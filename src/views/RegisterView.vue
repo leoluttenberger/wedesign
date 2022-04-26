@@ -8,13 +8,13 @@
 <script setup>
 import { ref } from "vue";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { useRouter } from "vue-router"; // import router
+import { useRouter } from "vue-router";
 const email = ref("");
 const password = ref("");
 const router = useRouter();
 const auth = getAuth();
 const register = () => {
-  createUserWithEmailAndPassword(auth, email.value, password.value) // need .value because ref()
+  createUserWithEmailAndPassword(auth, email.value, password.value)
     .then((data) => {
       console.log("Successfully registered!");
       router.push("/feed"); // redirect to the feed

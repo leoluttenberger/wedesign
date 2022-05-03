@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "300697432011",
+    "firebase_url": "https://wedesign-583d7-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "wedesign-583d7",
+    "storage_bucket": "wedesign-583d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300697432011:android:4546be3998498037c9504e",
+        "android_client_info": {
+          "package_name": "wedesign.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300697432011-25iv5cn0ti150sejv0ab9aokmou9v6ae.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjZLY0dvz4Ag-YDyND9N7wdx66hgE9CdA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "300697432011-25iv5cn0ti150sejv0ab9aokmou9v6ae.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

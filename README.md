@@ -39,10 +39,24 @@ npm run test:e2e
 ```
 npm run lint
 ```
+## Capasitor 
+### Seutp
+```
+ npx cap init
+```
+```
+npx cap add android
+```
+```
+npm run build
+```
+```
+npx cap copy
+```
+npx cap run android
+
 ## Firebase
-```
-npm install firebase
-```
+
 ### Firebase Config
 ```
 firebase login

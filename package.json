@@ -11,8 +11,9 @@
   },
   "dependencies": {
     "@capacitor/android": "^3.5.0",
-    "@capacitor/cli": "^3.5.0",
-    "@capacitor/core": "^3.5.0",
+    "@capacitor/cli": "^3.5.1",
+    "@capacitor/core": "^3.5.1",
+    "@capacitor/ios": "^3.5.1",
     "core-js": "^3.8.3",
     "firebase": "^9.6.11",
     "register-service-worker": "^1.7.2",

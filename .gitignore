@@ -26,4 +26,5 @@ pnpm-debug.log*
 *.sw?
 
 # Android copy
-/Android
+/android/firebase_credentials.json
+/android/.env

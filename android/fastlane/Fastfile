@@ -23,7 +23,8 @@ platform :android do
           build_type: "Release"
         )
         firebase_app_distribution(
-            app: "1:300697432011:android:4546be3998498037c9504e",
+            service_credentials_file: "firebase_credentials.json",
+            app: ENV['VUE_APP_FIREBASE_ANDROID_APP_ID'],
             testers: "leo.luttenberger@univie.ac.at",
             release_notes: "We:Design:Beta"
         )

@@ -1,0 +1,6 @@
+{
+	"appId": "we.design.android",
+	"appName": "wedesign",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}

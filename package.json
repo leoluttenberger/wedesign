@@ -14,6 +14,7 @@
     "@capacitor/cli": "^3.5.1",
     "@capacitor/core": "^3.5.1",
     "@capacitor/ios": "^3.5.1",
+    "chromedriver": "^101.0.0",
     "core-js": "^3.8.3",
     "firebase": "^9.6.11",
     "firebase-tools": "^10.9.2",
@@ -38,7 +39,6 @@
     "@vue/eslint-config-typescript": "^9.1.0",
     "@vue/test-utils": "^2.0.0-0",
     "chai": "^4.2.0",
-    "chromedriver": "^98.0.1",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -47,7 +47,7 @@
     "prettier": "^2.4.1",
     "ts-node": "^9.1.1",
     "typescript": "~4.5.5",
-    "wdio-chromedriver-service": "^7.0.0",
+    "wdio-chromedriver-service": "^7.3.2",
     "wdio-geckodriver-service": "^2.0.2"
   },
   "eslintConfig": {

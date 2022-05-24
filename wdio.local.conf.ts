@@ -13,12 +13,7 @@ exports.config = {
   capabilities: [
     {
       browserName: 'chrome',
-      acceptInsecureCerts: true,
-      'goog:chromeOptions': {
-        args: process.argv.includes('--headless')
-          ? ['--headless', '--disable-gpu']
-          : []
-      }
+      acceptInsecureCerts: true
     },
     {
       browserName: 'firefox',

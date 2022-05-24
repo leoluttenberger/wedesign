@@ -12,7 +12,6 @@ exports.config = {
   //
   specs: [
     path.join(__dirname, '/tests/e2e/**/*.spec.ts'),
-    path.join(__dirname, '/tests/e2e/**/*.spec.js')
   ],
   // Patterns to exclude.
   exclude: [

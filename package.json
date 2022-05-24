@@ -9,6 +9,12 @@
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint"
   },
+  "keywords": [
+    "webdriverio",
+    "browserstack",
+    "appium",
+    "tests"
+  ],
   "dependencies": {
     "@capacitor/android": "^3.5.0",
     "@capacitor/cli": "^3.5.1",

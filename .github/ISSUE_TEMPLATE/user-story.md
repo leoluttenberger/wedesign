@@ -34,9 +34,9 @@ Scenario: Scenario name
 - Constraint 3.
 
 ### Checklist
--[ ] User story is understood 
--[ ] User story is refined
--[ ] Resources are added
+- [ ] User story is understood 
+- [ ] User story is refined
+- [ ] Resources are added
 
 ### Resources:
 

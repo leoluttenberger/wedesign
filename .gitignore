@@ -4,6 +4,7 @@ node_modules
 
 
 /tests/e2e/logs/
+package-lock.json
 
 # local env files
 .env.local

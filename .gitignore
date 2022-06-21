@@ -5,6 +5,7 @@ node_modules
 
 /tests/e2e/logs/
 package-lock.json
+GoogleService-Info.plist
 
 # local env files
 .env.local

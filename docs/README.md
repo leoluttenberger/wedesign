@@ -1,21 +1,14 @@
 # wedesign
 ## Depedencies
 
-# Dependencie using Ubuntu
+# Dependencies Linux, iOS, Windows
+Install nvm for your platform https://github.com/nvm-sh/nvm
 ```
-curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
-sudo apt-get install -y nodejs
+nvm use
+nvm install
 sudo npm install ruby
 curl -sL https://firebase.tools | bash
 
-```
-
-# Dependencies using iOS
-```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-sudo brew install node
-sudo npm install ruby
-curl -sL https://firebase.tools | bash
 ```
 ## Project setup
 ```
@@ -45,10 +38,13 @@ npm run lint
 ### Seutp
 
 ```
- npx cap init
+npx cap init
 ```
 ```
 npx cap add android
+```
+```
+npx cap add ios
 ```
 ```
 npm run build
@@ -57,9 +53,11 @@ npm run build
 npx cap copy
 ```
 ```
-npx cap run android
+npx cap open android
 ```
-
+```
+npx cap open ios
+```
 ## Firebase
 ### Firebase Config
 ```
@@ -72,3 +70,4 @@ firebase init hosting
 firebase init deploy
 ```
 ### Firebase env
+Change .env.example files to  .env and /android/.env with your firebase env variables.

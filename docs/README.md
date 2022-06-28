@@ -4,6 +4,13 @@
 # Dependencies Linux, iOS, Windows
 Install nvm for your platform https://github.com/nvm-sh/nvm
 .nvmrc Node Version 16.15.1
+
+After installing nvm run install script 
+```
+sh install.sh
+```
+to auto install and configure project. Script cointains all command below.
+
 ```
 nvm use
 nvm install
@@ -83,46 +90,17 @@ firebase init deploy
 Change .env.example files to  .env and /android/.env with your firebase env variables
 Add Firebase config file to android and ios app directory
 
-#### Build Android app
-Change <project>/build.gradle
-```
-buildscript {
-  repositories {
-    google()  
-  }
-  dependencies 
-    classpath 'com.google.gms:google-services:4.3.12'
-  }
-
-}
-allprojects {
-  repositories {
-    google()
-  }
-}
-```
-Change <project>/<app-module>/build.gradle
-
-```
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
-dependencies {
-  implementation platform('com.google.firebase:firebase-bom:30.2.0')
-  implementation 'com.google.firebase:firebase-analytics'
-}
-
-```
-
-
+#### Manual Build Android app
 
 ```
 cd android && chmod +x gradlew && ./gradlew build
 ```
-#### Fastlane Config
+#### Manual Fastlane Config
 Make sure to build android app before starting fastlane distribution!
 Navigate to android project directory
 ```
 fastlane init
+```
 ```
 sudo fastlane add_plugin firebase_app_distribution
 ```

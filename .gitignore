@@ -12,6 +12,9 @@ GoogleService-Info.plist
 .env.*.local
 .env
 
+#Firebase config
+.firebaserc
+
 # Log files
 npm-debug.log*
 yarn-debug.log*

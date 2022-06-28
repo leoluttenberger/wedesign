@@ -29,6 +29,13 @@
             {
               "client_id": "33587919353-lueatvgu91muqi01097nv7u3h3eg93dg.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "33587919353-7lsdediucfjvo3c28ankukt8h6bq986t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "We.Design.iOS"
+              }
             }
           ]
         }

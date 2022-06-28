@@ -34,3 +34,4 @@ pnpm-debug.log*
 /android/firebase_credentials.json
 /android/firebase_credentials.json.b64
 /android/.env
+/android/app/google-services.json

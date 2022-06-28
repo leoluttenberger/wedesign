@@ -1,4 +1,4 @@
 /build/*
-google-services.json
 !/build/.npmkeep
+google-services.json
 

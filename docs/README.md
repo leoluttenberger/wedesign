@@ -2,8 +2,27 @@
 ## Depedencies
 
 # Dependencies Linux, iOS, Windows
-Install nvm for your platform https://github.com/nvm-sh/nvm
+Install nvm for your platform https://github.com/nvm-sh/nvm 
 .nvmrc Node Version 16.15.1
+Install nodejs version via nvm
+```
+nvm use
+nvm install
+```
+
+Install java version 17 https://openjdk.org/install/ or https://www.java.com/en/
+
+Install java version 17 for Ubuntu 20.04
+```
+sudo apt-get install openjdk-17-jre 
+```
+
+Install sdk version control for gradle
+```
+curl -s "https://get.sdkman.io" | bash 
+source "/home/leo/.sdkman/bin/sdkman-init.sh"
+sdk install gradle 7.4.2
+```
 
 After installing nvm run install script 
 ```
@@ -12,8 +31,7 @@ sh install.sh
 to auto install and configure project. Script cointains all command below.
 
 ```
-nvm use
-nvm install
+
 sudo npm install ruby firebase-tools 
 sudo gem install fastlane
 ```

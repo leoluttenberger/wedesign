@@ -3,12 +3,12 @@
 
 # Dependencies Linux, iOS, Windows
 Install nvm for your platform https://github.com/nvm-sh/nvm
+.nvmrc Node Version 16.15.1
 ```
 nvm use
 nvm install
-sudo npm install ruby
-curl -sL https://firebase.tools | bash
-
+sudo npm install ruby firebase-tools 
+sudo gem install fastlane
 ```
 ## Project setup
 ```
@@ -47,6 +47,9 @@ npx cap add android
 npx cap add ios
 ```
 ```
+npx cap sync
+```
+```
 npm run build
 ```
 ```
@@ -59,7 +62,15 @@ npx cap open android
 npx cap open ios
 ```
 ## Firebase
-### Firebase Config
+
+### Auto Config Firebase
+Run Script 
+```
+sh initFirebaseConfig.sh 
+```
+to configure all firebase environments and init firebase.
+
+### Manual Config Firebase
 ```
 firebase login
 ```
@@ -69,5 +80,54 @@ firebase init hosting
 ```
 firebase init deploy
 ```
-### Firebase env
-Change .env.example files to  .env and /android/.env with your firebase env variables.
+Change .env.example files to  .env and /android/.env with your firebase env variables
+Add Firebase config file to android and ios app directory
+
+#### Build Android app
+Change <project>/build.gradle
+```
+buildscript {
+  repositories {
+    google()  
+  }
+  dependencies 
+    classpath 'com.google.gms:google-services:4.3.12'
+  }
+
+}
+allprojects {
+  repositories {
+    google()
+  }
+}
+```
+Change <project>/<app-module>/build.gradle
+
+```
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+dependencies {
+  implementation platform('com.google.firebase:firebase-bom:30.2.0')
+  implementation 'com.google.firebase:firebase-analytics'
+}
+
+```
+
+
+
+```
+cd android && chmod +x gradlew && ./gradlew build
+```
+#### Fastlane Config
+Make sure to build android app before starting fastlane distribution!
+Navigate to android project directory
+```
+fastlane init
+```
+sudo fastlane add_plugin firebase_app_distribution
+```
+```
+fastlane distribute
+```
+
+

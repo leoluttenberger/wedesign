@@ -14,7 +14,7 @@ sh initFirebaseConfig.sh
 echo "++++++++++++++++++++++++Configure and build android app++++++++++++++++++++++++"
 cp build.gradle.example.android.app $( pwd; )/android/app/
 mv $( pwd; )/android/app/build.gradle.example.android.app $( pwd; )/android/app/build.gradle
-cd android && sdk install gradle 7.2 && gradle build
+cd android && gradle build
 echo "++++++++++++++++++++++++Create and install fastlane android distribution++++++++++++"
 fastlane init
 sudo fastlane add_plugin firebase_app_distribution

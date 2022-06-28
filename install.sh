@@ -1,9 +1,6 @@
 #!/bin/bash
-echo "++++++++++++++++++++++++Installing dependensies ruby, firebase-tools, fastlane++++++++++++++++++++++++"
-sudo npm install ruby firebase-tools gradle
-sudo gem install fastlane
 echo "++++++++++++++++++++++++Install and build nodejs++++++++++++++++++++++++"
-sudo npm i
+npm i
 npm run build
 echo "++++++++++++++++++++++++Create capasitor for android and ios++++++++++++++++++++++++"
 npx cap init

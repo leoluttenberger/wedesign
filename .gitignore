@@ -39,6 +39,3 @@ pnpm-debug.log*
 
 # iOS
 /ios
-
-#Capasitor
-capacitor.config.ts

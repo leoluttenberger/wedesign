@@ -28,7 +28,7 @@ jobs:
           distribution: 'temurin'
           cache: gradle
       - name: Capacitor copy and update
-        run: npx cap copy && npx cap update
+        run: npx cap add android && npx cap add ios && npx cap copy && npx cap sync
       - name:  Build with Gradle
         run: cd android && chmod +x gradlew && ./gradlew build 
       - name: Create Firebase Service Credentials file

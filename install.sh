@@ -16,10 +16,10 @@ echo "==========================================================================
 echo "Init Firebase config"
 echo "======================================================================================================"
 sh initFirebaseConfig.sh
-sh initFastlane.sh
 echo "======================================================================================================"
 echo "Configure and build android app plus fastlane"
 echo "======================================================================================================"
+sh initFastlane.sh
 cp build.gradle.example.android.app $( pwd; )/android/app/
 mv $( pwd; )/android/app/build.gradle.example.android.app $( pwd; )/android/app/build.gradle
 cd android && gradle build && fastlane init && sudo fastlane add_plugin firebase_app_distribution

@@ -7,4 +7,4 @@ cp Fastfile.example $( pwd; )/android/fastlane
 mv $( pwd; )/android/fastlane/Fastfile.example $( pwd; )/android/fastlane/Fastfile
 cp Gemfile.example $( pwd; )/android
 mv $( pwd; )/android/Gemfile.example $( pwd; )/android/Gemfile
-echo "Copien fastlane files to destination"
+echo "Copied fastlane files to destination"

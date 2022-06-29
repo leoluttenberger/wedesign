@@ -33,7 +33,7 @@ if [ "$RESP" = "y" ]; then
 				echo "Created iOS GoogleService-Info.plist"
 	 	 		echo "$tempVar" | grep -A500 -m1 -e '<?xml version=' | sed 's/^.*< //' | tee $( pwd; )/ios/App/App/GoogleService-Info.plist
 				var='<?xml version="1.0" encoding="UTF-8"?>'
-				sed -i "1s/.*/$var/" ( pwd; )/ios/App/App/GoogleService-Info.plist
+				sed -i "1s/.*/$var/" $( pwd; )/ios/App/App/GoogleService-Info.plist
 
 	else
 	"Error no firebase sdk configs found!"

@@ -35,13 +35,11 @@ jobs:
       - name: Create Firebase Service Credentials file
         run: cd android && echo "$FIREBASE_CREDENTIALS" > firebase_credentials.json.b64 && base64 -d -i firebase_credentials.json.b64 > firebase_credentials.json
         env:
-          FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}  
-      - name: Deploy Android app to firebase
-        run:  cd android && bundle update fastlane && bundle exec fastlane update_plugins
+          FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }} 
       - name:  Copy Fastlane files
-        run: sh installFastlane.sh  
-      - name:  Deployment Fastlane
-        run: cd android && bundle exec fastlane distribute
+        run: sh installFastlane.sh    
+      - name: Deploy Android app to firebase
+        run:  cd android && bundle install && bundle update fastlane && fastlane init && bundle exec fastlane update_plugins && bundle exec fastlane distribute
         env:
             VUE_APP_FIREBASE_ANDROID_APP_ID : ${{ secrets.VUE_APP_FIREBASE_ANDROID_APP_ID }}
             FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

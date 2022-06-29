@@ -29,6 +29,7 @@ jobs:
           cache: gradle
       - name: Capacitor copy and update
         run: npx cap add android && npx cap add ios && npx cap copy && npx cap sync
+    
       - name:  Build with Gradle
         run: cd android && chmod +x gradlew && ./gradlew build 
       - name: Create Firebase Service Credentials file
@@ -36,7 +37,11 @@ jobs:
         env:
           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}  
       - name: Deploy Android app to firebase
-        run:  cd android/fastlane && bundle update fastlane && bundle exec fastlane update_plugins && bundle exec fastlane distribute
+        run:  cd android && bundle update fastlane && bundle exec fastlane update_plugins
+      - name:  Copy Fastlane files
+        run: sh installFastlane.sh  
+      - name:  Deployment Fastlane
+        run: cd android && bundle exec fastlane distribute
         env:
             VUE_APP_FIREBASE_ANDROID_APP_ID : ${{ secrets.VUE_APP_FIREBASE_ANDROID_APP_ID }}
             FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

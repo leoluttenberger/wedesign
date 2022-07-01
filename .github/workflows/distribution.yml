@@ -37,7 +37,7 @@ jobs:
         env:
           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }} 
       - name:  Copy Fastlane files
-        run: sh installFastlane.sh    
+        run: sh initFastlane.sh    
       - name: Deploy Android app to firebase
         run:  cd android && bundle install && bundle update fastlane && fastlane init && bundle exec fastlane update_plugins && bundle exec fastlane distribute
         env:

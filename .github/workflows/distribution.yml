@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ['2.7']
+        ruby-version: ['ruby-3.0.0']
     steps:
       - uses: actions/checkout@v2
       - name: Install & Build npm
@@ -39,7 +39,7 @@ jobs:
       - name:  Copy Fastlane files
         run: sh initFastlane.sh    
       - name: Deploy Android app to firebase
-        run:  cd android && bundle install && bundle update fastlane && fastlane init && bundle exec fastlane update_plugins && bundle exec fastlane distribute
+        run:  cd android && bundle install fastlane && bundle update fastlane && fastlane init && bundle exec fastlane update_plugins && bundle exec fastlane distribute
         env:
             VUE_APP_FIREBASE_ANDROID_APP_ID : ${{ secrets.VUE_APP_FIREBASE_ANDROID_APP_ID }}
             FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

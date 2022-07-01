@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ['ruby-3.0.0']
+        ruby: ["ruby-3.0.0"]
     steps:
       - uses: actions/checkout@v2
       - name: Install & Build npm

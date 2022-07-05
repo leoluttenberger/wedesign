@@ -20,4 +20,4 @@
 ### Acceptance criteria 
 
 ### Proof Checklist
--[ ] Accepted
+- [ ] Accepted

@@ -1,30 +1,23 @@
----
-name: Epic template
-about: Template for creating epics
-title: "[EPIC]"
-labels: epic
-assignees: ''
 
----
+### Rationale
 
-## Rationale ##
+### Owner 
 
-## Owner ##
+### Stakeholder Point of Contact 
 
-## Stakeholder Point of Contact ##
+### Dependencies 
 
-## Dependencies ##
+### Description 
 
-## Description ##
+### Context 
 
-## Context ##
-
-## Issues ##
+### Issues 
 
 - [ ]  Issue one
 - [ ]  issue two
 - [ ]  issue three
 
-## Acceptance criteria ##
+### Acceptance criteria 
 
-## Proof ##
+### Proof 
+- [ ]

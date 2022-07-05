@@ -19,5 +19,5 @@
 
 ### Acceptance criteria 
 
-### Proof 
-- [ ]
+### Proof Checklist
+-[ ] Accepted

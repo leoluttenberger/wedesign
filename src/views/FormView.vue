@@ -1,15 +1,13 @@
 <template>
-  <h1>Feed</h1>
-  <!--<img src="../assets/fabian.jpg" /> -->
-  <!--  <img src="../assets/simon.jpg" /> -->
-  <!-- <img src="../assets/felix.jpg" /> -->
-  <!--<img src="../assets/nicole.jpg" /> -->
+  <input-field type="text" name="user" label="Username" />
+  <input-field type="text" name="age" label="Age" />
 </template>
-
 <script lang="ts" setup>
+import { Form, InputField } from "jenesius-vue-form";
 import { getAuth } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { onBeforeUnmount } from "vue";
+const form = new Form();
 const router = useRouter();
 const auth = getAuth();
 const authListener = auth.onAuthStateChanged(function (user) {

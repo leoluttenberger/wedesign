@@ -1,24 +1,17 @@
 <template>
-  <input-field type="text" name="user" label="Username" />
-  <input-field type="text" name="age" label="Age" />
+  <div>
+    <input-field type="text" name="firstName" label="Firstname" />
+    <input-field type="text" name="secondName" label="Secondname" />
+    <input-field type="text" name="email" label="Email" />
+    <p>Address</p>
+    <input-field name="city" label="City" />
+    <input-field name="street" label="Street" />
+    <input-field name="country" label="Country" />
+    <input-field name="address" label="Address" />
+    <input-field name="email" label="Email" />
+  </div>
 </template>
 <script lang="ts" setup>
 import { Form, InputField } from "jenesius-vue-form";
-import { getAuth } from "firebase/auth";
-import { useRouter } from "vue-router";
-import { onBeforeUnmount } from "vue";
 const form = new Form();
-const router = useRouter();
-const auth = getAuth();
-const authListener = auth.onAuthStateChanged(function (user) {
-  if (!user) {
-    // not logged in
-    alert("you must be logged in to view this. redirecting to the home page");
-    router.push("/");
-  }
-});
-onBeforeUnmount(() => {
-  // clear up listener
-  authListener();
-});
 </script>

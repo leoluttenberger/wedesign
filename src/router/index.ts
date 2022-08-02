@@ -23,6 +23,10 @@ const router = createRouter({
       path: "/form",
       component: () => import("../views/FormView.vue"),
     },
+    {
+      path: "/chat",
+      component: () => import("../views/ChatView.vue"),
+    },
   ],
 });
 

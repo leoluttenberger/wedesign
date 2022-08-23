@@ -19,13 +19,15 @@ Install nvm for your platform https://github.com/nvm-sh/nvm for .nvmrc Node Vers
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 ```
 
-Install sdk version control for gradle verion control
+Install sdk version control for gradle verion control and fastlane
 ```
 curl -s "https://get.sdkman.io" | bash 
 sdk install java 18.0.1.1-open 
 sdk use java 18.0.1.1-open 
 sdk install gradle 7.2
 sdk use gradle 7.2
+sudo npm install -g ruby firebase-tools 
+sudo gem install fastlane
 ```
 
 After installing nvm run install script to auto install. 
@@ -44,11 +46,6 @@ Install nodejs version 16.15.1 via nvm
 ```
 nvm use
 nvm install
-```
-
-```
-sduo npm install -g ruby firebase-tools 
-sudo gem install fastlane
 ```
 ## Project setup
 ```

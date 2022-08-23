@@ -3,6 +3,8 @@
     <nav>
       <router-link to="/"> Home </router-link> |
       <router-link to="/feed"> Feed </router-link> |
+      <router-link to="/form"> Form </router-link> |
+      <router-link to="/chat"> Chat </router-link> |
       <span v-if="isLoggedIn">
         <button @click="signOut">Logout</button>
       </span>
@@ -15,7 +17,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from "vue";
 import { getAuth } from "firebase/auth";
 import { useRouter } from "vue-router";

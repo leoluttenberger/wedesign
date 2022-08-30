@@ -23,6 +23,8 @@
 <script>
 import ChatWindow from "vue-advanced-chat";
 import "vue-advanced-chat/dist/vue-advanced-chat.css";
+import { useRouter } from "vue-router";
+const router = useRouter();
 var avatarApply =
   "https://firebasestorage.googleapis.com/v0/b/wedesign-35121.appspot.com/o/We_Design_Logo_PNG.png?alt=media&token=e33bd9e0-153c-44a9-903c-e4c62d292f35";
 var avatarUser1 = "https://66.media.tumblr.com/avatar_c6a8eae4303e_512.pnj";

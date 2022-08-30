@@ -20,6 +20,7 @@
     "@capacitor/cli": "^3.6.0",
     "@capacitor/core": "^3.6.0",
     "@capacitor/ios": "^3.6.0",
+    "base64-img": "^1.0.4",
     "chromedriver": "^101.0.0",
     "core-js": "^3.8.3",
     "firebase": "^9.6.11",

@@ -97,6 +97,10 @@
   </div>
 </template>
 <script>
+const MAX_WIDTH = 600;
+const MAX_HEIGHT = 600;
+const MIME_TYPE = "image/png";
+const QUALITY = 0.9;
 export default {
   data() {
     return {
@@ -114,9 +118,6 @@ export default {
       universityEdu: JSON.parse(localStorage.getItem("universityEdu")),
       image: JSON.parse(localStorage.getItem("profileImg")),
     };
-  },
-  mounted() {
-    console.log(new Blob(Object.values(localStorage)).size / 1024 + " KB");
   },
   methods: {
     async onClickedSave() {
@@ -146,7 +147,8 @@ export default {
     },
     handleImage(event) {
       const selectedImage = event.target.files[0];
-      this.createBase64Image(selectedImage);
+      //this.createBase64Image(selectedImage);
+      this.createBlogImage(selectedImage);
     },
     createBase64Image(fileObject) {
       const reader = new FileReader();
@@ -155,8 +157,56 @@ export default {
         localStorage.setItem("profileImg", JSON.stringify(this.image));
         console.log(JSON.parse(localStorage.getItem("profileImg")));
         console.log(JSON.stringify(this.image));
+        console.log(new Blob(Object.values(localStorage)).size / 1024 + " KB");
       };
       reader.readAsDataURL(fileObject);
+    },
+    createBlogImage(fileObject) {
+      const blobURL = URL.createObjectURL(fileObject);
+      const reader = new Image();
+      reader.src = blobURL;
+      reader.onload = () => {
+        URL.revokeObjectURL(this.src);
+        const [newWidth, newHeight] = this.calculateSize(
+          reader,
+          MAX_WIDTH,
+          MAX_HEIGHT
+        );
+        const canvas = document.createElement("canvas");
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(reader, 0, 0, newWidth, newHeight);
+        canvas.toBlob(
+          (blob) => {
+            console.log(blob.size / 1024 + " KB");
+          },
+          MIME_TYPE,
+          QUALITY
+        );
+        this.image = canvas.toDataURL();
+        localStorage.setItem("profileImg", JSON.stringify(this.image));
+        console.log(JSON.parse(localStorage.getItem("profileImg")));
+        console.log(JSON.stringify(this.image));
+        console.log(new Blob(Object.values(localStorage)).size / 1024 + " KB");
+      };
+    },
+    calculateSize(img, maxWidth, maxHeight) {
+      let width = img.width;
+      let height = img.height;
+
+      if (width > height) {
+        if (width > maxWidth) {
+          height = Math.round((height * maxWidth) / width);
+          width = maxWidth;
+        }
+      } else {
+        if (height > maxHeight) {
+          width = Math.round((width * maxHeight) / height);
+          height = maxHeight;
+        }
+      }
+      return [width, height];
     },
   },
 };

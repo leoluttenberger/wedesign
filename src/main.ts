@@ -1,8 +1,11 @@
 import { createApp } from "vue";
+import { plugin, defaultConfig } from "@formkit/vue";
+import { generateClasses } from "@formkit/themes";
 import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
-
+import theme from "./theme";
+import "./index.css";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 const firebaseConfig = {
@@ -16,6 +19,17 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-createApp(App).use(router).mount("#app");
+const firebase = initializeApp(firebaseConfig);
+//Create and configure App
+const app = createApp(App);
+// Formkit and tailwind css cofig
+app.use(
+  plugin,
+  defaultConfig({
+    config: {
+      classes: generateClasses(theme),
+    },
+  })
+);
+app.use(router);
+app.mount("#app");

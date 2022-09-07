@@ -116,6 +116,7 @@ const MAX_WIDTH = 600;
 const MAX_HEIGHT = 600;
 const MIME_TYPE = "image/png";
 const QUALITY = 0.9;
+var fileSelected = false;
 import { VueAvatar } from "vue-avatar-editor-improved";
 export default {
   data() {
@@ -163,13 +164,34 @@ export default {
       );
       localStorage.setItem("universityEdu", JSON.stringify(this.universityEdu));
       this.disableInput = true;
-      var img = this.$refs.vueavatar.getImage();
-      this.image = img.toDataURL();
-      localStorage.setItem("profileImg", JSON.stringify(this.image));
-      console.log(JSON.parse(localStorage.getItem("profileImg")));
-      console.log(JSON.stringify(this.image));
-      console.log(new Blob(Object.values(localStorage)).size / 1024 + " KB");
+      if (this.fileSelected == true) {
+        const reader = new Image();
+        reader.src = this.image;
+        const cropRect = this.$refs.vueavatar.getCroppingRect();
+        cropRect.x *= MAX_WIDTH;
+        cropRect.y *= MAX_HEIGHT;
+        if (cropRect.width == 1) {
+          cropRect.width = cropRect.height;
+        }
+        if (cropRect.height == 1) {
+          cropRect.height = cropRect.width;
+        }
+        cropRect.width *= MAX_WIDTH;
+        cropRect.height *= MAX_HEIGHT;
+        const canvas = document.createElement("canvas");
+        canvas.width = cropRect.width;
+        canvas.height = cropRect.height;
+        canvas.getContext("2d").drawImage(reader, -cropRect.x, -cropRect.y);
+        this.image = canvas.toDataURL();
+        localStorage.setItem("profileImg", JSON.stringify(this.image));
+        console.log(JSON.parse(localStorage.getItem("profileImg")));
+        console.log(JSON.stringify(this.image));
+        console.log(new Blob(Object.values(localStorage)).size / 1024 + " KB");
+      } else {
+        var img = this.$refs.vueavatar.getImage();
+      }
       console.log("input disabled");
+      this.fileSelected = false;
     },
     async onClickedEdit() {
       this.disableInput = false;
@@ -235,15 +257,17 @@ export default {
       }
       return [width, height];
     },
-    onSelectFile(files) {
+    onSelectFile(file) {
       console.log("here is your file");
+      this.createBlogImage(file[0]);
+      this.fileSelected = true;
     },
   },
 };
 </script>
 <style>
 .uploading-image {
-  width: 250px;
+  max-width: 250px;
   position: center;
 }
 </style>

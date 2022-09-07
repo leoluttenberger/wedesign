@@ -1,99 +1,114 @@
 <template>
-  <div class="grid place-items-center h-screen">
-    <div class="flex flex-row">
-      <div class="flex flex-col">
-        <img :src="image" class="uploading-image" />
-        <FormKit
-          @change="handleImage"
-          type="file"
-          label="Profil Bild"
-          accept=".jpg,.png"
-          single
-        />
-        <FormKit type="button" label="Edit" @click="onClickedEdit"></FormKit>
-        <FormKit type="button" label="Save" @click="onClickedSave"></FormKit>
+  <vue-avatar
+    ref="vueavatar"
+    :borderRadius="borderRadius"
+    @select-file="onSelectFile($event)"
+    v-show="valueAvatarCropShow"
+  >
+  </vue-avatar>
+  <img :src="image" class="uploading-image" v-show="valueAvatarShow" />
+  <div class="flex gap-4">
+    <FormKit type="button" label="Edit" @click="onClickedEdit"></FormKit>
+    <FormKit type="button" label="Save" @click="onClickedSave"></FormKit>
+  </div>
+  <div class="flex-auto">
+    <FormKit
+      v-model="fullName"
+      type="text"
+      label="Voller Name"
+      validation="required|length:3"
+      :disabled="disableInput"
+      help="Enter your full name."
+      :classes="{ input: 'content-center' }"
+    />
+    <FormKit
+      v-model="email"
+      type="email"
+      label="Email address"
+      validation="length:5|*email"
+      validation-visibility="live"
+      placeholder="Email"
+      :disabled="disableInput"
+    />
+    <FormKit
+      v-model="phone"
+      type="text"
+      label="Phone"
+      placeholder="xxxx-xxx-xxxx"
+      :validation="[['required'], ['matches', /^\d{4}-\d{3}-\d{4}$/]]"
+      validation-visibility="live"
+      :validation-messages="{
+        matches: 'Phone number must be formatted: xxxx-xxx-xxxx',
+      }"
+      :disabled="disableInput"
+    />
+    <FormKit type="group" label="Adresse">
+      <div class="flex gap-4">
+        <div class="basis-1/2">
+          <FormKit
+            v-model="streetName"
+            type="text"
+            placeholder="Straßenname"
+            :disabled="disableInput"
+          />
+        </div>
+        <div class="basis-1/4">
+          <FormKit
+            v-model="streetNumber"
+            type="text"
+            placeholder="Straßenummer"
+            :disabled="disableInput"
+          />
+        </div>
+        <div class="basis-1/4">
+          <FormKit
+            v-model="doorNumber"
+            type="text"
+            placeholder="Tür"
+            :disabled="disableInput"
+          />
+        </div>
       </div>
-      <div class="flex-auto">
-        <FormKit
-          v-model="fullName"
-          type="text"
-          label="Fullname"
-          validation="required|length:3"
-          :disabled="disableInput"
-          help="Enter your full name."
-          :classes="{ input: 'content-center' }"
-        />
-        <FormKit
-          v-model="email"
-          type="email"
-          label="Email address"
-          validation="length:5|*email"
-          validation-visibility="live"
-          placeholder="Email"
-          :disabled="disableInput"
-        />
-        <FormKit
-          v-model="phone"
-          type="text"
-          label="Phone"
-          placeholder="xxxx-xxx-xxxx"
-          :validation="[['required'], ['matches', /^\d{4}-\d{3}-\d{4}$/]]"
-          validation-visibility="live"
-          :validation-messages="{
-            matches: 'Phone number must be formatted: xxxx-xxx-xxxx',
-          }"
-          :disabled="disableInput"
-        />
-        <FormKit
-          v-model="streetName"
-          type="text"
-          placeholder="Straßenname"
-          :disabled="disableInput"
-        />
-        <FormKit
-          v-model="streetNumber"
-          type="text"
-          placeholder="Straßenummer"
-          :disabled="disableInput"
-        />
-        <FormKit
-          v-model="doorNumber"
-          type="text"
-          placeholder="Tür"
-          :disabled="disableInput"
-        />
-        <FormKit
-          v-model="districtNumber"
-          type="text"
-          placeholder="Bezirk"
-          :disabled="disableInput"
-        />
-        <FormKit
-          v-model="city"
-          type="text"
-          placeholder="Stadt"
-          :disabled="disableInput"
-        />
-        <FormKit
-          v-model="country"
-          type="text"
-          placeholder="Land"
-          :disabled="disableInput"
-        />
-        <FormKit
-          v-model="highestSchoolEdu"
-          type="text"
-          placeholder="Schulabschluß"
-          :disabled="disableInput"
-        />
-        <FormKit
-          v-model="universityEdu"
-          type="text"
-          placeholder="Universitätsabschluß"
-          :disabled="disableInput"
-        />
+      <div class="flex gap-4">
+        <div class="basis-1/5">
+          <FormKit
+            v-model="districtNumber"
+            type="text"
+            placeholder="Bezirk"
+            :disabled="disableInput"
+          />
+        </div>
+        <div class="basis-2/5">
+          <FormKit
+            v-model="city"
+            type="text"
+            placeholder="Stadt"
+            :disabled="disableInput"
+          />
+        </div>
+        <div class="basis-2/5">
+          <FormKit
+            v-model="country"
+            type="text"
+            placeholder="Land"
+            :disabled="disableInput"
+          />
+        </div>
       </div>
-    </div>
+    </FormKit>
+    <FormKit
+      v-model="highestSchoolEdu"
+      type="text"
+      label="Ausbildung"
+      placeholder="Schulabschluß"
+      :disabled="disableInput"
+    />
+    <FormKit
+      v-model="universityEdu"
+      type="text"
+      placeholder="Universitätsabschluß"
+      :disabled="disableInput"
+    />
   </div>
 </template>
 <script>
@@ -101,6 +116,7 @@ const MAX_WIDTH = 600;
 const MAX_HEIGHT = 600;
 const MIME_TYPE = "image/png";
 const QUALITY = 0.9;
+import { VueAvatar } from "vue-avatar-editor-improved";
 export default {
   data() {
     return {
@@ -117,10 +133,18 @@ export default {
       highestSchoolEdu: JSON.parse(localStorage.getItem("highestSchoolEdu")),
       universityEdu: JSON.parse(localStorage.getItem("universityEdu")),
       image: JSON.parse(localStorage.getItem("profileImg")),
+      borderRadius: 200,
+      valueAvatarShow: true,
+      valueAvatarCropShow: false,
     };
+  },
+  components: {
+    VueAvatar,
   },
   methods: {
     async onClickedSave() {
+      this.valueAvatarCropShow = false;
+      this.valueAvatarShow = true;
       localStorage.setItem("fullName", JSON.stringify(this.fullName));
       localStorage.setItem("email", JSON.stringify(this.email));
       localStorage.setItem("phone", JSON.stringify(this.phone));
@@ -139,16 +163,19 @@ export default {
       );
       localStorage.setItem("universityEdu", JSON.stringify(this.universityEdu));
       this.disableInput = true;
+      var img = this.$refs.vueavatar.getImage();
+      this.image = img.toDataURL();
+      localStorage.setItem("profileImg", JSON.stringify(this.image));
+      console.log(JSON.parse(localStorage.getItem("profileImg")));
+      console.log(JSON.stringify(this.image));
+      console.log(new Blob(Object.values(localStorage)).size / 1024 + " KB");
       console.log("input disabled");
     },
     async onClickedEdit() {
       this.disableInput = false;
+      this.valueAvatarCropShow = true;
+      this.valueAvatarShow = false;
       console.log("input enabled");
-    },
-    handleImage(event) {
-      const selectedImage = event.target.files[0];
-      //this.createBase64Image(selectedImage);
-      this.createBlogImage(selectedImage);
     },
     createBase64Image(fileObject) {
       const reader = new FileReader();
@@ -208,13 +235,15 @@ export default {
       }
       return [width, height];
     },
+    onSelectFile(files) {
+      console.log("here is your file");
+    },
   },
 };
 </script>
 <style>
 .uploading-image {
-  width: 10rem;
-  padding: 10px;
+  width: 250px;
   position: center;
 }
 </style>

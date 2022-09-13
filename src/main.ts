@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import { plugin, defaultConfig } from "@formkit/vue";
+import { de, en } from "@formkit/i18n";
 import { generateClasses } from "@formkit/themes";
 import App from "./App.vue";
 import "./registerServiceWorker";
@@ -29,6 +30,8 @@ app.use(
     config: {
       classes: generateClasses(theme),
     },
+    locales: { de, en },
+    locale: "de",
   })
 );
 app.use(router);

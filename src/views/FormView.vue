@@ -18,7 +18,6 @@
       label="Voller Name"
       validation="required|length:3"
       :disabled="disableInput"
-      help="Enter your full name."
       :classes="{ input: 'content-center' }"
     />
     <FormKit
@@ -38,7 +37,8 @@
       :validation="[['required'], ['matches', /^\d{4}-\d{3}-\d{4}$/]]"
       validation-visibility="live"
       :validation-messages="{
-        matches: 'Phone number must be formatted: xxxx-xxx-xxxx',
+        matches:
+          'Ihre Telephonnumber muss wie folgt formatiert sein: xxxx-xxx-xxxx',
       }"
       :disabled="disableInput"
     />

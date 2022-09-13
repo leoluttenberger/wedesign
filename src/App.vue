@@ -4,7 +4,6 @@
       <router-link to="/"> Home </router-link> |
       <router-link to="/feed"> Feed </router-link> |
       <router-link to="/form"> Form </router-link> |
-      <router-link to="/chat"> Chat </router-link> |
       <span v-if="isLoggedIn">
         <button @click="signOut">Logout</button>
       </span>

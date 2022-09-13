@@ -4,7 +4,6 @@
       <router-link to="/"> Home </router-link> |
       <router-link to="/feed"> Feed </router-link> |
       <router-link to="/form"> Form </router-link> |
-      <router-link to="/chat"> Chat </router-link> |
       <span v-if="isLoggedIn">
         <button @click="signOut">Logout</button>
       </span>
@@ -38,14 +37,3 @@ const signOut = () => {
   router.push("/");
 };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

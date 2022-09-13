@@ -13,6 +13,11 @@
           <div
             class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
           >
+            <router-link to="/documents"> Docs </router-link>
+          </div>
+          <div
+            class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+          >
             <router-link to="/feed"> Feed </router-link>
           </div>
           <div

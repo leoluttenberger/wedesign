@@ -1,17 +1,20 @@
 <template>
   <vue-avatar
+    class="px-2 py-3 max-w-xs"
+    :width="270"
+    :height="270"
     ref="vueavatar"
     :borderRadius="borderRadius"
     @select-file="onSelectFile($event)"
     v-show="valueAvatarCropShow"
   >
   </vue-avatar>
-  <img :src="image" class="uploading-image" v-show="valueAvatarShow" />
-  <div class="flex gap-4">
+  <img :src="image" class="px-2 py-3 max-w-xs" v-show="valueAvatarShow" />
+  <div class="flex gap-4 px-2 py-3">
     <FormKit type="button" label="Edit" @click="onClickedEdit"></FormKit>
     <FormKit type="button" label="Save" @click="onClickedSave"></FormKit>
   </div>
-  <div class="flex-auto">
+  <div class="flex-auto px-2 py-3">
     <FormKit
       v-model="fullName"
       type="text"
@@ -265,9 +268,3 @@ export default {
   },
 };
 </script>
-<style>
-.uploading-image {
-  max-width: 250px;
-  position: center;
-}
-</style>

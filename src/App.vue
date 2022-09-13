@@ -1,30 +1,72 @@
 <template>
-  <div>
-    <nav>
-      <router-link to="/"> Home </router-link> |
-      <router-link to="/feed"> Feed </router-link> |
-      <router-link to="/form"> Form </router-link> |
-      <span v-if="isLoggedIn">
-        <button @click="signOut">Logout</button>
-      </span>
-      <span v-else>
-        <router-link to="/register"> Register </router-link> |
-        <router-link to="/sign-in"> Login </router-link>
-      </span>
-    </nav>
-    <router-view />
-  </div>
+  <nav
+    class="relative flex flex-wrap justify-between justify-between items-center px-2 py-3 bg-cyan-500 mb-3"
+  >
+    <div class="py-2 px-3 mx-auto max-w-screen-xl md:px-6">
+      <div class="flex items-center">
+        <div class="flex flex-row mt-0 mr-6 space-x-8 text-sm">
+          <div
+            class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+          >
+            <router-link to="/"> Home </router-link>
+          </div>
+          <div
+            class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+          >
+            <router-link to="/feed"> Feed </router-link>
+          </div>
+          <div
+            class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+          >
+            <router-link to="/form"> Profil </router-link>
+          </div>
+
+          <span v-if="isLoggedIn">
+            <button
+              class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+              @click="signOut"
+            >
+              Logout
+            </button>
+          </span>
+          <span v-else>
+            <div
+              class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+            >
+              <router-link to="/register"> Register </router-link> |
+              <router-link to="/sign-in"> Login </router-link>
+            </div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <router-view />
 </template>
 
-<script lang="ts" setup>
+<script>
+export default {
+  name: "sky-navbar",
+  data() {
+    return {
+      showMenu: false,
+    };
+  },
+  methods: {
+    toggleNavbar: function () {
+      this.showMenu = !this.showMenu;
+    },
+  },
+};
+</script>
+<script setup>
 import { ref } from "vue";
-import { getAuth } from "firebase/auth";
 import { useRouter } from "vue-router";
-const router = useRouter();
+import { getAuth } from "firebase/auth";
 const isLoggedIn = ref(true);
+const router = useRouter();
 const auth = getAuth();
 
-// runs after firebase is initialized
 auth.onAuthStateChanged(function (user) {
   if (user) {
     isLoggedIn.value = true; // if we have a user

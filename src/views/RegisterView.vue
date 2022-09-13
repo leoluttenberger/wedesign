@@ -1,8 +1,8 @@
 <template>
-  <h1>Create an Account</h1>
-  <p><input type="text" placeholder="Email" v-model="email" /></p>
-  <p><input type="password" placeholder="Password" v-model="password" /></p>
-  <p><button @click="register">Submit</button></p>
+  <div class="px-2 py-3">Create an Account</div>
+  <FormKit type="text" placeholder="Email" v-model="email" />
+  <FormKit type="password" placeholder="Password" v-model="password" />
+  <FormKit type="button" @click="register">Submit</FormKit>
 </template>
 
 <script setup>

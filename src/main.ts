@@ -7,7 +7,6 @@ import "./registerServiceWorker";
 import router from "./router";
 import theme from "./theme";
 import "./index.css";
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_FIREBASE_API_KEY,

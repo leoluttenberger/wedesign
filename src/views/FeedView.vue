@@ -1,5 +1,5 @@
 <template>
-  <h1>Feed</h1>
+  <h1></h1>
   <!--<img src="../assets/fabian.jpg" /> -->
   <!--  <img src="../assets/simon.jpg" /> -->
   <!-- <img src="../assets/felix.jpg" /> -->
@@ -14,13 +14,11 @@ const router = useRouter();
 const auth = getAuth();
 const authListener = auth.onAuthStateChanged(function (user) {
   if (!user) {
-    // not logged in
     alert("you must be logged in to view this. redirecting to the home page");
     router.push("/");
   }
 });
 onBeforeUnmount(() => {
-  // clear up listener
   authListener();
 });
 </script>

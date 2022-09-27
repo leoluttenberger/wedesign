@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
+    "build": "npx tsc --p tsconfig-build.json",
+    "build:vue": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -35,7 +36,20 @@
     "vue-class-component": "^8.0.0-0",
     "vue-router": "^4.0.14",
     "vue-simple-calendar": "^6.0.7",
-    "webfontloader": "^1.0.0"
+    "webfontloader": "^1.0.0",
+    "@types/dexie": "^1.3.1",
+    "@types/lodash": "^4.14.185",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-typescript": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
+    "@vue/compiler-sfc": "^3.2.39",
+    "dexie": "^3.2.2",
+    "eslint-plugin-prettier": "^4.2.1",
+    "lint-staged": "^13.0.3",
+    "node-res": "^5.0.1",
+    "node-sass": "^7.0.3",
+    "prettier": "^2.7.1",
+    "sass-loader": "^13.0.2"
   },
   "devDependencies": {
     "@types/chai": "^4.2.15",

@@ -4,6 +4,7 @@
     <editor-content class="editor__content" :editor="editor" />
   </div>
   <FormKit type="button" label="Save" @click="onClickedSave"></FormKit>
+  <tiptap />
 </template>
 
 <script>

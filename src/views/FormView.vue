@@ -1,4 +1,5 @@
 <template>
+  <tiptap />
   <vue-avatar
     class="px-2 py-3 max-w-xs"
     :width="270"
@@ -113,8 +114,11 @@
       :disabled="disableInput"
     />
   </div>
+  <tiptap />
 </template>
 <script>
+import { Tiptap } from "../components";
+
 const MAX_WIDTH = 600;
 const MAX_HEIGHT = 600;
 const MIME_TYPE = "image/png";

@@ -1,15 +1,10 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <template>
-  <section class="editor-menubar">
-    <button @click="updateHtml">Copy editor html</button>
-    <button @click="proofread">Proofread</button>
-
-    <span>{{ loading ? "Loading" : "Done" }}</span>
-  </section>
-
-  <editor-content class="content" v-if="editor" :editor="editor" />
-
+  <div class="editor" v-if="editor">
+    <menu-bar class="editor__header" :editor="editor" />
+    <editor-content class="editor__content" v-if="editor" :editor="editor" />
+  </div>
   <bubble-menu
     class="bubble-menu"
     v-if="editor"
@@ -22,7 +17,7 @@
         {{ matchMessage }}
 
         <button class="ignore-suggestion-button" @click="ignoreSuggestion">
-          XXX
+          X
         </button>
       </section>
       <section class="suggestions-section">
@@ -39,10 +34,11 @@
   </bubble-menu>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { computed, ref } from "vue";
 import { useEditor, EditorContent, Editor, Content } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
+import MenuBar from "./MenuBar.vue";
 
 import {
   LanguageTool,
@@ -114,28 +110,6 @@ const ignoreSuggestion = () =>
 </script>
 
 <style lang="scss">
-.editor-menubar {
-  display: flex;
-  gap: 1rem;
-
-  button {
-    padding: 0.5rem;
-    text-transform: capitalize;
-    border: none;
-    background-color: white;
-    box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.25);
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    font-weight: 500;
-    font-size: 1.1em;
-
-    &:hover {
-      box-shadow: 0 0 2px rgba($color: #000000, $alpha: 0.25);
-    }
-  }
-}
-
 .ProseMirror {
   .lt {
     border-bottom: 2px solid #e86a69;

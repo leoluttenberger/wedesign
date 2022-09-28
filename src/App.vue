@@ -49,11 +49,9 @@
     </div>
   </nav>
   <router-view />
-  <tiptap />
 </template>
 
 <script>
-import { Tiptap } from "./components";
 export default {
   name: "sky-navbar",
   data() {

@@ -1,21 +1,21 @@
 <template>
-  <div class="editor" v-if="editor">
+  <!--<div class="editor" v-if="editor">
     <menu-bar class="editor__header" :editor="editor" />
     <editor-content class="editor__content" :editor="editor" />
   </div>
-  <FormKit type="button" label="Save" @click="onClickedSave"></FormKit>
+  -->
   <tiptap />
+  <FormKit type="button" label="Save" @click="onClickedSave"></FormKit>
 </template>
 
 <script>
 import { Editor, EditorContent } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
-import MenuBar from "../components/MenuBar.vue";
+import { Tiptap } from "../components";
 
 export default {
   components: {
-    EditorContent,
-    MenuBar,
+    Tiptap,
   },
 
   data() {

@@ -275,13 +275,16 @@ const getMatchAndSetDecorations = async (
   text: string,
   originalFrom: number
 ) => {
+  const languageSettings = process.env.VUE_APP_LANGUAGE_SETTING;
   const postOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
       Accept: "application/json",
     },
-    body: `text=${encodeURIComponent(text)}&language=en-US&enabledOnly=false`,
+    body: `text=${encodeURIComponent(
+      text
+    )}&${languageSettings}&enabledOnly=false`,
   };
   // Post option ouput in console
   //console.log(postOptions)

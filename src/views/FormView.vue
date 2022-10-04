@@ -1,4 +1,5 @@
 <template>
+  <tiptap />
   <vue-avatar
     class="px-2 py-3 max-w-xs"
     :width="270"

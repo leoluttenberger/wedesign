@@ -13,15 +13,22 @@
           <div
             class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
           >
-            <router-link to="/feed"> Feed </router-link>
+            <router-link to="/documents"> Bewerbung </router-link>
           </div>
+
           <div
             class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
           >
-            <router-link to="/form"> Profil </router-link>
+            <router-link to="/calendar"> Erinnerungen </router-link>
           </div>
 
-          <span v-if="isLoggedIn">
+          <div
+            class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+          >
+            <router-link to="/form"> Lebenslauf </router-link>
+          </div>
+
+          <!-- <span v-if="isLoggedIn">
             <button
               class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
               @click="signOut"
@@ -37,7 +44,7 @@
               <router-link to="/sign-in"> Login </router-link>
             </div>
           </span>
-        </div>
+        --></div>
       </div>
     </div>
   </nav>

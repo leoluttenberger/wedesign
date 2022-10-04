@@ -28,7 +28,7 @@
             <router-link to="/form"> Lebenslauf </router-link>
           </div>
 
-          <!-- <span v-if="isLoggedIn">
+          <!--<span v-if="isLoggedIn">
             <button
               class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
               @click="signOut"
@@ -44,45 +44,38 @@
               <router-link to="/sign-in"> Login </router-link>
             </div>
           </span>
-        --></div>
+          -->
+        </div>
       </div>
     </div>
   </nav>
   <router-view />
 </template>
 
-<script>
-export default {
-  name: "sky-navbar",
-  data() {
-    return {
-      showMenu: false,
-    };
-  },
-  methods: {
-    toggleNavbar: function () {
-      this.showMenu = !this.showMenu;
-    },
-  },
-};
-</script>
-<script setup>
+<script lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { getAuth } from "firebase/auth";
-const isLoggedIn = ref(true);
-const router = useRouter();
-const auth = getAuth();
 
-auth.onAuthStateChanged(function (user) {
-  if (user) {
-    isLoggedIn.value = true; // if we have a user
-  } else {
-    isLoggedIn.value = false; // if we do not
-  }
-});
-const signOut = () => {
-  auth.signOut();
-  router.push("/");
+export default {
+  setup() {
+    const isLoggedIn = ref(true);
+    const router = useRouter();
+    const auth = getAuth();
+    let showMenu = false;
+    const toogleNavbar = () => (showMenu = !showMenu);
+    auth.onAuthStateChanged(function (user) {
+      if (user) {
+        isLoggedIn.value = true;
+      } else {
+        isLoggedIn.value = false;
+      }
+    });
+    const signOut = () => {
+      auth.signOut();
+      router.push("/");
+    };
+    return { showMenu };
+  },
 };
 </script>

@@ -5,7 +5,7 @@
   <FormKit type="button" @click="register">Submit</FormKit>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
@@ -17,7 +17,7 @@ const register = () => {
   createUserWithEmailAndPassword(auth, email.value, password.value)
     .then((data) => {
       console.log("Successfully registered!");
-      router.push("/feed"); // redirect to the feed
+      router.push("/feed");
       const user = data;
     })
     .catch((error) => {

@@ -28,7 +28,7 @@
             <router-link to="/form"> Lebenslauf </router-link>
           </div>
 
-          <!--<span v-if="isLoggedIn">
+          <span v-if="isLoggedIn">
             <button
               class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
               @click="signOut"
@@ -44,7 +44,6 @@
               <router-link to="/sign-in"> Login </router-link>
             </div>
           </span>
-          -->
         </div>
       </div>
     </div>
@@ -52,30 +51,24 @@
   <router-view />
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { getAuth } from "firebase/auth";
-
-export default {
-  setup() {
-    const isLoggedIn = ref(true);
-    const router = useRouter();
-    const auth = getAuth();
-    let showMenu = false;
-    const toogleNavbar = () => (showMenu = !showMenu);
-    auth.onAuthStateChanged(function (user) {
-      if (user) {
-        isLoggedIn.value = true;
-      } else {
-        isLoggedIn.value = false;
-      }
-    });
-    const signOut = () => {
-      auth.signOut();
-      router.push("/");
-    };
-    return { showMenu };
-  },
+const isLoggedIn = ref(true);
+const router = useRouter();
+const auth = getAuth();
+let showMenu = false;
+const toogleNavbar = () => (showMenu = !showMenu);
+auth.onAuthStateChanged(function (user) {
+  if (user) {
+    isLoggedIn.value = true;
+  } else {
+    isLoggedIn.value = false;
+  }
+});
+const signOut = () => {
+  auth.signOut();
+  router.push("/");
 };
 </script>

@@ -6,7 +6,7 @@
   <FormKit type="button" @click="signIn">Submit</FormKit>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
@@ -15,7 +15,8 @@ const password = ref("");
 const router = useRouter();
 const auth = getAuth();
 const errMsg = ref();
-const signIn = () => {
+const signIn = function () {
+  console.log("signinlo");
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then((data) => {
       console.log("Successfully logged in!");

@@ -10,7 +10,7 @@
     v-show="valueAvatarCropShow"
   >
   </vue-avatar>
-  <img :src="image.value" class="px-2 py-3 max-w-xs" v-show="valueAvatarShow" />
+  <img :src="image" class="px-2 py-3 max-w-xs" v-show="valueAvatarShow" />
   <div class="flex gap-4 px-2 py-3">
     <FormKit type="button" label="Edit" @click="onClickedEdit"></FormKit>
     <FormKit type="button" label="Save" @click="onClickedSave"></FormKit>
@@ -116,7 +116,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import { VueAvatar } from "vue-avatar-editor-improved";
 const MAX_WIDTH = 600;
 const MAX_HEIGHT = 600;
@@ -137,11 +137,12 @@ const highestSchoolEdu = ref(
   JSON.parse(localStorage.getItem("highestSchoolEdu"))
 );
 const universityEdu = ref(JSON.parse(localStorage.getItem("universityEdu")));
-const image = ref(JSON.parse(localStorage.getItem("profileImg")));
-const borderRadius = ref(200);
+let image = ref(JSON.parse(localStorage.getItem("profileImg")));
+const borderRadius = 200;
 const valueAvatarShow = ref(true);
 const valueAvatarCropShow = ref(false);
 const vueavatar = ref(null);
+
 const onClickedSave = function () {
   valueAvatarCropShow.value = false;
   valueAvatarShow.value = true;
@@ -163,7 +164,7 @@ const onClickedSave = function () {
   if (fileSelected.value == true) {
     const reader = new Image();
     reader.src = image.value;
-    const cropRect = vueavatar.value.getCroppingRect;
+    const cropRect = vueavatar.value.getCroppingRect();
     cropRect.x *= MAX_WIDTH;
     cropRect.y *= MAX_HEIGHT;
     if (cropRect.width == 1) {
@@ -178,12 +179,12 @@ const onClickedSave = function () {
     canvas.width = cropRect.width;
     canvas.height = cropRect.height;
     canvas.getContext("2d").drawImage(reader, -cropRect.x, -cropRect.y);
-    //image = canvas.toDataURL();
+    image.value = canvas.toDataURL();
     localStorage.setItem("profileImg", JSON.stringify(image.value));
     console.log(JSON.stringify(image.value));
     console.log(new Blob(Object.values(localStorage)).size / 1024 + " KB");
   } else {
-    const img = vueavatar.value.getImage();
+    image.value = vueavatar.value.getImage();
   }
   console.log("input disabled");
   fileSelected.value = false;
@@ -193,17 +194,6 @@ const onClickedEdit = function () {
   valueAvatarCropShow.value = true;
   valueAvatarShow.value = false;
   console.log("input enabled");
-};
-const createBase64Image = function (fileObject) {
-  const reader = new FileReader();
-  reader.onload = (event) => {
-    image.value = event.target.result;
-    localStorage.setItem("profileImg", JSON.stringify(image.value));
-    console.log(JSON.parse(localStorage.getItem("profileImg")));
-    console.log(JSON.stringify(image.value));
-    console.log(new Blob(Object.values(localStorage)).size / 1024 + " KB");
-  };
-  reader.readAsDataURL(fileObject);
 };
 const createBlogImage = function (fileObject) {
   const blobURL = URL.createObjectURL(fileObject);

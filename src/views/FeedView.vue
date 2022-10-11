@@ -6,7 +6,7 @@
   <!--<img src="../assets/nicole.jpg" /> -->
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { getAuth } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { onBeforeUnmount } from "vue";

@@ -7,7 +7,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 nvm use
 nvm install
-sudo npm install -g ruby firebase-tools
+npm install -g ruby firebase-tools
 sudo gem install  fastlane
 echo "======================================================================================================"
 echo "Install and build nodejs"

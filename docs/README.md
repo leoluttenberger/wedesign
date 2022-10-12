@@ -26,9 +26,13 @@ sdk install java 18.0.1.1-open
 sdk use java 18.0.1.1-open 
 sdk install gradle 7.2
 sdk use gradle 7.2
-sudo npm install -g ruby firebase-tools 
 sudo gem install fastlane
 ```
+Install nodejs version 16.15.1 via nvm
+```
+nvm use
+nvm install
+npm install -g ruby firebase-tools 
 
 After installing nvm run install script to auto install. 
 ```
@@ -42,10 +46,6 @@ npx cap open android
 ```
 Android sdk updates gradle version and plugins.
 
-Install nodejs version 16.15.1 via nvm
-```
-nvm use
-nvm install
 ```
 ## Project setup
 ```

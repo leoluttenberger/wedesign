@@ -148,8 +148,7 @@
     </div>
   </div>
 </template>
-<script>
-// Load CSS from the published version
+<script setup lang="ts">
 import "../../node_modules/vue-simple-calendar/dist/style.css";
 import "../../node_modules/vue-simple-calendar/static/css/default.css";
 import "../../node_modules/vue-simple-calendar/static/css/holidays-us.css";
@@ -157,124 +156,111 @@ import {
   CalendarView,
   CalendarViewHeader,
   CalendarMath,
-} from "vue-simple-calendar"; // published version
-export default {
-  name: "App",
-  components: {
-    CalendarView,
-    CalendarViewHeader,
-  },
-  data() {
-    return {
-      /* Show the current month, and give it some fake items to show */
-      showDate: this.thisMonth(1),
-      message: "",
-      startingDayOfWeek: 0,
-      disablePast: false,
-      disableFuture: false,
-      displayPeriodUom: "month",
-      displayPeriodCount: 1,
-      displayWeekNumbers: false,
-      showTimes: true,
-      selectionStart: null,
-      selectionEnd: null,
-      newItemTitle: "",
-      newItemStartDate: "",
-      newItemEndDate: "",
-      useDefaultTheme: true,
-      useHolidayTheme: true,
-      useTodayIcons: false,
-      items: [],
-    };
-  },
-  computed: {
-    userLocale() {
-      return CalendarMath.getDefaultBrowserLocale;
-    },
-    dayNames() {
-      return CalendarMath.getFormattedWeekdayNames(this.userLocale, "long", 0);
-    },
-    themeClasses() {
-      return {
-        "theme-default": this.useDefaultTheme,
-        "holiday-us-traditional": this.useHolidayTheme,
-        "holiday-us-official": this.useHolidayTheme,
-      };
-    },
-    myDateClasses() {
-      // This was added to demonstrate the dateClasses prop. Note in particular that the
-      // keys of the object are `yyyy-mm-dd` ISO date strings (not dates), and the values
-      // for those keys are strings or string arrays. Keep in mind that your CSS to style these
-      // may need to be fairly specific to make it override your theme's styles. See the
-      // CSS at the bottom of this component to see how these are styled.
-      const o = {};
-      const theFirst = this.thisMonth(1);
-      const ides = [2, 4, 6, 9].includes(theFirst.getMonth()) ? 15 : 13;
-      const idesDate = this.thisMonth(ides);
-      o[CalendarMath.isoYearMonthDay(idesDate)] = "ides";
-      o[CalendarMath.isoYearMonthDay(this.thisMonth(21))] = [
-        "do-you-remember",
-        "the-21st",
-      ];
-      return o;
-    },
-  },
-  mounted() {
-    this.newItemStartDate = CalendarMath.isoYearMonthDay(CalendarMath.today());
-    this.newItemEndDate = CalendarMath.isoYearMonthDay(CalendarMath.today());
-  },
-  methods: {
-    periodChanged() {
-      // range, eventSource) {
-      // Demo does nothing with this information, just including the method to demonstrate how
-      // you can listen for changes to the displayed range and react to them (by loading items, etc.)
-      //console.log(eventSource)
-      //console.log(range)
-    },
-    thisMonth(d, h, m) {
-      const t = new Date();
-      return new Date(t.getFullYear(), t.getMonth(), d, h || 0, m || 0);
-    },
-    onClickDay(d) {
-      this.selectionStart = null;
-      this.selectionEnd = null;
-      this.message = `You clicked: ${d.toLocaleDateString()}`;
-    },
-    onClickItem(e) {
-      this.message = `You clicked: ${e.title}`;
-    },
-    setShowDate(d) {
-      this.message = `Changing calendar view to ${d.toLocaleDateString()}`;
-      this.showDate = d;
-    },
-    setSelection(dateRange) {
-      this.selectionEnd = dateRange[1];
-      this.selectionStart = dateRange[0];
-    },
-    finishSelection(dateRange) {
-      this.setSelection(dateRange);
-      this.message = `You selected: ${this.selectionStart.toLocaleDateString()} -${this.selectionEnd.toLocaleDateString()}`;
-    },
-    onDrop(item, date) {
-      this.message = `You dropped ${item.id} on ${date.toLocaleDateString()}`;
-      // Determine the delta between the old start date and the date chosen,
-      // and apply that delta to both the start and end date to move the item.
-      const eLength = CalendarMath.dayDiff(item.startDate, date);
-      item.originalItem.startDate = CalendarMath.addDays(
-        item.startDate,
-        eLength
-      );
-      item.originalItem.endDate = CalendarMath.addDays(item.endDate, eLength);
-    },
-    clickTestAddItem() {
-      this.items.push({
-        startDate: this.newItemStartDate,
-        endDate: this.newItemEndDate,
-        title: this.newItemTitle,
-        id: "e" + Math.random().toString(36).substr(2, 10),
-      });
-      this.message = "You added a calendar item!";
-    },
-  },
+} from "vue-simple-calendar";
+import { ref, computed, onMounted } from "vue";
+
+const message = ref("");
+const startingDayOfWeek = ref(0);
+const disablePast = ref(false);
+const disableFuture = ref(false);
+const displayPeriodUom = ref("month");
+const displayPeriodCount = ref(1);
+const displayWeekNumbers = ref(false);
+const showTimes = ref(true);
+const selectionStart = ref(null);
+const selectionEnd = ref(null);
+const newItemTitle = ref("");
+const newItemStartDate = ref("");
+const newItemEndDate = ref("");
+const useDefaultTheme = ref(true);
+const useHolidayTheme = ref(true);
+const useTodayIcons = ref(false);
+const items = ref([]);
+const thisMonth = (d = 1, h = 1, m = 1) => {
+  const t = new Date();
+  return new Date(t.getFullYear(), t.getMonth(), d, h || 0, m || 0);
+};
+const showDate = ref(thisMonth(1));
+const userLocale = computed(() => {
+  return CalendarMath.getDefaultBrowserLocale();
+});
+const dayNames = computed(() => {
+  return CalendarMath.getFormattedWeekdayNames(userLocale.value, "long", 0);
+});
+const themeClasses = computed(() => {
+  return {
+    "theme-default": useDefaultTheme.value,
+    "holiday-us-traditional": useHolidayTheme.value,
+    "holiday-us-official": useHolidayTheme.value,
+  };
+});
+const myDateClasses = computed(() => {
+  // This was added to demonstrate the dateClasses prop. Note in particular that the
+  // keys of the object are `yyyy-mm-dd` ISO date strings (not dates), and the values
+  // for those keys are strings or string arrays. Keep in mind that your CSS to style these
+  // may need to be fairly specific to make it override your theme's styles. See the
+  // CSS at the bottom of this component to see how these are styled.
+  const o = {};
+  const theFirst = thisMonth(1);
+  const ides = [2, 4, 6, 9].includes(theFirst.getMonth()) ? 15 : 13;
+  const idesDate = thisMonth(ides);
+  o[CalendarMath.isoYearMonthDay(idesDate)] = "ides";
+  o[CalendarMath.isoYearMonthDay(thisMonth(21))] = [
+    "do-you-remember",
+    "the-21st",
+  ];
+  return o;
+});
+
+onMounted(() => {
+  newItemStartDate.value = CalendarMath.isoYearMonthDay(CalendarMath.today());
+  newItemEndDate.value = CalendarMath.isoYearMonthDay(CalendarMath.today());
+});
+
+const periodChanged = () => {
+  // range, eventSource) {
+  // Demo does nothing with this information, just including the method to demonstrate how
+  // you can listen for changes to the displayed range and react to them (by loading items, etc.)
+  //console.log(eventSource)
+  //console.log(range)
+};
+
+const onClickDay = (d) => {
+  selectionStart.value = null;
+  selectionEnd.value = null;
+  message.value = `You clicked: ${d.toLocaleDateString()}`;
+};
+
+const onClickItem = (e) => {
+  message.value = `You clicked: ${e.title}`;
+};
+const setShowDate = (d) => {
+  message.value = `Changing calendar view to ${d.toLocaleDateString()}`;
+  showDate.value = d;
+};
+const setSelection = (dateRange) => {
+  selectionEnd.value = dateRange[1];
+  selectionStart.value = dateRange[0];
+};
+const finishSelection = (dateRange) => {
+  setSelection(dateRange);
+  message.value = `You selected: ${selectionStart.value.toLocaleDateString()} -${selectionEnd.value.toLocaleDateString()}`;
+};
+const onDrop = (item, date) => {
+  message.value = `You dropped ${item.id} on ${date.toLocaleDateString()}`;
+  // Determine the delta between the old start date and the date chosen,
+  // and apply that delta to both the start and end date to move the item.
+  const eLength = CalendarMath.dayDiff(item.startDate, date);
+  item.originalItem.startDate = CalendarMath.addDays(item.startDate, eLength);
+  item.originalItem.endDate = CalendarMath.addDays(item.endDate, eLength);
+};
+const clickTestAddItem = () => {
+  items.value.push({
+    startDate: newItemStartDate.value,
+    endDate: newItemEndDate.value,
+    title: newItemTitle.value,
+    id: "e" + Math.random().toString(36).substr(2, 10),
+  });
+  message.value = "You added a calendar item!";
 };
 </script>

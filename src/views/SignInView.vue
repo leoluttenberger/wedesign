@@ -15,7 +15,7 @@ const password = ref("");
 const router = useRouter();
 const auth = getAuth();
 const errMsg = ref();
-const signIn = function () {
+const signIn = () => {
   console.log("signinlo");
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then((data) => {

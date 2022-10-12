@@ -143,7 +143,7 @@ const valueAvatarShow = ref(true);
 const valueAvatarCropShow = ref(false);
 const vueavatar = ref(null);
 
-const onClickedSave = function () {
+const onClickedSave = () => {
   valueAvatarCropShow.value = false;
   valueAvatarShow.value = true;
   localStorage.setItem("fullName", JSON.stringify(fullName.value));
@@ -189,13 +189,13 @@ const onClickedSave = function () {
   console.log("input disabled");
   fileSelected.value = false;
 };
-const onClickedEdit = function () {
+const onClickedEdit = () => {
   disableInput.value = false;
   valueAvatarCropShow.value = true;
   valueAvatarShow.value = false;
   console.log("input enabled");
 };
-const createBlogImage = function (fileObject) {
+const createBlogImage = (fileObject) => {
   const blobURL = URL.createObjectURL(fileObject);
   const reader = new Image();
   reader.src = blobURL;
@@ -217,7 +217,7 @@ const createBlogImage = function (fileObject) {
     image.value = canvas.toDataURL();
   };
 };
-const calculateSize = function (img, maxWidth, maxHeight) {
+const calculateSize = (img, maxWidth, maxHeight) => {
   let width = img.width;
   let height = img.height;
 
@@ -234,7 +234,7 @@ const calculateSize = function (img, maxWidth, maxHeight) {
   }
   return [width, height];
 };
-const onSelectFile = function (file) {
+const onSelectFile = (file) => {
   console.log("here is your file");
   createBlogImage(file[0]);
   fileSelected.value = true;

@@ -107,14 +107,14 @@ const proofread = () => editor.value.commands.proofread();
 const ignoreSuggestion = () =>
   editor.value.commands.ignoreLanguageToolSuggestion();
 
-const onClickedSave = function () {
+const onClickedSave = () => {
   const comment_text = editor.value.getJSON().content[0].content[0].text
     ? editor.value.getJSON().content[0].content[0].text
     : "";
   console.log(comment_text);
   localStorage.setItem("documents", JSON.stringify(comment_text));
 };
-onMounted(function () {
+onMounted(() => {
   editor.value.commands.setContent({
     type: "text",
     text: JSON.parse(localStorage.getItem("documents"))

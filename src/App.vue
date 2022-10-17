@@ -60,7 +60,7 @@ const router = useRouter();
 const auth = getAuth();
 let showMenu = false;
 const toogleNavbar = () => (showMenu = !showMenu);
-auth.onAuthStateChanged(function (user) {
+auth.onAuthStateChanged((user) => {
   if (user) {
     isLoggedIn.value = true;
   } else {

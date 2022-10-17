@@ -115,12 +115,12 @@ const onClickedSave = () => {
   localStorage.setItem("documents", JSON.stringify(comment_text));
 };
 onMounted(() => {
-  editor.value.commands.setContent({
-    type: "text",
-    text: JSON.parse(localStorage.getItem("documents"))
-      ? JSON.parse(localStorage.getItem("documents"))
-      : "",
-  });
+  if (localStorage.getItem("documents")) {
+    editor.value.commands.setContent({
+      type: "text",
+      text: JSON.parse(localStorage.getItem("documents")),
+    });
+  }
 });
 </script>
 

@@ -33,7 +33,7 @@ const messagesLoaded = ref(false);
 const loadingRooms = ref(false);
 const messages = ref([]);
 
-onMounted(function () {
+onMounted(() => {
   if (localStorage.name) {
     name.value = localStorage.name;
   }
@@ -41,7 +41,7 @@ onMounted(function () {
     email.value = localStorage.email;
   }
 });
-const onFetchMessages = function () {
+const onFetchMessages = () => {
   setTimeout(() => {
     messages.value = [
       {
@@ -189,7 +189,7 @@ const onFetchMessages = function () {
   });
 };
 
-const sendMessage = function ({ content, roomId, files, replyMessage }) {
+const sendMessage = ({ content, roomId, files, replyMessage }) => {
   const message = {
     sender_id: currentUserId.value,
     content,
@@ -197,10 +197,6 @@ const sendMessage = function ({ content, roomId, files, replyMessage }) {
     files,
     replyMessage,
   };
-
-  if (files) {
-    message.files = this.formattedFiles(files);
-  }
 
   if (replyMessage) {
     message.replyMessage = {

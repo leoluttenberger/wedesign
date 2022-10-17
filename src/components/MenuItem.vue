@@ -11,38 +11,31 @@
   </button>
 </template>
 
-<script>
+<script setup>
 import remixiconUrl from "remixicon/fonts/remixicon.symbol.svg";
+import { defineProps, ref } from "vue";
 
-export default {
-  props: {
-    icon: {
-      type: String,
-      required: true,
-    },
-
-    title: {
-      type: String,
-      required: true,
-    },
-
-    action: {
-      type: Function,
-      required: true,
-    },
-
-    isActive: {
-      type: Function,
-      default: null,
-    },
+const props = defineProps({
+  icon: {
+    type: String,
+    required: true,
   },
 
-  data() {
-    return {
-      remixiconUrl,
-    };
+  title: {
+    type: String,
+    required: true,
   },
-};
+
+  action: {
+    type: Function,
+    required: true,
+  },
+
+  isActive: {
+    type: Function,
+    default: null,
+  },
+});
 </script>
 
 <style lang="scss">
@@ -69,5 +62,3 @@ export default {
   }
 }
 </style>
-
-Examples/CollaborativeEditing/Vue Edit on GitHub →

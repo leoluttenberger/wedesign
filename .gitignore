@@ -17,6 +17,7 @@ capacitor.config.ts
 
 #Firebase config
 .firebaserc
+.firebase
 
 # Log files
 npm-debug.log*

@@ -13,7 +13,7 @@
 
 <script setup>
 import remixiconUrl from "remixicon/fonts/remixicon.symbol.svg";
-import { defineProps, ref } from "vue";
+import { defineProps } from "vue";
 
 const props = defineProps({
   icon: {

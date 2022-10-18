@@ -1,5 +1,11 @@
 <template>
-  <tiptap />
+  <router-link to="/crop"> Crop </router-link>
+  <AvatarInput
+    class="w-32 h-32 rounded-full"
+    v-model="form.avatar"
+    default-src="https://pbs.twimg.com/profile_images/1333896976602193922/MtWztkxt_400x400.jpg"
+  />
+
   <vue-avatar
     class="px-2 py-3 max-w-xs"
     :width="270"
@@ -8,9 +14,12 @@
     :borderRadius="borderRadius"
     @select-file="onSelectFile($event)"
     v-show="valueAvatarCropShow"
-  >
-  </vue-avatar>
-  <img :src="image" class="px-2 py-3 max-w-xs" v-show="valueAvatarShow" />
+  />
+  <img
+    :src="image"
+    class="rounded-full w-32 shadow-lg"
+    v-show="valueAvatarShow"
+  />
   <div class="flex gap-4 px-2 py-3">
     <FormKit type="button" label="Edit" @click="onClickedEdit"></FormKit>
     <FormKit type="button" label="Save" @click="onClickedSave"></FormKit>
@@ -115,9 +124,13 @@
     />
   </div>
 </template>
+
 <script setup lang="ts">
 import { ref } from "vue";
 import { VueAvatar } from "vue-avatar-editor-improved";
+import { AvatarInput } from "../components";
+
+const form = ref({ avatar: null });
 const MAX_WIDTH = 600;
 const MAX_HEIGHT = 600;
 const MIME_TYPE = "image/png";

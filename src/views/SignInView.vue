@@ -20,7 +20,7 @@ const signIn = () => {
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then((data) => {
       console.log("Successfully logged in!");
-      router.push("/feed"); // redirect to the feed
+      router.push("/feed");
     })
     .catch((error) => {
       switch (error.code) {

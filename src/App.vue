@@ -27,7 +27,7 @@
           >
             <router-link to="/form"> Lebenslauf </router-link>
           </div>
-
+          <!--
           <span v-if="isLoggedIn">
             <button
               class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
@@ -44,6 +44,7 @@
               <router-link to="/sign-in"> Login </router-link>
             </div>
           </span>
+          -->
         </div>
       </div>
     </div>

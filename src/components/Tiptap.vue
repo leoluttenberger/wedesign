@@ -32,14 +32,14 @@
       </section>
     </section>
   </bubble-menu>
+  <FormKit type="button" label="Save" @click="onClickedSave"></FormKit>
 </template>
 
-<script lang="ts" setup>
-import { computed, ref } from "vue";
+<script setup lang="ts">
+import { computed, ref, onMounted } from "vue";
 import { useEditor, EditorContent, Editor, Content } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "./MenuBar.vue";
-
 import {
   LanguageTool,
   LanguageToolHelpingWords,
@@ -92,7 +92,6 @@ const editor = useEditor({
     else loading.value = false;
   },
 });
-
 const replacements = computed(() => match.value?.replacements || []);
 
 const matchMessage = computed(() => match.value?.message || "No Message");
@@ -107,6 +106,22 @@ const proofread = () => editor.value.commands.proofread();
 
 const ignoreSuggestion = () =>
   editor.value.commands.ignoreLanguageToolSuggestion();
+
+const onClickedSave = () => {
+  const comment_text = editor.value.getJSON().content[0].content[0].text
+    ? editor.value.getJSON().content[0].content[0].text
+    : "";
+  console.log(comment_text);
+  localStorage.setItem("documents", JSON.stringify(comment_text));
+};
+onMounted(() => {
+  if (localStorage.getItem("documents")) {
+    editor.value.commands.setContent({
+      type: "text",
+      text: JSON.parse(localStorage.getItem("documents")),
+    });
+  }
+});
 </script>
 
 <style lang="scss">
@@ -190,6 +205,92 @@ const ignoreSuggestion = () =>
       align-items: center;
       font-size: 1.1em;
       max-width: fit-content;
+    }
+  }
+}
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  max-height: 26rem;
+  color: #0d0d0d;
+  background-color: #fff;
+  border: 3px solid #0d0d0d;
+  border-radius: 0.75rem;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    flex-wrap: wrap;
+    padding: 0.25rem;
+    border-bottom: 3px solid #0d0d0d;
+  }
+
+  &__content {
+    padding: 1.25rem 1rem;
+    flex: 1 1 auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  &__footer {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    white-space: nowrap;
+    border-top: 3px solid #0d0d0d;
+    font-size: 12px;
+    font-weight: 600;
+    color: #0d0d0d;
+    white-space: nowrap;
+    padding: 0.25rem 0.75rem;
+  }
+
+  /* Some information about the status */
+  &__status {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+
+    &::before {
+      content: " ";
+      flex: 0 0 auto;
+      display: inline-block;
+      width: 0.5rem;
+      height: 0.5rem;
+      background: rgba(#0d0d0d, 0.5);
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+
+    &--connecting::before {
+      background: #616161;
+    }
+
+    &--connected::before {
+      background: #b9f18d;
+    }
+  }
+
+  &__name {
+    button {
+      background: none;
+      border: none;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      color: #0d0d0d;
+      border-radius: 0.4rem;
+      padding: 0.25rem 0.5rem;
+
+      &:hover {
+        color: #fff;
+        background-color: #0d0d0d;
+      }
     }
   }
 }

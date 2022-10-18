@@ -115,157 +115,128 @@
     />
   </div>
 </template>
-<script>
+<script setup lang="ts">
+import { ref } from "vue";
+import { VueAvatar } from "vue-avatar-editor-improved";
 const MAX_WIDTH = 600;
 const MAX_HEIGHT = 600;
 const MIME_TYPE = "image/png";
 const QUALITY = 0.9;
-var fileSelected = false;
-import { VueAvatar } from "vue-avatar-editor-improved";
-export default {
-  data() {
-    return {
-      disableInput: true,
-      fullName: JSON.parse(localStorage.getItem("fullName")),
-      email: JSON.parse(localStorage.getItem("email")),
-      phone: JSON.parse(localStorage.getItem("phone")),
-      streetName: JSON.parse(localStorage.getItem("streetName")),
-      streetNumber: JSON.parse(localStorage.getItem("streetNumber")),
-      doorNumber: JSON.parse(localStorage.getItem("doorNumber")),
-      districtNumber: JSON.parse(localStorage.getItem("districtNumber")),
-      city: JSON.parse(localStorage.getItem("city")),
-      country: JSON.parse(localStorage.getItem("country")),
-      highestSchoolEdu: JSON.parse(localStorage.getItem("highestSchoolEdu")),
-      universityEdu: JSON.parse(localStorage.getItem("universityEdu")),
-      image: JSON.parse(localStorage.getItem("profileImg")),
-      borderRadius: 200,
-      valueAvatarShow: true,
-      valueAvatarCropShow: false,
-    };
-  },
-  components: {
-    VueAvatar,
-  },
-  methods: {
-    async onClickedSave() {
-      this.valueAvatarCropShow = false;
-      this.valueAvatarShow = true;
-      localStorage.setItem("fullName", JSON.stringify(this.fullName));
-      localStorage.setItem("email", JSON.stringify(this.email));
-      localStorage.setItem("phone", JSON.stringify(this.phone));
-      localStorage.setItem("streetName", JSON.stringify(this.streetName));
-      localStorage.setItem("streetNumber", JSON.stringify(this.streetNumber));
-      localStorage.setItem("doorNumber", JSON.stringify(this.doorNumber));
-      localStorage.setItem(
-        "districtNumber",
-        JSON.stringify(this.districtNumber)
-      );
-      localStorage.setItem("city", JSON.stringify(this.city));
-      localStorage.setItem("country", JSON.stringify(this.country));
-      localStorage.setItem(
-        "highestSchoolEdu",
-        JSON.stringify(this.highestSchoolEdu)
-      );
-      localStorage.setItem("universityEdu", JSON.stringify(this.universityEdu));
-      this.disableInput = true;
-      if (this.fileSelected == true) {
-        const reader = new Image();
-        reader.src = this.image;
-        const cropRect = this.$refs.vueavatar.getCroppingRect();
-        cropRect.x *= MAX_WIDTH;
-        cropRect.y *= MAX_HEIGHT;
-        if (cropRect.width == 1) {
-          cropRect.width = cropRect.height;
-        }
-        if (cropRect.height == 1) {
-          cropRect.height = cropRect.width;
-        }
-        cropRect.width *= MAX_WIDTH;
-        cropRect.height *= MAX_HEIGHT;
-        const canvas = document.createElement("canvas");
-        canvas.width = cropRect.width;
-        canvas.height = cropRect.height;
-        canvas.getContext("2d").drawImage(reader, -cropRect.x, -cropRect.y);
-        this.image = canvas.toDataURL();
-        localStorage.setItem("profileImg", JSON.stringify(this.image));
-        console.log(JSON.parse(localStorage.getItem("profileImg")));
-        console.log(JSON.stringify(this.image));
-        console.log(new Blob(Object.values(localStorage)).size / 1024 + " KB");
-      } else {
-        var img = this.$refs.vueavatar.getImage();
-      }
-      console.log("input disabled");
-      this.fileSelected = false;
-    },
-    async onClickedEdit() {
-      this.disableInput = false;
-      this.valueAvatarCropShow = true;
-      this.valueAvatarShow = false;
-      console.log("input enabled");
-    },
-    createBase64Image(fileObject) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        this.image = event.target.result;
-        localStorage.setItem("profileImg", JSON.stringify(this.image));
-        console.log(JSON.parse(localStorage.getItem("profileImg")));
-        console.log(JSON.stringify(this.image));
-        console.log(new Blob(Object.values(localStorage)).size / 1024 + " KB");
-      };
-      reader.readAsDataURL(fileObject);
-    },
-    createBlogImage(fileObject) {
-      const blobURL = URL.createObjectURL(fileObject);
-      const reader = new Image();
-      reader.src = blobURL;
-      reader.onload = () => {
-        URL.revokeObjectURL(this.src);
-        const [newWidth, newHeight] = this.calculateSize(
-          reader,
-          MAX_WIDTH,
-          MAX_HEIGHT
-        );
-        const canvas = document.createElement("canvas");
-        canvas.width = newWidth;
-        canvas.height = newHeight;
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(reader, 0, 0, newWidth, newHeight);
-        canvas.toBlob(
-          (blob) => {
-            console.log(blob.size / 1024 + " KB");
-          },
-          MIME_TYPE,
-          QUALITY
-        );
-        this.image = canvas.toDataURL();
-        localStorage.setItem("profileImg", JSON.stringify(this.image));
-        console.log(JSON.parse(localStorage.getItem("profileImg")));
-        console.log(JSON.stringify(this.image));
-        console.log(new Blob(Object.values(localStorage)).size / 1024 + " KB");
-      };
-    },
-    calculateSize(img, maxWidth, maxHeight) {
-      let width = img.width;
-      let height = img.height;
+const fileSelected = ref(false);
+const disableInput = ref(true);
+const fullName = ref(JSON.parse(localStorage.getItem("fullName")));
+const email = ref(JSON.parse(localStorage.getItem("email")));
+const phone = ref(JSON.parse(localStorage.getItem("phone")));
+const streetName = ref(JSON.parse(localStorage.getItem("streetName")));
+const streetNumber = ref(JSON.parse(localStorage.getItem("streetNumber")));
+const doorNumber = ref(JSON.parse(localStorage.getItem("doorNumber")));
+const districtNumber = ref(JSON.parse(localStorage.getItem("districtNumber")));
+const city = ref(JSON.parse(localStorage.getItem("city")));
+const country = ref(JSON.parse(localStorage.getItem("country")));
+const highestSchoolEdu = ref(
+  JSON.parse(localStorage.getItem("highestSchoolEdu"))
+);
+const universityEdu = ref(JSON.parse(localStorage.getItem("universityEdu")));
+let image = ref(JSON.parse(localStorage.getItem("profileImg")));
+const borderRadius = 200;
+const valueAvatarShow = ref(true);
+const valueAvatarCropShow = ref(false);
+const vueavatar = ref(null);
 
-      if (width > height) {
-        if (width > maxWidth) {
-          height = Math.round((height * maxWidth) / width);
-          width = maxWidth;
-        }
-      } else {
-        if (height > maxHeight) {
-          width = Math.round((width * maxHeight) / height);
-          height = maxHeight;
-        }
-      }
-      return [width, height];
-    },
-    onSelectFile(file) {
-      console.log("here is your file");
-      this.createBlogImage(file[0]);
-      this.fileSelected = true;
-    },
-  },
+const onClickedSave = () => {
+  valueAvatarCropShow.value = false;
+  valueAvatarShow.value = true;
+  localStorage.setItem("fullName", JSON.stringify(fullName.value));
+  localStorage.setItem("email", JSON.stringify(email.value));
+  localStorage.setItem("phone", JSON.stringify(phone.value));
+  localStorage.setItem("streetName", JSON.stringify(streetName.value));
+  localStorage.setItem("streetNumber", JSON.stringify(streetNumber.value));
+  localStorage.setItem("doorNumber", JSON.stringify(doorNumber.value));
+  localStorage.setItem("districtNumber", JSON.stringify(districtNumber.value));
+  localStorage.setItem("city", JSON.stringify(city.value));
+  localStorage.setItem("country", JSON.stringify(country.value));
+  localStorage.setItem(
+    "highestSchoolEdu",
+    JSON.stringify(highestSchoolEdu.value)
+  );
+  localStorage.setItem("universityEdu", JSON.stringify(universityEdu));
+  disableInput.value = true;
+  if (fileSelected.value == true) {
+    const reader = new Image();
+    reader.src = image.value;
+    const cropRect = vueavatar.value.getCroppingRect();
+    cropRect.x *= MAX_WIDTH;
+    cropRect.y *= MAX_HEIGHT;
+    if (cropRect.width == 1) {
+      cropRect.width = cropRect.height;
+    }
+    if (cropRect.height == 1) {
+      cropRect.height = cropRect.width;
+    }
+    cropRect.width *= MAX_WIDTH;
+    cropRect.height *= MAX_HEIGHT;
+    const canvas = document.createElement("canvas");
+    canvas.width = cropRect.width;
+    canvas.height = cropRect.height;
+    canvas.getContext("2d").drawImage(reader, -cropRect.x, -cropRect.y);
+    image.value = canvas.toDataURL();
+    localStorage.setItem("profileImg", JSON.stringify(image.value));
+    console.log(JSON.stringify(image.value));
+    console.log(new Blob(Object.values(localStorage)).size / 1024 + " KB");
+  } else {
+    image.value = vueavatar.value.getImage();
+  }
+  console.log("input disabled");
+  fileSelected.value = false;
+};
+const onClickedEdit = () => {
+  disableInput.value = false;
+  valueAvatarCropShow.value = true;
+  valueAvatarShow.value = false;
+  console.log("input enabled");
+};
+const createBlogImage = (fileObject) => {
+  const blobURL = URL.createObjectURL(fileObject);
+  const reader = new Image();
+  reader.src = blobURL;
+  reader.onload = () => {
+    URL.revokeObjectURL(reader.src);
+    const [newWidth, newHeight] = calculateSize(reader, MAX_WIDTH, MAX_HEIGHT);
+    const canvas = document.createElement("canvas");
+    canvas.width = newWidth;
+    canvas.height = newHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(reader, 0, 0, newWidth, newHeight);
+    canvas.toBlob(
+      (blob) => {
+        console.log(blob.size / 1024 + " KB");
+      },
+      MIME_TYPE,
+      QUALITY
+    );
+    image.value = canvas.toDataURL();
+  };
+};
+const calculateSize = (img, maxWidth, maxHeight) => {
+  let width = img.width;
+  let height = img.height;
+
+  if (width > height) {
+    if (width > maxWidth) {
+      height = Math.round((height * maxWidth) / width);
+      width = maxWidth;
+    }
+  } else {
+    if (height > maxHeight) {
+      width = Math.round((width * maxHeight) / height);
+      height = maxHeight;
+    }
+  }
+  return [width, height];
+};
+const onSelectFile = (file) => {
+  console.log("here is your file");
+  createBlogImage(file[0]);
+  fileSelected.value = true;
 };
 </script>

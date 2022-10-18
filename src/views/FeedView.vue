@@ -6,13 +6,13 @@
   <!--<img src="../assets/nicole.jpg" /> -->
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { getAuth } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { onBeforeUnmount } from "vue";
 const router = useRouter();
 const auth = getAuth();
-const authListener = auth.onAuthStateChanged(function (user) {
+const authListener = auth.onAuthStateChanged((user) => {
   if (!user) {
     alert("you must be logged in to view this. redirecting to the home page");
     router.push("/");

@@ -20,7 +20,7 @@
       </button>
       <button
         type="button"
-        v-if="value"
+        v-if="isFileSelected"
         @click="remove()"
         class="rounded-full hover:bg-white hover:bg-opacity-25 p-2 focus:outline-none text-white transition duration-200"
       >
@@ -30,44 +30,41 @@
   </div>
 </template>
 
-<script>
-import IconProfile from "./IconProfile";
-export default {
-  props: {
-    value: File,
-    defaultSrc: String,
-  },
-  data() {
-    return {
-      image: this.defaultSrc,
+<script setup lang="ts">
+import IconProfile from "./IconProfile.vue";
+import { defineProps, ref } from "vue";
+
+const props = defineProps({
+  defaultSrc: String,
+});
+
+let image = ref(props.defaultSrc);
+const file = ref(null);
+const isFileSelected = ref(false);
+
+const browse = () => {
+  console.log("browse");
+  file.value.click();
+};
+const remove = () => {
+  console.log("remove");
+  image.value = props.defaultSrc;
+  file.value = "";
+};
+const change = (e) => {
+  if (!e.target.files[0]) {
+    console.log("no file");
+    image.value = props.defaultSrc;
+    file.value = "";
+    isFileSelected.value = false;
+  } else {
+    let reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    isFileSelected.value = true;
+    reader.onload = (e) => {
+      console.log("file read");
+      image.value = e.target.result as string;
     };
-  },
-  methods: {
-    browse() {
-      console.log("browse");
-      this.$refs.file.click();
-    },
-    remove() {
-      console.log("remove");
-      this.$emit("input", null);
-    },
-    change(e) {
-      if (!e.target.files[0]) {
-        console.log("file read");
-        this.image = this.defaultSrc;
-        this.$refs.file.value = "";
-      } else {
-        let reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
-        reader.onload = (e) => {
-          console.log("file read");
-          this.image = e.target.result;
-        };
-      }
-    },
-  },
-  components: {
-    IconProfile,
-  },
+  }
 };
 </script>

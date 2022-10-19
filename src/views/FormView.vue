@@ -1,25 +1,17 @@
 <template>
-  <router-link to="/crop"> Crop </router-link>
   <AvatarInput
-    class="w-32 h-32 rounded-full"
+    class="rounded-full w-32 shadow-lg"
     v-model="form.avatar"
     default-src="https://pbs.twimg.com/profile_images/1333896976602193922/MtWztkxt_400x400.jpg"
-  />
-
-  <vue-avatar
-    class="px-2 py-3 max-w-xs"
-    :width="270"
-    :height="270"
-    ref="vueavatar"
-    :borderRadius="borderRadius"
-    @select-file="onSelectFile($event)"
     v-show="valueAvatarCropShow"
   />
   <img
-    :src="image"
     class="rounded-full w-32 shadow-lg"
+    :src="image"
     v-show="valueAvatarShow"
   />
+  <CropperItem v-show="valueAvatarCropShow"></CropperItem>
+
   <div class="flex gap-4 px-2 py-3">
     <FormKit type="button" label="Edit" @click="onClickedEdit"></FormKit>
     <FormKit type="button" label="Save" @click="onClickedSave"></FormKit>
@@ -126,16 +118,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { VueAvatar } from "vue-avatar-editor-improved";
+import { ref, watch } from "vue";
 import { AvatarInput } from "../components";
+import CropperItem from "../components/CropperItem.vue";
+import { canvasCoordinates, fileObject, imageObject } from "../store.js";
 
-const form = ref({ avatar: null });
+const image = ref(JSON.parse(localStorage.getItem("profileImg")));
+
+watch(imageObject, () => {
+  image.value = imageObject.value;
+});
+
 const MAX_WIDTH = 600;
 const MAX_HEIGHT = 600;
 const MIME_TYPE = "image/png";
 const QUALITY = 0.9;
-const fileSelected = ref(false);
+
+const form = ref({ avatar: null });
 const disableInput = ref(true);
 const fullName = ref(JSON.parse(localStorage.getItem("fullName")));
 const email = ref(JSON.parse(localStorage.getItem("email")));
@@ -150,11 +149,9 @@ const highestSchoolEdu = ref(
   JSON.parse(localStorage.getItem("highestSchoolEdu"))
 );
 const universityEdu = ref(JSON.parse(localStorage.getItem("universityEdu")));
-let image = ref(JSON.parse(localStorage.getItem("profileImg")));
 const borderRadius = 200;
 const valueAvatarShow = ref(true);
 const valueAvatarCropShow = ref(false);
-const vueavatar = ref(null);
 
 const onClickedSave = () => {
   valueAvatarCropShow.value = false;
@@ -174,33 +171,9 @@ const onClickedSave = () => {
   );
   localStorage.setItem("universityEdu", JSON.stringify(universityEdu));
   disableInput.value = true;
-  if (fileSelected.value == true) {
-    const reader = new Image();
-    reader.src = image.value;
-    const cropRect = vueavatar.value.getCroppingRect();
-    cropRect.x *= MAX_WIDTH;
-    cropRect.y *= MAX_HEIGHT;
-    if (cropRect.width == 1) {
-      cropRect.width = cropRect.height;
-    }
-    if (cropRect.height == 1) {
-      cropRect.height = cropRect.width;
-    }
-    cropRect.width *= MAX_WIDTH;
-    cropRect.height *= MAX_HEIGHT;
-    const canvas = document.createElement("canvas");
-    canvas.width = cropRect.width;
-    canvas.height = cropRect.height;
-    canvas.getContext("2d").drawImage(reader, -cropRect.x, -cropRect.y);
-    image.value = canvas.toDataURL();
-    localStorage.setItem("profileImg", JSON.stringify(image.value));
-    console.log(JSON.stringify(image.value));
-    console.log(new Blob(Object.values(localStorage)).size / 1024 + " KB");
-  } else {
-    image.value = vueavatar.value.getImage();
-  }
+  createBlobImage();
+  console.log(new Blob(Object.values(localStorage)).size / 1024 + " KB");
   console.log("input disabled");
-  fileSelected.value = false;
 };
 const onClickedEdit = () => {
   disableInput.value = false;
@@ -208,48 +181,31 @@ const onClickedEdit = () => {
   valueAvatarShow.value = false;
   console.log("input enabled");
 };
-const createBlogImage = (fileObject) => {
-  const blobURL = URL.createObjectURL(fileObject);
-  const reader = new Image();
-  reader.src = blobURL;
-  reader.onload = () => {
-    URL.revokeObjectURL(reader.src);
-    const [newWidth, newHeight] = calculateSize(reader, MAX_WIDTH, MAX_HEIGHT);
-    const canvas = document.createElement("canvas");
-    canvas.width = newWidth;
-    canvas.height = newHeight;
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(reader, 0, 0, newWidth, newHeight);
-    canvas.toBlob(
-      (blob) => {
-        console.log(blob.size / 1024 + " KB");
-      },
-      MIME_TYPE,
-      QUALITY
-    );
-    image.value = canvas.toDataURL();
-  };
-};
-const calculateSize = (img, maxWidth, maxHeight) => {
-  let width = img.width;
-  let height = img.height;
-
-  if (width > height) {
-    if (width > maxWidth) {
-      height = Math.round((height * maxWidth) / width);
-      width = maxWidth;
-    }
+const createBlobImage = () => {
+  if (fileObject.file) {
+    const blobURL = URL.createObjectURL(fileObject.file);
+    const reader = new Image();
+    reader.src = blobURL;
+    reader.onload = () => {
+      URL.revokeObjectURL(reader.src);
+      console.log(canvasCoordinates);
+      const canvas = document.createElement("canvas");
+      canvas.width = canvasCoordinates.width;
+      canvas.height = canvasCoordinates.height;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(reader, -canvasCoordinates.left, -canvasCoordinates.top);
+      canvas.toBlob(
+        (blob) => {
+          console.log(blob.size / 1024 + " KB");
+        },
+        MIME_TYPE,
+        QUALITY
+      );
+      image.value = canvas.toDataURL();
+      localStorage.setItem("profileImg", JSON.stringify(image.value));
+    };
   } else {
-    if (height > maxHeight) {
-      width = Math.round((width * maxHeight) / height);
-      height = maxHeight;
-    }
+    console.log("Error reading File!");
   }
-  return [width, height];
-};
-const onSelectFile = (file) => {
-  console.log("here is your file");
-  createBlogImage(file[0]);
-  fileSelected.value = true;
 };
 </script>

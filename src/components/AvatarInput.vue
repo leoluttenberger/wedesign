@@ -33,6 +33,7 @@
 <script setup lang="ts">
 import IconProfile from "./IconProfile.vue";
 import { defineProps, ref } from "vue";
+import { fileObject, imageObject } from "../store.js";
 
 const props = defineProps({
   defaultSrc: String,
@@ -55,15 +56,19 @@ const change = (e) => {
   if (!e.target.files[0]) {
     console.log("no file");
     image.value = props.defaultSrc;
+    imageObject.value = image.value;
     file.value = "";
     isFileSelected.value = false;
   } else {
     let reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
+    fileObject.file = e.target.files[0];
     isFileSelected.value = true;
     reader.onload = (e) => {
       console.log("file read");
       image.value = e.target.result as string;
+      imageObject.value = image.value;
+      localStorage.setItem("profileImg", JSON.stringify(image.value));
     };
   }
 };

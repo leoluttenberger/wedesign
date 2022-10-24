@@ -1,7 +1,7 @@
 <template>
   <cropper
     class="cropper"
-    :src="image"
+    :src="imageCrop"
     :stencil-props="{
       aspectRatio: 12 / 12,
     }"
@@ -10,15 +10,11 @@
 </template>
 <script setup lang="ts">
 import { Cropper } from "vue-advanced-cropper";
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import "vue-advanced-cropper/dist/style.css";
 import { canvasCoordinates, imageObject } from "../store.js";
 
-const image = ref(JSON.parse(localStorage.getItem("profileImg")));
-
-watch(imageObject, () => {
-  image.value = imageObject.value;
-});
+const imageCrop = ref(JSON.parse(localStorage.getItem("profileImg")));
 
 const change = ({ coordinates }) => {
   canvasCoordinates.width = coordinates.width;

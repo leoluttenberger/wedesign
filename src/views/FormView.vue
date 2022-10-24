@@ -2,7 +2,7 @@
   <AvatarInput
     class="rounded-full w-32 shadow-lg"
     v-model="form.avatar"
-    :default-src="image"
+    :default-src="imagePreview"
     v-show="valueAvatarCropShow"
   />
   <img
@@ -120,18 +120,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch, defineEmits } from "vue";
 import { AvatarInput } from "../components";
 import CropperItem from "../components/CropperItem.vue";
 import { canvasCoordinates, fileObject, imageObject } from "../store.js";
 import ModalDialog from "../components/ModalDialog.vue";
-import IconProfile from "../components/IconProfile.vue";
+import { id } from "@formkit/i18n";
 
 const image = ref(JSON.parse(localStorage.getItem("profileImg")));
-watch(imageObject, () => {
-  image.value = imageObject.value;
-  switchModal();
-});
+const imagePreview = ref(JSON.parse(localStorage.getItem("profileImg")));
 
 const showModal = ref(false);
 const MAX_WIDTH = 600;
@@ -158,6 +155,21 @@ const borderRadius = 200;
 const valueAvatarShow = ref(true);
 const valueAvatarCropShow = ref(false);
 
+watch(imageObject, () => {
+  image.value = imageObject.value;
+  openModal();
+  console.log("Open Modal");
+});
+
+watch(showModal, () => {
+  if (showModal.value == false) {
+    console.log("Create Blob Image!");
+    createBlobImage();
+  } else {
+    console.log("show modal true");
+  }
+});
+
 const onClickedSave = () => {
   valueAvatarCropShow.value = false;
   valueAvatarShow.value = true;
@@ -175,8 +187,9 @@ const onClickedSave = () => {
     JSON.stringify(highestSchoolEdu.value)
   );
   localStorage.setItem("universityEdu", JSON.stringify(universityEdu));
+  localStorage.setItem("profileImg", JSON.stringify(image.value));
+
   disableInput.value = true;
-  createBlobImage();
   console.log(new Blob(Object.values(localStorage)).size / 1024 + " KB");
   console.log("input disabled");
 };
@@ -207,7 +220,7 @@ const createBlobImage = () => {
         QUALITY
       );
       image.value = canvas.toDataURL();
-      localStorage.setItem("profileImg", JSON.stringify(image.value));
+      imagePreview.value = image.value;
     };
   } else {
     console.log("Error reading File!");
@@ -216,7 +229,7 @@ const createBlobImage = () => {
 const closeModal = () => {
   showModal.value = false;
 };
-const switchModal = () => {
-  showModal.value = !showModal.value;
+const openModal = () => {
+  showModal.value = true;
 };
 </script>

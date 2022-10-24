@@ -2,7 +2,7 @@
   <AvatarInput
     class="rounded-full w-32 shadow-lg"
     v-model="form.avatar"
-    default-src="https://pbs.twimg.com/profile_images/1333896976602193922/MtWztkxt_400x400.jpg"
+    :default-src="image"
     v-show="valueAvatarCropShow"
   />
   <img
@@ -10,8 +10,10 @@
     :src="image"
     v-show="valueAvatarShow"
   />
-  <CropperItem v-show="valueAvatarCropShow"></CropperItem>
-
+  <ModalDialog :show="showModal">
+    <FormKit type="button" label="X" @click="closeModal"> </FormKit>
+    <CropperItem></CropperItem>
+  </ModalDialog>
   <div class="flex gap-4 px-2 py-3">
     <FormKit type="button" label="Edit" @click="onClickedEdit"></FormKit>
     <FormKit type="button" label="Save" @click="onClickedSave"></FormKit>
@@ -122,13 +124,16 @@ import { ref, watch } from "vue";
 import { AvatarInput } from "../components";
 import CropperItem from "../components/CropperItem.vue";
 import { canvasCoordinates, fileObject, imageObject } from "../store.js";
+import ModalDialog from "../components/ModalDialog.vue";
+import IconProfile from "../components/IconProfile.vue";
 
 const image = ref(JSON.parse(localStorage.getItem("profileImg")));
-
 watch(imageObject, () => {
   image.value = imageObject.value;
+  switchModal();
 });
 
+const showModal = ref(false);
 const MAX_WIDTH = 600;
 const MAX_HEIGHT = 600;
 const MIME_TYPE = "image/png";
@@ -207,5 +212,11 @@ const createBlobImage = () => {
   } else {
     console.log("Error reading File!");
   }
+};
+const closeModal = () => {
+  showModal.value = false;
+};
+const switchModal = () => {
+  showModal.value = !showModal.value;
 };
 </script>

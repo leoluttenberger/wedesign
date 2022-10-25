@@ -11,7 +11,13 @@
     v-show="valueAvatarShow"
   />
   <ModalDialog :show="showModal">
-    <FormKit type="button" label="X" @click="closeModal"> </FormKit>
+    <button
+      type="button"
+      @click="closeModal"
+      class="rounded-full hover:bg-black hover:bg-opacity-25 p-2 focus:outline-none text-black transition duration-200"
+    >
+      <icon-profile name="x" class="h-6 w-6"></icon-profile>
+    </button>
     <CropperItem></CropperItem>
   </ModalDialog>
   <div class="flex gap-4 px-2 py-3">
@@ -131,6 +137,7 @@ import {
 } from "../store.js";
 import ModalDialog from "../components/ModalDialog.vue";
 import { id } from "@formkit/i18n";
+import IconProfile from "../components/IconProfile.vue";
 
 const image = ref(JSON.parse(localStorage.getItem("profileImg")));
 const imagePreview = ref(JSON.parse(localStorage.getItem("profileImg")));

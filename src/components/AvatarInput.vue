@@ -18,22 +18,14 @@
       >
         <icon-profile name="camera" class="h-6 w-6"></icon-profile>
       </button>
-      <button
-        type="button"
-        v-if="isFileSelected"
-        @click="remove()"
-        class="rounded-full hover:bg-white hover:bg-opacity-25 p-2 focus:outline-none text-white transition duration-200"
-      >
-        <icon-profile name="x" class="h-6 w-6"></icon-profile>
-      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import IconProfile from "./IconProfile.vue";
 import { defineProps, ref, watch } from "vue";
 import { fileObject, imageObject, imagePreviewObject } from "../store.js";
+import IconProfile from "../components/IconProfile.vue";
 
 const props = defineProps({
   defaultSrc: String,
@@ -52,11 +44,6 @@ watch(imagePreviewObject, () => {
 const browse = () => {
   console.log("browse");
   file.value.click();
-};
-const remove = () => {
-  console.log("remove");
-  imageAvatar.value = props.defaultSrc;
-  file.value = "";
 };
 const change = (e) => {
   if (!e.target.files[0]) {

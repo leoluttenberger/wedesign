@@ -123,16 +123,19 @@
 import { ref, watch, defineEmits } from "vue";
 import { AvatarInput } from "../components";
 import CropperItem from "../components/CropperItem.vue";
-import { canvasCoordinates, fileObject, imageObject } from "../store.js";
+import {
+  canvasCoordinates,
+  fileObject,
+  imageObject,
+  imagePreviewObject,
+} from "../store.js";
 import ModalDialog from "../components/ModalDialog.vue";
 import { id } from "@formkit/i18n";
 
 const image = ref(JSON.parse(localStorage.getItem("profileImg")));
 const imagePreview = ref(JSON.parse(localStorage.getItem("profileImg")));
-
+imagePreviewObject.value = imagePreview.value;
 const showModal = ref(false);
-const MAX_WIDTH = 600;
-const MAX_HEIGHT = 600;
 const MIME_TYPE = "image/png";
 const QUALITY = 0.9;
 
@@ -151,7 +154,6 @@ const highestSchoolEdu = ref(
   JSON.parse(localStorage.getItem("highestSchoolEdu"))
 );
 const universityEdu = ref(JSON.parse(localStorage.getItem("universityEdu")));
-const borderRadius = 200;
 const valueAvatarShow = ref(true);
 const valueAvatarCropShow = ref(false);
 
@@ -188,16 +190,12 @@ const onClickedSave = () => {
   );
   localStorage.setItem("universityEdu", JSON.stringify(universityEdu));
   localStorage.setItem("profileImg", JSON.stringify(image.value));
-
   disableInput.value = true;
-  console.log(new Blob(Object.values(localStorage)).size / 1024 + " KB");
-  console.log("input disabled");
 };
 const onClickedEdit = () => {
   disableInput.value = false;
   valueAvatarCropShow.value = true;
   valueAvatarShow.value = false;
-  console.log("input enabled");
 };
 const createBlobImage = () => {
   if (fileObject.file) {
@@ -220,7 +218,8 @@ const createBlobImage = () => {
         QUALITY
       );
       image.value = canvas.toDataURL();
-      imagePreview.value = image.value;
+      imagePreviewObject.value = image.value;
+      imagePreview.value = imagePreviewObject.value;
     };
   } else {
     console.log("Error reading File!");

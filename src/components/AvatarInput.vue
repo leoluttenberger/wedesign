@@ -8,7 +8,6 @@
       @change="change"
     />
     <img :src="imageAvatar" class="h-full w-full object-cover" />
-    <img :src="image" v-show="false" />
     <div
       class="absolute top-0 h-full w-full bg-black bg-opacity-25 flex items-center justify-center"
     >
@@ -34,17 +33,21 @@
 <script setup lang="ts">
 import IconProfile from "./IconProfile.vue";
 import { defineProps, ref, watch } from "vue";
-import { fileObject, imageObject } from "../store.js";
+import { fileObject, imageObject, imagePreviewObject } from "../store.js";
 
 const props = defineProps({
   defaultSrc: String,
 });
 
 let imageAvatar = ref(props.defaultSrc);
-let image = ref(props.defaultSrc);
 
 const file = ref(null);
 const isFileSelected = ref(false);
+
+watch(imagePreviewObject, () => {
+  imageAvatar.value = imagePreviewObject.value;
+  console.log("Updated preview avatar");
+});
 
 const browse = () => {
   console.log("browse");
@@ -59,7 +62,6 @@ const change = (e) => {
   if (!e.target.files[0]) {
     console.log("no file");
     imageAvatar.value = props.defaultSrc;
-    imageObject.value = imageAvatar.value;
     file.value = "";
     isFileSelected.value = false;
   } else {
@@ -69,9 +71,7 @@ const change = (e) => {
     isFileSelected.value = true;
     reader.onload = (e) => {
       console.log("file read");
-      image.value = e.target.result as string;
-      imageObject.value = image.value;
-      localStorage.setItem("profileImg", JSON.stringify(imageObject.value));
+      imageObject.value = e.target.result as string;
     };
   }
 };

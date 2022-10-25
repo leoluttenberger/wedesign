@@ -13,3 +13,6 @@ export const fileObject = reactive({
 export const imageObject = reactive({
   value: null,
 });
+export const imagePreviewObject = reactive({
+  value: null,
+});

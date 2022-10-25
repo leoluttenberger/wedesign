@@ -165,19 +165,6 @@ onMounted(() => {
   }
 }
 
-.flex {
-  display: flex;
-
-  div {
-    width: 50%;
-  }
-}
-
-.content {
-  max-width: 50%;
-  min-width: 50%;
-}
-
 .bubble-menu > .bubble-menu-section-container {
   display: flex;
   flex-direction: column;

@@ -145,6 +145,8 @@ imagePreviewObject.value = imagePreview.value;
 const showModal = ref(false);
 const MIME_TYPE = "image/png";
 const QUALITY = 0.9;
+const MAX_WIDTH = 600;
+const MAX_HEIGHT = 600;
 
 const form = ref({ avatar: null });
 const disableInput = ref(true);
@@ -211,7 +213,6 @@ const createBlobImage = () => {
     reader.src = blobURL;
     reader.onload = () => {
       URL.revokeObjectURL(reader.src);
-      console.log(canvasCoordinates);
       const canvas = document.createElement("canvas");
       canvas.width = canvasCoordinates.width;
       canvas.height = canvasCoordinates.height;
@@ -219,19 +220,66 @@ const createBlobImage = () => {
       ctx.drawImage(reader, -canvasCoordinates.left, -canvasCoordinates.top);
       canvas.toBlob(
         (blob) => {
-          console.log(blob.size / 1024 + " KB");
+          console.log("1- " + blob.size / 1024 + " KB");
         },
         MIME_TYPE,
         QUALITY
       );
       image.value = canvas.toDataURL();
-      imagePreviewObject.value = image.value;
-      imagePreview.value = imagePreviewObject.value;
+      let blob = JSON.stringify(image.value);
+      console.log("2- " + blob.length / 1024 + " KB");
+      if (blob.length / 1028 >= 2048) {
+        downSampleImage(image.value);
+      } else {
+        imagePreviewObject.value = image.value;
+        imagePreview.value = imagePreviewObject.value;
+      }
     };
   } else {
     console.log("Error reading File!");
   }
 };
+const downSampleImage = (blobURL) => {
+  const reader = new Image();
+  reader.src = blobURL;
+  reader.onload = () => {
+    URL.revokeObjectURL(reader.src);
+    const [newWidth, newHeight] = calculateSize(reader, MAX_WIDTH, MAX_HEIGHT);
+    const canvas = document.createElement("canvas");
+    canvas.width = newWidth;
+    canvas.height = newHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(reader, 0, 0, newWidth, newHeight);
+    canvas.toBlob(
+      (blob) => {
+        console.log(blob.size / 1024 + " KB");
+      },
+      MIME_TYPE,
+      QUALITY
+    );
+    image.value = canvas.toDataURL();
+    imagePreviewObject.value = image.value;
+    imagePreview.value = imagePreviewObject.value;
+  };
+};
+
+const calculateSize = (img, maxWidth, maxHeight) => {
+  let width = img.width;
+  let height = img.height;
+  if (width > height) {
+    if (width > maxWidth) {
+      height = Math.round((height * maxWidth) / width);
+      width = maxWidth;
+    }
+  } else {
+    if (height > maxHeight) {
+      width = Math.round((width * maxHeight) / height);
+      height = maxHeight;
+    }
+  }
+  return [width, height];
+};
+
 const closeModal = () => {
   showModal.value = false;
 };

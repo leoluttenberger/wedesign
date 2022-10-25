@@ -27,6 +27,11 @@
           >
             <router-link to="/form"> Lebenslauf </router-link>
           </div>
+          <div
+            class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+          >
+            <router-link to="/swipe"> Swipe</router-link>
+          </div>
           <!--
           <span v-if="isLoggedIn">
             <button

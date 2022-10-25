@@ -220,14 +220,13 @@ const createBlobImage = () => {
       ctx.drawImage(reader, -canvasCoordinates.left, -canvasCoordinates.top);
       canvas.toBlob(
         (blob) => {
-          console.log("1- " + blob.size / 1024 + " KB");
+          console.log(blob.size / 1024 + " KB");
         },
         MIME_TYPE,
         QUALITY
       );
       image.value = canvas.toDataURL();
       let blob = JSON.stringify(image.value);
-      console.log("2- " + blob.length / 1024 + " KB");
       if (blob.length / 1028 >= 2048) {
         downSampleImage(image.value);
       } else {

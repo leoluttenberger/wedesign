@@ -45,6 +45,7 @@
     "vue-advanced-chat": "https://github.com/antoine92190/vue-advanced-chat/tarball/next",
     "vue-advanced-cropper": "^2.8.6",
     "vue-class-component": "^8.0.0-0",
+    "vue-low-code": "^1.0.35",
     "vue-router": "^4.0.14",
     "vue-simple-calendar": "^6.0.7",
     "webfontloader": "^1.0.0"

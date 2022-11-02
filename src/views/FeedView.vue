@@ -1,9 +1,9 @@
 <template>
   <h1></h1>
-  <!--<img src="../assets/fabian.jpg" /> -->
-  <!--  <img src="../assets/simon.jpg" /> -->
-  <!-- <img src="../assets/felix.jpg" /> -->
-  <!--<img src="../assets/nicole.jpg" /> -->
+  <!--<img src="../assets/images/fabian.jpg" /> -->
+  <!--  <img src="../assets/images/simon.jpg" /> -->
+  <!-- <img src="../assets/images/felix.jpg" /> -->
+  <!--<img src="../assets/images/nicole.jpg" /> -->
 </template>
 
 <script setup lang="ts">

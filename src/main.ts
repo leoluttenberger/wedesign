@@ -8,6 +8,7 @@ import router from "./router";
 import theme from "./theme";
 import "./index.css";
 import { initializeApp } from "firebase/app";
+import * as Figma from "vue-low-code";
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
   authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
@@ -17,9 +18,17 @@ const firebaseConfig = {
   appId: process.env.VUE_APP_FIREBASE_APP_ID,
   measurementId: process.env.VUE_APP_FIREBASE_MEASUREMENT_ID,
 };
-
-// Initialize Firebase
-const firebase = initializeApp(firebaseConfig);
+const figmaID = process.env.FIGMA_DESIGN_ID;
+const figmaToken = process.env.FIGMA_DESIGN_ID;
+const init = async () => {
+  // Initialize Firebase
+  console.log("Firebase started");
+  const firebase = initializeApp(firebaseConfig);
+  // Init Figma
+  console.log("Figma started");
+  //await Figma.createFigmaDesignlets(figmaID, figmaToken);
+};
+init();
 //Create and configure App
 const app = createApp(App);
 // Formkit and tailwind css cofig

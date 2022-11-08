@@ -31,7 +31,7 @@ const init = async () => {
 init();
 //Create and configure App
 const app = createApp(App);
-// Formkit and tailwind css cofig
+// Formkit and tailwind css config
 app.use(
   plugin,
   defaultConfig({

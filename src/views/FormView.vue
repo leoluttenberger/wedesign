@@ -14,7 +14,7 @@
     <button
       type="button"
       @click="closeModal"
-      class="rounded-full hover:bg-black hover:bg-opacity-25 p-2 focus:outline-none text-black transition duration-200"
+      class="rounded-full hover:bg-black hover:bg-opacity-25 p-2 focus:outline-none transition duration-200"
     >
       <icon-profile name="x" class="h-6 w-6"></icon-profile>
     </button>

@@ -1,30 +1,23 @@
 <template>
   <nav
-    class="relative flex flex-wrap justify-between justify-between items-center px-2 py-3 bg-cyan-500 mb-3"
+    text
+    class="relative flex flex-wrap justify-between justify-between items-center px-2 py-3 bg-white mb-3"
   >
     <div class="py-2 px-3 mx-auto max-w-screen-xl md:px-6">
       <div class="flex items-center">
         <div class="flex flex-row mt-0 mr-6 space-x-8 text-sm">
-          <div
-            class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-          >
+          <div class="navigation">
             <router-link to="/"> Home </router-link>
           </div>
-          <div
-            class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-          >
+          <div class="navigation">
             <router-link to="/documents"> Bewerbung </router-link>
           </div>
 
-          <div
-            class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-          >
+          <div class="navigation">
             <router-link to="/calendar"> Erinnerungen </router-link>
           </div>
 
-          <div
-            class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-          >
+          <div class="navigation">
             <router-link to="/form"> Lebenslauf </router-link>
           </div>
           <!--
@@ -73,3 +66,8 @@ const signOut = () => {
   router.push("/");
 };
 </script>
+<style lang="scss" scoped>
+body {
+  background-color: rgb(250, 28, 65);
+}
+</style>

@@ -1,3 +1,12 @@
+const colors = {
+  "wd-green": "[#00e0ac]",
+  "wd-error": "[#ff5e71]",
+  "wd-edit": "[#FFE175]",
+  "wd-light-green": "[#ebfffa]",
+  "wd-white": "[#ffffff]",
+  "transparent-black": "[#00000033]",
+  "transparent-green": "[#00e0ac40]",
+};
 const textClassification = {
   label: "block mb-1 font-bold text-sm formkit-invalid:text-red-500",
   inner: `
@@ -9,7 +18,7 @@ const textClassification = {
     focus-within:border-blue-500
   `,
   input:
-    "w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400",
+    "w-full h-10 px-3 border-none text-base font-sans text-black placeholder-black",
 };
 const boxClassification = {
   fieldset: "max-w-md border border-gray-400 rounded-md px-2 pb-1",
@@ -17,13 +26,17 @@ const boxClassification = {
   wrapper: "flex mb-1 cursor-pointer",
   help: "mb-2",
   input:
-    "form-check-input appearance-none h-5 w-5 mr-2 border border-gray-500 rounded-sm bg-white checked:bg-blue-500 focus:outline-none focus:ring-0 transition duration-200",
+    "form-check-input appearance-none h-5 w-5 mr-2 border border-gray-500 rounded-sm bg-white focus:outline-none focus:ring-0 transition duration-200",
   label: "text-sm text-gray-700 mt-1",
 };
 const buttonClassification = {
   wrapper: "mb-1",
   input:
-    "bg-blue-500 hover:bg-blue-700 text-white text-sm font-normal py-3 px-5 rounded",
+    "bg-[#00e0ac] hover:bg-[#00e0ac40] shadow text-white text-sm font-normal py-3 px-5 rounded",
+};
+const navigationClassification = {
+  input:
+    "flex items-center text-xs uppercase font-bold leading-snug text-black hover:bg-[#00000033]",
 };
 export default {
   global: {
@@ -32,12 +45,13 @@ export default {
     messages: "list-none p-0 mt-1 mb-0",
     message: "text-red-500 mb-1 text-xs",
   },
-  button: buttonClassification,
   color: {
     label: "block mb-1 font-bold text-sm",
     input:
       "w-16 h-8 appearance-none cursor-pointer border border-gray-300 rounded-md mb-2 p-1",
   },
+  navigation: navigationClassification,
+  button: buttonClassification,
   date: textClassification,
   "datetime-local": textClassification,
   checkbox: boxClassification,

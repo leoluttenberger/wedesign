@@ -41,5 +41,5 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ]
+, "src/theme.ts", "src/theme.ts"  ]
 }

@@ -14,9 +14,9 @@ export default {
 // This is the project stylesheet
 
 // Colors
-$transparent-black: rgba(0, 0, 0, 0.2);
-$wd-green: rgba(0, 224, 172, 1);
-$wd-white: rgba(255, 255, 255, 1);
+$transparent-black: #00000033;
+$wd-green: #00e0ac;
+$wd-white: #ffffff;
 
 // Typographies
 @mixin montserrat-18-medium {

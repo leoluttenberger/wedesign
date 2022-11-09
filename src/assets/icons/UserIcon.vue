@@ -1,12 +1,12 @@
 <template>
   <svg
-    width="160"
+    width="80"
     height="80"
-    viewBox="0 0 80 40"
+    viewBox="0 0 40 40"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <svg x="25">
+    <svg x="6">
       <g filter="url(#filter0_d_3_40)">
         <path
           d="M18.9004 17.5503C18.3638 16.4501 17.4622 15.558 16.3517 15.029C18.1315 14.158 19.3571 12.3293 19.3571 10.2143C19.3571 7.2556 16.9587 4.85715 14 4.85715C11.0413 4.85715 8.64282 7.2556 8.64282 10.2143C8.64282 12.3294 9.86854 14.1582 11.6484 15.0291C10.538 15.5581 9.63642 16.4502 9.09989 17.5503"
@@ -83,13 +83,7 @@
         </filter>
       </defs>
     </svg>
-    <text
-      x="23"
-      y="30"
-      font-size="6"
-      stroke-width="0.6"
-      class="font-Montserrat"
-    >
+    <text x="7" y="30" font-size="5" stroke-width="0.3" class="font-Montserrat">
       Lebenslauf
     </text>
   </svg>

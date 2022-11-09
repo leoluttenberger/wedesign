@@ -1,17 +1,15 @@
 <template>
-  <div>
-    <chat-window
-      :height="'calc(100vh - 80px)'"
-      :current-user-id="currentUserId"
-      :rooms="rooms"
-      :rooms-loaded="roomsLoaded"
-      :loading-rooms="loadingRooms"
-      :messages="messages"
-      :messages-loaded="messagesLoaded"
-      @fetch-messages="onFetchMessages"
-      @send-message="sendMessage"
-    />
-  </div>
+  <chat-window
+    :height="'calc(100vh - 80px)'"
+    :current-user-id="currentUserId"
+    :rooms="rooms"
+    :rooms-loaded="roomsLoaded"
+    :loading-rooms="loadingRooms"
+    :messages="messages"
+    :messages-loaded="messagesLoaded"
+    @fetch-messages="onFetchMessages"
+    @send-message="sendMessage"
+  />
 </template>
 
 <script setup lang="ts">

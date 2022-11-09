@@ -6,8 +6,9 @@
     v-show="valueAvatarCropShow"
   />
   <img
-    class="rounded-full w-32 shadow-lg"
+    class="relative rounded-full w-32 shadow-lg"
     :src="image"
+    default-src="../assets/images/logo.png"
     v-show="valueAvatarShow"
   />
   <ModalDialog :show="showModal">
@@ -20,11 +21,11 @@
     </button>
     <CropperItem></CropperItem>
   </ModalDialog>
-  <div class="flex gap-4 px-2 py-3">
+  <div class="flex gap-4">
     <FormKit type="button" label="Edit" @click="onClickedEdit"></FormKit>
     <FormKit type="button" label="Save" @click="onClickedSave"></FormKit>
   </div>
-  <div class="flex-auto px-2 py-3">
+  <div class="flex-auto">
     <FormKit
       v-model="fullName"
       type="text"
@@ -126,7 +127,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, defineEmits } from "vue";
+import { ref, watch, defineEmits, onMounted } from "vue";
 import { AvatarInput } from "../components";
 import CropperItem from "../components/CropperItem.vue";
 import {
@@ -138,6 +139,7 @@ import {
 import ModalDialog from "../components/ModalDialog.vue";
 import { id } from "@formkit/i18n";
 import IconProfile from "../components/IconProfile.vue";
+import defaultImageDataURL from "../assets/images/defaultImageDataURL.txt";
 
 const image = ref(JSON.parse(localStorage.getItem("profileImg")));
 const imagePreview = ref(JSON.parse(localStorage.getItem("profileImg")));
@@ -166,6 +168,11 @@ const universityEdu = ref(JSON.parse(localStorage.getItem("universityEdu")));
 const valueAvatarShow = ref(true);
 const valueAvatarCropShow = ref(false);
 
+if (image.value == null) {
+  image.value = defaultImageDataURL;
+  imagePreview.value = defaultImageDataURL;
+}
+
 watch(imageObject, () => {
   image.value = imageObject.value;
   openModal();
@@ -180,7 +187,6 @@ watch(showModal, () => {
     console.log("show modal true");
   }
 });
-
 const onClickedSave = () => {
   valueAvatarCropShow.value = false;
   valueAvatarShow.value = true;

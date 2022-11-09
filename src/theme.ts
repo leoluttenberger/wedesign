@@ -9,7 +9,7 @@ const textClassification = {
     focus-within:border-blue-500
   `,
   input:
-    "w-full h-10 px-3 border-none text-base font-Montserrat text-black placeholder-black",
+    "w-full h-10 px-3 border-none  font-Montserrat text-sm font-bold text-black placeholder-black",
 };
 const boxClassification = {
   fieldset: "max-w-md border border-gray-400 rounded-md px-2 pb-1",
@@ -23,7 +23,7 @@ const boxClassification = {
 const buttonClassification = {
   wrapper: "mb-1",
   input:
-    "bg-wd-green hover:bg-transparent-green shadow text-white text-sm font-Montserrat py-3 px-5 rounded",
+    "bg-wd-green hover:bg-transparent-green shadow text-white text-sm font-bold font-Montserrat py-3 px-5 rounded",
 };
 const navigationClassification = {
   input:

@@ -1,89 +1,35 @@
 <template>
   <router-view></router-view>
-  <div class="w-full h-screen">
-    <section class="block fixed inset-x-0 bottom-0 z-10 bg-white shadow">
-      <div id="tabs" class="flex justify-between">
-        <router-link
-          to="/"
-          class="content-center w-full focus:text-wd-green hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1"
-        >
-          <span class="tab tab-home block text-xs">
-            <HomeIcon
-              class="stroke-black focus:stroke-wd-green hover:stroke-wd-green"
-            ></HomeIcon>
-          </span>
-        </router-link>
-        <router-link
-          to="/form"
-          class="w-full focus:text-teal-500 hover:text-wd-green justify-center inline-block text-center pt-2 pb-1"
-        >
-          <span class="tab tab-kategori block text-xs">
-            <UserIcon
-              class="stroke-black focus:stroke-wd-green hover:stroke-wd-green"
-            ></UserIcon
-          ></span>
-        </router-link>
-        <router-link
-          to="/documents"
-          class="w-full focus:text-wd-green hover:text-wd-green justify-center inline-block text-center pt-2 pb-1"
-        >
-          <span class="tab tab-explore block text-xs"
-            ><DocumentsIcon
-              class="stroke-black focus:stroke-wd-green hover:stroke-wd-green"
-            ></DocumentsIcon
-          ></span>
-        </router-link>
-        <router-link
-          to="/calendar"
-          class="w-full focus:text-wd-green hover:text-wd-green justify-center inline-block text-center pt-2 pb-1"
-        >
-          <span class="tab tab-whishlist block text-xs"
-            ><NotificationsIcon
-              class="stroke-black focus:stroke-wd-green hover:stroke-wd-green"
-            ></NotificationsIcon
-          ></span>
+  <section class="block fixed inset-x-0 bottom-0 z-10 bg-white shadow">
+    <div class="flex justify-evenly">
+      <div>
+        <router-link to="/"
+          ><HomeIcon class="stroke-black hover:stroke-wd-green"></HomeIcon>
         </router-link>
       </div>
-    </section>
-  </div>
-
-  <!-- <nav
-    class="relative flex flex-wrap justify-between justify-between items-center px-2 py-3 bg-white"
-  >
-    <router-link to="/"><HomeIcon></HomeIcon>Home</router-link>
-    <div class="navigation">
-      <router-link to="/form"> <UserIcon></UserIcon> Lebenslauf </router-link>
+      <div>
+        <router-link to="/form">
+          <UserIcon
+            class="stroke-black focus:stroke-wd-green hover:stroke-wd-green"
+          ></UserIcon>
+        </router-link>
+      </div>
+      <div>
+        <router-link to="/documents"
+          ><DocumentsIcon
+            class="stroke-black focus:stroke-wd-green hover:stroke-wd-green"
+          ></DocumentsIcon>
+        </router-link>
+      </div>
+      <div>
+        <router-link to="/calendar">
+          <NotificationsIcon
+            class="stroke-black focus:stroke-wd-green hover:stroke-wd-green"
+          ></NotificationsIcon
+        ></router-link>
+      </div>
     </div>
-    <div class="navigation">
-      <router-link to="/documents">
-        <DocumentsIcon></DocumentsIcon> Bewerbung
-      </router-link>
-    </div>
-
-    <div class="navigation">
-      <router-link to="/calendar"
-        ><NotificationsIcon></NotificationsIcon> Erinnerungen
-      </router-link>
-    </div>
-    
-          <span v-if="isLoggedIn">
-            <button
-              class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-              @click="signOut"
-            >
-              Logout
-            </button>
-          </span>
-          <span v-else>
-            <div
-              class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-            >
-              <router-link to="/register"> Register </router-link> |
-              <router-link to="/sign-in"> Login </router-link>
-            </div>
-          </span>
-          
-  </nav> -->
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -111,3 +57,10 @@ const signOut = () => {
   router.push("/");
 };
 </script>
+<style>
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>

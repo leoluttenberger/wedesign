@@ -1,12 +1,3 @@
-const colors = {
-  "wd-green": "[#00e0ac]",
-  "wd-error": "[#ff5e71]",
-  "wd-edit": "[#FFE175]",
-  "wd-light-green": "[#ebfffa]",
-  "wd-white": "[#ffffff]",
-  "transparent-black": "[#00000033]",
-  "transparent-green": "[#00e0ac40]",
-};
 const textClassification = {
   label: "block mb-1 font-bold text-sm formkit-invalid:text-red-500",
   inner: `
@@ -18,7 +9,7 @@ const textClassification = {
     focus-within:border-blue-500
   `,
   input:
-    "w-full h-10 px-3 border-none text-base font-sans text-black placeholder-black",
+    "w-full h-10 px-3 border-none text-base font-Montserrat text-black placeholder-black",
 };
 const boxClassification = {
   fieldset: "max-w-md border border-gray-400 rounded-md px-2 pb-1",
@@ -32,11 +23,11 @@ const boxClassification = {
 const buttonClassification = {
   wrapper: "mb-1",
   input:
-    "bg-[#00e0ac] hover:bg-[#00e0ac40] shadow text-white text-sm font-normal py-3 px-5 rounded",
+    "bg-wd-green hover:bg-transparent-green shadow text-white text-sm font-Montserrat py-3 px-5 rounded",
 };
 const navigationClassification = {
   input:
-    "flex items-center text-xs uppercase font-bold leading-snug text-black hover:bg-[#00000033]",
+    "flex items-center text-xs uppercase font-Montserrat leading-snug text-black hover:bg-trasparent-black",
 };
 export default {
   global: {

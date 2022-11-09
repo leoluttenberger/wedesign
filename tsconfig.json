@@ -23,23 +23,19 @@
       "mocha",
       "chai"
     ],
+
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
-, "src/theme.ts", "src/theme.ts"  ]
+    "tests/**/*.tsx",
+    "src/theme.ts",
+    "src/theme.ts",
+  ]
 }

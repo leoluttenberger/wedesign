@@ -1,9 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;500;700&display=swap');
 
 @layer base {
   #app {
-    background-color: #00e0ac40;
+    background-color: #ebfffa;
   }
 }

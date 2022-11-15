@@ -1,15 +1,14 @@
 const textClassification = {
-  label: "block mb-1 font-bold text-sm formkit-invalid:text-red-500",
+  label: "font-bold text-base formkit-invalid:text-red-500",
   inner: `
     border
-    border-gray-400
-    formkit-invalid:border-red-500
-    rounded-lg mb-1
+    border-white
+    formkit-invalid:border-red-500 mb-1
     overflow-hidden
-    focus-within:border-blue-500
+    focus-within:border-wd-green
   `,
   input:
-    "w-full h-10 px-3 border-none  font-Montserrat text-sm font-bold text-black placeholder-black",
+    "w-full h-10 outline-0 font-Montserrat text-base font-bold text-black placeholder-black",
 };
 const boxClassification = {
   fieldset: "max-w-md border border-gray-400 rounded-md px-2 pb-1",
@@ -23,7 +22,7 @@ const boxClassification = {
 const buttonClassification = {
   wrapper: "mb-1",
   input:
-    "bg-wd-green hover:bg-transparent-green shadow text-white text-sm font-bold font-Montserrat py-3 px-5 rounded",
+    "bg-wd-green hover:bg-transparent-green shadow text-white text-base font-bold font-Montserrat py-2 px-6 rounded-full",
 };
 const navigationClassification = {
   input:
@@ -36,11 +35,6 @@ export default {
     messages: "list-none p-0 mt-1 mb-0",
     message: "text-red-500 mb-1 text-xs",
   },
-  color: {
-    label: "block mb-1 font-bold text-sm",
-    input:
-      "w-16 h-8 appearance-none cursor-pointer border border-gray-300 rounded-md mb-2 p-1",
-  },
   navigation: navigationClassification,
   button: buttonClassification,
   date: textClassification,
@@ -48,13 +42,13 @@ export default {
   checkbox: boxClassification,
   email: textClassification,
   file: {
-    label: "block mb-1 font-bold text-sm",
+    label: "block mb-1 font-bold text-base",
     inner: "max-w-full cursor-pointer",
     input:
-      "text-gray-600 text-sm mb-1 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:bg-blue-500 file:text-white hover:file:bg-blue-600",
-    noFiles: "block text-gray-800 text-sm mb-1",
-    fileItem: "block flex text-gray-800 text-sm mb-1",
-    fileRemove: "ml-auto text-blue-500 text-sm",
+      "text-gray-600 text-base mb-1 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:bg-blue-500 file:text-white hover:file:bg-blue-600",
+    noFiles: "block text-gray-800 text-base mb-1",
+    fileItem: "block flex text-gray-800 text-base mb-1",
+    fileRemove: "ml-auto text-blue-500 text-base",
   },
   month: textClassification,
   number: textClassification,
@@ -76,7 +70,7 @@ export default {
   textarea: {
     ...textClassification,
     input:
-      "block w-full h-32 px-3 border-none text-base text-gray-700 placeholder-gray-400 focus:shadow-outline",
+      "w-full h-10 outline-0 font-Montserrat text-base font-bold text-black placeholder-black",
   },
   time: textClassification,
   url: textClassification,

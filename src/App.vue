@@ -1,29 +1,29 @@
 <template>
-  <div class="h-screen px-2 py-3 overflow-auto hover:overflow-scroll">
+  <div class="h-screen px-2 py-3 overflow-auto overflow-scroll">
     <router-view></router-view>
   </div>
   <section class="block fixed inset-x-0 bottom-0 z-10 bg-white shadow">
     <div class="flex justify-evenly">
-      <div>
+      <div class="hover:border-wd-green border-t-[3px] border-white">
         <router-link to="/"
           ><HomeIcon class="stroke-black hover:stroke-wd-green"></HomeIcon>
         </router-link>
       </div>
-      <div>
+      <div class="hover:border-wd-green border-t-[3px] border-white">
         <router-link to="/form">
           <UserIcon
             class="stroke-black focus:stroke-wd-green hover:stroke-wd-green"
           ></UserIcon>
         </router-link>
       </div>
-      <div>
+      <div class="hover:border-wd-green border-t-[3px] border-white">
         <router-link to="/documents"
           ><DocumentsIcon
             class="stroke-black focus:stroke-wd-green hover:stroke-wd-green"
           ></DocumentsIcon>
         </router-link>
       </div>
-      <div>
+      <div class="hover:border-wd-green border-t-[3px] border-white">
         <router-link to="/calendar">
           <NotificationsIcon
             class="stroke-black focus:stroke-wd-green hover:stroke-wd-green"

@@ -29,82 +29,94 @@
   </div>
   <div class="space-y-1">
     <p class="text-black font-bold font-Montserrat text-base">Deine Daten</p>
-    <div class="flex bg-white h-10">
-      <p class="p-2 h-10 w-24 text-black font-Montserrat text-sm">Vorname:</p>
-      <FormKit
-        v-model="firstName"
-        type="text"
-        validation="required|length:3"
-        :disabled="disableInput"
-        :classes="{ input: 'content-center' }"
-      />
-    </div>
-    <div class="flex bg-white h-10">
-      <p class="p-2 h-10 w-24 text-black font-Montserrat text-sm">Nachname:</p>
-      <FormKit
-        v-model="secondName"
-        type="text"
-        validation="required|length:3"
-        :disabled="disableInput"
-        :classes="{ input: 'content-center' }"
-      />
-    </div>
-    <div class="flex bg-white h-10">
-      <p class="p-2 h-10 w-24 text-black font-Montserrat text-sm">E-Mail</p>
-      <FormKit
-        v-model="email"
-        type="email"
-        validation="length:5|*email"
-        validation-visibility="live"
-        placeholder="Email"
-        :disabled="disableInput"
-      />
-      <div class="basis-1/2"></div>
-    </div>
-    <p class="text-black font-bold font-Montserrat text-base">
-      Deine Kontaktdaten
-    </p>
-    <div class="flex bg-white h-10">
-      <div class="flex basis-1/2">
-        <p class="p-2 w-24 h-10 text-black font-Montserrat text-sm">Straße:</p>
-        <FormKit
-          v-model="streetName"
-          type="text"
-          placeholder="Straße"
-          :disabled="disableInput"
-        />
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white h-10">
+          <p class="p-2 w-24 h-10 text-black font-Montserrat text-sm">
+            Vorname:
+          </p>
+          <FormKit
+            v-model="firstName"
+            type="text"
+            validation="required|length:3"
+            :disabled="disableInput"
+          />
+        </div>
       </div>
-      <div class="flex basis-1/2">
-        <p class="p-2 h-10 w-24 text-black font-Montserrat text-sm">Nr:</p>
-        <FormKit
-          v-model="streetNumber"
-          type="text"
-          placeholder="Nr."
-          :disabled="disableInput"
-        />
+
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white h-10">
+          <p class="p-2 w-24 h-10 text-black font-Montserrat text-sm">
+            Nachname:
+          </p>
+          <FormKit
+            v-model="secondName"
+            type="text"
+            validation="required|length:3"
+            :disabled="disableInput"
+          />
+        </div>
       </div>
     </div>
-    <div class="flex bg-white h-10">
-      <div class="flex basis-1/2">
-        <p class="p-2 h-10 w-24 text-black font-Montserrat text-sm">PLZ:</p>
-        <FormKit
-          v-model="districtNumber"
-          type="text"
-          placeholder="Bezirk"
-          :disabled="disableInput"
-        />
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white h-10">
+          <p class="p-2 w-24 h-10 text-black font-Montserrat text-sm">
+            Straße:
+          </p>
+          <FormKit
+            v-model="streetName"
+            type="text"
+            placeholder="Straße"
+            :disabled="disableInput"
+          />
+        </div>
       </div>
-      <div class="flex basis-1/2">
-        <p class="p-2 h-10 w-24 text-black font-Montserrat text-sm">Ort:</p>
-        <FormKit
-          v-model="city"
-          type="text"
-          placeholder="Stadt"
-          :disabled="disableInput"
-        />
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white h-10">
+          <p class="p-2 h-10 w-24 text-black font-Montserrat text-sm">Nr:</p>
+          <FormKit
+            v-model="streetNumber"
+            type="text"
+            placeholder="Nr."
+            :disabled="disableInput"
+          />
+        </div>
       </div>
     </div>
-    <div class="flex bg-white h-10">
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white h-10">
+          <p class="p-2 h-10 w-24 text-black font-Montserrat text-sm">PLZ:</p>
+          <FormKit
+            v-model="districtNumber"
+            type="text"
+            placeholder="Bezirk"
+            :disabled="disableInput"
+          />
+        </div>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white h-10">
+          <p class="p-2 h-10 w-24 text-black font-Montserrat text-sm">Ort:</p>
+          <FormKit
+            v-model="city"
+            type="text"
+            placeholder="Stadt"
+            :disabled="disableInput"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="space-y-1">
+    <div class="mt-6">
+      <p class="text-black font-bold font-Montserrat text-base">
+        Deine Kontaktdaten
+      </p>
+    </div>
+
+    <div class="flex gap-1 bg-white h-10">
       <p class="p-2 h-10 w-24 text-black font-Montserrat text-sm">Telefon:</p>
       <FormKit
         v-model="phone"
@@ -117,6 +129,20 @@
             'Ihre Telephonnumber muss wie folgt formatiert sein: xxxx-xxx-xxxx',
         }"
         :disabled="disableInput"
+      />
+    </div>
+    <div class="flex gap-1 bg-white h-10">
+      <p class="p-2 w-24 h-10 text-black font-Montserrat text-sm">EMail:</p>
+      <FormKit
+        v-model="email"
+        type="email"
+        validation="length:5|*email"
+        validation-visibility="live"
+        placeholder="Email"
+        :disabled="disableInput"
+        :classes="{
+          input: 'w-64',
+        }"
       />
     </div>
   </div>

@@ -1,5 +1,6 @@
 const textClassification = {
-  label: "font-bold text-base formkit-invalid:text-red-500",
+  label:
+    "inline-block align-middle w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm",
   inner: `
     border
     border-white
@@ -8,7 +9,7 @@ const textClassification = {
     focus-within:border-wd-green
   `,
   input:
-    "h-10 outline-0 font-Montserrat text-base font-bold text-black placeholder-black",
+    "h-10 outline-0 font-Montserrat md:text-base text-sm font-bold text-black placeholder-black dark:text-white",
 };
 const boxClassification = {
   fieldset: "max-w-md border border-gray-400 rounded-md px-2 pb-1",
@@ -70,7 +71,7 @@ export default {
   textarea: {
     ...textClassification,
     input:
-      "w-full h-10 outline-0 font-Montserrat text-base font-bold text-black placeholder-black",
+      "h-10 outline-0 font-Montserrat md:text-base text-sm font-bold text-black placeholder-black dark:text-white",
   },
   time: textClassification,
   url: textClassification,

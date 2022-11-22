@@ -32,7 +32,9 @@
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white h-10">
-          <p class="p-2 w-24 h-10 text-black font-Montserrat text-sm">
+          <p
+            class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+          >
             Vorname:
           </p>
           <FormKit
@@ -46,7 +48,9 @@
 
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white h-10">
-          <p class="p-2 w-24 h-10 text-black font-Montserrat text-sm">
+          <p
+            class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+          >
             Nachname:
           </p>
           <FormKit
@@ -61,7 +65,9 @@
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white h-10">
-          <p class="p-2 w-24 h-10 text-black font-Montserrat text-sm">
+          <p
+            class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+          >
             Straße:
           </p>
           <FormKit
@@ -74,7 +80,11 @@
       </div>
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white h-10">
-          <p class="p-2 h-10 w-24 text-black font-Montserrat text-sm">Nr:</p>
+          <p
+            class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+          >
+            Nr:
+          </p>
           <FormKit
             v-model="streetNumber"
             type="text"
@@ -87,7 +97,11 @@
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white h-10">
-          <p class="p-2 h-10 w-24 text-black font-Montserrat text-sm">PLZ:</p>
+          <p
+            class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+          >
+            PLZ:
+          </p>
           <FormKit
             v-model="districtNumber"
             type="text"
@@ -98,7 +112,11 @@
       </div>
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white h-10">
-          <p class="p-2 h-10 w-24 text-black font-Montserrat text-sm">Ort:</p>
+          <p
+            class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+          >
+            Ort:
+          </p>
           <FormKit
             v-model="city"
             type="text"
@@ -116,34 +134,45 @@
       </p>
     </div>
 
-    <div class="flex gap-1 bg-white h-10">
-      <p class="p-2 h-10 w-24 text-black font-Montserrat text-sm">Telefon:</p>
-      <FormKit
-        v-model="phone"
-        type="text"
-        placeholder="xxxx-xxx-xxxx"
-        :validation="[['required'], ['matches', /^\d{4}-\d{3}-\d{4}$/]]"
-        validation-visibility="live"
-        :validation-messages="{
-          matches:
-            'Ihre Telephonnumber muss wie folgt formatiert sein: xxxx-xxx-xxxx',
-        }"
-        :disabled="disableInput"
-      />
-    </div>
-    <div class="flex gap-1 bg-white h-10">
-      <p class="p-2 w-24 h-10 text-black font-Montserrat text-sm">EMail:</p>
-      <FormKit
-        v-model="email"
-        type="email"
-        validation="length:5|*email"
-        validation-visibility="live"
-        placeholder="Email"
-        :disabled="disableInput"
-        :classes="{
-          input: 'w-64',
-        }"
-      />
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white h-10">
+          <p
+            class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+          >
+            Telefon:
+          </p>
+          <FormKit
+            v-model="phone"
+            type="text"
+            placeholder="xxxx-xxx-xxxx"
+            :validation="[['required'], ['matches', /^\d{4}-\d{3}-\d{4}$/]]"
+            validation-visibility="live"
+            :validation-messages="{
+              matches:
+                'Ihre Telephonnumber muss wie folgt formatiert sein: xxxx-xxx-xxxx',
+            }"
+            :disabled="disableInput"
+          />
+        </div>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white h-10">
+          <p
+            class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-sm md:text-base"
+          >
+            EMail:
+          </p>
+          <FormKit
+            v-model="email"
+            type="email"
+            validation="length:5|*email"
+            validation-visibility="live"
+            placeholder="Email"
+            :disabled="disableInput"
+          />
+        </div>
+      </div>
     </div>
   </div>
   <div class="py-8"></div>

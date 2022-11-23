@@ -1,13 +1,13 @@
 <template>
   <div class="flex grid place-items-center py-8">
     <AvatarInput
-      class="rounded-full w-32 shadow-lg mb-2 border-[5px] border-white"
+      class="rounded-full min-w-24 w-1/2 md:w-80 shadow-lg mb-2 border-[5px] border-white"
       v-model="form.avatar"
       :default-src="imagePreview"
       v-show="valueAvatarCropShow"
     />
     <img
-      class="rounded-full w-32 shadow-lg mb-2 border-[5px] border-white"
+      class="rounded-full min-w-24 w-1/2 md:w-80 shadow-lg mb-2 border-[5px] border-white"
       :src="image"
       default-src="../assets/images/logo.png"
       v-show="valueAvatarShow"
@@ -16,9 +16,9 @@
       <button
         type="button"
         @click="closeModal"
-        class="rounded-full hover:bg-black hover:bg-opacity-25 p-2 focus:outline-none transition duration-200"
+        class="rounded-full hover:bg-white hover:bg-opacity-25 focus:outline-none transition duration-200"
       >
-        <icon-profile name="x" class="h-6 w-6"></icon-profile>
+        <icon-profile name="x" class="h-6 w-6 text-white"></icon-profile>
       </button>
       <CropperItem></CropperItem>
     </ModalDialog>

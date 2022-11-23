@@ -26,12 +26,32 @@
       <FormKit type="button" label="Edit" @click="onClickedEdit"></FormKit>
       <FormKit type="button" label="Save" @click="onClickedSave"></FormKit>
     </div>
+    <div class="flex gap-4">
+      <Toggle
+        v-model="value"
+        :classes="{
+          container: 'inline-block',
+          toggle:
+            'flex w-12 h-5 rounded-full relative cursor-pointer transition items-center box-content border-2 text-xs leading-none',
+          toggleOn:
+            'bg-wd-green border-wd-green justify-start text-black bg-slate-800',
+          toggleOff: 'bg-gray-200 border-gray-200 justify-end',
+          handle:
+            'inline-block bg-white w-5 h-5 top-0 rounded-full absolute transition-all',
+          handleOn: 'left-full transform -translate-x-full bg-shite',
+          handleOff: 'left-0 bg-slate-600',
+          label: 'text-center w-8 border-box whitespace-nowrap select-none',
+        }"
+      />
+    </div>
   </div>
   <div class="space-y-1">
-    <p class="text-black font-bold font-Montserrat text-base">Deine Daten</p>
+    <p class="text-black dark:text-white font-bold font-Montserrat text-base">
+      Deine Daten
+    </p>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white h-10">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
             class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
@@ -47,7 +67,7 @@
       </div>
 
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white h-10">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
             class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
@@ -64,7 +84,7 @@
     </div>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white h-10">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
             class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
@@ -79,7 +99,7 @@
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white h-10">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
             class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
@@ -96,7 +116,7 @@
     </div>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white h-10">
+        <div class="flex bg-white dark:bg-slate-800 dark:bg-slate-800 h-10">
           <p
             class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
@@ -111,7 +131,7 @@
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white h-10">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
             class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
@@ -129,14 +149,14 @@
   </div>
   <div class="space-y-1">
     <div class="mt-6">
-      <p class="text-black font-bold font-Montserrat text-base">
+      <p class="text-black dark:text-white font-bold font-Montserrat text-base">
         Deine Kontaktdaten
       </p>
     </div>
 
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white h-10">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
             class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
@@ -157,7 +177,7 @@
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white h-10">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
             class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-sm md:text-base"
           >
@@ -187,11 +207,13 @@ import {
   fileObject,
   imageObject,
   imagePreviewObject,
+  isDarkMode,
 } from "../store.js";
 import ModalDialog from "../components/ModalDialog.vue";
 import { id } from "@formkit/i18n";
 import IconProfile from "../components/IconProfile.vue";
 import defaultImageDataURL from "../assets/images/defaultImageDataURL.txt";
+import Toggle from "@vueform/toggle";
 
 const image = ref(JSON.parse(localStorage.getItem("profileImg")));
 const imagePreview = ref(JSON.parse(localStorage.getItem("profileImg")));
@@ -214,7 +236,11 @@ const districtNumber = ref(JSON.parse(localStorage.getItem("districtNumber")));
 const city = ref(JSON.parse(localStorage.getItem("city")));
 const valueAvatarShow = ref(true);
 const valueAvatarCropShow = ref(false);
-
+const value = ref(false);
+console.log(JSON.parse(localStorage.getItem("theme")));
+if (JSON.parse(localStorage.getItem("theme")) == "dark") {
+  value.value = true;
+}
 if (image.value == null) {
   image.value = defaultImageDataURL;
   imagePreview.value = defaultImageDataURL;
@@ -224,6 +250,14 @@ watch(imageObject, () => {
   image.value = imageObject.value;
   openModal();
   console.log("Open Modal");
+});
+watch(value, () => {
+  isDarkMode.value = value.value;
+  if (isDarkMode.value == true) {
+    localStorage.setItem("theme", JSON.stringify("dark"));
+  } else {
+    localStorage.setItem("theme", JSON.stringify("light"));
+  }
 });
 
 watch(showModal, () => {

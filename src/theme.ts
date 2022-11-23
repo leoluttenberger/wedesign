@@ -3,13 +3,13 @@ const textClassification = {
     "inline-block align-middle w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm",
   inner: `
     border
-    border-white
+    border-transparent
     formkit-invalid:border-red-400
     overflow-hidden
     focus-within:border-wd-green
   `,
   input:
-    "h-10 outline-0 font-Montserrat md:text-base text-sm font-bold text-black placeholder-black dark:text-white",
+    "h-10 outline-0 font-Montserrat md:text-base text-sm font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-black",
 };
 const boxClassification = {
   fieldset: "max-w-md border border-gray-400 rounded-md px-2 pb-1",

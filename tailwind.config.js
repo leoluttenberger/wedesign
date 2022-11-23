@@ -1,6 +1,6 @@
 const formKitTailwind = require("@formkit/themes/tailwindcss");
-
 module.exports = {
+  darkMode: "class",
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
@@ -10,6 +10,7 @@ module.exports = {
         "wd-edit": "#FFE175",
         "wd-light-green": "#ebfffa40",
         "wd-white": "#ffffff",
+        "wd-background": "#ebfffa",
         "transparent-black": "#00000033",
         "transparent-green": "#00e0ac40",
       },

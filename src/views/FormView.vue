@@ -23,8 +23,18 @@
       <CropperItem></CropperItem>
     </ModalDialog>
     <div class="flex gap-4">
-      <FormKit type="button" label="Edit" @click="onClickedEdit"></FormKit>
-      <FormKit type="button" label="Save" @click="onClickedSave"></FormKit>
+      <FormKit
+        type="button"
+        label="Edit"
+        @click="onClickedEdit"
+        :disabled="disableEdit"
+      ></FormKit>
+      <FormKit
+        type="button"
+        label="Save"
+        @click="onClickedSave"
+        :disabled="disableInput"
+      ></FormKit>
     </div>
     <div class="flex gap-4">
       <Toggle
@@ -226,6 +236,7 @@ const MAX_HEIGHT = 600;
 
 const form = ref({ avatar: null });
 const disableInput = ref(true);
+const disableEdit = ref(false);
 const firstName = ref(JSON.parse(localStorage.getItem("firstName")));
 const secondName = ref(JSON.parse(localStorage.getItem("secondName")));
 const email = ref(JSON.parse(localStorage.getItem("email")));
@@ -281,9 +292,11 @@ const onClickedSave = () => {
   localStorage.setItem("city", JSON.stringify(city.value));
   localStorage.setItem("profileImg", JSON.stringify(image.value));
   disableInput.value = true;
+  disableEdit.value = false;
 };
 const onClickedEdit = () => {
   disableInput.value = false;
+  disableEdit.value = true;
   valueAvatarCropShow.value = true;
   valueAvatarShow.value = false;
 };

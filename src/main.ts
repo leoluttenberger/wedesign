@@ -17,12 +17,15 @@ const firebaseConfig = {
   appId: process.env.VUE_APP_FIREBASE_APP_ID,
   measurementId: process.env.VUE_APP_FIREBASE_MEASUREMENT_ID,
 };
-
-// Initialize Firebase
-const firebase = initializeApp(firebaseConfig);
+const init = async () => {
+  // Initialize Firebase
+  console.log("Firebase started");
+  const firebase = initializeApp(firebaseConfig);
+};
+init();
 //Create and configure App
 const app = createApp(App);
-// Formkit and tailwind css cofig
+// Formkit and tailwind css config
 app.use(
   plugin,
   defaultConfig({

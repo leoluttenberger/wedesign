@@ -1,3 +1,3 @@
 <template>
-  <img src="../assets/logo.png" class="px-2 py-3 max-w-xs" />
+  <img class="absolute max-w-[20%]" src="../assets/images/logo.png" />
 </template>

@@ -16,3 +16,6 @@ export const imageObject = reactive({
 export const imagePreviewObject = reactive({
   value: null,
 });
+export const isDarkMode = reactive({
+  value: null,
+});

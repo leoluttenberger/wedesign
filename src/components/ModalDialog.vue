@@ -11,29 +11,18 @@
       <div
         ref="modal-backdrop"
         v-if="showModal"
-        class="fixed z-10 inset-0 overflow-y-auto bg-black bg-opacity-50"
+        class="fixed z-10 inset-0 bg-black pt-10 bg-opacity-70"
       >
-        <div
-          class="flex items-start justify-center min-h-screen pt-24 text-center"
-        >
-          <transition
-            enter-active-class="transition ease-out duration-300 transform "
-            enter-from-class="opacity-0 translate-y-10 scale-95"
-            enter-to-class="opacity-100 translate-y-0 scale-100"
-            leave-active-class="ease-in duration-200"
-            leave-from-class="opacity-100 translate-y-0 scale-100"
-            leave-to-class="opacity-0 translate-y-10 translate-y-0 scale-95"
+        <div class="flex items-start justify-center text-center">
+          <div
+            class="rounded-lg md:h-96 md:w-96 overflow-hidden shadow-xl bg-slate-900"
+            role="dialog"
+            ref="modal"
+            aria-modal="true"
+            aria-labelledby="modal-headline"
           >
-            <div
-              class="bg-white rounded-lg text-left overflow-hidden shadow-xl p-8 w-1/2"
-              role="dialog"
-              ref="modal"
-              aria-modal="true"
-              aria-labelledby="modal-headline"
-            >
-              <slot>I'm empty inside</slot>
-            </div>
-          </transition>
+            <slot>I'm empty inside</slot>
+          </div>
         </div>
       </div>
     </transition>

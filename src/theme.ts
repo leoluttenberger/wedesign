@@ -1,15 +1,15 @@
 const textClassification = {
-  label: "block mb-1 font-bold text-sm formkit-invalid:text-red-500",
+  label:
+    "inline-block align-middle w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm",
   inner: `
     border
-    border-gray-400
-    formkit-invalid:border-red-500
-    rounded-lg mb-1
+    border-transparent
+    formkit-invalid:border-red-400
     overflow-hidden
-    focus-within:border-blue-500
+    focus-within:border-wd-green
   `,
   input:
-    "w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400",
+    "h-10 outline-0 font-Montserrat md:text-base text-sm font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-black",
 };
 const boxClassification = {
   fieldset: "max-w-md border border-gray-400 rounded-md px-2 pb-1",
@@ -17,13 +17,17 @@ const boxClassification = {
   wrapper: "flex mb-1 cursor-pointer",
   help: "mb-2",
   input:
-    "form-check-input appearance-none h-5 w-5 mr-2 border border-gray-500 rounded-sm bg-white checked:bg-blue-500 focus:outline-none focus:ring-0 transition duration-200",
+    "form-check-input appearance-none h-5 w-5 mr-2 border border-gray-500 rounded-sm bg-white focus:outline-none focus:ring-0 transition duration-200",
   label: "text-sm text-gray-700 mt-1",
 };
 const buttonClassification = {
   wrapper: "mb-1",
   input:
-    "bg-blue-500 hover:bg-blue-700 text-white text-sm font-normal py-3 px-5 rounded",
+    "bg-wd-green hover:bg-transparent-green shadow text-white text-base font-bold font-Montserrat py-2 px-6 rounded-full",
+};
+const navigationClassification = {
+  input:
+    "flex items-center text-xs uppercase font-Montserrat leading-snug text-black hover:bg-trasparent-black",
 };
 export default {
   global: {
@@ -32,24 +36,20 @@ export default {
     messages: "list-none p-0 mt-1 mb-0",
     message: "text-red-500 mb-1 text-xs",
   },
+  navigation: navigationClassification,
   button: buttonClassification,
-  color: {
-    label: "block mb-1 font-bold text-sm",
-    input:
-      "w-16 h-8 appearance-none cursor-pointer border border-gray-300 rounded-md mb-2 p-1",
-  },
   date: textClassification,
   "datetime-local": textClassification,
   checkbox: boxClassification,
   email: textClassification,
   file: {
-    label: "block mb-1 font-bold text-sm",
+    label: "block mb-1 font-bold text-base",
     inner: "max-w-full cursor-pointer",
     input:
-      "text-gray-600 text-sm mb-1 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:bg-blue-500 file:text-white hover:file:bg-blue-600",
-    noFiles: "block text-gray-800 text-sm mb-1",
-    fileItem: "block flex text-gray-800 text-sm mb-1",
-    fileRemove: "ml-auto text-blue-500 text-sm",
+      "text-gray-600 text-base mb-1 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:bg-blue-500 file:text-white hover:file:bg-blue-600",
+    noFiles: "block text-gray-800 text-base mb-1",
+    fileItem: "block flex text-gray-800 text-base mb-1",
+    fileRemove: "ml-auto text-blue-500 text-base",
   },
   month: textClassification,
   number: textClassification,
@@ -71,7 +71,7 @@ export default {
   textarea: {
     ...textClassification,
     input:
-      "block w-full h-32 px-3 border-none text-base text-gray-700 placeholder-gray-400 focus:shadow-outline",
+      "h-10 outline-0 font-Montserrat md:text-base text-sm font-bold text-black placeholder-black dark:text-white",
   },
   time: textClassification,
   url: textClassification,

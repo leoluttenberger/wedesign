@@ -12,6 +12,7 @@
 import { Cropper } from "vue-advanced-cropper";
 import { ref } from "vue";
 import "vue-advanced-cropper/dist/style.css";
+import "vue-advanced-cropper/dist/theme.compact.css";
 import { canvasCoordinates, imageObject } from "../store.js";
 
 const imageCrop = ref(imageObject.value);

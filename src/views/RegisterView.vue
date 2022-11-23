@@ -1,5 +1,5 @@
 <template>
-  <div class="px-2 py-3">Create an Account</div>
+  <div>Create an Account</div>
   <FormKit type="text" placeholder="Email" v-model="email" />
   <FormKit type="password" placeholder="Password" v-model="password" />
   <FormKit type="button" @click="register">Submit</FormKit>

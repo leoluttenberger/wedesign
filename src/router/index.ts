@@ -35,10 +35,6 @@ const router = createRouter({
       path: "/calendar",
       component: () => import("../views/CalendarView.vue"),
     },
-    {
-      path: "/swipe",
-      component: () => import("../views/SwipeView.vue"),
-    },
   ],
 });
 

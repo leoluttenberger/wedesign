@@ -1,211 +1,245 @@
 <template>
-  <div class="flex grid place-items-center py-8">
-    <AvatarInput
-      class="rounded-full min-w-24 w-1/2 md:w-80 shadow-lg mb-2 border-[5px] border-white"
-      v-model="form.avatar"
-      :default-src="imagePreview"
-      v-show="valueAvatarCropShow"
-    />
-    <img
-      class="rounded-full min-w-24 w-1/2 md:w-80 shadow-lg mb-2 border-[5px] border-white"
-      :src="image"
-      default-src="../assets/images/logo.png"
-      v-show="valueAvatarShow"
-    />
-    <ModalDialog :show="showModal">
-      <button
-        type="button"
-        @click="closeModal"
-        class="rounded-full hover:bg-white hover:bg-opacity-25 focus:outline-none transition duration-200"
-      >
-        <icon-profile name="x" class="h-6 w-6 text-white"></icon-profile>
-      </button>
-      <CropperItem></CropperItem>
-    </ModalDialog>
-    <div class="flex gap-4">
-      <FormKit
-        type="button"
-        label="Edit"
-        @click="onClickedEdit"
-        :disabled="disableEdit"
-      ></FormKit>
-      <FormKit
-        type="button"
-        label="Save"
-        @click="onClickedSave"
-        :disabled="disableInput"
-      ></FormKit>
-    </div>
-    <div class="flex gap-4">
-      <Toggle
-        v-model="value"
-        :classes="{
-          container: 'inline-block',
-          toggle:
-            'flex w-12 h-5 rounded-full relative cursor-pointer transition items-center box-content border-2 text-xs leading-none',
-          toggleOn:
-            'bg-wd-green border-wd-green justify-start text-black bg-slate-800',
-          toggleOff: 'bg-gray-200 border-gray-200 justify-end',
-          handle:
-            'inline-block bg-white w-5 h-5 top-0 rounded-full absolute transition-all',
-          handleOn: 'left-full transform -translate-x-full bg-shite',
-          handleOff: 'left-0 bg-slate-600',
-          label: 'text-center w-8 border-box whitespace-nowrap select-none',
-        }"
-      />
-    </div>
+  <div class="flex justify-center dark:text-white text-xl font-Montserrat">
+    Hi &#128075; Leo!
   </div>
-  <div class="space-y-1">
-    <p class="text-black dark:text-white font-bold font-Montserrat text-base">
-      Deine Daten
-    </p>
-    <div class="grid grid-cols-2 gap-1">
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-          >
-            Vorname:
-          </p>
-          <FormKit
-            v-model="firstName"
-            type="text"
-            validation="required|length:3"
-            :disabled="disableInput"
-          />
-        </div>
-      </div>
-
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-          >
-            Nachname:
-          </p>
-          <FormKit
-            v-model="secondName"
-            type="text"
-            validation="required|length:3"
-            :disabled="disableInput"
-          />
-        </div>
-      </div>
-    </div>
-    <div class="grid grid-cols-2 gap-1">
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-          >
-            Straße:
-          </p>
-          <FormKit
-            v-model="streetName"
-            type="text"
-            placeholder="Straße"
-            :disabled="disableInput"
-          />
-        </div>
-      </div>
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-          >
-            Nr:
-          </p>
-          <FormKit
-            v-model="streetNumber"
-            type="text"
-            placeholder="Nr."
-            :disabled="disableInput"
-          />
-        </div>
-      </div>
-    </div>
-    <div class="grid grid-cols-2 gap-1">
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 dark:bg-slate-800 h-10">
-          <p
-            class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-          >
-            PLZ:
-          </p>
-          <FormKit
-            v-model="districtNumber"
-            type="text"
-            placeholder="Bezirk"
-            :disabled="disableInput"
-          />
-        </div>
-      </div>
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-          >
-            Ort:
-          </p>
-          <FormKit
-            v-model="city"
-            type="text"
-            placeholder="Stadt"
-            :disabled="disableInput"
-          />
-        </div>
-      </div>
-    </div>
+  <div class="flex justify-evenly">
+    <button
+      @click="slideTo(1)"
+      class="text-sm dark:hover:border-wd-white hover:border-white border-b-[3px] font-Montserrat focus:border-wd-green dark:focus:border-wd-green dark:border-slate-800 dark:text-white"
+    >
+      Über mich
+    </button>
+    <button
+      @click="slideTo(2)"
+      class="text-sm dark:hover:border-wd-white hover:border-white border-b-[3px] font-Montserrat focus:border-wd-green dark:focus:border-wd-green dark:border-slate-800 dark:text-white"
+    >
+      Ausbildungen
+    </button>
+    <button
+      @click="slideTo(3)"
+      class="text-sm dark:hover:border-wd-white hover:border-white border-b-[3px] font-Montserrat focus:border-wd-green dark:focus:border-wd-green dark:border-slate-800 dark:text-white"
+    >
+      Erfahrung
+    </button>
   </div>
-  <div class="space-y-1">
-    <div class="mt-6">
-      <p class="text-black dark:text-white font-bold font-Montserrat text-base">
-        Deine Kontaktdaten
-      </p>
-    </div>
-
-    <div class="grid grid-cols-2 gap-1">
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+  <swiper class="mySwiper" @swiper="setSwiperRef" @slideChange="onSlideChange">
+    <swiper-slide>
+      <div class="flex grid place-items-center py-8">
+        <AvatarInput
+          class="rounded-full min-w-24 w-1/2 md:w-80 shadow-lg mb-2 border-[5px] border-white"
+          v-model="form.avatar"
+          :default-src="imagePreview"
+          v-show="valueAvatarCropShow"
+        />
+        <img
+          class="rounded-full min-w-24 w-1/2 md:w-80 shadow-lg mb-2 border-[5px] border-white"
+          :src="image"
+          default-src="../assets/images/logo.png"
+          v-show="valueAvatarShow"
+        />
+        <ModalDialog :show="showModal">
+          <button
+            type="button"
+            @click="closeModal"
+            class="rounded-full hover:bg-white hover:bg-opacity-25 focus:outline-none transition duration-200"
           >
-            Telefon:
-          </p>
+            <icon-profile name="x" class="h-6 w-6 text-white"></icon-profile>
+          </button>
+          <CropperItem></CropperItem>
+        </ModalDialog>
+        <div class="flex gap-4">
           <FormKit
-            v-model="phone"
-            type="text"
-            placeholder="xxxx-xxx-xxxx"
-            :validation="[['required'], ['matches', /^\d{4}-\d{3}-\d{4}$/]]"
-            validation-visibility="live"
-            :validation-messages="{
-              matches:
-                'Ihre Telephonnumber muss wie folgt formatiert sein: xxxx-xxx-xxxx',
+            type="button"
+            label="Edit"
+            @click="onClickedEdit"
+            :disabled="disableEdit"
+          ></FormKit>
+          <FormKit
+            type="button"
+            label="Save"
+            @click="onClickedSave"
+            :disabled="disableInput"
+          ></FormKit>
+        </div>
+        <div class="flex gap-4">
+          <Toggle
+            v-model="value"
+            :classes="{
+              container: 'inline-block',
+              toggle:
+                'flex w-12 h-5 rounded-full relative cursor-pointer transition items-center box-content border-2 text-xs leading-none',
+              toggleOn:
+                'bg-wd-green border-wd-green justify-start text-black bg-slate-800',
+              toggleOff: 'bg-gray-200 border-gray-200 justify-end',
+              handle:
+                'inline-block bg-white w-5 h-5 top-0 rounded-full absolute transition-all',
+              handleOn: 'left-full transform -translate-x-full bg-shite',
+              handleOff: 'left-0 bg-slate-600',
+              label: 'text-center w-8 border-box whitespace-nowrap select-none',
             }"
-            :disabled="disableInput"
           />
         </div>
       </div>
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-sm md:text-base"
-          >
-            EMail:
+      <div class="space-y-1">
+        <p class="text-black px-1 dark:text-white font-Montserrat text-sm">
+          Deine Daten
+        </p>
+        <div class="grid grid-cols-2 gap-1">
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 h-10">
+              <p
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              >
+                Vorname:
+              </p>
+              <FormKit
+                v-model="firstName"
+                type="text"
+                validation="required|length:3"
+                :disabled="disableInput"
+              />
+            </div>
+          </div>
+
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 h-10">
+              <p
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              >
+                Nachname:
+              </p>
+              <FormKit
+                v-model="secondName"
+                type="text"
+                validation="required|length:3"
+                :disabled="disableInput"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-1">
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 h-10">
+              <p
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              >
+                Straße:
+              </p>
+              <FormKit
+                v-model="streetName"
+                type="text"
+                placeholder="Straße"
+                :disabled="disableInput"
+              />
+            </div>
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 h-10">
+              <p
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              >
+                Nr:
+              </p>
+              <FormKit
+                v-model="streetNumber"
+                type="text"
+                placeholder="Nr."
+                :disabled="disableInput"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-1">
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 dark:bg-slate-800 h-10">
+              <p
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              >
+                PLZ:
+              </p>
+              <FormKit
+                v-model="districtNumber"
+                type="text"
+                placeholder="Bezirk"
+                :disabled="disableInput"
+              />
+            </div>
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 h-10">
+              <p
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              >
+                Ort:
+              </p>
+              <FormKit
+                v-model="city"
+                type="text"
+                placeholder="Stadt"
+                :disabled="disableInput"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="space-y-1">
+        <div class="mt-6">
+          <p class="text-black px-1 dark:text-white font-Montserrat text-sm">
+            Deine Kontaktdaten
           </p>
-          <FormKit
-            v-model="email"
-            type="email"
-            validation="length:5|*email"
-            validation-visibility="live"
-            placeholder="Email"
-            :disabled="disableInput"
-          />
+        </div>
+
+        <div class="grid grid-cols-2 gap-1">
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 h-10">
+              <p
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              >
+                Telefon:
+              </p>
+              <FormKit
+                v-model="phone"
+                type="text"
+                placeholder="xxxx-xxx-xxxx"
+                :validation="[['required'], ['matches', /^\d{4}-\d{3}-\d{4}$/]]"
+                validation-visibility="live"
+                :validation-messages="{
+                  matches:
+                    'Ihre Telephonnumber muss wie folgt formatiert sein: xxxx-xxx-xxxx',
+                }"
+                :disabled="disableInput"
+              />
+            </div>
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 h-10">
+              <p
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              >
+                EMail:
+              </p>
+              <FormKit
+                v-model="email"
+                type="email"
+                validation="length:5|*email"
+                validation-visibility="live"
+                placeholder="Email"
+                :disabled="disableInput"
+              />
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="py-8"></div>
+      <div class="py-14"></div> </swiper-slide
+    ><swiper-slide>
+      <div class="grid gap-1">
+        <button
+          class="bg-wd-green hover:bg-transparent-green shadow text-white text-base font-Montserrat p-2 rounded-full"
+        >
+          <AddIcon></AddIcon>
+        </button></div></swiper-slide
+    ><swiper-slide>Slide 3</swiper-slide>
+  </swiper>
 </template>
 
 <script setup lang="ts">
@@ -222,8 +256,13 @@ import {
 import ModalDialog from "../components/ModalDialog.vue";
 import { id } from "@formkit/i18n";
 import IconProfile from "../components/IconProfile.vue";
+import AddIcon from "../assets/icons/AddIcon.vue";
 import defaultImageDataURL from "../assets/images/defaultImageDataURL.txt";
+import swipe from "./SwipeView.vue";
 import Toggle from "@vueform/toggle";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css";
+import "swiper/css/virtual";
 
 const image = ref(JSON.parse(localStorage.getItem("profileImg")));
 const imagePreview = ref(JSON.parse(localStorage.getItem("profileImg")));
@@ -248,6 +287,13 @@ const city = ref(JSON.parse(localStorage.getItem("city")));
 const valueAvatarShow = ref(true);
 const valueAvatarCropShow = ref(false);
 const value = ref(false);
+const slides = ref(
+  Array.from({ length: 3 }).map((_, index) => `Slide ${index + 1}`)
+);
+let swiperRef = null;
+let appendNumber = 3;
+let prependNumber = 1;
+
 console.log(JSON.parse(localStorage.getItem("theme")));
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   value.value = true;
@@ -378,5 +424,23 @@ const closeModal = () => {
 };
 const openModal = () => {
   showModal.value = true;
+};
+
+const setSwiperRef = (swiper) => {
+  swiperRef = swiper;
+};
+const slideTo = (index) => {
+  swiperRef.slideTo(index - 1, 0);
+};
+const onSlideChange = () => {
+  console.log("slide change");
+  switch (swiperRef.value) {
+    case 1:
+      break;
+    case 2:
+      break;
+    case 3:
+      break;
+  }
 };
 </script>

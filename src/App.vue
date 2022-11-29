@@ -1,7 +1,7 @@
 <template>
   <Html :class="darkLightMode">
     <body class="bg-wd-background dark:bg-slate-700">
-      <div class="h-screen px-2 py-3 overflow-auto overflow-scroll">
+      <div class="h-screen overflow-auto overflow-scroll">
         <router-view></router-view>
       </div>
       <section
@@ -36,9 +36,7 @@
           </div>
           <div
             class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-          >
-            <router-link to="/swipe"> Swipe</router-link>
-          </div>
+          ></div>
         </div>
       </section>
     </body>

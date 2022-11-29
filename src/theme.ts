@@ -2,7 +2,7 @@ const textClassification = {
   label:
     "inline-block align-middle w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm",
   inner: `
-    border
+    border-none
     border-transparent
     formkit-invalid:border-red-400
     overflow-hidden

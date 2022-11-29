@@ -1,6 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-100">
     <button @click="addAfter">Add after</button>
+    <button @click="removeAfter">Remove after</button>
     <button @click="bottomCardOpen = true">Open</button>
 
     <BottomCard v-model:open="bottomCardOpen">
@@ -47,8 +48,6 @@ export default {
 
     const items = ref<SlideItem[]>([
       { id: getID(), index: getPosIndex(), text: "First" },
-      { id: getID(), index: getPosIndex(), text: "Second" },
-      { id: getID(), index: getPosIndex(), text: "Third" },
     ]);
 
     const currentIndex = ref(0);
@@ -65,12 +64,24 @@ export default {
     };
 
     const addAfter = () => {
+      localStorage.setItem("bottomSlidesIndex", JSON.stringify(getPosIndex()));
       items.value = [
         ...items.value,
         {
           id: getID(),
           index: getPosIndex(),
           text: "After",
+        },
+      ];
+    };
+
+    const removeAfter = () => {
+      localStorage.setItem("bottomSlidesIndex", JSON.stringify(getNegIndex()));
+      items.value = [
+        {
+          id: getID(),
+          index: getNegIndex(),
+          text: "Before",
         },
       ];
     };
@@ -82,6 +93,7 @@ export default {
       currentIndex,
       addBefore,
       addAfter,
+      removeAfter,
       bottomCardOpen,
     };
   },

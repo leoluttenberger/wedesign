@@ -39,24 +39,6 @@
           >
             <router-link to="/swipe"> Swipe</router-link>
           </div>
-          <!--
-          <span v-if="isLoggedIn">
-            <button
-              class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-              @click="signOut"
-            >
-              Logout
-            </button>
-          </span>
-          <span v-else>
-            <div
-              class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-            >
-              <router-link to="/register"> Register </router-link> |
-              <router-link to="/sign-in"> Login </router-link>
-            </div>
-          </span>
-          -->
         </div>
       </section>
     </body>

@@ -4,20 +4,38 @@
   </div>
   <div class="flex justify-evenly">
     <button
+      id="button1"
       @click="slideTo(1)"
-      class="text-sm dark:hover:border-wd-white hover:border-white border-b-[3px] font-Montserrat focus:border-wd-green dark:focus:border-wd-green dark:border-slate-800 dark:text-white"
+      :class="
+        activeButton1
+          ? 'border-wd-green dark:border-wd-green'
+          : 'border-white dark:border-slate-800'
+      "
+      class="outline:none text-sm border-b-[3px] font-Montserrat dark:hover:border-wd-green hover:border-wd-green dark:text-white"
     >
       Über mich
     </button>
     <button
+      id="button2"
       @click="slideTo(2)"
-      class="text-sm dark:hover:border-wd-white hover:border-white border-b-[3px] font-Montserrat focus:border-wd-green dark:focus:border-wd-green dark:border-slate-800 dark:text-white"
+      :class="
+        activeButton2
+          ? 'border-wd-green dark:border-wd-green'
+          : 'border-white dark:border-slate-800'
+      "
+      class="outline:none text-sm border-b-[3px] font-Montserrat dark:hover:border-wd-green hover:border-wd-green dark:text-white"
     >
       Ausbildungen
     </button>
     <button
+      id="button3"
       @click="slideTo(3)"
-      class="text-sm dark:hover:border-wd-white hover:border-white border-b-[3px] font-Montserrat focus:border-wd-green dark:focus:border-wd-green dark:border-slate-800 dark:text-white"
+      :class="
+        activeButton3
+          ? 'border-wd-green dark:border-wd-green'
+          : 'border-white dark:border-slate-800'
+      "
+      class="outline:none text-sm border-b-[3px] font-Montserrat dark:hover:border-wd-green hover:border-wd-green dark:text-white"
     >
       Erfahrung
     </button>
@@ -26,16 +44,18 @@
     <swiper-slide>
       <div class="flex grid place-items-center py-8">
         <AvatarInput
-          class="rounded-full min-w-24 w-1/2 md:w-80 shadow-lg mb-2 border-[5px] border-white"
+          class="outline:none rounded-full min-w-24 w-1/2 md:w-80 shadow-lg mb-2 border-[5px] border-white"
           v-model="form.avatar"
           :default-src="imagePreview"
           v-show="valueAvatarCropShow"
+          autofocus
         />
         <img
-          class="rounded-full min-w-24 w-1/2 md:w-80 shadow-lg mb-2 border-[5px] border-white"
+          class="outline:none rounded-full min-w-24 w-1/2 md:w-80 shadow-lg mb-2 border-[5px] border-white"
           :src="image"
           default-src="../assets/images/logo.png"
           v-show="valueAvatarShow"
+          autofocus
         />
         <ModalDialog :show="showModal">
           <button
@@ -290,10 +310,21 @@ const value = ref(false);
 const slides = ref(
   Array.from({ length: 3 }).map((_, index) => `Slide ${index + 1}`)
 );
+const button1 = ref(null);
+const button2 = ref(null);
+const button3 = ref(null);
+let activeButton1 = ref(true);
+let activeButton2 = ref(false);
+let activeButton3 = ref(false);
 let swiperRef = null;
+let swiperIndex = 0;
 let appendNumber = 3;
 let prependNumber = 1;
-
+const params = {
+  on: {
+    realIndexChange: (swiper) => console.log(swiper.realIndex),
+  },
+};
 console.log(JSON.parse(localStorage.getItem("theme")));
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   value.value = true;
@@ -431,15 +462,25 @@ const setSwiperRef = (swiper) => {
 };
 const slideTo = (index) => {
   swiperRef.slideTo(index - 1, 0);
+  onSlideChange();
 };
 const onSlideChange = () => {
-  console.log("slide change");
-  switch (swiperRef.value) {
+  swiperIndex = swiperRef.realIndex;
+  switch (swiperIndex) {
+    case 0:
+      activeButton1.value = true;
+      activeButton2.value = false;
+      activeButton3.value = false;
+      break;
     case 1:
+      activeButton1.value = false;
+      activeButton2.value = true;
+      activeButton3.value = false;
       break;
     case 2:
-      break;
-    case 3:
+      activeButton1.value = false;
+      activeButton2.value = false;
+      activeButton3.value = true;
       break;
   }
 };

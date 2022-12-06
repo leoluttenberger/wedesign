@@ -1,11 +1,11 @@
 <template>
   <svg
-    class="md:w-24 md:h-24 w-14 h-14 stroke-black hover:stroke-wd-green dark:stroke-wd-white dark:hover:stroke-wd-green"
-    viewBox="0 0 40 40"
+    class="md:w-24 md:h-24 w-16 h-16 hover:stroke-wd-green dark:hover:stroke-wd-green"
+    viewBox="0 0 45 45"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <svg x="6">
+    <svg x="8">
       <g filter="url(#filter0_d_3_40)">
         <path
           d="M18.9004 17.5503C18.3638 16.4501 17.4622 15.558 16.3517 15.029C18.1315 14.158 19.3571 12.3293 19.3571 10.2143C19.3571 7.2556 16.9587 4.85715 14 4.85715C11.0413 4.85715 8.64282 7.2556 8.64282 10.2143C8.64282 12.3294 9.86854 14.1582 11.6484 15.0291C10.538 15.5581 9.63642 16.4502 9.09989 17.5503"
@@ -82,7 +82,7 @@
         </filter>
       </defs>
     </svg>
-    <text x="7" y="30" font-size="5" stroke-width="0.3" class="font-Montserrat">
+    <text x="7" y="30" font-size="6" stroke-width="0.3" class="font-Montserrat">
       Lebenslauf
     </text>
   </svg>

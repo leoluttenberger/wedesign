@@ -1,11 +1,11 @@
 <template>
   <svg
-    class="md:w-24 md:h-24 w-14 h-14 stroke-black hover:stroke-wd-green dark:stroke-wd-white dark:hover:stroke-wd-green"
-    viewBox="0 0 40 40"
+    class="md:w-24 md:h-24 w-16 h-16 hover:stroke-wd-green dark:hover:stroke-wd-green"
+    viewBox="0 0 45 45"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <svg x="10">
+    <svg x="12">
       <path
         d="M11.4434 1.03444C11.8279 1.15401 13.0621 1.64373 14.8448 3.38227C16.5251 5.02099 17.0678 6.18447 17.2272 6.62671C17.2631 7.58731 17.2856 8.70576 17.2856 10C17.2856 13.4562 17.125 15.6589 16.9784 16.949C16.8713 17.8925 16.163 18.5982 15.2198 18.7082C14.0134 18.849 12.0429 19 9.14281 19C6.24271 19 4.27223 18.8489 3.06578 18.7082C2.12264 18.5982 1.41434 17.8925 1.30719 16.949C1.16067 15.6589 1 13.4562 1 10C1 6.54383 1.16067 4.34114 1.30719 3.051C1.41434 2.10753 2.12264 1.40188 3.06578 1.29184C4.27223 1.15109 6.24271 1 9.14281 1C9.9871 1 10.7527 1.01281 11.4434 1.03444Z"
         stroke-width="1"
@@ -37,7 +37,7 @@
         stroke-linejoin="round"
       />
     </svg>
-    <text x="5" y="30" font-size="5" stroke-width="0.3" class="font-Montserrat">
+    <text x="5" y="30" font-size="6" stroke-width="0.3" class="font-Montserrat">
       Bewerbung
     </text>
   </svg>

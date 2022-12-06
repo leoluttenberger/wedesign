@@ -252,12 +252,16 @@
       </div>
       <div class="py-14"></div> </swiper-slide
     ><swiper-slide>
-      <div class="grid gap-1">
-        <button
-          class="bg-wd-green hover:bg-transparent-green shadow text-white text-base font-Montserrat p-2 rounded-full"
-        >
-          <AddIcon></AddIcon>
-        </button></div></swiper-slide
+      <div class="grid gap-4 justify-items-end p-2">
+        <div class="col-span-1"></div>
+        <div class="...">
+          <button
+            class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
+          >
+            <div><AddIcon></AddIcon></div>
+          </button>
+        </div>
+      </div> </swiper-slide
     ><swiper-slide>Slide 3</swiper-slide>
   </swiper>
 </template>

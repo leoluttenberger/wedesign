@@ -15,9 +15,17 @@
                 ? 'border-wd-green dark:border-wd-green'
                 : 'border-white dark:border-slate-800'
             "
-            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
+            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px] md:px-8 py-2"
           >
-            <router-link to="/"><HomeIcon></HomeIcon> </router-link>
+            <router-link to="/"
+              ><HomeIcon
+                :class="
+                  activeButton1
+                    ? 'stroke-wd-green dark:stroke-wd-green'
+                    : 'stroke-black dark:stroke-white'
+                "
+              ></HomeIcon>
+            </router-link>
           </button>
           <button
             @click="onMenuTo(2)"
@@ -26,10 +34,16 @@
                 ? 'border-wd-green dark:border-wd-green'
                 : 'border-white dark:border-slate-800'
             "
-            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
+            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px] md:px-8 py-2"
           >
             <router-link to="/form">
-              <UserIcon></UserIcon>
+              <UserIcon
+                :class="
+                  activeButton2
+                    ? 'stroke-wd-green dark:stroke-wd-green'
+                    : 'stroke-black dark:stroke-white'
+                "
+              ></UserIcon>
             </router-link>
           </button>
           <button
@@ -39,10 +53,16 @@
                 ? 'border-wd-green dark:border-wd-green'
                 : 'border-white dark:border-slate-800'
             "
-            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
+            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px] md:px-8 py-2"
           >
             <router-link to="/documents"
-              ><DocumentsIcon></DocumentsIcon>
+              ><DocumentsIcon
+                :class="
+                  activeButton3
+                    ? 'stroke-wd-green dark:stroke-wd-green'
+                    : 'stroke-black dark:stroke-white'
+                "
+              ></DocumentsIcon>
             </router-link>
           </button>
           <button
@@ -52,10 +72,16 @@
                 ? 'border-wd-green dark:border-wd-green'
                 : 'border-white dark:border-slate-800'
             "
-            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
+            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px] md:px-4 py-2"
           >
             <router-link to="/calendar">
-              <NotificationsIcon></NotificationsIcon
+              <NotificationsIcon
+                :class="
+                  activeButton4
+                    ? 'stroke-wd-green dark:stroke-wd-green'
+                    : 'stroke-black dark:stroke-white'
+                "
+              ></NotificationsIcon
             ></router-link>
           </button>
           <div

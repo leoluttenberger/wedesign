@@ -1,5 +1,10 @@
 <template>
-  <div class="p-4">
+  <section
+    class="fixed inset-x-0 z-10 shadow dark:text-white text-xl font-Montserrat bg-white dark:bg-slate-800 shadow"
+  >
+    <div class="flex justify-center p-2">Erinnerungen</div>
+  </section>
+  <div class="py-14 px-4">
     <v-calendar :is-dark="theme" is-expanded :attributes="attributes" />
   </div>
 </template>

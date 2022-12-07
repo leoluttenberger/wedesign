@@ -11,7 +11,7 @@
       <div
         ref="modal-backdrop"
         v-if="showModal"
-        class="fixed z-10 inset-0 bg-black pt-10 bg-opacity-70"
+        class="fixed z-10 inset-0 bg-black pt-20 bg-opacity-70"
       >
         <div class="flex items-start justify-center text-center">
           <div

@@ -70,6 +70,7 @@
           <FormKit
             v-model="firstName"
             type="text"
+            placeholder="Max"
             validation="required|length:3"
             :disabled="disableInput"
           />
@@ -86,6 +87,7 @@
           <FormKit
             v-model="secondName"
             type="text"
+            placeholder="Muster"
             validation="required|length:3"
             :disabled="disableInput"
           />
@@ -103,7 +105,7 @@
           <FormKit
             v-model="streetName"
             type="text"
-            placeholder="Straße"
+            placeholder="Musterstraße"
             :disabled="disableInput"
           />
         </div>
@@ -118,7 +120,7 @@
           <FormKit
             v-model="streetNumber"
             type="text"
-            placeholder="Nr."
+            placeholder="1/1"
             :disabled="disableInput"
           />
         </div>
@@ -135,7 +137,7 @@
           <FormKit
             v-model="districtNumber"
             type="text"
-            placeholder="Bezirk"
+            placeholder="1010"
             :disabled="disableInput"
           />
         </div>
@@ -150,7 +152,7 @@
           <FormKit
             v-model="city"
             type="text"
-            placeholder="Stadt"
+            placeholder="Musterstadt"
             :disabled="disableInput"
           />
         </div>
@@ -189,7 +191,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-sm md:text-base"
+            class="p-3 w-24 h-10 text-black dark:text-white font-Montserrat text-sm md:text-sm"
           >
             EMail:
           </p>

@@ -115,6 +115,7 @@
               <FormKit
                 v-model="firstName"
                 type="text"
+                placeholder="Max"
                 validation="required|length:3"
                 :disabled="disableInput"
               />
@@ -131,6 +132,7 @@
               <FormKit
                 v-model="secondName"
                 type="text"
+                placeholder="Mustermann"
                 validation="required|length:3"
                 :disabled="disableInput"
               />
@@ -148,7 +150,7 @@
               <FormKit
                 v-model="streetName"
                 type="text"
-                placeholder="Straße"
+                placeholder="Musterstraße"
                 :disabled="disableInput"
               />
             </div>
@@ -163,7 +165,7 @@
               <FormKit
                 v-model="streetNumber"
                 type="text"
-                placeholder="Nr."
+                placeholder="1/1"
                 :disabled="disableInput"
               />
             </div>
@@ -180,7 +182,7 @@
               <FormKit
                 v-model="districtNumber"
                 type="text"
-                placeholder="Bezirk"
+                placeholder="1010"
                 :disabled="disableInput"
               />
             </div>
@@ -195,7 +197,7 @@
               <FormKit
                 v-model="city"
                 type="text"
-                placeholder="Stadt"
+                placeholder="Muserstadt"
                 :disabled="disableInput"
               />
             </div>
@@ -261,7 +263,7 @@
           </button>
         </div>
       </div> </swiper-slide
-    ><swiper-slide>Slide 3</swiper-slide>
+    ><swiper-slide></swiper-slide>
   </swiper>
 </template>
 

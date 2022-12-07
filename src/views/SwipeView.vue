@@ -72,7 +72,6 @@ export default {
         },
       ];
     };
-
     const bottomCardOpen = ref(false);
 
     return {

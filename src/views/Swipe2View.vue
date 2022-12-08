@@ -20,33 +20,26 @@
         <div class="flex flex-col items-left p-8 shadow-lg-up">
           {{ id }} | {{ index }}
           <FormKit
-            v-model="type"
-            type="select"
-            label="Typ"
-            :options="['HTL', 'AHS', 'HAK', 'HBLA']"
-          />
-
-          <FormKit
-            v-model="specialty"
-            type="select"
-            label="Schwerpunkt"
-            :options="['IT', 'BE', 'Sprachen', 'Wirtschaft']"
-          />
-          <FormKit
-            v-model="address"
+            v-model="workShop"
             type="text"
-            label="Adresse"
-            placeholder="PLZ, Ort, Adresse"
+            label="Titel"
+            placeholder="Workshop-Teilnahme"
+          />
+          <FormKit
+            v-model="description"
+            type="text"
+            label="Text"
+            placeholder="Beschreibung"
           />
           <FormKit
             type="date"
-            v-model="educationFrom"
+            v-model="workShopFrom"
             label="Von"
             placeholder="Auswählen"
           />
           <FormKit
             type="date"
-            v-model="educationTo"
+            v-model="workShopTo"
             label="Bis"
             placeholder="Auswählen"
             :validation="[['date_after', educationFrom]]"
@@ -63,11 +56,10 @@ import { ref } from "vue";
 import Swiper from "../components/SwiperCard.vue";
 import BottomCard from "../components/BottomCard.vue";
 import AddIcon from "../assets/icons/AddIcon.vue";
-const type = ref(null);
-const specialty = ref(null);
-const address = ref(null);
-const educationFrom = ref(null);
-const educationTo = ref(null);
+const workShop = ref(null);
+const description = ref(null);
+const workShopFrom = ref(null);
+const workShopTo = ref(null);
 interface SlideItem {
   id: string;
   index: number;

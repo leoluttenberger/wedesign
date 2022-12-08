@@ -1,6 +1,6 @@
 <template>
   <swiper
-    class="fixed w-screen h-screen overflow-hidden pt-6"
+    class="fixed w-screen h-screen top-20 bg-white dark:bg-slate-800 rounded-3xl"
     :slides-per-view="1"
     :space-between="spaceBetween"
     @swiper="onSwiper"

@@ -263,11 +263,11 @@
     ></swiper-slide>
     <swiper-slide>
       <div>
-        <SwipeViewVue></SwipeViewVue>
+        <SwipeViewVue> </SwipeViewVue>
       </div>
     </swiper-slide>
     <swiper-slide>
-      <div><SwipeViewVue></SwipeViewVue></div>
+      <div><Swipe2ViewVue></Swipe2ViewVue></div>
     </swiper-slide>
   </swiper>
 </template>
@@ -291,6 +291,7 @@ import swipe from "./SwipeView.vue";
 import Toggle from "@vueform/toggle";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import SwipeViewVue from "./SwipeView.vue";
+import Swipe2ViewVue from "./Swipe2View.vue";
 import "swiper/css";
 import "swiper/css/virtual";
 
@@ -317,6 +318,12 @@ const city = ref(JSON.parse(localStorage.getItem("city")));
 const valueAvatarShow = ref(true);
 const valueAvatarCropShow = ref(false);
 const value = ref(false);
+const type = ref(null);
+const specialty = ref(null);
+const address = ref(null);
+const educationFrom = ref(null);
+const educationTo = ref(null);
+const firstname = ref(null);
 const slides = ref(
   Array.from({ length: 3 }).map((_, index) => `Slide ${index + 1}`)
 );

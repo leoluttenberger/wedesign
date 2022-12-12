@@ -13,45 +13,14 @@
     <BottomCard v-model:open="bottomCardOpen">
       <Swiper
         v-slot="{ id, index }"
+        v-bind="slideIndex"
         v-model:index="currentIndex"
         :items="items"
         :space-between="8"
       >
         <div class="flex flex-col items-left p-8 shadow-lg-up">
-          {{ id }} | {{ index }}
-          <FormKit
-            v-model="type"
-            type="select"
-            label="Typ"
-            :options="['HTL', 'AHS', 'HAK', 'HBLA']"
-          />
-
-          <FormKit
-            v-model="specialty"
-            type="select"
-            label="Schwerpunkt"
-            :options="['IT', 'BE', 'Sprachen', 'Wirtschaft']"
-          />
-          <FormKit
-            v-model="address"
-            type="text"
-            label="Adresse"
-            placeholder="PLZ, Ort, Adresse"
-          />
-          <FormKit
-            type="date"
-            v-model="educationFrom"
-            label="Von"
-            placeholder="Auswählen"
-          />
-          <FormKit
-            type="date"
-            v-model="educationTo"
-            label="Bis"
-            placeholder="Auswählen"
-            :validation="[['date_after', educationFrom]]"
-            validation-visibility="live"
-          />
+          <component :is="mapTypeComponents[slideIndex - 1]" />
+          <div hidden="true">{{ id }} | {{ index }}</div>
         </div>
       </Swiper>
     </BottomCard>
@@ -59,21 +28,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed, defineProps, withDefaults } from "vue";
 import Swiper from "../components/SwiperCard.vue";
 import BottomCard from "../components/BottomCard.vue";
 import AddIcon from "../assets/icons/AddIcon.vue";
-const type = ref(null);
-const specialty = ref(null);
-const address = ref(null);
-const educationFrom = ref(null);
-const educationTo = ref(null);
+import ExperienceForm from "../components/ExperienceForm.vue";
+import EducationForm from "../components/EducationForm.vue";
 interface SlideItem {
   id: string;
   index: number;
   text: string;
 }
-
 let idCounter = 1;
 const getID = () => (idCounter++).toString();
 
@@ -81,6 +46,13 @@ let posIndexCounter = 0;
 const getPosIndex = () => posIndexCounter++;
 let negIndexCounter = -1;
 const getNegIndex = () => negIndexCounter--;
+const props = withDefaults(
+  defineProps<{
+    slideIndex: number;
+  }>(),
+  { slideIndex: 1 }
+);
+const mapTypeComponents = [EducationForm, ExperienceForm];
 
 const items = ref<SlideItem[]>([
   { id: getID(), index: getPosIndex(), text: "First" },

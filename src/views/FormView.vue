@@ -51,14 +51,12 @@
             v-model="form.avatar"
             :default-src="imagePreview"
             v-show="valueAvatarCropShow"
-            autofocus
           />
           <img
             class="outline:none rounded-full min-w-24 w-1/2 md:w-60 shadow-lg border-[5px] border-white"
             :src="image"
             default-src="../assets/images/logo.png"
             v-show="valueAvatarShow"
-            autofocus
           />
           <ModalDialog :show="showModal">
             <button
@@ -263,11 +261,11 @@
     ></swiper-slide>
     <swiper-slide>
       <div>
-        <SwipeViewVue> </SwipeViewVue>
+        <SwipeViewVue :slideIndex="1"> </SwipeViewVue>
       </div>
     </swiper-slide>
     <swiper-slide>
-      <div><Swipe2ViewVue></Swipe2ViewVue></div>
+      <div><SwipeViewVue :slideIndex="2"></SwipeViewVue></div>
     </swiper-slide>
   </swiper>
 </template>
@@ -291,7 +289,7 @@ import swipe from "./SwipeView.vue";
 import Toggle from "@vueform/toggle";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import SwipeViewVue from "./SwipeView.vue";
-import Swipe2ViewVue from "./Swipe2View.vue";
+import Swipe2ViewVue from "../components/Swipe2View.vue";
 import "swiper/css";
 import "swiper/css/virtual";
 

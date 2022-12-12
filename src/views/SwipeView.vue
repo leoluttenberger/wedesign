@@ -1,6 +1,7 @@
 <template>
-  <div class="w-screen h-screen py-40 z-10">
+  <div class="overflow-auto overflow-scroll w-screen h-screen py-20 z-10">
     <section class="z-0">
+      <component :is="mapListComponents[slideIndex - 1]" />
       <div class="flex justify-end p-4">
         <button
           @click="bottomCardOpen = true"
@@ -19,7 +20,7 @@
         :space-between="8"
       >
         <div class="flex flex-col items-left p-8 shadow-lg-up">
-          <component :is="mapTypeComponents[slideIndex - 1]" />
+          <component :is="mapFormComponents[slideIndex - 1]" />
           <div hidden="true">{{ id }} | {{ index }}</div>
         </div>
       </Swiper>
@@ -34,6 +35,8 @@ import BottomCard from "../components/BottomCard.vue";
 import AddIcon from "../assets/icons/AddIcon.vue";
 import ExperienceForm from "../components/ExperienceForm.vue";
 import EducationForm from "../components/EducationForm.vue";
+import ExperienceList from "../components/ExperienceList.vue";
+import EducationList from "../components/EducationList.vue";
 interface SlideItem {
   id: string;
   index: number;
@@ -41,7 +44,7 @@ interface SlideItem {
 }
 let idCounter = 1;
 const getID = () => (idCounter++).toString();
-
+const educations = ref(JSON.parse(localStorage.getItem("educations")));
 let posIndexCounter = 0;
 const getPosIndex = () => posIndexCounter++;
 let negIndexCounter = -1;
@@ -52,7 +55,8 @@ const props = withDefaults(
   }>(),
   { slideIndex: 1 }
 );
-const mapTypeComponents = [EducationForm, ExperienceForm];
+const mapFormComponents = [EducationForm, ExperienceForm];
+const mapListComponents = [EducationList, ExperienceList];
 
 const items = ref<SlideItem[]>([
   { id: getID(), index: getPosIndex(), text: "First" },

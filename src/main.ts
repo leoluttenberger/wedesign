@@ -8,6 +8,9 @@ import router from "./router";
 import theme from "./theme";
 import "./index.css";
 import { initializeApp } from "firebase/app";
+import "v-calendar/dist/style.css";
+import VCalendar from "v-calendar";
+
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
   authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
@@ -37,4 +40,5 @@ app.use(
   })
 );
 app.use(router);
+app.use(VCalendar, {});
 app.mount("#app");

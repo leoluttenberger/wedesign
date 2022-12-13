@@ -271,7 +271,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, defineEmits, onMounted } from "vue";
+import { ref, watch } from "vue";
 import { AvatarInput } from "../components";
 import CropperItem from "../components/CropperItem.vue";
 import {
@@ -282,14 +282,12 @@ import {
   isDarkMode,
 } from "../store.js";
 import ModalDialog from "../components/ModalDialog.vue";
-import { id } from "@formkit/i18n";
 import IconProfile from "../components/IconProfile.vue";
 import defaultImageDataURL from "../assets/images/defaultImageDataURL.txt";
 import swipe from "./SwipeView.vue";
 import Toggle from "@vueform/toggle";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import SwipeViewVue from "./SwipeView.vue";
-import Swipe2ViewVue from "../components/Swipe2View.vue";
 import "swiper/css";
 import "swiper/css/virtual";
 
@@ -316,30 +314,11 @@ const city = ref(JSON.parse(localStorage.getItem("city")));
 const valueAvatarShow = ref(true);
 const valueAvatarCropShow = ref(false);
 const value = ref(false);
-const type = ref(null);
-const specialty = ref(null);
-const address = ref(null);
-const educationFrom = ref(null);
-const educationTo = ref(null);
-const firstname = ref(null);
-const slides = ref(
-  Array.from({ length: 3 }).map((_, index) => `Slide ${index + 1}`)
-);
-const button1 = ref(null);
-const button2 = ref(null);
-const button3 = ref(null);
 let activeButton1 = ref(true);
 let activeButton2 = ref(false);
 let activeButton3 = ref(false);
 let swiperRef = null;
 let swiperIndex = 0;
-let appendNumber = 3;
-let prependNumber = 1;
-const params = {
-  on: {
-    realIndexChange: (swiper) => console.log(swiper.realIndex),
-  },
-};
 console.log(JSON.parse(localStorage.getItem("theme")));
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   value.value = true;

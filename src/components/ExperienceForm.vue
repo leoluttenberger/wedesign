@@ -1,36 +1,39 @@
 <template>
-  <FormKit
-    v-model="workshop"
-    type="text"
-    label="Titel"
-    placeholder="Workshop-Teilnahme"
-  />
-  <FormKit
-    v-model="description"
-    type="textarea"
-    label="Text"
-    placeholder="Beschreibung"
-  />
-  <FormKit
-    type="date"
-    v-model="workshopFrom"
-    label="Von"
-    placeholder="Auswählen"
-  />
-  <FormKit
-    type="date"
-    v-model="workshopTo"
-    label="Bis"
-    placeholder="Auswählen"
-    :validation="[['date_after', workshopFrom]]"
-    validation-visibility="live"
-  />
+  <div class="p-4">
+    <FormKit
+      v-model="workshop"
+      type="text"
+      label="Titel"
+      placeholder="Workshop-Teilnahme"
+    />
+    <FormKit
+      v-model="description"
+      type="textarea"
+      label="Text"
+      placeholder="Beschreibung"
+    />
+    <FormKit
+      type="date"
+      v-model="workshopFrom"
+      label="Von"
+      placeholder="Auswählen"
+    />
+    <FormKit
+      type="date"
+      v-model="workshopTo"
+      label="Bis"
+      placeholder="Auswählen"
+      :validation="[['date_after', workshopFrom]]"
+      validation-visibility="live"
+    />
+  </div>
+
   <button
-    class="bg-wd-green hover:bg-transparent-green shadow"
+    class="bg-wd-green hover:bg-transparent-green shadow h-14"
     @click="saveToLocalStorage()"
     :isdisabled="buttonDisabled"
   >
-    Save this user
+    Erfahrung hinzufügen
   </button>
 </template>
 
@@ -47,37 +50,24 @@ onMounted(() => {
 });
 
 const saveToLocalStorage = () => {
-  let index = 0;
-  console.log("buttonDisabled: ", buttonDisabled);
+  const experience = [
+    {
+      workshop: workshop.value,
+      description: description.value,
+      workshopFrom: workshopFrom.value,
+      workshopTo: workshopTo.value,
+    },
+  ];
   if (buttonDisabled == false) {
     buttonDisabled = true;
     if (localStorage.getItem("experiences")) {
       const currentExperiences = JSON.parse(
         localStorage.getItem("experiences")
       );
-      index = currentExperiences.length;
-      const experience = [
-        {
-          index: index,
-          workshop: workshop.value,
-          description: description.value,
-          workshopFrom: workshopFrom.value,
-          workshopTo: workshopTo.value,
-        },
-      ];
       const newData = [...currentExperiences, experience];
       console.log(newData);
       localStorage.setItem("experiences", JSON.stringify(newData));
     } else {
-      const experience = [
-        {
-          index: index,
-          workshop: workshop.value,
-          description: description.value,
-          workshopFrom: workshopFrom.value,
-          workshopTo: workshopTo.value,
-        },
-      ];
       localStorage.setItem("experiences", JSON.stringify([experience]));
     }
   }

@@ -28,17 +28,20 @@
     />
   </div>
 
+  <div class="flex p-4">
+    <button
+      class="bg-wd-error hover:bg-transparent-green shadow rounded-md h-8 w-full text-white"
+      @click="removeFromLocalStorage()"
+      :disabled="buttonDisabled"
+    >
+      Erfahrung entfernen
+    </button>
+  </div>
+
   <button
-    class="bg-wd-error shadow rounded-md"
-    @click="removeFromLocalStorage()"
-    :isdisabled="buttonDisabled"
-  >
-    Erfahrung entfernen
-  </button>
-  <button
-    class="bg-wd-green hover:bg-transparent-green shadow h-14"
+    class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
     @click="saveToLocalStorage()"
-    :isdisabled="buttonDisabled"
+    :disabled="buttonDisabled"
   >
     Erfahrung hinzufügen
   </button>
@@ -46,6 +49,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, defineProps, withDefaults } from "vue";
+import { slideDown } from "../store.js";
 const workshop = ref(null);
 const description = ref(null);
 const workshopFrom = ref(null);
@@ -89,12 +93,14 @@ const saveToLocalStorage = () => {
       ];
       localStorage.setItem("experiences", JSON.stringify([experience]));
     }
+    slideDown.value = true;
   }
 };
 const removeFromLocalStorage = () => {
   if (buttonDisabled == false) {
     experiences.value.splice(props.editIndex, 1);
     localStorage.setItem("experiences", JSON.stringify(experiences.value));
+    slideDown.value = true;
   }
 };
 </script>

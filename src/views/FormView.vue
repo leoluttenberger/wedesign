@@ -260,12 +260,10 @@
         </div></div
     ></swiper-slide>
     <swiper-slide>
-      <div>
-        <SwipeViewVue :slideIndex="1"> </SwipeViewVue>
-      </div>
+      <SwipeViewVue :slideIndex="1"> </SwipeViewVue>
     </swiper-slide>
     <swiper-slide>
-      <div><SwipeViewVue :slideIndex="2"></SwipeViewVue></div>
+      <SwipeViewVue :slideIndex="2"></SwipeViewVue>
     </swiper-slide>
   </swiper>
 </template>

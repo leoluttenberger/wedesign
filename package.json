@@ -51,6 +51,7 @@
     "vue-advanced-cropper": "^2.8.6",
     "vue-class-component": "^8.0.0-0",
     "vue-router": "^4.0.14",
+    "vue3-smooth-dnd": "^0.0.2",
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {

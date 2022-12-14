@@ -5,7 +5,7 @@
         :is="mapListComponents[slideIndex - 1]"
         v-if="renderComponent"
       />
-      <div class="flex justify-end p-4">
+      <div class="flex justify-end py-20 px-4">
         <button
           @click="openBottomCard()"
           class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
@@ -39,6 +39,7 @@ import ExperienceForm from "../components/ExperienceForm.vue";
 import EducationForm from "../components/EducationForm.vue";
 import ExperienceList from "../components/ExperienceList.vue";
 import EducationList from "../components/EducationList.vue";
+import { slideDown } from "../store.js";
 import { bottom } from "@popperjs/core";
 interface SlideItem {
   id: string;
@@ -62,6 +63,7 @@ const mapListComponents = [EducationList, ExperienceList];
 
 const bottomCardOpen = ref(false);
 const renderComponent = ref(true);
+
 watch(bottomCardOpen, () => {
   if (bottomCardOpen.value == false) {
     renderComponent.value = true;
@@ -70,6 +72,11 @@ watch(bottomCardOpen, () => {
   }
   console.log(bottomCardOpen.value);
   console.log(renderComponent.value);
+});
+watch(slideDown, () => {
+  if (slideDown.value == true) {
+    bottomCardOpen.value = false;
+  }
 });
 
 const items = ref<SlideItem[]>([
@@ -100,6 +107,6 @@ const addAfter = () => {
 
 const openBottomCard = () => {
   bottomCardOpen.value = true;
-  console.log("button card open: ", bottomCardOpen.value);
+  slideDown.value = false;
 };
 </script>

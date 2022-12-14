@@ -5,11 +5,23 @@
         <li v-for="(item, index) in experiences" :key="index">
           <button @click="openBottomCard(index)" class="w-full px-2">
             <div
-              class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md"
+              class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
             >
               <div class="font-bold text-xl">{{ item[0].workshop }}</div>
               <div>{{ item[0].description }}</div>
-              <div>{{ item[0].workshopFrom }} -> {{ item[0].workshopTo }}</div>
+              <div class="flex">
+                <div class="flex-none">
+                  {{ item[0].workshopFrom }}
+                </div>
+                <div class="grow py-2 px-2">
+                  <ArrowIcon
+                    class="dark:stroke-wd-white stroke-1 w-full h-2"
+                  ></ArrowIcon>
+                </div>
+                <div class="flex-none">
+                  {{ item[0].workshopTo }}
+                </div>
+              </div>
             </div>
           </button>
         </li>
@@ -35,6 +47,8 @@ import { ref, watch } from "vue";
 import Swiper from "../components/SwiperCard.vue";
 import BottomCard from "../components/BottomCard.vue";
 import ExperienceEdit from "../components/ExperienceEdit.vue";
+import ArrowIcon from "../assets/icons/ArrowIcon.vue";
+import { slideDown } from "../store.js";
 const experiences = ref(JSON.parse(localStorage.getItem("experiences")));
 const bottomCardOpen3 = ref(false);
 const renderComponent3 = ref(true);
@@ -64,12 +78,16 @@ watch(bottomCardOpen3, () => {
   } else {
     renderComponent3.value = false;
   }
-  console.log(bottomCardOpen3.value);
-  console.log(renderComponent3.value);
+});
+watch(slideDown, () => {
+  if (slideDown.value == true) {
+    bottomCardOpen3.value = false;
+  }
 });
 
 const openBottomCard = (id) => {
   currentButtonIndex.value = id;
+  slideDown.value = false;
   bottomCardOpen3.value = true;
 };
 const addBefore = () => {

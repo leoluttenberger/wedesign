@@ -19,3 +19,6 @@ export const imagePreviewObject = reactive({
 export const isDarkMode = reactive({
   value: null,
 });
+export const slideDown = reactive({
+  value: null,
+});

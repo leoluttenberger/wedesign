@@ -36,16 +36,18 @@
     />
   </div>
   <button
-    class="bg-wd-green hover:bg-transparent-green shadow h-14"
+    class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
     @click="saveToLocalStorage()"
-    :isdisabled="buttonDisabled"
+    :disabled="buttonDisabled"
   >
     Ausbildung hinzufügen
   </button>
 </template>
 
 <script setup lang="ts">
+import { number } from "@formkit/inputs";
 import { ref, onMounted } from "vue";
+import { slideDown } from "../store.js";
 const type = ref(null);
 const specialty = ref(null);
 const address = ref(null);
@@ -77,6 +79,7 @@ const saveToLocalStorage = () => {
     } else {
       localStorage.setItem("educations", JSON.stringify([education]));
     }
+    slideDown.value = true;
   }
 };
 </script>

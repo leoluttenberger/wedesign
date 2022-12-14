@@ -1,21 +1,37 @@
 <template>
   <div>
     <section class="z-0">
-      <ul class="grid gap-2" v-if="renderComponent2">
-        <li v-for="(item, index) in educations" :key="index">
-          <button @click="openBottomCard(index)" class="w-full px-2">
-            <div
-              class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md"
-            >
-              <div class="font-bold text-xl">{{ item[0].type }}</div>
-              <div>{{ item[0].address }}</div>
-              <div>
-                {{ item[0].educationFrom }} -> {{ item[0].educationTo }}
+      <div class="grid gap-2" v-if="renderComponent2">
+        <Container @drop="onDrop">
+          <Draggable
+            v-for="(item, index) in educations"
+            :key="index"
+            class="p-2"
+          >
+            <button @click="openBottomCard(index)" class="w-full px-2">
+              <div
+                class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
+              >
+                <div class="font-bold text-xl">{{ item[0].type }}</div>
+                <div>{{ item[0].address }}</div>
+                <div class="flex">
+                  <div class="flex-none">
+                    {{ item[0].educationFrom }}
+                  </div>
+                  <div class="grow py-2 px-2">
+                    <ArrowIcon
+                      class="dark:stroke-wd-white stroke-1 w-full h-2"
+                    ></ArrowIcon>
+                  </div>
+                  <div class="flex-none">
+                    {{ item[0].educationTo }}
+                  </div>
+                </div>
               </div>
-            </div>
-          </button>
-        </li>
-      </ul>
+            </button>
+          </Draggable>
+        </Container>
+      </div>
     </section>
   </div>
 
@@ -33,10 +49,13 @@
   </BottomCard>
 </template>
 <script setup lang="ts">
-import { ref, watch, defineAsyncComponent } from "vue";
+import { ref, watch } from "vue";
+import { Container, Draggable } from "vue3-smooth-dnd";
 import Swiper from "../components/SwiperCard.vue";
 import BottomCard from "../components/BottomCard.vue";
 import EducationEdit from "../components/EducationEdit.vue";
+import ArrowIcon from "../assets/icons/ArrowIcon.vue";
+import { slideDown } from "../store.js";
 const educations = ref(JSON.parse(localStorage.getItem("educations")));
 const bottomCardOpen2 = ref(false);
 const renderComponent2 = ref(true);
@@ -49,14 +68,10 @@ let idCounter = 1;
 const getID = () => (idCounter++).toString();
 let posIndexCounter = 0;
 const getPosIndex = () => posIndexCounter++;
-let negIndexCounter = -1;
-const getNegIndex = () => negIndexCounter--;
-const index = ref(0);
 const items = ref<SlideItem[]>([
   { id: getID(), index: getPosIndex(), text: "First" },
 ]);
 
-const currentIndex = ref(0);
 let currentButtonIndex = ref(0);
 
 watch(bottomCardOpen2, () => {
@@ -66,33 +81,37 @@ watch(bottomCardOpen2, () => {
   } else {
     renderComponent2.value = false;
   }
-  console.log(bottomCardOpen2.value);
-  console.log(renderComponent2.value);
+});
+watch(slideDown, () => {
+  if (slideDown.value == true) {
+    bottomCardOpen2.value = false;
+  }
 });
 
 const openBottomCard = (id) => {
   currentButtonIndex.value = id;
+  slideDown.value = false;
   bottomCardOpen2.value = true;
 };
-const addBefore = () => {
-  items.value = [
-    {
-      id: getID(),
-      index: getNegIndex(),
-      text: "Before",
-    },
-    ...items.value,
-  ];
-};
 
-const addAfter = () => {
-  items.value = [
-    ...items.value,
-    {
-      id: getID(),
-      index: getPosIndex(),
-      text: "After",
-    },
-  ];
+const onDrop = (dropResult) => {
+  educations.value = applyDrag(educations.value, dropResult);
+  //localStorage.setItem("educations", JSON.stringify(educations));
+};
+const applyDrag = (arr, dragResult) => {
+  const { removedIndex, addedIndex, payload } = dragResult;
+
+  if (removedIndex === null && addedIndex === null) return arr;
+  const result = [...arr];
+  let itemToAdd = payload;
+  if (removedIndex !== null) {
+    itemToAdd = result.splice(removedIndex, 1)[0];
+    console.log("add:", itemToAdd);
+  }
+  if (addedIndex !== null) {
+    result.splice(addedIndex, 0, itemToAdd);
+    console.log("result:", result);
+  }
+  return result;
 };
 </script>

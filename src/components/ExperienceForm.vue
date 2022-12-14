@@ -29,9 +29,9 @@
   </div>
 
   <button
-    class="bg-wd-green hover:bg-transparent-green shadow h-14"
+    class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
     @click="saveToLocalStorage()"
-    :isdisabled="buttonDisabled"
+    :disabled="buttonDisabled"
   >
     Erfahrung hinzufügen
   </button>
@@ -39,6 +39,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import { slideDown } from "../store.js";
 const workshop = ref(null);
 const description = ref(null);
 const workshopFrom = ref(null);
@@ -70,6 +71,7 @@ const saveToLocalStorage = () => {
     } else {
       localStorage.setItem("experiences", JSON.stringify([experience]));
     }
+    slideDown.value = true;
   }
 };
 </script>

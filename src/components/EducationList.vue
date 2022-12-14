@@ -8,27 +8,32 @@
             :key="index"
             class="p-2"
           >
-            <button @click="openBottomCard(index)" class="w-full px-2">
-              <div
-                class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
-              >
-                <div class="font-bold text-xl">{{ item[0].type }}</div>
-                <div>{{ item[0].address }}</div>
-                <div class="flex">
-                  <div class="flex-none">
-                    {{ item[0].educationFrom }}
-                  </div>
-                  <div class="grow py-2 px-2">
-                    <ArrowIcon
-                      class="dark:stroke-wd-white stroke-1 w-full h-2"
-                    ></ArrowIcon>
-                  </div>
-                  <div class="flex-none">
-                    {{ item[0].educationTo }}
+            <div class="flex">
+              <button @click="openBottomCard(index)" class="grow px-2">
+                <div
+                  class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
+                >
+                  <div class="font-bold text-xl">{{ item[0].type }}</div>
+                  <div>{{ item[0].address }}</div>
+                  <div class="flex">
+                    <div class="flex-none">
+                      {{ item[0].educationFrom }}
+                    </div>
+                    <div class="grow py-2 px-2">
+                      <ArrowIcon
+                        class="dark:stroke-wd-white stroke-1 w-full h-2"
+                      ></ArrowIcon>
+                    </div>
+                    <div class="flex-none">
+                      {{ item[0].educationTo }}
+                    </div>
                   </div>
                 </div>
+              </button>
+              <div class="flex-none p-4">
+                <SortIcon class="h-full"></SortIcon>
               </div>
-            </button>
+            </div>
           </Draggable>
         </Container>
       </div>
@@ -50,12 +55,13 @@
 </template>
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { Container, Draggable } from "vue3-smooth-dnd";
 import Swiper from "../components/SwiperCard.vue";
 import BottomCard from "../components/BottomCard.vue";
 import EducationEdit from "../components/EducationEdit.vue";
 import ArrowIcon from "../assets/icons/ArrowIcon.vue";
+import SortIcon from "../assets/icons/SortIcon.vue";
 import { slideDown } from "../store.js";
+import { Container, Draggable } from "vue3-smooth-dnd";
 const educations = ref(JSON.parse(localStorage.getItem("educations")));
 const bottomCardOpen2 = ref(false);
 const renderComponent2 = ref(true);
@@ -95,23 +101,20 @@ const openBottomCard = (id) => {
 };
 
 const onDrop = (dropResult) => {
-  educations.value = applyDrag(educations.value, dropResult);
-  //localStorage.setItem("educations", JSON.stringify(educations));
+  const newData = applyDrag(educations, dropResult); // educations call by reference
+  localStorage.setItem("educations", JSON.stringify(educations.value));
 };
 const applyDrag = (arr, dragResult) => {
   const { removedIndex, addedIndex, payload } = dragResult;
 
   if (removedIndex === null && addedIndex === null) return arr;
-  const result = [...arr];
   let itemToAdd = payload;
   if (removedIndex !== null) {
-    itemToAdd = result.splice(removedIndex, 1)[0];
-    console.log("add:", itemToAdd);
+    itemToAdd = arr.value.splice(removedIndex, 1)[0];
   }
   if (addedIndex !== null) {
-    result.splice(addedIndex, 0, itemToAdd);
-    console.log("result:", result);
+    arr.value.splice(addedIndex, 0, itemToAdd);
   }
-  return result;
+  return arr;
 };
 </script>

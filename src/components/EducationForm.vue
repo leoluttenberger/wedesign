@@ -73,6 +73,7 @@ const saveToLocalStorage = () => {
     buttonDisabled = true;
     if (localStorage.getItem("educations")) {
       const currentEducations = JSON.parse(localStorage.getItem("educations"));
+      console.log(currentEducations);
       const newData = [...currentEducations, education];
       console.log(newData);
       localStorage.setItem("educations", JSON.stringify(newData));

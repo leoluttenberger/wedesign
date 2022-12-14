@@ -1,31 +1,42 @@
 <template>
   <div>
     <section class="z-0">
-      <ul class="grid gap-2" v-if="renderComponent3">
-        <li v-for="(item, index) in experiences" :key="index">
-          <button @click="openBottomCard(index)" class="w-full px-2">
-            <div
-              class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
-            >
-              <div class="font-bold text-xl">{{ item[0].workshop }}</div>
-              <div>{{ item[0].description }}</div>
-              <div class="flex">
-                <div class="flex-none">
-                  {{ item[0].workshopFrom }}
+      <div class="grid gap-2" v-if="renderComponent3">
+        <Container @drop="onDrop">
+          <Draggable
+            v-for="(item, index) in experiences"
+            :key="index"
+            class="p-2"
+          >
+            <div class="flex">
+              <button @click="openBottomCard(index)" class="w-full px-2">
+                <div
+                  class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
+                >
+                  <div class="font-bold text-xl">{{ item[0].workshop }}</div>
+                  <div>{{ item[0].description }}</div>
+                  <div class="flex">
+                    <div class="flex-none">
+                      {{ item[0].workshopFrom }}
+                    </div>
+                    <div class="grow py-2 px-2">
+                      <ArrowIcon
+                        class="dark:stroke-wd-white stroke-1 w-full h-2"
+                      ></ArrowIcon>
+                    </div>
+                    <div class="flex-none">
+                      {{ item[0].workshopTo }}
+                    </div>
+                  </div>
                 </div>
-                <div class="grow py-2 px-2">
-                  <ArrowIcon
-                    class="dark:stroke-wd-white stroke-1 w-full h-2"
-                  ></ArrowIcon>
-                </div>
-                <div class="flex-none">
-                  {{ item[0].workshopTo }}
-                </div>
+              </button>
+              <div class="flex-none p-4">
+                <SortIcon class="h-full"></SortIcon>
               </div>
             </div>
-          </button>
-        </li>
-      </ul>
+          </Draggable>
+        </Container>
+      </div>
     </section>
   </div>
 
@@ -48,7 +59,10 @@ import Swiper from "../components/SwiperCard.vue";
 import BottomCard from "../components/BottomCard.vue";
 import ExperienceEdit from "../components/ExperienceEdit.vue";
 import ArrowIcon from "../assets/icons/ArrowIcon.vue";
+import SortIcon from "../assets/icons/SortIcon.vue";
 import { slideDown } from "../store.js";
+import { Container, Draggable } from "vue3-smooth-dnd";
+import exp from "constants";
 const experiences = ref(JSON.parse(localStorage.getItem("experiences")));
 const bottomCardOpen3 = ref(false);
 const renderComponent3 = ref(true);
@@ -61,14 +75,10 @@ let idCounter = 1;
 const getID = () => (idCounter++).toString();
 let posIndexCounter = 0;
 const getPosIndex = () => posIndexCounter++;
-let negIndexCounter = -1;
-const getNegIndex = () => negIndexCounter--;
-const index = ref(0);
 const items = ref<SlideItem[]>([
   { id: getID(), index: getPosIndex(), text: "First" },
 ]);
 
-const currentIndex = ref(0);
 let currentButtonIndex = ref(0);
 
 watch(bottomCardOpen3, () => {
@@ -90,25 +100,22 @@ const openBottomCard = (id) => {
   slideDown.value = false;
   bottomCardOpen3.value = true;
 };
-const addBefore = () => {
-  items.value = [
-    {
-      id: getID(),
-      index: getNegIndex(),
-      text: "Before",
-    },
-    ...items.value,
-  ];
-};
 
-const addAfter = () => {
-  items.value = [
-    ...items.value,
-    {
-      id: getID(),
-      index: getPosIndex(),
-      text: "After",
-    },
-  ];
+const onDrop = (dropResult) => {
+  const newData = applyDrag(experiences, dropResult); // experiences call by reference
+  localStorage.setItem("experiences", JSON.stringify(experiences.value));
+};
+const applyDrag = (arr, dragResult) => {
+  const { removedIndex, addedIndex, payload } = dragResult;
+
+  if (removedIndex === null && addedIndex === null) return arr;
+  let itemToAdd = payload;
+  if (removedIndex !== null) {
+    itemToAdd = arr.value.splice(removedIndex, 1)[0];
+  }
+  if (addedIndex !== null) {
+    arr.value.splice(addedIndex, 0, itemToAdd);
+  }
+  return arr;
 };
 </script>

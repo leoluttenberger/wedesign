@@ -56,7 +56,7 @@ const mapListComponents = [EducationList, ExperienceList];
 const bottomCardOpen = ref(false);
 const renderComponent = ref(true);
 
-/*watch(bottomCardOpen, () => {
+watch(bottomCardOpen, () => {
   if (bottomCardOpen.value == false) {
     renderComponent.value = true;
   } else {
@@ -70,7 +70,7 @@ watch(slideDown, () => {
     bottomCardOpen.value = false;
   }
 });
-*/
+
 const items = ref<SlideItem[]>([
   { id: getID(), index: getPosIndex(), text: "First" },
 ]);

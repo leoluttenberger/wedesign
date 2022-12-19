@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+$base-color: cornflowerblue;
+@import "~vue-advanced-cropper/dist/theme.classic.scss";
+@layer base {
+}

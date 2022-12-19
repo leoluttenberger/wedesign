@@ -1,10 +1,7 @@
 <template>
   <div class="overflow-auto overflow-scroll w-screen h-screen py-20 z-10">
     <section class="z-0">
-      <component
-        :is="mapListComponents[slideIndex - 1]"
-        v-if="renderComponent"
-      />
+      <component :is="mapListComponents[slideIndex]" v-if="renderComponent" />
       <div class="flex justify-end py-20 px-4">
         <button
           @click="openBottomCard()"
@@ -13,20 +10,15 @@
           <AddIcon></AddIcon>
         </button>
       </div>
+      <BottomCard v-model:open="bottomCardOpen">
+        <Swiper v-slot="{ id, index }" :items="items" :space-between="8">
+          <div class="flex flex-col items-left shadow-lg-up">
+            <component :is="mapFormComponents[slideIndex]" />
+            <div hidden="true">{{ id }} | {{ index }}</div>
+          </div>
+        </Swiper>
+      </BottomCard>
     </section>
-    <BottomCard v-model:open="bottomCardOpen">
-      <Swiper
-        v-slot="{ id, index }"
-        v-bind="slideIndex"
-        :items="items"
-        :space-between="8"
-      >
-        <div class="flex flex-col items-left shadow-lg-up">
-          <component :is="mapFormComponents[slideIndex - 1]" />
-          <div hidden="true">{{ id }} | {{ index }}</div>
-        </div>
-      </Swiper>
-    </BottomCard>
   </div>
 </template>
 
@@ -56,7 +48,7 @@ const props = withDefaults(
   defineProps<{
     slideIndex: number;
   }>(),
-  { slideIndex: 1 }
+  { slideIndex: 0 }
 );
 const mapFormComponents = [EducationForm, ExperienceForm];
 const mapListComponents = [EducationList, ExperienceList];
@@ -64,7 +56,7 @@ const mapListComponents = [EducationList, ExperienceList];
 const bottomCardOpen = ref(false);
 const renderComponent = ref(true);
 
-watch(bottomCardOpen, () => {
+/*watch(bottomCardOpen, () => {
   if (bottomCardOpen.value == false) {
     renderComponent.value = true;
   } else {
@@ -78,7 +70,7 @@ watch(slideDown, () => {
     bottomCardOpen.value = false;
   }
 });
-
+*/
 const items = ref<SlideItem[]>([
   { id: getID(), index: getPosIndex(), text: "First" },
 ]);

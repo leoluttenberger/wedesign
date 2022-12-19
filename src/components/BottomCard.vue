@@ -92,12 +92,8 @@ export default {
     onMounted(reactToOpen);
 
     const blur = computed(() => {
-      // Length is for how long the effect should last, expressed as a
-      // percentage of the container height.
       const length = 0.3;
-      // Strength is the strength of the blur effect, expessed in pixels.
       const strength = 5;
-
       const lerp = (length - offset.value) * (1 / length);
 
       return Math.max(lerp * strength, 0);

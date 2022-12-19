@@ -90,6 +90,7 @@ export default {
 
     const onActiveIndexChange = () => {
       const activeItem = items.value[swiper.activeIndex];
+      console.log("activeIndex: ", activeItem.index);
       emit("update:index", activeItem.index);
     };
 

@@ -81,7 +81,7 @@ const items = ref<SlideItem[]>([
 
 let currentButtonIndex = ref(0);
 
-watch(bottomCardOpen3, () => {
+/*watch(bottomCardOpen3, () => {
   if (bottomCardOpen3.value == false) {
     experiences.value = JSON.parse(localStorage.getItem("experiences"));
     renderComponent3.value = true;
@@ -93,7 +93,7 @@ watch(slideDown, () => {
   if (slideDown.value == true) {
     bottomCardOpen3.value = false;
   }
-});
+});*/
 
 const openBottomCard = (id) => {
   currentButtonIndex.value = id;

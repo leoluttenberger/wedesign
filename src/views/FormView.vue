@@ -65,10 +65,10 @@
   <swiper class="mySwiper" @swiper="setSwiperRef" @slideChange="onSlideChange">
     <swiper-slide> <UserInfo></UserInfo> </swiper-slide>
     <swiper-slide>
-      <SwipeViewVue :slideIndex="0"> </SwipeViewVue>
+      <SwipeView :slideIndex="0"> </SwipeView>
     </swiper-slide>
     <swiper-slide>
-      <SwipeViewVue :slideIndex="1"></SwipeViewVue>
+      <SwipeView :slideIndex="1"></SwipeView>
     </swiper-slide>
   </swiper>
 </template>
@@ -89,7 +89,7 @@ import {
 import swipe from "./SwipeView.vue";
 import Toggle from "@vueform/toggle";
 import { Swiper, SwiperSlide } from "swiper/vue";
-import SwipeViewVue from "./SwipeView.vue";
+import SwipeView from "./SwipeView.vue";
 import "swiper/css";
 import "swiper/css/virtual";
 

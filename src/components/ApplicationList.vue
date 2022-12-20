@@ -4,28 +4,37 @@
       <div class="grid gap-2" v-if="renderComponent3">
         <Container @drop="onDrop">
           <Draggable
-            v-for="(item, index) in experiences"
+            v-for="(item, index) in applications"
             :key="index"
             class="p-2"
           >
             <div class="flex">
-              <button @click="openBottomCard(index)" class="w-full px-2">
+              <button @click="openBottomCard(index)" class="grow px-2">
                 <div
                   class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
                 >
-                  <div class="font-bold text-xl">{{ item[0].workshop }}</div>
-                  <div>{{ item[0].description }}</div>
+                  <div class="font-bold text-xl">{{ item[0].company }}</div>
+                  <div>{{ item[0].job }}</div>
                   <div class="flex">
-                    <div class="flex-none">
-                      {{ item[0].workshopFrom }}
-                    </div>
+                    <div class="flex-none">Deadline</div>
                     <div class="grow py-2 px-2">
                       <ArrowIcon
                         class="dark:stroke-wd-white stroke-1 w-full h-2"
                       ></ArrowIcon>
                     </div>
                     <div class="flex-none">
-                      {{ item[0].workshopTo }}
+                      {{ item[0].deadline }}
+                    </div>
+                  </div>
+                  <div class="flex">
+                    <div class="flex-none">Motivationsschreiben</div>
+                    <div class="grow py-2 px-2">
+                      <ArrowIcon
+                        class="dark:stroke-wd-white stroke-1 w-full h-2"
+                      ></ArrowIcon>
+                    </div>
+                    <div class="flex-none">
+                      {{ item[0].cv }}
                     </div>
                   </div>
                 </div>
@@ -39,71 +48,47 @@
       </div>
     </section>
   </div>
-
-  <BottomCard v-model:open="bottomCardOpen3">
-    <Swiper v-slot="{ id, index }" :items="items" :space-between="8">
-      <div class="flex flex-col items-left shadow-lg-up">
-        <component
-          v-bind="currentButtonIndex"
-          :is="ExperienceEdit"
-          :editIndex="currentButtonIndex"
-        />
-        <div hidden="true">{{ id }} | {{ index }}</div>
-      </div>
-    </Swiper>
-  </BottomCard>
+  <div>
+    <ModalDialog :show="bottomCardOpen3">
+      <component
+        v-bind="currentButtonIndex"
+        :is="ApplicationEdit"
+        :editIndex="currentButtonIndex"
+      />
+    </ModalDialog>
+  </div>
 </template>
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import Swiper from "./SwiperCard.vue";
-import BottomCard from "./BottomCard.vue";
-import ExperienceEdit from "./ExperienceEdit.vue";
+import ApplicationEdit from "./ApplicationEdit.vue";
+import ModalDialog from "./ModalDialog.vue";
 import ArrowIcon from "../assets/icons/ArrowIcon.vue";
 import SortIcon from "../assets/icons/SortIcon.vue";
 import { slideDown } from "../store.js";
 import { Container, Draggable } from "vue3-smooth-dnd";
-import exp from "constants";
-const experiences = ref(JSON.parse(localStorage.getItem("experiences")));
+
+const applications = ref(JSON.parse(localStorage.getItem("applications")));
 const bottomCardOpen3 = ref(false);
 const renderComponent3 = ref(true);
-interface SlideItem {
-  id: string;
-  index: number;
-  text: string;
-}
-let idCounter = 1;
-const getID = () => (idCounter++).toString();
-let posIndexCounter = 0;
-const getPosIndex = () => posIndexCounter++;
-const items = ref<SlideItem[]>([
-  { id: getID(), index: getPosIndex(), text: "First" },
-]);
-
 let currentButtonIndex = ref(0);
 
 watch(bottomCardOpen3, () => {
   if (bottomCardOpen3.value == false) {
-    experiences.value = JSON.parse(localStorage.getItem("experiences"));
+    applications.value = JSON.parse(localStorage.getItem("applications"));
     renderComponent3.value = true;
   } else {
     renderComponent3.value = false;
   }
 });
-watch(slideDown, () => {
-  if (slideDown.value == true) {
-    bottomCardOpen3.value = false;
-  }
-});
 
 const openBottomCard = (id) => {
   currentButtonIndex.value = id;
-  slideDown.value = false;
   bottomCardOpen3.value = true;
 };
 
 const onDrop = (dropResult) => {
-  const newData = applyDrag(experiences, dropResult); // experiences call by reference
-  localStorage.setItem("experiences", JSON.stringify(experiences.value));
+  const newData = applyDrag(applications, dropResult); // educations call by reference
+  localStorage.setItem("applications", JSON.stringify(applications.value));
 };
 const applyDrag = (arr, dragResult) => {
   const { removedIndex, addedIndex, payload } = dragResult;

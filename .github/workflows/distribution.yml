@@ -16,6 +16,12 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install & Build npm
         run: npm install && npm run build
+      - name: firebase web deploy
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_WEDESIGN_35121 }}'
+          projectId: wedesign-35121
       - name: Set up Ruby
         uses: ruby/setup-ruby@2b019609e2b0f1ea1a2bc8ca11cb82ab46ada124
         with:
@@ -28,7 +34,6 @@ jobs:
           cache: gradle
       - name: Capacitor copy and update
         run: mv capacitor.config.example capacitor.config.ts && npx cap add android && npx cap add ios && npx cap copy && npx cap sync
-    
       - name:  Build with Gradle
         run: cd android && chmod +x gradlew && ./gradlew build 
       - name: Create Firebase Service Credentials file

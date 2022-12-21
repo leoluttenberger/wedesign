@@ -91,7 +91,6 @@ const saveToLocalStorage = () => {
       educations.value[props.editIndex][0].address = address.value;
       educations.value[props.editIndex][0].educationFrom = educationFrom.value;
       educations.value[props.editIndex][0].educationTo = educationTo.value;
-      console.log(educations.value);
       localStorage.setItem("educations", JSON.stringify(educations.value));
     } else {
       const education = [

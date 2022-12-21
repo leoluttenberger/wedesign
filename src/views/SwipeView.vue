@@ -31,6 +31,8 @@ import ExperienceForm from "../components/ExperienceForm.vue";
 import EducationForm from "../components/EducationForm.vue";
 import ExperienceList from "../components/ExperienceList.vue";
 import EducationList from "../components/EducationList.vue";
+import ApplicationForm from "../components/ApplicationForm.vue";
+import ApplicationList from "../components/ApplicationList.vue";
 import { slideDown } from "../store.js";
 import { bottom } from "@popperjs/core";
 interface SlideItem {
@@ -50,8 +52,8 @@ const props = withDefaults(
   }>(),
   { slideIndex: 0 }
 );
-const mapFormComponents = [EducationForm, ExperienceForm];
-const mapListComponents = [EducationList, ExperienceList];
+const mapFormComponents = [EducationForm, ExperienceForm, ApplicationForm];
+const mapListComponents = [EducationList, ExperienceList, ApplicationList];
 
 const bottomCardOpen = ref(false);
 const renderComponent = ref(true);

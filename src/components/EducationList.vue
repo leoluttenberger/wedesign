@@ -55,9 +55,9 @@
 </template>
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import Swiper from "../components/SwiperCard.vue";
-import BottomCard from "../components/BottomCard.vue";
-import EducationEdit from "../components/EducationEdit.vue";
+import Swiper from "./SwiperCard.vue";
+import BottomCard from "./BottomCard.vue";
+import EducationEdit from "./EducationEdit.vue";
 import ArrowIcon from "../assets/icons/ArrowIcon.vue";
 import SortIcon from "../assets/icons/SortIcon.vue";
 import { slideDown } from "../store.js";
@@ -65,6 +65,8 @@ import { Container, Draggable } from "vue3-smooth-dnd";
 const educations = ref(JSON.parse(localStorage.getItem("educations")));
 const bottomCardOpen2 = ref(false);
 const renderComponent2 = ref(true);
+let currentButtonIndex = ref(0);
+
 interface SlideItem {
   id: string;
   index: number;
@@ -77,8 +79,6 @@ const getPosIndex = () => posIndexCounter++;
 const items = ref<SlideItem[]>([
   { id: getID(), index: getPosIndex(), text: "First" },
 ]);
-
-let currentButtonIndex = ref(0);
 
 watch(bottomCardOpen2, () => {
   if (bottomCardOpen2.value == false) {

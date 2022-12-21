@@ -19,17 +19,33 @@
       placeholder="Auswählen"
     />
   </div>
-  <button
-    class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
-    @click="saveToLocalStorage()"
-    :disabled="buttonDisabled"
-  >
-    Bewerbung hinzufügen
-  </button>
+  <div class="grid flex gap-2">
+    <button
+      class="bg-wd-error shadow rounded-md h-8 w-full text-white"
+      @click="removeFromLocalStorage()"
+      :disabled="buttonDisabled"
+    >
+      Bewerbung entfernen
+    </button>
+    <button
+      class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
+      @click="createMotivationNode()"
+      :disabled="buttonDisabled"
+    >
+      Motivationsschreiben erstellen
+    </button>
+    <button
+      class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
+      @click="sendJobApplication()"
+      :disabled="buttonDisabled"
+    >
+      Bewerbung abschicken
+    </button>
+  </div>
 </template>
 <script setup lang="ts">
 import { ref, onMounted, defineProps, withDefaults } from "vue";
-import { slideDown } from "../store.js";
+import { slideDown } from "@/store.js";
 const company = ref(null);
 const job = ref(null);
 const deadline = ref(null);
@@ -58,41 +74,23 @@ onMounted(() => {
   __note = applications.value[props.editIndex][0].note;
 });
 
-const saveToLocalStorage = () => {
+const sendJobApplication = () => {
   if (buttonDisabled == false) {
     buttonDisabled = true;
-    if (localStorage.getItem("applications")) {
-      console.log("Update Education");
-      applications.value[props.editIndex][0].company = company.value;
-      applications.value[props.editIndex][0].job = job.value;
-      applications.value[props.editIndex][0].deadline = deadline.value;
-      applications.value[props.editIndex][0].contactPerson = __contactPerson;
-      applications.value[props.editIndex][0].cv = __cv;
-      applications.value[props.editIndex][0].state = __state;
-      applications.value[props.editIndex][0].note = __note;
-
-      localStorage.setItem("applications", JSON.stringify(applications.value));
-    } else {
-      const application = [
-        {
-          company: company.value,
-          job: job.value,
-          deadline: deadline.value,
-          contactPerson: __contactPerson,
-          state: __state,
-          cv: __cv,
-          note: __note,
-        },
-      ];
-      localStorage.setItem("applications", JSON.stringify([application]));
-    }
     slideDown.value = true;
   }
 };
 const removeFromLocalStorage = () => {
   if (buttonDisabled == false) {
+    buttonDisabled = true;
     applications.value.splice(props.editIndex, 1);
     localStorage.setItem("applications", JSON.stringify(applications.value));
+    slideDown.value = true;
+  }
+};
+const createMotivationNode = () => {
+  if (buttonDisabled == false) {
+    buttonDisabled = true;
     slideDown.value = true;
   }
 };

@@ -35,7 +35,7 @@
       validation-visibility="live"
     />
   </div>
-  <div class="flex p-4">
+  <div class="grid flex gap-2">
     <button
       class="bg-wd-error shadow rounded-md h-8 w-full text-white"
       @click="removeFromLocalStorage()"
@@ -43,20 +43,19 @@
     >
       Ausbildung entfernen
     </button>
+    <button
+      class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
+      @click="saveToLocalStorage()"
+      :disabled="buttonDisabled"
+    >
+      Ausbildung speichern
+    </button>
   </div>
-
-  <button
-    class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
-    @click="saveToLocalStorage()"
-    :disabled="buttonDisabled"
-  >
-    Ausbildung speichern
-  </button>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, defineProps, withDefaults } from "vue";
-import { slideDown } from "../store.js";
+import { slideDown } from "@/store.js";
 const type = ref(null);
 const specialty = ref(null);
 const address = ref(null);

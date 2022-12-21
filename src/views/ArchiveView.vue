@@ -30,5 +30,6 @@
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
+import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 const applications = ref(JSON.parse(localStorage.getItem("applications")));
 </script>

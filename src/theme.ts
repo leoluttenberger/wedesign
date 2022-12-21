@@ -12,7 +12,7 @@ const textClassification = {
     "h-10 outline-0 font-Montserrat md:text-base text-sm font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-black dark:placeholder-white",
 };
 const boxClassification = {
-  fieldset: "max-w-md border border-gray-400 rounded-md px-2 pb-1",
+  fieldset: "max-w-md border border-gray-400 rounded-md",
   legend: "font-bold text-sm",
   wrapper: "flex mb-1 cursor-pointer",
   help: "mb-2",

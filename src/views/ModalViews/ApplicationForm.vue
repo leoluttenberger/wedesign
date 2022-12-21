@@ -29,7 +29,7 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { slideDown } from "../store.js";
+import { slideDown } from "@/store.js";
 const company = ref(null);
 const job = ref(null);
 const deadline = ref(null);

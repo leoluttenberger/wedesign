@@ -30,9 +30,13 @@
       </button>
     </div>
   </section>
-  <swiper class="mySwiper" @swiper="setSwiperRef" @slideChange="onSlideChange">
+  <swiper
+    class="applicationSwiper"
+    @swiper="setSwiperRef"
+    @slideChange="onSlideChange"
+  >
     <swiper-slide>
-      <SwipeView :slideIndex="2"> </SwipeView>
+      <SwipeView :slideIndex="3"> </SwipeView>
     </swiper-slide>
     <swiper-slide>
       <ArchiveView></ArchiveView>
@@ -46,7 +50,7 @@ import swipe from "./SwipeView.vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import SwipeView from "./SwipeView.vue";
 import ArchiveView from "./ArchiveView.vue";
-import { Tiptap } from "../components";
+import { Tiptap } from "@/components";
 let activeButton1 = ref(true);
 let activeButton2 = ref(false);
 let swiperRef = null;

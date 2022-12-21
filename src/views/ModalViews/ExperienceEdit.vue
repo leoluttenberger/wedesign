@@ -28,7 +28,7 @@
     />
   </div>
 
-  <div class="flex p-4">
+  <div class="grid flex gap-2">
     <button
       class="bg-wd-error hover:bg-transparent-green shadow rounded-md h-8 w-full text-white"
       @click="removeFromLocalStorage()"
@@ -36,20 +36,19 @@
     >
       Erfahrung entfernen
     </button>
+    <button
+      class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
+      @click="saveToLocalStorage()"
+      :disabled="buttonDisabled"
+    >
+      Erfahrung hinzufügen
+    </button>
   </div>
-
-  <button
-    class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
-    @click="saveToLocalStorage()"
-    :disabled="buttonDisabled"
-  >
-    Erfahrung hinzufügen
-  </button>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, defineProps, withDefaults } from "vue";
-import { slideDown } from "../store.js";
+import { slideDown } from "@/store.js";
 const workshop = ref(null);
 const description = ref(null);
 const workshopFrom = ref(null);

@@ -24,16 +24,23 @@
 
 <script setup lang="ts">
 import { ref, defineProps, withDefaults, watch } from "vue";
-import Swiper from "../components/SwiperCard.vue";
-import BottomCard from "../components/BottomCard.vue";
-import AddIcon from "../assets/icons/AddIcon.vue";
-import ExperienceForm from "../components/ExperienceForm.vue";
-import EducationForm from "../components/EducationForm.vue";
-import ExperienceList from "../components/ExperienceList.vue";
-import EducationList from "../components/EducationList.vue";
-import ApplicationForm from "../components/ApplicationForm.vue";
-import ApplicationList from "../components/ApplicationList.vue";
-import { slideDown } from "../store.js";
+import Swiper from "@/components/SwiperCard.vue";
+import BottomCard from "@/components/BottomCard.vue";
+import AddIcon from "@/assets/icons/AddIcon.vue";
+
+import ExperienceForm from "./ModalViews/ExperienceForm.vue";
+import EducationForm from "./ModalViews/EducationForm.vue";
+
+import ExperienceList from "./ModalViews/ExperienceList.vue";
+import EducationList from "./ModalViews/EducationList.vue";
+
+import ApplicationForm from "./ModalViews/ApplicationForm.vue";
+import ApplicationList from "./ModalViews/ApplicationList.vue";
+
+import KnowledgeForm from "./ModalViews/KnowledgeForm.vue";
+import KnowledgeList from "./ModalViews/KnowledgeList.vue";
+
+import { slideDown } from "@/store.js";
 import { bottom } from "@popperjs/core";
 interface SlideItem {
   id: string;
@@ -52,8 +59,18 @@ const props = withDefaults(
   }>(),
   { slideIndex: 0 }
 );
-const mapFormComponents = [EducationForm, ExperienceForm, ApplicationForm];
-const mapListComponents = [EducationList, ExperienceList, ApplicationList];
+const mapFormComponents = [
+  EducationForm,
+  ExperienceForm,
+  KnowledgeForm,
+  ApplicationForm,
+];
+const mapListComponents = [
+  EducationList,
+  ExperienceList,
+  KnowledgeList,
+  ApplicationList,
+];
 
 const bottomCardOpen = ref(false);
 const renderComponent = ref(true);

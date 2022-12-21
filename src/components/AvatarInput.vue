@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { defineProps, ref, watch } from "vue";
 import { fileObject, imageObject, imagePreviewObject } from "../store.js";
-import IconProfile from "../components/IconProfile.vue";
+import IconProfile from "./IconProfile.vue";
 
 const props = defineProps({
   defaultSrc: String,

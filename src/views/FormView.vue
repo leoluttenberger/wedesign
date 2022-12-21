@@ -60,9 +60,25 @@
       >
         Erfahrung
       </button>
+      <button
+        id="button4"
+        @click="slideTo(4)"
+        :class="
+          activeButton4
+            ? 'border-wd-green dark:border-wd-green'
+            : 'border-white dark:border-slate-800'
+        "
+        class="outline:none text-sm border-b-[3px] font-Montserrat dark:hover:border-wd-green hover:border-wd-green dark:text-white"
+      >
+        Kenntnisse
+      </button>
     </div>
   </section>
-  <swiper class="mySwiper" @swiper="setSwiperRef" @slideChange="onSlideChange">
+  <swiper
+    class="userSwiper"
+    @swiper="setSwiperRef"
+    @slideChange="onSlideChange"
+  >
     <swiper-slide> <UserInfo></UserInfo> </swiper-slide>
     <swiper-slide>
       <SwipeView :slideIndex="0"> </SwipeView>
@@ -70,13 +86,16 @@
     <swiper-slide>
       <SwipeView :slideIndex="1"></SwipeView>
     </swiper-slide>
+    <swiper-slide>
+      <SwipeView :slideIndex="2"></SwipeView>
+    </swiper-slide>
   </swiper>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { AvatarInput } from "../components";
-import CropperItem from "../components/CropperItem.vue";
+import { AvatarInput } from "@/components";
+import CropperItem from "@/components/CropperItem.vue";
 import UserInfo from "./UserInfoView.vue";
 import {
   canvasCoordinates,
@@ -84,7 +103,7 @@ import {
   imageObject,
   imagePreviewObject,
   isDarkMode,
-} from "../store.js";
+} from "@/store.js";
 
 import swipe from "./SwipeView.vue";
 import Toggle from "@vueform/toggle";
@@ -97,6 +116,8 @@ const toggleOnDark = ref(false);
 let activeButton1 = ref(true);
 let activeButton2 = ref(false);
 let activeButton3 = ref(false);
+let activeButton4 = ref(false);
+
 let swiperRef = null;
 let swiperIndex = 0;
 console.log(JSON.parse(localStorage.getItem("theme")));
@@ -125,16 +146,25 @@ const onSlideChange = () => {
       activeButton1.value = true;
       activeButton2.value = false;
       activeButton3.value = false;
+      activeButton4.value = false;
       break;
     case 1:
       activeButton1.value = false;
       activeButton2.value = true;
       activeButton3.value = false;
+      activeButton4.value = false;
       break;
     case 2:
       activeButton1.value = false;
       activeButton2.value = false;
       activeButton3.value = true;
+      activeButton4.value = false;
+      break;
+    case 3:
+      activeButton1.value = false;
+      activeButton2.value = false;
+      activeButton3.value = false;
+      activeButton4.value = true;
       break;
   }
 };

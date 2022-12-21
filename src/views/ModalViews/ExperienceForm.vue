@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { slideDown } from "../store.js";
+import { slideDown } from "@/store.js";
 const workshop = ref(null);
 const description = ref(null);
 const workshopFrom = ref(null);

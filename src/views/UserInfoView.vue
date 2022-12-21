@@ -10,10 +10,10 @@
       <img
         class="outline:none rounded-full min-w-24 w-1/2 md:w-60 shadow-lg border-[5px] border-white"
         :src="image"
-        default-src="../assets/images/logo.png"
+        default-src="@/assets/images/logo.png"
         v-show="valueAvatarShow"
       />
-      <ModalDialog :show="showModal">
+      <CropModal :show="showModal">
         <button
           type="button"
           @click="closeModal"
@@ -22,7 +22,7 @@
           <icon-profile name="x" class="h-6 w-6 text-white"></icon-profile>
         </button>
         <CropperItem></CropperItem>
-      </ModalDialog>
+      </CropModal>
       <div class="flex gap-4">
         <FormKit
           type="button"
@@ -46,7 +46,23 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            >
+              Titel vor:
+            </p>
+            <FormKit
+              v-model="titelBefore"
+              type="text"
+              placeholder="Dr."
+              :disabled="disableInput"
+            />
+          </div>
+        </div>
+
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex bg-white dark:bg-slate-800 h-10">
+            <p
+              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
             >
               Vorname:
             </p>
@@ -59,11 +75,12 @@
             />
           </div>
         </div>
-
+      </div>
+      <div class="grid grid-cols-2 gap-1">
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
             >
               Nachname:
             </p>
@@ -76,12 +93,96 @@
             />
           </div>
         </div>
+
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex bg-white dark:bg-slate-800 h-10">
+            <p
+              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            >
+              Titel nach:
+            </p>
+            <FormKit
+              v-model="titelAfter"
+              type="text"
+              placeholder="BA"
+              :disabled="disableInput"
+            />
+          </div>
+        </div>
       </div>
       <div class="grid grid-cols-2 gap-1">
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            >
+              Geburtsdatum:
+            </p>
+            <FormKit
+              v-model="birthDate"
+              type="text"
+              placeholder="2000"
+              validation="required|length:4"
+              :disabled="disableInput"
+            />
+          </div>
+        </div>
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex bg-white dark:bg-slate-800 h-10">
+            <p
+              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            >
+              Geburtsort:
+            </p>
+            <FormKit
+              v-model="birthArea"
+              type="text"
+              placeholder="Stadt"
+              validation="required|length:3"
+              :disabled="disableInput"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-1">
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex bg-white dark:bg-slate-800 h-10">
+            <p
+              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            >
+              Familienstand:
+            </p>
+            <FormKit
+              v-model="civilStatus"
+              type="text"
+              placeholder="ledig"
+              :disabled="disableInput"
+            />
+          </div>
+        </div>
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex bg-white dark:bg-slate-800 h-10">
+            <p
+              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            >
+              Geschlecht:
+            </p>
+            <FormKit
+              v-model="gender"
+              type="text"
+              placeholder="weiblich/männlich/divers"
+              :disabled="disableInput"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-1">
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex bg-white dark:bg-slate-800 h-10">
+            <p
+              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
             >
               Straße:
             </p>
@@ -96,7 +197,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
             >
               Nr:
             </p>
@@ -113,7 +214,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
             >
               PLZ:
             </p>
@@ -128,7 +229,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
             >
               Ort:
             </p>
@@ -150,61 +251,77 @@
       </div>
       <div class="grid grid-cols-2 gap-1">
         <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
+          <div class="flex bg-white dark:bg-slate-800 h-16">
             <p
-              class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              class="py-5 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
             >
               Telefon:
             </p>
-            <FormKit
-              v-model="phone"
-              type="text"
-              placeholder="xxxx-xxx-xxxx"
-              :validation="[['required'], ['matches', /^\d{4}-\d{3}-\d{4}$/]]"
-              validation-visibility="live"
-              :validation-messages="{
-                matches:
-                  'Ihre Telephonnumber muss wie folgt formatiert sein: xxxx-xxx-xxxx',
-              }"
-              :disabled="disableInput"
-            />
+            <div class="py-3">
+              <FormKit
+                v-model="phone"
+                type="text"
+                placeholder="xxxx-xxx-xxxx"
+                :validation="[['required'], ['matches', /^\d{4}-\d{3}-\d{4}$/]]"
+                validation-visibility="live"
+                :validation-messages="{
+                  matches:
+                    'Ihre Telephonnumber muss wie folgt formatiert sein: xxxx-xxx-xxxx',
+                }"
+                :disabled="disableInput"
+              />
+            </div>
           </div>
         </div>
         <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
+          <div class="flex bg-white dark:bg-slate-800 h-16">
             <p
-              class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              class="py-5 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
             >
               EMail:
             </p>
-            <FormKit
-              v-model="email"
-              type="email"
-              validation="length:5|*email"
-              validation-visibility="live"
-              placeholder="Email"
-              :disabled="disableInput"
-            />
+            <div class="py-3">
+              <FormKit
+                v-model="email"
+                type="email"
+                validation="length:5|*email"
+                validation-visibility="live"
+                placeholder="Email"
+                :disabled="disableInput"
+              />
+            </div>
           </div>
         </div>
+      </div>
+      <div class="flex bg-white dark:bg-slate-800 h-10">
+        <p
+          class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+        >
+          Hobbies:
+        </p>
+        <FormKit
+          v-model="hobbies"
+          type="text"
+          placeholder="laufen, schwimmen, tanzen"
+          :disabled="disableInput"
+        />
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { AvatarInput } from "../components";
-import ModalDialog from "../components/ModalDialog.vue";
-import IconProfile from "../components/IconProfile.vue";
-import defaultImageDataURL from "../assets/images/defaultImageDataURL.txt";
-import CropperItem from "../components/CropperItem.vue";
+import { AvatarInput } from "@/components";
+import CropModal from "@/components/Modals/CropModal.vue";
+import IconProfile from "@/components/IconProfile.vue";
+import defaultImageDataURL from "@/assets/images/defaultImageDataURL.txt";
+import CropperItem from "@/components/CropperItem.vue";
 import {
   canvasCoordinates,
   fileObject,
   imageObject,
   imagePreviewObject,
-  isDarkMode,
-} from "../store.js";
+} from "@/store.js";
 
 const image = ref(JSON.parse(localStorage.getItem("profileImg")));
 const imagePreview = ref(JSON.parse(localStorage.getItem("profileImg")));
@@ -218,14 +335,21 @@ const MAX_HEIGHT = 600;
 const form = ref({ avatar: null });
 const disableInput = ref(true);
 const disableEdit = ref(false);
+const titelBefore = ref(JSON.parse(localStorage.getItem("titelBefore")));
+const titelAfter = ref(JSON.parse(localStorage.getItem("titelAfter")));
 const firstName = ref(JSON.parse(localStorage.getItem("firstName")));
 const secondName = ref(JSON.parse(localStorage.getItem("secondName")));
+const birthDate = ref(JSON.parse(localStorage.getItem("birthDate")));
+const birthArea = ref(JSON.parse(localStorage.getItem("birthArea")));
+const civilStatus = ref(JSON.parse(localStorage.getItem("civilStatus")));
+const gender = ref(JSON.parse(localStorage.getItem("gender")));
 const email = ref(JSON.parse(localStorage.getItem("email")));
 const phone = ref(JSON.parse(localStorage.getItem("phone")));
 const streetName = ref(JSON.parse(localStorage.getItem("streetName")));
 const streetNumber = ref(JSON.parse(localStorage.getItem("streetNumber")));
 const districtNumber = ref(JSON.parse(localStorage.getItem("districtNumber")));
 const city = ref(JSON.parse(localStorage.getItem("city")));
+const hobbies = ref(JSON.parse(localStorage.getItem("hobbies")));
 const valueAvatarShow = ref(true);
 const valueAvatarCropShow = ref(false);
 
@@ -252,15 +376,23 @@ watch(showModal, () => {
 const onClickedSave = () => {
   valueAvatarCropShow.value = false;
   valueAvatarShow.value = true;
+  localStorage.setItem("titelBefore", JSON.stringify(titelBefore.value));
+  localStorage.setItem("titelAfter", JSON.stringify(titelAfter.value));
   localStorage.setItem("firstName", JSON.stringify(firstName.value));
   localStorage.setItem("secondName", JSON.stringify(secondName.value));
+  localStorage.setItem("birthDate", JSON.stringify(birthDate.value));
+  localStorage.setItem("birthArea", JSON.stringify(birthArea.value));
+  localStorage.setItem("civilStatus", JSON.stringify(civilStatus.value));
+  localStorage.setItem("gender", JSON.stringify(gender.value));
   localStorage.setItem("email", JSON.stringify(email.value));
   localStorage.setItem("phone", JSON.stringify(phone.value));
   localStorage.setItem("streetName", JSON.stringify(streetName.value));
   localStorage.setItem("streetNumber", JSON.stringify(streetNumber.value));
   localStorage.setItem("districtNumber", JSON.stringify(districtNumber.value));
   localStorage.setItem("city", JSON.stringify(city.value));
+  localStorage.setItem("hobbies", JSON.stringify(hobbies));
   localStorage.setItem("profileImg", JSON.stringify(image.value));
+
   disableInput.value = true;
   disableEdit.value = false;
 };

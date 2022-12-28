@@ -52,7 +52,7 @@
     <CVEditModal :show="bottomCardOpen4">
       <div class="flex">
         <div
-          class="rounded-lg w-screen h-screen overflow-hidden shadow-xl dark:bg-slate-900 bg-white"
+          class="rounded-lg w-screen h-screen overflow-hidden shadow-xl dark:bg-slate-700 bg-white"
         >
           <button type="button" @click="closeModal" class="p-4">
             <BackIcon class="h-6 w-6 dark:stroke-wd-white stroke-1"></BackIcon>

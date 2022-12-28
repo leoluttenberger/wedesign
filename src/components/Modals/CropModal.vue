@@ -9,9 +9,8 @@
       leave-to-class="opacity-0"
     >
       <div
-        ref="modal-backdrop"
         v-if="showModal"
-        class="fixed z-10 inset-0 bg-black pt-20 bg-opacity-70"
+        class="fixed z-10 inset-0 bg-white dark:bg-black pt-20 bg-opacity-70"
       >
         <div class="flex items-start justify-center text-center">
           <div
@@ -30,7 +29,6 @@
 </template>
 <script setup lang="ts">
 import { ref, watch, defineProps } from "vue";
-
 const props = defineProps({
   show: {
     type: Boolean,

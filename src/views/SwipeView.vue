@@ -10,20 +10,39 @@
           <AddIcon></AddIcon>
         </button>
       </div>
-      <BottomCard v-model:open="bottomCardOpen">
-        <Swiper v-slot="{ id, index }" :items="items" :space-between="8">
-          <div class="flex flex-col items-left shadow-lg-up">
-            <component :is="mapFormComponents[slideIndex]" />
-            <div hidden="true">{{ id }} | {{ index }}</div>
-          </div>
-        </Swiper>
-      </BottomCard>
     </section>
   </div>
+  <teleport to="body">
+    <transition
+      enter-active-class="transition ease-out duration-200 transform"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition ease-in duration-200 transform"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <section :class="darkLightMode">
+        <div
+          v-if="bottomCardOpen"
+          class="fixed z-10 inset-0 dark:bg-transparent-black bg-wd-white bg-opacity-50"
+        >
+          <BottomCard v-model:open="bottomCardOpen">
+            <SwiperCard :items="items">
+              <div class="flex flex-col items-left shadow-lg-up">
+                <component :is="mapFormComponents[slideIndex]" />
+              </div>
+            </SwiperCard>
+          </BottomCard>
+        </div>
+      </section>
+    </transition>
+  </teleport>
 </template>
 
 <script setup lang="ts">
 import { ref, defineProps, withDefaults, watch } from "vue";
+import SwiperCard from "@/components/SwiperCard.vue";
+
 import Swiper from "@/components/SwiperCard.vue";
 import BottomCard from "@/components/BottomCard.vue";
 import AddIcon from "@/assets/icons/AddIcon.vue";
@@ -40,19 +59,23 @@ import ApplicationList from "./ModalViews/ApplicationList.vue";
 import KnowledgeForm from "./ModalViews/KnowledgeForm.vue";
 import KnowledgeList from "./ModalViews/KnowledgeList.vue";
 
-import { slideDown } from "@/store.js";
+import { slideDown, isDarkMode } from "@/store.js";
 import { bottom } from "@popperjs/core";
 interface SlideItem {
   id: string;
   index: number;
   text: string;
 }
-let idCounter = 1;
+let idCounter = 0;
 const getID = () => (idCounter++).toString();
 let posIndexCounter = 0;
+let negIndexCounter = 0;
 const getPosIndex = () => posIndexCounter++;
-let negIndexCounter = -1;
 const getNegIndex = () => negIndexCounter--;
+const items = ref<SlideItem[]>([
+  { id: getID(), index: getPosIndex(), text: "First" },
+]);
+
 const props = withDefaults(
   defineProps<{
     slideIndex: number;
@@ -75,6 +98,13 @@ const mapListComponents = [
 const bottomCardOpen = ref(false);
 const renderComponent = ref(true);
 
+const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")));
+if (JSON.parse(localStorage.getItem("theme")) == "dark") {
+  darkLightMode.value = "dark";
+} else {
+  darkLightMode.value = "light";
+}
+
 watch(bottomCardOpen, () => {
   if (bottomCardOpen.value == false) {
     renderComponent.value = true;
@@ -89,10 +119,6 @@ watch(slideDown, () => {
     bottomCardOpen.value = false;
   }
 });
-
-const items = ref<SlideItem[]>([
-  { id: getID(), index: getPosIndex(), text: "First" },
-]);
 
 const addBefore = () => {
   items.value = [

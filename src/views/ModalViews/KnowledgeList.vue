@@ -41,21 +41,19 @@
   </div>
 
   <BottomCard v-model:open="bottomCardOpen3">
-    <Swiper v-slot="{ id, index }" :items="items" :space-between="8">
+    <SwiperCard :items="items">
       <div class="flex flex-col items-left shadow-lg-up">
         <component
           v-bind="currentButtonIndex"
           :is="KnowledgeEdit"
           :editIndex="currentButtonIndex"
         />
-        <div hidden="true">{{ id }} | {{ index }}</div>
       </div>
-    </Swiper>
+    </SwiperCard>
   </BottomCard>
 </template>
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import Swiper from "@/components/SwiperCard.vue";
 import BottomCard from "@/components/BottomCard.vue";
 import KnowledgeEdit from "./KnowledgeEdit.vue";
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
@@ -66,21 +64,21 @@ import exp from "constants";
 const knowledges = ref(JSON.parse(localStorage.getItem("knowledges")));
 const bottomCardOpen3 = ref(false);
 const renderComponent3 = ref(true);
+let currentButtonIndex = ref(0);
+
 interface SlideItem {
   id: string;
   index: number;
   text: string;
 }
-let idCounter = 1;
+let idCounter = 0;
 const getID = () => (idCounter++).toString();
 let posIndexCounter = 0;
 const getPosIndex = () => posIndexCounter++;
+
 const items = ref<SlideItem[]>([
   { id: getID(), index: getPosIndex(), text: "First" },
 ]);
-
-let currentButtonIndex = ref(0);
-
 watch(bottomCardOpen3, () => {
   if (bottomCardOpen3.value == false) {
     knowledges.value = JSON.parse(localStorage.getItem("knowledges"));

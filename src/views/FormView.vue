@@ -74,28 +74,42 @@
       </button>
     </div>
   </section>
-  <swiper
+  <Swiper
     class="userSwiper"
-    @swiper="setSwiperRef"
+    @Swiper="setSwiperRef"
     @slideChange="onSlideChange"
   >
-    <swiper-slide> <UserInfo></UserInfo> </swiper-slide>
-    <swiper-slide>
-      <SwipeView :slideIndex="0"> </SwipeView>
-    </swiper-slide>
-    <swiper-slide>
+    <SwiperSlide> <UserInfo></UserInfo> </SwiperSlide>
+    <SwiperSlide>
+      <SwipeView :slideIndex="0"></SwipeView>
+    </SwiperSlide>
+    <SwiperSlide>
       <SwipeView :slideIndex="1"></SwipeView>
-    </swiper-slide>
-    <swiper-slide>
-      <SwipeView :slideIndex="2"></SwipeView>
-    </swiper-slide>
-  </swiper>
+    </SwiperSlide>
+    <SwiperSlide>
+      <SwipeView :slideIndex="1"></SwipeView>
+    </SwiperSlide>
+  </Swiper>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { AvatarInput } from "@/components";
 import CropperItem from "@/components/CropperItem.vue";
+
+import ExperienceForm from "./ModalViews/ExperienceForm.vue";
+import EducationForm from "./ModalViews/EducationForm.vue";
+import ApplicationForm from "./ModalViews/ApplicationForm.vue";
+import KnowledgeForm from "./ModalViews/KnowledgeForm.vue";
+
+import ExperienceList from "./ModalViews/ExperienceList.vue";
+import EducationList from "./ModalViews/EducationList.vue";
+import ApplicationList from "./ModalViews/ApplicationList.vue";
+import KnowledgeList from "./ModalViews/KnowledgeList.vue";
+
+import SwiperCard from "@/components/SwiperCard.vue";
+import BottomCard from "@/components/BottomCard.vue";
+import AddIcon from "@/assets/icons/AddIcon.vue";
 import UserInfo from "./UserInfoView.vue";
 import {
   canvasCoordinates,
@@ -105,7 +119,6 @@ import {
   isDarkMode,
 } from "@/store.js";
 
-import swipe from "./SwipeView.vue";
 import Toggle from "@vueform/toggle";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import SwipeView from "./SwipeView.vue";
@@ -118,8 +131,12 @@ let activeButton2 = ref(false);
 let activeButton3 = ref(false);
 let activeButton4 = ref(false);
 
+const bottomCardOpen1 = ref(false);
+const renderComponent1 = ref(true);
+
 let swiperRef = null;
 let swiperIndex = 0;
+
 console.log(JSON.parse(localStorage.getItem("theme")));
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   toggleOnDark.value = true;

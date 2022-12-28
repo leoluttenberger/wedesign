@@ -41,27 +41,27 @@
   </div>
 
   <BottomCard v-model:open="bottomCardOpen2">
-    <Swiper v-slot="{ id, index }" :items="items" :space-between="8">
+    <SwiperCard :items="items">
       <div class="flex flex-col items-left shadow-lg-up">
         <component
           v-bind="currentButtonIndex"
           :is="EducationEdit"
           :editIndex="currentButtonIndex"
         />
-        <div hidden="true">{{ id }} | {{ index }}</div>
       </div>
-    </Swiper>
+    </SwiperCard>
   </BottomCard>
 </template>
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import Swiper from "@/components/SwiperCard.vue";
 import BottomCard from "@/components/BottomCard.vue";
 import EducationEdit from "./EducationEdit.vue";
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 import SortIcon from "@/assets/icons/SortIcon.vue";
 import { slideDown } from "@/store.js";
 import { Container, Draggable } from "vue3-smooth-dnd";
+import SwiperCard from "@/components/SwiperCard.vue";
+
 const educations = ref(JSON.parse(localStorage.getItem("educations")));
 const bottomCardOpen2 = ref(false);
 const renderComponent2 = ref(true);
@@ -72,10 +72,12 @@ interface SlideItem {
   index: number;
   text: string;
 }
-let idCounter = 1;
+
+let idCounter = 0;
 const getID = () => (idCounter++).toString();
 let posIndexCounter = 0;
 const getPosIndex = () => posIndexCounter++;
+
 const items = ref<SlideItem[]>([
   { id: getID(), index: getPosIndex(), text: "First" },
 ]);

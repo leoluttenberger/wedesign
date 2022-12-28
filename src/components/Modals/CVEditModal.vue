@@ -8,19 +8,21 @@
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >
-      <div
-        ref="modal-backdrop"
-        v-if="showModal"
-        class="fixed z-10 inset-0 bg-black pt-16 bg-opacity-10"
-      >
-        <slot>I'm empty inside</slot>
-      </div>
+      <section :class="darkLightMode">
+        <div
+          ref="modal-backdrop"
+          v-if="showModal"
+          class="fixed z-10 inset-0 bg-black pt-16 bg-opacity-10"
+        >
+          <slot>I'm empty inside</slot>
+        </div>
+      </section>
     </transition>
   </teleport>
 </template>
 <script setup lang="ts">
 import { ref, watch, defineProps } from "vue";
-import { isdark } from "@/store.js";
+import { isDarkMode } from "@/store.js";
 
 const props = defineProps({
   show: {
@@ -28,6 +30,22 @@ const props = defineProps({
     default: false,
   },
 });
+
+const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")));
+if (JSON.parse(localStorage.getItem("theme")) == "dark") {
+  darkLightMode.value = "dark";
+} else {
+  darkLightMode.value = "light";
+}
+
+watch(isDarkMode, () => {
+  if (isDarkMode == true) {
+    darkLightMode.value = "dark";
+  } else {
+    darkLightMode.value = "light";
+  }
+});
+
 const showModal = ref(false);
 watch(
   () => props.show,

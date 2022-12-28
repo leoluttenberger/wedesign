@@ -87,7 +87,7 @@
       <SwipeView :slideIndex="1"></SwipeView>
     </SwiperSlide>
     <SwiperSlide>
-      <SwipeView :slideIndex="1"></SwipeView>
+      <SwipeView :slideIndex="2"></SwipeView>
     </SwiperSlide>
   </Swiper>
 </template>

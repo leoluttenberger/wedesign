@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="z-0">
-      <div class="grid gap-2" v-if="renderComponent3">
+      <div class="grid gap-2" v-if="renderComponent4">
         <Container @drop="onDrop">
           <Draggable
             v-for="(item, index) in knowledges"
@@ -40,17 +40,35 @@
     </section>
   </div>
 
-  <BottomCard v-model:open="bottomCardOpen3">
-    <SwiperCard :items="items">
-      <div class="flex flex-col items-left shadow-lg-up">
-        <component
-          v-bind="currentButtonIndex"
-          :is="KnowledgeEdit"
-          :editIndex="currentButtonIndex"
-        />
-      </div>
-    </SwiperCard>
-  </BottomCard>
+  <teleport to="body">
+    <transition
+      enter-active-class="transition ease-out duration-200 transform"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition ease-in duration-200 transform"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <section :class="darkLightMode">
+        <div
+          v-if="bottomCardOpen4"
+          class="fixed z-10 inset-0 dark:bg-transparent-black bg-wd-white bg-opacity-50"
+        >
+          <BottomCard v-model:open="bottomCardOpen4">
+            <SwiperCard :items="items">
+              <div class="flex flex-col items-left shadow-lg-up">
+                <component
+                  v-bind="currentButtonIndex"
+                  :is="KnowledgeEdit"
+                  :editIndex="currentButtonIndex"
+                />
+              </div>
+            </SwiperCard>
+          </BottomCard>
+        </div>
+      </section>
+    </transition>
+  </teleport>
 </template>
 <script setup lang="ts">
 import { ref, watch } from "vue";
@@ -58,12 +76,13 @@ import BottomCard from "@/components/BottomCard.vue";
 import KnowledgeEdit from "./KnowledgeEdit.vue";
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 import SortIcon from "@/assets/icons/SortIcon.vue";
-import { slideDown } from "@/store.js";
+import { slideDown, isDarkMode } from "@/store.js";
 import { Container, Draggable } from "vue3-smooth-dnd";
+import SwiperCard from "@/components/SwiperCard.vue";
 import exp from "constants";
 const knowledges = ref(JSON.parse(localStorage.getItem("knowledges")));
-const bottomCardOpen3 = ref(false);
-const renderComponent3 = ref(true);
+const bottomCardOpen4 = ref(false);
+const renderComponent4 = ref(true);
 let currentButtonIndex = ref(0);
 
 interface SlideItem {
@@ -79,24 +98,39 @@ const getPosIndex = () => posIndexCounter++;
 const items = ref<SlideItem[]>([
   { id: getID(), index: getPosIndex(), text: "First" },
 ]);
-watch(bottomCardOpen3, () => {
-  if (bottomCardOpen3.value == false) {
-    knowledges.value = JSON.parse(localStorage.getItem("knowledges"));
-    renderComponent3.value = true;
+
+const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")));
+if (JSON.parse(localStorage.getItem("theme")) == "dark") {
+  darkLightMode.value = "dark";
+} else {
+  darkLightMode.value = "light";
+}
+
+watch(isDarkMode, () => {
+  if (isDarkMode == true) {
+    darkLightMode.value = "dark";
   } else {
-    renderComponent3.value = false;
+    darkLightMode.value = "light";
+  }
+});
+watch(bottomCardOpen4, () => {
+  if (bottomCardOpen4.value == false) {
+    knowledges.value = JSON.parse(localStorage.getItem("knowledges"));
+    renderComponent4.value = true;
+  } else {
+    renderComponent4.value = false;
   }
 });
 watch(slideDown, () => {
   if (slideDown.value == true) {
-    bottomCardOpen3.value = false;
+    bottomCardOpen4.value = false;
   }
 });
 
 const openBottomCard = (id) => {
   currentButtonIndex.value = id;
   slideDown.value = false;
-  bottomCardOpen3.value = true;
+  bottomCardOpen4.value = true;
 };
 
 const onDrop = (dropResult) => {

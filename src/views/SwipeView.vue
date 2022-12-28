@@ -105,6 +105,14 @@ if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   darkLightMode.value = "light";
 }
 
+watch(isDarkMode, () => {
+  if (isDarkMode == true) {
+    darkLightMode.value = "dark";
+  } else {
+    darkLightMode.value = "light";
+  }
+});
+
 watch(bottomCardOpen, () => {
   if (bottomCardOpen.value == false) {
     renderComponent.value = true;

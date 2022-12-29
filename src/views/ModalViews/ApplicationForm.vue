@@ -34,8 +34,8 @@ const company = ref(null);
 const job = ref(null);
 const deadline = ref(null);
 let __contactPerson = null;
-let __cv = null;
-let __state = null;
+let __cv = false;
+let __state = "Entwurf";
 let __note = null;
 let buttonDisabled = false;
 

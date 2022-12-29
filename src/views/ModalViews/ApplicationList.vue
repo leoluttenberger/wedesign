@@ -34,7 +34,16 @@
                       ></ArrowIcon>
                     </div>
                     <div class="flex-none">
-                      {{ item[0].cv }}
+                      <CloseIcon
+                        v-if="!item[0].cv"
+                        class="w-24 stroke-wd-error"
+                      ></CloseIcon>
+                    </div>
+                    <div class="flex-none">
+                      <CheckIcon
+                        v-if="item[0].cv"
+                        class="w-24 stroke-wd-green"
+                      ></CheckIcon>
                     </div>
                   </div>
                 </div>
@@ -54,18 +63,11 @@
         <div
           class="rounded-lg w-screen h-screen overflow-hidden shadow-xl dark:bg-slate-700 bg-white"
         >
-          <button type="button" @click="closeModal" class="p-4">
-            <BackIcon
-              class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-            ></BackIcon>
-          </button>
-          <div class="flex flex-col items-left shadow-lg-up">
-            <component
-              v-bind="currentButtonIndex"
-              :is="ApplicationEdit"
-              :editIndex="currentButtonIndex"
-            />
-          </div>
+          <component
+            v-bind="currentButtonIndex"
+            :is="ApplicationEdit"
+            :editIndex="currentButtonIndex"
+          />
         </div>
       </div>
     </CVEditModal>
@@ -75,9 +77,10 @@
 import { ref, watch } from "vue";
 import ApplicationEdit from "./ApplicationEdit.vue";
 import CVEditModal from "@/components/Modals/CVEditModal.vue";
-import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 import SortIcon from "@/assets/icons/SortIcon.vue";
-import BackIcon from "@/assets/icons/BackIcon.vue";
+import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
+import CloseIcon from "@/assets/icons/CloseIcon.vue";
+import CheckIcon from "@/assets/icons/CheckIcon.vue";
 
 import { slideDown } from "@/store.js";
 import { Container, Draggable } from "vue3-smooth-dnd";
@@ -86,6 +89,14 @@ const applications = ref(JSON.parse(localStorage.getItem("applications")));
 const bottomCardOpen4 = ref(false);
 const renderComponent4 = ref(true);
 let currentButtonIndex = ref(0);
+
+watch(slideDown, () => {
+  if (slideDown.value) {
+    bottomCardOpen4.value = false;
+  } else {
+    bottomCardOpen4.value = true;
+  }
+});
 
 watch(bottomCardOpen4, () => {
   if (bottomCardOpen4.value == false) {
@@ -98,7 +109,7 @@ watch(bottomCardOpen4, () => {
 
 const openBottomCard = (id) => {
   currentButtonIndex.value = id;
-  bottomCardOpen4.value = true;
+  slideDown.value = false;
 };
 
 const onDrop = (dropResult) => {

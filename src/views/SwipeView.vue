@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, withDefaults, watch } from "vue";
+import { ref, defineProps, withDefaults, watch, onMounted } from "vue";
 import SwiperCard from "@/components/SwiperCard.vue";
 
 import Swiper from "@/components/SwiperCard.vue";
@@ -59,8 +59,9 @@ import ApplicationList from "./ModalViews/ApplicationList.vue";
 import KnowledgeForm from "./ModalViews/KnowledgeForm.vue";
 import KnowledgeList from "./ModalViews/KnowledgeList.vue";
 
-import { slideDown, isDarkMode } from "@/store.js";
+import { slideDown, sideBack, sideBackBack, isDarkMode } from "@/store.js";
 import { bottom } from "@popperjs/core";
+
 interface SlideItem {
   id: string;
   index: number;
@@ -82,6 +83,7 @@ const props = withDefaults(
   }>(),
   { slideIndex: 0 }
 );
+
 const mapFormComponents = [
   EducationForm,
   ExperienceForm,
@@ -94,6 +96,12 @@ const mapListComponents = [
   KnowledgeList,
   ApplicationList,
 ];
+
+onMounted(() => {
+  sideBackBack.value = false;
+  sideBack.value = false;
+  slideDown.value = true;
+});
 
 const bottomCardOpen = ref(false);
 const renderComponent = ref(true);
@@ -119,8 +127,6 @@ watch(bottomCardOpen, () => {
   } else {
     renderComponent.value = false;
   }
-  console.log(bottomCardOpen.value);
-  console.log(renderComponent.value);
 });
 watch(slideDown, () => {
   if (slideDown.value == true) {

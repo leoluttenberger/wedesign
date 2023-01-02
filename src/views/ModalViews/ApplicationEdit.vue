@@ -138,7 +138,7 @@
     </div>
   </div>
 
-  <CVEditModal v-if="motivationModalOpen">
+  <CVEditModal :show="motivationModalOpen">
     <div class="flex">
       <div
         class="rounded-lg w-screen h-screen overflow-hidden shadow-xl dark:bg-slate-700 bg-white"
@@ -146,18 +146,18 @@
         <component
           v-bind="editIndex"
           :is="MotivationEdit"
-          :editIndex="editIndex"
+          :currentIndex="editIndex"
         />
       </div>
     </div>
   </CVEditModal>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, defineProps, withDefaults } from "vue";
+import { ref, onMounted, defineProps, withDefaults, watch } from "vue";
 import BackIcon from "@/assets/icons/BackIcon.vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
-import { slideDown } from "@/store.js";
+import { slideDown, sideBack } from "@/store.js";
 import MotivationEdit from "./MotivationEdit.vue";
 const company = ref(null);
 const job = ref(null);
@@ -180,6 +180,14 @@ const props = withDefaults(
   { editIndex: 0 }
 );
 
+watch(sideBack, () => {
+  if (sideBack.value) {
+    motivationModalOpen.value = true;
+  } else {
+    motivationModalOpen.value = false;
+  }
+});
+
 onMounted(() => {
   buttonDisabled = false;
   company.value = applications.value[props.editIndex][0].company;
@@ -194,6 +202,8 @@ onMounted(() => {
   } else {
     cvText = "Motivationsschreiben angehaengt";
   }
+  sideBack.value = false;
+  slideDown.value = false;
 });
 
 const sendJobApplication = () => {
@@ -212,11 +222,10 @@ const removeFromLocalStorage = () => {
 };
 const createMotivationNode = () => {
   motivationModalOpen.value = true;
+  sideBack.value = true;
 };
 const closeModal = () => {
-  if (buttonDisabled == false) {
-    buttonDisabled = true;
-    slideDown.value = true;
-  }
+  buttonDisabled = true;
+  slideDown.value = true;
 };
 </script>

@@ -51,10 +51,12 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import SwipeView from "./SwipeView.vue";
 import ArchiveView from "./ArchiveView.vue";
 import { Tiptap } from "@/components";
+
 let activeButton1 = ref(true);
 let activeButton2 = ref(false);
 let swiperRef = null;
 let swiperIndex = 0;
+
 const setSwiperRef = (swiper) => {
   swiperRef = swiper;
 };

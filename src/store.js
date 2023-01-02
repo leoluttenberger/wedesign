@@ -22,3 +22,9 @@ export const isDarkMode = reactive({
 export const slideDown = reactive({
   value: null,
 });
+export const sideBack = reactive({
+  value: null,
+});
+export const sideBackBack = reactive({
+  value: null,
+});

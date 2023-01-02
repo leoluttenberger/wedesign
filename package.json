@@ -84,6 +84,7 @@
     "tailwindcss": "^3.2.1",
     "ts-node": "^9.1.1",
     "typescript": "4.6.4",
+    "unplugin-vue-components": "^0.22.12",
     "wdio-chromedriver-service": "^7.3.2",
     "wdio-geckodriver-service": "^2.0.2"
   },

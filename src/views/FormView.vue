@@ -137,7 +137,6 @@ const renderComponent1 = ref(true);
 let swiperRef = null;
 let swiperIndex = 0;
 
-console.log(JSON.parse(localStorage.getItem("theme")));
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   toggleOnDark.value = true;
 }

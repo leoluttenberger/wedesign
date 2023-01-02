@@ -129,35 +129,16 @@
     </div>
   </div>
   <div>
-    <CVEditModal :show="textfieldEditOpen">
-      <div class="flex">
-        <div
-          class="rounded-lg w-screen h-screen overflow-hidden shadow-xl dark:bg-slate-700 bg-white"
-        >
+    <BottomCard v-model:open="showBottomSlide">
+      <SwiperCard :items="items">
+        <div class="flex flex-col items-left shadow-lg-up">
           <component
-            v-bind="currentIndex"
-            :is="TextfieldEditModal"
+            :is="mapEditModals[buttonIndex]"
             :editIndex="currentIndex"
           />
         </div>
-      </div>
-    </CVEditModal>
-  </div>
-
-  <div>
-    <CVEditModal :show="endingEditOpen">
-      <div class="flex">
-        <div
-          class="rounded-lg w-screen h-screen overflow-hidden shadow-xl dark:bg-slate-700 bg-white"
-        >
-          <component
-            v-bind="currentIndex"
-            :is="EndingEditModal"
-            :editIndex="currentIndex"
-          />
-        </div>
-      </div>
-    </CVEditModal>
+      </SwiperCard>
+    </BottomCard>
   </div>
 </template>
 <script setup lang="ts">
@@ -165,6 +146,8 @@ import { ref, onMounted, defineProps, withDefaults, watch } from "vue";
 import BackIcon from "@/assets/icons/BackIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 import EditIcon from "@/assets/icons/EditIcon.vue";
+
+import BottomCard from "@/components/BottomCard.vue";
 
 import EndingEditModal from "@/components/Modals/EndingEditModal.vue";
 import TextfieldEditModal from "@/components/Modals/TextfieldEditModal.vue";
@@ -176,29 +159,46 @@ const props = withDefaults(
   { currentIndex: 0 }
 );
 
-watch(sideBackBack, () => {
-  if (sideBackBack.value == false) {
-    textfieldEditOpen.value = false;
-    endingEditOpen.value = false;
-  }
-});
-
-let buttonDisabled = false;
+interface SlideItem {
+  id: string;
+  index: number;
+  text: string;
+}
+let idCounter = 0;
+const getID = () => (idCounter++).toString();
+let posIndexCounter = 0;
+let negIndexCounter = 0;
+const getPosIndex = () => posIndexCounter++;
+const getNegIndex = () => negIndexCounter--;
+const items = ref<SlideItem[]>([
+  { id: getID(), index: getPosIndex(), text: "First" },
+  { id: getID(), index: getPosIndex(), text: "Seconds" },
+]);
 
 const subject = ref(null);
 const salutaionBegining = ref(null);
 const textfield = ref(null);
 const ending = ref(null);
 const salutationEnding = ref(null);
-const textfieldEditOpen = ref(false);
-const endingEditOpen = ref(false);
+const showBottomSlide = ref(false);
+let buttonIndex = 0;
+let buttonDisabled = false;
+
+const mapEditModals = [EndingEditModal, TextfieldEditModal];
+
+watch(sideBackBack, () => {
+  if (sideBackBack.value == false) {
+    showBottomSlide.value = false;
+    buttonIndex = 0;
+  }
+});
 
 onMounted(() => {
   buttonDisabled = false;
   sideBackBack.value = false;
   sideBack.value = true;
-  textfieldEditOpen.value = false;
-  endingEditOpen.value = false;
+  showBottomSlide.value = false;
+  buttonIndex = 0;
 });
 
 const closeModal = () => {
@@ -207,10 +207,12 @@ const closeModal = () => {
 };
 const textfieldEdit = () => {
   sideBackBack.value = true;
-  textfieldEditOpen.value = true;
+  showBottomSlide.value = true;
+  buttonIndex = 0;
 };
 const endingEdit = () => {
   sideBackBack.value = true;
-  endingEditOpen.value = true;
+  showBottomSlide.value = true;
+  buttonIndex = 1;
 };
 </script>

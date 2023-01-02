@@ -29,7 +29,7 @@
           <BottomCard v-model:open="bottomCardOpen">
             <SwiperCard :items="items">
               <div class="flex flex-col items-left shadow-lg-up">
-                <component :is="mapFormComponents[slideIndex]" />
+                <component :is="mapFormComponents[props.slideIndex]" />
               </div>
             </SwiperCard>
           </BottomCard>
@@ -42,8 +42,6 @@
 <script setup lang="ts">
 import { ref, defineProps, withDefaults, watch, onMounted } from "vue";
 import SwiperCard from "@/components/SwiperCard.vue";
-
-import Swiper from "@/components/SwiperCard.vue";
 import BottomCard from "@/components/BottomCard.vue";
 import AddIcon from "@/assets/icons/AddIcon.vue";
 
@@ -60,7 +58,6 @@ import KnowledgeForm from "./ModalViews/KnowledgeForm.vue";
 import KnowledgeList from "./ModalViews/KnowledgeList.vue";
 
 import { slideDown, sideBack, sideBackBack, isDarkMode } from "@/store.js";
-import { bottom } from "@popperjs/core";
 
 interface SlideItem {
   id: string;

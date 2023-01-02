@@ -22,7 +22,7 @@ const firebaseConfig = {
 };
 const init = async () => {
   // Initialize Firebase
-  console.log("Firebase started");
+  //console.log("Firebase started");
   const firebase = initializeApp(firebaseConfig);
 };
 init();

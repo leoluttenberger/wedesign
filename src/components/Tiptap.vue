@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted } from "vue";
+import { computed, ref, onMounted, defineProps } from "vue";
 import { useEditor, EditorContent, Editor, Content } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "./MenuBar.vue";
@@ -58,6 +58,21 @@ const shouldShow = ({ editor }) => {
     !!match && !!matchRange && matchRange.from <= from && to <= matchRange.to
   );
 };
+
+const props = defineProps({
+  currentIndex: {
+    type: Number,
+    default: 0,
+  },
+  isTextFieldEditModal: {
+    type: Boolean,
+    default: false,
+  },
+  isEndingEditModal: {
+    type: Boolean,
+    default: false,
+  },
+});
 
 const match = ref<Match>();
 
@@ -112,13 +127,51 @@ const onClickedSave = () => {
     ? editor.value.getJSON().content[0].content[0].text
     : "";
   console.log(comment_text);
-  localStorage.setItem("documents", JSON.stringify(comment_text));
+
+  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+  let lastIndex = motivations.value.length - 1;
+  if (lastIndex < 0) {
+    lastIndex = 0;
+  }
+  console.log(lastIndex);
+
+  if (props.isTextFieldEditModal) {
+    motivations.value[lastIndex][0].textfield = comment_text;
+    console.log(motivations.value);
+  }
+  if (props.isEndingEditModal) {
+    motivations.value[lastIndex][0].ending = comment_text;
+    console.log(motivations.value);
+  }
+  localStorage.setItem("motivations", JSON.stringify(motivations.value));
 };
 onMounted(() => {
-  if (localStorage.getItem("documents")) {
+  const defaultMotivation = [
+    {
+      indexMV: 0,
+      subject: "",
+      salutationBeginning: "",
+      textfield: "Sehr geehrte Damen/Herren",
+      ending: "Mit freundlichen Grüßem",
+      salutationEnding: "",
+    },
+  ];
+  if (!localStorage.getItem("motivations")) {
+    localStorage.setItem("motivations", JSON.stringify([defaultMotivation]));
+    console.log("empty");
+  }
+  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+  let lastIndex = motivations.value.length - 1;
+  if (props.isTextFieldEditModal) {
     editor.value.commands.setContent({
       type: "text",
-      text: JSON.parse(localStorage.getItem("documents")),
+      text: motivations.value[lastIndex - props.currentIndex][0].textfield,
+    });
+  }
+  if (props.isEndingEditModal) {
+    editor.value.commands.setContent({
+      type: "text",
+      text: motivations.value[lastIndex - props.currentIndex][0].ending,
     });
   }
 });

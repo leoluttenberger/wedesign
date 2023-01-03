@@ -18,7 +18,9 @@
       :key="slide.index"
       :virtual-index="slide.index"
     >
-      <slot :id="slide.id" :index="slide.index" />
+      <div class="flex flex-col items-left shadow-lg-up">
+        <slot :id="slide.id" v-bind:itemIndex="slide.index" />
+      </div>
     </swiper-slide>
   </swiper>
 </template>

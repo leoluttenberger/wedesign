@@ -125,7 +125,7 @@
           @click="createMotivationNode()"
           :disabled="buttonDisabled"
         >
-          Motivationsschreiben erstellen
+          Motivationsschreiben hinzufügen
         </button>
         <button
           class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
@@ -153,7 +153,7 @@
   </CVEditModal>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, defineProps, withDefaults, watch } from "vue";
+import { ref, onMounted, defineProps, watch } from "vue";
 import BackIcon from "@/assets/icons/BackIcon.vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
@@ -173,12 +173,12 @@ let cvText = null;
 let buttonDisabled = false;
 const applications = ref(JSON.parse(localStorage.getItem("applications")));
 
-const props = withDefaults(
-  defineProps<{
-    editIndex: number;
-  }>(),
-  { editIndex: 0 }
-);
+const props = defineProps({
+  editIndex: {
+    type: Number,
+    default: 0,
+  },
+});
 
 watch(sideBack, () => {
   if (sideBack.value) {

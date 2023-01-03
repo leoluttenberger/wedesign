@@ -9,18 +9,24 @@
       Text bearbeiten
     </p>
   </div>
+  <Tiptap
+    :currentIndex="props.itemIndex"
+    :is-text-field-edit-modal="true"
+  ></Tiptap>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, defineProps, withDefaults, watch } from "vue";
+import { ref, onMounted, defineProps } from "vue";
 import { sideBack, sideBackBack } from "@/store.js";
 import BackIcon from "@/assets/icons/BackIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
-const props = withDefaults(
-  defineProps<{
-    editIndex: number;
-  }>(),
-  { editIndex: 0 }
-);
+import Tiptap from "@/components/Tiptap.vue";
+
+const props = defineProps({
+  itemIndex: {
+    type: Number,
+    default: 0,
+  },
+});
 
 onMounted(() => {
   sideBackBack.value = true;
@@ -29,5 +35,6 @@ onMounted(() => {
 
 const closeModal = () => {
   sideBackBack.value = false;
+  console.log(props.itemIndex);
 };
 </script>

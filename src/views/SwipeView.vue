@@ -74,12 +74,12 @@ const items = ref<SlideItem[]>([
   { id: getID(), index: getPosIndex(), text: "First" },
 ]);
 
-const props = withDefaults(
-  defineProps<{
-    slideIndex: number;
-  }>(),
-  { slideIndex: 0 }
-);
+const props = defineProps({
+  slideIndex: {
+    type: Number,
+    default: 0,
+  },
+});
 
 const mapFormComponents = [
   EducationForm,

@@ -47,6 +47,7 @@ import {
 } from "./extensions";
 import { content } from "./text";
 import { Match } from "@/types";
+import { currentTextField, currentEnding } from "@/store.js";
 
 const shouldShow = ({ editor }) => {
   const match = editor.storage.languagetool.match;
@@ -60,7 +61,7 @@ const shouldShow = ({ editor }) => {
 };
 
 const props = defineProps({
-  currentIndex: {
+  itemCurrentIndex: {
     type: Number,
     default: 0,
   },
@@ -127,54 +128,44 @@ const onClickedSave = () => {
     ? editor.value.getJSON().content[0].content[0].text
     : "";
   console.log(comment_text);
-
+  if (props.isEndingEditModal) {
+    currentEnding.value = comment_text;
+  }
+  if (props.isTextFieldEditModal) {
+    currentTextField.value = comment_text;
+  }
+};
+onMounted(() => {
   const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
-  let lastIndex = motivations.value.length - 1;
+  let lastIndex = getLastIndex();
+  let indexCal = props.itemCurrentIndex;
+  if (indexCal >= 0) {
+    if (props.isTextFieldEditModal) {
+      editor.value.commands.setContent({
+        type: "text",
+        text: motivations.value[indexCal][0].textfield,
+      });
+    }
+    if (props.isEndingEditModal) {
+      editor.value.commands.setContent({
+        type: "text",
+        text: motivations.value[indexCal][0].ending,
+      });
+    }
+  } else {
+    console.log("Error! Slide index is negative!");
+  }
+});
+
+const getLastIndex = () => {
+  const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
+  let lastIndex = tempMotivations.length - 1;
+  console.log("lastIndex:", lastIndex);
   if (lastIndex < 0) {
     lastIndex = 0;
   }
-  console.log(lastIndex);
-
-  if (props.isTextFieldEditModal) {
-    motivations.value[lastIndex][0].textfield = comment_text;
-    console.log(motivations.value);
-  }
-  if (props.isEndingEditModal) {
-    motivations.value[lastIndex][0].ending = comment_text;
-    console.log(motivations.value);
-  }
-  localStorage.setItem("motivations", JSON.stringify(motivations.value));
+  return lastIndex;
 };
-onMounted(() => {
-  const defaultMotivation = [
-    {
-      indexMV: 0,
-      subject: "",
-      salutationBeginning: "",
-      textfield: "Sehr geehrte Damen/Herren",
-      ending: "Mit freundlichen Grüßem",
-      salutationEnding: "",
-    },
-  ];
-  if (!localStorage.getItem("motivations")) {
-    localStorage.setItem("motivations", JSON.stringify([defaultMotivation]));
-    console.log("empty");
-  }
-  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
-  let lastIndex = motivations.value.length - 1;
-  if (props.isTextFieldEditModal) {
-    editor.value.commands.setContent({
-      type: "text",
-      text: motivations.value[lastIndex - props.currentIndex][0].textfield,
-    });
-  }
-  if (props.isEndingEditModal) {
-    editor.value.commands.setContent({
-      type: "text",
-      text: motivations.value[lastIndex - props.currentIndex][0].ending,
-    });
-  }
-});
 </script>
 
 <style lang="scss">

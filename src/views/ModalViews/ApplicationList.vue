@@ -35,13 +35,13 @@
                     </div>
                     <div class="flex-none">
                       <CloseIcon
-                        v-if="!item[0].cv"
+                        v-if="!item[0].mv"
                         class="w-24 stroke-wd-error"
                       ></CloseIcon>
                     </div>
                     <div class="flex-none">
                       <CheckIcon
-                        v-if="item[0].cv"
+                        v-if="item[0].mv"
                         class="w-24 stroke-wd-green"
                       ></CheckIcon>
                     </div>
@@ -58,7 +58,7 @@
     </section>
   </div>
   <div>
-    <CVEditModal :show="bottomCardOpen4">
+    <MVEditModal :show="bottomCardOpen4">
       <div class="flex">
         <div
           class="rounded-lg w-screen h-screen overflow-hidden shadow-xl dark:bg-slate-700 bg-white"
@@ -70,13 +70,13 @@
           />
         </div>
       </div>
-    </CVEditModal>
+    </MVEditModal>
   </div>
 </template>
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import ApplicationEdit from "./ApplicationEdit.vue";
-import CVEditModal from "@/components/Modals/CVEditModal.vue";
+import MVEditModal from "@/components/Modals/MVEditModal.vue";
 import SortIcon from "@/assets/icons/SortIcon.vue";
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";

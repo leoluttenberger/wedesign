@@ -34,7 +34,7 @@ const company = ref(null);
 const job = ref(null);
 const deadline = ref(null);
 let __contactPerson = null;
-let __cv = false;
+let __mv = 0;
 let __state = "Entwurf";
 let __note = null;
 let buttonDisabled = false;
@@ -51,7 +51,7 @@ const saveToLocalStorage = () => {
       deadline: deadline.value,
       contactPerson: __contactPerson,
       state: __state,
-      cv: __cv,
+      mv: __mv,
       note: __note,
     },
   ];

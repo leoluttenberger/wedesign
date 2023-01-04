@@ -10,7 +10,7 @@
     </p>
   </div>
   <Tiptap
-    :currentIndex="props.itemIndex"
+    :itemCurrentIndex="props.itemIndex"
     :is-text-field-edit-modal="true"
   ></Tiptap>
 </template>

@@ -100,15 +100,15 @@
 
       <div class="flex bg-white dark:bg-slate-800 h-10">
         <div class="py-2">
-          <CloseIcon v-if="!cv" class="w-24 stroke-wd-error"></CloseIcon>
+          <CloseIcon v-if="__mv == 0" class="w-24 stroke-wd-error"></CloseIcon>
         </div>
         <div class="py-2">
-          <CheckIcon v-if="cv" class="w-24 stroke-wd-green"></CheckIcon>
+          <CheckIcon v-if="__mv > 0" class="w-24 stroke-wd-green"></CheckIcon>
         </div>
         <p
           class="w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
         >
-          {{ cvText }}
+          {{ __mvText }}
         </p>
       </div>
 
@@ -125,7 +125,7 @@
           @click="createMotivationNode()"
           :disabled="buttonDisabled"
         >
-          Motivationsschreiben hinzufügen
+          Motivationsschreiben bearbeiten
         </button>
         <button
           class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
@@ -138,7 +138,7 @@
     </div>
   </div>
 
-  <CVEditModal :show="motivationModalOpen">
+  <MVEditModal :show="motivationModalOpen">
     <div class="flex">
       <div
         class="rounded-lg w-screen h-screen overflow-hidden shadow-xl dark:bg-slate-700 bg-white"
@@ -150,7 +150,7 @@
         />
       </div>
     </div>
-  </CVEditModal>
+  </MVEditModal>
 </template>
 <script setup lang="ts">
 import { ref, onMounted, defineProps, watch } from "vue";
@@ -159,6 +159,7 @@ import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 import { slideDown, sideBack } from "@/store.js";
 import MotivationEdit from "./MotivationEdit.vue";
+import MVEditModal from "@/components/Modals/MVEditModal.vue";
 const company = ref(null);
 const job = ref(null);
 const deadline = ref(null);
@@ -167,11 +168,10 @@ const state = ref(null);
 const note = ref(null);
 const motivationModalOpen = ref(false);
 
-let cv = null;
-let cvText = null;
+let __mv = null;
+let __mvText = null;
 
 let buttonDisabled = false;
-const applications = ref(JSON.parse(localStorage.getItem("applications")));
 
 const props = defineProps({
   editIndex: {
@@ -185,22 +185,27 @@ watch(sideBack, () => {
     motivationModalOpen.value = true;
   } else {
     motivationModalOpen.value = false;
+    const applications = ref(JSON.parse(localStorage.getItem("applications")));
+    __mv = applications.value[props.editIndex][0].mv;
+    console.log("mv:", __mv);
   }
 });
 
 onMounted(() => {
   buttonDisabled = false;
+  const applications = ref(JSON.parse(localStorage.getItem("applications")));
   company.value = applications.value[props.editIndex][0].company;
   job.value = applications.value[props.editIndex][0].job;
   deadline.value = applications.value[props.editIndex][0].deadline;
   contactPerson.value = applications.value[props.editIndex][0].contactPerson;
   state.value = applications.value[props.editIndex][0].state;
   note.value = applications.value[props.editIndex][0].note;
-  cv = applications.value[props.editIndex][0].cv;
-  if (cv == false) {
-    cvText = "Motivationsschreiben fehlt";
+  __mv = applications.value[props.editIndex][0].mv;
+  console.log("mv: ", __mv);
+  if (__mv == null) {
+    __mvText = "Motivationsschreiben fehlt";
   } else {
-    cvText = "Motivationsschreiben angehaengt";
+    __mvText = "Motivationsschreiben angehaengt";
   }
   sideBack.value = false;
   slideDown.value = false;
@@ -215,6 +220,7 @@ const sendJobApplication = () => {
 const removeFromLocalStorage = () => {
   if (buttonDisabled == false) {
     buttonDisabled = true;
+    const applications = ref(JSON.parse(localStorage.getItem("applications")));
     applications.value.splice(props.editIndex, 1);
     localStorage.setItem("applications", JSON.stringify(applications.value));
     slideDown.value = true;

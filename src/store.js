@@ -28,3 +28,9 @@ export const sideBack = reactive({
 export const sideBackBack = reactive({
   value: null,
 });
+export const currentTextField = reactive({
+  value: null,
+});
+export const currentEnding = reactive({
+  value: null,
+});

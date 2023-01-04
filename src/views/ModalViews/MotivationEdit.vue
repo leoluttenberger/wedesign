@@ -147,7 +147,13 @@ import EditIcon from "@/assets/icons/EditIcon.vue";
 import BottomCard from "@/components/BottomCard.vue";
 import EndingEditModal from "@/components/Modals/EndingEditModal.vue";
 import TextfieldEditModal from "@/components/Modals/TextfieldEditModal.vue";
-import { slideDown, sideBack, sideBackBack } from "@/store.js";
+import {
+  slideDown,
+  sideBack,
+  sideBackBack,
+  currentTextField,
+  currentEnding,
+} from "@/store.js";
 
 const props = defineProps({
   currentIndex: {
@@ -172,7 +178,6 @@ const items = ref<SlideItem[]>([
   { id: getID(), index: getPosIndex(), text: "First" },
 ]);
 
-let __indexMV = 0;
 const subject = ref(null);
 const salutationBeginning = ref(null);
 const textfield = ref(null);
@@ -185,40 +190,44 @@ let buttonDisabled = false;
 
 const mapEditModals = [TextfieldEditModal, EndingEditModal];
 
-onMounted(() => {
-  console.log("motivation mounted");
-  const motivation = [
+if (!localStorage.getItem("motivations")) {
+  console.log("Empty");
+  const defaulfMotivation = [
     {
-      indexMV: 0,
-      subject: "",
-      salutationBeginning: "",
+      indexMV: 1,
+      subject: "Bewerbung Beruf",
+      salutationBeginning: "Sehr geehrte Frau/Herr",
       textfield: "Mit großen Interesse habe ich Ihre Anzeige im...",
       ending: "Ich freue mich Ihnen bei einem persönlichen...",
-      salutationEnding: "",
+      salutationEnding: "Mit freundlichen Grüßen ...",
     },
   ];
-  if (!localStorage.getItem("motivations")) {
-    console.log("Empty");
-    localStorage.setItem("motivations", JSON.stringify([motivation]));
-  } else {
-    const currentmotivations = JSON.parse(localStorage.getItem("motivations"));
-    const newData = [...currentmotivations, motivation];
-    console.log(currentmotivations.length);
-    if (currentmotivations.length >= 5) {
-      newData.splice(0, 1);
-    }
-    console.log(newData);
-    localStorage.setItem("motivations", JSON.stringify(newData));
-  }
+  localStorage.setItem("motivations", JSON.stringify([defaulfMotivation]));
+  console.log("Default motivation letter added!");
+}
 
+const MAX_MV_LETTERS = 10;
+
+onMounted(() => {
+  currentEnding.value = "";
+  currentTextField.value = "";
+  console.log("motivation mounted");
+  const applications = ref(JSON.parse(localStorage.getItem("applications")));
+  applications.value = JSON.parse(localStorage.getItem("applications"));
+  console.log("application mv:", applications.value[props.currentIndex][0].mv);
+  if (applications.value[props.currentIndex][0].mv == 0) {
+    console.log("currentindex:", props.currentIndex);
+    createNewMotivation();
+  } else {
+    updateForm();
+  }
+  initSlides();
   buttonDisabled = false;
   sideBackBack.value = false;
   sideBack.value = true;
   slideDown.value = false;
   showBottomSlide.value = false;
   buttonIndex = 0;
-  updateForm();
-  initSlides();
 });
 
 watch(slideDown, () => {
@@ -238,40 +247,134 @@ watch(sideBackBack, () => {
   }
 });
 
-const updateForm = () => {
+const saveMVToApplication = () => {
   const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
-  let lastIndex = motivations.value.length - 1;
+  const applications = ref(JSON.parse(localStorage.getItem("applications")));
+  let lastIndex = getLastIndex();
+  if (applications.value[props.currentIndex][0].mv == 0) {
+    applications.value[props.currentIndex][0].mv =
+      motivations.value[lastIndex][0].indexMV;
+    localStorage.setItem("applications", JSON.stringify(applications.value));
+  } else {
+    console.log("Error saving MV to application!");
+  }
+};
+
+const getNextIndexMV = () => {
+  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+  let lastIndex = getLastIndex();
+  let index = 0;
+  if (lastIndex < 0) {
+    lastIndex = 0;
+    index = 1;
+  } else {
+    index = motivations.value[lastIndex][0].indexMV;
+    index++;
+  }
+  console.log("lastINdex:", lastIndex);
+  console.log("motivation last index", motivations.value[lastIndex][0].indexMV);
+  console.log("indexMV", index);
+  return index;
+};
+
+const getLastIndex = () => {
+  const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
+  let lastIndex = tempMotivations.length - 1;
   if (lastIndex <= 0) {
     lastIndex = 0;
-    __indexMV = 0;
-  } else {
-    __indexMV = motivations.value[lastIndex - 1][0].indexMV + 1;
   }
-  subject.value = motivations.value[lastIndex][0].subject;
+  return lastIndex;
+};
+
+const createNewMotivation = () => {
+  const index = getNextIndexMV();
+  console.log("nextindexMV:", index);
+  const motivation = [
+    {
+      indexMV: index,
+      subject: "Bewerbung Beruf",
+      salutationBeginning: "Sehr geehrte Frau/Herr",
+      textfield: "Mit großen Interesse habe ich Ihre Anzeige im...",
+      ending: "Ich freue mich Ihnen bei einem persönlichen...",
+      salutationEnding: "Mit freundlichen Grüßen ...",
+    },
+  ];
+  const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
+  console.log(tempMotivations);
+  const newData = [...tempMotivations, motivation];
+  const indexCal = tempMotivations.length - 1;
+  console.log("indexCal:", indexCal);
+  if (indexCal >= MAX_MV_LETTERS) {
+    newData.splice(0, 1);
+    console.log("Splice newData");
+  }
+  console.log(newData);
+  console.log("New motivation letter added!");
+  localStorage.setItem("motivations", JSON.stringify(newData));
+};
+
+const updateForm = () => {
+  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+  const indexOfID = getIndexOfMVid();
+  subject.value = motivations.value[indexOfID][0].subject;
   salutationBeginning.value =
-    motivations.value[lastIndex][0].salutationBeginning;
-  textfield.value = motivations.value[lastIndex][0].textfield;
-  ending.value = motivations.value[lastIndex][0].ending;
-  salutationEnding.value = motivations.value[lastIndex][0].salutationEnding;
+    motivations.value[indexOfID][0].salutationBeginning;
+  salutationEnding.value = motivations.value[indexOfID][0].salutationEnding;
+  if (currentEnding.value != "") {
+    ending.value = currentEnding.value;
+
+    console.log("udpated ending");
+  } else {
+    ending.value = motivations.value[indexOfID][0].ending;
+  }
+  if (currentTextField.value != "") {
+    textfield.value = currentTextField.value;
+    console.log("udpated Text field");
+  } else {
+    textfield.value = motivations.value[indexOfID][0].textfield;
+  }
+};
+
+const getIndexOfMVid = () => {
+  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+  const applications = ref(JSON.parse(localStorage.getItem("applications")));
+  console.log("application mv:", applications.value[props.currentIndex][0].mv);
+  let lastIndex = getLastIndex();
+  let indexOfId = 0;
+  if (lastIndex < MAX_MV_LETTERS) {
+    for (let i = 0; i <= lastIndex; i++) {
+      if (
+        motivations.value[i][0].indexMV ==
+        applications.value[props.currentIndex][0].mv
+      ) {
+        indexOfId = i;
+        console.log("indexOfId", indexOfId);
+        return indexOfId;
+      }
+    }
+  }
+  return 0;
 };
 
 const storeFormData = () => {
   const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
-  let lastIndex = motivations.value.length - 1;
-  motivations.value[lastIndex][0].subject = subject.value;
-  motivations.value[lastIndex][0].salutationBeginning =
+  const indexOfID = getIndexOfMVid();
+  motivations.value[indexOfID][0].subject = subject.value;
+  motivations.value[indexOfID][0].salutationBeginning =
     salutationBeginning.value;
-  motivations.value[lastIndex][0].textfield = textfield.value;
-  motivations.value[lastIndex][0].ending = ending.value;
-  motivations.value[lastIndex][0].salutatioEnding = salutationEnding;
+  motivations.value[indexOfID][0].textfield = textfield.value;
+  motivations.value[indexOfID][0].ending = ending.value;
+  motivations.value[indexOfID][0].salutationEnding = salutationEnding;
   localStorage.setItem("motivations", JSON.stringify(motivations.value));
+  console.log(motivations.value);
 };
 
 const initSlides = () => {
-  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
-  let lastIndex = motivations.value.length - 1;
-  for (let i = 0; i < lastIndex; i++) {
-    addAfter();
+  let lastIndex = getLastIndex();
+  if (lastIndex < MAX_MV_LETTERS) {
+    for (let i = 0; i < lastIndex; i++) {
+      addAfter();
+    }
   }
 };
 
@@ -281,6 +384,8 @@ const closeModal = () => {
 };
 
 const saveModal = () => {
+  saveMVToApplication();
+  storeFormData();
   buttonDisabled = true;
   sideBack.value = false;
 };

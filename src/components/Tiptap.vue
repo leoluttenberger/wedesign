@@ -137,24 +137,23 @@ const onClickedSave = () => {
 };
 onMounted(() => {
   const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
-  let lastIndex = getLastIndex();
   let indexCal = props.itemCurrentIndex;
-  if (indexCal >= 0) {
+  let editText = "Neuer Text";
+
+  if (indexCal > 0) {
     if (props.isTextFieldEditModal) {
-      editor.value.commands.setContent({
-        type: "text",
-        text: motivations.value[indexCal][0].textfield,
-      });
+      editText = motivations.value[indexCal][0].textfield;
     }
     if (props.isEndingEditModal) {
-      editor.value.commands.setContent({
-        type: "text",
-        text: motivations.value[indexCal][0].ending,
-      });
+      editText = motivations.value[indexCal][0].ending;
     }
   } else {
     console.log("Error! Slide index is negative!");
   }
+  editor.value.commands.setContent({
+    type: "text",
+    text: editText,
+  });
 });
 
 const getLastIndex = () => {

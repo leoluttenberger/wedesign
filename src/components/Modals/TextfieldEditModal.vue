@@ -11,7 +11,7 @@
   </div>
   <Tiptap
     :itemCurrentIndex="props.itemIndex"
-    :is-text-field-edit-modal="true"
+    :isTextFieldEditModal="true"
   ></Tiptap>
 </template>
 <script setup lang="ts">

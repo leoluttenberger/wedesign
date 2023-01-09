@@ -206,19 +206,20 @@ if (!localStorage.getItem("motivations")) {
   console.log("Default motivation letter added!");
 }
 
-const MAX_MV_LETTERS = 10;
+const MAX_MV_PREVIEW = 5;
 
 onMounted(() => {
   currentEnding.value = "";
   currentTextField.value = "";
   console.log("motivation mounted");
   const applications = ref(JSON.parse(localStorage.getItem("applications")));
-  applications.value = JSON.parse(localStorage.getItem("applications"));
   console.log("application mv:", applications.value[props.currentIndex][0].mv);
   if (applications.value[props.currentIndex][0].mv == 0) {
     console.log("currentindex:", props.currentIndex);
     createNewMotivation();
   } else {
+    currentEnding.value = "";
+    currentTextField.value = "";
     updateForm();
   }
   initSlides();
@@ -300,17 +301,25 @@ const createNewMotivation = () => {
     },
   ];
   const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
-  console.log(tempMotivations);
   const newData = [...tempMotivations, motivation];
   const indexCal = tempMotivations.length - 1;
   console.log("indexCal:", indexCal);
-  if (indexCal >= MAX_MV_LETTERS) {
-    newData.splice(0, 1);
-    console.log("Splice newData");
+  const applications = JSON.parse(localStorage.getItem("applications"));
+
+  const cvlength = applications.length;
+  console.log(cvlength);
+  if (cvlength > 0) {
+    if (indexCal > cvlength) {
+      if (indexCal > MAX_MV_PREVIEW) {
+        const deleteCount = indexCal - MAX_MV_PREVIEW;
+        newData.splice(0, deleteCount);
+        console.log("Splice newData");
+      }
+    }
+    console.log(newData);
+    console.log("New motivation letter added!");
+    localStorage.setItem("motivations", JSON.stringify(newData));
   }
-  console.log(newData);
-  console.log("New motivation letter added!");
-  localStorage.setItem("motivations", JSON.stringify(newData));
 };
 
 const updateForm = () => {
@@ -320,18 +329,15 @@ const updateForm = () => {
   salutationBeginning.value =
     motivations.value[indexOfID][0].salutationBeginning;
   salutationEnding.value = motivations.value[indexOfID][0].salutationEnding;
+  ending.value = motivations.value[indexOfID][0].ending;
+  textfield.value = motivations.value[indexOfID][0].textfield;
   if (currentEnding.value != "") {
     ending.value = currentEnding.value;
-
     console.log("udpated ending");
-  } else {
-    ending.value = motivations.value[indexOfID][0].ending;
   }
   if (currentTextField.value != "") {
     textfield.value = currentTextField.value;
     console.log("udpated Text field");
-  } else {
-    textfield.value = motivations.value[indexOfID][0].textfield;
   }
 };
 
@@ -341,7 +347,7 @@ const getIndexOfMVid = () => {
   console.log("application mv:", applications.value[props.currentIndex][0].mv);
   let lastIndex = getLastIndex();
   let indexOfId = 0;
-  if (lastIndex < MAX_MV_LETTERS) {
+  if (lastIndex > 0) {
     for (let i = 0; i <= lastIndex; i++) {
       if (
         motivations.value[i][0].indexMV ==
@@ -371,10 +377,8 @@ const storeFormData = () => {
 
 const initSlides = () => {
   let lastIndex = getLastIndex();
-  if (lastIndex < MAX_MV_LETTERS) {
-    for (let i = 0; i < lastIndex; i++) {
-      addAfter();
-    }
+  for (let i = 0; i < lastIndex; i++) {
+    addAfter();
   }
 };
 

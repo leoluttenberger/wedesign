@@ -9,7 +9,10 @@
       Abschluss bearbeiten
     </p>
   </div>
-  <Tiptap :currentIndex="props.itemIndex" :is-ending-edit-modal="true"></Tiptap>
+  <Tiptap
+    :itemCurrentIndex="props.itemIndex"
+    :isEndingEditModal="true"
+  ></Tiptap>
 </template>
 <script setup lang="ts">
 import { ref, onMounted, defineProps } from "vue";

@@ -12,7 +12,7 @@
         <div
           ref="modal-backdrop"
           v-if="showModal"
-          class="fixed z-10 inset-0 bg-black pt-16 bg-opacity-10"
+          class="fixed z-10 inset-0 bg-black bg-opacity-10"
         >
           <slot>I'm empty inside</slot>
         </div>

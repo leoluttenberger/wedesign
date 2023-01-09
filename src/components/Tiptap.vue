@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted } from "vue";
+import { computed, ref, onMounted, defineProps } from "vue";
 import { useEditor, EditorContent, Editor, Content } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "./MenuBar.vue";
@@ -47,6 +47,7 @@ import {
 } from "./extensions";
 import { content } from "./text";
 import { Match } from "@/types";
+import { currentTextField, currentEnding } from "@/store.js";
 
 const shouldShow = ({ editor }) => {
   const match = editor.storage.languagetool.match;
@@ -58,6 +59,21 @@ const shouldShow = ({ editor }) => {
     !!match && !!matchRange && matchRange.from <= from && to <= matchRange.to
   );
 };
+
+const props = defineProps({
+  itemCurrentIndex: {
+    type: Number,
+    default: 0,
+  },
+  isTextFieldEditModal: {
+    type: Boolean,
+    default: false,
+  },
+  isEndingEditModal: {
+    type: Boolean,
+    default: false,
+  },
+});
 
 const match = ref<Match>();
 
@@ -112,16 +128,43 @@ const onClickedSave = () => {
     ? editor.value.getJSON().content[0].content[0].text
     : "";
   console.log(comment_text);
-  localStorage.setItem("documents", JSON.stringify(comment_text));
+  if (props.isEndingEditModal) {
+    currentEnding.value = comment_text;
+  }
+  if (props.isTextFieldEditModal) {
+    currentTextField.value = comment_text;
+  }
 };
 onMounted(() => {
-  if (localStorage.getItem("documents")) {
-    editor.value.commands.setContent({
-      type: "text",
-      text: JSON.parse(localStorage.getItem("documents")),
-    });
+  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+  let indexCal = props.itemCurrentIndex;
+  let editText = "Neuer Text";
+
+  if (indexCal > 0) {
+    if (props.isTextFieldEditModal) {
+      editText = motivations.value[indexCal][0].textfield;
+    }
+    if (props.isEndingEditModal) {
+      editText = motivations.value[indexCal][0].ending;
+    }
+  } else {
+    console.log("Error! Slide index is negative!");
   }
+  editor.value.commands.setContent({
+    type: "text",
+    text: editText,
+  });
 });
+
+const getLastIndex = () => {
+  const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
+  let lastIndex = tempMotivations.length - 1;
+  console.log("lastIndex:", lastIndex);
+  if (lastIndex < 0) {
+    lastIndex = 0;
+  }
+  return lastIndex;
+};
 </script>
 
 <style lang="scss">

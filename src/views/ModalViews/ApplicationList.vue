@@ -13,7 +13,34 @@
                 <div
                   class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
                 >
-                  <div class="font-bold text-xl">{{ item[0].company }}</div>
+                  <div class="flex">
+                    <div class="font-bold text-xl">{{ item[0].company }}</div>
+                    <div class="grow py-2 px-2"></div>
+                    <div
+                      v-if="item[0].state == 'Entwurf'"
+                      class="font-none px-5 py-2 text-xs text-white font-bold rounded-2xl bg-wd-edit"
+                    >
+                      {{ item[0].state }}
+                    </div>
+                    <div
+                      v-if="item[0].state == 'Erledigt'"
+                      class="font-none px-5 py-2 text-xs text-white font-bold rounded-2xl bg-wd-green"
+                    >
+                      {{ item[0].state }}
+                    </div>
+                    <div
+                      v-if="item[0].state == 'Keine Rückmeldung'"
+                      class="font-none px-5 py-2 text-xs text-white font-bold rounded-2xl bg-wd-error"
+                    >
+                      {{ item[0].state }}
+                    </div>
+                    <div
+                      v-if="item[0].state == 'Leider nein'"
+                      class="font-none px-5 py-2 text-xs text-white font-bold rounded-2xl bg-wd-error"
+                    >
+                      {{ item[0].state }}
+                    </div>
+                  </div>
                   <div>{{ item[0].job }}</div>
                   <div class="flex">
                     <div class="flex-none">Deadline</div>
@@ -34,7 +61,16 @@
                       ></ArrowIcon>
                     </div>
                     <div class="flex-none">
-                      {{ item[0].cv }}
+                      <CloseIcon
+                        v-if="!item[0].mv"
+                        class="w-24 stroke-wd-error"
+                      ></CloseIcon>
+                    </div>
+                    <div class="flex-none">
+                      <CheckIcon
+                        v-if="item[0].mv"
+                        class="w-24 stroke-wd-green"
+                      ></CheckIcon>
                     </div>
                   </div>
                 </div>
@@ -49,35 +85,29 @@
     </section>
   </div>
   <div>
-    <CVEditModal :show="bottomCardOpen4">
+    <MVEditModal :show="bottomCardOpen4">
       <div class="flex">
         <div
           class="rounded-lg w-screen h-screen overflow-hidden shadow-xl dark:bg-slate-700 bg-white"
         >
-          <button type="button" @click="closeModal" class="p-4">
-            <BackIcon
-              class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-            ></BackIcon>
-          </button>
-          <div class="flex flex-col items-left shadow-lg-up">
-            <component
-              v-bind="currentButtonIndex"
-              :is="ApplicationEdit"
-              :editIndex="currentButtonIndex"
-            />
-          </div>
+          <component
+            v-bind="currentButtonIndex"
+            :is="ApplicationEdit"
+            :editIndex="currentButtonIndex"
+          />
         </div>
       </div>
-    </CVEditModal>
+    </MVEditModal>
   </div>
 </template>
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import ApplicationEdit from "./ApplicationEdit.vue";
-import CVEditModal from "@/components/Modals/CVEditModal.vue";
-import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
+import MVEditModal from "@/components/Modals/MVEditModal.vue";
 import SortIcon from "@/assets/icons/SortIcon.vue";
-import BackIcon from "@/assets/icons/BackIcon.vue";
+import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
+import CloseIcon from "@/assets/icons/CloseIcon.vue";
+import CheckIcon from "@/assets/icons/CheckIcon.vue";
 
 import { slideDown } from "@/store.js";
 import { Container, Draggable } from "vue3-smooth-dnd";
@@ -86,6 +116,14 @@ const applications = ref(JSON.parse(localStorage.getItem("applications")));
 const bottomCardOpen4 = ref(false);
 const renderComponent4 = ref(true);
 let currentButtonIndex = ref(0);
+
+watch(slideDown, () => {
+  if (slideDown.value) {
+    bottomCardOpen4.value = false;
+  } else {
+    bottomCardOpen4.value = true;
+  }
+});
 
 watch(bottomCardOpen4, () => {
   if (bottomCardOpen4.value == false) {
@@ -98,7 +136,7 @@ watch(bottomCardOpen4, () => {
 
 const openBottomCard = (id) => {
   currentButtonIndex.value = id;
-  bottomCardOpen4.value = true;
+  slideDown.value = false;
 };
 
 const onDrop = (dropResult) => {

@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, defineProps, withDefaults } from "vue";
+import { ref, onMounted, defineProps } from "vue";
 import { slideDown } from "@/store.js";
 const type = ref(null);
 const diversKnowledge = ref(null);
@@ -65,12 +65,12 @@ const languageLevel = ref(null);
 let buttonDisabled = false;
 const knowledges = ref(JSON.parse(localStorage.getItem("knowledges")));
 
-const props = withDefaults(
-  defineProps<{
-    editIndex: number;
-  }>(),
-  { editIndex: 0 }
-);
+const props = defineProps({
+  editIndex: {
+    type: Number,
+    default: 0,
+  },
+});
 
 onMounted(() => {
   buttonDisabled = false;

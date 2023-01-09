@@ -1,27 +1,38 @@
 <template>
   <swiper
-    class="w-screen h-screen top-20 bg-white dark:bg-slate-800 rounded-3xl"
+    class="h-screen"
     :slides-per-view="1"
     :space-between="spaceBetween"
+    :pagination="(({
+      type: 'bullets',
+      enabled: true,
+      dynamicBullets:true,
+        }) as any)"
+    :modules="modules"
     @swiper="onSwiper"
     @activeIndexChange="onActiveIndexChange"
   >
     <swiper-slide
+      class="top-20 bg-white dark:bg-slate-800 rounded-3xl"
       v-for="slide in items"
       :key="slide.index"
       :virtual-index="slide.index"
     >
-      <slot :id="slide.id" :index="slide.index" />
+      <div class="flex flex-col items-left shadow-lg-up">
+        <slot :id="slide.id" v-bind:itemIndex="slide.index" />
+      </div>
     </swiper-slide>
   </swiper>
 </template>
 <script lang="ts">
 import { nextTick, PropType, toRefs, watch } from "vue";
 import SwiperCore, { Virtual } from "swiper";
+import { Pagination, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/swiper.min.css";
+import "swiper/css/pagination";
 
-SwiperCore.use([Virtual]);
+SwiperCore.use([Virtual, Pagination, Navigation]);
 
 export interface SlideItem {
   index: number;
@@ -55,7 +66,6 @@ export default {
 
     const counterChanges = (items: SlideItem[], oldItems: SlideItem[]) => {
       if (swiper) {
-        console.log(items.length, oldItems.length);
         const lowest = Math.min(...items.map((i) => i.index));
         const oldLowest = Math.min(...oldItems.map((i) => i.index));
 
@@ -90,13 +100,13 @@ export default {
 
     const onActiveIndexChange = () => {
       const activeItem = items.value[swiper.activeIndex];
-      console.log("activeIndex: ", activeItem.index);
       emit("update:index", activeItem.index);
     };
 
     return {
       onSwiper,
       onActiveIndexChange,
+      modules: [Pagination, Navigation],
     };
   },
 };

@@ -1,5 +1,5 @@
 <template>
-  <Html :class="darkLightMode">
+  <section :class="darkLightMode">
     <body class="bg-wd-background dark:bg-slate-700">
       <div class="h-screen overflow-auto overflow-scroll">
         <router-view></router-view>
@@ -90,7 +90,7 @@
         </div>
       </section>
     </body>
-  </Html>
+  </section>
 </template>
 <script setup lang="ts">
 import { ref, watch } from "vue";

@@ -22,3 +22,15 @@ export const isDarkMode = reactive({
 export const slideDown = reactive({
   value: null,
 });
+export const sideBack = reactive({
+  value: null,
+});
+export const sideBackBack = reactive({
+  value: null,
+});
+export const currentTextField = reactive({
+  value: null,
+});
+export const currentEnding = reactive({
+  value: null,
+});

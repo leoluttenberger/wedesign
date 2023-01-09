@@ -10,4 +10,11 @@ module.exports = defineConfig({
       .loader("raw-loader")
       .end();
   },
+  configureWebpack: {
+    plugins: [
+      require("unplugin-vue-components/webpack")({
+        /* options */
+      }),
+    ],
+  },
 });

@@ -75,8 +75,12 @@
           <FormKit
             type="select"
             v-model="state"
-            :options="['Entwurf', 'Erledigt', 'Zurückgewiesen']"
-            placeholder="Entwurf"
+            :options="[
+              'Entwurf',
+              'Erledigt',
+              'Keine Rückmeldung',
+              'Leider nein',
+            ]"
           />
         </div>
       </div>
@@ -233,5 +237,13 @@ const createMotivationNode = () => {
 const closeModal = () => {
   buttonDisabled = true;
   slideDown.value = true;
+  const applications = ref(JSON.parse(localStorage.getItem("applications")));
+  applications.value[props.editIndex][0].company = company.value;
+  applications.value[props.editIndex][0].job = job.value;
+  applications.value[props.editIndex][0].deadline = deadline.value;
+  applications.value[props.editIndex][0].contactPerson = contactPerson.value;
+  applications.value[props.editIndex][0].state = state.value;
+  applications.value[props.editIndex][0].note = note.value;
+  localStorage.setItem("applications", JSON.stringify(applications.value));
 };
 </script>

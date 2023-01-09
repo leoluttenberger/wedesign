@@ -13,7 +13,34 @@
                 <div
                   class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
                 >
-                  <div class="font-bold text-xl">{{ item[0].company }}</div>
+                  <div class="flex">
+                    <div class="font-bold text-xl">{{ item[0].company }}</div>
+                    <div class="grow py-2 px-2"></div>
+                    <div
+                      v-if="item[0].state == 'Entwurf'"
+                      class="font-none px-5 py-2 text-xs text-white font-bold rounded-2xl bg-wd-edit"
+                    >
+                      {{ item[0].state }}
+                    </div>
+                    <div
+                      v-if="item[0].state == 'Erledigt'"
+                      class="font-none px-5 py-2 text-xs text-white font-bold rounded-2xl bg-wd-green"
+                    >
+                      {{ item[0].state }}
+                    </div>
+                    <div
+                      v-if="item[0].state == 'Keine Rückmeldung'"
+                      class="font-none px-5 py-2 text-xs text-white font-bold rounded-2xl bg-wd-error"
+                    >
+                      {{ item[0].state }}
+                    </div>
+                    <div
+                      v-if="item[0].state == 'Leider nein'"
+                      class="font-none px-5 py-2 text-xs text-white font-bold rounded-2xl bg-wd-error"
+                    >
+                      {{ item[0].state }}
+                    </div>
+                  </div>
                   <div>{{ item[0].job }}</div>
                   <div class="flex">
                     <div class="flex-none">Deadline</div>

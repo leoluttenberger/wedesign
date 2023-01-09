@@ -213,9 +213,7 @@ onMounted(() => {
   currentTextField.value = "";
   console.log("motivation mounted");
   const applications = ref(JSON.parse(localStorage.getItem("applications")));
-  console.log("application mv:", applications.value[props.currentIndex][0].mv);
   if (applications.value[props.currentIndex][0].mv == 0) {
-    console.log("currentindex:", props.currentIndex);
     createNewMotivation();
   } else {
     currentEnding.value = "";
@@ -235,7 +233,6 @@ watch(slideDown, () => {
   if (sideBackBack.value == false) {
     showBottomSlide.value = false;
     updateForm();
-    console.log("Updated tiptap");
     buttonIndex = 0;
   }
 });
@@ -243,7 +240,6 @@ watch(sideBackBack, () => {
   if (sideBackBack.value == false) {
     showBottomSlide.value = false;
     updateForm();
-    console.log("Updated tiptap");
     buttonIndex = 0;
   }
 });
@@ -272,9 +268,6 @@ const getNextIndexMV = () => {
     index = motivations.value[lastIndex][0].indexMV;
     index++;
   }
-  console.log("lastINdex:", lastIndex);
-  console.log("motivation last index", motivations.value[lastIndex][0].indexMV);
-  console.log("indexMV", index);
   return index;
 };
 
@@ -289,7 +282,6 @@ const getLastIndex = () => {
 
 const createNewMotivation = () => {
   const index = getNextIndexMV();
-  console.log("nextindexMV:", index);
   const motivation = [
     {
       indexMV: index,
@@ -303,11 +295,9 @@ const createNewMotivation = () => {
   const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
   const newData = [...tempMotivations, motivation];
   const indexCal = tempMotivations.length - 1;
-  console.log("indexCal:", indexCal);
   const applications = JSON.parse(localStorage.getItem("applications"));
 
   const cvlength = applications.length;
-  console.log(cvlength);
   if (cvlength > 0) {
     if (indexCal > cvlength) {
       if (indexCal > MAX_MV_PREVIEW) {
@@ -316,7 +306,6 @@ const createNewMotivation = () => {
         console.log("Splice newData");
       }
     }
-    console.log(newData);
     console.log("New motivation letter added!");
     localStorage.setItem("motivations", JSON.stringify(newData));
   }
@@ -344,7 +333,6 @@ const updateForm = () => {
 const getIndexOfMVid = () => {
   const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
   const applications = ref(JSON.parse(localStorage.getItem("applications")));
-  console.log("application mv:", applications.value[props.currentIndex][0].mv);
   let lastIndex = getLastIndex();
   let indexOfId = 0;
   if (lastIndex > 0) {
@@ -354,7 +342,6 @@ const getIndexOfMVid = () => {
         applications.value[props.currentIndex][0].mv
       ) {
         indexOfId = i;
-        console.log("indexOfId", indexOfId);
         return indexOfId;
       }
     }
@@ -372,7 +359,6 @@ const storeFormData = () => {
   motivations.value[indexOfID][0].ending = ending.value;
   motivations.value[indexOfID][0].salutationEnding = salutationEnding;
   localStorage.setItem("motivations", JSON.stringify(motivations.value));
-  console.log(motivations.value);
 };
 
 const initSlides = () => {

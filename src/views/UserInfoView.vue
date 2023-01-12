@@ -157,6 +157,15 @@ watch(showModal, () => {
     console.log("show modal true");
   }
 });
+
+const onClickedSave = () => {
+  valueAvatarCropShow.value = false;
+  valueAvatarShow.value = true;
+  localStorage.setItem("profileImg", JSON.stringify(image.value));
+  disableInput.value = true;
+  disableEdit.value = false;
+};
+
 const onClickedEdit = () => {
   bottomCardOpen.value = true;
   slideDown.value = false;

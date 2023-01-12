@@ -1,6 +1,6 @@
 <template>
   <section
-    class="fixed inset-x-0 top-0 z-10 shadow dark:text-white text-xl font-Montserrat bg-white dark:bg-slate-800"
+    class="fixed inset-x-0 z-10 top-0 shadow dark:text-white text-xl font-Montserrat bg-white dark:bg-slate-800"
   >
     <div class="flex justify-center p-2">
       <div class="px-2">Lebenslauf</div>
@@ -80,16 +80,16 @@
     @slideChange="onSlideChange"
   >
     <SwiperSlide>
-      <UserInfo></UserInfo>
+      <SwipeView :slideIndex="0" :useEditButton="true"> </SwipeView>
     </SwiperSlide>
     <SwiperSlide>
-      <SwipeView :slideIndex="0"></SwipeView>
+      <SwipeView :slideIndex="1" :useEditButton="false"></SwipeView>
     </SwiperSlide>
     <SwiperSlide>
-      <SwipeView :slideIndex="1"></SwipeView>
+      <SwipeView :slideIndex="2" :useEditButton="false"></SwipeView>
     </SwiperSlide>
     <SwiperSlide>
-      <SwipeView :slideIndex="2"></SwipeView>
+      <SwipeView :slideIndex="3" :useEditButton="false"></SwipeView>
     </SwiperSlide>
   </Swiper>
 </template>
@@ -97,7 +97,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import CropperItem from "@/components/CropperItem.vue";
-import UserInfo from "./UserInfoView.vue";
 import { isDarkMode } from "@/store.js";
 
 import Toggle from "@vueform/toggle";

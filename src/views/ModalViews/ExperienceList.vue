@@ -56,7 +56,14 @@
         >
           <BottomCard v-model:open="bottomCardOpen3">
             <SwiperCard :items="items">
-              <div class="flex flex-col items-left shadow-lg-up">
+              <button @click="closeBottomCard()" class="p-2">
+                <BackIcon
+                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                ></BackIcon>
+              </button>
+              <div
+                class="flex flex-col items-left shadow-lg-up overflow-auto overflow-scroll w-screen h-screen py-20"
+              >
                 <component
                   v-bind="currentButtonIndex"
                   :is="ExperienceEdit"
@@ -76,6 +83,8 @@ import BottomCard from "@/components/BottomCard.vue";
 import ExperienceEdit from "./ExperienceEdit.vue";
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 import SortIcon from "@/assets/icons/SortIcon.vue";
+import BackIcon from "@/assets/icons/BackIcon.vue";
+
 import { slideDown, isDarkMode } from "@/store.js";
 import { Container, Draggable } from "vue3-smooth-dnd";
 import SwiperCard from "@/components/SwiperCard.vue";
@@ -108,7 +117,7 @@ if (JSON.parse(localStorage.getItem("theme")) == "dark") {
 }
 
 watch(isDarkMode, () => {
-  if (isDarkMode == true) {
+  if (isDarkMode.value == true) {
     darkLightMode.value = "dark";
   } else {
     darkLightMode.value = "light";
@@ -150,5 +159,8 @@ const applyDrag = (arr, dragResult) => {
     arr.value.splice(addedIndex, 0, itemToAdd);
   }
   return arr;
+};
+const closeBottomCard = () => {
+  slideDown.value = true;
 };
 </script>

@@ -5,14 +5,12 @@
       type="select"
       label="Typ"
       :options="['HTL', 'AHS', 'HAK', 'HBLA']"
-      value="HTL"
     />
     <FormKit
       v-model="specialty"
       type="select"
       label="Schwerpunkt"
       :options="['IT', 'BE', 'Sprachen', 'Wirtschaft']"
-      value="IT"
     />
     <FormKit
       v-model="address"

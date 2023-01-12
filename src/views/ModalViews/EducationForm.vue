@@ -4,15 +4,13 @@
       v-model="type"
       type="select"
       label="Typ"
-      :options="['HTL', 'AHS', 'HAK', 'HBLA']"
-      value="HTL"
+      :options="['Auswahl', 'HTL', 'AHS', 'HAK', 'HBLA']"
     />
     <FormKit
       v-model="specialty"
       type="select"
       label="Schwerpunkt"
-      :options="['IT', 'BE', 'Sprachen', 'Wirtschaft']"
-      value="IT"
+      :options="['Auswahl', 'IT', 'BE', 'Sprachen', 'Wirtschaft']"
     />
     <FormKit
       v-model="address"

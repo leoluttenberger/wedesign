@@ -12,5 +12,4 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 const firstname = JSON.parse(localStorage.getItem("firstName"));
-console.log(firstname);
 </script>

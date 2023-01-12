@@ -39,7 +39,7 @@ if (JSON.parse(localStorage.getItem("theme")) == "dark") {
 }
 
 watch(isDarkMode, () => {
-  if (isDarkMode == true) {
+  if (isDarkMode.value == true) {
     darkLightMode.value = "dark";
   } else {
     darkLightMode.value = "light";

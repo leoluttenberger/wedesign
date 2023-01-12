@@ -1,17 +1,28 @@
 <template>
-  <div class="overflow-auto overflow-scroll w-screen h-screen py-20 z-10">
-    <section class="z-0">
-      <component :is="mapListComponents[slideIndex]" v-if="renderComponent" />
-      <div class="flex justify-end py-20 px-4">
-        <button
-          @click="openBottomCard()"
-          class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
-        >
-          <AddIcon></AddIcon>
-        </button>
-      </div>
-    </section>
-  </div>
+  <section class="z-0 overflow-auto overflow-scroll w-screen h-screen py-20">
+    <div class="flex justify-end px-4">
+      <button
+        v-if="isEdit"
+        @click="openBottomCard()"
+        class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
+      >
+        <EditIcon
+          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+        ></EditIcon>
+      </button>
+
+      <button
+        v-if="!isEdit"
+        @click="openBottomCard()"
+        class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
+      >
+        <AddIcon
+          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+        ></AddIcon>
+      </button>
+    </div>
+    <component :is="mapListComponents[slideIndex]" :key="renderComponent" />
+  </section>
   <teleport to="body">
     <transition
       enter-active-class="transition ease-out duration-200 transform"
@@ -24,11 +35,18 @@
       <section :class="darkLightMode">
         <div
           v-if="bottomCardOpen"
-          class="fixed z-10 inset-0 dark:bg-transparent-black bg-wd-white bg-opacity-50"
+          class="fixed z-10 inset-0 bg-wd-transparent-black bg-opacity-10"
         >
           <BottomCard v-model:open="bottomCardOpen">
             <SwiperCard :items="items">
-              <div class="flex flex-col items-left shadow-lg-up">
+              <button @click="closeBottomCard()" class="p-2">
+                <BackIcon
+                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                ></BackIcon>
+              </button>
+              <div
+                class="flex flex-col items-left shadow-lg-up overflow-auto overflow-scroll w-screen h-screen py-20"
+              >
                 <component :is="mapFormComponents[props.slideIndex]" />
               </div>
             </SwiperCard>
@@ -44,22 +62,26 @@ import { ref, defineProps, withDefaults, watch, onMounted } from "vue";
 import SwiperCard from "@/components/SwiperCard.vue";
 import BottomCard from "@/components/BottomCard.vue";
 import AddIcon from "@/assets/icons/AddIcon.vue";
+import EditIcon from "@/assets/icons/EditIcon.vue";
+import BackIcon from "@/assets/icons/BackIcon.vue";
 
-import ExperienceForm from "./ModalViews/ExperienceForm.vue";
-import EducationForm from "./ModalViews/EducationForm.vue";
+import ExperienceForm from "@/views/ModalViews/ExperienceForm.vue";
+import EducationForm from "@/views/ModalViews/EducationForm.vue";
 
-import ExperienceList from "./ModalViews/ExperienceList.vue";
-import EducationList from "./ModalViews/EducationList.vue";
+import ExperienceList from "@/views/ModalViews/ExperienceList.vue";
+import EducationList from "@/views/ModalViews/EducationList.vue";
 
-import ApplicationForm from "./ModalViews/ApplicationForm.vue";
-import ApplicationList from "./ModalViews/ApplicationList.vue";
+import ApplicationForm from "@/views/ModalViews/ApplicationForm.vue";
+import ApplicationList from "@/views/ModalViews/ApplicationList.vue";
 
-import KnowledgeForm from "./ModalViews/KnowledgeForm.vue";
-import KnowledgeList from "./ModalViews/KnowledgeList.vue";
+import KnowledgeForm from "@/views/ModalViews/KnowledgeForm.vue";
+import KnowledgeList from "@/views/ModalViews/KnowledgeList.vue";
 
-import UserFormInput from "@/components/UserFormInput.vue";
+import UserForm from "@/views/ModalViews/UserForm.vue";
+import UserDisplay from "@/views/ModalViews/UserDisplay.vue";
 
 import { slideDown, sideBack, sideBackBack, isDarkMode } from "@/store.js";
+import { useEditor } from "@tiptap/vue-3";
 
 interface SlideItem {
   id: string;
@@ -81,15 +103,21 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  useEditButton: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const mapFormComponents = [
+  UserForm,
   EducationForm,
   ExperienceForm,
   KnowledgeForm,
   ApplicationForm,
 ];
 const mapListComponents = [
+  UserDisplay,
   EducationList,
   ExperienceList,
   KnowledgeList,
@@ -97,6 +125,7 @@ const mapListComponents = [
 ];
 
 onMounted(() => {
+  isEdit.value = props.useEditButton;
   sideBackBack.value = false;
   sideBack.value = false;
   slideDown.value = true;
@@ -104,6 +133,7 @@ onMounted(() => {
 
 const bottomCardOpen = ref(false);
 const renderComponent = ref(true);
+const isEdit = ref(false);
 
 const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")));
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
@@ -112,14 +142,6 @@ if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   darkLightMode.value = "light";
 }
 
-watch(isDarkMode, () => {
-  if (isDarkMode == true) {
-    darkLightMode.value = "dark";
-  } else {
-    darkLightMode.value = "light";
-  }
-});
-
 watch(bottomCardOpen, () => {
   if (bottomCardOpen.value == false) {
     renderComponent.value = true;
@@ -127,6 +149,15 @@ watch(bottomCardOpen, () => {
     renderComponent.value = false;
   }
 });
+
+watch(isDarkMode, () => {
+  if (isDarkMode.value == true) {
+    darkLightMode.value = "dark";
+  } else {
+    darkLightMode.value = "light";
+  }
+});
+
 watch(slideDown, () => {
   if (slideDown.value == true) {
     bottomCardOpen.value = false;
@@ -158,5 +189,9 @@ const addAfter = () => {
 const openBottomCard = () => {
   bottomCardOpen.value = true;
   slideDown.value = false;
+};
+const closeBottomCard = () => {
+  bottomCardOpen.value = false;
+  slideDown.value = true;
 };
 </script>

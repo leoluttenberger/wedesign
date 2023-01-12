@@ -1,4 +1,6 @@
+/*
 <template>
+  <Profile></Profile>
   <div class="space-y-1">
     <p class="text-black px-1 dark:text-white font-Montserrat text-sm">
       Deine Daten
@@ -9,13 +11,13 @@
           <p
             class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
-            Titel vor:
+            Vortitel:
           </p>
           <FormKit
-            v-model="titelBefore"
+            v-model="titleBefore"
             type="text"
             placeholder="Dr."
-            :disabled="props.disableInput"
+            :disabled="true"
           />
         </div>
       </div>
@@ -32,7 +34,7 @@
             type="text"
             placeholder="Max"
             validation="required|length:3"
-            :disabled="props.disableInput"
+            :disabled="true"
           />
         </div>
       </div>
@@ -50,7 +52,7 @@
             type="text"
             placeholder="Mustermann"
             validation="required|length:3"
-            :disabled="props.disableInput"
+            :disabled="true"
           />
         </div>
       </div>
@@ -60,13 +62,13 @@
           <p
             class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
-            Titel nach:
+            Nachtitel:
           </p>
           <FormKit
-            v-model="titelAfter"
+            v-model="titleAfter"
             type="text"
             placeholder="BA"
-            :disabled="props.disableInput"
+            :disabled="true"
           />
         </div>
       </div>
@@ -79,13 +81,7 @@
           >
             Geburtsdatum:
           </p>
-          <FormKit
-            v-model="birthDate"
-            type="text"
-            placeholder="2000"
-            validation="required|length:4"
-            :disabled="props.disableInput"
-          />
+          <FormKit v-model="birthDate" type="date" :disabled="true" />
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
@@ -100,7 +96,7 @@
             type="text"
             placeholder="Stadt"
             validation="required|length:3"
-            :disabled="props.disableInput"
+            :disabled="true"
           />
         </div>
       </div>
@@ -116,9 +112,10 @@
           </p>
           <FormKit
             v-model="civilStatus"
-            type="text"
+            type="select"
+            :options="['Auswahl', 'ledig', 'verheiratet', 'sonstig']"
             placeholder="ledig"
-            :disabled="props.disableInput"
+            :disabled="true"
           />
         </div>
       </div>
@@ -131,9 +128,10 @@
           </p>
           <FormKit
             v-model="gender"
-            type="text"
-            placeholder="weiblich/männlich/divers"
-            :disabled="props.disableInput"
+            type="select"
+            :options="['Auswahl', 'weiblich', 'männlich', 'divers']"
+            placeholder="weiblich"
+            :disabled="true"
           />
         </div>
       </div>
@@ -151,7 +149,7 @@
             v-model="streetName"
             type="text"
             placeholder="Musterstraße"
-            :disabled="props.disableInput"
+            :disabled="true"
           />
         </div>
       </div>
@@ -166,7 +164,7 @@
             v-model="streetNumber"
             type="text"
             placeholder="1/1"
-            :disabled="props.disableInput"
+            :disabled="true"
           />
         </div>
       </div>
@@ -183,7 +181,7 @@
             v-model="districtNumber"
             type="text"
             placeholder="1010"
-            :disabled="props.disableInput"
+            :disabled="true"
           />
         </div>
       </div>
@@ -198,7 +196,7 @@
             v-model="city"
             type="text"
             placeholder="Muserstadt"
-            :disabled="props.disableInput"
+            :disabled="true"
           />
         </div>
       </div>
@@ -212,45 +210,35 @@
     </div>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-16">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="py-5 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
             Telefon:
           </p>
-          <div class="py-3">
-            <FormKit
-              v-model="phone"
-              type="text"
-              placeholder="xxxx-xxx-xxxx"
-              :validation="[['required'], ['matches', /^\d{4}-\d{3}-\d{4}$/]]"
-              validation-visibility="live"
-              :validation-messages="{
-                matches:
-                  'Ihre Telephonnumber muss wie folgt formatiert sein: xxxx-xxx-xxxx',
-              }"
-              :disabled="props.disableInput"
-            />
-          </div>
+          <FormKit
+            v-model="phone"
+            type="text"
+            placeholder="xxxx-xxx-xxxx"
+            :disabled="true"
+          />
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-16">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="py-5 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
             EMail:
           </p>
-          <div class="py-3">
-            <FormKit
-              v-model="email"
-              type="email"
-              validation="length:5|*email"
-              validation-visibility="live"
-              placeholder="Email"
-              :disabled="props.disableInput"
-            />
-          </div>
+          <FormKit
+            v-model="email"
+            type="email"
+            validation="length:5|*email"
+            validation-visibility="live"
+            placeholder="Email"
+            :disabled="true"
+          />
         </div>
       </div>
     </div>
@@ -264,64 +252,49 @@
         v-model="hobbies"
         type="text"
         placeholder="laufen, schwimmen, tanzen"
-        :disabled="props.disableInput"
+        :disabled="true"
       />
-    </div>
-    <div class="grid flex gap-2 py-10">
-      <button
-        class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
-        @click="saveToLocalStorage()"
-        v-if="!props.disableInput"
-      >
-        Speichern
-      </button>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { ref, defineProps, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { slideDown } from "@/store.js";
-
-const props = defineProps({
-  disableInput: {
-    type: Boolean,
-    default: false,
-  },
-});
-const titelBefore = ref(JSON.parse(localStorage.getItem("titelBefore")));
-const titelAfter = ref(JSON.parse(localStorage.getItem("titelAfter")));
-const firstName = ref(JSON.parse(localStorage.getItem("firstName")));
-const secondName = ref(JSON.parse(localStorage.getItem("secondName")));
-const birthDate = ref(JSON.parse(localStorage.getItem("birthDate")));
-const birthArea = ref(JSON.parse(localStorage.getItem("birthArea")));
-const civilStatus = ref(JSON.parse(localStorage.getItem("civilStatus")));
-const gender = ref(JSON.parse(localStorage.getItem("gender")));
-const email = ref(JSON.parse(localStorage.getItem("email")));
-const phone = ref(JSON.parse(localStorage.getItem("phone")));
-const streetName = ref(JSON.parse(localStorage.getItem("streetName")));
-const streetNumber = ref(JSON.parse(localStorage.getItem("streetNumber")));
-const districtNumber = ref(JSON.parse(localStorage.getItem("districtNumber")));
-const city = ref(JSON.parse(localStorage.getItem("city")));
-const hobbies = ref(JSON.parse(localStorage.getItem("hobbies")));
+import Profile from "@/views/ProfileView.vue";
+const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")));
+const titleBefore = ref(null);
+const titleAfter = ref(null);
+const firstName = ref(null);
+const secondName = ref(null);
+const birthDate = ref(null);
+const birthArea = ref(null);
+const civilStatus = ref(null);
+const gender = ref(null);
+const email = ref(null);
+const phone = ref(null);
+const streetName = ref(null);
+const streetNumber = ref(null);
+const districtNumber = ref(null);
+const city = ref(null);
+const hobbies = ref(null);
 onMounted(() => {
-  slideDown.value = false;
-});
-const saveToLocalStorage = () => {
-  localStorage.setItem("titelBefore", JSON.stringify(titelBefore.value));
-  localStorage.setItem("titelAfter", JSON.stringify(titelAfter.value));
-  localStorage.setItem("firstName", JSON.stringify(firstName.value));
-  localStorage.setItem("secondName", JSON.stringify(secondName.value));
-  localStorage.setItem("birthDate", JSON.stringify(birthDate.value));
-  localStorage.setItem("birthArea", JSON.stringify(birthArea.value));
-  localStorage.setItem("civilStatus", JSON.stringify(civilStatus.value));
-  localStorage.setItem("gender", JSON.stringify(gender.value));
-  localStorage.setItem("email", JSON.stringify(email.value));
-  localStorage.setItem("phone", JSON.stringify(phone.value));
-  localStorage.setItem("streetName", JSON.stringify(streetName.value));
-  localStorage.setItem("streetNumber", JSON.stringify(streetNumber.value));
-  localStorage.setItem("districtNumber", JSON.stringify(districtNumber.value));
-  localStorage.setItem("city", JSON.stringify(city.value));
-  localStorage.setItem("hobbies", JSON.stringify(hobbies));
   slideDown.value = true;
-};
+  if (localStorage.getItem("userInfos")) {
+    titleBefore.value = userInfos.value[0][0].titleBefore;
+    titleAfter.value = userInfos.value[0][0].titleAfter;
+    firstName.value = userInfos.value[0][0].firstName;
+    secondName.value = userInfos.value[0][0].secondName;
+    birthDate.value = userInfos.value[0][0].birthDate;
+    birthArea.value = userInfos.value[0][0].birthArea;
+    civilStatus.value = userInfos.value[0][0].civilStatus;
+    gender.value = userInfos.value[0][0].gender;
+    email.value = userInfos.value[0][0].email;
+    phone.value = userInfos.value[0][0].phone;
+    streetName.value = userInfos.value[0][0].streetName;
+    streetNumber.value = userInfos.value[0][0].streetNumber;
+    districtNumber.value = userInfos.value[0][0].districtNumber;
+    city.value = userInfos.value[0][0].city;
+    hobbies.value = userInfos.value[0][0].hobbies;
+  }
+});
 </script>

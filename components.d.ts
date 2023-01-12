@@ -21,6 +21,5 @@ declare module '@vue/runtime-core' {
     SwiperCard: typeof import('./src/components/SwiperCard.vue')['default']
     TextfieldEditModal: typeof import('./src/components/Modals/TextfieldEditModal.vue')['default']
     Tiptap: typeof import('./src/components/Tiptap.vue')['default']
-    UserFormInput: typeof import('./src/components/UserFormInput.vue')['default']
   }
 }

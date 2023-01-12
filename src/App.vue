@@ -1,7 +1,7 @@
 <template>
   <section :class="darkLightMode">
     <div class="bg-wd-background dark:bg-slate-700">
-      <div class="h-screen overflow-auto overflow-scroll">
+      <div class="h-screen">
         <router-view></router-view>
       </div>
       <section

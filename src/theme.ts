@@ -1,6 +1,6 @@
 const textClassification = {
   label:
-    "inline-block align-middle w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm",
+    "inline-block align-middle w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm placeholder-gray dark:placeholder-gray",
   inner: `
     border-none
     border-transparent

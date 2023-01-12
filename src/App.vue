@@ -1,11 +1,11 @@
 <template>
   <section :class="darkLightMode">
-    <body class="bg-wd-background dark:bg-slate-700">
+    <div class="bg-wd-background dark:bg-slate-700">
       <div class="h-screen overflow-auto overflow-scroll">
         <router-view></router-view>
       </div>
       <section
-        class="block fixed inset-x-0 bottom-0 z-10 bg-white dark:bg-slate-800 shadow"
+        class="fixed z-10 inset-x-0 bottom-0 shadow bg-white dark:bg-slate-800"
       >
         <div class="flex justify-evenly">
           <button
@@ -15,7 +15,7 @@
                 ? 'border-wd-green dark:border-wd-green'
                 : 'border-white dark:border-slate-800'
             "
-            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px] md:px-8 py-2"
+            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
           >
             <router-link to="/"
               ><HomeIcon
@@ -34,7 +34,7 @@
                 ? 'border-wd-green dark:border-wd-green'
                 : 'border-white dark:border-slate-800'
             "
-            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px] md:px-8 py-2"
+            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
           >
             <router-link to="/form">
               <UserIcon
@@ -53,7 +53,7 @@
                 ? 'border-wd-green dark:border-wd-green'
                 : 'border-white dark:border-slate-800'
             "
-            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px] md:px-8 py-2"
+            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
           >
             <router-link to="/documents"
               ><DocumentsIcon
@@ -72,7 +72,7 @@
                 ? 'border-wd-green dark:border-wd-green'
                 : 'border-white dark:border-slate-800'
             "
-            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px] md:px-4 py-2"
+            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
           >
             <router-link to="/calendar">
               <NotificationsIcon
@@ -89,7 +89,7 @@
           ></div>
         </div>
       </section>
-    </body>
+    </div>
   </section>
 </template>
 <script setup lang="ts">

@@ -3,11 +3,8 @@
     class="h-screen"
     :slides-per-view="1"
     :space-between="spaceBetween"
-    :pagination="(({
-      type: 'bullets',
-      enabled: true,
-      dynamicBullets:true,
-        }) as any)"
+    :pagination="(({ type:
+    'bullets', enabled: true, dynamicBullets:true, }) as any)"
     :modules="modules"
     @swiper="onSwiper"
     @activeIndexChange="onActiveIndexChange"
@@ -18,7 +15,7 @@
       :key="slide.index"
       :virtual-index="slide.index"
     >
-      <div class="flex flex-col items-left shadow-lg-up">
+      <div class="py-10 flex flex-col items-left shadow-lg-up">
         <slot :id="slide.id" v-bind:itemIndex="slide.index" />
       </div>
     </swiper-slide>

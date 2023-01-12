@@ -57,6 +57,8 @@ import ApplicationList from "./ModalViews/ApplicationList.vue";
 import KnowledgeForm from "./ModalViews/KnowledgeForm.vue";
 import KnowledgeList from "./ModalViews/KnowledgeList.vue";
 
+import UserFormInput from "@/components/UserFormInput.vue";
+
 import { slideDown, sideBack, sideBackBack, isDarkMode } from "@/store.js";
 
 interface SlideItem {

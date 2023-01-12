@@ -45,7 +45,6 @@
 </template>
 
 <script setup lang="ts">
-import { number } from "@formkit/inputs";
 import { ref, onMounted } from "vue";
 import { slideDown } from "@/store.js";
 const type = ref(null);

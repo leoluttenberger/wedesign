@@ -1,6 +1,6 @@
 <template>
   <section
-    class="fixed inset-x-0 top-0 z-10 shadow dark:text-white text-xl font-Montserrat bg-white dark:bg-slate-800 shadow"
+    class="fixed inset-x-0 top-0 z-10 shadow dark:text-white text-xl font-Montserrat bg-white dark:bg-slate-800"
   >
     <div class="flex justify-center p-2">
       <div class="">Hi &#128075; Leo!</div>
@@ -79,7 +79,9 @@
     @Swiper="setSwiperRef"
     @slideChange="onSlideChange"
   >
-    <SwiperSlide> <UserInfo></UserInfo> </SwiperSlide>
+    <SwiperSlide>
+      <UserInfo></UserInfo>
+    </SwiperSlide>
     <SwiperSlide>
       <SwipeView :slideIndex="0"></SwipeView>
     </SwiperSlide>
@@ -94,30 +96,9 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { AvatarInput } from "@/components";
 import CropperItem from "@/components/CropperItem.vue";
-
-import ExperienceForm from "./ModalViews/ExperienceForm.vue";
-import EducationForm from "./ModalViews/EducationForm.vue";
-import ApplicationForm from "./ModalViews/ApplicationForm.vue";
-import KnowledgeForm from "./ModalViews/KnowledgeForm.vue";
-
-import ExperienceList from "./ModalViews/ExperienceList.vue";
-import EducationList from "./ModalViews/EducationList.vue";
-import ApplicationList from "./ModalViews/ApplicationList.vue";
-import KnowledgeList from "./ModalViews/KnowledgeList.vue";
-
-import SwiperCard from "@/components/SwiperCard.vue";
-import BottomCard from "@/components/BottomCard.vue";
-import AddIcon from "@/assets/icons/AddIcon.vue";
 import UserInfo from "./UserInfoView.vue";
-import {
-  canvasCoordinates,
-  fileObject,
-  imageObject,
-  imagePreviewObject,
-  isDarkMode,
-} from "@/store.js";
+import { isDarkMode } from "@/store.js";
 
 import Toggle from "@vueform/toggle";
 import { Swiper, SwiperSlide } from "swiper/vue";

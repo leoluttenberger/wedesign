@@ -4,15 +4,21 @@
       <AvatarInput
         class="outline:none rounded-full min-w-24 w-1/2 md:w-60 shadow-lg border-[5px] border-white"
         v-model="form.avatar"
-        :default-src="imagePreview"
+        :default-src="image"
         v-show="valueAvatarCropShow"
       />
-      <img
+      <button
         class="outline:none rounded-full min-w-24 w-1/2 md:w-60 shadow-lg border-[5px] border-white"
-        :src="image"
-        default-src="@/assets/images/logo.png"
-        v-show="valueAvatarShow"
-      />
+        @click="showEditImage()"
+      >
+        <img
+          class="rounded-full"
+          :src="image"
+          :default-src="image"
+          v-show="valueAvatarShow"
+        />
+      </button>
+
       <CropModal :show="showModal">
         <button
           type="button"
@@ -23,290 +29,39 @@
         </button>
         <CropperItem></CropperItem>
       </CropModal>
-      <div class="flex gap-4">
+      <div class="flex gap-4 py-4">
         <FormKit
           type="button"
           label="Edit"
           @click="onClickedEdit"
           :disabled="disableEdit"
         ></FormKit>
-        <FormKit
-          type="button"
-          label="Save"
-          @click="onClickedSave"
-          :disabled="disableInput"
-        ></FormKit>
       </div>
     </div>
-    <div class="space-y-1">
-      <p class="text-black px-1 dark:text-white font-Montserrat text-sm">
-        Deine Daten
-      </p>
-      <div class="grid grid-cols-2 gap-1">
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
-            <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-            >
-              Titel vor:
-            </p>
-            <FormKit
-              v-model="titelBefore"
-              type="text"
-              placeholder="Dr."
-              :disabled="disableInput"
-            />
+    <UserFormInput :disableInput="true"></UserFormInput>
+    <teleport to="body">
+      <transition
+        enter-active-class="transition ease-out duration-200 transform"
+        enter-from-class="opacity-0"
+        enter-to-class="opacity-100"
+        leave-active-class="transition ease-in duration-200 transform"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <section :class="darkLightMode">
+          <div
+            v-if="bottomCardOpen"
+            class="fixed z-10 inset-0 dark:bg-transparent-black bg-wd-white bg-opacity-50"
+          >
+            <BottomCard v-model:open="bottomCardOpen">
+              <SwiperCard :items="items">
+                <UserFormInput></UserFormInput>
+              </SwiperCard>
+            </BottomCard>
           </div>
-        </div>
-
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
-            <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-            >
-              Vorname:
-            </p>
-            <FormKit
-              v-model="firstName"
-              type="text"
-              placeholder="Max"
-              validation="required|length:3"
-              :disabled="disableInput"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-1">
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
-            <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-            >
-              Nachname:
-            </p>
-            <FormKit
-              v-model="secondName"
-              type="text"
-              placeholder="Mustermann"
-              validation="required|length:3"
-              :disabled="disableInput"
-            />
-          </div>
-        </div>
-
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
-            <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-            >
-              Titel nach:
-            </p>
-            <FormKit
-              v-model="titelAfter"
-              type="text"
-              placeholder="BA"
-              :disabled="disableInput"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-1">
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
-            <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-            >
-              Geburtsdatum:
-            </p>
-            <FormKit
-              v-model="birthDate"
-              type="text"
-              placeholder="2000"
-              validation="required|length:4"
-              :disabled="disableInput"
-            />
-          </div>
-        </div>
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
-            <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-            >
-              Geburtsort:
-            </p>
-            <FormKit
-              v-model="birthArea"
-              type="text"
-              placeholder="Stadt"
-              validation="required|length:3"
-              :disabled="disableInput"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-2 gap-1">
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
-            <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-            >
-              Familienstand:
-            </p>
-            <FormKit
-              v-model="civilStatus"
-              type="text"
-              placeholder="ledig"
-              :disabled="disableInput"
-            />
-          </div>
-        </div>
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
-            <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-            >
-              Geschlecht:
-            </p>
-            <FormKit
-              v-model="gender"
-              type="text"
-              placeholder="weiblich/männlich/divers"
-              :disabled="disableInput"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-2 gap-1">
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
-            <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-            >
-              Straße:
-            </p>
-            <FormKit
-              v-model="streetName"
-              type="text"
-              placeholder="Musterstraße"
-              :disabled="disableInput"
-            />
-          </div>
-        </div>
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
-            <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-            >
-              Nr:
-            </p>
-            <FormKit
-              v-model="streetNumber"
-              type="text"
-              placeholder="1/1"
-              :disabled="disableInput"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-1">
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 dark:bg-slate-800 h-10">
-            <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-            >
-              PLZ:
-            </p>
-            <FormKit
-              v-model="districtNumber"
-              type="text"
-              placeholder="1010"
-              :disabled="disableInput"
-            />
-          </div>
-        </div>
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
-            <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-            >
-              Ort:
-            </p>
-            <FormKit
-              v-model="city"
-              type="text"
-              placeholder="Muserstadt"
-              :disabled="disableInput"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="space-y-1">
-      <div class="mt-6">
-        <p class="text-black px-1 dark:text-white font-Montserrat text-sm">
-          Deine Kontaktdaten
-        </p>
-      </div>
-      <div class="grid grid-cols-2 gap-1">
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-16">
-            <p
-              class="py-5 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-            >
-              Telefon:
-            </p>
-            <div class="py-3">
-              <FormKit
-                v-model="phone"
-                type="text"
-                placeholder="xxxx-xxx-xxxx"
-                :validation="[['required'], ['matches', /^\d{4}-\d{3}-\d{4}$/]]"
-                validation-visibility="live"
-                :validation-messages="{
-                  matches:
-                    'Ihre Telephonnumber muss wie folgt formatiert sein: xxxx-xxx-xxxx',
-                }"
-                :disabled="disableInput"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-16">
-            <p
-              class="py-5 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-            >
-              EMail:
-            </p>
-            <div class="py-3">
-              <FormKit
-                v-model="email"
-                type="email"
-                validation="length:5|*email"
-                validation-visibility="live"
-                placeholder="Email"
-                :disabled="disableInput"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-        >
-          Hobbies:
-        </p>
-        <FormKit
-          v-model="hobbies"
-          type="text"
-          placeholder="laufen, schwimmen, tanzen"
-          :disabled="disableInput"
-        />
-      </div>
-    </div>
+        </section>
+      </transition>
+    </teleport>
   </div>
 </template>
 <script setup lang="ts">
@@ -316,16 +71,29 @@ import CropModal from "@/components/Modals/CropModal.vue";
 import IconProfile from "@/components/IconProfile.vue";
 import defaultImageDataURL from "@/assets/images/defaultImageDataURL.txt";
 import CropperItem from "@/components/CropperItem.vue";
+import SwiperCard from "@/components/SwiperCard.vue";
+import BottomCard from "@/components/BottomCard.vue";
+import UserFormInput from "@/components/UserFormInput.vue";
 import {
   canvasCoordinates,
   fileObject,
   imageObject,
-  imagePreviewObject,
+  isDarkMode,
+  slideDown,
 } from "@/store.js";
+interface SlideItem {
+  id: string;
+  index: number;
+  text: string;
+}
+let idCounter = 0;
+
+const getID = () => (idCounter++).toString();
+const getPosIndex = () => posIndexCounter++;
+let posIndexCounter = 0;
+const items = ref<SlideItem[]>([{ id: getID(), index: 1, text: "First" }]);
 
 const image = ref(JSON.parse(localStorage.getItem("profileImg")));
-const imagePreview = ref(JSON.parse(localStorage.getItem("profileImg")));
-imagePreviewObject.value = imagePreview.value;
 const showModal = ref(false);
 const MIME_TYPE = "image/png";
 const QUALITY = 0.9;
@@ -335,29 +103,44 @@ const MAX_HEIGHT = 600;
 const form = ref({ avatar: null });
 const disableInput = ref(true);
 const disableEdit = ref(false);
-const titelBefore = ref(JSON.parse(localStorage.getItem("titelBefore")));
-const titelAfter = ref(JSON.parse(localStorage.getItem("titelAfter")));
-const firstName = ref(JSON.parse(localStorage.getItem("firstName")));
-const secondName = ref(JSON.parse(localStorage.getItem("secondName")));
-const birthDate = ref(JSON.parse(localStorage.getItem("birthDate")));
-const birthArea = ref(JSON.parse(localStorage.getItem("birthArea")));
-const civilStatus = ref(JSON.parse(localStorage.getItem("civilStatus")));
-const gender = ref(JSON.parse(localStorage.getItem("gender")));
-const email = ref(JSON.parse(localStorage.getItem("email")));
-const phone = ref(JSON.parse(localStorage.getItem("phone")));
-const streetName = ref(JSON.parse(localStorage.getItem("streetName")));
-const streetNumber = ref(JSON.parse(localStorage.getItem("streetNumber")));
-const districtNumber = ref(JSON.parse(localStorage.getItem("districtNumber")));
-const city = ref(JSON.parse(localStorage.getItem("city")));
-const hobbies = ref(JSON.parse(localStorage.getItem("hobbies")));
+
 const valueAvatarShow = ref(true);
 const valueAvatarCropShow = ref(false);
+valueAvatarCropShow.value = false;
+valueAvatarShow.value = true;
+disableInput.value = true;
+disableEdit.value = false;
 
-if (image.value == null) {
-  image.value = defaultImageDataURL;
-  imagePreview.value = defaultImageDataURL;
+const bottomCardOpen = ref(false);
+
+const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")));
+if (JSON.parse(localStorage.getItem("theme")) == "dark") {
+  darkLightMode.value = "dark";
+} else {
+  darkLightMode.value = "light";
 }
 
+if (image.value == null) {
+  console.log("Setting Default ProfileImage!");
+  image.value = defaultImageDataURL;
+  localStorage.setItem("profileImg", JSON.stringify(image.value));
+}
+
+watch(isDarkMode, () => {
+  if (isDarkMode == true) {
+    darkLightMode.value = "dark";
+  } else {
+    darkLightMode.value = "light";
+  }
+});
+
+watch(slideDown, () => {
+  if (slideDown.value) {
+    bottomCardOpen.value = false;
+  } else {
+    bottomCardOpen.value = true;
+  }
+});
 watch(imageObject, () => {
   image.value = imageObject.value;
   openModal();
@@ -366,41 +149,17 @@ watch(imageObject, () => {
 
 watch(showModal, () => {
   if (showModal.value == false) {
-    console.log("Create Blob Image!");
     createBlobImage();
+    console.log("Saved Profile Image to LocalStorage.");
+    valueAvatarCropShow.value = false;
+    valueAvatarShow.value = true;
   } else {
     console.log("show modal true");
   }
 });
-
-const onClickedSave = () => {
-  valueAvatarCropShow.value = false;
-  valueAvatarShow.value = true;
-  localStorage.setItem("titelBefore", JSON.stringify(titelBefore.value));
-  localStorage.setItem("titelAfter", JSON.stringify(titelAfter.value));
-  localStorage.setItem("firstName", JSON.stringify(firstName.value));
-  localStorage.setItem("secondName", JSON.stringify(secondName.value));
-  localStorage.setItem("birthDate", JSON.stringify(birthDate.value));
-  localStorage.setItem("birthArea", JSON.stringify(birthArea.value));
-  localStorage.setItem("civilStatus", JSON.stringify(civilStatus.value));
-  localStorage.setItem("gender", JSON.stringify(gender.value));
-  localStorage.setItem("email", JSON.stringify(email.value));
-  localStorage.setItem("phone", JSON.stringify(phone.value));
-  localStorage.setItem("streetName", JSON.stringify(streetName.value));
-  localStorage.setItem("streetNumber", JSON.stringify(streetNumber.value));
-  localStorage.setItem("districtNumber", JSON.stringify(districtNumber.value));
-  localStorage.setItem("city", JSON.stringify(city.value));
-  localStorage.setItem("hobbies", JSON.stringify(hobbies));
-  localStorage.setItem("profileImg", JSON.stringify(image.value));
-
-  disableInput.value = true;
-  disableEdit.value = false;
-};
 const onClickedEdit = () => {
-  disableInput.value = false;
-  disableEdit.value = true;
-  valueAvatarCropShow.value = true;
-  valueAvatarShow.value = false;
+  bottomCardOpen.value = true;
+  slideDown.value = false;
 };
 const createBlobImage = () => {
   if (fileObject.file) {
@@ -426,9 +185,9 @@ const createBlobImage = () => {
       if (blob.length / 1028 >= 2048) {
         downSampleImage(image.value);
       } else {
-        imagePreviewObject.value = image.value;
-        imagePreview.value = imagePreviewObject.value;
+        localStorage.setItem("profileImg", JSON.stringify(image.value));
       }
+      console.log("Create Blob Image!");
     };
   } else {
     console.log("Error reading File!");
@@ -453,8 +212,7 @@ const downSampleImage = (blobURL) => {
       QUALITY
     );
     image.value = canvas.toDataURL();
-    imagePreviewObject.value = image.value;
-    imagePreview.value = imagePreviewObject.value;
+    localStorage.setItem("profileImg", JSON.stringify(image.value));
   };
 };
 
@@ -480,5 +238,10 @@ const closeModal = () => {
 };
 const openModal = () => {
   showModal.value = true;
+};
+
+const showEditImage = () => {
+  valueAvatarCropShow.value = true;
+  valueAvatarShow.value = false;
 };
 </script>

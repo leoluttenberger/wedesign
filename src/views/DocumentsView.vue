@@ -36,7 +36,7 @@
     @slideChange="onSlideChange"
   >
     <swiper-slide>
-      <SwipeView :slideIndex="3"> </SwipeView>
+      <SwipeView :slideIndex="4"> </SwipeView>
     </swiper-slide>
     <swiper-slide>
       <ArchiveView></ArchiveView>

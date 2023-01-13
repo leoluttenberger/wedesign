@@ -11,7 +11,9 @@
   </div>
   <Tiptap
     :itemCurrentIndex="props.itemIndex"
-    :isTextFieldEditModal="true"
+    :textEditIndex="props.buttonIndex"
+    :indexOfMVid="props.indexOfMVid"
+    :lastIndex="props.lastIndex"
   ></Tiptap>
 </template>
 <script setup lang="ts">
@@ -23,6 +25,18 @@ import Tiptap from "@/components/Tiptap.vue";
 
 const props = defineProps({
   itemIndex: {
+    type: Number,
+    default: 0,
+  },
+  buttonIndex: {
+    type: Number,
+    default: 0,
+  },
+  indexOfMVid: {
+    type: Number,
+    default: 0,
+  },
+  lastIndex: {
     type: Number,
     default: 0,
   },

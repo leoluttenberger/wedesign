@@ -111,7 +111,7 @@
           <FormKit
             v-model="civilStatus"
             type="select"
-            :options="['Auswahl','ledig', 'verheiratet', 'sonstig']"
+            :options="['Auswahl', 'ledig', 'verheiratet', 'sonstig']"
             placeholder="ledig"
             :disabled="false"
           />
@@ -127,7 +127,7 @@
           <FormKit
             v-model="gender"
             type="select"
-            :options="['Auswahl','weiblich', 'männlich', 'divers']"
+            :options="['Auswahl', 'weiblich', 'männlich', 'divers']"
             placeholder="weiblich"
             :disabled="false"
           />

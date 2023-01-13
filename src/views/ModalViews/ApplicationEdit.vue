@@ -154,7 +154,8 @@
           <component
             v-bind="editIndex"
             :is="MotivationEdit"
-            :currentIndex="editIndex"
+            :currentApplIndex="editIndex"
+            :currentApplMVid="__mv"
           />
         </div>
       </div>
@@ -196,7 +197,6 @@ watch(sideBack, () => {
     motivationModalOpen.value = false;
     const applications = ref(JSON.parse(localStorage.getItem("applications")));
     __mv = applications.value[props.editIndex][0].mv;
-    console.log("mv:", __mv);
   }
 });
 
@@ -210,7 +210,6 @@ onMounted(() => {
   state.value = applications.value[props.editIndex][0].state;
   note.value = applications.value[props.editIndex][0].note;
   __mv = applications.value[props.editIndex][0].mv;
-  console.log("mv: ", __mv);
   if (__mv == null) {
     __mvText = "Motivationsschreiben fehlt";
   } else {

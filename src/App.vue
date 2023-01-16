@@ -95,15 +95,12 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
-import { getAuth } from "firebase/auth";
 import HomeIcon from "./assets/icons/HomeIcon.vue";
 import UserIcon from "./assets/icons/UserIcon.vue";
 import DocumentsIcon from "./assets/icons/DocumentsIcon.vue";
 import NotificationsIcon from "./assets/icons/NotificationsIcon.vue";
 import { isDarkMode } from "./store.js";
-const isLoggedIn = ref(true);
 const router = useRouter();
-const auth = getAuth();
 const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")));
 let activeButton1 = ref(true);
 let activeButton2 = ref(false);
@@ -117,20 +114,6 @@ if (JSON.parse(localStorage.getItem("theme")) == "dark") {
 watch(isDarkMode, () => {
   swichtDarkLightMode();
 });
-
-let showMenu = false;
-const toogleNavbar = () => (showMenu = !showMenu);
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    isLoggedIn.value = true;
-  } else {
-    isLoggedIn.value = false;
-  }
-});
-const signOut = () => {
-  auth.signOut();
-  router.push("/");
-};
 const swichtDarkLightMode = () => {
   if (isDarkMode.value == true) {
     darkLightMode.value = "dark";

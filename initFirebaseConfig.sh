@@ -1,4 +1,7 @@
 #!/bin/bash
+echo "======================================================================================================"
+echo "Init Firebase config"
+echo "======================================================================================================"
 firebase login
 echo "!!!!!!!!! Init firebase hosting in folder: (dist) !!!!!!!!!"
 read -p "Do you want to add firebase hosting configuration to the project?(y/N) " RESP

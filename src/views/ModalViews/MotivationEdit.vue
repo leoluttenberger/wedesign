@@ -194,7 +194,7 @@ interface SlideItem {
 const motivation = [
   {
     indexMV: "1",
-    subject: "Bewerbung Berbung",
+    subject: "Bewerbung Bewerbung",
     salutationBeginning: "Sehr geehrte Frau/Herr",
     textfield: "Mit großen Interesse habe ich Ihre Anzeige im...",
     ending: "Ich freue mich Ihnen bei einem persönlichen...",

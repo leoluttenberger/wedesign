@@ -50,3 +50,6 @@ pnpm-debug.log*
 
 # iOS
 /ios
+
+#Components
+components.d.ts

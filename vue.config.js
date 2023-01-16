@@ -1,3 +1,4 @@
+// Raw data Config for handling bas64 storaged file
 const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
   transpileDependencies: true,

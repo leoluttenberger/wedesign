@@ -1,4 +1,4 @@
-const { config } = require('./wdio.shared.conf.ts')
+const { config } = require("./wdio.shared.conf.ts");
 
 exports.config = {
   /**
@@ -9,15 +9,15 @@ exports.config = {
    * config for local testing
    */
   maxInstances: 1,
-  services: ['chromedriver', 'geckodriver'],
+  services: ["chromedriver", "geckodriver"],
   capabilities: [
     {
-      browserName: 'chrome',
-      acceptInsecureCerts: true
+      browserName: "chrome",
+      acceptInsecureCerts: true,
     },
     {
-      browserName: 'firefox',
-      acceptInsecureCerts: true
-    }
-  ]
-}
+      browserName: "firefox",
+      acceptInsecureCerts: true,
+    },
+  ],
+};

@@ -1,3 +1,4 @@
+// postcss config for tailwind nesting
 module.exports = {
   plugins: {
     "postcss-import": {},

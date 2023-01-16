@@ -8,7 +8,7 @@ export NVM_DIR="$HOME/.nvm"
 nvm use
 nvm install
 npm install -g ruby firebase-tools
-sudo gem install  fastlane
+sudo gem install fastlane
 echo "======================================================================================================"
 echo "Install and build nodejs"
 echo "======================================================================================================"
@@ -22,21 +22,8 @@ npx cap add android
 npx cap add ios
 npx cap copy
 npx cap sync
-echo "======================================================================================================"
-echo "Init Firebase config"
-echo "======================================================================================================"
-sh initFirebaseConfig.sh
-echo "======================================================================================================"
-echo "Configure and build android app plus fastlane"
-echo "======================================================================================================"
-sh initFastlane.sh
-cp build.gradle.example.android.app $( pwd; )/android/app/
-mv $( pwd; )/android/app/build.gradle.example.android.app $( pwd; )/android/app/build.gradle
-cp build.gradle.example.android $( pwd; )/android/
-mv $( pwd; )/android/app/build.gradle.example.android $( pwd; )/android/build.gradle
-cd android && gradle build
-fastlane init
-sudo fastlane add_plugin firebase_app_distribution
+sh ./initFirebaseConfig.sh
+sh ./initAndroidBuild.sh
 
 
 

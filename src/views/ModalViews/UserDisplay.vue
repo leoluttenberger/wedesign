@@ -2,7 +2,7 @@
 <template>
   <Profile></Profile>
   <div class="space-y-1">
-    <p class="text-black px-1 dark:text-white font-Montserrat text-sm">
+    <p class="text-black px-1 py-2 dark:text-white font-Montserrat text-sm">
       Deine Daten
     </p>
     <div class="grid grid-cols-2 gap-1">
@@ -17,42 +17,7 @@
             v-model="titleBefore"
             type="text"
             placeholder="Dr."
-            :disabled="true"
-          />
-        </div>
-      </div>
-
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-          >
-            Vorname:
-          </p>
-          <FormKit
-            v-model="firstName"
-            type="text"
-            placeholder="Max"
-            validation="required|length:3"
-            :disabled="true"
-          />
-        </div>
-      </div>
-    </div>
-    <div class="grid grid-cols-2 gap-1">
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-          >
-            Nachname:
-          </p>
-          <FormKit
-            v-model="secondName"
-            type="text"
-            placeholder="Mustermann"
-            validation="required|length:3"
-            :disabled="true"
+            :disabled="false"
           />
         </div>
       </div>
@@ -68,7 +33,41 @@
             v-model="titleAfter"
             type="text"
             placeholder="BA"
-            :disabled="true"
+            :disabled="false"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+          >
+            Vorname:
+          </p>
+          <FormKit
+            v-model="firstName"
+            type="text"
+            placeholder="Max"
+            validation="required|length:3"
+            :disabled="false"
+          />
+        </div>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+          >
+            Nachname:
+          </p>
+          <FormKit
+            v-model="secondName"
+            type="text"
+            placeholder="Mustermann"
+            validation="required|length:3"
+            :disabled="false"
           />
         </div>
       </div>

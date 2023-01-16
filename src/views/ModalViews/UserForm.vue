@@ -25,6 +25,23 @@
           <p
             class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
+            Nachtitel:
+          </p>
+          <FormKit
+            v-model="titleAfter"
+            type="text"
+            placeholder="BA"
+            :disabled="false"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+          >
             Vorname:
           </p>
           <FormKit
@@ -36,8 +53,6 @@
           />
         </div>
       </div>
-    </div>
-    <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
@@ -50,22 +65,6 @@
             type="text"
             placeholder="Mustermann"
             validation="required|length:3"
-            :disabled="false"
-          />
-        </div>
-      </div>
-
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-          >
-            Nachtitel:
-          </p>
-          <FormKit
-            v-model="titleAfter"
-            type="text"
-            placeholder="BA"
             :disabled="false"
           />
         </div>

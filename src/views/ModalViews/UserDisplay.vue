@@ -17,7 +17,7 @@
             v-model="titleBefore"
             type="text"
             placeholder="Dr."
-            :disabled="false"
+            :disabled="true"
           />
         </div>
       </div>
@@ -33,7 +33,7 @@
             v-model="titleAfter"
             type="text"
             placeholder="BA"
-            :disabled="false"
+            :disabled="true"
           />
         </div>
       </div>
@@ -51,7 +51,7 @@
             type="text"
             placeholder="Max"
             validation="required|length:3"
-            :disabled="false"
+            :disabled="true"
           />
         </div>
       </div>
@@ -67,7 +67,7 @@
             type="text"
             placeholder="Mustermann"
             validation="required|length:3"
-            :disabled="false"
+            :disabled="true"
           />
         </div>
       </div>

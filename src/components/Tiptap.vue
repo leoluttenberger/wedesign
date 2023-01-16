@@ -47,7 +47,15 @@ import {
 } from "./extensions";
 import { content } from "./text";
 import { Match } from "@/types";
-import { currentTextField, currentEnding } from "@/store.js";
+import {
+  currentSubject,
+  currentSalutationBeginning,
+  currentTextField,
+  currentEnding,
+  currentSalutationEnding,
+} from "@/store.js";
+
+const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
 
 const shouldShow = ({ editor }) => {
   const match = editor.storage.languagetool.match;
@@ -65,13 +73,17 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
-  isTextFieldEditModal: {
-    type: Boolean,
-    default: false,
+  textEditIndex: {
+    type: Number,
+    default: 0,
   },
-  isEndingEditModal: {
-    type: Boolean,
-    default: false,
+  indexOfMVid: {
+    type: Number,
+    default: 0,
+  },
+  lastIndex: {
+    type: Number,
+    default: 0,
   },
 });
 
@@ -127,44 +139,97 @@ const onClickedSave = () => {
   const comment_text = editor.value.getJSON().content[0].content[0].text
     ? editor.value.getJSON().content[0].content[0].text
     : "";
-  console.log(comment_text);
-  if (props.isEndingEditModal) {
-    currentEnding.value = comment_text;
-  }
-  if (props.isTextFieldEditModal) {
-    currentTextField.value = comment_text;
+  switch (props.textEditIndex) {
+    case 0:
+      currentSubject.value = comment_text;
+      break;
+    case 1:
+      currentSalutationBeginning.value = comment_text;
+      break;
+    case 2:
+      currentTextField.value = comment_text;
+      break;
+    case 3:
+      currentEnding.value = comment_text;
+      break;
+    case 4:
+      currentSalutationEnding.value = comment_text;
+      break;
+    default:
+      currentSalutationBeginning.value = comment_text;
+      break;
   }
 };
 onMounted(() => {
-  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
-  let indexCal = props.itemCurrentIndex;
-  let editText = "Neuer Text";
+  let editText = "";
+  let mvIndexToDisplay = 0;
 
-  if (indexCal > 0) {
-    if (props.isTextFieldEditModal) {
-      editText = motivations.value[indexCal][0].textfield;
-    }
-    if (props.isEndingEditModal) {
-      editText = motivations.value[indexCal][0].ending;
+  if (props.itemCurrentIndex >= 0) {
+    if (props.itemCurrentIndex == 0) {
+      switch (props.textEditIndex) {
+        case 0:
+          editText = currentSubject.value;
+          break;
+        case 1:
+          editText = currentSalutationBeginning.value;
+          break;
+        case 2:
+          editText = currentTextField.value;
+          break;
+        case 3:
+          editText = currentEnding.value;
+          break;
+        case 4:
+          editText = currentSalutationEnding.value;
+          break;
+        default:
+          editText = currentSalutationBeginning.value;
+          break;
+      }
+    } else {
+      mvIndexToDisplay = props.lastIndex - props.itemCurrentIndex;
+      if (mvIndexToDisplay >= 0) {
+        switch (props.textEditIndex) {
+          case 0:
+            editText = motivations.value[mvIndexToDisplay][0].subject;
+            break;
+          case 1:
+            editText =
+              motivations.value[mvIndexToDisplay][0].salutationBeginning;
+            break;
+          case 2:
+            editText = motivations.value[mvIndexToDisplay][0].textfield;
+            break;
+          case 3:
+            editText = motivations.value[mvIndexToDisplay][0].ending;
+            break;
+          case 4:
+            editText = motivations.value[mvIndexToDisplay][0].salutationEnding;
+            break;
+          default:
+            editText = motivations.value[mvIndexToDisplay][0].subject;
+            break;
+        }
+      } else {
+        console.log("Error Caclulated index negative!");
+      }
     }
   } else {
     console.log("Error! Slide index is negative!");
   }
-  editor.value.commands.setContent({
-    type: "text",
-    text: editText,
-  });
-});
-
-const getLastIndex = () => {
-  const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
-  let lastIndex = tempMotivations.length - 1;
-  console.log("lastIndex:", lastIndex);
-  if (lastIndex < 0) {
-    lastIndex = 0;
+  if (editText != "") {
+    editor.value.commands.setContent({
+      type: "text",
+      text: editText,
+    });
+  } else {
+    editor.value.commands.setContent({
+      type: "text",
+      text: "Neuer Text",
+    });
+    console.log("Empty text is not allowed!");
   }
-  return lastIndex;
-};
+});
 </script>
 
 <style lang="scss">

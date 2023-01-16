@@ -1,6 +1,6 @@
 const textClassification = {
   label:
-    "inline-block align-middle w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm",
+    "inline-block align-middle w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm placeholder-gray dark:placeholder-gray",
   inner: `
     border-none
     border-transparent
@@ -9,7 +9,7 @@ const textClassification = {
     focus-within:border-wd-green
   `,
   input:
-    "h-10 outline-0 font-Montserrat md:text-base text-sm font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-black dark:placeholder-white",
+    "h-10 outline-0 font-Montserrat md:text-base text-sm font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-gray dark:placeholder-gray",
 };
 const boxClassification = {
   fieldset: "max-w-md border border-gray-400 rounded-md",
@@ -71,7 +71,7 @@ export default {
   textarea: {
     ...textClassification,
     input:
-      "h-14 outline-0 outline-none font-Montserrat md:text-base text-sm font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-black dark:placeholder-white",
+      "h-14 outline-0 outline-none font-Montserrat md:text-base text-sm font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-gray dark:placeholder-gray",
   },
   time: textClassification,
   url: textClassification,

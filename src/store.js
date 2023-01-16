@@ -28,9 +28,19 @@ export const sideBack = reactive({
 export const sideBackBack = reactive({
   value: null,
 });
+export const currentSubject = reactive({
+  value: " ",
+});
+export const currentSalutationBeginning = reactive({
+  value: " ",
+});
 export const currentTextField = reactive({
-  value: null,
+  value: " ",
 });
 export const currentEnding = reactive({
-  value: null,
+  value: " ",
+});
+
+export const currentSalutationEnding = reactive({
+  value: " ",
 });

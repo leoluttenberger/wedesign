@@ -4,8 +4,7 @@
       v-model="type"
       type="select"
       label="Typ"
-      :options="['Sprachkenntnisse', 'Sonstige Kenntnisse']"
-      value="Sonstige Kenntnisse"
+      :options="['Auswahl', 'Sprachkenntnisse', 'Sonstige Kenntnisse']"
     />
     <div v-if="type === 'Sonstige Kenntnisse'">
       <FormKit
@@ -27,12 +26,12 @@
         type="select"
         label="Typ"
         :options="[
+          'Auswahl',
           'Basiskenntnisse',
           'Fortgeschritten',
           'Fließend',
           'Muttersprache',
         ]"
-        value="Basiskenntnisse"
       />
     </div>
   </div>

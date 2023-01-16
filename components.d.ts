@@ -11,7 +11,7 @@ declare module '@vue/runtime-core' {
     BottomCard: typeof import('./src/components/BottomCard.vue')['default']
     CropModal: typeof import('./src/components/Modals/CropModal.vue')['default']
     CropperItem: typeof import('./src/components/CropperItem.vue')['default']
-    EndingEditModal: typeof import('./src/components/Modals/EndingEditModal.vue')['default']
+    EditTextModal: typeof import('./src/components/Modals/EditTextModal.vue')['default']
     IconProfile: typeof import('./src/components/IconProfile.vue')['default']
     MenuBar: typeof import('./src/components/MenuBar.vue')['default']
     MenuItem: typeof import('./src/components/MenuItem.vue')['default']
@@ -19,8 +19,6 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SwiperCard: typeof import('./src/components/SwiperCard.vue')['default']
-    TextfieldEditModal: typeof import('./src/components/Modals/TextfieldEditModal.vue')['default']
     Tiptap: typeof import('./src/components/Tiptap.vue')['default']
-    UserFormInput: typeof import('./src/components/UserFormInput.vue')['default']
   }
 }

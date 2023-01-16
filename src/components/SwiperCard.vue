@@ -10,12 +10,12 @@
     @activeIndexChange="onActiveIndexChange"
   >
     <swiper-slide
-      class="top-20 bg-white dark:bg-slate-800 rounded-3xl"
+      class="top-10 bg-white dark:bg-slate-800 rounded-3xl border-t-[5px] border-t-gray"
       v-for="slide in items"
       :key="slide.index"
       :virtual-index="slide.index"
     >
-      <div class="py-10 flex flex-col items-left shadow-lg-up">
+      <div class="flex flex-col items-left shadow-lg-up">
         <slot :id="slide.id" v-bind:itemIndex="slide.index" />
       </div>
     </swiper-slide>

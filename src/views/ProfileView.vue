@@ -1,5 +1,5 @@
 <template>
-  <div class="py-20">
+  <div class="py-4">
     <div class="flex grid place-items-center">
       <AvatarInput
         class="outline:none rounded-full min-w-24 w-1/2 md:w-60 shadow-lg border-[5px] border-white"
@@ -29,39 +29,7 @@
         </button>
         <CropperItem></CropperItem>
       </CropModal>
-      <div class="flex gap-4 py-4">
-        <FormKit
-          type="button"
-          label="Edit"
-          @click="onClickedEdit"
-          :disabled="disableEdit"
-        ></FormKit>
-      </div>
     </div>
-    <UserFormInput :disableInput="true"></UserFormInput>
-    <teleport to="body">
-      <transition
-        enter-active-class="transition ease-out duration-200 transform"
-        enter-from-class="opacity-0"
-        enter-to-class="opacity-100"
-        leave-active-class="transition ease-in duration-200 transform"
-        leave-from-class="opacity-100"
-        leave-to-class="opacity-0"
-      >
-        <section :class="darkLightMode">
-          <div
-            v-if="bottomCardOpen"
-            class="fixed z-10 inset-0 dark:bg-transparent-black bg-wd-white bg-opacity-50"
-          >
-            <BottomCard v-model:open="bottomCardOpen">
-              <SwiperCard :items="items">
-                <UserFormInput></UserFormInput>
-              </SwiperCard>
-            </BottomCard>
-          </div>
-        </section>
-      </transition>
-    </teleport>
   </div>
 </template>
 <script setup lang="ts">
@@ -73,7 +41,9 @@ import defaultImageDataURL from "@/assets/images/defaultImageDataURL.txt";
 import CropperItem from "@/components/CropperItem.vue";
 import SwiperCard from "@/components/SwiperCard.vue";
 import BottomCard from "@/components/BottomCard.vue";
-import UserFormInput from "@/components/UserFormInput.vue";
+import UserFormInput from "@/views/ModalViews/UserForm.vue";
+import UserFormDisplay from "@/views/ModalViews/UserDisplay.vue";
+
 import {
   canvasCoordinates,
   fileObject,
@@ -81,17 +51,6 @@ import {
   isDarkMode,
   slideDown,
 } from "@/store.js";
-interface SlideItem {
-  id: string;
-  index: number;
-  text: string;
-}
-let idCounter = 0;
-
-const getID = () => (idCounter++).toString();
-const getPosIndex = () => posIndexCounter++;
-let posIndexCounter = 0;
-const items = ref<SlideItem[]>([{ id: getID(), index: 1, text: "First" }]);
 
 const image = ref(JSON.parse(localStorage.getItem("profileImg")));
 const showModal = ref(false);
@@ -157,6 +116,15 @@ watch(showModal, () => {
     console.log("show modal true");
   }
 });
+
+const onClickedSave = () => {
+  valueAvatarCropShow.value = false;
+  valueAvatarShow.value = true;
+  localStorage.setItem("profileImg", JSON.stringify(image.value));
+  disableInput.value = true;
+  disableEdit.value = false;
+};
+
 const onClickedEdit = () => {
   bottomCardOpen.value = true;
   slideDown.value = false;

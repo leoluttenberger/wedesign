@@ -18,7 +18,6 @@ fi
 cp ./exampleFiles/Appfile.example $( pwd; )/android/fastlane
 mv $( pwd; )./android/fastlane/Appfile.example $( pwd; )/android/fastlane/Appfile
 cp ./exampleFiles/Fastfile.example $( pwd; )/android/fastlane
-echo "======================================================================================================"
 mv $( pwd; )/android/fastlane/Fastfile.example $( pwd; )/android/fastlane/Fastfile
 cp ./exampleFiles/Gemfile.example $( pwd; )/android
 mv $( pwd; )/android/Gemfile.example $( pwd; )/android/Gemfile
@@ -31,6 +30,7 @@ echo "Build Android with : 'export ANDROID_SDK_ROOT=~/Android/Sdk' './android/gr
 echo "======================================================================================================"
 echo "Fastlane Deploy Init and Configure"
 echo "======================================================================================================"
+export ANDROID_SDK_ROOT=~/Android/Sdk
 cd android && fastlane init
 cd fastlane && fastlane add_plugin firebase_app_distribution
 echo "======================================================================================================"

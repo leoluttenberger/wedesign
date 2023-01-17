@@ -80,7 +80,10 @@
     @slideChange="onSlideChange"
   >
     <SwiperSlide>
-      <SwipeView :slideIndex="0" :useEditButton="true"> </SwipeView>
+      <UserInfoDisplay></UserInfoDisplay>
+    </SwiperSlide>
+    <SwiperSlide>
+      <SwipeView :slideIndex="0" :useEditButton="false"></SwipeView>
     </SwiperSlide>
     <SwiperSlide>
       <SwipeView :slideIndex="1" :useEditButton="false"></SwipeView>
@@ -88,15 +91,13 @@
     <SwiperSlide>
       <SwipeView :slideIndex="2" :useEditButton="false"></SwipeView>
     </SwiperSlide>
-    <SwiperSlide>
-      <SwipeView :slideIndex="3" :useEditButton="false"></SwipeView>
-    </SwiperSlide>
   </Swiper>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import CropperItem from "@/components/CropperItem.vue";
+import UserInfoDisplay from "./ModalViews/UserInfoDisplay.vue";
 import { isDarkMode } from "@/store.js";
 
 import Toggle from "@vueform/toggle";

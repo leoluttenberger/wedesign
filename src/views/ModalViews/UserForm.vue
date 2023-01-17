@@ -7,7 +7,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
           >
             Vortitel:
           </p>
@@ -15,7 +15,7 @@
             v-model="titleBefore"
             type="text"
             placeholder="Dr."
-            :disabled="false"
+            :disabled="true"
           />
         </div>
       </div>
@@ -23,7 +23,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
           >
             Nachtitel:
           </p>
@@ -31,7 +31,7 @@
             v-model="titleAfter"
             type="text"
             placeholder="BA"
-            :disabled="false"
+            :disabled="true"
           />
         </div>
       </div>
@@ -40,7 +40,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
           >
             Vorname:
           </p>
@@ -49,14 +49,14 @@
             type="text"
             placeholder="Max"
             validation="required|length:3"
-            :disabled="false"
+            :disabled="true"
           />
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
           >
             Nachname:
           </p>
@@ -65,7 +65,7 @@
             type="text"
             placeholder="Mustermann"
             validation="required|length:3"
-            :disabled="false"
+            :disabled="true"
           />
         </div>
       </div>
@@ -74,17 +74,17 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
           >
             Geburtsdatum:
           </p>
-          <FormKit v-model="birthDate" type="date" :disabled="false" />
+          <FormKit v-model="birthDate" type="date" :disabled="true" />
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
           >
             Geburtsort:
           </p>
@@ -93,7 +93,7 @@
             type="text"
             placeholder="Stadt"
             validation="required|length:3"
-            :disabled="false"
+            :disabled="true"
           />
         </div>
       </div>
@@ -103,7 +103,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
           >
             Familienstand:
           </p>
@@ -112,14 +112,14 @@
             type="select"
             :options="['Auswahl', 'ledig', 'verheiratet', 'sonstig']"
             placeholder="ledig"
-            :disabled="false"
+            :disabled="true"
           />
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
           >
             Geschlecht:
           </p>
@@ -128,7 +128,7 @@
             type="select"
             :options="['Auswahl', 'weiblich', 'männlich', 'divers']"
             placeholder="weiblich"
-            :disabled="false"
+            :disabled="true"
           />
         </div>
       </div>
@@ -138,7 +138,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
           >
             Straße:
           </p>
@@ -146,14 +146,14 @@
             v-model="streetName"
             type="text"
             placeholder="Musterstraße"
-            :disabled="false"
+            :disabled="true"
           />
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
           >
             Nr:
           </p>
@@ -161,7 +161,7 @@
             v-model="streetNumber"
             type="text"
             placeholder="1/1"
-            :disabled="false"
+            :disabled="true"
           />
         </div>
       </div>
@@ -170,7 +170,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 dark:bg-slate-800 h-10">
           <p
-            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
           >
             PLZ:
           </p>
@@ -178,14 +178,14 @@
             v-model="districtNumber"
             type="text"
             placeholder="1010"
-            :disabled="false"
+            :disabled="true"
           />
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
           >
             Ort:
           </p>
@@ -193,7 +193,7 @@
             v-model="city"
             type="text"
             placeholder="Muserstadt"
-            :disabled="false"
+            :disabled="true"
           />
         </div>
       </div>
@@ -209,43 +209,39 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="py-5 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
           >
             Telefon:
           </p>
-          <div class="py-3">
-            <FormKit
-              v-model="phone"
-              type="text"
-              placeholder="xxxx-xxx-xxxx"
-              :disabled="false"
-            />
-          </div>
+          <FormKit
+            v-model="phone"
+            type="text"
+            placeholder="xxxx-xxx-xxxx"
+            :disabled="true"
+          />
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="py-5 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
           >
             EMail:
           </p>
-          <div class="py-3">
-            <FormKit
-              v-model="email"
-              type="email"
-              validation="length:5|*email"
-              validation-visibility="live"
-              placeholder="Email"
-              :disabled="false"
-            />
-          </div>
+          <FormKit
+            v-model="email"
+            type="email"
+            validation="length:5|*email"
+            validation-visibility="live"
+            placeholder="Email"
+            :disabled="true"
+          />
         </div>
       </div>
     </div>
     <div class="flex bg-white dark:bg-slate-800 h-10">
       <p
-        class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+        class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
       >
         Hobbies:
       </p>
@@ -253,16 +249,10 @@
         v-model="hobbies"
         type="text"
         placeholder="laufen, schwimmen, tanzen"
-        :disabled="false"
+        :disabled="true"
       />
     </div>
   </div>
-  <button
-    class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white py-2"
-    @click="saveToLocalStorage"
-  >
-    Speichern
-  </button>
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
@@ -303,49 +293,4 @@ onMounted(() => {
     hobbies.value = userInfos.value[0][0].hobbies;
   }
 });
-
-const saveToLocalStorage = () => {
-  if (localStorage.getItem("userInfos")) {
-    userInfos.value[0][0].titleBefore = titleBefore.value;
-    userInfos.value[0][0].titleAfter = titleAfter.value;
-    userInfos.value[0][0].firstName = firstName.value;
-    userInfos.value[0][0].secondName = secondName.value;
-    userInfos.value[0][0].birthDate = birthDate.value;
-    userInfos.value[0][0].birthArea = birthArea.value;
-    userInfos.value[0][0].civilStatus = civilStatus.value;
-    userInfos.value[0][0].gender = gender.value;
-    userInfos.value[0][0].email = email.value;
-    userInfos.value[0][0].phone = phone.value;
-    userInfos.value[0][0].streetName = streetName.value;
-    userInfos.value[0][0].streetNumber = streetNumber.value;
-    userInfos.value[0][0].districtNumber = districtNumber.value;
-    userInfos.value[0][0].city = city.value;
-    userInfos.value[0][0].hobbies = hobbies.value;
-    localStorage.setItem("userInfos", JSON.stringify(userInfos.value));
-  } else {
-    console.log("userinfo new save");
-    const defaultUserInfos = [
-      {
-        titleBefore: titleBefore.value,
-        firstName: firstName.value,
-        secondName: secondName.value,
-        titleAfter: titleAfter.value,
-        birthDate: birthDate.value,
-        birthArea: birthArea.value,
-        civilStatus: civilStatus.value,
-        gender: gender.value,
-        email: email.value,
-        phone: phone.value,
-        streetName: streetName.value,
-        streetNumber: streetNumber,
-        districtNumber: districtNumber,
-        city: city.value,
-        hobbies: hobbies.value,
-      },
-    ];
-    localStorage.setItem("userInfos", JSON.stringify([defaultUserInfos]));
-  }
-
-  slideDown.value = true;
-};
 </script>

@@ -1,48 +1,84 @@
 <template>
   <div class="p-4" v-bind="editIndex">
-    <FormKit
-      v-model="type"
-      type="select"
-      label="Typ"
-      :options="['HTL', 'AHS', 'HAK', 'HBLA']"
-    />
-    <FormKit
-      v-model="specialty"
-      type="select"
-      label="Schwerpunkt"
-      :options="['IT', 'BE', 'Sprachen', 'Wirtschaft']"
-    />
-    <FormKit
-      v-model="address"
-      type="text"
-      label="Adresse"
-      placeholder="PLZ, Ort, Adresse"
-    />
-    <FormKit
-      type="date"
-      v-model="educationFrom"
-      label="Von"
-      placeholder="Auswählen"
-    />
-    <FormKit
-      type="date"
-      v-model="educationTo"
-      label="Bis"
-      placeholder="Auswählen"
-      :validation="[['date_after', educationFrom]]"
-      validation-visibility="live"
-    />
+    <div class="col-span-2 md:col-span-1">
+      <div class="flex bg-white dark:bg-slate-800 h-10">
+        <p
+          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+        >
+          Typ:
+        </p>
+        <FormKit
+          v-model="type"
+          type="select"
+          :options="['Auswahl', 'HTL', 'AHS', 'HAK', 'HBLA']"
+        />
+      </div>
+    </div>
+    <div class="col-span-2 md:col-span-1">
+      <div class="flex bg-white dark:bg-slate-800 h-10">
+        <p
+          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+        >
+          Schwerpunkt:
+        </p>
+        <FormKit
+          v-model="specialty"
+          type="select"
+          :options="['Auswahl', 'IT', 'BE', 'Sprachen', 'Wirtschaft']"
+        />
+      </div>
+    </div>
+    <div class="col-span-2 md:col-span-1">
+      <div class="flex bg-white dark:bg-slate-800 h-10">
+        <p
+          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+        >
+          Adresse:
+        </p>
+        <FormKit
+          v-model="address"
+          type="text"
+          placeholder="PLZ, Ort, Adresse"
+        />
+      </div>
+    </div>
+    <div class="col-span-2 md:col-span-1">
+      <div class="flex bg-white dark:bg-slate-800 h-10">
+        <p
+          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+        >
+          Von:
+        </p>
+        <FormKit type="date" v-model="educationFrom" placeholder="Auswählen" />
+      </div>
+    </div>
+    <div class="col-span-2 md:col-span-1">
+      <div class="flex bg-white dark:bg-slate-800 h-10">
+        <p
+          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+        >
+          Bis:
+        </p>
+        <FormKit
+          type="date"
+          v-model="educationTo"
+          placeholder="Auswählen"
+          :validation="[['date_after', educationFrom]]"
+          validation-visibility="live"
+        />
+      </div>
+    </div>
   </div>
-  <div class="grid flex gap-2">
+  <div class="grid flex gap-4 fixed z-10 inset-x-0 bottom-0">
     <button
-      class="bg-wd-error shadow rounded-md h-8 w-full text-white"
+      class="bg-wd-error shadow rounded-md h-14 w-full text-white"
       @click="removeFromLocalStorage()"
       :disabled="buttonDisabled"
     >
       Ausbildung entfernen
     </button>
     <button
-      class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
+      class="bg-wd-green hover:bg-transparent-green shadow h-32 text-white"
       @click="saveToLocalStorage()"
       :disabled="buttonDisabled"
     >

@@ -5,7 +5,7 @@
         class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
       ></BackIcon>
     </button>
-    <p class="text-black px-1 dark:text-white font-Montserrat text-xl p-4">
+    <p class="text-black px-0 dark:text-white font-Montserrat text-xl p-4">
       Motivationsschreiben
     </p>
     <button type="button" @click="saveModal" class="p-4">
@@ -15,14 +15,14 @@
     </button>
   </div>
   <div class="space-y-1">
-    <p class="text-black px-1 dark:text-white font-Montserrat text-sm">
+    <p class="text-black px-0 dark:text-white font-Montserrat text-sm">
       Einstieg
     </p>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-16">
           <p
-            class="py-3 px-1 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
             Betreff:
           </p>
@@ -44,7 +44,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-16">
           <p
-            class="py-3 px-1 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
             Anrede:
           </p>
@@ -65,14 +65,14 @@
     </div>
   </div>
   <div class="space-y-1">
-    <p class="text-black px-1 dark:text-white font-Montserrat text-sm">
+    <p class="text-black px-0 dark:text-white font-Montserrat text-sm">
       Motivationsschreiben
     </p>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-16">
           <p
-            class="py-3 px-1 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
             Text:
           </p>
@@ -95,7 +95,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-16">
           <p
-            class="py-3 px-1 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
             Abschluss:
           </p>
@@ -116,14 +116,14 @@
     </div>
   </div>
   <div class="space-y-1">
-    <p class="text-black px-1 dark:text-white font-Montserrat text-sm">
+    <p class="text-black px-0 dark:text-white font-Montserrat text-sm">
       Abschluss-Grußformel
     </p>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-16">
           <p
-            class="py-3 px-1 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-3 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
             Grußformel:
           </p>

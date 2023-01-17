@@ -1,48 +1,77 @@
 <template>
   <div class="p-4">
-    <FormKit
-      v-model="type"
-      type="select"
-      label="Typ"
-      :options="['Auswahl', 'Sprachkenntnisse', 'Sonstige Kenntnisse']"
-    />
+    <div class="col-span-2 md:col-span-1">
+      <div class="flex bg-white dark:bg-slate-800 h-10">
+        <p
+          class="py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+        >
+          Kenntnisse:
+        </p>
+        <FormKit
+          v-model="type"
+          type="select"
+          :options="['Auswahl', 'Sprachkenntnisse', 'Sonstige Kenntnisse']"
+          value="Sonstige Kenntnisse"
+        />
+      </div>
+    </div>
+
     <div v-if="type === 'Sonstige Kenntnisse'">
       <FormKit
         v-model="diversKnowledge"
         type="text"
-        label="Sonstige Kenntnisse"
         placeholder="z.B. Führerschein, Office etc."
       />
     </div>
     <div v-if="type === 'Sprachkenntnisse'">
-      <FormKit
-        v-model="languageKnowledge"
-        type="text"
-        label="Sprachkenntnisse"
-        placeholder="z.B. Englisch, Deutsch etc."
-      />
-      <FormKit
-        v-model="languageLevel"
-        type="select"
-        label="Typ"
-        :options="[
-          'Auswahl',
-          'Basiskenntnisse',
-          'Fortgeschritten',
-          'Fließend',
-          'Muttersprache',
-        ]"
-      />
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+          >
+            Sprache:
+          </p>
+          <div class="px-0">
+            <FormKit
+              v-model="languageKnowledge"
+              type="text"
+              placeholder="z.B. Englisch, Deutsch etc."
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+          >
+            Type:
+          </p>
+          <FormKit
+            v-model="languageLevel"
+            type="select"
+            :options="[
+              'Auswahl',
+              'Basiskenntnisse',
+              'Fortgeschritten',
+              'Fließend',
+              'Muttersprache',
+            ]"
+            value="Basiskenntnisse"
+          />
+        </div>
+      </div>
     </div>
   </div>
-
-  <button
-    class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
-    @click="saveToLocalStorage()"
-    :disabled="buttonDisabled"
-  >
-    Erfahrung hinzufügen
-  </button>
+  <div class="grid flex gap-4 fixed z-10 inset-x-0 bottom-0">
+    <button
+      class="bg-wd-green hover:bg-transparent-green shadow h-32 text-white"
+      @click="saveToLocalStorage()"
+      :disabled="buttonDisabled"
+    >
+      Erfahrung hinzufügen
+    </button>
+  </div>
 </template>
 
 <script setup lang="ts">

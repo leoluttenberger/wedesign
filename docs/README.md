@@ -3,10 +3,11 @@
 
 # Dependencies Linux, iOS, Windows
 Install Dependencies git curl for all platforms https://git-scm.com/book/en/v2/Getting-Started-Installing-Git, https://everything.curl.dev/get
+https://developer.android.com/studio
 Ubuntu install curl, git
 ```
 sudo apt-get update
-sudo apt-get install git curl 
+sudo apt-get install git curl apt-transport-https ca-certificates gnupg2 curl
 ```
 
 Clone Project
@@ -26,13 +27,18 @@ sdk install java 18.0.1.1-open
 sdk use java 18.0.1.1-open 
 sdk install gradle 7.2
 sdk use gradle 7.2
-sudo gem install fastlane
+```
+Install ruby version 2.4.0 with rvm
+```
+curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import -
+curl -sSL https://get.rvm.io | bash -s stable --ruby
+source ~/.rvm/scripts/rvm
+bundle update
 ```
 Install nodejs version 16.15.1 via nvm
 ```
 nvm use
 nvm install
-npm install -g ruby firebase-tools 
 
 After installing nvm run install script to auto install. 
 ```

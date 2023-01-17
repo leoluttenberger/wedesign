@@ -58,7 +58,7 @@
             <SwiperCard :items="items">
               <button @click="closeBottomCard()" class="p-2">
                 <BackIcon
-                  class="p-4 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
+                  class="p-8 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
                 ></BackIcon>
               </button>
               <div

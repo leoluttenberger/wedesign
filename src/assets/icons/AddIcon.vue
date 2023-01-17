@@ -1,6 +1,7 @@
 <template>
   <svg
-    class="md:w-8 md:h-8 w-4 h-4 stroke-black hover:stroke-wd-green dark:stroke-wd-white dark:hover:stroke-wd-green"
+    width="20"
+    height="20"
     viewBox="0 0 20 20"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

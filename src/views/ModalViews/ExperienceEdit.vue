@@ -3,7 +3,7 @@
     <div class="col-span-2 md:col-span-1">
       <div class="flex bg-white dark:bg-slate-800 h-10">
         <p
-          class="py-2 px-1 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+          class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
         >
           Titel:
         </p>
@@ -14,7 +14,7 @@
     <div class="col-span-2 md:col-span-1">
       <div class="flex bg-white dark:bg-slate-800 h-10">
         <p
-          class="py-2 px-1 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+          class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
         >
           Text:
         </p>
@@ -29,7 +29,7 @@
     </div>
     <div class="flex bg-white dark:bg-slate-800 h-10">
       <p
-        class="py-2 px-1 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+        class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
       >
         Von:
       </p>
@@ -38,7 +38,7 @@
 
     <div class="flex bg-white dark:bg-slate-800 h-10">
       <p
-        class="py-2 px-1 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+        class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
       >
         Bis:
       </p>

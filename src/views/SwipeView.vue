@@ -2,16 +2,6 @@
   <section class="z-0 overflow-auto overflow-scroll w-screen h-screen py-20">
     <div class="flex justify-end px-4">
       <button
-        v-if="isEdit"
-        @click="openBottomCard()"
-        class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
-      >
-        <EditIcon
-          class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
-        ></EditIcon>
-      </button>
-      <button
-        v-if="!isEdit"
         @click="openBottomCard()"
         class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
       >
@@ -40,7 +30,7 @@
             <SwiperCard :items="items">
               <button @click="closeBottomCard()" class="p-2">
                 <BackIcon
-                  class="p-4 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
+                  class="py-8 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
                 ></BackIcon>
               </button>
               <div
@@ -61,7 +51,6 @@ import { ref, defineProps, withDefaults, watch, onMounted } from "vue";
 import SwiperCard from "@/components/SwiperCard.vue";
 import BottomCard from "@/components/BottomCard.vue";
 import AddIcon from "@/assets/icons/AddIcon.vue";
-import EditIcon from "@/assets/icons/EditIcon.vue";
 import BackIcon from "@/assets/icons/BackIcon.vue";
 
 import ExperienceForm from "@/views/ModalViews/ExperienceForm.vue";
@@ -109,14 +98,12 @@ const props = defineProps({
 });
 
 const mapFormComponents = [
-  UserForm,
   EducationForm,
   ExperienceForm,
   KnowledgeForm,
   ApplicationForm,
 ];
 const mapListComponents = [
-  UserDisplay,
   EducationList,
   ExperienceList,
   KnowledgeList,

@@ -31,7 +31,7 @@
           >
             Sprache:
           </p>
-          <div class="px-1">
+          <div class="px-0">
             <FormKit
               v-model="languageKnowledge"
               type="text"

@@ -1,43 +1,67 @@
 <template>
   <div class="p-4" v-bind="editIndex">
-    <FormKit
-      v-model="workshop"
-      type="text"
-      label="Titel"
-      placeholder="Workshop-Teilnahme"
-    />
-    <FormKit
-      v-model="description"
-      type="textarea"
-      label="Text"
-      placeholder="Beschreibung"
-    />
-    <FormKit
-      type="date"
-      v-model="workshopFrom"
-      label="Von"
-      placeholder="Auswählen"
-    />
-    <FormKit
-      type="date"
-      v-model="workshopTo"
-      label="Bis"
-      placeholder="Auswählen"
-      :validation="[['date_after', workshopFrom]]"
-      validation-visibility="live"
-    />
+    <div class="col-span-2 md:col-span-1">
+      <div class="flex bg-white dark:bg-slate-800 h-10">
+        <p
+          class="py-2 px-1 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+        >
+          Titel:
+        </p>
+        <FormKit v-model="workshop" type="text" placeholder="Workshop" />
+      </div>
+    </div>
+
+    <div class="col-span-2 md:col-span-1">
+      <div class="flex bg-white dark:bg-slate-800 h-10">
+        <p
+          class="py-2 px-1 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+        >
+          Text:
+        </p>
+        <div class="py-2">
+          <FormKit
+            v-model="description"
+            type="textarea"
+            placeholder="Beschreibung"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="flex bg-white dark:bg-slate-800 h-10">
+      <p
+        class="py-2 px-1 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+      >
+        Von:
+      </p>
+      <FormKit type="date" v-model="workshopFrom" placeholder="Auswählen" />
+    </div>
+
+    <div class="flex bg-white dark:bg-slate-800 h-10">
+      <p
+        class="py-2 px-1 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+      >
+        Bis:
+      </p>
+      <FormKit
+        type="date"
+        v-model="workshopTo"
+        placeholder="Auswählen"
+        :validation="[['date_after', workshopFrom]]"
+        validation-visibility="live"
+      />
+    </div>
   </div>
 
-  <div class="grid flex gap-2">
+  <div class="grid flex gap-4 fixed z-10 inset-x-0 bottom-0">
     <button
-      class="bg-wd-error hover:bg-transparent-green shadow rounded-md h-8 w-full text-white"
+      class="bg-wd-error shadow rounded-md h-14 w-full text-white"
       @click="removeFromLocalStorage()"
       :disabled="buttonDisabled"
     >
       Erfahrung entfernen
     </button>
     <button
-      class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
+      class="bg-wd-green hover:bg-transparent-green shadow h-32 text-white"
       @click="saveToLocalStorage()"
       :disabled="buttonDisabled"
     >

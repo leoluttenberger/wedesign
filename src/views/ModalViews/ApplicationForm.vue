@@ -1,31 +1,46 @@
 <template>
   <div class="p-4">
-    <FormKit
-      v-model="company"
-      type="text"
-      label="Firma"
-      placeholder="Unternehmensname"
-    />
-    <FormKit
-      v-model="job"
-      type="text"
-      label="Beruf"
-      placeholder="Beruf oder Lehre"
-    />
-    <FormKit
-      type="date"
-      v-model="deadline"
-      label="Deadline"
-      placeholder="Auswählen"
-    />
+    <div class="col-span-2 md:col-span-1">
+      <div class="flex bg-white dark:bg-slate-800 h-10">
+        <p
+          class="px-1 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+        >
+          Firma:
+        </p>
+        <FormKit v-model="company" type="text" placeholder="Unternehmensname" />
+      </div>
+    </div>
+    <div class="col-span-2 md:col-span-1">
+      <div class="flex bg-white dark:bg-slate-800 h-10">
+        <p
+          class="px-1 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+        >
+          Beruf:
+        </p>
+        <FormKit v-model="job" type="text" placeholder="Beruf oder Lehre" />
+      </div>
+    </div>
+    <div class="col-span-2 md:col-span-1">
+      <div class="flex bg-white dark:bg-slate-800 h-10">
+        <p
+          class="px-1 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+        >
+          Deadline:
+        </p>
+        <FormKit type="date" v-model="deadline" placeholder="Auswählen" />
+      </div>
+    </div>
   </div>
-  <button
-    class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
-    @click="saveToLocalStorage()"
-    :disabled="buttonDisabled"
-  >
-    Bewerbung hinzufügen
-  </button>
+
+  <div class="grid flex fixed z-10 inset-x-0 bottom-0">
+    <button
+      class="bg-wd-green hover:bg-transparent-green shadow h-32 text-white"
+      @click="saveToLocalStorage()"
+      :disabled="buttonDisabled"
+    >
+      Bewerbung hinzufügen
+    </button>
+  </div>
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from "vue";

@@ -33,7 +33,9 @@ Install ruby version 2.4.0 with rvm
 curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import -
 curl -sSL https://get.rvm.io | bash -s stable --ruby
 source ~/.rvm/scripts/rvm
+rvm install 2.4.0
 bundle update
+
 ```
 Install nodejs version 16.15.1 via nvm
 ```

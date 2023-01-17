@@ -7,17 +7,16 @@
         class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
       >
         <EditIcon
-          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+          class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
         ></EditIcon>
       </button>
-
       <button
         v-if="!isEdit"
         @click="openBottomCard()"
         class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
       >
         <AddIcon
-          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+          class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
         ></AddIcon>
       </button>
     </div>
@@ -41,11 +40,11 @@
             <SwiperCard :items="items">
               <button @click="closeBottomCard()" class="p-2">
                 <BackIcon
-                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                  class="p-4 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
                 ></BackIcon>
               </button>
               <div
-                class="flex flex-col items-left shadow-lg-up overflow-auto overflow-scroll w-screen h-screen py-20"
+                class="flex flex-col items-left shadow-lg-up overflow-auto overflow-scroll w-screen h-screen"
               >
                 <component :is="mapFormComponents[props.slideIndex]" />
               </div>
@@ -129,6 +128,7 @@ onMounted(() => {
   sideBackBack.value = false;
   sideBack.value = false;
   slideDown.value = true;
+  renderComponent.value = true;
 });
 
 const bottomCardOpen = ref(false);

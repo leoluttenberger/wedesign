@@ -1,6 +1,6 @@
 const textClassification = {
   label:
-    "inline-block align-middle w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm placeholder-gray dark:placeholder-gray",
+    "inline-block align-middle w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-lg placeholder-gray dark:placeholder-gray",
   inner: `
     border-none
     border-transparent
@@ -9,16 +9,16 @@ const textClassification = {
     focus-within:border-wd-green
   `,
   input:
-    "h-10 outline-0 font-Montserrat md:text-base text-sm font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-gray dark:placeholder-gray",
+    "h-10 outline-0 font-Montserrat md:text-lg text-base font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-gray dark:placeholder-gray",
 };
 const boxClassification = {
   fieldset: "max-w-md border border-gray-400 rounded-md",
-  legend: "font-bold text-sm",
+  legend: "font-bold text-base",
   wrapper: "flex mb-1 cursor-pointer",
   help: "mb-2",
   input:
-    "form-check-input appearance-none h-5 w-5 mr-2 border border-gray-500 rounded-sm bg-white focus:outline-none focus:ring-0 transition duration-200",
-  label: "text-sm text-gray-700 mt-1",
+    "form-check-input appearance-none h-5 w-5 mr-2 border border-gray-500 rounded-md bg-white focus:outline-none focus:ring-0 transition duration-200",
+  label: "text-base text-gray-700 mt-1",
 };
 const buttonClassification = {
   wrapper: "mb-1",
@@ -46,7 +46,7 @@ export default {
     label: "block mb-1 font-bold text-base",
     inner: "max-w-full cursor-pointer",
     input:
-      "text-gray-600 text-base mb-1 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:bg-blue-500 file:text-white hover:file:bg-blue-600",
+      "text-gray-600 text-base mb-1 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-base file:bg-blue-500 file:text-white hover:file:bg-blue-600",
     noFiles: "block text-gray-800 text-base mb-1",
     fileItem: "block flex text-gray-800 text-base mb-1",
     fileRemove: "ml-auto text-blue-500 text-base",
@@ -71,7 +71,7 @@ export default {
   textarea: {
     ...textClassification,
     input:
-      "h-14 outline-0 outline-none font-Montserrat md:text-base text-sm font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-gray dark:placeholder-gray",
+      "h-14 outline-0 outline-none font-Montserrat md:text-lg text-base font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-gray dark:placeholder-gray",
   },
   time: textClassification,
   url: textClassification,

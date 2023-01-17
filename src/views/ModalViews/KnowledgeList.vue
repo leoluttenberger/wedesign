@@ -58,11 +58,11 @@
             <SwiperCard :items="items">
               <button @click="closeBottomCard()" class="p-2">
                 <BackIcon
-                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                  class="p-4 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
                 ></BackIcon>
               </button>
               <div
-                class="flex flex-col items-left shadow-lg-up overflow-auto overflow-scroll w-screen h-screen py-20"
+                class="flex flex-col items-left shadow-lg-up overflow-auto overflow-scroll w-screen h-screen"
               >
                 <component
                   v-bind="currentButtonIndex"

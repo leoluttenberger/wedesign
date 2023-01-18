@@ -137,6 +137,7 @@ watch(bottomCardOpen4, () => {
 const openBottomCard = (id) => {
   currentButtonIndex.value = id;
   slideDown.value = false;
+  bottomCardOpen4.value = true;
 };
 
 const onDrop = (dropResult) => {
@@ -157,6 +158,7 @@ const applyDrag = (arr, dragResult) => {
   return arr;
 };
 const closeModal = () => {
-  bottomCardOpen4.value = false;
+  slideDown.value = true;
+  slideDown.value = false;
 };
 </script>

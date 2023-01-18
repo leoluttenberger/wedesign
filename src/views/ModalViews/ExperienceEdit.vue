@@ -51,8 +51,7 @@
       />
     </div>
   </div>
-
-  <div class="grid flex gap-4 fixed z-10 inset-x-0 bottom-0">
+  <div class="grid flex gap-6 py-10">
     <button
       class="bg-wd-error shadow rounded-md h-14 w-full text-white"
       @click="removeFromLocalStorage()"
@@ -61,7 +60,7 @@
       Erfahrung entfernen
     </button>
     <button
-      class="bg-wd-green hover:bg-transparent-green shadow h-32 text-white"
+      class="bg-wd-green hover:bg-transparent-green shadow h-24 text-white"
       @click="saveToLocalStorage()"
       :disabled="buttonDisabled"
     >

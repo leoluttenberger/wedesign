@@ -1,35 +1,38 @@
 <template>
   <div></div>
   <div class="p-4" v-bind="editIndex">
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
-        >
-          Typ:
-        </p>
-        <FormKit
-          v-model="type"
-          type="select"
-          placeholder="Auswahl"
-          :options="['Mittelschule', 'Lehre', 'HTL', 'AHS', 'HAK', 'HBLA']"
-        />
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+          >
+            Typ:
+          </p>
+          <FormKit
+            v-model="type"
+            type="select"
+            placeholder="Auswahl"
+            :options="['Mittelschule', 'Lehre', 'HTL', 'AHS', 'HAK', 'HBLA']"
+          />
+        </div>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+          >
+            Schwerpunkt:
+          </p>
+          <FormKit
+            v-model="specialty"
+            type="text"
+            placeholder="zB. Sprachen, BE, IT"
+          />
+        </div>
       </div>
     </div>
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
-        >
-          Schwerpunkt:
-        </p>
-        <FormKit
-          v-model="specialty"
-          type="text"
-          placeholder="zB. Sprachen, BE, IT"
-        />
-      </div>
-    </div>
+
     <div class="col-span-2 md:col-span-1">
       <div class="flex bg-white dark:bg-slate-800 h-10">
         <p
@@ -44,30 +47,36 @@
         />
       </div>
     </div>
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
-        >
-          Von:
-        </p>
-        <FormKit type="date" v-model="educationFrom" placeholder="Auswählen" />
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+          >
+            Von:
+          </p>
+          <FormKit
+            type="date"
+            v-model="educationFrom"
+            placeholder="Auswählen"
+          />
+        </div>
       </div>
-    </div>
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
-        >
-          Bis:
-        </p>
-        <FormKit
-          type="date"
-          v-model="educationTo"
-          placeholder="Auswählen"
-          :validation="[['date_after', educationFrom]]"
-          validation-visibility="live"
-        />
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+          >
+            Bis:
+          </p>
+          <FormKit
+            type="date"
+            v-model="educationTo"
+            placeholder="Auswählen"
+            :validation="[['date_after', educationFrom]]"
+            validation-visibility="live"
+          />
+        </div>
       </div>
     </div>
   </div>

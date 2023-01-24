@@ -13,7 +13,7 @@
         </button>
       </div>
 
-      <UserForm></UserForm>
+      <UserForm v-if="renderComponent5"></UserForm>
     </section>
   </div>
   <div>

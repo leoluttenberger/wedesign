@@ -10,8 +10,8 @@
         <FormKit
           v-model="type"
           type="select"
-          :options="['Auswahl', 'Sprachkenntnisse', 'Sonstige Kenntnisse']"
-          value="Sonstige Kenntnisse"
+          placeholder="Auswahl"
+          :options="['Sprachkenntnisse', 'Sonstige Kenntnisse']"
         />
       </div>
     </div>
@@ -51,13 +51,12 @@
             v-model="languageLevel"
             type="select"
             :options="[
-              'Auswahl',
               'Basiskenntnisse',
               'Fortgeschritten',
               'Fließend',
               'Muttersprache',
             ]"
-            value="Basiskenntnisse"
+            placeholder="Auswahl"
           />
         </div>
       </div>

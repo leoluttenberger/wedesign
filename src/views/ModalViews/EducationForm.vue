@@ -10,7 +10,8 @@
         <FormKit
           v-model="type"
           type="select"
-          :options="['Auswahl', 'HTL', 'AHS', 'HAK', 'HBLA']"
+          placeholder="Auswahl"
+          :options="['Mittelschule', 'Lehre', 'HTL', 'AHS', 'HAK', 'HBLA']"
         />
       </div>
     </div>
@@ -23,8 +24,8 @@
         </p>
         <FormKit
           v-model="specialty"
-          type="select"
-          :options="['Auswahl', 'IT', 'BE', 'Sprachen', 'Wirtschaft']"
+          type="text"
+          placeholder="zB. Sprachen, BE, IT"
         />
       </div>
     </div>

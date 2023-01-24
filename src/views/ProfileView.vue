@@ -20,23 +20,43 @@
       </button>
 
       <CropModal :show="showModal">
-        <button
-          type="button"
-          @click="closeModal"
-          class="rounded-full hover:bg-white hover:bg-opacity-25 focus:outline-none transition duration-200"
-        >
-          <icon-profile name="x" class="h-6 w-6 text-white"></icon-profile>
-        </button>
+        <div class="grid grid-cols-3 gap-8 p-2 place-items-center">
+          <div>
+            <button
+              type="button"
+              @click="closeModal()"
+              class="rounded-full hover:bg-white hover:bg-opacity-25 focus:outline-none transition duration-200"
+            >
+              <CloseIcon
+                class="h-6 w-6 stroke-wd-white stroke-black stroke-1"
+              ></CloseIcon>
+            </button>
+          </div>
+          <div class="text-left text-white">Speichern!</div>
+          <div>
+            <button
+              type="button"
+              @click="onClickedSave()"
+              class="rounded-full hover:bg-white hover:bg-opacity-25 focus:outline-none transition duration-200"
+            >
+              <CheckIcon
+                class="h-6 w-6 stroke-wd-white stroke-black stroke-1"
+              ></CheckIcon>
+            </button>
+          </div>
+        </div>
         <CropperItem></CropperItem>
       </CropModal>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 import { AvatarInput } from "@/components";
 import CropModal from "@/components/Modals/CropModal.vue";
 import IconProfile from "@/components/IconProfile.vue";
+import CheckIcon from "@/assets/icons/CheckIcon.vue";
+import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import defaultImageDataURL from "@/assets/images/defaultImageDataURL.txt";
 import CropperItem from "@/components/CropperItem.vue";
 import SwiperCard from "@/components/SwiperCard.vue";
@@ -52,7 +72,6 @@ import {
   slideDown,
 } from "@/store.js";
 
-const image = ref(JSON.parse(localStorage.getItem("profileImg")));
 const showModal = ref(false);
 const MIME_TYPE = "image/png";
 const QUALITY = 0.9;
@@ -60,15 +79,11 @@ const MAX_WIDTH = 600;
 const MAX_HEIGHT = 600;
 
 const form = ref({ avatar: null });
-const disableInput = ref(true);
-const disableEdit = ref(false);
-
+const image = ref(null);
 const valueAvatarShow = ref(true);
 const valueAvatarCropShow = ref(false);
 valueAvatarCropShow.value = false;
 valueAvatarShow.value = true;
-disableInput.value = true;
-disableEdit.value = false;
 
 const bottomCardOpen = ref(false);
 
@@ -79,14 +94,16 @@ if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   darkLightMode.value = "light";
 }
 
-if (image.value == null) {
+if (localStorage.getItem("profileImg")) {
+  image.value = JSON.parse(localStorage.getItem("profileImg"));
+} else {
   console.log("Setting Default ProfileImage!");
   image.value = defaultImageDataURL;
   localStorage.setItem("profileImg", JSON.stringify(image.value));
 }
 
 watch(isDarkMode, () => {
-  if (isDarkMode == true) {
+  if (isDarkMode.value == true) {
     darkLightMode.value = "dark";
   } else {
     darkLightMode.value = "light";
@@ -106,29 +123,18 @@ watch(imageObject, () => {
   console.log("Open Modal");
 });
 
-watch(showModal, () => {
-  if (showModal.value == false) {
-    createBlobImage();
-    console.log("Saved Profile Image to LocalStorage.");
-    valueAvatarCropShow.value = false;
-    valueAvatarShow.value = true;
-  } else {
-    console.log("show modal true");
-  }
+onMounted(() => {
+  valueAvatarCropShow.value = false;
+  valueAvatarShow.value = true;
 });
 
 const onClickedSave = () => {
+  createBlobImage();
+  showModal.value = false;
   valueAvatarCropShow.value = false;
   valueAvatarShow.value = true;
-  localStorage.setItem("profileImg", JSON.stringify(image.value));
-  disableInput.value = true;
-  disableEdit.value = false;
 };
 
-const onClickedEdit = () => {
-  bottomCardOpen.value = true;
-  slideDown.value = false;
-};
 const createBlobImage = () => {
   if (fileObject.file) {
     const blobURL = URL.createObjectURL(fileObject.file);
@@ -202,12 +208,16 @@ const calculateSize = (img, maxWidth, maxHeight) => {
 };
 
 const closeModal = () => {
+  valueAvatarCropShow.value = false;
+  valueAvatarShow.value = true;
   showModal.value = false;
+  image.value = JSON.parse(localStorage.getItem("profileImg"));
 };
 const openModal = () => {
+  valueAvatarCropShow.value = true;
+  valueAvatarShow.value = false;
   showModal.value = true;
 };
-
 const showEditImage = () => {
   valueAvatarCropShow.value = true;
   valueAvatarShow.value = false;

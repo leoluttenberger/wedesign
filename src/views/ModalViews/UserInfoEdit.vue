@@ -1,10 +1,10 @@
 <template>
   <div class="overflow-auto overflow-scroll w-screen h-screen">
     <div class="flex">
-      <button type="button" @click="saveToLocalStorage" class="p-4">
-        <BackIcon
+      <button type="button" @click="closeModal()" class="p-4">
+        <CloseIcon
           class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
-        ></BackIcon>
+        ></CloseIcon>
       </button>
     </div>
     <div class="space-y-1">
@@ -15,7 +15,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
             >
               Titel(vor Name):
             </p>
@@ -31,9 +31,9 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
             >
-              Titel (nach Namen):
+              Titel(nach Namen):
             </p>
             <FormKit
               v-model="titleAfter"
@@ -48,7 +48,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
             >
               Vorname:
             </p>
@@ -64,7 +64,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
             >
               Nachname:
             </p>
@@ -82,7 +82,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
             >
               Geburtsdatum:
             </p>
@@ -92,7 +92,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
             >
               Geburtsort:
             </p>
@@ -111,7 +111,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
             >
               Familienstand:
             </p>
@@ -133,7 +133,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
             >
               Geschlecht:
             </p>
@@ -152,7 +152,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
             >
               Straße:
             </p>
@@ -167,7 +167,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
             >
               Nr:
             </p>
@@ -184,7 +184,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
             >
               PLZ:
             </p>
@@ -199,7 +199,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
             >
               Ort:
             </p>
@@ -223,7 +223,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
             >
               Telefon:
             </p>
@@ -238,7 +238,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
             >
               EMail:
             </p>
@@ -255,7 +255,7 @@
       </div>
       <div class="flex bg-white dark:bg-slate-800 h-10">
         <p
-          class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+          class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
         >
           Hobbies:
         </p>
@@ -280,7 +280,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { slideDownUserInfo } from "@/store.js";
-import BackIcon from "@/assets/icons/BackIcon.vue";
+import CloseIcon from "@/assets/icons/CloseIcon.vue";
 const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")));
 const titleBefore = ref(null);
 const titleAfter = ref(null);

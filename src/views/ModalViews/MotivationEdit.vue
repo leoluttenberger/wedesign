@@ -1,14 +1,20 @@
 <template>
-  <div class="flex">
-    <button type="button" @click="saveModal" class="p-4">
-      <BackIcon
+  <div class="grid grid-cols-3 gap-20 p-2 place-items-center">
+    <button type="button" @click="closeModal()" class="p-4">
+      <CloseIcon
         class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-      ></BackIcon>
+      ></CloseIcon>
     </button>
     <p class="text-black px-0 dark:text-white font-Montserrat text-xl p-4">
-      Motivationsschreiben
+      Motivationsschreiben speichern!
     </p>
+    <button type="button" @click="saveModal()" class="p-4">
+      <CheckIcon
+        class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+      ></CheckIcon>
+    </button>
   </div>
+
   <div class="space-y-1">
     <p class="text-black px-0 dark:text-white font-Montserrat text-sm">
       Einstieg
@@ -154,7 +160,7 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted, defineProps, watch } from "vue";
-import BackIcon from "@/assets/icons/BackIcon.vue";
+import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 import EditIcon from "@/assets/icons/EditIcon.vue";
 import BottomCard from "@/components/BottomCard.vue";

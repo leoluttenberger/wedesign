@@ -57,9 +57,9 @@
           <BottomCard v-model:open="bottomCardOpen2">
             <SwiperCard :items="items">
               <button @click="closeBottomCard()" class="p-2">
-                <BackIcon
+                <CloseIcon
                   class="p-8 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
-                ></BackIcon>
+                ></CloseIcon>
               </button>
               <div class="flex flex-col items-left shadow-lg-up">
                 <component
@@ -84,7 +84,7 @@ import SortIcon from "@/assets/icons/SortIcon.vue";
 import { slideDown, isDarkMode } from "@/store.js";
 import { Container, Draggable } from "vue3-smooth-dnd";
 import SwiperCard from "@/components/SwiperCard.vue";
-import BackIcon from "@/assets/icons/BackIcon.vue";
+import CloseIcon from "@/assets/icons/CloseIcon.vue";
 
 const educations = ref(JSON.parse(localStorage.getItem("educations")));
 const bottomCardOpen2 = ref(false);

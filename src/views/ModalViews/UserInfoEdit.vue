@@ -9,7 +9,7 @@
     </div>
     <div class="space-y-1">
       <p class="text-black px-1 py-2 dark:text-white font-Montserrat text-sm">
-        Deine Daten1
+        Deine Daten:
       </p>
       <div class="grid grid-cols-2 gap-1">
         <div class="col-span-2 md:col-span-1">
@@ -17,7 +17,7 @@
             <p
               class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
             >
-              Vortitel:
+              Titel(vor Name):
             </p>
             <FormKit
               v-model="titleBefore"
@@ -33,7 +33,7 @@
             <p
               class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
             >
-              Nachtitel:
+              Titel (nach Namen):
             </p>
             <FormKit
               v-model="titleAfter"
@@ -118,7 +118,13 @@
             <FormKit
               v-model="civilStatus"
               type="select"
-              :options="['ledig', 'verheiratet', 'sonstig']"
+              :options="[
+                'ledig',
+                'verheiratet',
+                'geschieden',
+                'verwitwet',
+                ' getrennt lebend',
+              ]"
               placeholder="Auswahl"
               :disabled="false"
             />

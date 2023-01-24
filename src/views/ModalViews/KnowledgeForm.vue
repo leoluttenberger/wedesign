@@ -1,63 +1,65 @@
 <template>
   <div class="p-4">
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
-        >
-          Kenntnisse:
-        </p>
-        <FormKit
-          v-model="type"
-          type="select"
-          placeholder="Auswahl"
-          :options="['Sprachkenntnisse', 'Sonstige Kenntnisse']"
-        />
-      </div>
-    </div>
-
-    <div v-if="type === 'Sonstige Kenntnisse'">
-      <FormKit
-        v-model="diversKnowledge"
-        type="text"
-        placeholder="z.B. Führerschein, Office etc."
-      />
-    </div>
-    <div v-if="type === 'Sprachkenntnisse'">
+    <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
             class="py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
           >
-            Sprache:
-          </p>
-          <div class="px-0">
-            <FormKit
-              v-model="languageKnowledge"
-              type="text"
-              placeholder="z.B. Englisch, Deutsch etc."
-            />
-          </div>
-        </div>
-      </div>
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
-          >
-            Level:
+            Kenntnisse:
           </p>
           <FormKit
-            v-model="languageLevel"
+            v-model="type"
             type="select"
-            :options="[
-              'Basiskenntnisse',
-              'Fortgeschritten',
-              'Fließend',
-              'Muttersprache',
-            ]"
             placeholder="Auswahl"
+            :options="['Sprachkenntnisse', 'Sonstige Kenntnisse']"
           />
+        </div>
+      </div>
+
+      <div v-if="type === 'Sonstige Kenntnisse'">
+        <FormKit
+          v-model="diversKnowledge"
+          type="text"
+          placeholder="z.B. Führerschein, Office etc."
+        />
+      </div>
+      <div v-if="type === 'Sprachkenntnisse'">
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex bg-white dark:bg-slate-800 h-10">
+            <p
+              class="py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+            >
+              Sprache:
+            </p>
+            <div class="px-0">
+              <FormKit
+                v-model="languageKnowledge"
+                type="text"
+                placeholder="z.B. Englisch, Deutsch etc."
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex bg-white dark:bg-slate-800 h-10">
+            <p
+              class="py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+            >
+              Level:
+            </p>
+            <FormKit
+              v-model="languageLevel"
+              type="select"
+              :options="[
+                'Basiskenntnisse',
+                'Fortgeschritten',
+                'Fließend',
+                'Muttersprache',
+              ]"
+              placeholder="Auswahl"
+            />
+          </div>
         </div>
       </div>
     </div>

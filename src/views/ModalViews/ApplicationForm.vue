@@ -1,23 +1,29 @@
 <template>
   <div class="p-4">
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
-        >
-          Firma:
-        </p>
-        <FormKit v-model="company" type="text" placeholder="Unternehmensname" />
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+          >
+            Firma:
+          </p>
+          <FormKit
+            v-model="company"
+            type="text"
+            placeholder="Unternehmensname"
+          />
+        </div>
       </div>
-    </div>
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
-        >
-          Beruf:
-        </p>
-        <FormKit v-model="job" type="text" placeholder="Beruf oder Lehre" />
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+          >
+            Beruf:
+          </p>
+          <FormKit v-model="job" type="text" placeholder="Beruf oder Lehre" />
+        </div>
       </div>
     </div>
     <div class="col-span-2 md:col-span-1">

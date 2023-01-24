@@ -12,77 +12,105 @@
         </p>
       </div>
       <div class="space-y-1">
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
-            <p
-              class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-            >
-              Firma:
-            </p>
-            <FormKit
-              type="text"
-              v-model="company"
-              placeholder="Unternehmensname"
-            />
-          </div>
-        </div>
-
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
-            <p
-              class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-            >
-              Beruf:
-            </p>
-            <FormKit type="text" v-model="job" placeholder="Beruf oder Lehre" />
-          </div>
-        </div>
-
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
-            <div
-              class="px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-            >
-              <p>Ansprechs</p>
-              <p>person:</p>
+        <div class="grid grid-cols-2 gap-1">
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 h-10">
+              <p
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              >
+                Firma:
+              </p>
+              <FormKit
+                type="text"
+                v-model="company"
+                placeholder="Unternehmensname"
+              />
             </div>
+          </div>
 
-            <FormKit
-              type="text"
-              v-model="contactPerson"
-              placeholder="Marlene Musterfrau"
-            />
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 h-10">
+              <p
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              >
+                Beruf:
+              </p>
+              <FormKit
+                type="text"
+                v-model="job"
+                placeholder="Beruf oder Lehre"
+              />
+            </div>
           </div>
         </div>
+        <div class="grid grid-cols-2 gap-1">
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 h-10">
+              <div
+                class="px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              >
+                <p>Ansprechs</p>
+                <p>person:</p>
+              </div>
 
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
-            <p
-              class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-            >
-              Deadline:
-            </p>
-            <FormKit type="date" v-model="deadline" placeholder="Auswählen" />
+              <FormKit
+                type="text"
+                v-model="contactPerson"
+                placeholder="Marlene Musterfrau"
+              />
+            </div>
+          </div>
+
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 h-10">
+              <p
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              >
+                Deadline:
+              </p>
+              <FormKit type="date" v-model="deadline" placeholder="Auswählen" />
+            </div>
           </div>
         </div>
+        <div class="grid grid-cols-2 gap-1">
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 h-10">
+              <p
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              >
+                Status:
+              </p>
+              <FormKit
+                type="select"
+                v-model="state"
+                :options="[
+                  'Entwurf',
+                  'Erledigt',
+                  'Keine Rückmeldung',
+                  'Leider nein',
+                ]"
+              />
+            </div>
+          </div>
 
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
+          <div class="flex bg-white dark:bg-slate-800 h-10 py-1">
+            <div class="py-2">
+              <CloseIcon
+                v-if="__mv == 0"
+                class="w-24 stroke-wd-error"
+              ></CloseIcon>
+            </div>
+            <div class="py-2">
+              <CheckIcon
+                v-if="__mv > 0"
+                class="w-24 stroke-wd-green"
+              ></CheckIcon>
+            </div>
             <p
-              class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              class="w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
             >
-              Status:
+              {{ __mvText }}
             </p>
-            <FormKit
-              type="select"
-              v-model="state"
-              :options="[
-                'Entwurf',
-                'Erledigt',
-                'Keine Rückmeldung',
-                'Leider nein',
-              ]"
-            />
           </div>
         </div>
 
@@ -101,23 +129,6 @@
               />
             </div>
           </div>
-        </div>
-
-        <div class="flex bg-white dark:bg-slate-800 h-14 py-1">
-          <div class="py-2">
-            <CloseIcon
-              v-if="__mv == 0"
-              class="w-24 stroke-wd-error"
-            ></CloseIcon>
-          </div>
-          <div class="py-2">
-            <CheckIcon v-if="__mv > 0" class="w-24 stroke-wd-green"></CheckIcon>
-          </div>
-          <p
-            class="w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
-          >
-            {{ __mvText }}
-          </p>
         </div>
 
         <div class="grid flex gap-6 py-10">

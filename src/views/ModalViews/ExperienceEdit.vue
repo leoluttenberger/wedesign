@@ -1,54 +1,58 @@
 <template>
   <div class="p-4" v-bind="editIndex">
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
-        >
-          Titel:
-        </p>
-        <FormKit v-model="workshop" type="text" placeholder="Workshop" />
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+          >
+            Titel:
+          </p>
+          <FormKit v-model="workshop" type="text" placeholder="Workshop" />
+        </div>
       </div>
-    </div>
 
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
-        >
-          Text:
-        </p>
-        <div class="py-2">
-          <FormKit
-            v-model="description"
-            type="textarea"
-            placeholder="Beschreibung"
-          />
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+          >
+            Text:
+          </p>
+          <div class="py-2">
+            <FormKit
+              v-model="description"
+              type="textarea"
+              placeholder="Beschreibung"
+            />
+          </div>
         </div>
       </div>
     </div>
-    <div class="flex bg-white dark:bg-slate-800 h-10">
-      <p
-        class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
-      >
-        Von:
-      </p>
-      <FormKit type="date" v-model="workshopFrom" placeholder="Auswählen" />
-    </div>
+    <div class="grid grid-cols-2 gap-1">
+      <div class="flex bg-white dark:bg-slate-800 h-10">
+        <p
+          class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+        >
+          Von:
+        </p>
+        <FormKit type="date" v-model="workshopFrom" placeholder="Auswählen" />
+      </div>
 
-    <div class="flex bg-white dark:bg-slate-800 h-10">
-      <p
-        class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
-      >
-        Bis:
-      </p>
-      <FormKit
-        type="date"
-        v-model="workshopTo"
-        placeholder="Auswählen"
-        :validation="[['date_after', workshopFrom]]"
-        validation-visibility="live"
-      />
+      <div class="flex bg-white dark:bg-slate-800 h-10">
+        <p
+          class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+        >
+          Bis:
+        </p>
+        <FormKit
+          type="date"
+          v-model="workshopTo"
+          placeholder="Auswählen"
+          :validation="[['date_after', workshopFrom]]"
+          validation-visibility="live"
+        />
+      </div>
     </div>
   </div>
   <div class="grid flex gap-6 py-10">

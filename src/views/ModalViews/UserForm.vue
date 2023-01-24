@@ -9,7 +9,7 @@
           <p
             class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
           >
-            Vortitel:
+            Titel(vor Name):
           </p>
           <FormKit
             v-model="titleBefore"
@@ -25,7 +25,7 @@
           <p
             class="py-3 px-1 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
           >
-            Nachtitel:
+            Titel (nach Namen):
           </p>
           <FormKit
             v-model="titleAfter"
@@ -110,7 +110,13 @@
           <FormKit
             v-model="civilStatus"
             type="select"
-            :options="['ledig', 'verheiratet', 'sonstig']"
+            :options="[
+              'ledig',
+              'verheiratet',
+              'geschieden',
+              'verwitwet',
+              ' getrennt lebend',
+            ]"
             placeholder="Auswahl"
             :disabled="true"
           />

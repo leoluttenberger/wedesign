@@ -110,8 +110,8 @@
           <FormKit
             v-model="civilStatus"
             type="select"
-            :options="['Auswahl', 'ledig', 'verheiratet', 'sonstig']"
-            placeholder="ledig"
+            :options="['ledig', 'verheiratet', 'sonstig']"
+            placeholder="Auswahl"
             :disabled="true"
           />
         </div>
@@ -126,8 +126,8 @@
           <FormKit
             v-model="gender"
             type="select"
-            :options="['Auswahl', 'weiblich', 'männlich', 'divers']"
-            placeholder="weiblich"
+            :options="['weiblich', 'männlich', 'divers']"
+            placeholder="Auswahl"
             :disabled="true"
           />
         </div>
@@ -257,7 +257,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { slideDown } from "@/store.js";
-const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")));
 const titleBefore = ref(null);
 const titleAfter = ref(null);
 const firstName = ref(null);
@@ -275,6 +274,7 @@ const city = ref(null);
 const hobbies = ref(null);
 onMounted(() => {
   slideDown.value = false;
+  const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")));
   if (localStorage.getItem("userInfos")) {
     titleBefore.value = userInfos.value[0][0].titleBefore;
     titleAfter.value = userInfos.value[0][0].titleAfter;

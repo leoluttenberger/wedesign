@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <button type="button" @click="closeModal" class="p-4">
+    <button type="button" @click="saveModal" class="p-4">
       <BackIcon
         class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
       ></BackIcon>
@@ -8,11 +8,6 @@
     <p class="text-black px-0 dark:text-white font-Montserrat text-xl p-4">
       Motivationsschreiben
     </p>
-    <button type="button" @click="saveModal" class="p-4">
-      <CheckIcon
-        class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-      ></CheckIcon>
-    </button>
   </div>
   <div class="space-y-1">
     <p class="text-black px-0 dark:text-white font-Montserrat text-sm">
@@ -398,9 +393,7 @@ const saveModal = () => {
     saveToMVForm();
   }
 
-  buttonDisabled = true;
-  sideBack.value = false;
-  isEdited = false;
+  closeModal();
 };
 
 const subjectEdit = () => {

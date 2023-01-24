@@ -2,7 +2,7 @@
   <div class="overflow-auto overflow-scroll w-screen h-screen">
     <div v-if="!motivationModalOpen">
       <div class="flex">
-        <button type="button" @click="closeModal" class="p-4">
+        <button type="button" @click="saveToLocalStorage" class="p-4">
           <BackIcon
             class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
           ></BackIcon>
@@ -103,7 +103,7 @@
           </div>
         </div>
 
-        <div class="flex bg-white dark:bg-slate-800 h-10">
+        <div class="flex bg-white dark:bg-slate-800 h-14 py-1">
           <div class="py-2">
             <CloseIcon
               v-if="__mv == 0"
@@ -120,23 +120,23 @@
           </p>
         </div>
 
-        <div class="grid flex gap-2">
+        <div class="grid flex gap-6 py-10">
           <button
-            class="bg-wd-error shadow rounded-md h-8 w-full text-white"
+            class="bg-wd-error shadow rounded-md h-10 w-full text-white"
             @click="removeFromLocalStorage()"
             :disabled="buttonDisabled"
           >
             Bewerbung entfernen
           </button>
           <button
-            class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
+            class="bg-wd-green hover:bg-transparent-green shadow h-16 text-white"
             @click="createMotivationNode()"
             :disabled="buttonDisabled"
           >
             Motivationsschreiben bearbeiten
           </button>
           <button
-            class="bg-wd-green hover:bg-transparent-green shadow h-14 text-white"
+            class="bg-wd-green hover:bg-transparent-green shadow h-16 text-white"
             @click="sendJobApplication()"
             :disabled="buttonDisabled"
           >
@@ -238,7 +238,7 @@ const createMotivationNode = () => {
   motivationModalOpen.value = true;
   sideBack.value = true;
 };
-const closeModal = () => {
+const saveToLocalStorage = () => {
   buttonDisabled = true;
   slideDown.value = true;
   const applications = ref(JSON.parse(localStorage.getItem("applications")));

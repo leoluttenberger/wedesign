@@ -24,7 +24,7 @@
       <section :class="darkLightMode">
         <div
           v-if="bottomCardOpen"
-          class="fixed z-10 inset-0 bg-wd-transparent-black bg-opacity-10"
+          class="fixed z-10 inset-0 bg-black bg-opacity-10"
         >
           <BottomCard v-model:open="bottomCardOpen">
             <SwiperCard :items="items">
@@ -33,9 +33,7 @@
                   class="py-8 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
                 ></BackIcon>
               </button>
-              <div
-                class="flex flex-col items-left shadow-lg-up overflow-auto overflow-scroll w-screen h-screen"
-              >
+              <div class="flex flex-col items-left shadow-lg-up">
                 <component :is="mapFormComponents[props.slideIndex]" />
               </div>
             </SwiperCard>

@@ -17,7 +17,7 @@
     </section>
   </div>
   <div>
-    <MVEditModal :show="bottomCardOpen4">
+    <MVEditModal :show="bottomCardOpen5">
       <div class="flex">
         <div
           class="rounded-lg w-screen h-screen overflow-hidden shadow-xl dark:bg-slate-700 bg-white"
@@ -42,34 +42,34 @@ import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import EditIcon from "@/assets/icons/EditIcon.vue";
 import ProfileView from "../ProfileView.vue";
 
-import { slideDown } from "@/store.js";
+import { slideDownUserInfo } from "@/store.js";
 import { Container, Draggable } from "vue3-smooth-dnd";
 
 const applications = ref(JSON.parse(localStorage.getItem("applications")));
-const bottomCardOpen4 = ref(false);
-const renderComponent4 = ref(true);
+const bottomCardOpen5 = ref(false);
+const renderComponent5 = ref(true);
 let currentButtonIndex = ref(0);
 
-watch(slideDown, () => {
-  if (slideDown.value) {
-    bottomCardOpen4.value = false;
+watch(slideDownUserInfo, () => {
+  if (slideDownUserInfo.value) {
+    bottomCardOpen5.value = false;
   } else {
-    bottomCardOpen4.value = true;
+    bottomCardOpen5.value = true;
   }
 });
 
-watch(bottomCardOpen4, () => {
-  if (bottomCardOpen4.value == false) {
+watch(bottomCardOpen5, () => {
+  if (bottomCardOpen5.value == false) {
     applications.value = JSON.parse(localStorage.getItem("applications"));
-    renderComponent4.value = true;
+    renderComponent5.value = true;
   } else {
-    renderComponent4.value = false;
+    renderComponent5.value = false;
   }
 });
 
 const openBottomCard = (id) => {
   currentButtonIndex.value = id;
-  slideDown.value = false;
+  slideDownUserInfo.value = false;
 };
 
 const onDrop = (dropResult) => {
@@ -90,6 +90,6 @@ const applyDrag = (arr, dragResult) => {
   return arr;
 };
 const closeModal = () => {
-  bottomCardOpen4.value = false;
+  bottomCardOpen5.value = false;
 };
 </script>

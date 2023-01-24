@@ -261,7 +261,7 @@
         />
       </div>
     </div>
-    <div class="grid flex py-2">
+    <div class="grid flex py-2 bottom-0">
       <button
         class="bg-wd-green hover:bg-transparent-green shadow h-24 text-white"
         @click="saveToLocalStorage()"
@@ -273,7 +273,7 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { slideDown } from "@/store.js";
+import { slideDownUserInfo } from "@/store.js";
 import BackIcon from "@/assets/icons/BackIcon.vue";
 const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")));
 const titleBefore = ref(null);
@@ -292,7 +292,7 @@ const districtNumber = ref(null);
 const city = ref(null);
 const hobbies = ref(null);
 onMounted(() => {
-  slideDown.value = false;
+  slideDownUserInfo.value = false;
   if (localStorage.getItem("userInfos")) {
     titleBefore.value = userInfos.value[0][0].titleBefore;
     titleAfter.value = userInfos.value[0][0].titleAfter;
@@ -354,9 +354,9 @@ const saveToLocalStorage = () => {
     localStorage.setItem("userInfos", JSON.stringify([defaultUserInfos]));
   }
 
-  slideDown.value = true;
+  slideDownUserInfo.value = true;
 };
 const closeModal = () => {
-  slideDown.value = true;
+  slideDownUserInfo.value = true;
 };
 </script>

@@ -12,7 +12,7 @@
             ? 'border-wd-green dark:border-wd-green'
             : 'border-white dark:border-slate-800'
         "
-        class="outline:none text-sm border-b-[3px] font-Montserrat dark:hover:border-wd-green hover:border-wd-green dark:text-white"
+        class="outline:none text-sm border-b-[3px] font-Montserrat dark:text-white"
       >
         Offen
       </button>
@@ -24,7 +24,7 @@
             ? 'border-wd-green dark:border-wd-green'
             : 'border-white dark:border-slate-800'
         "
-        class="outline:none text-sm border-b-[3px] font-Montserrat dark:hover:border-wd-green hover:border-wd-green dark:text-white"
+        class="outline:none text-sm border-b-[3px] font-Montserrat dark:text-white"
       >
         Archiv
       </button>

@@ -61,9 +61,7 @@
                   class="p-8 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
                 ></BackIcon>
               </button>
-              <div
-                class="flex flex-col items-left shadow-lg-up overflow-auto overflow-scroll w-screen h-screen"
-              >
+              <div class="flex flex-col items-left shadow-lg-up">
                 <component
                   v-bind="currentButtonIndex"
                   :is="ExperienceEdit"

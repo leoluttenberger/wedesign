@@ -50,7 +50,10 @@ import { Match } from "@/types";
 import {
   currentSubject,
   currentSalutationBeginning,
-  currentTextField,
+  currentTextBegining,
+  currentTextExperience,
+  currentTextCompetence,
+  currentTextContribution,
   currentEnding,
   currentSalutationEnding,
 } from "@/store.js";
@@ -155,12 +158,21 @@ const onClickedSave = () => {
       currentSalutationBeginning.value = comment_text;
       break;
     case 2:
-      currentTextField.value = comment_text;
+      currentTextBegining.value = comment_text;
       break;
     case 3:
-      currentEnding.value = comment_text;
+      currentTextExperience.value = comment_text;
       break;
     case 4:
+      currentTextContribution.value = comment_text;
+      break;
+    case 5:
+      currentTextCompetence.value = comment_text;
+      break;
+    case 6:
+      currentEnding.value = comment_text;
+      break;
+    case 7:
       currentSalutationEnding.value = comment_text;
       break;
     default:
@@ -182,12 +194,21 @@ onMounted(() => {
           editText = currentSalutationBeginning.value;
           break;
         case 2:
-          editText = currentTextField.value;
+          editText = currentTextBegining.value;
           break;
         case 3:
-          editText = currentEnding.value;
+          editText = currentTextExperience.value;
           break;
         case 4:
+          editText = currentTextContribution.value;
+          break;
+        case 5:
+          editText = currentTextCompetence.value;
+          break;
+        case 6:
+          editText = currentEnding.value;
+          break;
+        case 7:
           editText = currentSalutationEnding.value;
           break;
         default:
@@ -206,12 +227,21 @@ onMounted(() => {
               motivations.value[mvIndexToDisplay][0].salutationBeginning;
             break;
           case 2:
-            editText = motivations.value[mvIndexToDisplay][0].textfield;
+            editText = motivations.value[mvIndexToDisplay][0].textBegining;
             break;
           case 3:
-            editText = motivations.value[mvIndexToDisplay][0].ending;
+            editText = motivations.value[mvIndexToDisplay][0].textExperience;
             break;
           case 4:
+            editText = motivations.value[mvIndexToDisplay][0].textContribution;
+            break;
+          case 5:
+            editText = motivations.value[mvIndexToDisplay][0].textCompetence;
+            break;
+          case 6:
+            editText = motivations.value[mvIndexToDisplay][0].ending;
+            break;
+          case 7:
             editText = motivations.value[mvIndexToDisplay][0].salutationEnding;
             break;
           default:

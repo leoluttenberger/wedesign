@@ -63,13 +63,13 @@
                     <div class="flex-none">
                       <CloseIcon
                         v-if="!item[0].mv"
-                        class="w-24 stroke-wd-error"
+                        class="h-6 w-6 stroke-1 stroke-wd-error"
                       ></CloseIcon>
                     </div>
                     <div class="flex-none">
                       <CheckIcon
                         v-if="item[0].mv"
-                        class="w-24 stroke-wd-green"
+                        class="h-6 w-6 stroke-1 stroke-wd-green"
                       ></CheckIcon>
                     </div>
                   </div>

@@ -216,6 +216,7 @@
           :buttonIndex="buttonIndex"
           :indexOfMVid="indexOfMVid"
           :lastIndex="lastindex"
+          :textLabel="textLabel"
         />
       </SwiperCard>
     </BottomCard>
@@ -305,6 +306,8 @@ const indexOfMVid = ref(0);
 
 const MAX_MV_PREVIEW = 5;
 const lastindex = ref(0);
+
+let textLabel = "";
 
 onMounted(() => {
   lastindex.value = getLastIndex();
@@ -505,6 +508,7 @@ const subjectEdit = () => {
   showBottomSlide.value = true;
   buttonIndex = 0;
   isEdited = true;
+  textLabel = "Betreff ";
 };
 
 const salutationBeginningEdit = () => {
@@ -513,6 +517,7 @@ const salutationBeginningEdit = () => {
   showBottomSlide.value = true;
   buttonIndex = 1;
   isEdited = true;
+  textLabel = "Anrede ";
 };
 
 const textBeginingEdit = () => {
@@ -521,6 +526,7 @@ const textBeginingEdit = () => {
   showBottomSlide.value = true;
   buttonIndex = 2;
   isEdited = true;
+  textLabel = "Einleitung ";
 };
 
 const textExperienceEdit = () => {
@@ -529,6 +535,7 @@ const textExperienceEdit = () => {
   showBottomSlide.value = true;
   buttonIndex = 3;
   isEdited = true;
+  textLabel = "Werdegang ";
 };
 
 const textContributionEdit = () => {
@@ -537,6 +544,7 @@ const textContributionEdit = () => {
   showBottomSlide.value = true;
   buttonIndex = 4;
   isEdited = true;
+  textLabel = "Kompetenz ";
 };
 const textCompetenceEdit = () => {
   storeFormData();
@@ -544,6 +552,7 @@ const textCompetenceEdit = () => {
   showBottomSlide.value = true;
   buttonIndex = 5;
   isEdited = true;
+  textLabel = "Beitrag ";
 };
 
 const endingEdit = () => {
@@ -552,6 +561,7 @@ const endingEdit = () => {
   showBottomSlide.value = true;
   buttonIndex = 6;
   isEdited = true;
+  textLabel = "Abschluss ";
 };
 const salutationEndingEdit = () => {
   storeFormData();
@@ -559,6 +569,7 @@ const salutationEndingEdit = () => {
   showBottomSlide.value = true;
   buttonIndex = 7;
   isEdited = true;
+  textLabel = "Abschied ";
 };
 
 const addAfter = () => {

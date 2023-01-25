@@ -37,7 +37,16 @@ export const currentSubject = reactive({
 export const currentSalutationBeginning = reactive({
   value: " ",
 });
-export const currentTextField = reactive({
+export const currentTextBegining = reactive({
+  value: " ",
+});
+export const currentTextExperience = reactive({
+  value: " ",
+});
+export const currentTextContribution = reactive({
+  value: " ",
+});
+export const currentTextCompetence = reactive({
   value: " ",
 });
 export const currentEnding = reactive({

@@ -87,6 +87,7 @@
 <script setup lang="ts">
 import { ref, onMounted, defineProps } from "vue";
 import { slideDown } from "@/store.js";
+import CloseIcon from "@/assets/icons/CloseIcon.vue";
 const type = ref(null);
 const diversKnowledge = ref(null);
 const languageKnowledge = ref(null);

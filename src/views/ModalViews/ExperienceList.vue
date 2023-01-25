@@ -81,6 +81,7 @@ import BottomCard from "@/components/BottomCard.vue";
 import ExperienceEdit from "./ExperienceEdit.vue";
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 import SortIcon from "@/assets/icons/SortIcon.vue";
+import CloseIcon from "@/assets/icons/CloseIcon.vue";
 
 import { slideDown, isDarkMode } from "@/store.js";
 import { Container, Draggable } from "vue3-smooth-dnd";

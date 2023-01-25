@@ -1,15 +1,20 @@
 <template>
   <div class="overflow-auto overflow-scroll w-screen h-screen">
     <div v-if="!motivationModalOpen">
-      <div class="flex">
-        <button type="button" @click="saveToLocalStorage" class="p-4">
-          <BackIcon
+      <div class="grid grid-cols-3 gap-20 p-2 place-items-center">
+        <button type="button" @click="closeModal()" class="p-4">
+          <CloseIcon
             class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-          ></BackIcon>
+          ></CloseIcon>
         </button>
         <p class="text-black px-1 dark:text-white font-Montserrat text-xl p-4">
           {{ company }}
         </p>
+        <button type="button" @click="saveToLocalStorage()" class="p-4">
+          <CheckIcon
+            class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+          ></CheckIcon>
+        </button>
       </div>
       <div class="space-y-1">
         <div class="grid grid-cols-2 gap-1">
@@ -175,7 +180,6 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted, defineProps, watch } from "vue";
-import BackIcon from "@/assets/icons/BackIcon.vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 import { slideDown, sideBack } from "@/store.js";
@@ -260,5 +264,9 @@ const saveToLocalStorage = () => {
   applications.value[props.editIndex][0].state = state.value;
   applications.value[props.editIndex][0].note = note.value;
   localStorage.setItem("applications", JSON.stringify(applications.value));
+};
+const closeModal = () => {
+  buttonDisabled = true;
+  slideDown.value = true;
 };
 </script>

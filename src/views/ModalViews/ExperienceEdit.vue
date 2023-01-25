@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4" v-bind="editIndex">
+  <div class="p-4">
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
@@ -76,6 +76,7 @@
 <script setup lang="ts">
 import { ref, onMounted, defineProps } from "vue";
 import { slideDown } from "@/store.js";
+import CloseIcon from "@/assets/icons/CloseIcon.vue";
 const workshop = ref(null);
 const description = ref(null);
 const workshopFrom = ref(null);

@@ -1,6 +1,7 @@
 <template>
   <section class="z-0 overflow-auto overflow-scroll w-screen h-screen py-20">
-    <div class="flex justify-end px-4">
+    <component :is="mapListComponents[slideIndex]" :key="renderComponent" />
+    <div class="flex justify-center p-4">
       <button
         @click="openBottomCard()"
         class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
@@ -10,7 +11,6 @@
         ></AddIcon>
       </button>
     </div>
-    <component :is="mapListComponents[slideIndex]" :key="renderComponent" />
   </section>
   <teleport to="body">
     <transition
@@ -29,9 +29,9 @@
           <BottomCard v-model:open="bottomCardOpen">
             <SwiperCard :items="items">
               <button @click="closeBottomCard()" class="p-2">
-                <BackIcon
+                <CloseIcon
                   class="py-8 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
-                ></BackIcon>
+                ></CloseIcon>
               </button>
               <div class="flex flex-col items-left shadow-lg-up">
                 <component :is="mapFormComponents[props.slideIndex]" />
@@ -49,7 +49,7 @@ import { ref, defineProps, withDefaults, watch, onMounted } from "vue";
 import SwiperCard from "@/components/SwiperCard.vue";
 import BottomCard from "@/components/BottomCard.vue";
 import AddIcon from "@/assets/icons/AddIcon.vue";
-import BackIcon from "@/assets/icons/BackIcon.vue";
+import CloseIcon from "@/assets/icons/CloseIcon.vue";
 
 import ExperienceForm from "@/views/ModalViews/ExperienceForm.vue";
 import EducationForm from "@/views/ModalViews/EducationForm.vue";

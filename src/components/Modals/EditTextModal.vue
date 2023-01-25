@@ -6,7 +6,7 @@
       ></CloseIcon>
     </button>
     <p class="text-black px-1 dark:text-white font-Montserrat text-xl p-4">
-      Text bearbeiten
+      {{ textLabel }} {{ "Textvorlage " + (itemIndex + 1) + " bearbeiten" }}
     </p>
   </div>
   <Tiptap
@@ -40,6 +40,10 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  textLabel: {
+    type: String,
+    default: "Text bearbeiten",
+  },
 });
 
 onMounted(() => {
@@ -49,6 +53,5 @@ onMounted(() => {
 
 const closeModal = () => {
   sideBackBack.value = false;
-  console.log(props.itemIndex);
 };
 </script>

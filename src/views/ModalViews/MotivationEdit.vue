@@ -23,7 +23,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-16">
           <p
-            class="py-3 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-5 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
             Betreff:
           </p>
@@ -45,7 +45,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-16">
           <p
-            class="py-3 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-5 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
             Anrede:
           </p>
@@ -67,25 +67,25 @@
   </div>
   <div class="space-y-1">
     <p class="text-black px-0 dark:text-white font-Montserrat text-sm">
-      Motivationsschreiben
+      Hauptteil:
     </p>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-16">
           <p
-            class="py-3 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-5 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
-            Text:
+            Einleitung:
           </p>
           <div class="py-2">
             <FormKit
-              v-model="textfield"
+              v-model="textBegining"
               type="textarea"
-              placeholder="Mit großen Interesse habe ich Ihre Anzeige im..."
+              placeholder="Mit großem Interesse habe ich Ihre Anzeige gelesen."
             />
           </div>
 
-          <button type="button" @click="textfieldEdit()" class="p-4">
+          <button type="button" @click="textBeginingEdit()" class="p-4">
             <EditIcon
               class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
             ></EditIcon>
@@ -96,18 +96,60 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-16">
           <p
-            class="py-3 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-5 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
-            Abschluss:
+            Werdegang:
           </p>
           <div class="py-2">
             <FormKit
-              v-model="ending"
+              v-model="textExperience"
               type="textarea"
-              placeholder="Ich freue mich Ihnen bei einem persönlichen..."
+              placeholder="Die Berufsausbildung zum KFZ-Mechaniker habe ich im Jahr 2020 erfolgreich bei der Musterfirma abgeschlossen..."
             />
           </div>
-          <button type="button" @click="endingEdit()" class="p-4">
+          <button type="button" @click="textExperienceEdit()" class="p-4">
+            <EditIcon
+              class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+            ></EditIcon>
+          </button>
+        </div>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-16">
+          <p
+            class="py-5 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+          >
+            Kompetenzen:
+          </p>
+          <div class="py-2">
+            <FormKit
+              v-model="textCompetence"
+              type="textarea"
+              placeholder="Ich kann mit stressigen Situationen sehr gut umgehen..."
+            />
+          </div>
+          <button type="button" @click="textCompetenceEdit()" class="p-4">
+            <EditIcon
+              class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+            ></EditIcon>
+          </button>
+        </div>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-16">
+          <p
+            class="py-5 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+          >
+            Beitrag:
+          </p>
+          <div class="py-2">
+            <FormKit
+              v-model="textContribution"
+              type="textarea"
+              placeholder="In Ihrem Unternehmen möchte ich mein handwerkliches Geschick einbringen..."
+            />
+          </div>
+          <button type="button" @click="textContributionEdit()" class="p-4">
             <EditIcon
               class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
             ></EditIcon>
@@ -118,15 +160,36 @@
   </div>
   <div class="space-y-1">
     <p class="text-black px-0 dark:text-white font-Montserrat text-sm">
-      Abschluss-Grußformel
+      Schlussteil:
     </p>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-16">
           <p
-            class="py-3 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="py-5 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
-            Grußformel:
+            Abschluss:
+          </p>
+          <div class="py-2">
+            <FormKit
+              v-model="ending"
+              type="textarea"
+              placeholder="Für offene Fragen zu meiner Bewerbung stehe ich Ihnen jederzeit zur Verfügung..."
+            />
+          </div>
+          <button type="button" @click="endingEdit()" class="p-4">
+            <EditIcon
+              class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+            ></EditIcon>
+          </button>
+        </div>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-16">
+          <p
+            class="py-5 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+          >
+            Abschied:
           </p>
           <div class="py-2">
             <FormKit
@@ -153,6 +216,7 @@
           :buttonIndex="buttonIndex"
           :indexOfMVid="indexOfMVid"
           :lastIndex="lastindex"
+          :textLabel="textLabel"
         />
       </SwiperCard>
     </BottomCard>
@@ -171,9 +235,12 @@ import {
   sideBackBack,
   currentSubject,
   currentSalutationBeginning,
-  currentTextField,
   currentEnding,
   currentSalutationEnding,
+  currentTextBegining,
+  currentTextExperience,
+  currentTextContribution,
+  currentTextCompetence,
 } from "@/store.js";
 import { update } from "lodash";
 const props = defineProps({
@@ -197,8 +264,14 @@ const motivation = [
     indexMV: "1",
     subject: "Bewerbung Bewerbung",
     salutationBeginning: "Sehr geehrte Frau/Herr",
-    textfield: "Mit großen Interesse habe ich Ihre Anzeige im...",
-    ending: "Ich freue mich Ihnen bei einem persönlichen...",
+    textBegining: "Mit großem Interesse habe ich Ihre Anzeige gelesen.",
+    textExperience:
+      "Die Berufsausbildung zum KFZ-Mechaniker habe ich im Jahr 2020 erfolgreich bei der Musterfirma abgeschlossen...",
+    textCompetence: "Ich kann mit stressigen Situationen sehr gut umgehen...",
+    textContribution:
+      "In Ihrem Unternehmen möchte ich mein handwerkliches Geschick einbringen...",
+    ending:
+      "Für offene Fragen zu meiner Bewerbung stehe ich Ihnen jederzeit zur Verfügung...",
     salutationEnding: "Mit freundlichen Grüßen ...",
   },
 ];
@@ -219,25 +292,28 @@ const items = ref<SlideItem[]>([
 
 const subject = ref(null);
 const salutationBeginning = ref(null);
-const textfield = ref(null);
+const textBegining = ref(null);
+const textExperience = ref(null);
+const textCompetence = ref(null);
+const textContribution = ref(null);
 const ending = ref(null);
 const salutationEnding = ref(null);
 
 const showBottomSlide = ref(false);
 let buttonIndex = 0;
-let buttonDisabled = false;
 let isEdited = false;
 const indexOfMVid = ref(0);
 
 const MAX_MV_PREVIEW = 5;
 const lastindex = ref(0);
 
+let textLabel = "";
+
 onMounted(() => {
   lastindex.value = getLastIndex();
   indexOfMVid.value = getIndexOfMVid();
   motivations.value = JSON.parse(localStorage.getItem("motivations"));
   updateForm();
-  buttonDisabled = false;
   sideBackBack.value = false;
   sideBack.value = true;
   slideDown.value = false;
@@ -262,7 +338,11 @@ const saveToMVForm = () => {
   motivations.value[indexOfMVid.value][0].subject = subject.value;
   motivations.value[indexOfMVid.value][0].salutationBeginning =
     salutationBeginning.value;
-  motivations.value[indexOfMVid.value][0].textfield = textfield.value;
+  motivations.value[indexOfMVid.value][0].textBegining = textBegining.value;
+  motivations.value[indexOfMVid.value][0].textExperience = textExperience.value;
+  motivations.value[indexOfMVid.value][0].textContribution =
+    textContribution.value;
+  motivations.value[indexOfMVid.value][0].textCompetence = textCompetence.value;
   motivations.value[indexOfMVid.value][0].ending = ending.value;
   motivations.value[indexOfMVid.value][0].salutationEnding =
     salutationEnding.value;
@@ -298,7 +378,10 @@ const createNewMotivation = () => {
       indexMV: index,
       subject: subject.value,
       salutationBeginning: salutationBeginning.value,
-      textfield: textfield.value,
+      textBegining: textBegining.value,
+      textExperience: textExperience.value,
+      textContribution: textContribution.value,
+      textCompetence: textCompetence.value,
       ending: ending.value,
       salutationEnding: salutationEnding.value,
     },
@@ -330,27 +413,42 @@ const updateForm = () => {
   if (isEdited) {
     subject.value = currentSubject.value;
     salutationBeginning.value = currentSalutationBeginning.value;
-    textfield.value = currentTextField.value;
+    textBegining.value = currentTextBegining.value;
+    textExperience.value = currentTextExperience.value;
+    textContribution.value = currentTextContribution.value;
+    textCompetence.value = currentTextCompetence.value;
     ending.value = currentEnding.value;
     salutationEnding.value = currentSalutationEnding.value;
   } else if (indexOfMVid.value >= 0) {
     subject.value = motivations.value[indexOfMVid.value][0].subject;
     salutationBeginning.value =
       motivations.value[indexOfMVid.value][0].salutationBeginning;
-    textfield.value = motivations.value[indexOfMVid.value][0].textfield;
+    textBegining.value = motivations.value[indexOfMVid.value][0].textBegining;
+    textExperience.value =
+      motivations.value[indexOfMVid.value][0].textExperience;
+    textContribution.value =
+      motivations.value[indexOfMVid.value][0].textContribution;
+    textCompetence.value =
+      motivations.value[indexOfMVid.value][0].textCompetence;
     ending.value = motivations.value[indexOfMVid.value][0].ending;
     salutationEnding.value =
       motivations.value[indexOfMVid.value][0].salutationEnding;
   } else {
     subject.value = "";
     salutationBeginning.value = "";
-    textfield.value = "";
+    textBegining.value = "";
+    textExperience.value = "";
+    textContribution.value = "";
+    textCompetence.value = "";
     ending.value = "";
     salutationEnding.value = "";
 
     currentSubject.value = "";
     currentSalutationBeginning.value = "";
-    currentTextField.value = "";
+    currentTextBegining.value = "";
+    currentTextExperience.value = "";
+    currentTextContribution.value = "";
+    currentTextCompetence.value = "";
     currentEnding.value = "";
     currentSalutationEnding.value = "";
   }
@@ -372,7 +470,10 @@ const storeFormData = () => {
   if (localStorage.getItem("motivations")) {
     currentSubject.value = subject.value;
     currentSalutationBeginning.value = salutationBeginning.value;
-    currentTextField.value = textfield.value;
+    currentTextBegining.value = textBegining.value;
+    currentTextExperience.value = textExperience.value;
+    currentTextContribution.value = textContribution.value;
+    currentTextCompetence.value = textCompetence.value;
     currentEnding.value = ending.value;
     currentSalutationEnding.value = salutationEnding.value;
   }
@@ -385,7 +486,6 @@ const initSlides = () => {
 };
 
 const closeModal = () => {
-  buttonDisabled = true;
   sideBack.value = false;
   isEdited = false;
 };
@@ -408,6 +508,7 @@ const subjectEdit = () => {
   showBottomSlide.value = true;
   buttonIndex = 0;
   isEdited = true;
+  textLabel = "Betreff ";
 };
 
 const salutationBeginningEdit = () => {
@@ -416,28 +517,59 @@ const salutationBeginningEdit = () => {
   showBottomSlide.value = true;
   buttonIndex = 1;
   isEdited = true;
+  textLabel = "Anrede ";
 };
 
-const textfieldEdit = () => {
+const textBeginingEdit = () => {
   storeFormData();
   sideBackBack.value = true;
   showBottomSlide.value = true;
   buttonIndex = 2;
   isEdited = true;
+  textLabel = "Einleitung ";
 };
-const endingEdit = () => {
+
+const textExperienceEdit = () => {
   storeFormData();
   sideBackBack.value = true;
   showBottomSlide.value = true;
   buttonIndex = 3;
   isEdited = true;
+  textLabel = "Werdegang ";
 };
-const salutationEndingEdit = () => {
+
+const textContributionEdit = () => {
   storeFormData();
   sideBackBack.value = true;
   showBottomSlide.value = true;
   buttonIndex = 4;
   isEdited = true;
+  textLabel = "Kompetenz ";
+};
+const textCompetenceEdit = () => {
+  storeFormData();
+  sideBackBack.value = true;
+  showBottomSlide.value = true;
+  buttonIndex = 5;
+  isEdited = true;
+  textLabel = "Beitrag ";
+};
+
+const endingEdit = () => {
+  storeFormData();
+  sideBackBack.value = true;
+  showBottomSlide.value = true;
+  buttonIndex = 6;
+  isEdited = true;
+  textLabel = "Abschluss ";
+};
+const salutationEndingEdit = () => {
+  storeFormData();
+  sideBackBack.value = true;
+  showBottomSlide.value = true;
+  buttonIndex = 7;
+  isEdited = true;
+  textLabel = "Abschied ";
 };
 
 const addAfter = () => {

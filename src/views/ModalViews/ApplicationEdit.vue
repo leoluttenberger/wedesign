@@ -8,7 +8,7 @@
           ></CloseIcon>
         </button>
         <p class="text-black px-1 dark:text-white font-Montserrat text-xl p-4">
-          {{ company }}
+          {{ company + " speichern!" }}
         </p>
         <button type="button" @click="saveToLocalStorage()" class="p-4">
           <CheckIcon
@@ -102,13 +102,13 @@
             <div class="py-2">
               <CloseIcon
                 v-if="__mv == 0"
-                class="w-24 stroke-wd-error"
+                class="h-6 w-6 stroke-1 stroke-wd-error"
               ></CloseIcon>
             </div>
             <div class="py-2">
               <CheckIcon
                 v-if="__mv > 0"
-                class="w-24 stroke-wd-green"
+                class="h-6 w-6 stroke-1 stroke-wd-green"
               ></CheckIcon>
             </div>
             <p

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed top-16 left-0 w-screen h-screen"
+    class="fixed top-0 left-0 w-screen h-screen"
     :class="{
       'pointer-events-none': !open,
       'transition-all duration-300 ease': !isDismissing,

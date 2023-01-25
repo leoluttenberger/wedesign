@@ -136,9 +136,17 @@ const ignoreSuggestion = () =>
   editor.value.commands.ignoreLanguageToolSuggestion();
 
 const onClickedSave = () => {
-  const comment_text = editor.value.getJSON().content[0].content[0].text
-    ? editor.value.getJSON().content[0].content[0].text
-    : "";
+  let comment_text = "";
+  console.log(editor.value.getJSON());
+
+  const len = editor.value.getJSON().content.length;
+  for (let i = 0; i < len; i++) {
+    if (editor.value.getJSON().content[i].content) {
+      comment_text += editor.value.getJSON().content[i].content[0].text + "\n";
+    } else {
+      comment_text += "\n";
+    }
+  }
   switch (props.textEditIndex) {
     case 0:
       currentSubject.value = comment_text;

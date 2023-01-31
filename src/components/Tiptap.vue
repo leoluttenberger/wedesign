@@ -40,6 +40,7 @@ import { computed, ref, onMounted, defineProps } from "vue";
 import { useEditor, EditorContent, Editor, Content } from "@tiptap/vue-3";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import StarterKit from "@tiptap/starter-kit";
+import { EditorView } from "prosemirror-view";
 import MenuBar from "./MenuBar.vue";
 import {
   LanguageTool,
@@ -58,6 +59,12 @@ import {
   currentEnding,
   currentSalutationEnding,
 } from "@/store.js";
+
+// Prosemirror-view hack to prevent editor TypeError: Cannot read property 'matchesNode'
+EditorView.prototype.updateState = function updateState(state) {
+  if (!this.docView) return; // This prevents the matchesNode error on hot reloads
+  this.updateStateInner(state, this.state.plugins != state.plugins);
+};
 
 const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
 

@@ -23,7 +23,7 @@
           <div class="col-span-2 md:col-span-1">
             <div class="flex bg-white dark:bg-slate-800 h-10">
               <p
-                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
               >
                 Firma:
               </p>
@@ -38,7 +38,7 @@
           <div class="col-span-2 md:col-span-1">
             <div class="flex bg-white dark:bg-slate-800 h-10">
               <p
-                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
               >
                 Beruf:
               </p>
@@ -54,7 +54,7 @@
           <div class="col-span-2 md:col-span-1">
             <div class="flex bg-white dark:bg-slate-800 h-10">
               <div
-                class="px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+                class="px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
               >
                 <p>Ansprechs</p>
                 <p>person:</p>
@@ -71,7 +71,7 @@
           <div class="col-span-2 md:col-span-1">
             <div class="flex bg-white dark:bg-slate-800 h-10">
               <p
-                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
               >
                 Deadline:
               </p>
@@ -83,7 +83,7 @@
           <div class="col-span-2 md:col-span-1">
             <div class="flex bg-white dark:bg-slate-800 h-10">
               <p
-                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
               >
                 Status:
               </p>
@@ -114,7 +114,7 @@
                 ></CheckIcon>
               </div>
               <p
-                class="w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+                class="w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
               >
                 {{ __mvText }}
               </p>
@@ -125,7 +125,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-24">
             <p
-              class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
             >
               Notiz:
             </p>
@@ -141,21 +141,21 @@
 
         <div class="grid flex gap-6 py-10">
           <button
-            class="bg-wd-error shadow rounded-md h-10 w-full text-white"
+            class="bg-wd-error shadow rounded-md h-10 w-full text-white font-bold"
             @click="removeFromLocalStorage()"
             :disabled="buttonDisabled"
           >
             Bewerbung entfernen
           </button>
           <button
-            class="bg-wd-green hover:bg-transparent-green shadow h-16 text-white"
+            class="bg-wd-green hover:bg-transparent-green shadow h-16 text-white font-bold"
             @click="createMotivationNode()"
             :disabled="buttonDisabled"
           >
             Motivationsschreiben bearbeiten
           </button>
           <button
-            class="bg-wd-green hover:bg-transparent-green shadow h-16 text-white"
+            class="bg-wd-green hover:bg-transparent-green shadow h-16 text-white font-bold"
             @click="sendJobApplication()"
             :disabled="buttonDisabled"
           >

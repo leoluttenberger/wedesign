@@ -28,7 +28,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-24">
             <p
-              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
             >
               Betreff:
             </p>
@@ -50,7 +50,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-24">
             <p
-              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
             >
               Anrede:
             </p>
@@ -84,7 +84,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-24">
             <p
-              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
             >
               Einleitung:
             </p>
@@ -107,7 +107,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-24">
             <p
-              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
             >
               Werdegang:
             </p>
@@ -128,7 +128,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-24">
             <p
-              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
             >
               Kompetenzen:
             </p>
@@ -149,7 +149,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-24">
             <p
-              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
             >
               Beitrag:
             </p>
@@ -177,7 +177,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-24">
             <p
-              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
             >
               Abschluss:
             </p>
@@ -198,7 +198,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-24">
             <p
-              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
             >
               Abschied:
             </p>

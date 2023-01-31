@@ -32,7 +32,7 @@
             ? 'border-wd-green dark:border-wd-green'
             : 'border-white dark:border-slate-800'
         "
-        class="outline:none text-sm border-b-[3px] font-Montserrat dark:text-white"
+        class="outline:none text-sm border-b-[3px] font-Montserrat dark:text-white font-bold"
       >
         Über mich
       </button>
@@ -44,7 +44,7 @@
             ? 'border-wd-green dark:border-wd-green'
             : 'border-white dark:border-slate-800'
         "
-        class="outline:none text-sm border-b-[3px] font-Montserrat dark:text-white"
+        class="outline:none text-sm border-b-[3px] font-Montserrat dark:text-white font-bold"
       >
         Ausbildungen
       </button>
@@ -56,7 +56,7 @@
             ? 'border-wd-green dark:border-wd-green'
             : 'border-white dark:border-slate-800'
         "
-        class="outline:none text-sm border-b-[3px] font-Montserrat dark:text-white"
+        class="outline:none text-sm border-b-[3px] font-Montserrat dark:text-white font-bold"
       >
         Erfahrung
       </button>
@@ -68,7 +68,7 @@
             ? 'border-wd-green dark:border-wd-green'
             : 'border-white dark:border-slate-800'
         "
-        class="outline:none text-sm border-b-[3px] font-Montserrat dark:text-white"
+        class="outline:none text-sm border-b-[3px] font-Montserrat dark:text-white font-bold"
       >
         Kenntnisse
       </button>

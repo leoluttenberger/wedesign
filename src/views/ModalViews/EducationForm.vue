@@ -4,7 +4,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
           >
             Typ:
           </p>
@@ -19,7 +19,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
           >
             Schwerpunkt:
           </p>
@@ -35,7 +35,7 @@
     <div class="col-span-2 md:col-span-1">
       <div class="flex bg-white dark:bg-slate-800 h-10">
         <p
-          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
         >
           Adresse:
         </p>
@@ -50,7 +50,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
           >
             Von:
           </p>
@@ -64,7 +64,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
           >
             Bis:
           </p>
@@ -81,7 +81,7 @@
   </div>
   <div class="grid flex gap-6 py-10">
     <button
-      class="bg-wd-green hover:bg-transparent-green shadow h-24 text-white"
+      class="bg-wd-green hover:bg-transparent-green shadow h-24 text-white font-bold"
       @click="saveToLocalStorage()"
       :disabled="buttonDisabled"
     >

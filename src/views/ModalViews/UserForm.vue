@@ -13,12 +13,14 @@
           >
             Titel(vor N.):
           </p>
-          <FormKit
-            v-model="titleBefore"
-            type="text"
-            placeholder="Dr."
-            :disabled="true"
-          />
+          <div class="px-2">
+            <FormKit
+              v-model="titleBefore"
+              type="text"
+              placeholder="Dr."
+              :disabled="true"
+            />
+          </div>
         </div>
       </div>
 
@@ -29,12 +31,14 @@
           >
             Titel(nach N.):
           </p>
-          <FormKit
-            v-model="titleAfter"
-            type="text"
-            placeholder="BA"
-            :disabled="true"
-          />
+          <div class="px-2">
+            <FormKit
+              v-model="titleAfter"
+              type="text"
+              placeholder="BA"
+              :disabled="true"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -46,13 +50,15 @@
           >
             Vorname:
           </p>
-          <FormKit
-            v-model="firstName"
-            type="text"
-            placeholder="Max"
-            validation="required|length:3"
-            :disabled="true"
-          />
+          <div class="px-2">
+            <FormKit
+              v-model="firstName"
+              type="text"
+              placeholder="Max"
+              validation="required|length:3"
+              :disabled="true"
+            />
+          </div>
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
@@ -62,13 +68,15 @@
           >
             Nachname:
           </p>
-          <FormKit
-            v-model="secondName"
-            type="text"
-            placeholder="Mustermann"
-            validation="required|length:3"
-            :disabled="true"
-          />
+          <div class="px-2">
+            <FormKit
+              v-model="secondName"
+              type="text"
+              placeholder="Mustermann"
+              validation="required|length:3"
+              :disabled="true"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -80,7 +88,9 @@
           >
             Geburtsdatum:
           </p>
-          <FormKit v-model="birthDate" type="date" :disabled="true" />
+          <div class="px-2">
+            <FormKit v-model="birthDate" type="date" :disabled="true" />
+          </div>
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
@@ -90,13 +100,15 @@
           >
             Geburtsort:
           </p>
-          <FormKit
-            v-model="birthArea"
-            type="text"
-            placeholder="Stadt"
-            validation="required|length:3"
-            :disabled="true"
-          />
+          <div class="px-2">
+            <FormKit
+              v-model="birthArea"
+              type="text"
+              placeholder="Stadt"
+              validation="required|length:3"
+              :disabled="true"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -109,19 +121,21 @@
           >
             Familienstand:
           </p>
-          <FormKit
-            v-model="civilStatus"
-            type="select"
-            :options="[
-              'ledig',
-              'verheiratet',
-              'geschieden',
-              'verwitwet',
-              ' getrennt lebend',
-            ]"
-            placeholder="Auswahl"
-            :disabled="true"
-          />
+          <div class="px-2">
+            <FormKit
+              v-model="civilStatus"
+              type="select"
+              :options="[
+                'ledig',
+                'verheiratet',
+                'geschieden',
+                'verwitwet',
+                ' getrennt lebend',
+              ]"
+              placeholder="Auswahl"
+              :disabled="true"
+            />
+          </div>
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
@@ -131,13 +145,15 @@
           >
             Geschlecht:
           </p>
-          <FormKit
-            v-model="gender"
-            type="select"
-            :options="['weiblich', 'männlich', 'divers']"
-            placeholder="Auswahl"
-            :disabled="true"
-          />
+          <div class="px-2">
+            <FormKit
+              v-model="gender"
+              type="select"
+              :options="['weiblich', 'männlich', 'divers']"
+              placeholder="Auswahl"
+              :disabled="true"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -150,12 +166,14 @@
           >
             Straße:
           </p>
-          <FormKit
-            v-model="streetName"
-            type="text"
-            placeholder="Musterstraße"
-            :disabled="true"
-          />
+          <div class="px-2">
+            <FormKit
+              v-model="streetName"
+              type="text"
+              placeholder="Musterstraße"
+              :disabled="true"
+            />
+          </div>
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
@@ -165,12 +183,14 @@
           >
             Nr:
           </p>
-          <FormKit
-            v-model="streetNumber"
-            type="text"
-            placeholder="1/1"
-            :disabled="true"
-          />
+          <div class="px-2">
+            <FormKit
+              v-model="streetNumber"
+              type="text"
+              placeholder="1/1"
+              :disabled="true"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -182,12 +202,14 @@
           >
             PLZ:
           </p>
-          <FormKit
-            v-model="districtNumber"
-            type="text"
-            placeholder="1010"
-            :disabled="true"
-          />
+          <div class="px-2">
+            <FormKit
+              v-model="districtNumber"
+              type="text"
+              placeholder="1010"
+              :disabled="true"
+            />
+          </div>
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
@@ -197,12 +219,14 @@
           >
             Ort:
           </p>
-          <FormKit
-            v-model="city"
-            type="text"
-            placeholder="Muserstadt"
-            :disabled="true"
-          />
+          <div class="px-2">
+            <FormKit
+              v-model="city"
+              type="text"
+              placeholder="Muserstadt"
+              :disabled="true"
+            />
+          </div>
         </div>
       </div>
     </div>

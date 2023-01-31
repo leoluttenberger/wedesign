@@ -8,11 +8,13 @@
           >
             Firma:
           </p>
-          <FormKit
-            v-model="company"
-            type="text"
-            placeholder="Unternehmensname"
-          />
+          <div class="px-2">
+            <FormKit
+              v-model="company"
+              type="text"
+              placeholder="Unternehmensname"
+            />
+          </div>
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
@@ -22,7 +24,9 @@
           >
             Beruf:
           </p>
-          <FormKit v-model="job" type="text" placeholder="Beruf oder Lehre" />
+          <div class="px-2">
+            <FormKit v-model="job" type="text" placeholder="Beruf oder Lehre" />
+          </div>
         </div>
       </div>
     </div>
@@ -33,7 +37,9 @@
         >
           Deadline:
         </p>
-        <FormKit type="date" v-model="deadline" placeholder="Auswählen" />
+        <div class="px-2">
+          <FormKit type="date" v-model="deadline" placeholder="Auswählen" />
+        </div>
       </div>
     </div>
   </div>

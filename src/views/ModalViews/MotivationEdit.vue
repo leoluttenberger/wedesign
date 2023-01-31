@@ -32,7 +32,7 @@
             >
               Betreff:
             </p>
-            <div class="py-2">
+            <div class="p-2">
               <FormKit
                 v-model="subject"
                 type="textarea"
@@ -54,7 +54,7 @@
             >
               Anrede:
             </p>
-            <div class="py-2">
+            <div class="p-2">
               <FormKit
                 v-model="salutationBeginning"
                 type="textarea"
@@ -88,7 +88,7 @@
             >
               Einleitung:
             </p>
-            <div class="py-2">
+            <div class="p-2">
               <FormKit
                 v-model="textBegining"
                 type="textarea"
@@ -132,7 +132,7 @@
             >
               Kompetenzen:
             </p>
-            <div class="py-2">
+            <div class="p-2">
               <FormKit
                 v-model="textCompetence"
                 type="textarea"
@@ -153,7 +153,7 @@
             >
               Beitrag:
             </p>
-            <div class="py-2">
+            <div class="p-2">
               <FormKit
                 v-model="textContribution"
                 type="textarea"
@@ -181,7 +181,7 @@
             >
               Abschluss:
             </p>
-            <div class="py-2">
+            <div class="p-2">
               <FormKit
                 v-model="ending"
                 type="textarea"
@@ -202,7 +202,7 @@
             >
               Abschied:
             </p>
-            <div class="py-2">
+            <div class="p-2">
               <FormKit
                 v-model="salutationEnding"
                 type="textarea"

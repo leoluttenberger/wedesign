@@ -27,11 +27,13 @@
               >
                 Firma:
               </p>
-              <FormKit
-                type="text"
-                v-model="company"
-                placeholder="Unternehmensname"
-              />
+              <div class="px-2">
+                <FormKit
+                  type="text"
+                  v-model="company"
+                  placeholder="Unternehmensname"
+                />
+              </div>
             </div>
           </div>
 
@@ -42,11 +44,13 @@
               >
                 Beruf:
               </p>
-              <FormKit
-                type="text"
-                v-model="job"
-                placeholder="Beruf oder Lehre"
-              />
+              <div class="px-2">
+                <FormKit
+                  type="text"
+                  v-model="job"
+                  placeholder="Beruf oder Lehre"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -59,12 +63,13 @@
                 <p>Ansprechs</p>
                 <p>person:</p>
               </div>
-
-              <FormKit
-                type="text"
-                v-model="contactPerson"
-                placeholder="Marlene Musterfrau"
-              />
+              <div class="px-2">
+                <FormKit
+                  type="text"
+                  v-model="contactPerson"
+                  placeholder="Marlene Musterfrau"
+                />
+              </div>
             </div>
           </div>
 
@@ -75,7 +80,13 @@
               >
                 Deadline:
               </p>
-              <FormKit type="date" v-model="deadline" placeholder="Auswählen" />
+              <div class="px-2">
+                <FormKit
+                  type="date"
+                  v-model="deadline"
+                  placeholder="Auswählen"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -87,16 +98,18 @@
               >
                 Status:
               </p>
-              <FormKit
-                type="select"
-                v-model="state"
-                :options="[
-                  'Entwurf',
-                  'Erledigt',
-                  'Keine Rückmeldung',
-                  'Leider nein',
-                ]"
-              />
+              <div class="px-2">
+                <FormKit
+                  type="select"
+                  v-model="state"
+                  :options="[
+                    'Entwurf',
+                    'Erledigt',
+                    'Keine Rückmeldung',
+                    'Leider nein',
+                  ]"
+                />
+              </div>
             </div>
           </div>
           <div class="col-span-2 md:col-span-1">
@@ -129,7 +142,7 @@
             >
               Notiz:
             </p>
-            <div class="py-2">
+            <div class="py-2 px-2">
               <FormKit
                 type="textarea"
                 v-model="note"

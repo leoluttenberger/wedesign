@@ -17,7 +17,7 @@
         {{ matchMessage }}
 
         <button class="ignore-suggestion-button" @click="ignoreSuggestion">
-          X
+          <CloseIcon class="h-6 w-6 stroke-1 stroke-wd-error"></CloseIcon>
         </button>
       </section>
       <section class="suggestions-section">
@@ -38,6 +38,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, defineProps } from "vue";
 import { useEditor, EditorContent, Editor, Content } from "@tiptap/vue-3";
+import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "./MenuBar.vue";
 import {
@@ -123,7 +124,13 @@ const editor = useEditor({
     else loading.value = false;
   },
 });
-const replacements = computed(() => match.value?.replacements || []);
+const replacements = computed(() => {
+  let rps = match.value?.replacements || [];
+  while (rps.length > 4) {
+    rps.pop();
+  }
+  return rps;
+});
 
 const matchMessage = computed(() => match.value?.message || "No Message");
 
@@ -135,8 +142,9 @@ const acceptSuggestion = (sug: { value: Content }) => {
 
 const proofread = () => editor.value.commands.proofread();
 
-const ignoreSuggestion = () =>
-  editor.value.commands.ignoreLanguageToolSuggestion();
+const ignoreSuggestion = () => {
+  editor.value.commands.resetLanguageToolMatch();
+};
 
 const onClickedSave = () => {
   let comment_text = "";

@@ -1,210 +1,220 @@
 <template>
-  <div class="grid grid-cols-3 gap-20 p-2 place-items-center">
-    <button type="button" @click="closeModal()" class="p-4">
-      <CloseIcon
-        class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-      ></CloseIcon>
-    </button>
-    <p
-      class="text-black px-2 dark:text-white font-Montserrat text-xl p-4 font-bold"
-    >
-      Motivationsschreiben speichern!
-    </p>
-    <button type="button" @click="saveModal()" class="p-4">
-      <CheckIcon
-        class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-      ></CheckIcon>
-    </button>
-  </div>
+  <div class="overflow-auto overflow-scroll w-screen h-screen">
+    <div class="grid grid-cols-3 gap-20 p-2 place-items-center">
+      <button type="button" @click="closeModal()" class="p-4">
+        <CloseIcon
+          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+        ></CloseIcon>
+      </button>
+      <p
+        class="text-black px-2 dark:text-white font-Montserrat text-xl p-4 font-bold"
+      >
+        Motivationsschreiben speichern!
+      </p>
+      <button type="button" @click="saveModal()" class="p-4">
+        <CheckIcon
+          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+        ></CheckIcon>
+      </button>
+    </div>
 
-  <div class="space-y-1">
-    <p class="text-black p-2 dark:text-white font-Montserrat text-sm font-bold">
-      Einstieg
-    </p>
-    <div class="grid grid-cols-2 gap-1">
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-24">
-          <p
-            class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-          >
-            Betreff:
-          </p>
-          <div class="py-2">
-            <FormKit
-              v-model="subject"
-              type="textarea"
-              placeholder="Bewerbung Beruf"
-            />
+    <div class="space-y-1">
+      <p
+        class="text-black p-2 dark:text-white font-Montserrat text-sm font-bold"
+      >
+        Einstieg
+      </p>
+      <div class="grid grid-cols-2 gap-1">
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex bg-white dark:bg-slate-800 h-24">
+            <p
+              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            >
+              Betreff:
+            </p>
+            <div class="py-2">
+              <FormKit
+                v-model="subject"
+                type="textarea"
+                placeholder="Bewerbung Beruf"
+              />
+            </div>
+            <button type="button" @click="subjectEdit()" class="p-4">
+              <EditIcon
+                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+              ></EditIcon>
+            </button>
           </div>
-          <button type="button" @click="subjectEdit()" class="p-4">
-            <EditIcon
-              class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-            ></EditIcon>
-          </button>
         </div>
-      </div>
 
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-24">
-          <p
-            class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-          >
-            Anrede:
-          </p>
-          <div class="py-2">
-            <FormKit
-              v-model="salutationBeginning"
-              type="textarea"
-              placeholder="Sehr geehrte Frau/Herr"
-            />
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex bg-white dark:bg-slate-800 h-24">
+            <p
+              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            >
+              Anrede:
+            </p>
+            <div class="py-2">
+              <FormKit
+                v-model="salutationBeginning"
+                type="textarea"
+                placeholder="Sehr geehrte Frau/Herr"
+              />
+            </div>
+            <button
+              type="button"
+              @click="salutationBeginningEdit()"
+              class="p-4"
+            >
+              <EditIcon
+                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+              ></EditIcon>
+            </button>
           </div>
-          <button type="button" @click="salutationBeginningEdit()" class="p-4">
-            <EditIcon
-              class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-            ></EditIcon>
-          </button>
         </div>
       </div>
     </div>
-  </div>
-  <div class="space-y-1">
-    <p class="text-black p-2 dark:text-white font-Montserrat text-sm font-bold">
-      Hauptteil:
-    </p>
-    <div class="grid grid-cols-2 gap-1">
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-24">
-          <p
-            class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-          >
-            Einleitung:
-          </p>
-          <div class="py-2">
-            <FormKit
-              v-model="textBegining"
-              type="textarea"
-              placeholder="Mit großem Interesse habe ich Ihre Anzeige gelesen."
-            />
-          </div>
+    <div class="space-y-1">
+      <p
+        class="text-black p-2 dark:text-white font-Montserrat text-sm font-bold"
+      >
+        Hauptteil:
+      </p>
+      <div class="grid grid-cols-2 gap-1">
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex bg-white dark:bg-slate-800 h-24">
+            <p
+              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            >
+              Einleitung:
+            </p>
+            <div class="py-2">
+              <FormKit
+                v-model="textBegining"
+                type="textarea"
+                placeholder="Mit großem Interesse habe ich Ihre Anzeige gelesen."
+              />
+            </div>
 
-          <button type="button" @click="textBeginingEdit()" class="p-4">
-            <EditIcon
-              class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-            ></EditIcon>
-          </button>
+            <button type="button" @click="textBeginingEdit()" class="p-4">
+              <EditIcon
+                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+              ></EditIcon>
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-24">
-          <p
-            class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-          >
-            Werdegang:
-          </p>
-          <div class="py-2">
-            <FormKit
-              v-model="textExperience"
-              type="textarea"
-              placeholder="Die Berufsausbildung zum KFZ-Mechaniker habe ich im Jahr 2020 erfolgreich bei der Musterfirma abgeschlossen..."
-            />
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex bg-white dark:bg-slate-800 h-24">
+            <p
+              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            >
+              Werdegang:
+            </p>
+            <div class="py-2">
+              <FormKit
+                v-model="textExperience"
+                type="textarea"
+                placeholder="Die Berufsausbildung zum KFZ-Mechaniker habe ich im Jahr 2020 erfolgreich bei der Musterfirma abgeschlossen..."
+              />
+            </div>
+            <button type="button" @click="textExperienceEdit()" class="p-4">
+              <EditIcon
+                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+              ></EditIcon>
+            </button>
           </div>
-          <button type="button" @click="textExperienceEdit()" class="p-4">
-            <EditIcon
-              class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-            ></EditIcon>
-          </button>
         </div>
-      </div>
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-24">
-          <p
-            class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-          >
-            Kompetenzen:
-          </p>
-          <div class="py-2">
-            <FormKit
-              v-model="textCompetence"
-              type="textarea"
-              placeholder="Ich kann mit stressigen Situationen sehr gut umgehen..."
-            />
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex bg-white dark:bg-slate-800 h-24">
+            <p
+              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            >
+              Kompetenzen:
+            </p>
+            <div class="py-2">
+              <FormKit
+                v-model="textCompetence"
+                type="textarea"
+                placeholder="Ich kann mit stressigen Situationen sehr gut umgehen..."
+              />
+            </div>
+            <button type="button" @click="textCompetenceEdit()" class="p-4">
+              <EditIcon
+                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+              ></EditIcon>
+            </button>
           </div>
-          <button type="button" @click="textCompetenceEdit()" class="p-4">
-            <EditIcon
-              class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-            ></EditIcon>
-          </button>
         </div>
-      </div>
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-24">
-          <p
-            class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-          >
-            Beitrag:
-          </p>
-          <div class="py-2">
-            <FormKit
-              v-model="textContribution"
-              type="textarea"
-              placeholder="In Ihrem Unternehmen möchte ich mein handwerkliches Geschick einbringen..."
-            />
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex bg-white dark:bg-slate-800 h-24">
+            <p
+              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            >
+              Beitrag:
+            </p>
+            <div class="py-2">
+              <FormKit
+                v-model="textContribution"
+                type="textarea"
+                placeholder="In Ihrem Unternehmen möchte ich mein handwerkliches Geschick einbringen..."
+              />
+            </div>
+            <button type="button" @click="textContributionEdit()" class="p-4">
+              <EditIcon
+                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+              ></EditIcon>
+            </button>
           </div>
-          <button type="button" @click="textContributionEdit()" class="p-4">
-            <EditIcon
-              class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-            ></EditIcon>
-          </button>
         </div>
       </div>
     </div>
-  </div>
-  <div class="space-y-1">
-    <p class="text-black px-2 dark:text-white font-Montserrat text-sm">
-      Schlussteil:
-    </p>
-    <div class="grid grid-cols-2 gap-1">
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-24">
-          <p
-            class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-          >
-            Abschluss:
-          </p>
-          <div class="py-2">
-            <FormKit
-              v-model="ending"
-              type="textarea"
-              placeholder="Für offene Fragen zu meiner Bewerbung stehe ich Ihnen jederzeit zur Verfügung..."
-            />
+    <div class="space-y-1">
+      <p class="text-black px-2 dark:text-white font-Montserrat text-sm">
+        Schlussteil:
+      </p>
+      <div class="grid grid-cols-2 gap-1">
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex bg-white dark:bg-slate-800 h-24">
+            <p
+              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            >
+              Abschluss:
+            </p>
+            <div class="py-2">
+              <FormKit
+                v-model="ending"
+                type="textarea"
+                placeholder="Für offene Fragen zu meiner Bewerbung stehe ich Ihnen jederzeit zur Verfügung..."
+              />
+            </div>
+            <button type="button" @click="endingEdit()" class="p-4">
+              <EditIcon
+                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+              ></EditIcon>
+            </button>
           </div>
-          <button type="button" @click="endingEdit()" class="p-4">
-            <EditIcon
-              class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-            ></EditIcon>
-          </button>
         </div>
-      </div>
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-24">
-          <p
-            class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
-          >
-            Abschied:
-          </p>
-          <div class="py-2">
-            <FormKit
-              v-model="salutationEnding"
-              type="textarea"
-              placeholder="Mit freundlichen Grüßen ..."
-            />
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex bg-white dark:bg-slate-800 h-24">
+            <p
+              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            >
+              Abschied:
+            </p>
+            <div class="py-2">
+              <FormKit
+                v-model="salutationEnding"
+                type="textarea"
+                placeholder="Mit freundlichen Grüßen ..."
+              />
+            </div>
+            <button type="button" @click="salutationEndingEdit()" class="p-4">
+              <EditIcon
+                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+              ></EditIcon>
+            </button>
           </div>
-          <button type="button" @click="salutationEndingEdit()" class="p-4">
-            <EditIcon
-              class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-            ></EditIcon>
-          </button>
         </div>
       </div>
     </div>

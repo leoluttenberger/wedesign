@@ -7,7 +7,9 @@
             class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
           ></CloseIcon>
         </button>
-        <p class="text-black px-1 dark:text-white font-Montserrat text-xl p-4">
+        <p
+          class="text-black px-1 dark:text-white font-Montserrat text-xl p-4 font-bold"
+        >
           {{ company + " speichern!" }}
         </p>
         <button type="button" @click="saveToLocalStorage()" class="p-4">

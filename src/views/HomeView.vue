@@ -2,7 +2,7 @@
   <section
     class="fixed inset-x-0 z-10 shadow dark:text-white text-xl font-Montserrat bg-white dark:bg-slate-800 shadow"
   >
-    <div class="flex justify-center p-2">Home</div>
+    <div class="flex justify-center p-2 font-bold">Home</div>
     <div class="flex justify-center text-md">
       <span>Hi &#128075; {{ firstName }}</span>
     </div>

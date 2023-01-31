@@ -3,7 +3,7 @@
     class="fixed inset-x-0 z-10 top-0 shadow dark:text-white text-xl font-Montserrat bg-white dark:bg-slate-800"
   >
     <div class="flex justify-center p-2">
-      <div class="px-2">Lebenslauf</div>
+      <div class="px-2 font-bold">Lebenslauf</div>
       <div>
         <Toggle
           v-model="toggleOnDark"

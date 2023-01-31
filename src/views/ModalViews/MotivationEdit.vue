@@ -5,7 +5,9 @@
         class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
       ></CloseIcon>
     </button>
-    <p class="text-black px-0 dark:text-white font-Montserrat text-xl p-4">
+    <p
+      class="text-black px-2 dark:text-white font-Montserrat text-xl p-4 font-bold"
+    >
       Motivationsschreiben speichern!
     </p>
     <button type="button" @click="saveModal()" class="p-4">
@@ -16,14 +18,14 @@
   </div>
 
   <div class="space-y-1">
-    <p class="text-black px-0 dark:text-white font-Montserrat text-sm">
+    <p class="text-black p-2 dark:text-white font-Montserrat text-sm font-bold">
       Einstieg
     </p>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-16">
+        <div class="flex bg-white dark:bg-slate-800 h-24">
           <p
-            class="py-5 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
             Betreff:
           </p>
@@ -43,9 +45,9 @@
       </div>
 
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-16">
+        <div class="flex bg-white dark:bg-slate-800 h-24">
           <p
-            class="py-5 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
             Anrede:
           </p>
@@ -66,14 +68,14 @@
     </div>
   </div>
   <div class="space-y-1">
-    <p class="text-black px-0 dark:text-white font-Montserrat text-sm">
+    <p class="text-black p-2 dark:text-white font-Montserrat text-sm font-bold">
       Hauptteil:
     </p>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-16">
+        <div class="flex bg-white dark:bg-slate-800 h-24">
           <p
-            class="py-5 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
             Einleitung:
           </p>
@@ -94,9 +96,9 @@
       </div>
 
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-16">
+        <div class="flex bg-white dark:bg-slate-800 h-24">
           <p
-            class="py-5 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
             Werdegang:
           </p>
@@ -115,9 +117,9 @@
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-16">
+        <div class="flex bg-white dark:bg-slate-800 h-24">
           <p
-            class="py-5 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
             Kompetenzen:
           </p>
@@ -136,9 +138,9 @@
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-16">
+        <div class="flex bg-white dark:bg-slate-800 h-24">
           <p
-            class="py-5 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
             Beitrag:
           </p>
@@ -159,14 +161,14 @@
     </div>
   </div>
   <div class="space-y-1">
-    <p class="text-black px-0 dark:text-white font-Montserrat text-sm">
+    <p class="text-black px-2 dark:text-white font-Montserrat text-sm">
       Schlussteil:
     </p>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-16">
+        <div class="flex bg-white dark:bg-slate-800 h-24">
           <p
-            class="py-5 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
             Abschluss:
           </p>
@@ -185,9 +187,9 @@
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-16">
+        <div class="flex bg-white dark:bg-slate-800 h-24">
           <p
-            class="py-5 px-0 w-32 h-16 text-black dark:text-white font-Montserrat text-xs md:text-sm"
+            class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm"
           >
             Abschied:
           </p>

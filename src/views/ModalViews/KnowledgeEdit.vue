@@ -8,21 +8,25 @@
           >
             Kenntnisse:
           </p>
-          <FormKit
-            v-model="type"
-            type="select"
-            placeholder="Auswahl"
-            :options="['Sprachkenntnisse', 'Sonstige Kenntnisse']"
-          />
+          <div class="px-2">
+            <FormKit
+              v-model="type"
+              type="select"
+              placeholder="Auswahl"
+              :options="['Sprachkenntnisse', 'Sonstige Kenntnisse']"
+            />
+          </div>
         </div>
       </div>
 
       <div v-if="type === 'Sonstige Kenntnisse'">
-        <FormKit
-          v-model="diversKnowledge"
-          type="text"
-          placeholder="z.B. Führerschein, Office etc."
-        />
+        <div class="px-2">
+          <FormKit
+            v-model="diversKnowledge"
+            type="text"
+            placeholder="z.B. Führerschein, Office etc."
+          />
+        </div>
       </div>
       <div v-if="type === 'Sprachkenntnisse'">
         <div class="col-span-2 md:col-span-1">
@@ -49,17 +53,19 @@
             >
               Level:
             </p>
-            <FormKit
-              v-model="languageLevel"
-              type="select"
-              plaseholder="Auswahl"
-              :options="[
-                'Basiskenntnisse',
-                'Fortgeschritten',
-                'Fließend',
-                'Muttersprache',
-              ]"
-            />
+            <div class="px-2">
+              <FormKit
+                v-model="languageLevel"
+                type="select"
+                plaseholder="Auswahl"
+                :options="[
+                  'Basiskenntnisse',
+                  'Fortgeschritten',
+                  'Fließend',
+                  'Muttersprache',
+                ]"
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -8,12 +8,14 @@
           >
             Typ:
           </p>
-          <FormKit
-            v-model="type"
-            type="select"
-            placeholder="Auswahl"
-            :options="['Mittelschule', 'Lehre', 'HTL', 'AHS', 'HAK', 'HBLA']"
-          />
+          <div class="px-2">
+            <FormKit
+              v-model="type"
+              type="select"
+              placeholder="Auswahl"
+              :options="['Mittelschule', 'Lehre', 'HTL', 'AHS', 'HAK', 'HBLA']"
+            />
+          </div>
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
@@ -23,11 +25,13 @@
           >
             Schwerpunkt:
           </p>
-          <FormKit
-            v-model="specialty"
-            type="text"
-            placeholder="zB. Sprachen, BE, IT"
-          />
+          <div class="px-2">
+            <FormKit
+              v-model="specialty"
+              type="text"
+              placeholder="zB. Sprachen, BE, IT"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -39,11 +43,13 @@
         >
           Adresse:
         </p>
-        <FormKit
-          v-model="address"
-          type="text"
-          placeholder="PLZ, Ort, Adresse"
-        />
+        <div class="px-2">
+          <FormKit
+            v-model="address"
+            type="text"
+            placeholder="PLZ, Ort, Adresse"
+          />
+        </div>
       </div>
     </div>
     <div class="grid grid-cols-2 gap-1">
@@ -54,11 +60,13 @@
           >
             Von:
           </p>
-          <FormKit
-            type="date"
-            v-model="educationFrom"
-            placeholder="Auswählen"
-          />
+          <div class="px-2">
+            <FormKit
+              type="date"
+              v-model="educationFrom"
+              placeholder="Auswählen"
+            />
+          </div>
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
@@ -68,13 +76,15 @@
           >
             Bis:
           </p>
-          <FormKit
-            type="date"
-            v-model="educationTo"
-            placeholder="Auswählen"
-            :validation="[['date_after', educationFrom]]"
-            validation-visibility="live"
-          />
+          <div class="px-2">
+            <FormKit
+              type="date"
+              v-model="educationTo"
+              placeholder="Auswählen"
+              :validation="[['date_after', educationFrom]]"
+              validation-visibility="live"
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -5,8 +5,17 @@
         class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
       ></CloseIcon>
     </button>
-    <p class="text-black px-1 dark:text-white font-Montserrat text-xl p-4">
-      {{ textLabel }} {{ "Textvorlage " + (itemIndex + 1) + " bearbeiten" }}
+    <p
+      v-if="itemIndex > 0"
+      class="text-black px-1 dark:text-white font-Montserrat text-xl p-4"
+    >
+      {{ textLabel }} {{ " - Textvorlage " + itemIndex + ":" }}
+    </p>
+    <p
+      v-if="itemIndex == 0"
+      class="text-black px-1 dark:text-white font-Montserrat text-xl p-4"
+    >
+      {{ textLabel }} {{ " - Aktueller Text:" }}
     </p>
   </div>
   <Tiptap

@@ -4,7 +4,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+            class="py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
           >
             Kenntnisse:
           </p>
@@ -28,11 +28,11 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+              class="py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
             >
               Sprache:
             </p>
-            <div class="px-0">
+            <div class="px-2">
               <FormKit
                 v-model="languageKnowledge"
                 type="text"
@@ -45,7 +45,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+              class="py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
             >
               Level:
             </p>
@@ -68,14 +68,14 @@
 
   <div class="grid flex gap-6 py-10">
     <button
-      class="bg-wd-error shadow rounded-md h-14 w-full text-white"
+      class="bg-wd-error shadow rounded-md h-14 w-full text-white font-bold"
       @click="removeFromLocalStorage()"
       :disabled="buttonDisabled"
     >
       Kenntnisse entfernen
     </button>
     <button
-      class="bg-wd-green hover:bg-transparent-green shadow h-24 text-white"
+      class="bg-wd-green hover:bg-transparent-green shadow h-24 text-white font-bold"
       @click="saveToLocalStorage()"
       :disabled="buttonDisabled"
     >

@@ -4,7 +4,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+            class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
           >
             Titel:
           </p>
@@ -15,7 +15,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+            class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
           >
             Text:
           </p>
@@ -32,7 +32,7 @@
     <div class="grid grid-cols-2 gap-1">
       <div class="flex bg-white dark:bg-slate-800 h-10">
         <p
-          class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+          class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
         >
           Von:
         </p>
@@ -41,7 +41,7 @@
 
       <div class="flex bg-white dark:bg-slate-800 h-10">
         <p
-          class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md"
+          class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
         >
           Bis:
         </p>
@@ -57,14 +57,14 @@
   </div>
   <div class="grid flex gap-6 py-10">
     <button
-      class="bg-wd-error shadow rounded-md h-14 w-full text-white"
+      class="bg-wd-error shadow rounded-md h-14 w-full text-white font-bold"
       @click="removeFromLocalStorage()"
       :disabled="buttonDisabled"
     >
       Erfahrung entfernen
     </button>
     <button
-      class="bg-wd-green hover:bg-transparent-green shadow h-24 text-white"
+      class="bg-wd-green hover:bg-transparent-green shadow h-24 text-white font-bold"
       @click="saveToLocalStorage()"
       :disabled="buttonDisabled"
     >

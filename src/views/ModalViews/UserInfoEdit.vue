@@ -8,16 +8,18 @@
       </button>
     </div>
     <div class="space-y-1">
-      <p class="text-black px-1 py-2 dark:text-white font-Montserrat text-sm">
+      <p
+        class="text-black px-1 py-2 dark:text-white font-Montserrat text-sm font-bold"
+      >
         Deine Daten:
       </p>
       <div class="grid grid-cols-2 gap-1">
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
             >
-              Titel(vor Name):
+              Titel(vor N.):
             </p>
             <FormKit
               v-model="titleBefore"
@@ -31,9 +33,9 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
             >
-              Titel(nach Namen):
+              Titel(nach N.):
             </p>
             <FormKit
               v-model="titleAfter"
@@ -48,7 +50,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
             >
               Vorname:
             </p>
@@ -64,7 +66,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
             >
               Nachname:
             </p>
@@ -82,7 +84,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
             >
               Geburtsdatum:
             </p>
@@ -92,7 +94,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
             >
               Geburtsort:
             </p>
@@ -111,7 +113,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
             >
               Familienstand:
             </p>
@@ -133,7 +135,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
             >
               Geschlecht:
             </p>
@@ -152,7 +154,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
             >
               Straße:
             </p>
@@ -167,7 +169,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
             >
               Nr:
             </p>
@@ -184,7 +186,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
             >
               PLZ:
             </p>
@@ -199,7 +201,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
             >
               Ort:
             </p>
@@ -215,7 +217,9 @@
     </div>
     <div class="space-y-1">
       <div class="mt-6">
-        <p class="text-black px-1 dark:text-white font-Montserrat text-sm">
+        <p
+          class="text-black px-1 dark:text-white font-Montserrat text-sm font-bold"
+        >
           Deine Kontaktdaten
         </p>
       </div>
@@ -223,7 +227,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
             >
               Telefon:
             </p>
@@ -238,7 +242,7 @@
         <div class="col-span-2 md:col-span-1">
           <div class="flex bg-white dark:bg-slate-800 h-10">
             <p
-              class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+              class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
             >
               EMail:
             </p>
@@ -255,7 +259,7 @@
       </div>
       <div class="flex bg-white dark:bg-slate-800 h-10">
         <p
-          class="py-3 px-1 w-40 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm"
+          class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
         >
           Hobbies:
         </p>
@@ -269,7 +273,7 @@
     </div>
     <div class="grid flex py-2 bottom-0">
       <button
-        class="bg-wd-green hover:bg-transparent-green shadow h-24 text-white"
+        class="bg-wd-green hover:bg-transparent-green shadow h-24 text-white font-bold"
         @click="saveToLocalStorage()"
       >
         Speichern

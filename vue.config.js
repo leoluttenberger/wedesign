@@ -1,5 +1,6 @@
 // Raw data Config for handling bas64 storaged file
 const { defineConfig } = require("@vue/cli-service");
+
 module.exports = defineConfig({
   transpileDependencies: true,
 
@@ -11,11 +12,18 @@ module.exports = defineConfig({
       .loader("raw-loader")
       .end();
   },
+
   configureWebpack: {
     plugins: [
       require("unplugin-vue-components/webpack")({
         /* options */
       }),
     ],
+
+    resolve: {
+      fallback: {
+        timers: require.resolve("timers-browserify"),
+      },
+    },
   },
 });

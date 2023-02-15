@@ -46,6 +46,7 @@
     "node-res": "^5.0.1",
     "node-sass": "^7.0.3",
     "path": "^0.12.7",
+    "pdfmake": "^0.2.7",
     "prettier": "^2.7.1",
     "prosemirror-view": "^1.30.0",
     "register-service-worker": "^1.7.2",
@@ -53,6 +54,7 @@
     "ruby": "^0.6.1",
     "sass-loader": "^13.0.2",
     "swiper": "^8.4.4",
+    "timers-browserify": "^2.0.12",
     "util": "^0.12.5",
     "v-calendar": "^3.0.0-alpha.8",
     "vue": "^3.2.13",
@@ -65,7 +67,8 @@
     "vue-router": "^4.0.14",
     "vue3-pdf": "^4.2.6",
     "vue3-smooth-dnd": "^0.0.2",
-    "webfontloader": "^1.0.0"
+    "webfontloader": "^1.0.0",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
     "@babel/preset-flow": "^7.18.6",

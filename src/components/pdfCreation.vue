@@ -4,19 +4,15 @@
     <img class="absolute max-w-[20%] py-24" :src="imagePreview" />
   </div>
   <div v-if="xmlContent">
-    <div v-html="xmlContent"></div>
-    <div>
-      <button @click="createDocx()">Create Docx</button>
-    </div>
     <div>
       <button @click="createPdf()">Create PDF</button>
     </div>
   </div>
-
   <div v-if="pdf">PDF created!</div>
   <div>
     <button v-if="pdf" @click="savePdf()">Save PDF</button>
   </div>
+  <vue-pdf-embed :source="pdfDataURL" />
 </template>
 
 <script setup lang="ts">
@@ -25,6 +21,7 @@ import { saveAs } from "file-saver";
 import jsPDF from "jspdf";
 import JSZip from "jszip";
 import xml2js from "xml2js";
+import VuePdfEmbed from "vue-pdf-embed";
 
 const docx = ref("");
 const docxLayout = ref("");
@@ -32,6 +29,7 @@ const pdf = ref("");
 const imagePreview = ref(null);
 const xmlContent = ref(null);
 const downloadDocx = ref(null);
+const pdfDataURL = ref(null);
 
 const onFileSelected = async (event) => {
   const file = event.target.files[0];
@@ -116,6 +114,11 @@ const createPdf = async () => {
   }
   const pdfBlob = doc.output("blob");
   pdf.value = pdfBlob;
+  const reader = new FileReader();
+  reader.readAsDataURL(pdfBlob);
+  reader.onloadend = () => {
+    pdfDataURL.value = reader.result;
+  };
 };
 
 const createDocx = async () => {

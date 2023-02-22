@@ -54,6 +54,69 @@
             </div>
           </div>
         </div>
+
+        <div class="grid grid-cols-2 gap-1">
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 h-10">
+              <p
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+              >
+                Straße:
+              </p>
+              <div class="px-2">
+                <FormKit
+                  v-model="streetName"
+                  type="text"
+                  placeholder="Musterstraße"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 h-10">
+              <p
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+              >
+                Nr:
+              </p>
+              <div class="px-2">
+                <FormKit v-model="streetNumber" type="text" placeholder="1/1" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-1">
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 dark:bg-slate-800 h-10">
+              <p
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+              >
+                PLZ:
+              </p>
+              <div class="px-2">
+                <FormKit
+                  v-model="districtNumber"
+                  type="text"
+                  placeholder="1010"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 h-10">
+              <p
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+              >
+                Ort:
+              </p>
+              <div class="px-2">
+                <FormKit v-model="city" type="text" placeholder="Muserstadt" />
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="grid grid-cols-2 gap-1">
           <div class="col-span-2 md:col-span-1">
             <div class="flex bg-white dark:bg-slate-800 h-10">
@@ -72,7 +135,6 @@
               </div>
             </div>
           </div>
-
           <div class="col-span-2 md:col-span-1">
             <div class="flex bg-white dark:bg-slate-800 h-10">
               <p
@@ -112,6 +174,27 @@
               </div>
             </div>
           </div>
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 h-14 py-1">
+              <div class="py-2">
+                <CloseIcon
+                  v-if="__mv == 0"
+                  class="h-6 w-24 stroke-1 stroke-wd-error"
+                ></CloseIcon>
+              </div>
+              <div class="py-2">
+                <CheckIcon
+                  v-if="__mv > 0"
+                  class="h-6 w-24 stroke-1 stroke-wd-green"
+                ></CheckIcon>
+              </div>
+              <p
+                class="w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+              >
+                {{ __mvText }}
+              </p>
+            </div>
+          </div>
         </div>
 
         <div class="col-span-2 md:col-span-1">
@@ -131,7 +214,7 @@
           </div>
         </div>
 
-        <div class="grid flex gap-6 py-10">
+        <div class="grid flex gap-2 py-2">
           <button
             class="bg-wd-error shadow rounded-md h-10 w-full text-white font-bold"
             @click="removeFromLocalStorage()"
@@ -191,6 +274,10 @@ const contactPerson = ref(null);
 const state = ref(null);
 const note = ref(null);
 const motivationModalOpen = ref(false);
+const streetName = ref(null);
+const streetNumber = ref(null);
+const districtNumber = ref(null);
+const city = ref(null);
 
 let __mv = null;
 let __mvText = null;
@@ -219,6 +306,10 @@ onMounted(() => {
   const applications = ref(JSON.parse(localStorage.getItem("applications")));
   company.value = applications.value[props.editIndex][0].company;
   job.value = applications.value[props.editIndex][0].job;
+  streetName.value = applications.value[props.editIndex][0].streetName;
+  streetNumber.value = applications.value[props.editIndex][0].streetNumber;
+  districtNumber.value = applications.value[props.editIndex][0].districtNumber;
+  city.value = applications.value[props.editIndex][0].city;
   deadline.value = applications.value[props.editIndex][0].deadline;
   contactPerson.value = applications.value[props.editIndex][0].contactPerson;
   state.value = applications.value[props.editIndex][0].state;
@@ -255,6 +346,10 @@ const saveToLocalStorage = () => {
   const applications = ref(JSON.parse(localStorage.getItem("applications")));
   applications.value[props.editIndex][0].company = company.value;
   applications.value[props.editIndex][0].job = job.value;
+  applications.value[props.editIndex][0].streetName = streetName.value;
+  applications.value[props.editIndex][0].streetNumber = streetNumber.value;
+  applications.value[props.editIndex][0].districtNumber = districtNumber.value;
+  applications.value[props.editIndex][0].city = city.value;
   applications.value[props.editIndex][0].deadline = deadline.value;
   applications.value[props.editIndex][0].contactPerson = contactPerson.value;
   applications.value[props.editIndex][0].state = state.value;

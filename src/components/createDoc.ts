@@ -2,13 +2,14 @@ import { saveAs } from "file-saver";
 import { Document, Paragraph, HeadingLevel, AlignmentType, Packer } from "docx";
 import moment from "moment";
 export const createDoc = async (applicationIndex) => {
-  if (!applicationIndex) {
-    throw new Error("applicationIndex is undefined");
-  }
-
   const applications = JSON.parse(localStorage.getItem("applications"));
   const motivations = JSON.parse(localStorage.getItem("motivations"));
   const userInfos = JSON.parse(localStorage.getItem("userInfos"));
+
+  console.log(applications);
+  console.log(applications);
+  console.log(motivations);
+  console.log(userInfos);
 
   const currentApplMVid = applications[applicationIndex][0].mv;
   const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
@@ -43,7 +44,7 @@ export const createDoc = async (applicationIndex) => {
 
   const city = userInfos[0][0].city ? userInfos[0][0].city : "";
   const hobbies = userInfos[0][0].hobbies ? userInfos[0][0].hobbies : "";
-  const date_city = moment().format("DD. MM. YYYY, ") + city;
+  const date_city = moment().format("DD.MM.YYYY, ") + city;
   const streetPlusNumber = streetName + " " + streetNumber;
   const districtPlusCity = districtNumber + " " + city;
   let fullName = "";
@@ -64,16 +65,35 @@ export const createDoc = async (applicationIndex) => {
       mvIndex = i;
     }
   }
+  console.log("LastIndes: ", lastIndex);
+  console.log("mvIndes: ", mvIndex);
 
   const company = applications[applicationIndex][0].company
     ? applications[applicationIndex][0].company
     : "";
-  const job = applications[applicationIndex][0].job
-    ? applications[applicationIndex][0].job
-    : "";
   const contactPerson = applications[applicationIndex][0].contactPerson
     ? applications[applicationIndex][0].contactPerson
     : "";
+  const applStreetName = applications[applicationIndex][0].streetName
+    ? applications[applicationIndex][0].streetName
+    : "";
+  const applStreetNumber = applications[applicationIndex][0].streetNumber
+    ? applications[applicationIndex][0].streetNumber
+    : "";
+  const applDistrict = applications[applicationIndex][0].districtNumber
+    ? applications[applicationIndex][0].districtNumber
+    : "";
+  const applCity = applications[applicationIndex][0].city
+    ? applications[applicationIndex][0].city
+    : "";
+
+  const job = applications[applicationIndex][0].job
+    ? applications[applicationIndex][0].job
+    : "";
+
+  const applStreetNameNumber = applStreetName + " " + applStreetNumber;
+  const applDistrictplusCity = applDistrict + " " + applCity;
+  const toContactPerson = "zH." + contactPerson;
 
   const subject = motivations[mvIndex][0].subject
     ? motivations[mvIndex][0].subject
@@ -194,7 +214,15 @@ export const createDoc = async (applicationIndex) => {
             style: "h2",
           }),
           new Paragraph({
-            text: contactPerson,
+            text: toContactPerson,
+            style: "normal",
+          }),
+          new Paragraph({
+            text: applStreetNameNumber,
+            style: "normal",
+          }),
+          new Paragraph({
+            text: applDistrictplusCity,
             style: "normal",
           }),
           new Paragraph({

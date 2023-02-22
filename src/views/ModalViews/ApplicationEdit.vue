@@ -112,27 +112,6 @@
               </div>
             </div>
           </div>
-          <div class="col-span-2 md:col-span-1">
-            <div class="flex bg-white dark:bg-slate-800 h-14 py-1">
-              <div class="py-2">
-                <CloseIcon
-                  v-if="__mv == 0"
-                  class="h-6 w-24 stroke-1 stroke-wd-error"
-                ></CloseIcon>
-              </div>
-              <div class="py-2">
-                <CheckIcon
-                  v-if="__mv > 0"
-                  class="h-6 w-24 stroke-1 stroke-wd-green"
-                ></CheckIcon>
-              </div>
-              <p
-                class="w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
-              >
-                {{ __mvText }}
-              </p>
-            </div>
-          </div>
         </div>
 
         <div class="col-span-2 md:col-span-1">
@@ -255,7 +234,7 @@ onMounted(() => {
 });
 
 const sendJobApplication = () => {
-  createDoc();
+  createDoc(props.editIndex);
 };
 const removeFromLocalStorage = () => {
   if (buttonDisabled == false) {

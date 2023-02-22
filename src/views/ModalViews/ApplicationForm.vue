@@ -87,15 +87,34 @@
         </div>
       </div>
     </div>
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="px-0 py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-        >
-          Deadline:
-        </p>
-        <div class="px-2">
-          <FormKit type="date" v-model="deadline" placeholder="Auswählen" />
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <div
+            class="px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+          >
+            <p>Ansprechs</p>
+            <p>person:</p>
+          </div>
+          <div class="px-2">
+            <FormKit
+              type="text"
+              v-model="contactPerson"
+              placeholder="Marlene Musterfrau"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+          >
+            Deadline:
+          </p>
+          <div class="px-2">
+            <FormKit type="date" v-model="deadline" placeholder="Auswählen" />
+          </div>
         </div>
       </div>
     </div>
@@ -121,7 +140,7 @@ const streetName = ref(null);
 const streetNumber = ref(null);
 const districtNumber = ref(null);
 const city = ref(null);
-let __contactPerson = null;
+const contactPerson = ref(null);
 let __mv = 0;
 let __state = "Entwurf";
 let __note = null;
@@ -141,7 +160,7 @@ const saveToLocalStorage = () => {
       districtNumber: districtNumber.value,
       city: city.value,
       deadline: deadline.value,
-      contactPerson: __contactPerson,
+      contactPerson: contactPerson.value,
       state: __state,
       mv: __mv,
       note: __note,

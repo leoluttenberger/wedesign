@@ -93,7 +93,7 @@ export const createDoc = async (applicationIndex) => {
 
   const applStreetNameNumber = applStreetName + " " + applStreetNumber;
   const applDistrictplusCity = applDistrict + " " + applCity;
-  const toContactPerson = "zH." + contactPerson;
+  const toContactPerson = "zH. " + contactPerson;
 
   const subject = motivations[mvIndex][0].subject
     ? motivations[mvIndex][0].subject

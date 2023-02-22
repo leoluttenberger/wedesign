@@ -22,7 +22,6 @@
     :itemCurrentIndex="props.itemIndex"
     :textEditIndex="props.buttonIndex"
     :indexOfMVid="props.indexOfMVid"
-    :lastIndex="props.lastIndex"
   ></Tiptap>
 </template>
 <script setup lang="ts">
@@ -42,10 +41,6 @@ const props = defineProps({
     default: 0,
   },
   indexOfMVid: {
-    type: Number,
-    default: 0,
-  },
-  lastIndex: {
     type: Number,
     default: 0,
   },

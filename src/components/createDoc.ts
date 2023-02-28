@@ -14,36 +14,49 @@ export const createDoc = async (applicationIndex) => {
   const currentApplMVid = applications[applicationIndex][0].mv;
   const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
 
-  const titleBefore = userInfos[0][0].titleBefore
-    ? userInfos[0][0].titleBefore
-    : "";
-  const titleAfter = userInfos[0][0].titleAfter
-    ? userInfos[0][0].titleAfter
-    : "";
-  const firstName = userInfos[0][0].firstName ? userInfos[0][0].firstName : "";
-  const secondName = userInfos[0][0].secondName
-    ? userInfos[0][0].secondName
-    : "";
-  const birthDate = userInfos[0][0].birthDate ? userInfos[0][0].birthDate : "";
-  const birthArea = userInfos[0][0].birthArea ? userInfos[0][0].birthArea : "";
-  const civilStatus = userInfos[0][0].civilStatus
-    ? userInfos[0][0].civilStatus
-    : "";
-  const gender = userInfos[0][0].gender ? userInfos[0][0].gender : "";
-  const email = userInfos[0][0].email ? userInfos[0][0].email : "";
-  const phone = userInfos[0][0].phone ? userInfos[0][0].phone : "";
-  const streetName = userInfos[0][0].streetName
-    ? userInfos[0][0].streetName
-    : "";
-  const streetNumber = userInfos[0][0].streetNumber
-    ? userInfos[0][0].streetNumber
-    : "";
-  const districtNumber = userInfos[0][0].districtNumber
-    ? userInfos[0][0].districtNumber
-    : "";
+  let titleBefore = "";
+  let titleAfter = "";
+  let firstName = "";
+  let secondName = "";
+  let birthDate = "";
+  let birthArea = "";
+  let civilStatus = "";
+  let gender = "";
+  let email = "";
+  let phone = "";
+  let streetName = "";
+  let streetNumber = "";
+  let districtNumber = "";
+  let city = "";
+  let hobbies = "";
 
-  const city = userInfos[0][0].city ? userInfos[0][0].city : "";
-  const hobbies = userInfos[0][0].hobbies ? userInfos[0][0].hobbies : "";
+  if (localStorage.getItem("userInfos")) {
+    titleBefore = userInfos[0][0].titleBefore
+      ? userInfos[0][0].titleBefore
+      : "";
+    titleAfter = userInfos[0][0].titleAfter ? userInfos[0][0].titleAfter : "";
+    firstName = userInfos[0][0].firstName ? userInfos[0][0].firstName : "";
+    secondName = userInfos[0][0].secondName ? userInfos[0][0].secondName : "";
+    birthDate = userInfos[0][0].birthDate ? userInfos[0][0].birthDate : "";
+    birthArea = userInfos[0][0].birthArea ? userInfos[0][0].birthArea : "";
+    civilStatus = userInfos[0][0].civilStatus
+      ? userInfos[0][0].civilStatus
+      : "";
+    gender = userInfos[0][0].gender ? userInfos[0][0].gender : "";
+    email = userInfos[0][0].email ? userInfos[0][0].email : "";
+    phone = userInfos[0][0].phone ? userInfos[0][0].phone : "";
+    streetName = userInfos[0][0].streetName ? userInfos[0][0].streetName : "";
+    streetNumber = userInfos[0][0].streetNumber
+      ? userInfos[0][0].streetNumber
+      : "";
+    districtNumber = userInfos[0][0].districtNumber
+      ? userInfos[0][0].districtNumber
+      : "";
+
+    city = userInfos[0][0].city ? userInfos[0][0].city : "";
+    hobbies = userInfos[0][0].hobbies ? userInfos[0][0].hobbies : "";
+  }
+
   const date_city = moment().format("DD.MM.YYYY, ") + city;
   const streetPlusNumber = streetName + " " + streetNumber;
   const districtPlusCity = districtNumber + " " + city;
@@ -68,57 +81,78 @@ export const createDoc = async (applicationIndex) => {
   console.log("LastIndes: ", lastIndex);
   console.log("mvIndes: ", mvIndex);
 
-  const company = applications[applicationIndex][0].company
-    ? applications[applicationIndex][0].company
-    : "";
-  const contactPerson = applications[applicationIndex][0].contactPerson
-    ? applications[applicationIndex][0].contactPerson
-    : "";
-  const applStreetName = applications[applicationIndex][0].streetName
-    ? applications[applicationIndex][0].streetName
-    : "";
-  const applStreetNumber = applications[applicationIndex][0].streetNumber
-    ? applications[applicationIndex][0].streetNumber
-    : "";
-  const applDistrict = applications[applicationIndex][0].districtNumber
-    ? applications[applicationIndex][0].districtNumber
-    : "";
-  const applCity = applications[applicationIndex][0].city
-    ? applications[applicationIndex][0].city
-    : "";
+  let company = "";
+  let contactPerson = "";
+  let applStreetName = "";
+  let applStreetNumber = "";
+  let applDistrict = "";
+  let applCity = "";
+  let job = "";
 
-  const job = applications[applicationIndex][0].job
-    ? applications[applicationIndex][0].job
-    : "";
+  if (localStorage.getItem("applications")) {
+    company = applications[applicationIndex][0].company
+      ? applications[applicationIndex][0].company
+      : "";
+    contactPerson = applications[applicationIndex][0].contactPerson
+      ? applications[applicationIndex][0].contactPerson
+      : "";
+    applStreetName = applications[applicationIndex][0].streetName
+      ? applications[applicationIndex][0].streetName
+      : "";
+    applStreetNumber = applications[applicationIndex][0].streetNumber
+      ? applications[applicationIndex][0].streetNumber
+      : "";
+    applDistrict = applications[applicationIndex][0].districtNumber
+      ? applications[applicationIndex][0].districtNumber
+      : "";
+    applCity = applications[applicationIndex][0].city
+      ? applications[applicationIndex][0].city
+      : "";
+    job = applications[applicationIndex][0].job
+      ? applications[applicationIndex][0].job
+      : "";
+  }
 
   const applStreetNameNumber = applStreetName + " " + applStreetNumber;
   const applDistrictplusCity = applDistrict + " " + applCity;
   const toContactPerson = "zH. " + contactPerson;
 
-  const subject = motivations[mvIndex][0].subject
-    ? motivations[mvIndex][0].subject
-    : "";
-  const salutationBeginning = motivations[mvIndex][0].salutationBeginning
-    ? motivations[mvIndex][0].salutationBeginning
-    : "";
-  const textBegining = motivations[mvIndex][0].textBegining
-    ? motivations[mvIndex][0].textBegining
-    : "";
-  const textExperience = motivations[mvIndex][0].textExperience
-    ? motivations[mvIndex][0].textExperience
-    : "";
-  const textContribution = motivations[mvIndex][0].textContribution
-    ? motivations[mvIndex][0].textContribution
-    : "";
-  const textCompetence = motivations[mvIndex][0].textCompetence
-    ? motivations[mvIndex][0].textCompetence
-    : "";
-  const ending = motivations[mvIndex][0].ending
-    ? motivations[mvIndex][0].endin
-    : "";
-  const salutationEnding = motivations[mvIndex][0].salutationEnding
-    ? motivations[mvIndex][0].salutationEnding
-    : "";
+  let subject = "";
+  let salutationBeginning = "";
+  let textBegining = "";
+  let textExperience = "";
+  let textContribution = "";
+  let textCompetence = "";
+  let ending = "";
+  let salutationEnding = "";
+
+  if (localStorage.getItem("motivations")) {
+    subject = motivations[mvIndex][0].subject
+      ? motivations[mvIndex][0].subject
+      : "";
+    salutationBeginning = motivations[mvIndex][0].salutationBeginning
+      ? motivations[mvIndex][0].salutationBeginning
+      : "";
+    textBegining = motivations[mvIndex][0].textBegining
+      ? motivations[mvIndex][0].textBegining
+      : "";
+    textExperience = motivations[mvIndex][0].textExperience
+      ? motivations[mvIndex][0].textExperience
+      : "";
+    textContribution = motivations[mvIndex][0].textContribution
+      ? motivations[mvIndex][0].textContribution
+      : "";
+    textCompetence = motivations[mvIndex][0].textCompetence
+      ? motivations[mvIndex][0].textCompetence
+      : "";
+    ending = motivations[mvIndex][0].ending
+      ? motivations[mvIndex][0].endin
+      : "";
+    salutationEnding = motivations[mvIndex][0].salutationEnding
+      ? motivations[mvIndex][0].salutationEnding
+      : "";
+  }
+
   const doc = new Document({
     styles: {
       paragraphStyles: [

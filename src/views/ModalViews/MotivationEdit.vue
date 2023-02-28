@@ -278,7 +278,7 @@ const defaultData = [
     textBegining:
       "mit großem Interesse habe ich in der Zeitung / auf der Website gelesen, dass Sie eine/n Mustermitarbeiter/in suchen. Ich möchte hiermit meine Chance nutzen, um mich Ihnen vorzustellen.",
     textExperience:
-      "mit großem Interesse habe ich in der Zeitung / auf der Website gelesen, dass Sie eine/n Mustermitarbeiter/in suchen. Ich möchte hiermit meine Chance nutzen, um mich Ihnen vorzustellen.",
+      "Wie Sie den beigefügten Unterlagen entnehmen können, bringe ich die erforderlichen fachlichen Qualifikationen für die ausgeschriebene Stelle mit. Nach dem erfolgreichen Abschluss meiner Musterausbildung an der Musterschule im Jahr JJJJ war ich mehrere Jahre als Mustermitarbeiter/in tätig. Zu meinen Aufgaben gehörten vor allem Aufzählen der wichtigsten Aufgaben.",
     textCompetence:
       "Bei meiner bisherigen beruflichen Tätigkeit zählte ein hohes Maß an Lernbereitschaft ebenso zu meinen Stärken wie Teamfähigkeit und Problemlösungsfähigkeit . Diese Kompetenzen konnte ich vor allem bei der Umsetzung von Projekten unter Beweis stellen. Während meiner beruflichen Laufbahn / Ausbildung /... habe ich äußerst fundierte Kenntnisse bezüglich Daten- und Texterfassung , telefonische Beratung und Interviewführung erworben. Besonders möchte ich meine Kompetenzen und Erfahrungen auf dem Gebiet Verfassen von Texten hervorheben, die ich in meine zukünftige Arbeitsstelle mitbringe.",
     textContribution:

@@ -227,7 +227,6 @@
           :itemIndex="slotProps.itemIndex"
           :buttonIndex="buttonIndex"
           :indexOfMVid="indexOfMVid"
-          :lastIndex="lastindex"
           :textLabel="textLabel"
         />
       </SwiperCard>
@@ -271,27 +270,64 @@ interface SlideItem {
   index: number;
   text: string;
 }
-const motivation = [
+const defaultData = [
   {
     indexMV: "1",
-    subject: "Bewerbung Bewerbung",
+    subject: "Bewerbung als ...",
+    salutationBeginning: " Sehr geehrte/r Frau/Herr... Musterfrau, ",
+    textBegining:
+      "mit großem Interesse habe ich in der Zeitung / auf der Website gelesen, dass Sie eine/n Mustermitarbeiter/in suchen. Ich möchte hiermit meine Chance nutzen, um mich Ihnen vorzustellen.",
+    textExperience:
+      "Wie Sie den beigefügten Unterlagen entnehmen können, bringe ich die erforderlichen fachlichen Qualifikationen für die ausgeschriebene Stelle mit. Nach dem erfolgreichen Abschluss meiner Musterausbildung an der Musterschule im Jahr JJJJ war ich mehrere Jahre als Mustermitarbeiter/in tätig. Zu meinen Aufgaben gehörten vor allem Aufzählen der wichtigsten Aufgaben.",
+    textCompetence:
+      "Bei meiner bisherigen beruflichen Tätigkeit zählte ein hohes Maß an Lernbereitschaft ebenso zu meinen Stärken wie Teamfähigkeit und Problemlösungsfähigkeit . Diese Kompetenzen konnte ich vor allem bei der Umsetzung von Projekten unter Beweis stellen. Während meiner beruflichen Laufbahn / Ausbildung /... habe ich äußerst fundierte Kenntnisse bezüglich Daten- und Texterfassung , telefonische Beratung und Interviewführung erworben. Besonders möchte ich meine Kompetenzen und Erfahrungen auf dem Gebiet Verfassen von Texten hervorheben, die ich in meine zukünftige Arbeitsstelle mitbringe.",
+    textContribution:
+      "Da Ihre Stellenbeschreibung meinen Fähigkeiten und Kenntnissen entspricht , bin ich davon überzeugt, für diesen Beruf bestens geeignet zu sein.",
+    ending:
+      "Ich freue mich darauf, mich bald in einem persönlichen Gespräch vorzustellen und mehr über die Position zu erfahren.",
+    salutationEnding: " Mit freundlichen Grüßen",
+  },
+];
+
+const motivation1 = [
+  {
+    indexMV: "2",
+    subject: "Bewerbung als Bäcker",
     salutationBeginning: "Sehr geehrte Frau/Herr",
     textBegining: "Mit großem Interesse habe ich Ihre Anzeige gelesen.",
     textExperience:
-      "Die Berufsausbildung zum KFZ-Mechaniker habe ich im Jahr 2020 erfolgreich bei der Musterfirma abgeschlossen...",
+      "Die Berufsausbildung zum Bäcker habe ich im Jahr 2020 erfolgreich bei der Musterfirma abgeschlossen...",
     textCompetence: "Ich kann mit stressigen Situationen sehr gut umgehen...",
     textContribution:
-      "In Ihrem Unternehmen möchte ich mein handwerkliches Geschick einbringen...",
+      "In Ihrem Unternehmen möchte ich meine Backkünste einbringen...",
     ending:
       "Für offene Fragen zu meiner Bewerbung stehe ich Ihnen jederzeit zur Verfügung...",
     salutationEnding: "Mit freundlichen Grüßen ...",
   },
 ];
-if (!localStorage.getItem("motivations")) {
-  localStorage.setItem("motivations", JSON.stringify([motivation]));
-}
-const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+const motivation2 = [
+  {
+    indexMV: "3",
+    subject: "Bewerbung als Verkäufer",
+    salutationBeginning: "Sehr geehrte Frau/Herr",
+    textBegining: "Mit großem Interesse habe ich Ihre Anzeige gelesen.",
+    textExperience:
+      "Die Berufsausbildung zum Bäcker habe ich im Jahr 2020 erfolgreich bei der Musterfirma abgeschlossen...",
+    textCompetence: "Ich kann mit stressigen Situationen sehr gut umgehen...",
+    textContribution:
+      "In Ihrem Unternehmen möchte ich mein verkäuferisches Geschick einbringen...",
+    ending:
+      "Für offene Fragen zu meiner Bewerbung stehe ich Ihnen jederzeit zur Verfügung...",
+    salutationEnding: "Mit freundlichen Grüßen ...",
+  },
+];
 
+if (!localStorage.getItem("motivations")) {
+  localStorage.setItem("motivations", JSON.stringify([defaultData]));
+  const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
+  const newData = [...tempMotivations, motivation1, motivation2];
+  localStorage.setItem("motivations", JSON.stringify(newData));
+}
 let idCounter = 0;
 const getID = () => (idCounter++).toString();
 let posIndexCounter = 0;
@@ -317,14 +353,12 @@ let isEdited = false;
 const indexOfMVid = ref(0);
 
 const MAX_MV_PREVIEW = 5;
-const lastindex = ref(0);
+const lastIndex = ref(0);
 
 let textLabel = "";
 
 onMounted(() => {
-  lastindex.value = getLastIndex();
-  indexOfMVid.value = getIndexOfMVid();
-  motivations.value = JSON.parse(localStorage.getItem("motivations"));
+  setLastAndMVIndex();
   updateForm();
   sideBackBack.value = false;
   sideBack.value = true;
@@ -346,7 +380,30 @@ watch(sideBackBack, () => {
   }
 });
 
+const setLastAndMVIndex = () => {
+  if (localStorage.getItem("motivations")) {
+    const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+    lastIndex.value = motivations.value.length;
+    lastIndex.value--;
+    if (lastIndex.value < 0) {
+      console.log("Error last index negative!");
+    } else {
+      for (let i = 0; i <= lastIndex.value; i++) {
+        if (motivations.value[i][0].subject == props.currentApplMVid) {
+          indexOfMVid.value = i;
+          break;
+        }
+      }
+    }
+  } else {
+    lastIndex.value = 0;
+    indexOfMVid.value = 0;
+    console.log("Error default motivations are not set!");
+  }
+};
+
 const saveToMVForm = () => {
+  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
   motivations.value[indexOfMVid.value][0].subject = subject.value;
   motivations.value[indexOfMVid.value][0].salutationBeginning =
     salutationBeginning.value;
@@ -361,30 +418,9 @@ const saveToMVForm = () => {
   localStorage.setItem("motivations", JSON.stringify(motivations.value));
 };
 
-const getNextIndexMV = () => {
-  let index = 0;
-  if (lastindex.value <= 0) {
-    index = 1;
-  } else {
-    index = motivations.value[lastindex.value][0].indexMV;
-    index++;
-  }
-  return index;
-};
-
-const getLastIndex = () => {
-  const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
-  let index = tempMotivations.length - 1;
-  if (index <= 0) {
-    index = 0;
-  }
-  return index;
-};
-
 const createNewMotivation = () => {
-  const index = getNextIndexMV();
   const applications = ref(JSON.parse(localStorage.getItem("applications")));
-
+  const index = indexOfMVid.value + 1;
   const motivation = [
     {
       indexMV: index,
@@ -402,9 +438,9 @@ const createNewMotivation = () => {
     const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
     const newData = [...tempMotivations, motivation];
     const cvlength = applications.value[0].length;
-    if (lastindex.value > cvlength) {
-      if (lastindex.value > MAX_MV_PREVIEW) {
-        const deleteCount = lastindex.value - MAX_MV_PREVIEW;
+    if (lastIndex.value > cvlength) {
+      if (lastIndex.value > MAX_MV_PREVIEW) {
+        const deleteCount = lastIndex.value - MAX_MV_PREVIEW;
         newData.splice(0, deleteCount);
         console.log("Splice newData");
       }
@@ -418,10 +454,11 @@ const createNewMotivation = () => {
 
   applications.value[props.currentApplIndex][0].mv = index;
   localStorage.setItem("applications", JSON.stringify(applications.value));
-  motivations.value = JSON.parse(localStorage.getItem("motivations"));
 };
 
 const updateForm = () => {
+  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+
   if (isEdited) {
     subject.value = currentSubject.value;
     salutationBeginning.value = currentSalutationBeginning.value;
@@ -465,18 +502,6 @@ const updateForm = () => {
     currentSalutationEnding.value = "";
   }
 };
-const getIndexOfMVid = () => {
-  if (localStorage.getItem("motivations")) {
-    if (lastindex.value >= 0) {
-      for (let i = 0; i <= lastindex.value; i++) {
-        if (motivations.value[i][0].indexMV == props.currentApplMVid) {
-          return i;
-        }
-      }
-    }
-  }
-  return -1;
-};
 
 const storeFormData = () => {
   if (localStorage.getItem("motivations")) {
@@ -492,7 +517,7 @@ const storeFormData = () => {
 };
 
 const initSlides = () => {
-  for (let i = 0; i < lastindex.value; i++) {
+  for (let i = 0; i <= lastIndex.value; i++) {
     addAfter();
   }
 };

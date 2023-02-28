@@ -65,9 +65,6 @@ EditorView.prototype.updateState = function updateState(state) {
   if (!this.docView) return; // This prevents the matchesNode error on hot reloads
   this.updateStateInner(state, this.state.plugins != state.plugins);
 };
-
-const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
-
 const shouldShow = ({ editor }) => {
   const match = editor.storage.languagetool.match;
   const matchRange = editor.storage.languagetool.matchRange;
@@ -89,10 +86,6 @@ const props = defineProps({
     default: 0,
   },
   indexOfMVid: {
-    type: Number,
-    default: 0,
-  },
-  lastIndex: {
     type: Number,
     default: 0,
   },
@@ -155,8 +148,6 @@ const ignoreSuggestion = () => {
 
 const onClickedSave = () => {
   let comment_text = "";
-  console.log(editor.value.getJSON());
-
   const len = editor.value.getJSON().content.length;
   for (let i = 0; i < len; i++) {
     if (editor.value.getJSON().content[i].content) {
@@ -198,7 +189,11 @@ const onClickedSave = () => {
 onMounted(() => {
   let editText = "";
   let mvIndexToDisplay = 0;
-
+  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+  const lastIndex = motivations.value.length;
+  console.log(motivations);
+  console.log("last", lastIndex);
+  console.log("current", props.itemCurrentIndex);
   if (props.itemCurrentIndex >= 0) {
     if (props.itemCurrentIndex == 0) {
       switch (props.textEditIndex) {
@@ -231,7 +226,8 @@ onMounted(() => {
           break;
       }
     } else {
-      mvIndexToDisplay = props.lastIndex - props.itemCurrentIndex;
+      mvIndexToDisplay = lastIndex - props.itemCurrentIndex;
+      console.log(mvIndexToDisplay);
       if (mvIndexToDisplay >= 0) {
         switch (props.textEditIndex) {
           case 0:

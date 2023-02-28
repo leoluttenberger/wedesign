@@ -16,7 +16,6 @@ declare module '@vue/runtime-core' {
     MenuBar: typeof import('./src/components/MenuBar.vue')['default']
     MenuItem: typeof import('./src/components/MenuItem.vue')['default']
     MVEditModal: typeof import('./src/components/Modals/MVEditModal.vue')['default']
-    PdfCreation: typeof import('./src/components/pdfCreation.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SwiperCard: typeof import('./src/components/SwiperCard.vue')['default']

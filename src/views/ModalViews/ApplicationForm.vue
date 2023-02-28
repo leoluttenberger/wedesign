@@ -4,7 +4,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
+            class="px-0 py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
           >
             Firma:
           </p>
@@ -20,7 +20,7 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
-            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
+            class="px-0 py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
           >
             Beruf:
           </p>
@@ -30,15 +30,91 @@
         </div>
       </div>
     </div>
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-        >
-          Deadline:
-        </p>
-        <div class="px-2">
-          <FormKit type="date" v-model="deadline" placeholder="Auswählen" />
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="px-0 py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+          >
+            Straße:
+          </p>
+          <div class="px-2">
+            <FormKit
+              v-model="streetName"
+              type="text"
+              placeholder="Musterstraße"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="px-0 py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+          >
+            Nr:
+          </p>
+          <div class="px-2">
+            <FormKit v-model="streetNumber" type="text" placeholder="1/1" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 dark:bg-slate-800 h-10">
+          <p
+            class="px-0 py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+          >
+            PLZ:
+          </p>
+          <div class="px-2">
+            <FormKit v-model="districtNumber" type="text" placeholder="1010" />
+          </div>
+        </div>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="px-0 py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+          >
+            Ort:
+          </p>
+          <div class="px-2">
+            <FormKit v-model="city" type="text" placeholder="Muserstadt" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <div
+            class="px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+          >
+            <p>Ansprechs</p>
+            <p>person:</p>
+          </div>
+          <div class="px-2">
+            <FormKit
+              type="text"
+              v-model="contactPerson"
+              placeholder="Marlene Musterfrau"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+          >
+            Deadline:
+          </p>
+          <div class="px-2">
+            <FormKit type="date" v-model="deadline" placeholder="Auswählen" />
+          </div>
         </div>
       </div>
     </div>
@@ -60,7 +136,11 @@ import { slideDown } from "@/store.js";
 const company = ref(null);
 const job = ref(null);
 const deadline = ref(null);
-let __contactPerson = null;
+const streetName = ref(null);
+const streetNumber = ref(null);
+const districtNumber = ref(null);
+const city = ref(null);
+const contactPerson = ref(null);
 let __mv = 0;
 let __state = "Entwurf";
 let __note = null;
@@ -75,8 +155,12 @@ const saveToLocalStorage = () => {
     {
       company: company.value,
       job: job.value,
+      streetName: streetName.value,
+      streetNumber: streetNumber.value,
+      districtNumber: districtNumber.value,
+      city: city.value,
       deadline: deadline.value,
-      contactPerson: __contactPerson,
+      contactPerson: contactPerson.value,
       state: __state,
       mv: __mv,
       note: __note,

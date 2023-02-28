@@ -234,9 +234,8 @@
             @click="sendJobApplication()"
             :disabled="buttonDisabled"
           >
-            Bewerbung abschicken
+            Bewerbungs Ansicht
           </button>
-          <PDF></PDF>
         </div>
       </div>
     </div>
@@ -255,6 +254,21 @@
         </div>
       </div>
     </MVEditModal>
+
+    <MVEditModal :show="applicationPreviewOpen">
+      <div class="flex">
+        <div
+          class="rounded-lg w-screen h-screen overflow-hidden shadow-xl dark:bg-slate-700 bg-white"
+        >
+          <component
+            v-bind="editIndex"
+            :is="ApplicationPreview"
+            :currentApplIndex="editIndex"
+            :currentApplMVid="__mv"
+          />
+        </div>
+      </div>
+    </MVEditModal>
   </div>
 </template>
 <script setup lang="ts">
@@ -264,8 +278,7 @@ import CheckIcon from "@/assets/icons/CheckIcon.vue";
 import { slideDown, sideBack } from "@/store.js";
 import MotivationEdit from "./MotivationEdit.vue";
 import MVEditModal from "@/components/Modals/MVEditModal.vue";
-import { createDoc } from "@/components/createDoc";
-import PDF from "@/components/pdfCreation.vue";
+import ApplicationPreview from "./AppilcationPreview.vue";
 
 const company = ref(null);
 const job = ref(null);
@@ -274,6 +287,7 @@ const contactPerson = ref(null);
 const state = ref(null);
 const note = ref(null);
 const motivationModalOpen = ref(false);
+const applicationPreviewOpen = ref(false);
 const streetName = ref(null);
 const streetNumber = ref(null);
 const districtNumber = ref(null);
@@ -283,6 +297,7 @@ let __mv = null;
 let __mvText = null;
 
 let buttonDisabled = false;
+const editIndex = ref(0);
 
 const props = defineProps({
   editIndex: {
@@ -293,15 +308,22 @@ const props = defineProps({
 
 watch(sideBack, () => {
   if (sideBack.value) {
-    motivationModalOpen.value = true;
+    if (motivationModalOpen.value == true) {
+      motivationModalOpen.value = true;
+    } else {
+      applicationPreviewOpen.value = true;
+    }
   } else {
     motivationModalOpen.value = false;
+    applicationPreviewOpen.value = false;
     const applications = ref(JSON.parse(localStorage.getItem("applications")));
     __mv = applications.value[props.editIndex][0].mv;
   }
 });
 
 onMounted(() => {
+  console.log(props.editIndex);
+  editIndex.value = props.editIndex;
   buttonDisabled = false;
   const applications = ref(JSON.parse(localStorage.getItem("applications")));
   company.value = applications.value[props.editIndex][0].company;
@@ -325,7 +347,8 @@ onMounted(() => {
 });
 
 const sendJobApplication = () => {
-  createDoc(props.editIndex);
+  applicationPreviewOpen.value = true;
+  sideBack.value = true;
 };
 const removeFromLocalStorage = () => {
   if (buttonDisabled == false) {

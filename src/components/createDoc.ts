@@ -1,7 +1,23 @@
 import { saveAs } from "file-saver";
 import { Document, Paragraph, HeadingLevel, AlignmentType, Packer } from "docx";
 import moment from "moment";
-export const createDoc = async (applicationIndex) => {
+export const createDoc = async (applicationIndex: number, mvIndex: number) => {
+  console.log("appIndex:", applicationIndex);
+  console.log("mvIndex:", mvIndex);
+  const blob = createDocHandler(applicationIndex, mvIndex);
+  return blob;
+};
+async function createDocHandler(applicationIndex: number, mvIndex: number) {
+  // Create the Docx file in memory
+  const docxBlob = await createDocx(applicationIndex, mvIndex);
+  return docxBlob;
+}
+
+async function createDocx(
+  applicationIndex: number,
+  mvIndex: number
+): Promise<Blob> {
+  const index: number = applicationIndex;
   const applications = JSON.parse(localStorage.getItem("applications"));
   const motivations = JSON.parse(localStorage.getItem("motivations"));
   const userInfos = JSON.parse(localStorage.getItem("userInfos"));
@@ -11,7 +27,6 @@ export const createDoc = async (applicationIndex) => {
   console.log(motivations);
   console.log(userInfos);
 
-  const currentApplMVid = applications[applicationIndex][0].mv;
   const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
 
   let titleBefore = "";
@@ -72,14 +87,6 @@ export const createDoc = async (applicationIndex) => {
   if (lastIndex <= 0) {
     lastIndex = 0;
   }
-  let mvIndex = 0;
-  for (let i = 0; i <= lastIndex; i++) {
-    if (motivations[i][0].indexMV == currentApplMVid) {
-      mvIndex = i;
-    }
-  }
-  console.log("LastIndes: ", lastIndex);
-  console.log("mvIndes: ", mvIndex);
 
   let company = "";
   let contactPerson = "";
@@ -90,6 +97,7 @@ export const createDoc = async (applicationIndex) => {
   let job = "";
 
   if (localStorage.getItem("applications")) {
+    console.log(applications[applicationIndex][0].company);
     company = applications[applicationIndex][0].company
       ? applications[applicationIndex][0].company
       : "";
@@ -125,7 +133,6 @@ export const createDoc = async (applicationIndex) => {
   let textCompetence = "";
   let ending = "";
   let salutationEnding = "";
-
   if (localStorage.getItem("motivations")) {
     subject = motivations[mvIndex][0].subject
       ? motivations[mvIndex][0].subject
@@ -342,12 +349,12 @@ export const createDoc = async (applicationIndex) => {
       },
     ],
   });
-
   const mimeType =
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
   const fileName = "motivationLetter.docx";
-  Packer.toBlob(doc).then((blob) => {
+  const docblob = Packer.toBlob(doc).then((blob) => {
     const docblob = blob.slice(0, blob.size, mimeType);
-    saveAs(docblob, fileName);
+    return docblob;
   });
-};
+  return docblob;
+}

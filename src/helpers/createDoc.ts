@@ -159,7 +159,6 @@ async function createDocx(
       ? motivations[mvIndex][0].salutationEnding
       : "";
   }
-
   const doc = new Document({
     styles: {
       paragraphStyles: [
@@ -170,6 +169,7 @@ async function createDocx(
           next: "Normal",
           quickFormat: true,
           run: {
+            font: "Arial",
             size: 28,
             bold: true,
           },
@@ -187,6 +187,7 @@ async function createDocx(
           next: "Normal",
           quickFormat: true,
           run: {
+            font: "Arial",
             size: 24,
             bold: true,
           },
@@ -204,6 +205,7 @@ async function createDocx(
           next: "Normal",
           quickFormat: true,
           run: {
+            font: "Arial",
             size: 22,
           },
           paragraph: {

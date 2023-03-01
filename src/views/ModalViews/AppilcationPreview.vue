@@ -32,10 +32,11 @@ import VuePdfEmbed from "vue-pdf-embed";
 import { saveAs } from "file-saver";
 import jsPDF from "jspdf";
 import JSZip from "jszip";
-import { createDoc } from "@/components/createDoc";
+import { createDoc } from "@/helpers/createDoc";
+import { convertXmlToPdf } from "@/helpers/convertDocToPdf";
 import { sideBack } from "@/store.js";
 
-const pdf = ref("");
+const pdf = ref(null);
 const imagePreview = ref(null);
 const downloadDocx = ref(null);
 const docxContent = ref(null);
@@ -53,13 +54,9 @@ const props = defineProps({
 });
 
 onMounted(async () => {
-  console.log("Process 1");
   downloadDocx.value = await createFile();
-  console.log("content 1:", docxContent.value);
-  console.log("Process 2");
-  console.log("content 2:", docxContent.value);
   sideBack.value = true;
-  await createPdf();
+  await convertToPdf();
 });
 
 const closeModal = () => {
@@ -82,16 +79,27 @@ const createFile = async () => {
   console.log("onload Process");
   return file;
 };
+const convertToPdf = async () => {
+  const xmlString = docxContent.value;
+  const pdfBlob = await convertXmlToPdf(xmlString);
+  pdf.value = pdfBlob;
+  const reader = new FileReader();
+  reader.readAsDataURL(pdfBlob);
+  reader.onloadend = () => {
+    pdfDataURL.value = reader.result;
+  };
+};
+
 const createPdf = async () => {
   const doc = new jsPDF();
   const layout = docxContent.value;
-  console.log("Process 3");
-  console.log("content 3:", docxContent.value);
   const parser = new DOMParser();
   const layoutDoc = parser.parseFromString(layout, "text/xml");
+  console.log("layoutDoc", layoutDoc);
   // Get all the paragraph elements in the layout
   const paragraphs = layoutDoc.getElementsByTagName("w:p");
   // Loop through the paragraphs and add the content to the PDF
+  console.log("paragraphs", paragraphs);
   for (let i = 0; i < paragraphs.length; i++) {
     const paragraph = paragraphs[i];
     const textNodes = paragraph.getElementsByTagName("w:t");
@@ -103,18 +111,20 @@ const createPdf = async () => {
     }
     // Get the formatting of the paragraph
     const runProperties = paragraph.getElementsByTagName("w:rPr")[0];
+    console.log("RunProperties", runProperties);
+
+    const align = runProperties?.getElementsByTagName("w:jc")?.length > 0;
     const bold = runProperties?.getElementsByTagName("w:b")?.length > 0;
     const italic = runProperties?.getElementsByTagName("w:i")?.length > 0;
     const fontSize = runProperties
-      ?.getElementsByTagName("w:sz")[0]
-      ?.getAttribute("w:val");
+      .getElementsByTagName("w:sz")[0]
+      .getAttribute("w:val");
     // Add the text to the PDF with the formatting
     if (Number(fontSize)) {
-      console.log(Number(fontSize));
       doc.setFontSize(Number(fontSize));
     } else {
-      console.log("Default fontsize 20");
-      doc.setFontSize(20);
+      console.log("Default fontsize 14");
+      doc.setFontSize(14);
     }
     if (bold) {
       doc.setFontType("bold");
@@ -122,6 +132,7 @@ const createPdf = async () => {
     if (italic) {
       doc.setFontType("italic");
     }
+
     doc.text(10, 10 + i * 10, text);
   }
   const pdfBlob = doc.output("blob");

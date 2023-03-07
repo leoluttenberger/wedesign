@@ -4,7 +4,6 @@ import jsPDF from "jspdf";
 export async function convertXmlToPdf(xmlString: string): Promise<Blob> {
   const parser = new xml2js.Parser({ explicitArray: false });
   const doc = new jsPDF();
-
   const parseXmlNode = async (node: any) => {
     console.log("node", node);
     if (node.$) {
@@ -17,7 +16,6 @@ export async function convertXmlToPdf(xmlString: string): Promise<Blob> {
         if (textNodes) {
           text = textNodes["w:t"] ? textNodes["w:t"]._ : "";
         }
-        console.log("text:", text);
         doc.setFontSize(14);
         doc.setFontType("normal");
         if (text == null) {

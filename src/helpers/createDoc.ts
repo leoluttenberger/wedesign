@@ -169,8 +169,8 @@ async function createDocx(
           next: "Normal",
           quickFormat: true,
           run: {
-            font: "Arial",
-            size: 28,
+            font: "arial",
+            size: 44,
             bold: true,
           },
           paragraph: {
@@ -187,8 +187,8 @@ async function createDocx(
           next: "Normal",
           quickFormat: true,
           run: {
-            font: "Arial",
-            size: 24,
+            font: "arial",
+            size: 28,
             bold: true,
           },
           paragraph: {
@@ -205,8 +205,8 @@ async function createDocx(
           next: "Normal",
           quickFormat: true,
           run: {
-            font: "Arial",
-            size: 22,
+            font: "arial",
+            size: 24,
           },
           paragraph: {
             spacing: {
@@ -248,7 +248,7 @@ async function createDocx(
             alignment: AlignmentType.RIGHT,
           }),
           new Paragraph({
-            text: "",
+            text: " ",
             style: "normal",
           }),
           new Paragraph({
@@ -269,7 +269,7 @@ async function createDocx(
             style: "normal",
           }),
           new Paragraph({
-            text: "",
+            text: " ",
             style: "normal",
           }),
           new Paragraph({
@@ -278,7 +278,7 @@ async function createDocx(
             alignment: AlignmentType.RIGHT,
           }),
           new Paragraph({
-            text: "",
+            text: " ",
             style: "normal",
           }),
           new Paragraph({
@@ -287,7 +287,7 @@ async function createDocx(
             style: "h1",
           }),
           new Paragraph({
-            text: "",
+            text: " ",
             style: "normal",
           }),
           new Paragraph({
@@ -295,7 +295,7 @@ async function createDocx(
             style: "normal",
           }),
           new Paragraph({
-            text: "",
+            text: " ",
             style: "normal",
           }),
           new Paragraph({
@@ -303,7 +303,7 @@ async function createDocx(
             style: "normal",
           }),
           new Paragraph({
-            text: "",
+            text: " ",
             style: "normal",
           }),
           new Paragraph({
@@ -311,7 +311,7 @@ async function createDocx(
             style: "normal",
           }),
           new Paragraph({
-            text: "",
+            text: " ",
             style: "normal",
           }),
           new Paragraph({
@@ -319,7 +319,7 @@ async function createDocx(
             style: "normal",
           }),
           new Paragraph({
-            text: "",
+            text: " ",
             style: "normal",
           }),
           new Paragraph({
@@ -331,7 +331,7 @@ async function createDocx(
             style: "normal",
           }),
           new Paragraph({
-            text: "",
+            text: " ",
             style: "normal",
           }),
           new Paragraph({
@@ -339,7 +339,7 @@ async function createDocx(
             style: "normal",
           }),
           new Paragraph({
-            text: "",
+            text: " ",
             style: "normal",
           }),
           new Paragraph({

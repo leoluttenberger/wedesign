@@ -17,33 +17,39 @@
         ></CheckIcon>
       </button>
     </div>
-    <div v-if="imagePreview">
-      <img class="absolute max-w-[20%] py-24" :src="imagePreview" />
+    <div
+      class="border-[4px] border-wd-black dark:border-slate-800"
+      id="pdf-container"
+    >
+      <vue-pdf-embed :source="pdfDataURL" />
     </div>
-    <vue-pdf-embed :source="pdfDataURL" />
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, defineProps } from "vue";
+import { ref, onMounted, defineProps, onBeforeUnmount } from "vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 import VuePdfEmbed from "vue-pdf-embed";
 
 import { saveAs } from "file-saver";
 import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+
 import JSZip from "jszip";
 import { createDoc } from "@/helpers/createDoc";
 import { convertXmlToPdf } from "@/helpers/convertDocToPdf";
+import { convertXmlToHtml } from "@/helpers/convertXmlToHtml";
 import { sideBack } from "@/store.js";
 
-import { Filesystem, Directory, Encoding } from "@capacitor/filesystem";
+import { Filesystem, Directory } from "@capacitor/filesystem";
 import { fileToBase64 } from "@/helpers/fileToBase64";
 
 const pdf = ref(null);
+const pdfDataURL = ref(null);
+const html = ref(null);
 const imagePreview = ref(null);
 const downloadDocx = ref(null);
 const docxContent = ref(null);
-const pdfDataURL = ref(null);
 
 const props = defineProps({
   currentApplIndex: {
@@ -60,8 +66,11 @@ onMounted(async () => {
   downloadDocx.value = await createFile();
   sideBack.value = true;
   await convertToPdf();
+  //window.addEventListener("resize", resizePdfContainer);
 });
-
+onBeforeUnmount(() => {
+  //window.removeEventListener("resize", resizePdfContainer);
+});
 const closeModal = () => {
   sideBack.value = false;
 };
@@ -84,76 +93,18 @@ const createFile = async () => {
 };
 const convertToPdf = async () => {
   const xmlString = docxContent.value;
-  const pdfBlob = await convertXmlToPdf(xmlString);
-  pdf.value = pdfBlob;
-  const reader = new FileReader();
-  reader.readAsDataURL(pdfBlob);
-  reader.onloadend = () => {
-    pdfDataURL.value = reader.result;
-  };
+  html.value = convertXmlToHtml(xmlString);
+  pdf.value = createPdfFromHtml(html.value);
+  pdfDataURL.value = URL.createObjectURL(pdf.value);
 };
 
-const createPdf = async () => {
-  const doc = new jsPDF();
-  const layout = docxContent.value;
-  const parser = new DOMParser();
-  const layoutDoc = parser.parseFromString(layout, "text/xml");
-  console.log("layoutDoc", layoutDoc);
-  // Get all the paragraph elements in the layout
-  const paragraphs = layoutDoc.getElementsByTagName("w:p");
-  // Loop through the paragraphs and add the content to the PDF
-  console.log("paragraphs", paragraphs);
-  for (let i = 0; i < paragraphs.length; i++) {
-    const paragraph = paragraphs[i];
-    const textNodes = paragraph.getElementsByTagName("w:t");
-    let text = "";
-    // Get the text content of the paragraph
-    for (let j = 0; j < textNodes.length; j++) {
-      const textNode = textNodes[j];
-      text += textNode.textContent;
-    }
-    // Get the formatting of the paragraph
-    const runProperties = paragraph.getElementsByTagName("w:rPr")[0];
-    console.log("RunProperties", runProperties);
-
-    const align = runProperties?.getElementsByTagName("w:jc")?.length > 0;
-    const bold = runProperties?.getElementsByTagName("w:b")?.length > 0;
-    const italic = runProperties?.getElementsByTagName("w:i")?.length > 0;
-    const fontSize = runProperties
-      .getElementsByTagName("w:sz")[0]
-      .getAttribute("w:val");
-    // Add the text to the PDF with the formatting
-    if (Number(fontSize)) {
-      doc.setFontSize(Number(fontSize));
-    } else {
-      console.log("Default fontsize 14");
-      doc.setFontSize(14);
-    }
-    if (bold) {
-      doc.setFontType("bold");
-    }
-    if (italic) {
-      doc.setFontType("italic");
-    }
-
-    doc.text(10, 10 + i * 10, text);
-  }
-  const pdfBlob = doc.output("blob");
-  pdf.value = pdfBlob;
-  const reader = new FileReader();
-  reader.readAsDataURL(pdfBlob);
-  reader.onloadend = () => {
-    pdfDataURL.value = reader.result;
-  };
-};
 const fileNameDoc = "motivation-letter.docx";
 const fileNamePDF = "motivation-letter.pdf";
 
 const saveAndDownLoadDocs = async () => {
-  saveAs(pdf.value, "motivation-letter.pdf");
-  saveAs(downloadDocx.value, "motivation-letter.docx");
+  saveAs(pdf.value, fileNamePDF);
+  saveAs(downloadDocx.value, fileNameDoc);
   console.log(downloadDocx.value);
-  console.log(pdf.value);
   const base64StringDoc = await fileToBase64(downloadDocx.value);
   const base64StringPdf = await fileToBase64(pdf.value);
 
@@ -181,5 +132,54 @@ const saveAndDownLoadDocs = async () => {
       console.error(error);
     });
   sideBack.value = false;
+};
+
+const createPdfFromHtml = (html: string) => {
+  const element = document.createElement("div");
+  element.innerHTML = html;
+
+  const doc = new jsPDF("p", "pt"),
+    specialElementHandlers = {
+      "#bypassme": function (element, renderer) {
+        return true;
+      },
+    };
+
+  const margins = {
+    top: 60,
+    bottom: 60,
+    left: 40,
+    right: 40,
+    width: 522,
+  };
+  doc.setFont("helvetica");
+  doc.fromHTML(
+    element,
+    margins.left,
+    margins.top,
+    {
+      width: margins.width,
+      elementHandlers: specialElementHandlers,
+    },
+    margins
+  );
+  return doc.output("blob");
+};
+const resizePdfContainer = () => {
+  const container = document.getElementById("pdf-container");
+  const parentWidth = container.offsetWidth;
+  const parentHeight = container.offsetHeight;
+  const aspectRatio = 1.4142; // assume A4 paper size
+  const width = Math.min(parentWidth, parentHeight * aspectRatio);
+  const height = width / aspectRatio;
+  container.style.width = `${width}px`;
+  container.style.height = `${height}px`;
+
+  // Get current width and height of the container
+  const currentWidth = container.offsetWidth;
+  const currentHeight = container.offsetHeight;
+  console.log(
+    `Current container dimensions: ${currentWidth} x ${currentHeight}`
+  );
 };
 </script>

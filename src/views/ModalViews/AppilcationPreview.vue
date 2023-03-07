@@ -36,6 +36,9 @@ import { createDoc } from "@/helpers/createDoc";
 import { convertXmlToPdf } from "@/helpers/convertDocToPdf";
 import { sideBack } from "@/store.js";
 
+import { Filesystem, Directory, Encoding } from "@capacitor/filesystem";
+import { fileToBase64 } from "@/helpers/fileToBase64";
+
 const pdf = ref(null);
 const imagePreview = ref(null);
 const downloadDocx = ref(null);
@@ -143,9 +146,40 @@ const createPdf = async () => {
     pdfDataURL.value = reader.result;
   };
 };
+const fileNameDoc = "motivation-letter.docx";
+const fileNamePDF = "motivation-letter.pdf";
 
-const saveAndDownLoadDocs = () => {
+const saveAndDownLoadDocs = async () => {
   saveAs(pdf.value, "motivation-letter.pdf");
   saveAs(downloadDocx.value, "motivation-letter.docx");
+  console.log(downloadDocx.value);
+  console.log(pdf.value);
+  const base64StringDoc = await fileToBase64(downloadDocx.value);
+  const base64StringPdf = await fileToBase64(pdf.value);
+
+  await Filesystem.writeFile({
+    path: `${fileNameDoc}`,
+    data: base64StringDoc,
+    directory: Directory.Documents,
+  })
+    .then(() => {
+      console.log("File written to document docx directory!");
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+  await Filesystem.writeFile({
+    path: `${fileNamePDF}`,
+    data: base64StringPdf,
+    directory: Directory.Documents,
+  })
+    .then(() => {
+      console.log("File written to document pdf directory!");
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  sideBack.value = false;
 };
 </script>

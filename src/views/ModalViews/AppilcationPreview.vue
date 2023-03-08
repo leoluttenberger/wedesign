@@ -21,12 +21,17 @@
       class="border-[4px] border-wd-black dark:border-slate-800"
       id="pdf-container"
     >
-      <vue-pdf-embed :source="pdfDataURL" />
+      <vue-pdf-embed :source="pdfDataURL" :width="width" :height="height" />
+    </div>
+    <div class="border-[4px] border-wd-black dark:border-slate-800" ref="el">
+      {{ height }} x {{ width }}
     </div>
   </div>
 </template>
 <script setup lang="ts">
 import { ref, onMounted, defineProps, onBeforeUnmount } from "vue";
+import { useElementSize } from "@vueuse/core";
+
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 import VuePdfEmbed from "vue-pdf-embed";
@@ -47,9 +52,10 @@ import { fileToBase64 } from "@/helpers/fileToBase64";
 const pdf = ref(null);
 const pdfDataURL = ref(null);
 const html = ref(null);
-const imagePreview = ref(null);
 const downloadDocx = ref(null);
 const docxContent = ref(null);
+const el = ref(null);
+const { width, height } = useElementSize(el);
 
 const props = defineProps({
   currentApplIndex: {
@@ -66,10 +72,10 @@ onMounted(async () => {
   downloadDocx.value = await createFile();
   sideBack.value = true;
   await convertToPdf();
-  //window.addEventListener("resize", resizePdfContainer);
+  window.addEventListener("resize", resizePdfContainer);
 });
 onBeforeUnmount(() => {
-  //window.removeEventListener("resize", resizePdfContainer);
+  window.removeEventListener("resize", resizePdfContainer);
 });
 const closeModal = () => {
   sideBack.value = false;
@@ -167,19 +173,12 @@ const createPdfFromHtml = (html: string) => {
 };
 const resizePdfContainer = () => {
   const container = document.getElementById("pdf-container");
-  const parentWidth = container.offsetWidth;
-  const parentHeight = container.offsetHeight;
+  const parentWidth = el.value.width;
+  const parentHeight = el.value.height;
   const aspectRatio = 1.4142; // assume A4 paper size
   const width = Math.min(parentWidth, parentHeight * aspectRatio);
   const height = width / aspectRatio;
   container.style.width = `${width}px`;
   container.style.height = `${height}px`;
-
-  // Get current width and height of the container
-  const currentWidth = container.offsetWidth;
-  const currentHeight = container.offsetHeight;
-  console.log(
-    `Current container dimensions: ${currentWidth} x ${currentHeight}`
-  );
 };
 </script>

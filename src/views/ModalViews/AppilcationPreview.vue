@@ -9,7 +9,7 @@
       <p
         class="text-black px-1 dark:text-white font-Montserrat text-xl font-bold"
       >
-        {{ "Download" }}
+        {{ "Speichern & Senden" }}
       </p>
       <button v-if="pdf" @click="saveAndDownLoadDocs()" class="">
         <CheckIcon
@@ -67,6 +67,8 @@ import { sideBack } from "@/store.js";
 import { Filesystem, Directory } from "@capacitor/filesystem";
 import { fileToBase64 } from "@/helpers/fileToBase64";
 
+import moment from "moment";
+
 const pdf = ref(null);
 const pdfDataURL = ref(null);
 const html = ref(null);
@@ -75,6 +77,7 @@ const docxContent = ref(null);
 const el = ref(null);
 const { width, height } = useElementSize(el);
 const zoomFactor = ref(1);
+const imgData = ref("");
 
 const props = defineProps({
   currentApplIndex: {
@@ -120,18 +123,44 @@ const convertToPdf = async () => {
   const xmlString = docxContent.value;
   html.value = convertXmlToHtml(xmlString);
   pdf.value = createPdfFromHtml(html.value);
-  pdfDataURL.value = URL.createObjectURL(pdf.value);
+  pdfDataURL.value = URL.createObjectURL(pdf.value.output("blob"));
+};
+const creatImage = () => {
+  const canvas = document.querySelector("canvas") as HTMLCanvasElement;
+  const context = canvas.getContext("2d") as CanvasRenderingContext2D;
+  const img = new Image();
+  img.src = pdf.value.output("datauristring");
+  context.drawImage(img, 0, 0);
+  imgData.value = canvas.toDataURL("image/png");
 };
 
-const fileNameDoc = "motivation-letter.docx";
-const fileNamePDF = "motivation-letter.pdf";
+const mailImage = () => {
+  creatImage();
+  const mailtoLink = `mailto:recipient@example.com?subject=&body= Bitte hänge dein Motivationsschreiben und deinen Lebenslauf an. Die Datein findest im Ordner Dokumente!&attachment=`;
+  window.location.href = mailtoLink;
+};
 
 const saveAndDownLoadDocs = async () => {
-  saveAs(pdf.value, fileNamePDF);
+  const applications = JSON.parse(localStorage.getItem("applications"));
+  const dateString = moment().format("DD_MM_YYYY");
+
+  const fileNameDoc =
+    "motivationsschreiben-" +
+    applications[props.currentApplIndex][0].company +
+    "_" +
+    dateString +
+    ".docx";
+  const fileNamePDF =
+    "motivationsschreiben-" +
+    applications[props.currentApplIndex][0].company +
+    "_" +
+    dateString +
+    ".pdf";
+
+  saveAs(pdf.value.output("blob"), fileNamePDF);
   saveAs(downloadDocx.value, fileNameDoc);
-  console.log(downloadDocx.value);
+  const base64StringPdf = await fileToBase64(pdf.value.output("blob"));
   const base64StringDoc = await fileToBase64(downloadDocx.value);
-  const base64StringPdf = await fileToBase64(pdf.value);
 
   await Filesystem.writeFile({
     path: `${fileNameDoc}`,
@@ -156,6 +185,7 @@ const saveAndDownLoadDocs = async () => {
     .catch((error) => {
       console.error(error);
     });
+  mailImage();
   sideBack.value = false;
 };
 
@@ -187,7 +217,7 @@ const createPdfFromHtml = (html: string) => {
     },
     margins
   );
-  return doc.output("blob");
+  return doc;
 };
 const resizePdfContainer = () => {
   const container = document.getElementById("pdf-container");

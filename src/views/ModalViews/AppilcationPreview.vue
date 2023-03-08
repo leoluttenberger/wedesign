@@ -1,27 +1,44 @@
 <template>
   <div class="overflow-auto overflow-scroll w-screen h-screen">
-    <div class="grid grid-cols-3 gap-20 p-2 place-items-center">
-      <button type="button" @click="closeModal()" class="p-4">
+    <div class="grid grid-cols-3 p-4 place-items-center">
+      <button type="button" @click="closeModal()" class="">
         <CloseIcon
           class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
         ></CloseIcon>
       </button>
       <p
-        class="text-black px-1 dark:text-white font-Montserrat text-xl p-4 font-bold"
+        class="text-black px-1 dark:text-white font-Montserrat text-xl font-bold"
       >
         {{ "Download" }}
       </p>
-      <button v-if="pdf" @click="saveAndDownLoadDocs()" class="p-4">
+      <button v-if="pdf" @click="saveAndDownLoadDocs()" class="">
         <CheckIcon
           class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
         ></CheckIcon>
+      </button>
+    </div>
+    <div class="grid grid-cols-3 p-4 place-items-center">
+      <button v-if="pdf" @click="zoomOut()" class="">
+        <CloseIcon
+          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+        ></CloseIcon>
+      </button>
+      <p
+        class="text-black px-1 dark:text-white font-Montserrat text-xl font-bold"
+      >
+        {{ "Zoom" }}
+      </p>
+      <button v-if="pdf" @click="zoomIn()" class="">
+        <AddIcon
+          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+        ></AddIcon>
       </button>
     </div>
     <div
       class="border-[4px] border-wd-black dark:border-slate-800"
       id="pdf-container"
     >
-      <vue-pdf-embed :source="pdfDataURL" :width="width" :height="height" />
+      <vue-pdf-embed :source="pdfDataURL" :width="width * zoomFactor" />
     </div>
     <div class="border-[4px] border-wd-black dark:border-slate-800" ref="el">
       {{ height }} x {{ width }}
@@ -34,6 +51,7 @@ import { useElementSize } from "@vueuse/core";
 
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
+import AddIcon from "@/assets/icons/AddIcon.vue";
 import VuePdfEmbed from "vue-pdf-embed";
 
 import { saveAs } from "file-saver";
@@ -56,6 +74,7 @@ const downloadDocx = ref(null);
 const docxContent = ref(null);
 const el = ref(null);
 const { width, height } = useElementSize(el);
+const zoomFactor = ref(1);
 
 const props = defineProps({
   currentApplIndex: {
@@ -154,11 +173,10 @@ const createPdfFromHtml = (html: string) => {
   const margins = {
     top: 60,
     bottom: 60,
-    left: 40,
-    right: 40,
-    width: 522,
+    left: 50,
+    right: 50,
+    width: 500,
   };
-  doc.setFont("helvetica");
   doc.fromHTML(
     element,
     margins.left,
@@ -180,5 +198,15 @@ const resizePdfContainer = () => {
   const height = width / aspectRatio;
   container.style.width = `${width}px`;
   container.style.height = `${height}px`;
+};
+const zoomIn = () => {
+  if (zoomFactor.value < 5) {
+    zoomFactor.value++;
+  }
+};
+const zoomOut = () => {
+  if (zoomFactor.value > 1) {
+    zoomFactor.value--;
+  }
 };
 </script>

@@ -1,45 +1,80 @@
 <template>
   <div class="overflow-auto overflow-scroll w-screen h-screen">
-    <div class="grid grid-cols-3 gap-20 p-2 place-items-center">
-      <button type="button" @click="closeModal()" class="p-4">
+    <div class="grid grid-cols-3 p-4 place-items-center">
+      <button type="button" @click="closeModal()" class="">
         <CloseIcon
           class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
         ></CloseIcon>
       </button>
       <p
-        class="text-black px-1 dark:text-white font-Montserrat text-xl p-4 font-bold"
+        class="text-black px-1 dark:text-white font-Montserrat text-xl font-bold"
       >
         {{ "Download" }}
       </p>
-      <button v-if="pdf" @click="saveAndDownLoadDocs()" class="p-4">
+      <button v-if="pdf" @click="saveAndDownLoadDocs()" class="">
         <CheckIcon
           class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
         ></CheckIcon>
       </button>
     </div>
-    <div v-if="imagePreview">
-      <img class="absolute max-w-[20%] py-24" :src="imagePreview" />
+    <div class="grid grid-cols-3 p-4 place-items-center">
+      <button v-if="pdf" @click="zoomOut()" class="">
+        <CloseIcon
+          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+        ></CloseIcon>
+      </button>
+      <p
+        class="text-black px-1 dark:text-white font-Montserrat text-xl font-bold"
+      >
+        {{ "Zoom" }}
+      </p>
+      <button v-if="pdf" @click="zoomIn()" class="">
+        <AddIcon
+          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+        ></AddIcon>
+      </button>
     </div>
-    <vue-pdf-embed :source="pdfDataURL" />
+    <div
+      class="border-[4px] border-wd-black dark:border-slate-800"
+      id="pdf-container"
+    >
+      <vue-pdf-embed :source="pdfDataURL" :width="width * zoomFactor" />
+    </div>
+    <div class="border-[4px] border-wd-black dark:border-slate-800" ref="el">
+      {{ height }} x {{ width }}
+    </div>
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, defineProps } from "vue";
+import { ref, onMounted, defineProps, onBeforeUnmount } from "vue";
+import { useElementSize } from "@vueuse/core";
+
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
+import AddIcon from "@/assets/icons/AddIcon.vue";
 import VuePdfEmbed from "vue-pdf-embed";
 
 import { saveAs } from "file-saver";
 import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+
 import JSZip from "jszip";
-import { createDoc } from "@/components/createDoc";
+import { createDoc } from "@/helpers/createDoc";
+import { convertXmlToPdf } from "@/helpers/convertDocToPdf";
+import { convertXmlToHtml } from "@/helpers/convertXmlToHtml";
 import { sideBack } from "@/store.js";
 
-const pdf = ref("");
-const imagePreview = ref(null);
+import { Filesystem, Directory } from "@capacitor/filesystem";
+import { fileToBase64 } from "@/helpers/fileToBase64";
+
+const pdf = ref(null);
+const pdfDataURL = ref(null);
+const html = ref(null);
 const downloadDocx = ref(null);
 const docxContent = ref(null);
-const pdfDataURL = ref(null);
+const el = ref(null);
+const { width, height } = useElementSize(el);
+const zoomFactor = ref(1);
 
 const props = defineProps({
   currentApplIndex: {
@@ -53,15 +88,14 @@ const props = defineProps({
 });
 
 onMounted(async () => {
-  console.log("Process 1");
   downloadDocx.value = await createFile();
-  console.log("content 1:", docxContent.value);
-  console.log("Process 2");
-  console.log("content 2:", docxContent.value);
   sideBack.value = true;
-  await createPdf();
+  await convertToPdf();
+  window.addEventListener("resize", resizePdfContainer);
 });
-
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", resizePdfContainer);
+});
 const closeModal = () => {
   sideBack.value = false;
 };
@@ -82,59 +116,97 @@ const createFile = async () => {
   console.log("onload Process");
   return file;
 };
-const createPdf = async () => {
-  const doc = new jsPDF();
-  const layout = docxContent.value;
-  console.log("Process 3");
-  console.log("content 3:", docxContent.value);
-  const parser = new DOMParser();
-  const layoutDoc = parser.parseFromString(layout, "text/xml");
-  // Get all the paragraph elements in the layout
-  const paragraphs = layoutDoc.getElementsByTagName("w:p");
-  // Loop through the paragraphs and add the content to the PDF
-  for (let i = 0; i < paragraphs.length; i++) {
-    const paragraph = paragraphs[i];
-    const textNodes = paragraph.getElementsByTagName("w:t");
-    let text = "";
-    // Get the text content of the paragraph
-    for (let j = 0; j < textNodes.length; j++) {
-      const textNode = textNodes[j];
-      text += textNode.textContent;
-    }
-    // Get the formatting of the paragraph
-    const runProperties = paragraph.getElementsByTagName("w:rPr")[0];
-    const bold = runProperties?.getElementsByTagName("w:b")?.length > 0;
-    const italic = runProperties?.getElementsByTagName("w:i")?.length > 0;
-    const fontSize = runProperties
-      ?.getElementsByTagName("w:sz")[0]
-      ?.getAttribute("w:val");
-    // Add the text to the PDF with the formatting
-    if (Number(fontSize)) {
-      console.log(Number(fontSize));
-      doc.setFontSize(Number(fontSize));
-    } else {
-      console.log("Default fontsize 20");
-      doc.setFontSize(20);
-    }
-    if (bold) {
-      doc.setFontType("bold");
-    }
-    if (italic) {
-      doc.setFontType("italic");
-    }
-    doc.text(10, 10 + i * 10, text);
-  }
-  const pdfBlob = doc.output("blob");
-  pdf.value = pdfBlob;
-  const reader = new FileReader();
-  reader.readAsDataURL(pdfBlob);
-  reader.onloadend = () => {
-    pdfDataURL.value = reader.result;
-  };
+const convertToPdf = async () => {
+  const xmlString = docxContent.value;
+  html.value = convertXmlToHtml(xmlString);
+  pdf.value = createPdfFromHtml(html.value);
+  pdfDataURL.value = URL.createObjectURL(pdf.value);
 };
 
-const saveAndDownLoadDocs = () => {
-  saveAs(pdf.value, "motivation-letter.pdf");
-  saveAs(downloadDocx.value, "motivation-letter.docx");
+const fileNameDoc = "motivation-letter.docx";
+const fileNamePDF = "motivation-letter.pdf";
+
+const saveAndDownLoadDocs = async () => {
+  saveAs(pdf.value, fileNamePDF);
+  saveAs(downloadDocx.value, fileNameDoc);
+  console.log(downloadDocx.value);
+  const base64StringDoc = await fileToBase64(downloadDocx.value);
+  const base64StringPdf = await fileToBase64(pdf.value);
+
+  await Filesystem.writeFile({
+    path: `${fileNameDoc}`,
+    data: base64StringDoc,
+    directory: Directory.Documents,
+  })
+    .then(() => {
+      console.log("File written to document docx directory!");
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+  await Filesystem.writeFile({
+    path: `${fileNamePDF}`,
+    data: base64StringPdf,
+    directory: Directory.Documents,
+  })
+    .then(() => {
+      console.log("File written to document pdf directory!");
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  sideBack.value = false;
+};
+
+const createPdfFromHtml = (html: string) => {
+  const element = document.createElement("div");
+  element.innerHTML = html;
+
+  const doc = new jsPDF("p", "pt"),
+    specialElementHandlers = {
+      "#bypassme": function (element, renderer) {
+        return true;
+      },
+    };
+
+  const margins = {
+    top: 60,
+    bottom: 60,
+    left: 50,
+    right: 50,
+    width: 500,
+  };
+  doc.fromHTML(
+    element,
+    margins.left,
+    margins.top,
+    {
+      width: margins.width,
+      elementHandlers: specialElementHandlers,
+    },
+    margins
+  );
+  return doc.output("blob");
+};
+const resizePdfContainer = () => {
+  const container = document.getElementById("pdf-container");
+  const parentWidth = el.value.width;
+  const parentHeight = el.value.height;
+  const aspectRatio = 1.4142; // assume A4 paper size
+  const width = Math.min(parentWidth, parentHeight * aspectRatio);
+  const height = width / aspectRatio;
+  container.style.width = `${width}px`;
+  container.style.height = `${height}px`;
+};
+const zoomIn = () => {
+  if (zoomFactor.value < 5) {
+    zoomFactor.value++;
+  }
+};
+const zoomOut = () => {
+  if (zoomFactor.value > 1) {
+    zoomFactor.value--;
+  }
 };
 </script>

@@ -14,12 +14,12 @@ module.exports = defineConfig({
   },
 
   configureWebpack: {
+    devtool: 'source-map',
     plugins: [
       require("unplugin-vue-components/webpack")({
         /* options */
       }),
     ],
-
     resolve: {
       fallback: {
         timers: require.resolve("timers-browserify"),

@@ -2,8 +2,6 @@ import { saveAs } from "file-saver";
 import { Document, Paragraph, HeadingLevel, AlignmentType, Packer } from "docx";
 import moment from "moment";
 export const createDoc = async (applicationIndex: number, mvIndex: number) => {
-  console.log("appIndex:", applicationIndex);
-  console.log("mvIndex:", mvIndex);
   const blob = createDocHandler(applicationIndex, mvIndex);
   return blob;
 };
@@ -21,12 +19,6 @@ async function createDocx(
   const applications = JSON.parse(localStorage.getItem("applications"));
   const motivations = JSON.parse(localStorage.getItem("motivations"));
   const userInfos = JSON.parse(localStorage.getItem("userInfos"));
-
-  console.log(applications);
-  console.log(applications);
-  console.log(motivations);
-  console.log(userInfos);
-
   const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
 
   let titleBefore = "";
@@ -97,7 +89,6 @@ async function createDocx(
   let job = "";
 
   if (localStorage.getItem("applications")) {
-    console.log(applications[applicationIndex][0].company);
     company = applications[applicationIndex][0].company
       ? applications[applicationIndex][0].company
       : "";
@@ -159,7 +150,6 @@ async function createDocx(
       ? motivations[mvIndex][0].salutationEnding
       : "";
   }
-
   const doc = new Document({
     styles: {
       paragraphStyles: [
@@ -170,7 +160,8 @@ async function createDocx(
           next: "Normal",
           quickFormat: true,
           run: {
-            size: 28,
+            font: "helvetica",
+            size: 44,
             bold: true,
           },
           paragraph: {
@@ -187,12 +178,30 @@ async function createDocx(
           next: "Normal",
           quickFormat: true,
           run: {
-            size: 24,
+            font: "helvetica",
+            size: 28,
             bold: true,
           },
           paragraph: {
             spacing: {
               before: 240,
+              after: 60,
+            },
+          },
+        },
+        {
+          id: "paragraph",
+          name: "Paragraph",
+          basedOn: "Normal",
+          next: "Normal",
+          quickFormat: true,
+          run: {
+            font: "helvetica",
+            size: 24,
+          },
+          paragraph: {
+            spacing: {
+              before: 0,
               after: 60,
             },
           },
@@ -204,12 +213,13 @@ async function createDocx(
           next: "Normal",
           quickFormat: true,
           run: {
-            size: 22,
+            font: "helvetica",
+            size: 24,
           },
           paragraph: {
             spacing: {
               before: 0,
-              after: 60,
+              after: 0,
             },
           },
         },
@@ -246,7 +256,11 @@ async function createDocx(
             alignment: AlignmentType.RIGHT,
           }),
           new Paragraph({
-            text: "",
+            text: " ",
+            style: "normal",
+          }),
+          new Paragraph({
+            text: " ",
             style: "normal",
           }),
           new Paragraph({
@@ -267,7 +281,19 @@ async function createDocx(
             style: "normal",
           }),
           new Paragraph({
-            text: "",
+            text: " ",
+            style: "normal",
+          }),
+          new Paragraph({
+            text: " ",
+            style: "normal",
+          }),
+          new Paragraph({
+            text: " ",
+            style: "normal",
+          }),
+          new Paragraph({
+            text: " ",
             style: "normal",
           }),
           new Paragraph({
@@ -276,7 +302,11 @@ async function createDocx(
             alignment: AlignmentType.RIGHT,
           }),
           new Paragraph({
-            text: "",
+            text: " ",
+            style: "normal",
+          }),
+          new Paragraph({
+            text: " ",
             style: "normal",
           }),
           new Paragraph({
@@ -285,59 +315,59 @@ async function createDocx(
             style: "h1",
           }),
           new Paragraph({
-            text: "",
+            text: " ",
             style: "normal",
           }),
           new Paragraph({
             text: salutationBeginning,
-            style: "normal",
+            style: "paragraph",
           }),
           new Paragraph({
-            text: "",
+            text: " ",
             style: "normal",
           }),
           new Paragraph({
             text: textBegining,
-            style: "normal",
+            style: "paragraph",
           }),
           new Paragraph({
-            text: "",
+            text: " ",
             style: "normal",
           }),
           new Paragraph({
             text: textExperience,
-            style: "normal",
+            style: "paragraph",
           }),
           new Paragraph({
-            text: "",
+            text: " ",
             style: "normal",
           }),
           new Paragraph({
             text: textContribution,
-            style: "normal",
+            style: "paragraph",
           }),
           new Paragraph({
-            text: "",
+            text: " ",
             style: "normal",
           }),
           new Paragraph({
             text: textCompetence,
-            style: "normal",
+            style: "paragraph",
           }),
           new Paragraph({
             text: ending,
-            style: "normal",
+            style: "paragraph",
           }),
           new Paragraph({
-            text: "",
+            text: " ",
             style: "normal",
           }),
           new Paragraph({
             text: salutationEnding,
-            style: "normal",
+            style: "paragraph",
           }),
           new Paragraph({
-            text: "",
+            text: " ",
             style: "normal",
           }),
           new Paragraph({

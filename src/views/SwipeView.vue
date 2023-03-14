@@ -29,10 +29,20 @@
           <BottomCard v-model:open="bottomCardOpen">
             <SwiperCard :items="items">
               <button @click="closeBottomCard()" class="p-2">
-                <CloseIcon
-                  class="py-8 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
-                ></CloseIcon>
+                <div class="flex">
+                  <CloseIcon
+                    class="py-8 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
+                  ></CloseIcon>
+                  <div class="flex justify-center">
+                    <h1
+                      class="py-10 px-10 text-black dark:text-white font-Montserrat text-xl md:text-xxl font-bold"
+                    >
+                      {{ mapFormComponentsNames[props.slideIndex] }}
+                    </h1>
+                  </div>
+                </div>
               </button>
+
               <div class="flex flex-col items-left shadow-lg-up">
                 <component :is="mapFormComponents[props.slideIndex]" />
               </div>
@@ -106,6 +116,12 @@ const mapListComponents = [
   ExperienceList,
   KnowledgeList,
   ApplicationList,
+];
+const mapFormComponentsNames = [
+  "Ausbildungen",
+  "Erfahrung",
+  "Kenntnisse",
+  "Bewerbung",
 ];
 
 onMounted(() => {

@@ -84,7 +84,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { slideDown } from "@/store.js";
-import CloseIcon from "@/assets/icons/CloseIcon.vue";
 
 const type = ref(null);
 const diversKnowledge = ref(null);

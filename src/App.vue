@@ -84,6 +84,25 @@
               ></NotificationsIcon
             ></router-link>
           </button>
+          <button
+            @click="onMenuTo(5)"
+            :class="
+              activeButton5
+                ? 'border-wd-green dark:border-wd-green'
+                : 'border-white dark:border-slate-800'
+            "
+            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
+          >
+            <router-link to="/tools">
+              <ToolIcon
+                :class="
+                  activeButton5
+                    ? 'stroke-wd-green dark:stroke-wd-green'
+                    : 'stroke-black dark:stroke-white'
+                "
+              ></ToolIcon
+            ></router-link>
+          </button>
           <div
             class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
           ></div>
@@ -99,6 +118,9 @@ import HomeIcon from "./assets/icons/HomeIcon.vue";
 import UserIcon from "./assets/icons/UserIcon.vue";
 import DocumentsIcon from "./assets/icons/DocumentsIcon.vue";
 import NotificationsIcon from "./assets/icons/NotificationsIcon.vue";
+import ToolIcon from "./assets/icons/ToolIcon.vue";
+import CircleIcon from "./assets/icons/CircleIcon.vue";
+
 import { isDarkMode } from "./store.js";
 const router = useRouter();
 const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")));
@@ -106,6 +128,8 @@ let activeButton1 = ref(true);
 let activeButton2 = ref(false);
 let activeButton3 = ref(false);
 let activeButton4 = ref(false);
+let activeButton5 = ref(false);
+
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   darkLightMode.value = "dark";
 } else {
@@ -128,24 +152,35 @@ const onMenuTo = (index) => {
       activeButton2.value = false;
       activeButton3.value = false;
       activeButton4.value = false;
+      activeButton5.value = false;
       break;
     case 2:
       activeButton1.value = false;
       activeButton2.value = true;
       activeButton3.value = false;
       activeButton4.value = false;
+      activeButton5.value = false;
       break;
     case 3:
       activeButton1.value = false;
       activeButton2.value = false;
       activeButton3.value = true;
       activeButton4.value = false;
+      activeButton5.value = false;
       break;
     case 4:
       activeButton1.value = false;
       activeButton2.value = false;
       activeButton3.value = false;
       activeButton4.value = true;
+      activeButton5.value = false;
+      break;
+    case 5:
+      activeButton1.value = false;
+      activeButton2.value = false;
+      activeButton3.value = false;
+      activeButton4.value = false;
+      activeButton5.value = true;
       break;
   }
 };

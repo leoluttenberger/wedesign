@@ -15,7 +15,6 @@ async function createDocx(
   applicationIndex: number,
   mvIndex: number
 ): Promise<Blob> {
-  const index: number = applicationIndex;
   const applications = JSON.parse(localStorage.getItem("applications"));
   const motivations = JSON.parse(localStorage.getItem("motivations"));
   const userInfos = JSON.parse(localStorage.getItem("userInfos"));

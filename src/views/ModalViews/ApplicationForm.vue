@@ -1,7 +1,7 @@
 <template>
   <div class="p-4">
     <div class="grid grid-cols-2 gap-1">
-      <div class="col-span-2 md:col-span-1">
+      <div class="col-span-2 md:col-span-1 py-4">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
             class="px-0 py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
@@ -13,11 +13,14 @@
               v-model="company"
               type="text"
               placeholder="Unternehmensname"
+              validation="required|alphanumeric|?length:2"
+              validation-label="Firma"
+              validation-visibility="live"
             />
           </div>
         </div>
       </div>
-      <div class="col-span-2 md:col-span-1">
+      <div class="col-span-2 md:col-span-1 py-4">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
             class="px-0 py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
@@ -166,20 +169,22 @@ const saveToLocalStorage = () => {
       note: __note,
     },
   ];
-  if (buttonDisabled == false) {
-    buttonDisabled = true;
-    if (localStorage.getItem("applications")) {
-      const currentApplications = JSON.parse(
-        localStorage.getItem("applications")
-      );
-      console.log(currentApplications);
-      const newData = [...currentApplications, application];
-      console.log(newData);
-      localStorage.setItem("applications", JSON.stringify(newData));
-    } else {
-      localStorage.setItem("applications", JSON.stringify([application]));
+  if (company.value) {
+    if (buttonDisabled == false) {
+      buttonDisabled = true;
+      if (localStorage.getItem("applications")) {
+        const currentApplications = JSON.parse(
+          localStorage.getItem("applications")
+        );
+        console.log(currentApplications);
+        const newData = [...currentApplications, application];
+        console.log(newData);
+        localStorage.setItem("applications", JSON.stringify(newData));
+      } else {
+        localStorage.setItem("applications", JSON.stringify([application]));
+      }
+      slideDown.value = true;
     }
-    slideDown.value = true;
   }
 };
 </script>

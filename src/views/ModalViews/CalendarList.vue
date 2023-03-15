@@ -8,7 +8,45 @@
             :key="index"
             class="p-2"
           >
-            <div v-if="item[0].appointmentFrom.slice(8, 10) > 0">
+            <div
+              v-if="
+                item[0].appointmentFrom.slice(8, 10) >= new Date().getDate() &&
+                isPicked == false
+              "
+            >
+              <div class="flex">
+                <button @click="openBottomCard(index)" class="grow px-2">
+                  <div
+                    class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
+                  >
+                    <div class="font-bold text-xl">{{ item[0].type }}</div>
+                    <div>{{ item[0].address }}</div>
+                    <div class="flex">
+                      <div class="flex-none">
+                        {{ item[0].appointmentFrom }}
+                      </div>
+                      <div class="grow py-2 px-2">
+                        <ArrowIcon
+                          class="dark:stroke-wd-white stroke-1 w-full h-2"
+                        ></ArrowIcon>
+                      </div>
+                      <div class="flex-none">
+                        {{ item[0].appointmentTo }}
+                      </div>
+                    </div>
+                  </div>
+                </button>
+                <div class="flex-none p-4">
+                  <SortIcon class="h-full"></SortIcon>
+                </div>
+              </div>
+            </div>
+            <div
+              v-if="
+                item[0].appointmentFrom.slice(8, 10) == currentDay &&
+                isPicked == true
+              "
+            >
               <div class="flex">
                 <button @click="openBottomCard(index)" class="grow px-2">
                   <div
@@ -92,7 +130,7 @@ import BottomCard from "@/components/BottomCard.vue";
 import CalendarEdit from "./CalendarEdit.vue";
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 import SortIcon from "@/assets/icons/SortIcon.vue";
-import { slideDown, isDarkMode } from "@/store.js";
+import { slideDown, isDarkMode, selectedDay } from "@/store.js";
 import { Container, Draggable } from "vue3-smooth-dnd";
 import SwiperCard from "@/components/SwiperCard.vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
@@ -101,6 +139,8 @@ const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
 const bottomCardOpen2 = ref(false);
 const renderComponent2 = ref(true);
 let currentButtonIndex = ref(0);
+const currentDay = ref(0);
+const isPicked = ref(false);
 
 interface SlideItem {
   id: string;
@@ -143,6 +183,16 @@ watch(bottomCardOpen2, () => {
 watch(slideDown, () => {
   if (slideDown.value == true) {
     bottomCardOpen2.value = false;
+  }
+});
+watch(selectedDay, () => {
+  if (selectedDay.value != 0) {
+    isPicked.value = true;
+    currentDay.value = selectedDay.value;
+    renderComponent2.value = false;
+    renderComponent2.value = true;
+  } else {
+    isPicked.value = false;
   }
 });
 

@@ -13,27 +13,33 @@
         :attributes="attributes"
         :locale="locale"
         @dayclick="dayClicked"
-      />
+      >
+        <template #footer>
+          <div class="w-full px-4 pb-3">
+            <button
+              class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold w-full px-3 py-1 rounded-md"
+              @click="moveToAll"
+            >
+              Alle Termine
+            </button>
+          </div>
+        </template></v-calendar
+      >
       <div class="flex">
         <BellIcon
           class="h-10 w-8 dark:stroke-wd-white stroke-black stroke-1"
         ></BellIcon>
         <div
-          v-if="!selectedDay"
+          v-if="!pickedDate"
           class="selected-day py-3 px-3 text-black dark:text-white font-Montserrat text-sm md:text-base font-bold"
         >
           Nächste Termine
         </div>
         <div
-          v-if="selectedDay"
+          v-if="pickedDate"
           class="selected-day py-3 px-3 text-black dark:text-white font-Montserrat text-sm md:text-base font-bold"
         >
-          <h3>{{ selectedDay.date.toDateString() }}</h3>
-          <ul>
-            <li v-for="attr in selectedDay.attributes" :key="attr.key">
-              {{ attr.customData.description }}
-            </li>
-          </ul>
+          <h3>{{ pickedDate.date.toDateString() }}</h3>
         </div>
       </div>
       <section
@@ -83,14 +89,14 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 import BellIcon from "../assets/icons/BellIcon.vue";
 import AddIcon from "@/assets/icons/AddIcon.vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import BottomCard from "@/components/BottomCard.vue";
 import CalendarForm from "@/views/ModalViews/CalendarForm.vue";
 import CalendarList from "@/views/ModalViews/CalendarList.vue";
-import { slideDown } from "@/store.js";
+import { slideDown, selectedDay } from "@/store.js";
 interface SlideItem {
   id: string;
   index: number;
@@ -100,9 +106,43 @@ interface SlideItem {
 let theme = ref(false);
 const calendar = ref("");
 const locale = "de-AT";
-const selectedDay = ref(null);
 const bottomCardOpen = ref(false);
 const renderComponent = ref(true);
+const pickedDate = ref(null);
+const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
+
+interface Todo {
+  highlight?: string;
+  dates: Date[];
+}
+// Define the initial list of todos
+const todos: Todo[] = [];
+
+const addTodo = (highlight: string | undefined, date: Date, todos: Todo[]) => {
+  // Check if the current date already exists in the list of todos
+  const existingTodo = todos.find((todo) => {
+    return todo.dates.some((d) => d.getTime() === date.getTime());
+  });
+
+  if (existingTodo) {
+    // If the date already exists, set the highlight for that todo
+    existingTodo.highlight = highlight;
+  } else {
+    // Otherwise, create a new todo item with the specified date and highlight
+    todos.push({
+      highlight: highlight,
+      dates: [date],
+    });
+  }
+};
+// Add a new todo with a new date and highlight
+for (let i = 0; i < appointments.value.length; i++) {
+  const year = appointments.value[i][0].appointmentFrom.slice(0, 4);
+  const month = appointments.value[i][0].appointmentFrom.slice(5, 7) - 1;
+  const day = appointments.value[i][0].appointmentFrom.slice(8, 10);
+  const newDate = new Date(year, month, day);
+  addTodo("blue", newDate, todos);
+}
 
 let idCounter = 0;
 const getID = () => (idCounter++).toString();
@@ -131,10 +171,17 @@ let attributes = ref([
     dot: true,
     dates: new Date(),
   },
+  ...todos.flatMap((todo) =>
+    todo.dates.map((date) => ({
+      highlight: todo.highlight,
+      dates: date,
+    }))
+  ),
 ]);
 
 const dayClicked = (day) => {
-  selectedDay.value = day;
+  pickedDate.value = day;
+  selectedDay.value = day.day;
 };
 const openBottomCard = () => {
   bottomCardOpen.value = true;
@@ -143,5 +190,9 @@ const openBottomCard = () => {
 const closeBottomCard = () => {
   bottomCardOpen.value = false;
   slideDown.value = true;
+};
+const moveToAll = () => {
+  pickedDate.value = null;
+  selectedDay.value = 0;
 };
 </script>

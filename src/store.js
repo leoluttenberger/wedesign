@@ -52,7 +52,9 @@ export const currentTextCompetence = reactive({
 export const currentEnding = reactive({
   value: " ",
 });
-
 export const currentSalutationEnding = reactive({
   value: " ",
+});
+export const selectedDay = reactive({
+  value: 0,
 });

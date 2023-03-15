@@ -5,7 +5,7 @@
     <div class="flex justify-center p-2 font-bold">Erinnerungen</div>
   </section>
 
-  <div class="flex pt-12 px-2">
+  <div class="flex pt-12 px-2" v-if="renderComponent">
     <v-calendar
       ref="calendar"
       :is-dark="theme"
@@ -95,7 +95,7 @@ import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import BottomCard from "@/components/BottomCard.vue";
 import CalendarForm from "@/views/ModalViews/CalendarForm.vue";
 import CalendarList from "@/views/ModalViews/CalendarList.vue";
-import { slideDown, selectedDay } from "@/store.js";
+import { slideDown, selectedDay, addedDate } from "@/store.js";
 interface SlideItem {
   id: string;
   index: number;
@@ -162,8 +162,29 @@ if (JSON.parse(localStorage.getItem("theme")) == "dark") {
 }
 watch(bottomCardOpen, () => {
   if (bottomCardOpen.value == false) {
+    if (addedDate != "") {
+      const year = addedDate.value.slice(0, 4);
+      const month = addedDate.value.slice(5, 7) - 1;
+      const day = addedDate.value.slice(8, 10);
+      const newDate = new Date(year, month, day);
+      addTodo("blue", newDate, todos);
+      attributes.value = [
+        {
+          key: "today",
+          dot: true,
+          dates: new Date(),
+        },
+        ...todos.flatMap((todo) =>
+          todo.dates.map((date) => ({
+            highlight: todo.highlight,
+            dates: date,
+          }))
+        ),
+      ];
+    }
     renderComponent.value = true;
   } else {
+    addedDate.value = "";
     renderComponent.value = false;
   }
 });

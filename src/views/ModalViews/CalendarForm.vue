@@ -117,7 +117,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { slideDown } from "@/store.js";
+import { slideDown, addedDate } from "@/store.js";
 const type = ref(null);
 const title = ref("");
 const appointmentFrom = ref(null);
@@ -153,6 +153,7 @@ const saveToLocalStorage = () => {
       localStorage.setItem("appointments", JSON.stringify([appointment]));
     }
     slideDown.value = true;
+    addedDate.value = appointmentFrom.value;
   }
 };
 </script>

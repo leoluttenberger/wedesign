@@ -13,6 +13,7 @@
       :attributes="attributes"
       :locale="locale"
       @dayclick="dayClicked"
+      @change-page="onPageChange"
     >
       <template #footer>
         <div class="w-full px-2 pb-3">
@@ -20,7 +21,7 @@
             class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold w-full px-3 py-1 rounded-md"
             @click="moveToAll"
           >
-            Alle Termine
+            Termine im Monat
           </button>
         </div>
       </template></v-calendar
@@ -95,7 +96,7 @@ import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import BottomCard from "@/components/BottomCard.vue";
 import CalendarForm from "@/views/ModalViews/CalendarForm.vue";
 import CalendarList from "@/views/ModalViews/CalendarList.vue";
-import { slideDown, selectedDay, addedDate } from "@/store.js";
+import { slideDown, selectedDay, selectedMonth, addedDate } from "@/store.js";
 interface SlideItem {
   id: string;
   index: number;
@@ -103,12 +104,13 @@ interface SlideItem {
 }
 
 let theme = ref(false);
-const calendar = ref("");
+const calendar = ref(null);
 const locale = "de-AT";
 const bottomCardOpen = ref(false);
 const renderComponent = ref(true);
 const pickedDate = ref(null);
 const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
+const month = ref(0);
 
 interface Todo {
   highlight?: string;
@@ -160,8 +162,16 @@ if (JSON.parse(localStorage.getItem("theme")) == "dark") {
 } else {
   theme.value = false;
 }
+
+onMounted(() => {
+  selectedMonth.value = new Date().getMonth();
+  console.log("Month", selectedMonth.value);
+  console.log("Month", month.value);
+});
+
 watch(bottomCardOpen, () => {
   if (bottomCardOpen.value == false) {
+    renderComponent.value = true;
     if (addedDate != "") {
       const year = addedDate.value.slice(0, 4);
       const month = addedDate.value.slice(5, 7) - 1;
@@ -182,9 +192,7 @@ watch(bottomCardOpen, () => {
         ),
       ];
     }
-    renderComponent.value = true;
   } else {
-    addedDate.value = "";
     renderComponent.value = false;
   }
 });
@@ -216,7 +224,13 @@ const closeBottomCard = () => {
   slideDown.value = true;
 };
 const moveToAll = () => {
+  selectedMonth.value = calendar.value.getPageDays()[8].id.slice(5, 7) - 1;
+  renderComponent.value = false;
+  renderComponent.value = true;
   pickedDate.value = null;
   selectedDay.value = 0;
+};
+const onPageChange = (pageDate: Date) => {
+  console.log(`Changed to page: ${pageDate}`);
 };
 </script>

@@ -1,12 +1,13 @@
 <template>
   <div>
     <section class="z-0">
-      <div class="grid gap-2" v-if="renderComponent2">
+      <div class="grid gap-2">
         <Container @drop="onDrop">
           <div v-for="(item, index) in appointments" :key="index">
             <div
               v-if="
                 item[0].appointmentFrom.slice(8, 10) >= new Date().getDate() &&
+                item[0].appointmentFrom.slice(5, 7) - 1 == currentMonth &&
                 isPicked == false
               "
             >
@@ -120,7 +121,7 @@ import BottomCard from "@/components/BottomCard.vue";
 import CalendarEdit from "./CalendarEdit.vue";
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 import SortIcon from "@/assets/icons/SortIcon.vue";
-import { slideDown, isDarkMode, selectedDay } from "@/store.js";
+import { slideDown, isDarkMode, selectedDay, selectedMonth } from "@/store.js";
 import { Container, Draggable } from "vue3-smooth-dnd";
 import SwiperCard from "@/components/SwiperCard.vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
@@ -130,6 +131,8 @@ const bottomCardOpen2 = ref(false);
 const renderComponent2 = ref(true);
 let currentButtonIndex = ref(0);
 const currentDay = ref(0);
+const currentMonth = ref(selectedMonth.value);
+console.log(currentMonth.value);
 const isPicked = ref(false);
 
 interface SlideItem {
@@ -165,9 +168,6 @@ watch(isDarkMode, () => {
 watch(bottomCardOpen2, () => {
   if (bottomCardOpen2.value == false) {
     appointments.value = JSON.parse(localStorage.getItem("appointments"));
-    renderComponent2.value = true;
-  } else {
-    renderComponent2.value = false;
   }
 });
 watch(slideDown, () => {
@@ -179,11 +179,15 @@ watch(selectedDay, () => {
   if (selectedDay.value != 0) {
     isPicked.value = true;
     currentDay.value = selectedDay.value;
-    renderComponent2.value = false;
-    renderComponent2.value = true;
   } else {
     isPicked.value = false;
+    currentDay.value = 0;
   }
+});
+watch(selectedMonth, () => {
+  isPicked.value = false;
+  currentMonth.value = selectedMonth.value;
+  console.log("listMont:", selectedMonth.value);
 });
 
 const openBottomCard = (id) => {

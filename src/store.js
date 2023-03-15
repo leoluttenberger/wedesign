@@ -58,6 +58,9 @@ export const currentSalutationEnding = reactive({
 export const selectedDay = reactive({
   value: 0,
 });
+export const selectedMonth = reactive({
+  value: 0,
+});
 export const addedDate = reactive({
   value: "",
 });

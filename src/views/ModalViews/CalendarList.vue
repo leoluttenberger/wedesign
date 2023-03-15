@@ -3,11 +3,7 @@
     <section class="z-0">
       <div class="grid gap-2" v-if="renderComponent2">
         <Container @drop="onDrop">
-          <Draggable
-            v-for="(item, index) in appointments"
-            :key="index"
-            class="p-2"
-          >
+          <div v-for="(item, index) in appointments" :key="index">
             <div
               v-if="
                 item[0].appointmentFrom.slice(8, 10) >= new Date().getDate() &&
@@ -15,7 +11,7 @@
               "
             >
               <div class="flex">
-                <button @click="openBottomCard(index)" class="grow px-2">
+                <button @click="openBottomCard(index)" class="grow p-2">
                   <div
                     class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
                   >
@@ -36,9 +32,6 @@
                     </div>
                   </div>
                 </button>
-                <div class="flex-none p-4">
-                  <SortIcon class="h-full"></SortIcon>
-                </div>
               </div>
             </div>
             <div
@@ -48,7 +41,7 @@
               "
             >
               <div class="flex">
-                <button @click="openBottomCard(index)" class="grow px-2">
+                <button @click="openBottomCard(index)" class="grow p-2">
                   <div
                     class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
                   >
@@ -69,12 +62,9 @@
                     </div>
                   </div>
                 </button>
-                <div class="flex-none p-4">
-                  <SortIcon class="h-full"></SortIcon>
-                </div>
               </div>
             </div>
-          </Draggable>
+          </div>
         </Container>
       </div>
     </section>

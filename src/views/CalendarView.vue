@@ -4,87 +4,86 @@
   >
     <div class="flex justify-center p-2 font-bold">Erinnerungen</div>
   </section>
-  <div class="overflow-auto overflow-scroll w-screen h-screen">
-    <div class="py-14 px-4">
-      <v-calendar
-        ref="calendar"
-        :is-dark="theme"
-        is-expanded
-        :attributes="attributes"
-        :locale="locale"
-        @dayclick="dayClicked"
-      >
-        <template #footer>
-          <div class="w-full px-4 pb-3">
-            <button
-              class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold w-full px-3 py-1 rounded-md"
-              @click="moveToAll"
-            >
-              Alle Termine
-            </button>
-          </div>
-        </template></v-calendar
-      >
-      <div class="flex">
-        <BellIcon
-          class="h-10 w-8 dark:stroke-wd-white stroke-black stroke-1"
-        ></BellIcon>
-        <div
-          v-if="!pickedDate"
-          class="selected-day py-3 px-3 text-black dark:text-white font-Montserrat text-sm md:text-base font-bold"
-        >
-          Nächste Termine
-        </div>
-        <div
-          v-if="pickedDate"
-          class="selected-day py-3 px-3 text-black dark:text-white font-Montserrat text-sm md:text-base font-bold"
-        >
-          <h3>{{ pickedDate.date.toDateString() }}</h3>
-        </div>
-      </div>
-      <section
-        class="z-0 overflow-auto overflow-scroll w-screen h-screen py-20"
-      >
-        <component :is="CalendarList" :key="renderComponent" />
-        <div class="flex justify-center p-4">
+
+  <div class="flex pt-12 px-2">
+    <v-calendar
+      ref="calendar"
+      :is-dark="theme"
+      is-expanded
+      :attributes="attributes"
+      :locale="locale"
+      @dayclick="dayClicked"
+    >
+      <template #footer>
+        <div class="w-full px-2 pb-3">
           <button
-            @click="openBottomCard()"
-            class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
+            class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold w-full px-3 py-1 rounded-md"
+            @click="moveToAll"
           >
-            <AddIcon
-              class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
-            ></AddIcon>
+            Alle Termine
           </button>
         </div>
-      </section>
-      <div>
-        <div
-          v-if="bottomCardOpen"
-          class="fixed z-10 inset-0 bg-black bg-opacity-10"
-        >
-          <BottomCard v-model:open="bottomCardOpen">
-            <SwiperCard :items="items">
-              <button @click="closeBottomCard()" class="p-2">
-                <div class="flex">
-                  <CloseIcon
-                    class="py-8 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
-                  ></CloseIcon>
-                  <div class="flex justify-center">
-                    <h1
-                      class="py-10 px-10 text-black dark:text-white font-Montserrat text-xl md:text-xxl font-bold"
-                    >
-                      Erinnerungen
-                    </h1>
-                  </div>
-                </div>
-              </button>
-              <div class="flex flex-col items-left shadow-lg-up">
-                <component :is="CalendarForm" />
+      </template></v-calendar
+    >
+  </div>
+  <div class="flex px-2">
+    <BellIcon
+      class="h-10 w-8 dark:stroke-wd-white stroke-black stroke-1"
+    ></BellIcon>
+    <div
+      v-if="!pickedDate"
+      class="selected-day py-3 px-3 text-black dark:text-white font-Montserrat text-sm md:text-base font-bold"
+    >
+      Nächste Termine
+    </div>
+    <div
+      v-if="pickedDate"
+      class="selected-day py-3 px-3 text-black dark:text-white font-Montserrat text-sm md:text-base font-bold"
+    >
+      <h3>{{ pickedDate.date.toDateString() }}</h3>
+    </div>
+  </div>
+  <section class="z-0 overflow-auto overflow-scroll w-screen h-1/2">
+    <div class="">
+      <component :is="CalendarList" :key="renderComponent" />
+    </div>
+    <div class="flex justify-end p-2 pb-20">
+      <button
+        @click="openBottomCard()"
+        class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
+      >
+        <AddIcon
+          class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
+        ></AddIcon>
+      </button>
+    </div>
+  </section>
+  <div>
+    <div
+      v-if="bottomCardOpen"
+      class="fixed z-10 inset-0 bg-black bg-opacity-10"
+    >
+      <BottomCard v-model:open="bottomCardOpen">
+        <SwiperCard :items="items">
+          <button @click="closeBottomCard()" class="p-2">
+            <div class="flex">
+              <CloseIcon
+                class="py-8 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
+              ></CloseIcon>
+              <div class="flex justify-center">
+                <h1
+                  class="py-10 px-10 text-black dark:text-white font-Montserrat text-xl md:text-xxl font-bold"
+                >
+                  Erinnerungen
+                </h1>
               </div>
-            </SwiperCard>
-          </BottomCard>
-        </div>
-      </div>
+            </div>
+          </button>
+          <div class="flex flex-col items-left shadow-lg-up">
+            <component :is="CalendarForm" />
+          </div>
+        </SwiperCard>
+      </BottomCard>
     </div>
   </div>
 </template>
@@ -136,12 +135,16 @@ const addTodo = (highlight: string | undefined, date: Date, todos: Todo[]) => {
   }
 };
 // Add a new todo with a new date and highlight
-for (let i = 0; i < appointments.value.length; i++) {
-  const year = appointments.value[i][0].appointmentFrom.slice(0, 4);
-  const month = appointments.value[i][0].appointmentFrom.slice(5, 7) - 1;
-  const day = appointments.value[i][0].appointmentFrom.slice(8, 10);
-  const newDate = new Date(year, month, day);
-  addTodo("blue", newDate, todos);
+if (localStorage.getItem("appointments")) {
+  for (let i = 0; i < appointments.value.length; i++) {
+    const year = appointments.value[i][0].appointmentFrom.slice(0, 4);
+    const month = appointments.value[i][0].appointmentFrom.slice(5, 7) - 1;
+    const day = appointments.value[i][0].appointmentFrom.slice(8, 10);
+    const newDate = new Date(year, month, day);
+    addTodo("blue", newDate, todos);
+  }
+} else {
+  addTodo("blue", new Date(), todos);
 }
 
 let idCounter = 0;

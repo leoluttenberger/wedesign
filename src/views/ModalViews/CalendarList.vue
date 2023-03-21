@@ -14,7 +14,12 @@
               <div class="flex">
                 <button @click="openBottomCard(index)" class="grow p-2">
                   <div
-                    class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
+                    class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border"
+                    :class="
+                      item[0].type == greenType
+                        ? 'border-green-500'
+                        : 'border-orange-500'
+                    "
                   >
                     <div class="font-bold text-base">
                       {{ item[0].type + ": " + item[0].title }}
@@ -56,14 +61,19 @@
             </div>
             <div
               v-if="
-                item[0].appointmentFrom.slice(8, 10) == currentDay &&
-                isPicked == true
+                currentDay >= item[0].appointmentFrom.slice(8, 10) &&
+                currentDay <= item[0].appointmentTo.slice(8, 10)
               "
             >
               <div class="flex">
                 <button @click="openBottomCard(index)" class="grow p-2">
                   <div
-                    class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
+                    class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border"
+                    :class="
+                      item[0].type == greenType
+                        ? 'border-green-500'
+                        : 'border-orange-500'
+                    "
                   >
                     <div class="font-bold text-base">
                       {{ item[0].type + ": " + item[0].title }}
@@ -172,6 +182,8 @@ const currentDay = ref(0);
 const currentMonth = ref(selectedMonth.value);
 console.log(currentMonth.value);
 const isPicked = ref(false);
+const greenType = ref("Bewerbungsgespräch");
+const orangeType = ref("Sonstige Termine");
 
 interface SlideItem {
   id: string;

@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
     BottomCard: typeof import('./src/components/BottomCard.vue')['default']
     CropModal: typeof import('./src/components/Modals/CropModal.vue')['default']
     CropperItem: typeof import('./src/components/CropperItem.vue')['default']
+    CustomCalendar: typeof import('./src/components/CustomCalendar.vue')['default']
     EditTextModal: typeof import('./src/components/Modals/EditTextModal.vue')['default']
     IconProfile: typeof import('./src/components/IconProfile.vue')['default']
     MenuBar: typeof import('./src/components/MenuBar.vue')['default']

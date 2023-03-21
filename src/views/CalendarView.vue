@@ -4,7 +4,6 @@
   >
     <div class="flex justify-center p-2 font-bold">Erinnerungen</div>
   </section>
-
   <div class="flex pt-12 px-2" v-if="renderComponent">
     <v-calendar
       ref="calendar"
@@ -45,7 +44,7 @@
     </div>
   </div>
   <section class="z-0 overflow-auto overflow-scroll w-screen h-1/2">
-    <div class="">
+    <div>
       <component :is="CalendarList" :key="renderComponent" />
     </div>
     <div class="flex justify-end p-2 pb-20">
@@ -96,6 +95,7 @@ import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import BottomCard from "@/components/BottomCard.vue";
 import CalendarForm from "@/views/ModalViews/CalendarForm.vue";
 import CalendarList from "@/views/ModalViews/CalendarList.vue";
+import CustomCalendar from "@/components/CustomCalendar.vue";
 import {
   slideDown,
   selectedDay,
@@ -150,8 +150,8 @@ const addTodo = (color: string | undefined, dates: Dates, todos: Todo[]) => {
       },
     },
     highlight: {
-      start: { fillMode: "solid", color: color },
-      base: { fillMode: "light", color: color },
+      start: { fillMode: "outline", color: color },
+      base: { fillMode: "dot", color: color },
       end: { fillMode: "outline", color: color },
     },
     dates: dates,

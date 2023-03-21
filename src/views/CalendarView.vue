@@ -96,7 +96,13 @@ import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import BottomCard from "@/components/BottomCard.vue";
 import CalendarForm from "@/views/ModalViews/CalendarForm.vue";
 import CalendarList from "@/views/ModalViews/CalendarList.vue";
-import { slideDown, selectedDay, selectedMonth, addedDate } from "@/store.js";
+import {
+  slideDown,
+  selectedDay,
+  selectedMonth,
+  addedDate,
+  addedType,
+} from "@/store.js";
 interface SlideItem {
   id: string;
   index: number;
@@ -112,41 +118,73 @@ const pickedDate = ref(null);
 const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
 const month = ref(0);
 
+interface Highlight {
+  start: { fillMode: string; color: string };
+  base: { fillMode: string; color: string };
+  end: { fillMode: string; color: string };
+}
+interface Dates {
+  start: Date;
+  end: Date;
+}
+interface Dot {
+  style: {
+    backgroundColor: string;
+  };
+}
+
 interface Todo {
-  highlight?: string;
-  dates: Date[];
+  dot: Dot;
+  highlight: Highlight;
+  dates: Dates;
 }
 // Define the initial list of todos
 const todos: Todo[] = [];
 
-const addTodo = (highlight: string | undefined, date: Date, todos: Todo[]) => {
-  // Check if the current date already exists in the list of todos
-  const existingTodo = todos.find((todo) => {
-    return todo.dates.some((d) => d.getTime() === date.getTime());
+const addTodo = (color: string | undefined, dates: Dates, todos: Todo[]) => {
+  // Otherwise, create a new todo item with the specified date and highlight
+  todos.push({
+    dot: {
+      style: {
+        backgroundColor: color,
+      },
+    },
+    highlight: {
+      start: { fillMode: "solid", color: color },
+      base: { fillMode: "light", color: color },
+      end: { fillMode: "outline", color: color },
+    },
+    dates: dates,
   });
-
-  if (existingTodo) {
-    // If the date already exists, set the highlight for that todo
-    existingTodo.highlight = highlight;
-  } else {
-    // Otherwise, create a new todo item with the specified date and highlight
-    todos.push({
-      highlight: highlight,
-      dates: [date],
-    });
-  }
 };
 // Add a new todo with a new date and highlight
 if (localStorage.getItem("appointments")) {
   for (let i = 0; i < appointments.value.length; i++) {
-    const year = appointments.value[i][0].appointmentFrom.slice(0, 4);
-    const month = appointments.value[i][0].appointmentFrom.slice(5, 7) - 1;
-    const day = appointments.value[i][0].appointmentFrom.slice(8, 10);
-    const newDate = new Date(year, month, day);
-    addTodo("blue", newDate, todos);
+    const yearStart = appointments.value[i][0].appointmentFrom.slice(0, 4);
+    const monthStart = appointments.value[i][0].appointmentFrom.slice(5, 7) - 1;
+    const dayStart = appointments.value[i][0].appointmentFrom.slice(8, 10);
+    const yearEnd = appointments.value[i][0].appointmentTo.slice(0, 4);
+    const monthEnd = appointments.value[i][0].appointmentTo.slice(5, 7) - 1;
+    const dayEnd = appointments.value[i][0].appointmentTo.slice(8, 10);
+    const dates: Dates = {
+      start: new Date(yearStart, monthStart, dayStart),
+      end: new Date(yearEnd, monthEnd, dayEnd),
+    };
+
+    if (appointments.value[i][0].type == "Bewerbungsgespräch") {
+      addTodo("green", dates, todos);
+    } else if (appointments.value[i][0].type == "Deadline") {
+      addTodo("red", dates, todos);
+    } else {
+      addTodo("orange", dates, todos);
+    }
   }
 } else {
-  addTodo("blue", new Date(), todos);
+  const dates: Dates = {
+    start: new Date(),
+    end: new Date(),
+  };
+  addTodo("blue", dates, todos);
 }
 
 let idCounter = 0;
@@ -172,24 +210,30 @@ onMounted(() => {
 watch(bottomCardOpen, () => {
   if (bottomCardOpen.value == false) {
     renderComponent.value = true;
-    if (addedDate != "") {
-      const year = addedDate.value.slice(0, 4);
-      const month = addedDate.value.slice(5, 7) - 1;
-      const day = addedDate.value.slice(8, 10);
-      const newDate = new Date(year, month, day);
-      addTodo("blue", newDate, todos);
+    if (addedDate.value != "") {
+      const yearStart = addedDate.value.slice(0, 4);
+      const monthStart = addedDate.value.slice(5, 7) - 1;
+      const dayStart = addedDate.value.slice(8, 10);
+      const yearEnd = addedDate.value.slice(0, 4);
+      const monthEnd = addedDate.value.slice(5, 7) - 1;
+      const dayEnd = addedDate.value.slice(8, 10);
+      const dates: Dates = {
+        start: new Date(yearStart, monthStart, dayStart),
+        end: new Date(yearEnd, monthEnd, dayEnd),
+      };
+
+      if (addedType.value == "Bewerbungsgespräch") {
+        addTodo("green", dates, todos);
+      } else {
+        addTodo("blue", dates, todos);
+      }
       attributes.value = [
         {
           key: "today",
           dot: true,
           dates: new Date(),
         },
-        ...todos.flatMap((todo) =>
-          todo.dates.map((date) => ({
-            highlight: todo.highlight,
-            dates: date,
-          }))
-        ),
+        ...todos,
       ];
     }
   } else {
@@ -203,12 +247,7 @@ let attributes = ref([
     dot: true,
     dates: new Date(),
   },
-  ...todos.flatMap((todo) =>
-    todo.dates.map((date) => ({
-      highlight: todo.highlight,
-      dates: date,
-    }))
-  ),
+  ...todos,
 ]);
 
 const dayClicked = (day) => {

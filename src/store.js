@@ -64,3 +64,6 @@ export const selectedMonth = reactive({
 export const addedDate = reactive({
   value: "",
 });
+export const addedType = reactive({
+  value: "",
+});

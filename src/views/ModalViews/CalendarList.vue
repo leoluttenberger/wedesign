@@ -16,19 +16,38 @@
                   <div
                     class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
                   >
-                    <div class="font-bold text-xl">{{ item[0].type }}</div>
-                    <div>{{ item[0].address }}</div>
+                    <div class="font-bold text-base">
+                      {{ item[0].type + ": " + item[0].title }}
+                    </div>
                     <div class="flex">
-                      <div class="flex-none">
-                        {{ item[0].appointmentFrom }}
+                      <div class="flex-none text-sm">
+                        {{
+                          item[0].appointmentFrom.slice(8, 10) +
+                          "." +
+                          item[0].appointmentFrom.slice(5, 7) +
+                          "." +
+                          item[0].appointmentFrom.slice(0, 4) +
+                          " " +
+                          item[0].appointmentFrom.slice(11, 16) +
+                          " Uhr"
+                        }}
                       </div>
                       <div class="grow py-2 px-2">
                         <ArrowIcon
                           class="dark:stroke-wd-white stroke-1 w-full h-2"
                         ></ArrowIcon>
                       </div>
-                      <div class="flex-none">
-                        {{ item[0].appointmentTo }}
+                      <div class="flex-none text-sm">
+                        {{
+                          item[0].appointmentTo.slice(8, 10) +
+                          "." +
+                          item[0].appointmentTo.slice(5, 7) +
+                          "." +
+                          item[0].appointmentTo.slice(0, 4) +
+                          " " +
+                          item[0].appointmentTo.slice(11, 16) +
+                          " Uhr"
+                        }}
                       </div>
                     </div>
                   </div>
@@ -46,19 +65,38 @@
                   <div
                     class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
                   >
-                    <div class="font-bold text-xl">{{ item[0].type }}</div>
-                    <div>{{ item[0].address }}</div>
+                    <div class="font-bold text-base">
+                      {{ item[0].type + ": " + item[0].title }}
+                    </div>
                     <div class="flex">
-                      <div class="flex-none">
-                        {{ item[0].appointmentFrom }}
+                      <div class="flex-none text-sm">
+                        {{
+                          item[0].appointmentFrom.slice(8, 10) +
+                          "." +
+                          item[0].appointmentFrom.slice(5, 7) +
+                          "." +
+                          item[0].appointmentFrom.slice(0, 4) +
+                          " " +
+                          item[0].appointmentFrom.slice(11, 16) +
+                          " Uhr"
+                        }}
                       </div>
                       <div class="grow py-2 px-2">
                         <ArrowIcon
                           class="dark:stroke-wd-white stroke-1 w-full h-2"
                         ></ArrowIcon>
                       </div>
-                      <div class="flex-none">
-                        {{ item[0].appointmentTo }}
+                      <div class="flex-none text-sm">
+                        {{
+                          item[0].appointmentTo.slice(8, 10) +
+                          "." +
+                          item[0].appointmentTo.slice(5, 7) +
+                          "." +
+                          item[0].appointmentTo.slice(0, 4) +
+                          " " +
+                          item[0].appointmentTo.slice(11, 16) +
+                          " Uhr"
+                        }}
                       </div>
                     </div>
                   </div>

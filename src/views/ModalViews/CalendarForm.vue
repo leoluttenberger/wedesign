@@ -12,7 +12,7 @@
             v-model="type"
             type="select"
             placeholder="Auswahl"
-            :options="['Bewerbungstermin', 'Sonstig Termine']"
+            :options="['Bewerbungsgespräch', 'Sonstige Termine']"
           />
         </div>
       </div>
@@ -117,7 +117,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { slideDown, addedDate } from "@/store.js";
+import { slideDown, addedDate, addedType } from "@/store.js";
 const type = ref(null);
 const title = ref("");
 const appointmentFrom = ref(null);
@@ -154,6 +154,7 @@ const saveToLocalStorage = () => {
     }
     slideDown.value = true;
     addedDate.value = appointmentFrom.value;
+    addedType.value = type.value;
   }
 };
 </script>

@@ -94,7 +94,33 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <div
-            class="px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+            class="px-0 py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+          >
+            <p>Start</p>
+          </div>
+          <div class="px-2">
+            <FormKit type="date" v-model="start" placeholder="Auswählen" />
+          </div>
+        </div>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="py-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+          >
+            Deadline:
+          </p>
+          <div class="px-2">
+            <FormKit type="date" v-model="deadline" placeholder="Auswählen" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex bg-white dark:bg-slate-800 h-14">
+          <div
+            class="px-0 py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
           >
             <p>Ansprechs</p>
             <p>person:</p>
@@ -109,14 +135,18 @@
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
+        <div class="flex bg-white dark:bg-slate-800 h-24">
           <p
-            class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+            class="px-0 py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
           >
-            Deadline:
+            Notiz:
           </p>
-          <div class="px-2">
-            <FormKit type="date" v-model="deadline" placeholder="Auswählen" />
+          <div class="py-2 px-2">
+            <FormKit
+              type="textarea"
+              v-model="note"
+              placeholder="Wichtige Informationen"
+            />
           </div>
         </div>
       </div>
@@ -144,9 +174,10 @@ const streetNumber = ref(null);
 const districtNumber = ref(null);
 const city = ref(null);
 const contactPerson = ref(null);
+const note = ref("");
+const start = ref(null);
 let __mv = 0;
 let __state = "Entwurf";
-let __note = null;
 let buttonDisabled = false;
 
 onMounted(() => {
@@ -166,7 +197,16 @@ const saveToLocalStorage = () => {
       contactPerson: contactPerson.value,
       state: __state,
       mv: __mv,
-      note: __note,
+      note: note.value,
+    },
+  ];
+  const appointment = [
+    {
+      type: "Deadline",
+      title: company.value,
+      appointmentFrom: start.value,
+      appointmentTo: deadline.value,
+      note: note.value,
     },
   ];
   if (company.value) {
@@ -182,6 +222,16 @@ const saveToLocalStorage = () => {
         localStorage.setItem("applications", JSON.stringify(newData));
       } else {
         localStorage.setItem("applications", JSON.stringify([application]));
+      }
+      if (localStorage.getItem("appointments")) {
+        const currentappointments = JSON.parse(
+          localStorage.getItem("appointments")
+        );
+        const newData = [...currentappointments, appointment];
+        console.log(newData);
+        localStorage.setItem("appointments", JSON.stringify(newData));
+      } else {
+        localStorage.setItem("appointments", JSON.stringify([appointment]));
       }
       slideDown.value = true;
     }

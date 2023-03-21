@@ -120,18 +120,13 @@
         <div class="grid grid-cols-2 gap-1">
           <div class="col-span-2 md:col-span-1">
             <div class="flex bg-white dark:bg-slate-800 h-10">
-              <div
-                class="px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+              <p
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
               >
-                <p>Ansprechs</p>
-                <p>person:</p>
-              </div>
+                Start:
+              </p>
               <div class="px-2">
-                <FormKit
-                  type="text"
-                  v-model="contactPerson"
-                  placeholder="Marlene Musterfrau"
-                />
+                <FormKit type="date" v-model="start" placeholder="Auswählen" />
               </div>
             </div>
           </div>
@@ -175,7 +170,42 @@
             </div>
           </div>
           <div class="col-span-2 md:col-span-1">
-            <div class="flex bg-white dark:bg-slate-800 h-14 py-1">
+            <div class="flex bg-white dark:bg-slate-800 h-14">
+              <div
+                class="px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+              >
+                <p>Ansprechs</p>
+                <p>person:</p>
+              </div>
+              <div class="px-2">
+                <FormKit
+                  type="text"
+                  v-model="contactPerson"
+                  placeholder="Marlene Musterfrau"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-1">
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 h-24">
+              <p
+                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+              >
+                Notiz:
+              </p>
+              <div class="py-2 px-2">
+                <FormKit
+                  type="textarea"
+                  v-model="note"
+                  placeholder="Wichtige Informationen"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex bg-white dark:bg-slate-800 h-24 py-1">
               <div class="py-2">
                 <CloseIcon
                   v-if="__mv == 0"
@@ -189,27 +219,10 @@
                 ></CheckIcon>
               </div>
               <p
-                class="w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+                class="w-34 h-10 py-2 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
               >
                 {{ __mvText }}
               </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-24">
-            <p
-              class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-            >
-              Notiz:
-            </p>
-            <div class="py-2 px-2">
-              <FormKit
-                type="textarea"
-                v-model="note"
-                placeholder="Wichtige Informationen"
-              />
             </div>
           </div>
         </div>
@@ -292,6 +305,7 @@ const streetName = ref(null);
 const streetNumber = ref(null);
 const districtNumber = ref(null);
 const city = ref(null);
+const start = ref(null);
 
 let __mv = null;
 let __mvText = null;
@@ -336,6 +350,7 @@ onMounted(() => {
   contactPerson.value = applications.value[props.editIndex][0].contactPerson;
   state.value = applications.value[props.editIndex][0].state;
   note.value = applications.value[props.editIndex][0].note;
+  start.value = applications.value[props.editIndex][0].start;
   __mv = applications.value[props.editIndex][0].mv;
   if (__mv == null) {
     __mvText = "Motivationsschreiben fehlt";
@@ -377,6 +392,7 @@ const saveToLocalStorage = () => {
   applications.value[props.editIndex][0].contactPerson = contactPerson.value;
   applications.value[props.editIndex][0].state = state.value;
   applications.value[props.editIndex][0].note = note.value;
+  applications.value[props.editIndex][0].start = start.value;
   localStorage.setItem("applications", JSON.stringify(applications.value));
 };
 const closeModal = () => {

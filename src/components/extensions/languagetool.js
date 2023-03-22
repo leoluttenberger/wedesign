@@ -127,10 +127,8 @@ const getMatchAndSetDecorations = async (doc, text, originalFrom) => {
     )}&${languageSettings}&enabledOnly=false`,
   };
   // Post option ouput in console
-  //console.log(postOptions)
   const ltRes = await (await fetch(apiUrl, postOptions)).json();
   // Post response output in console
-  //console.log(ltRes)
   const { matches } = ltRes;
   const decorations = [];
   for (const match of matches) {

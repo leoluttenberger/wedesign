@@ -52,17 +52,14 @@
 </template>
 <script setup lang="ts">
 import { ref, watch, onMounted } from "vue";
-import { AvatarInput } from "@/components";
-import CropModal from "@/components/Modals/CropModal.vue";
-import IconProfile from "@/components/IconProfile.vue";
+
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import defaultImageDataURL from "@/assets/images/defaultImageDataURL.txt";
-import CropperItem from "@/components/CropperItem.vue";
-import SwiperCard from "@/components/SwiperCard.vue";
-import BottomCard from "@/components/BottomCard.vue";
-import UserFormInput from "@/views/ModalViews/UserForm.vue";
-import UserFormDisplay from "@/views/ModalViews/UserDisplay.vue";
+
+import { AvatarInput } from "@/components/TipTapModals";
+import CropModal from "@/components/MenuModals/CropModal.vue";
+import CropperItem from "@/components/MenuModals/CropperItem.vue";
 
 import {
   canvasCoordinates,
@@ -70,7 +67,7 @@ import {
   imageObject,
   isDarkMode,
   slideDown,
-} from "@/store.js";
+} from "@/store/store.js";
 
 const showModal = ref(false);
 const MIME_TYPE = "image/png";

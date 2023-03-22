@@ -29,10 +29,20 @@
           <BottomCard v-model:open="bottomCardOpen">
             <SwiperCard :items="items">
               <button @click="closeBottomCard()" class="p-2">
-                <CloseIcon
-                  class="py-8 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
-                ></CloseIcon>
+                <div class="flex">
+                  <CloseIcon
+                    class="py-8 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
+                  ></CloseIcon>
+                  <div class="flex justify-center">
+                    <h1
+                      class="py-10 px-10 text-black dark:text-white font-Montserrat text-xl md:text-xxl font-bold"
+                    >
+                      {{ mapFormComponentsNames[props.slideIndex] }}
+                    </h1>
+                  </div>
+                </div>
               </button>
+
               <div class="flex flex-col items-left shadow-lg-up">
                 <component :is="mapFormComponents[props.slideIndex]" />
               </div>
@@ -45,29 +55,31 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, withDefaults, watch, onMounted } from "vue";
-import SwiperCard from "@/components/SwiperCard.vue";
-import BottomCard from "@/components/BottomCard.vue";
+import { ref, defineProps, watch, onMounted } from "vue";
 import AddIcon from "@/assets/icons/AddIcon.vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
 
-import ExperienceForm from "@/views/ModalViews/ExperienceForm.vue";
-import EducationForm from "@/views/ModalViews/EducationForm.vue";
+import SwiperCard from "@/components/MenuModals/SwiperCard.vue";
+import BottomCard from "@/components/MenuModals/BottomCard.vue";
 
-import ExperienceList from "@/views/ModalViews/ExperienceList.vue";
-import EducationList from "@/views/ModalViews/EducationList.vue";
+import ExperienceForm from "@/components/MainModals/ExperienceViews/ExperienceForm.vue";
+import EducationForm from "@/components/MainModals/EducationViews/EducationForm.vue";
 
-import ApplicationForm from "@/views/ModalViews/ApplicationForm.vue";
-import ApplicationList from "@/views/ModalViews/ApplicationList.vue";
+import ExperienceList from "@/components/MainModals/ExperienceViews/ExperienceList.vue";
+import EducationList from "@/components/MainModals/EducationViews/EducationList.vue";
 
-import KnowledgeForm from "@/views/ModalViews/KnowledgeForm.vue";
-import KnowledgeList from "@/views/ModalViews/KnowledgeList.vue";
+import ApplicationForm from "@/components/MainModals/ApplicationViews/ApplicationForm.vue";
+import ApplicationList from "@/components/MainModals/ApplicationViews/ApplicationList.vue";
 
-import UserForm from "@/views/ModalViews/UserForm.vue";
-import UserDisplay from "@/views/ModalViews/UserDisplay.vue";
+import KnowledgeForm from "@/components/MainModals/KnowledgeViews/KnowledgeForm.vue";
+import KnowledgeList from "@/components/MainModals/KnowledgeViews/KnowledgeList.vue";
 
-import { slideDown, sideBack, sideBackBack, isDarkMode } from "@/store.js";
-import { useEditor } from "@tiptap/vue-3";
+import {
+  slideDown,
+  sideBack,
+  sideBackBack,
+  isDarkMode,
+} from "@/store/store.js";
 
 interface SlideItem {
   id: string;
@@ -106,6 +118,12 @@ const mapListComponents = [
   ExperienceList,
   KnowledgeList,
   ApplicationList,
+];
+const mapFormComponentsNames = [
+  "Ausbildungen",
+  "Erfahrung",
+  "Kenntnisse",
+  "Bewerbung",
 ];
 
 onMounted(() => {

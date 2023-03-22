@@ -26,7 +26,6 @@ export async function convertXmlToPdf(xmlString: string): Promise<Blob> {
     }
   };
   const xmlData = await parser.parseStringPromise(xmlString);
-  console.log("Data root", xmlData["w:document"]);
   await parseXmlNode(xmlData["w:document"]);
 
   return doc.output("blob");

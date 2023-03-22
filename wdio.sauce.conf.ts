@@ -20,7 +20,7 @@ exports.config = {
       "sauce",
       {
         sauceConnect: true,
-        tunnelIdentifier: "Vue.js Integration tests",
+        tunnelIdentifier: "vue Integration tests",
       },
     ],
   ],

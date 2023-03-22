@@ -6,9 +6,9 @@
           <div v-for="(item, index) in appointments" :key="index">
             <div
               v-if="
-                item[0].appointmentFrom.slice(8, 10) >= new Date().getDate() &&
-                item[0].appointmentFrom.slice(5, 7) - 1 == currentMonth &&
-                isPicked == false
+                isPicked == false &&
+                (item[0].appointmentFrom.slice(5, 7) - 1 == currentMonth ||
+                  item[0].appointmentTo.slice(5, 7) - 1 == currentMonth)
               "
             >
               <div class="flex">
@@ -63,14 +63,18 @@
             </div>
             <div
               v-if="
-                currentDay >= item[0].appointmentFrom.slice(8, 10) &&
-                currentDay <= item[0].appointmentTo.slice(8, 10)
+                (isPicked == true &&
+                  currentDay == item[0].appointmentFrom.slice(8, 10) &&
+                  item[0].appointmentFrom.slice(5, 7) - 1 == currentMonth) ||
+                (isPicked == true &&
+                  currentDay == item[0].appointmentTo.slice(8, 10) &&
+                  item[0].appointmentTo.slice(5, 7) - 1 == currentMonth)
               "
             >
               <div class="flex">
                 <button @click="openBottomCard(index)" class="grow p-2">
                   <div
-                    class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border"
+                    class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border-2"
                     :class="
                       item[0].type == greenType
                         ? 'border-green-500'
@@ -174,6 +178,7 @@ import {
   isDarkMode,
   selectedDay,
   selectedMonth,
+  isMonthEvent,
 } from "@/store/store.js";
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
@@ -234,7 +239,7 @@ watch(slideDown, () => {
   }
 });
 watch(selectedDay, () => {
-  if (selectedDay.value != 0) {
+  if (selectedDay.value > 0) {
     isPicked.value = true;
     currentDay.value = selectedDay.value;
   } else {
@@ -242,7 +247,7 @@ watch(selectedDay, () => {
     currentDay.value = 0;
   }
 });
-watch(selectedMonth, () => {
+watch(isMonthEvent, () => {
   isPicked.value = false;
   currentMonth.value = selectedMonth.value;
 });

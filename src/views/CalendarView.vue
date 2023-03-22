@@ -18,9 +18,9 @@
         <div class="w-full px-2 pb-3">
           <button
             class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold w-full px-3 py-1 rounded-md"
-            @click="setToday"
+            @click="setMonth"
           >
-            Heute
+            Alle Termine im Monat
           </button>
         </div>
       </template></VCalendar
@@ -104,6 +104,7 @@ import {
   selectedMonth,
   addedDate,
   addedType,
+  isMonthEvent,
 } from "@/store/store.js";
 interface SlideItem {
   id: string;
@@ -254,7 +255,7 @@ let attributes = ref([
 const dayClicked = (date) => {
   pickedDate.value = date;
   selectedDay.value = date.day;
-  console.log("Day:", selectedDay.value);
+  isMonthEvent.value = false;
 };
 const openBottomCard = () => {
   bottomCardOpen.value = true;
@@ -265,11 +266,12 @@ const closeBottomCard = () => {
   slideDown.value = true;
 };
 
-const setToday = async () => {
-  const date = new Date();
-  await calendar.value.move(date);
+const setMonth = () => {
+  renderComponent.value = false;
+  isMonthEvent.value = false;
   pickedDate.value = null;
-  selectedDay.value = date.getUTCDate();
+  isMonthEvent.value = true;
+  renderComponent.value = true;
 };
 
 const onPageChanged = (page) => {

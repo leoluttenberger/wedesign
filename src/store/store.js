@@ -67,3 +67,6 @@ export const addedDate = reactive({
 export const addedType = reactive({
   value: "",
 });
+export const isMonthEvent = reactive({
+  value: null,
+});

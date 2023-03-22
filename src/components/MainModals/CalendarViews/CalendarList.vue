@@ -14,11 +14,13 @@
               <div class="flex">
                 <button @click="openBottomCard(index)" class="grow p-2">
                   <div
-                    class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border"
+                    class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border-2"
                     :class="
                       item[0].type == greenType
                         ? 'border-green-500'
-                        : 'border-orange-500'
+                        : item[0].type == redType
+                        ? 'border-red-500'
+                        : 'border-blue-500'
                     "
                   >
                     <div class="font-bold text-base">
@@ -72,7 +74,9 @@
                     :class="
                       item[0].type == greenType
                         ? 'border-green-500'
-                        : 'border-orange-500'
+                        : item[0].type == redType
+                        ? 'border-red-500'
+                        : 'border-blue-500'
                     "
                   >
                     <div class="font-bold text-base">
@@ -174,7 +178,7 @@ import {
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
 
-import CalendarEdit from "@/components/MainModals/CalendarEdit.vue";
+import CalendarEdit from "@/components/MainModals/CalendarViews/CalendarEdit.vue";
 import BottomCard from "@/components/MenuModals/BottomCard.vue";
 import SwiperCard from "@/components/MenuModals/SwiperCard.vue";
 
@@ -187,6 +191,7 @@ const currentDay = ref(0);
 const currentMonth = ref(selectedMonth.value);
 const isPicked = ref(false);
 const greenType = ref("Bewerbungsgespräch");
+const redType = ref("Deadline");
 
 interface SlideItem {
   id: string;

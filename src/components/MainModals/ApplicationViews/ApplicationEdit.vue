@@ -290,9 +290,9 @@ import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 
 import { slideDown, sideBack } from "@/store/store.js";
-import MotivationEdit from "@/components/MainModals/MotivationEdit.vue";
+import MotivationEdit from "@/components/MainModals/MotivationViews/MotivationEdit.vue";
 import MVEditModal from "@/components/MenuModals/MVEditModal.vue";
-import ApplicationPreview from "@/components/MainModals/AppilcationPreview.vue";
+import ApplicationPreview from "@/components/MainModals/ApplicationViews/AppilcationPreview.vue";
 
 const company = ref(null);
 const job = ref(null);
@@ -382,6 +382,7 @@ const saveToLocalStorage = () => {
   buttonDisabled = true;
   slideDown.value = true;
   const applications = ref(JSON.parse(localStorage.getItem("applications")));
+
   applications.value[props.editIndex][0].company = company.value;
   applications.value[props.editIndex][0].job = job.value;
   applications.value[props.editIndex][0].streetName = streetName.value;
@@ -393,6 +394,7 @@ const saveToLocalStorage = () => {
   applications.value[props.editIndex][0].state = state.value;
   applications.value[props.editIndex][0].note = note.value;
   applications.value[props.editIndex][0].start = start.value;
+
   localStorage.setItem("applications", JSON.stringify(applications.value));
 };
 const closeModal = () => {

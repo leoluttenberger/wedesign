@@ -94,7 +94,7 @@ import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import SwiperCard from "@/components/MenuModals/SwiperCard.vue";
 import BottomCard from "@/components/MenuModals/BottomCard.vue";
 
-import KnowledgeEdit from "@/components/MainModals/KnowledgeEdit.vue";
+import KnowledgeEdit from "@/components/MainModals/KnowledgeViews/KnowledgeEdit.vue";
 
 import { Container, Draggable } from "vue3-smooth-dnd";
 

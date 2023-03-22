@@ -39,8 +39,8 @@ import { slideDownUserInfo } from "@/store/store.js";
 import EditIcon from "@/assets/icons/EditIcon.vue";
 
 import MVEditModal from "@/components/MenuModals/MVEditModal.vue";
-import UserInfoEdit from "@/components/MainModals/UserInfoEdit.vue";
-import UserForm from "@/components/MainModals/UserForm.vue";
+import UserInfoEdit from "@/components/MainModals/UserInfoViews/UserInfoEdit.vue";
+import UserForm from "@/components/MainModals/UserInfoViews/UserForm.vue";
 import ProfileView from "@/views/ProfileView.vue";
 
 const applications = ref(JSON.parse(localStorage.getItem("applications")));

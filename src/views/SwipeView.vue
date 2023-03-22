@@ -62,17 +62,17 @@ import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import SwiperCard from "@/components/MenuModals/SwiperCard.vue";
 import BottomCard from "@/components/MenuModals/BottomCard.vue";
 
-import ExperienceForm from "@/components/MainModals/ExperienceForm.vue";
-import EducationForm from "@/components/MainModals/EducationForm.vue";
+import ExperienceForm from "@/components/MainModals/ExperienceViews/ExperienceForm.vue";
+import EducationForm from "@/components/MainModals/EducationViews/EducationForm.vue";
 
-import ExperienceList from "@/components/MainModals/ExperienceList.vue";
-import EducationList from "@/components/MainModals/EducationList.vue";
+import ExperienceList from "@/components/MainModals/ExperienceViews/ExperienceList.vue";
+import EducationList from "@/components/MainModals/EducationViews/EducationList.vue";
 
-import ApplicationForm from "@/components/MainModals/ApplicationForm.vue";
-import ApplicationList from "@/components/MainModals/ApplicationList.vue";
+import ApplicationForm from "@/components/MainModals/ApplicationViews/ApplicationForm.vue";
+import ApplicationList from "@/components/MainModals/ApplicationViews/ApplicationList.vue";
 
-import KnowledgeForm from "@/components/MainModals/KnowledgeForm.vue";
-import KnowledgeList from "@/components/MainModals/KnowledgeList.vue";
+import KnowledgeForm from "@/components/MainModals/KnowledgeViews/KnowledgeForm.vue";
+import KnowledgeList from "@/components/MainModals/KnowledgeViews/KnowledgeList.vue";
 
 import {
   slideDown,

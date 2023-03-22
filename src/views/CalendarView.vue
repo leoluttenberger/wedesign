@@ -95,8 +95,8 @@ import CloseIcon from "@/assets/icons/CloseIcon.vue";
 
 import BottomCard from "@/components/MenuModals/BottomCard.vue";
 
-import CalendarForm from "@/components/MainModals/CalendarForm.vue";
-import CalendarList from "@/components/MainModals/CalendarList.vue";
+import CalendarForm from "@/components/MainModals/CalendarViews/CalendarForm.vue";
+import CalendarList from "@/components/MainModals/CalendarViews/CalendarList.vue";
 
 import {
   slideDown,
@@ -177,7 +177,7 @@ if (localStorage.getItem("appointments")) {
     } else if (appointments.value[i][0].type == "Deadline") {
       addTodo("red", dates, todos);
     } else {
-      addTodo("orange", dates, todos);
+      addTodo("blau", dates, todos);
     }
   }
 } else {
@@ -223,13 +223,15 @@ watch(bottomCardOpen, () => {
 
       if (addedType.value == "Bewerbungsgespräch") {
         addTodo("green", dates, todos);
+      } else if (addedType.value == "Deadline") {
+        addTodo("red", dates, todos);
       } else {
-        addTodo("blue", dates, todos);
+        addTodo("blau", dates, todos);
       }
       attributes.value = [
         {
           key: "today",
-          dot: true,
+          highlight: true,
           dates: new Date(),
         },
         ...todos,
@@ -243,7 +245,7 @@ watch(bottomCardOpen, () => {
 let attributes = ref([
   {
     key: "today",
-    dot: true,
+    highlight: true,
     dates: new Date(),
   },
   ...todos,

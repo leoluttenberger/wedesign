@@ -104,7 +104,7 @@
 import { ref, watch } from "vue";
 import { slideDown } from "@/store/store.js";
 
-import ApplicationEdit from "@/components/MainModals/ApplicationEdit.vue";
+import ApplicationEdit from "@/components/MainModals/ApplicationViews/ApplicationEdit.vue";
 import MVEditModal from "@/components/MenuModals/MVEditModal.vue";
 
 import SortIcon from "@/assets/icons/SortIcon.vue";

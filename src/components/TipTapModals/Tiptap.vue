@@ -32,7 +32,7 @@
       </section>
     </section>
   </bubble-menu>
-  <FormKit type="button" label="Save" @click="onClickedSave"></FormKit>
+  <FormKit type="button" label="Speichern" @click="onClickedSave"></FormKit>
 </template>
 
 <script setup lang="ts">
@@ -59,6 +59,7 @@ import {
   currentTextContribution,
   currentEnding,
   currentSalutationEnding,
+  sideBackBack,
 } from "@/store/store.js";
 
 // Prosemirror-view hack to prevent editor TypeError: Cannot read property 'matchesNode'
@@ -186,8 +187,10 @@ const onClickedSave = () => {
       currentSalutationBeginning.value = comment_text;
       break;
   }
+  sideBackBack.value = false;
 };
 onMounted(() => {
+  sideBackBack.value = true;
   let editText = "";
   let mvIndexToDisplay = 0;
   const motivations = ref(JSON.parse(localStorage.getItem("motivations")));

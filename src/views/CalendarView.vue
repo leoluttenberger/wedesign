@@ -5,25 +5,25 @@
     <div class="flex justify-center p-2 font-bold">Erinnerungen</div>
   </section>
   <div class="flex pt-12 px-2" v-if="renderComponent">
-    <v-calendar
+    <VCalendar
+      expanded
       ref="calendar"
       :is-dark="theme"
-      is-expanded
       :attributes="attributes"
       :locale="locale"
       @dayclick="dayClicked"
-      @change-page="onPageChange"
+      @update:pages="onPageChanged"
     >
       <template #footer>
         <div class="w-full px-2 pb-3">
           <button
             class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold w-full px-3 py-1 rounded-md"
-            @click="moveToAll"
+            @click="setToday"
           >
-            Termine im Monat
+            Heute
           </button>
         </div>
-      </template></v-calendar
+      </template></VCalendar
     >
   </div>
   <div class="flex px-2">
@@ -118,7 +118,6 @@ const bottomCardOpen = ref(false);
 const renderComponent = ref(true);
 const pickedDate = ref(null);
 const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
-const month = ref(0);
 
 interface Highlight {
   start: { fillMode: string; color: string };
@@ -250,9 +249,10 @@ let attributes = ref([
   ...todos,
 ]);
 
-const dayClicked = (day) => {
-  pickedDate.value = day;
-  selectedDay.value = day.day;
+const dayClicked = (date) => {
+  pickedDate.value = date;
+  selectedDay.value = date.day;
+  console.log("Day:", selectedDay.value);
 };
 const openBottomCard = () => {
   bottomCardOpen.value = true;
@@ -262,14 +262,15 @@ const closeBottomCard = () => {
   bottomCardOpen.value = false;
   slideDown.value = true;
 };
-const moveToAll = () => {
-  selectedMonth.value = calendar.value.getPageDays()[8].id.slice(5, 7) - 1;
-  renderComponent.value = false;
-  renderComponent.value = true;
+
+const setToday = async () => {
+  const date = new Date();
+  await calendar.value.move(date);
   pickedDate.value = null;
-  selectedDay.value = 0;
+  selectedDay.value = date.getUTCDate();
 };
-const onPageChange = (pageDate: Date) => {
-  console.log(`Changed to page: ${pageDate}`);
+
+const onPageChanged = (page) => {
+  selectedMonth.value = page[0].id.slice(5, 7) - 1;
 };
 </script>

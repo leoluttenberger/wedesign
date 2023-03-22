@@ -89,20 +89,22 @@
 </template>
 <script setup lang="ts">
 import { ref, watch, onMounted } from "vue";
-import BellIcon from "../assets/icons/BellIcon.vue";
+import BellIcon from "@/assets/icons/BellIcon.vue";
 import AddIcon from "@/assets/icons/AddIcon.vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
-import BottomCard from "@/components/BottomCard.vue";
-import CalendarForm from "@/views/ModalViews/CalendarForm.vue";
-import CalendarList from "@/views/ModalViews/CalendarList.vue";
-import CustomCalendar from "@/components/CustomCalendar.vue";
+
+import BottomCard from "@/components/MenuModals/BottomCard.vue";
+
+import CalendarForm from "@/components/MainModals/CalendarForm.vue";
+import CalendarList from "@/components/MainModals/CalendarList.vue";
+
 import {
   slideDown,
   selectedDay,
   selectedMonth,
   addedDate,
   addedType,
-} from "@/store.js";
+} from "@/store/store.js";
 interface SlideItem {
   id: string;
   index: number;
@@ -203,8 +205,6 @@ if (JSON.parse(localStorage.getItem("theme")) == "dark") {
 
 onMounted(() => {
   selectedMonth.value = new Date().getMonth();
-  console.log("Month", selectedMonth.value);
-  console.log("Month", month.value);
 });
 
 watch(bottomCardOpen, () => {

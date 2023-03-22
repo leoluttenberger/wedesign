@@ -55,29 +55,31 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, withDefaults, watch, onMounted } from "vue";
-import SwiperCard from "@/components/SwiperCard.vue";
-import BottomCard from "@/components/BottomCard.vue";
+import { ref, defineProps, watch, onMounted } from "vue";
 import AddIcon from "@/assets/icons/AddIcon.vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
 
-import ExperienceForm from "@/views/ModalViews/ExperienceForm.vue";
-import EducationForm from "@/views/ModalViews/EducationForm.vue";
+import SwiperCard from "@/components/MenuModals/SwiperCard.vue";
+import BottomCard from "@/components/MenuModals/BottomCard.vue";
 
-import ExperienceList from "@/views/ModalViews/ExperienceList.vue";
-import EducationList from "@/views/ModalViews/EducationList.vue";
+import ExperienceForm from "@/components/MainModals/ExperienceForm.vue";
+import EducationForm from "@/components/MainModals/EducationForm.vue";
 
-import ApplicationForm from "@/views/ModalViews/ApplicationForm.vue";
-import ApplicationList from "@/views/ModalViews/ApplicationList.vue";
+import ExperienceList from "@/components/MainModals/ExperienceList.vue";
+import EducationList from "@/components/MainModals/EducationList.vue";
 
-import KnowledgeForm from "@/views/ModalViews/KnowledgeForm.vue";
-import KnowledgeList from "@/views/ModalViews/KnowledgeList.vue";
+import ApplicationForm from "@/components/MainModals/ApplicationForm.vue";
+import ApplicationList from "@/components/MainModals/ApplicationList.vue";
 
-import UserForm from "@/views/ModalViews/UserForm.vue";
-import UserDisplay from "@/views/ModalViews/UserDisplay.vue";
+import KnowledgeForm from "@/components/MainModals/KnowledgeForm.vue";
+import KnowledgeList from "@/components/MainModals/KnowledgeList.vue";
 
-import { slideDown, sideBack, sideBackBack, isDarkMode } from "@/store.js";
-import { useEditor } from "@tiptap/vue-3";
+import {
+  slideDown,
+  sideBack,
+  sideBackBack,
+  isDarkMode,
+} from "@/store/store.js";
 
 interface SlideItem {
   id: string;

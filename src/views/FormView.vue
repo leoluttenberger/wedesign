@@ -80,7 +80,7 @@
 import { ref } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import SwipeView from "./SwipeView.vue";
-import UserInfoDisplay from "./ModalViews/UserInfoDisplay.vue";
+import UserInfoDisplay from "@/components/MainModals/UserInfoDisplay.vue";
 import "swiper/css";
 import "swiper/css/virtual";
 

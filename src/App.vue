@@ -114,14 +114,14 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
-import HomeIcon from "./assets/icons/HomeIcon.vue";
-import UserIcon from "./assets/icons/UserIcon.vue";
-import DocumentsIcon from "./assets/icons/DocumentsIcon.vue";
-import NotificationsIcon from "./assets/icons/NotificationsIcon.vue";
-import ToolIcon from "./assets/icons/ToolIcon.vue";
-import CircleIcon from "./assets/icons/CircleIcon.vue";
+import { isDarkMode } from "@/store/store.js";
 
-import { isDarkMode } from "./store.js";
+import HomeIcon from "@/assets/icons/HomeIcon.vue";
+import UserIcon from "@/assets/icons/UserIcon.vue";
+import DocumentsIcon from "@/assets/icons/DocumentsIcon.vue";
+import NotificationsIcon from "@/assets/icons/NotificationsIcon.vue";
+import ToolIcon from "@/assets/icons/ToolIcon.vue";
+
 const router = useRouter();
 const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")));
 let activeButton1 = ref(true);

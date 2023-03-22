@@ -5,35 +5,23 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      component: () => import("../views/HomeView.vue"),
-    },
-    {
-      path: "/register",
-      component: () => import("../views/RegisterView.vue"),
-    },
-    {
-      path: "/feed",
-      component: () => import("../views/FeedView.vue"),
+      component: () => import("@/views/HomeView.vue"),
     },
     {
       path: "/form",
-      component: () => import("../views/FormView.vue"),
-    },
-    {
-      path: "/chat",
-      component: () => import("../views/ChatView.vue"),
+      component: () => import("@/views/FormView.vue"),
     },
     {
       path: "/documents",
-      component: () => import("../views/DocumentsView.vue"),
+      component: () => import("@/views/DocumentsView.vue"),
     },
     {
       path: "/calendar",
-      component: () => import("../views/CalendarView.vue"),
+      component: () => import("@/views/CalendarView.vue"),
     },
     {
       path: "/tools",
-      component: () => import("../views/ToolsView.vue"),
+      component: () => import("@/views/ToolsView.vue"),
     },
   ],
 });

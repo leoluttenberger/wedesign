@@ -287,12 +287,10 @@ const getMatchAndSetDecorations = async (
     )}&${languageSettings}&enabledOnly=false`,
   };
   // Post option ouput in console
-  //console.log(postOptions)
   const ltRes: LanguageToolResponse = await (
     await fetch(apiUrl, postOptions)
   ).json();
   // Post response output in console
-  //console.log(ltRes)
   const { matches } = ltRes;
 
   const decorations: Decoration[] = [];

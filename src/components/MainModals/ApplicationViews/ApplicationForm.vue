@@ -99,7 +99,14 @@
             <p>Start</p>
           </div>
           <div class="px-2">
-            <FormKit type="date" v-model="start" placeholder="Auswählen" />
+            <FormKit
+              type="datetime-local"
+              v-model="start"
+              validation="required"
+              value=""
+              validation-visibility="live"
+              placeholder="Auswählen"
+            />
           </div>
         </div>
       </div>
@@ -111,7 +118,14 @@
             Deadline:
           </p>
           <div class="px-2">
-            <FormKit type="date" v-model="deadline" placeholder="Auswählen" />
+            <FormKit
+              type="datetime-local"
+              v-model="deadline"
+              :value="start"
+              validation="required|date_after"
+              validation-visibility="live"
+              placeholder="Auswählen"
+            />
           </div>
         </div>
       </div>
@@ -193,22 +207,16 @@ const saveToLocalStorage = () => {
       streetNumber: streetNumber.value,
       districtNumber: districtNumber.value,
       city: city.value,
-      deadline: deadline.value,
       contactPerson: contactPerson.value,
       state: __state,
       mv: __mv,
       note: note.value,
+      start: start.value,
+      deadline: deadline.value,
     },
   ];
-  const appointment = [
-    {
-      type: "Deadline",
-      title: company.value,
-      appointmentFrom: start.value,
-      appointmentTo: deadline.value,
-      note: note.value,
-    },
-  ];
+  let length = 0;
+
   if (company.value) {
     if (buttonDisabled == false) {
       buttonDisabled = true;
@@ -216,11 +224,25 @@ const saveToLocalStorage = () => {
         const currentApplications = JSON.parse(
           localStorage.getItem("applications")
         );
+
         const newData = [...currentApplications, application];
+        length = currentApplications.length + 1;
+        console.log("length", length);
         localStorage.setItem("applications", JSON.stringify(newData));
       } else {
         localStorage.setItem("applications", JSON.stringify([application]));
       }
+      const appointment = [
+        {
+          type: "Deadline",
+          title: company.value,
+          appointmentFrom: start.value,
+          appointmentTo: deadline.value,
+          note: note.value,
+          deadlineId: length,
+        },
+      ];
+
       if (localStorage.getItem("appointments")) {
         const currentappointments = JSON.parse(
           localStorage.getItem("appointments")

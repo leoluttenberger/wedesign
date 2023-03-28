@@ -64,7 +64,7 @@ import {
   addedDate,
   addedType,
   isMonthEvent,
-  deletedDate,
+  changedDate,
 } from "@/store/store.js";
 
 let theme = ref(false);
@@ -214,8 +214,8 @@ watch(slideDown, () => {
   }
 });
 
-watch(deletedDate, () => {
-  if (deletedDate.value == true) {
+watch(changedDate, () => {
+  if (changedDate.value == true) {
     appointments.value = JSON.parse(localStorage.getItem("appointments"));
     clearTodo();
     loadAppointments();

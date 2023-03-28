@@ -64,7 +64,7 @@ export const selectedMonth = reactive({
 export const addedDate = reactive({
   value: "",
 });
-export const deletedDate = reactive({
+export const changedDate = reactive({
   value: true,
 });
 export const addedType = reactive({

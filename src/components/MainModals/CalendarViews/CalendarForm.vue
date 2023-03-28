@@ -48,8 +48,9 @@
             type="datetime-local"
             v-model="appointmentFrom"
             validation="required"
-            value="2020-03-13T18:22"
+            value=""
             validation-visibility="live"
+            placeholder="Auswählen"
           />
         </div>
       </div>
@@ -68,6 +69,7 @@
             :value="appointmentFrom"
             validation="required|date_after"
             validation-visibility="live"
+            placeholder="Auswählen"
           />
         </div>
       </div>
@@ -143,6 +145,7 @@ const saveToLocalStorage = () => {
       appointmentFrom: appointmentFrom.value,
       appointmentTo: appointmentTo.value,
       note: note.value,
+      deadlineId: 0,
     },
   ];
   if (appointmentFrom.value != null && appointmentTo.value != null) {

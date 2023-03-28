@@ -125,7 +125,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, defineProps, withDefaults } from "vue";
-import { slideDown, deletedDate } from "@/store/store.js";
+import { slideDown, changedDate } from "@/store/store.js";
 const type = ref(null);
 const title = ref("");
 const appointmentFrom = ref(null);
@@ -144,7 +144,7 @@ const props = withDefaults(
 
 onMounted(() => {
   buttonDisabled = false;
-  deletedDate.value = false;
+  changedDate.value = false;
   type.value = appointments.value[props.editIndex][0].type;
   title.value = appointments.value[props.editIndex][0].title;
   appointmentFrom.value =
@@ -159,6 +159,10 @@ const saveToLocalStorage = () => {
     buttonDisabled = true;
     if (localStorage.getItem("appointments")) {
       console.log("Update Appointments");
+      const applications = ref(
+        JSON.parse(localStorage.getItem("applications"))
+      );
+
       appointments.value[props.editIndex][0].type = type.value;
       appointments.value[props.editIndex][0].titel = title.value;
       appointments.value[props.editIndex][0].appointmentFrom =
@@ -168,6 +172,19 @@ const saveToLocalStorage = () => {
 
       appointments.value[props.editIndex][0].address = address.value;
       appointments.value[props.editIndex][0].note = note.value;
+
+      if (appointments.value[props.editIndex][0].deadlineId > 0) {
+        applications.value[
+          appointments.value[props.editIndex][0].deadlineId - 1
+        ][0].start = appointmentFrom.value;
+        applications.value[
+          appointments.value[props.editIndex][0].deadlineId - 1
+        ][0].deadline = appointmentTo.value;
+        localStorage.setItem(
+          "applications",
+          JSON.stringify(applications.value)
+        );
+      }
 
       localStorage.setItem("appointments", JSON.stringify(appointments.value));
     } else {
@@ -180,14 +197,28 @@ const saveToLocalStorage = () => {
       localStorage.setItem("appointments", JSON.stringify([appointment]));
     }
     slideDown.value = true;
+    changedDate.value = true;
   }
 };
 const removeFromLocalStorage = () => {
   if (buttonDisabled == false) {
+    const applications = ref(JSON.parse(localStorage.getItem("applications")));
+    for (let i = 0; i < applications.value.length; i++) {
+      if (
+        props.editIndex + 1 ==
+          appointments.value[props.editIndex][0].deadlineId &&
+        appointments.value[props.editIndex][0].deadlineId != 0
+      ) {
+        applications.value[i][0].deadline = null;
+        applications.value[i][0].start = null;
+      }
+    }
     appointments.value.splice(props.editIndex, 1);
     localStorage.setItem("appointments", JSON.stringify(appointments.value));
+    localStorage.setItem("applications", JSON.stringify(applications.value));
+
     slideDown.value = true;
-    deletedDate.value = true;
+    changedDate.value = true;
   }
 };
 </script>

@@ -126,7 +126,13 @@
                 Start:
               </p>
               <div class="px-2">
-                <FormKit type="date" v-model="start" placeholder="Auswählen" />
+                <FormKit
+                  type="datetime-local"
+                  v-model="start"
+                  validation="required"
+                  validation-visibility="live"
+                  placeholder="Auswählen"
+                />
               </div>
             </div>
           </div>
@@ -139,9 +145,11 @@
               </p>
               <div class="px-2">
                 <FormKit
-                  type="date"
+                  type="datetime-local"
                   v-model="deadline"
-                  placeholder="Auswählen"
+                  :validation="[['date_after', start]]"
+                  validation-visibility="live"
+                  :value="deadline"
                 />
               </div>
             </div>
@@ -369,6 +377,23 @@ const removeFromLocalStorage = () => {
   if (buttonDisabled == false) {
     buttonDisabled = true;
     const applications = ref(JSON.parse(localStorage.getItem("applications")));
+    const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
+    let sliceIndex = 0;
+    let count = 0;
+    for (let i = 0; i < appointments.value.length; i++) {
+      if (
+        props.editIndex + 1 == appointments.value[i][0].deadlineId &&
+        appointments.value[i][0].deadlineId != 0
+      ) {
+        sliceIndex = i;
+        count++;
+      }
+    }
+    if (count != 0) {
+      appointments.value.splice(sliceIndex, 1);
+      localStorage.setItem("appointments", JSON.stringify(appointments.value));
+      console.log("Removed Appointment: ", count);
+    }
     applications.value.splice(props.editIndex, 1);
     localStorage.setItem("applications", JSON.stringify(applications.value));
     slideDown.value = true;
@@ -382,6 +407,7 @@ const saveToLocalStorage = () => {
   buttonDisabled = true;
   slideDown.value = true;
   const applications = ref(JSON.parse(localStorage.getItem("applications")));
+  const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
 
   applications.value[props.editIndex][0].company = company.value;
   applications.value[props.editIndex][0].job = job.value;
@@ -389,11 +415,39 @@ const saveToLocalStorage = () => {
   applications.value[props.editIndex][0].streetNumber = streetNumber.value;
   applications.value[props.editIndex][0].districtNumber = districtNumber.value;
   applications.value[props.editIndex][0].city = city.value;
-  applications.value[props.editIndex][0].deadline = deadline.value;
   applications.value[props.editIndex][0].contactPerson = contactPerson.value;
   applications.value[props.editIndex][0].state = state.value;
   applications.value[props.editIndex][0].note = note.value;
   applications.value[props.editIndex][0].start = start.value;
+  applications.value[props.editIndex][0].deadline = deadline.value;
+
+  console.log(props.editIndex);
+  const appointment = [
+    {
+      type: "Deadline",
+      title: company.value,
+      appointmentFrom: start.value,
+      appointmentTo: deadline.value,
+      note: note.value,
+      deadlineId: props.editIndex,
+    },
+  ];
+  if (appointments.value.length > 0) {
+    for (let i = 0; i < appointments.value.length; i++) {
+      if (
+        props.editIndex + 1 == appointments.value[i][0].deadlineId &&
+        appointments.value[i][0].deadlineId != 0
+      ) {
+        appointments.value[i][0].appointmentFrom = start.value;
+        appointments.value[i][0].appointmentTo = deadline.value;
+      }
+    }
+    localStorage.setItem("appointments", JSON.stringify(appointments.value));
+    console.log("Updated Appointment");
+  } else {
+    localStorage.setItem("appointments", JSON.stringify([appointment]));
+    console.log("Added Appointment");
+  }
 
   localStorage.setItem("applications", JSON.stringify(applications.value));
 };

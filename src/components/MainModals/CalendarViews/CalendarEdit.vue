@@ -125,7 +125,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, defineProps, withDefaults } from "vue";
-import { slideDown } from "@/store/store.js";
+import { slideDown, deletedDate } from "@/store/store.js";
 const type = ref(null);
 const title = ref("");
 const appointmentFrom = ref(null);
@@ -144,6 +144,7 @@ const props = withDefaults(
 
 onMounted(() => {
   buttonDisabled = false;
+  deletedDate.value = false;
   type.value = appointments.value[props.editIndex][0].type;
   title.value = appointments.value[props.editIndex][0].title;
   appointmentFrom.value =
@@ -186,6 +187,7 @@ const removeFromLocalStorage = () => {
     appointments.value.splice(props.editIndex, 1);
     localStorage.setItem("appointments", JSON.stringify(appointments.value));
     slideDown.value = true;
+    deletedDate.value = true;
   }
 };
 </script>

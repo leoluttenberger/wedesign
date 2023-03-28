@@ -19,7 +19,7 @@
     v-if="props.slideIndex == 4"
     class="z-0 overflow-auto overflow-scroll w-screen h-screen h-1/2"
   >
-    <component :is="mapListComponents[slideIndex]" :key="renderComponent" />
+    <component :is="mapListComponents[4]" :key="renderComponent" />
     <div class="flex justify-center p-4">
       <button
         @click="openBottomCard()"

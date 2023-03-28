@@ -64,6 +64,7 @@ import {
   addedDate,
   addedType,
   isMonthEvent,
+  deletedDate,
 } from "@/store/store.js";
 
 let theme = ref(false);
@@ -112,48 +113,57 @@ const addTodo = (color: string | undefined, dates: Dates, todos: Todo[]) => {
     dates: dates,
   });
 };
-// Add a new todo with a new date and highlight
-if (localStorage.getItem("appointments")) {
-  for (let i = 0; i < appointments.value.length; i++) {
-    if (appointments.value[i][0].appointmentFrom) {
-      const yearStart = appointments.value[i][0].appointmentFrom.slice(0, 4)
-        ? appointments.value[i][0].appointmentFrom.slice(0, 4)
-        : 0;
-      const monthStart = appointments.value[i][0].appointmentFrom.slice(5, 7)
-        ? appointments.value[i][0].appointmentFrom.slice(5, 7) - 1
-        : 0;
-      const dayStart = appointments.value[i][0].appointmentFrom.slice(8, 10)
-        ? appointments.value[i][0].appointmentFrom.slice(8, 10)
-        : 0;
-      const yearEnd = appointments.value[i][0].appointmentTo.slice(0, 4)
-        ? appointments.value[i][0].appointmentTo.slice(0, 4)
-        : 0;
-      const monthEnd = appointments.value[i][0].appointmentTo.slice(5, 7)
-        ? appointments.value[i][0].appointmentTo.slice(5, 7) - 1
-        : 0;
-      const dayEnd = appointments.value[i][0].appointmentTo.slice(8, 10)
-        ? appointments.value[i][0].appointmentTo.slice(8, 10)
-        : 0;
-      const dates: Dates = {
-        start: new Date(yearStart, monthStart, dayStart),
-        end: new Date(yearEnd, monthEnd, dayEnd),
-      };
-      if (appointments.value[i][0].type == "Bewerbungsgespräch") {
-        addTodo("green", dates, todos);
-      } else if (appointments.value[i][0].type == "Deadline") {
-        addTodo("red", dates, todos);
-      } else {
-        addTodo("blau", dates, todos);
+const clearTodo = () => {
+  for (let i = 0; i < todos.length; i++) {
+    todos.pop();
+  }
+};
+const loadAppointments = () => {
+  // Add a new todo with a new date and highlight
+  if (localStorage.getItem("appointments")) {
+    for (let i = 0; i < appointments.value.length; i++) {
+      if (appointments.value[i][0].appointmentFrom) {
+        const yearStart = appointments.value[i][0].appointmentFrom.slice(0, 4)
+          ? appointments.value[i][0].appointmentFrom.slice(0, 4)
+          : 0;
+        const monthStart = appointments.value[i][0].appointmentFrom.slice(5, 7)
+          ? appointments.value[i][0].appointmentFrom.slice(5, 7) - 1
+          : 0;
+        const dayStart = appointments.value[i][0].appointmentFrom.slice(8, 10)
+          ? appointments.value[i][0].appointmentFrom.slice(8, 10)
+          : 0;
+        const yearEnd = appointments.value[i][0].appointmentTo.slice(0, 4)
+          ? appointments.value[i][0].appointmentTo.slice(0, 4)
+          : 0;
+        const monthEnd = appointments.value[i][0].appointmentTo.slice(5, 7)
+          ? appointments.value[i][0].appointmentTo.slice(5, 7) - 1
+          : 0;
+        const dayEnd = appointments.value[i][0].appointmentTo.slice(8, 10)
+          ? appointments.value[i][0].appointmentTo.slice(8, 10)
+          : 0;
+        const dates: Dates = {
+          start: new Date(yearStart, monthStart, dayStart),
+          end: new Date(yearEnd, monthEnd, dayEnd),
+        };
+        if (appointments.value[i][0].type == "Bewerbungsgespräch") {
+          addTodo("green", dates, todos);
+        } else if (appointments.value[i][0].type == "Deadline") {
+          addTodo("red", dates, todos);
+        } else {
+          addTodo("blau", dates, todos);
+        }
       }
     }
+  } else {
+    const dates: Dates = {
+      start: new Date(),
+      end: new Date(),
+    };
+    addTodo("blue", dates, todos);
   }
-} else {
-  const dates: Dates = {
-    start: new Date(),
-    end: new Date(),
-  };
-  addTodo("blue", dates, todos);
-}
+};
+
+loadAppointments();
 
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   theme.value = true;
@@ -201,6 +211,26 @@ watch(slideDown, () => {
     console.log("Date in Calendar added!");
   } else {
     renderComponent.value = false;
+  }
+});
+
+watch(deletedDate, () => {
+  if (deletedDate.value == true) {
+    appointments.value = JSON.parse(localStorage.getItem("appointments"));
+    clearTodo();
+    loadAppointments();
+    attributes.value = [];
+    attributes.value = [
+      {
+        key: "today",
+        highlight: true,
+        dates: new Date(),
+      },
+      ...todos,
+    ];
+    renderComponent.value = false;
+    renderComponent.value = true;
+    console.log("Deleted Date in Calendar");
   }
 });
 

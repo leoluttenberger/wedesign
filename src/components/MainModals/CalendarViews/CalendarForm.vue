@@ -47,7 +47,9 @@
           <FormKit
             type="datetime-local"
             v-model="appointmentFrom"
+            validation="required"
             value="2020-03-13T18:22"
+            validation-visibility="live"
           />
         </div>
       </div>
@@ -63,7 +65,8 @@
           <FormKit
             type="datetime-local"
             v-model="appointmentTo"
-            :validation="[['date_after', appointmentFrom]]"
+            :value="appointmentFrom"
+            validation="required|date_after"
             validation-visibility="live"
           />
         </div>
@@ -129,6 +132,7 @@ let buttonDisabled = false;
 
 onMounted(() => {
   buttonDisabled = false;
+  slideDown.value = false;
 });
 
 const saveToLocalStorage = () => {
@@ -141,20 +145,27 @@ const saveToLocalStorage = () => {
       note: note.value,
     },
   ];
-  if (buttonDisabled == false) {
-    buttonDisabled = true;
-    if (localStorage.getItem("appointments")) {
-      const currentappointments = JSON.parse(
-        localStorage.getItem("appointments")
-      );
-      const newData = [...currentappointments, appointment];
-      localStorage.setItem("appointments", JSON.stringify(newData));
-    } else {
-      localStorage.setItem("appointments", JSON.stringify([appointment]));
+  if (appointmentFrom.value != null && appointmentTo.value != null) {
+    if (buttonDisabled == false) {
+      buttonDisabled = true;
+      if (localStorage.getItem("appointments")) {
+        const currentappointments = JSON.parse(
+          localStorage.getItem("appointments")
+        );
+        const newData = [...currentappointments, appointment];
+        localStorage.setItem("appointments", JSON.stringify(newData));
+      } else {
+        localStorage.setItem("appointments", JSON.stringify([appointment]));
+      }
+      addedDate.value = appointmentFrom.value;
+      addedType.value = type.value;
+      slideDown.value = true;
+      console.log("Date saved!");
     }
-    slideDown.value = true;
-    addedDate.value = appointmentFrom.value;
-    addedType.value = type.value;
+  } else {
+    console.log("Date is not set!");
+    console.log(appointmentFrom.value);
+    console.log(appointmentTo.value);
   }
 };
 </script>

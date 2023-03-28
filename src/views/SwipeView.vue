@@ -1,5 +1,24 @@
 <template>
-  <section class="z-0 overflow-auto overflow-scroll w-screen h-screen py-20">
+  <section
+    v-if="props.slideIndex != 4"
+    class="z-0 overflow-auto overflow-scroll w-screen h-screen py-20"
+  >
+    <component :is="mapListComponents[slideIndex]" :key="renderComponent" />
+    <div class="flex justify-center p-4">
+      <button
+        @click="openBottomCard()"
+        class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
+      >
+        <AddIcon
+          class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
+        ></AddIcon>
+      </button>
+    </div>
+  </section>
+  <section
+    v-if="props.slideIndex == 4"
+    class="z-0 overflow-auto overflow-scroll w-screen h-screen h-1/2"
+  >
     <component :is="mapListComponents[slideIndex]" :key="renderComponent" />
     <div class="flex justify-center p-4">
       <button
@@ -74,6 +93,9 @@ import ApplicationList from "@/components/MainModals/ApplicationViews/Applicatio
 import KnowledgeForm from "@/components/MainModals/KnowledgeViews/KnowledgeForm.vue";
 import KnowledgeList from "@/components/MainModals/KnowledgeViews/KnowledgeList.vue";
 
+import CalendarForm from "@/components/MainModals/CalendarViews/CalendarForm.vue";
+import CalendarList from "@/components/MainModals/CalendarViews/CalendarList.vue";
+
 import {
   slideDown,
   sideBack,
@@ -112,18 +134,21 @@ const mapFormComponents = [
   ExperienceForm,
   KnowledgeForm,
   ApplicationForm,
+  CalendarForm,
 ];
 const mapListComponents = [
   EducationList,
   ExperienceList,
   KnowledgeList,
   ApplicationList,
+  CalendarList,
 ];
 const mapFormComponentsNames = [
   "Ausbildungen",
   "Erfahrung",
   "Kenntnisse",
   "Bewerbung",
+  "Erinnerungen",
 ];
 
 onMounted(() => {

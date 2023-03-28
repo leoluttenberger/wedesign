@@ -43,60 +43,19 @@
       <h3>{{ pickedDate.date.toDateString() }}</h3>
     </div>
   </div>
-  <section class="z-0 overflow-auto overflow-scroll w-screen h-1/2">
-    <div>
-      <component :is="CalendarList" :key="renderComponent" />
-    </div>
-    <div class="flex justify-end p-2 pb-20">
-      <button
-        @click="openBottomCard()"
-        class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
-      >
-        <AddIcon
-          class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
-        ></AddIcon>
-      </button>
-    </div>
-  </section>
-  <div>
-    <div
-      v-if="bottomCardOpen"
-      class="fixed z-10 inset-0 bg-black bg-opacity-10"
-    >
-      <BottomCard v-model:open="bottomCardOpen">
-        <SwiperCard :items="items">
-          <button @click="closeBottomCard()" class="p-2">
-            <div class="flex">
-              <CloseIcon
-                class="py-8 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
-              ></CloseIcon>
-              <div class="flex justify-center">
-                <h1
-                  class="py-10 px-10 text-black dark:text-white font-Montserrat text-xl md:text-xxl font-bold"
-                >
-                  Erinnerungen
-                </h1>
-              </div>
-            </div>
-          </button>
-          <div class="flex flex-col items-left shadow-lg-up">
-            <component :is="CalendarForm" />
-          </div>
-        </SwiperCard>
-      </BottomCard>
-    </div>
-  </div>
+  <swiper class="applicationSwiper">
+    <swiper-slide>
+      <SwipeView :slideIndex="4"> </SwipeView>
+    </swiper-slide>
+    <swiper-slide>
+      <ArchiveView></ArchiveView>
+    </swiper-slide>
+  </swiper>
 </template>
 <script setup lang="ts">
 import { ref, watch, onMounted } from "vue";
 import BellIcon from "@/assets/icons/BellIcon.vue";
-import AddIcon from "@/assets/icons/AddIcon.vue";
-import CloseIcon from "@/assets/icons/CloseIcon.vue";
-
-import BottomCard from "@/components/MenuModals/BottomCard.vue";
-
-import CalendarForm from "@/components/MainModals/CalendarViews/CalendarForm.vue";
-import CalendarList from "@/components/MainModals/CalendarViews/CalendarList.vue";
+import SwipeView from "./SwipeView.vue";
 
 import {
   slideDown,
@@ -106,16 +65,10 @@ import {
   addedType,
   isMonthEvent,
 } from "@/store/store.js";
-interface SlideItem {
-  id: string;
-  index: number;
-  text: string;
-}
 
 let theme = ref(false);
 const calendar = ref(null);
 const locale = "de-AT";
-const bottomCardOpen = ref(false);
 const renderComponent = ref(true);
 const pickedDate = ref(null);
 const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
@@ -162,23 +115,36 @@ const addTodo = (color: string | undefined, dates: Dates, todos: Todo[]) => {
 // Add a new todo with a new date and highlight
 if (localStorage.getItem("appointments")) {
   for (let i = 0; i < appointments.value.length; i++) {
-    const yearStart = appointments.value[i][0].appointmentFrom.slice(0, 4);
-    const monthStart = appointments.value[i][0].appointmentFrom.slice(5, 7) - 1;
-    const dayStart = appointments.value[i][0].appointmentFrom.slice(8, 10);
-    const yearEnd = appointments.value[i][0].appointmentTo.slice(0, 4);
-    const monthEnd = appointments.value[i][0].appointmentTo.slice(5, 7) - 1;
-    const dayEnd = appointments.value[i][0].appointmentTo.slice(8, 10);
-    const dates: Dates = {
-      start: new Date(yearStart, monthStart, dayStart),
-      end: new Date(yearEnd, monthEnd, dayEnd),
-    };
-
-    if (appointments.value[i][0].type == "Bewerbungsgespräch") {
-      addTodo("green", dates, todos);
-    } else if (appointments.value[i][0].type == "Deadline") {
-      addTodo("red", dates, todos);
-    } else {
-      addTodo("blau", dates, todos);
+    if (appointments.value[i][0].appointmentFrom) {
+      const yearStart = appointments.value[i][0].appointmentFrom.slice(0, 4)
+        ? appointments.value[i][0].appointmentFrom.slice(0, 4)
+        : 0;
+      const monthStart = appointments.value[i][0].appointmentFrom.slice(5, 7)
+        ? appointments.value[i][0].appointmentFrom.slice(5, 7) - 1
+        : 0;
+      const dayStart = appointments.value[i][0].appointmentFrom.slice(8, 10)
+        ? appointments.value[i][0].appointmentFrom.slice(8, 10)
+        : 0;
+      const yearEnd = appointments.value[i][0].appointmentTo.slice(0, 4)
+        ? appointments.value[i][0].appointmentTo.slice(0, 4)
+        : 0;
+      const monthEnd = appointments.value[i][0].appointmentTo.slice(5, 7)
+        ? appointments.value[i][0].appointmentTo.slice(5, 7) - 1
+        : 0;
+      const dayEnd = appointments.value[i][0].appointmentTo.slice(8, 10)
+        ? appointments.value[i][0].appointmentTo.slice(8, 10)
+        : 0;
+      const dates: Dates = {
+        start: new Date(yearStart, monthStart, dayStart),
+        end: new Date(yearEnd, monthEnd, dayEnd),
+      };
+      if (appointments.value[i][0].type == "Bewerbungsgespräch") {
+        addTodo("green", dates, todos);
+      } else if (appointments.value[i][0].type == "Deadline") {
+        addTodo("red", dates, todos);
+      } else {
+        addTodo("blau", dates, todos);
+      }
     }
   }
 } else {
@@ -188,14 +154,6 @@ if (localStorage.getItem("appointments")) {
   };
   addTodo("blue", dates, todos);
 }
-
-let idCounter = 0;
-const getID = () => (idCounter++).toString();
-let posIndexCounter = 0;
-const getPosIndex = () => posIndexCounter++;
-const items = ref<SlideItem[]>([
-  { id: getID(), index: getPosIndex(), text: "First" },
-]);
 
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   theme.value = true;
@@ -207,9 +165,10 @@ onMounted(() => {
   selectedMonth.value = new Date().getMonth();
 });
 
-watch(bottomCardOpen, () => {
-  if (bottomCardOpen.value == false) {
+watch(slideDown, () => {
+  if (slideDown.value) {
     renderComponent.value = true;
+
     if (addedDate.value != "") {
       const yearStart = addedDate.value.slice(0, 4);
       const monthStart = addedDate.value.slice(5, 7) - 1;
@@ -238,6 +197,8 @@ watch(bottomCardOpen, () => {
         ...todos,
       ];
     }
+    addedDate.value = "";
+    console.log("Date in Calendar added!");
   } else {
     renderComponent.value = false;
   }
@@ -257,21 +218,11 @@ const dayClicked = (date) => {
   selectedDay.value = date.day;
   isMonthEvent.value = false;
 };
-const openBottomCard = () => {
-  bottomCardOpen.value = true;
-  slideDown.value = false;
-};
-const closeBottomCard = () => {
-  bottomCardOpen.value = false;
-  slideDown.value = true;
-};
 
 const setMonth = () => {
-  renderComponent.value = false;
   isMonthEvent.value = false;
   pickedDate.value = null;
   isMonthEvent.value = true;
-  renderComponent.value = true;
 };
 
 const onPageChanged = (page) => {

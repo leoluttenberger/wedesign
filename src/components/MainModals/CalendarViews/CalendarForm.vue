@@ -47,7 +47,7 @@
           <FormKit
             type="datetime-local"
             v-model="appointmentFrom"
-            validation="required"
+            validation="required|date_after"
             value=""
             validation-visibility="live"
             placeholder="Auswählen"
@@ -148,22 +148,62 @@ const saveToLocalStorage = () => {
       deadlineId: 0,
     },
   ];
+
   if (appointmentFrom.value != null && appointmentTo.value != null) {
-    if (buttonDisabled == false) {
-      buttonDisabled = true;
-      if (localStorage.getItem("appointments")) {
-        const currentappointments = JSON.parse(
-          localStorage.getItem("appointments")
-        );
-        const newData = [...currentappointments, appointment];
-        localStorage.setItem("appointments", JSON.stringify(newData));
-      } else {
-        localStorage.setItem("appointments", JSON.stringify([appointment]));
+    const year = Number(appointmentFrom.value.slice(0, 4));
+    const month = (Number(appointmentFrom.value.slice(5, 7)) / 10) * 10;
+    const day = (Number(appointmentFrom.value.slice(8, 10)) / 10) * 10;
+    const hours = (Number(appointmentFrom.value.slice(11, 13)) / 10) * 10;
+    const minutes = (Number(appointmentFrom.value.slice(14, 16)) / 10) * 10;
+    const currentDate = new Date();
+    let dateCheck = false;
+
+    if (year > Number(currentDate.getFullYear())) {
+      console.log("Year:", year);
+      dateCheck = true;
+    } else if (year == Number(currentDate.getFullYear())) {
+      if (month > Number(currentDate.getMonth() + 1)) {
+        console.log("Month:", month);
+        dateCheck = true;
+      } else if (month == Number(currentDate.getMonth() + 1)) {
+        if (day > Number(currentDate.getDate())) {
+          console.log("Day:", day);
+          dateCheck = true;
+        } else if (day == Number(currentDate.getDate())) {
+          console.log("Day:", day);
+          if (hours > Number(currentDate.getHours())) {
+            console.log("Hours:", hours);
+            dateCheck = true;
+          } else if (hours == Number(currentDate.getHours())) {
+            console.log("Hours:", hours);
+            if (minutes >= Number(currentDate.getMinutes())) {
+              console.log("Minutes:", minutes);
+              dateCheck = true;
+            }
+          }
+        }
       }
-      addedDate.value = appointmentFrom.value;
-      addedType.value = type.value;
-      slideDown.value = true;
-      console.log("Date saved!");
+    }
+
+    if (buttonDisabled == false) {
+      if (appointmentFrom.value < appointmentTo.value) {
+        if (dateCheck) {
+          buttonDisabled = true;
+          if (localStorage.getItem("appointments")) {
+            const currentappointments = JSON.parse(
+              localStorage.getItem("appointments")
+            );
+            const newData = [...currentappointments, appointment];
+            localStorage.setItem("appointments", JSON.stringify(newData));
+          } else {
+            localStorage.setItem("appointments", JSON.stringify([appointment]));
+          }
+          addedDate.value = appointmentFrom.value;
+          addedType.value = type.value;
+          slideDown.value = true;
+          console.log("Date saved!");
+        }
+      }
     }
   } else {
     console.log("Date is not set!");

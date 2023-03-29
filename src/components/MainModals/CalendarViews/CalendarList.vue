@@ -2,13 +2,16 @@
   <div>
     <section class="z-0">
       <div class="grid gap-2">
-        <Container @drop="onDrop">
+        <Container @drop="onDrop" v-if="!isPicked">
           <div v-for="(item, index) in appointments" :key="index">
             <div
               v-if="
-                isPicked == false &&
-                (item[0].appointmentFrom.slice(5, 7) - 1 == currentMonth ||
-                  item[0].appointmentTo.slice(5, 7) - 1 == currentMonth)
+                (item[0].appointmentFrom
+                  ? item[0].appointmentFrom.slice(5, 7) == currentMonth
+                  : false) ||
+                (item[0].appointmentTo
+                  ? item[0].appointmentTo.slice(5, 7) == currentMonth
+                  : false)
               "
             >
               <div class="flex">
@@ -29,14 +32,16 @@
                     <div class="flex">
                       <div class="flex-none text-sm">
                         {{
-                          item[0].appointmentFrom.slice(8, 10) +
-                          "." +
-                          item[0].appointmentFrom.slice(5, 7) +
-                          "." +
-                          item[0].appointmentFrom.slice(0, 4) +
-                          " " +
-                          item[0].appointmentFrom.slice(11, 16) +
-                          " Uhr"
+                          item[0].appointmentFrom
+                            ? item[0].appointmentFrom.slice(8, 10) +
+                              "." +
+                              item[0].appointmentFrom.slice(5, 7) +
+                              "." +
+                              item[0].appointmentFrom.slice(0, 4) +
+                              " " +
+                              item[0].appointmentFrom.slice(11, 16) +
+                              " Uhr"
+                            : ""
                         }}
                       </div>
                       <div class="grow py-2 px-2">
@@ -46,14 +51,16 @@
                       </div>
                       <div class="flex-none text-sm">
                         {{
-                          item[0].appointmentTo.slice(8, 10) +
-                          "." +
-                          item[0].appointmentTo.slice(5, 7) +
-                          "." +
-                          item[0].appointmentTo.slice(0, 4) +
-                          " " +
-                          item[0].appointmentTo.slice(11, 16) +
-                          " Uhr"
+                          item[0].appointmentTo
+                            ? item[0].appointmentTo.slice(8, 10) +
+                              "." +
+                              item[0].appointmentTo.slice(5, 7) +
+                              "." +
+                              item[0].appointmentTo.slice(0, 4) +
+                              " " +
+                              item[0].appointmentTo.slice(11, 16) +
+                              " Uhr"
+                            : ""
                         }}
                       </div>
                     </div>
@@ -61,14 +68,38 @@
                 </button>
               </div>
             </div>
+          </div>
+        </Container>
+        <Container @drop="onDrop" v-if="isPicked">
+          <div v-for="(item, index) in appointments" :key="index">
             <div
               v-if="
-                (isPicked == true &&
-                  currentDay == item[0].appointmentFrom.slice(8, 10) &&
-                  item[0].appointmentFrom.slice(5, 7) - 1 == currentMonth) ||
-                (isPicked == true &&
-                  currentDay == item[0].appointmentTo.slice(8, 10) &&
-                  item[0].appointmentTo.slice(5, 7) - 1 == currentMonth)
+                (item[0].appointmentFrom
+                  ? item[0].appointmentFrom.slice(8, 10) == currentDay &&
+                    currentMonth == item[0].appointmentFrom.slice(5, 7)
+                  : false) ||
+                (item[0].appointmentTo
+                  ? item[0].appointmentTo.slice(8, 10) == currentDay &&
+                    currentMonth == item[0].appointmentTo.slice(5, 7)
+                  : false) ||
+                (item[0].appointmentFrom && item[0].appointmentTo
+                  ? currentDay > item[0].appointmentFrom.slice(8, 10) &&
+                    currentDay < item[0].appointmentTo.slice(8, 10)
+                  : false) ||
+                (item[0].appointmentFrom && item[0].appointmentTo
+                  ? currentMonth < item[0].appointmentTo.slice(5, 7) &&
+                    currentMonth == item[0].appointmentFrom.slice(5, 7) &&
+                    currentDay > item[0].appointmentFrom.slice(8, 10)
+                  : false) ||
+                (item[0].appointmentFrom && item[0].appointmentTo
+                  ? currentMonth < item[0].appointmentTo.slice(5, 7) &&
+                    currentMonth > item[0].appointmentFrom.slice(5, 7) &&
+                    currentDay > item[0].appointmentTo.slice(8, 10)
+                  : false) ||
+                (item[0].appointmentFrom && item[0].appointmentTo
+                  ? currentMonth == item[0].appointmentTo.slice(5, 7) &&
+                    currentDay < item[0].appointmentTo.slice(8, 10)
+                  : false)
               "
             >
               <div class="flex">
@@ -89,14 +120,16 @@
                     <div class="flex">
                       <div class="flex-none text-sm">
                         {{
-                          item[0].appointmentFrom.slice(8, 10) +
-                          "." +
-                          item[0].appointmentFrom.slice(5, 7) +
-                          "." +
-                          item[0].appointmentFrom.slice(0, 4) +
-                          " " +
-                          item[0].appointmentFrom.slice(11, 16) +
-                          " Uhr"
+                          item[0].appointmentFrom
+                            ? item[0].appointmentFrom.slice(8, 10) +
+                              "." +
+                              item[0].appointmentFrom.slice(5, 7) +
+                              "." +
+                              item[0].appointmentFrom.slice(0, 4) +
+                              " " +
+                              item[0].appointmentFrom.slice(11, 16) +
+                              " Uhr"
+                            : ""
                         }}
                       </div>
                       <div class="grow py-2 px-2">
@@ -106,14 +139,16 @@
                       </div>
                       <div class="flex-none text-sm">
                         {{
-                          item[0].appointmentTo.slice(8, 10) +
-                          "." +
-                          item[0].appointmentTo.slice(5, 7) +
-                          "." +
-                          item[0].appointmentTo.slice(0, 4) +
-                          " " +
-                          item[0].appointmentTo.slice(11, 16) +
-                          " Uhr"
+                          item[0].appointmentTo
+                            ? item[0].appointmentTo.slice(8, 10) +
+                              "." +
+                              item[0].appointmentTo.slice(5, 7) +
+                              "." +
+                              item[0].appointmentTo.slice(0, 4) +
+                              " " +
+                              item[0].appointmentTo.slice(11, 16) +
+                              " Uhr"
+                            : ""
                         }}
                       </div>
                     </div>
@@ -188,6 +223,7 @@ import BottomCard from "@/components/MenuModals/BottomCard.vue";
 import SwiperCard from "@/components/MenuModals/SwiperCard.vue";
 
 import { Container } from "vue3-smooth-dnd";
+import { select } from "@formkit/inputs";
 
 const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
 const bottomCardOpen2 = ref(false);
@@ -249,7 +285,7 @@ watch(selectedDay, () => {
 });
 watch(isMonthEvent, () => {
   isPicked.value = false;
-  currentMonth.value = selectedMonth.value;
+  currentMonth.value = selectedMonth.value + 1;
 });
 
 const openBottomCard = (id) => {
@@ -259,7 +295,7 @@ const openBottomCard = (id) => {
 };
 
 const onDrop = (dropResult) => {
-  const newData = applyDrag(appointments, dropResult); // appointments call by reference
+  const newData = applyDrag(appointments, dropResult);
   localStorage.setItem("appointments", JSON.stringify(appointments.value));
 };
 const applyDrag = (arr, dragResult) => {

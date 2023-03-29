@@ -155,46 +155,107 @@ onMounted(() => {
 });
 
 const saveToLocalStorage = () => {
+  let dateCheck = false;
+  const currentDate = new Date();
+
+  if (appointmentFrom.value != null) {
+    const year = Number(appointmentFrom.value.slice(0, 4));
+    const month = (Number(appointmentFrom.value.slice(5, 7)) / 10) * 10;
+    const day = (Number(appointmentFrom.value.slice(8, 10)) / 10) * 10;
+    const hours = (Number(appointmentFrom.value.slice(11, 13)) / 10) * 10;
+    const minutes = (Number(appointmentFrom.value.slice(14, 16)) / 10) * 10;
+
+    if (year > Number(currentDate.getFullYear())) {
+      dateCheck = true;
+    } else if (year == Number(currentDate.getFullYear())) {
+      if (month > Number(currentDate.getMonth() + 1)) {
+        dateCheck = true;
+      } else if (month == Number(currentDate.getMonth() + 1)) {
+        if (day > Number(currentDate.getDate())) {
+          dateCheck = true;
+        } else if (day == Number(currentDate.getDate())) {
+          if (hours > Number(currentDate.getHours())) {
+            dateCheck = true;
+          } else if (hours == Number(currentDate.getHours())) {
+            console.log("Hours:", hours);
+            if (minutes >= Number(currentDate.getMinutes())) {
+              dateCheck = true;
+            }
+          }
+        }
+      }
+    }
+  }
+  if (appointmentTo.value != null) {
+    const year = Number(appointmentTo.value.slice(0, 4));
+    const month = (Number(appointmentTo.value.slice(5, 7)) / 10) * 10;
+    const day = (Number(appointmentTo.value.slice(8, 10)) / 10) * 10;
+    const hours = (Number(appointmentTo.value.slice(11, 13)) / 10) * 10;
+    const minutes = (Number(appointmentTo.value.slice(14, 16)) / 10) * 10;
+
+    if (year > Number(currentDate.getFullYear())) {
+      dateCheck = true;
+    } else if (year == Number(currentDate.getFullYear())) {
+      if (month > Number(currentDate.getMonth() + 1)) {
+        dateCheck = true;
+      } else if (month == Number(currentDate.getMonth() + 1)) {
+        if (day > Number(currentDate.getDate())) {
+          dateCheck = true;
+        } else if (day == Number(currentDate.getDate())) {
+          console.log("Day:", day);
+          if (hours > Number(currentDate.getHours())) {
+            dateCheck = true;
+          } else if (hours == Number(currentDate.getHours())) {
+            if (minutes >= Number(currentDate.getMinutes())) {
+              dateCheck = true;
+            }
+          }
+        }
+      }
+    }
+  }
   if (buttonDisabled == false) {
-    buttonDisabled = true;
-    if (localStorage.getItem("appointments")) {
-      console.log("Update Appointments");
-      const applications = ref(
-        JSON.parse(localStorage.getItem("applications"))
-      );
+    if (dateCheck) {
+      buttonDisabled = true;
+      if (localStorage.getItem("appointments")) {
+        console.log("Update Appointments");
+        const applications = ref(
+          JSON.parse(localStorage.getItem("applications"))
+        );
 
-      appointments.value[props.editIndex][0].type = type.value;
-      appointments.value[props.editIndex][0].titel = title.value;
-      appointments.value[props.editIndex][0].appointmentFrom =
-        appointmentFrom.value;
-      appointments.value[props.editIndex][0].appointmentTo =
-        appointmentTo.value;
+        appointments.value[props.editIndex][0].type = type.value;
+        appointments.value[props.editIndex][0].titel = title.value;
+        appointments.value[props.editIndex][0].appointmentFrom =
+          appointmentFrom.value;
+        appointments.value[props.editIndex][0].appointmentTo =
+          appointmentTo.value;
 
-      appointments.value[props.editIndex][0].address = address.value;
-      appointments.value[props.editIndex][0].note = note.value;
+        appointments.value[props.editIndex][0].address = address.value;
+        appointments.value[props.editIndex][0].note = note.value;
 
-      if (appointments.value[props.editIndex][0].deadlineId > 0) {
-        applications.value[
-          appointments.value[props.editIndex][0].deadlineId - 1
-        ][0].start = appointmentFrom.value;
-        applications.value[
-          appointments.value[props.editIndex][0].deadlineId - 1
-        ][0].deadline = appointmentTo.value;
+        if (type.value == "Deadline") {
+          if (appointments.value.length > 0) {
+            for (let i = 0; i < applications.value.length; i++) {
+              if (
+                applications.value[i][0].id ==
+                appointments.value[props.editIndex][0].deadlineId
+              ) {
+                applications.value[i][0].start = appointmentFrom.value;
+              }
+            }
+
+            localStorage.setItem(
+              "applications",
+              JSON.stringify(applications.value)
+            );
+          }
+        }
+
         localStorage.setItem(
-          "applications",
-          JSON.stringify(applications.value)
+          "appointments",
+          JSON.stringify(appointments.value)
         );
       }
-
-      localStorage.setItem("appointments", JSON.stringify(appointments.value));
-    } else {
-      const appointment = [
-        {
-          type: type.value,
-          address: address.value,
-        },
-      ];
-      localStorage.setItem("appointments", JSON.stringify([appointment]));
     }
     slideDown.value = true;
     changedDate.value = true;
@@ -205,7 +266,7 @@ const removeFromLocalStorage = () => {
     const applications = ref(JSON.parse(localStorage.getItem("applications")));
     for (let i = 0; i < applications.value.length; i++) {
       if (
-        props.editIndex + 1 ==
+        applications.value[i][0].id ==
           appointments.value[props.editIndex][0].deadlineId &&
         appointments.value[props.editIndex][0].deadlineId != 0
       ) {

@@ -47,13 +47,11 @@
     <swiper-slide>
       <SwipeView :slideIndex="4"> </SwipeView>
     </swiper-slide>
-    <swiper-slide>
-      <ArchiveView></ArchiveView>
-    </swiper-slide>
   </swiper>
 </template>
 <script setup lang="ts">
 import { ref, watch, onMounted } from "vue";
+import { Swiper, SwiperSlide } from "swiper/vue";
 import BellIcon from "@/assets/icons/BellIcon.vue";
 import SwipeView from "./SwipeView.vue";
 
@@ -177,6 +175,7 @@ onMounted(() => {
 
 watch(slideDown, () => {
   if (slideDown.value) {
+    renderComponent.value = false;
     renderComponent.value = true;
 
     if (addedDate.value != "") {
@@ -209,8 +208,6 @@ watch(slideDown, () => {
     }
     addedDate.value = "";
     console.log("Date in Calendar added!");
-  } else {
-    renderComponent.value = false;
   }
 });
 
@@ -246,7 +243,10 @@ let attributes = ref([
 const dayClicked = (date) => {
   pickedDate.value = date;
   selectedDay.value = date.day;
+  console.log("Calendar View current day:", selectedDay.value);
   isMonthEvent.value = false;
+  renderComponent.value = false;
+  renderComponent.value = true;
 };
 
 const setMonth = () => {
@@ -257,5 +257,7 @@ const setMonth = () => {
 
 const onPageChanged = (page) => {
   selectedMonth.value = page[0].id.slice(5, 7) - 1;
+  isMonthEvent.value = false;
+  isMonthEvent.value = true;
 };
 </script>

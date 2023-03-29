@@ -422,6 +422,8 @@ const saveToLocalStorage = () => {
   applications.value[props.editIndex][0].deadline = deadline.value;
 
   console.log(props.editIndex);
+  let dateCheck = false;
+  const currentDate = new Date();
   const appointment = [
     {
       type: "Deadline",
@@ -429,27 +431,86 @@ const saveToLocalStorage = () => {
       appointmentFrom: start.value,
       appointmentTo: deadline.value,
       note: note.value,
-      deadlineId: props.editIndex,
+      deadlineId: applications.value[props.editIndex][0].id,
     },
   ];
-  if (appointments.value.length > 0) {
-    for (let i = 0; i < appointments.value.length; i++) {
-      if (
-        props.editIndex + 1 == appointments.value[i][0].deadlineId &&
-        appointments.value[i][0].deadlineId != 0
-      ) {
-        appointments.value[i][0].appointmentFrom = start.value;
-        appointments.value[i][0].appointmentTo = deadline.value;
+  if (start.value.value != null) {
+    const year = Number(start.value.value.slice(0, 4));
+    const month = (Number(start.value.value.slice(5, 7)) / 10) * 10;
+    const day = (Number(start.value.value.slice(8, 10)) / 10) * 10;
+    const hours = (Number(start.value.value.slice(11, 13)) / 10) * 10;
+    const minutes = (Number(start.value.value.slice(14, 16)) / 10) * 10;
+
+    if (year > Number(currentDate.getFullYear())) {
+      dateCheck = true;
+    } else if (year == Number(currentDate.getFullYear())) {
+      if (month > Number(currentDate.getMonth() + 1)) {
+        dateCheck = true;
+      } else if (month == Number(currentDate.getMonth() + 1)) {
+        if (day > Number(currentDate.getDate())) {
+          dateCheck = true;
+        } else if (day == Number(currentDate.getDate())) {
+          if (hours > Number(currentDate.getHours())) {
+            dateCheck = true;
+          } else if (hours == Number(currentDate.getHours())) {
+            console.log("Hours:", hours);
+            if (minutes >= Number(currentDate.getMinutes())) {
+              dateCheck = true;
+            }
+          }
+        }
       }
     }
-    localStorage.setItem("appointments", JSON.stringify(appointments.value));
-    console.log("Updated Appointment");
-  } else {
-    localStorage.setItem("appointments", JSON.stringify([appointment]));
-    console.log("Added Appointment");
   }
+  if (deadline.value.value != null) {
+    const year = Number(deadline.value.value.slice(0, 4));
+    const month = (Number(deadline.value.value.slice(5, 7)) / 10) * 10;
+    const day = (Number(deadline.value.value.slice(8, 10)) / 10) * 10;
+    const hours = (Number(deadline.value.value.slice(11, 13)) / 10) * 10;
+    const minutes = (Number(deadline.value.value.slice(14, 16)) / 10) * 10;
 
-  localStorage.setItem("applications", JSON.stringify(applications.value));
+    if (year > Number(currentDate.getFullYear())) {
+      dateCheck = true;
+    } else if (year == Number(currentDate.getFullYear())) {
+      if (month > Number(currentDate.getMonth() + 1)) {
+        dateCheck = true;
+      } else if (month == Number(currentDate.getMonth() + 1)) {
+        if (day > Number(currentDate.getDate())) {
+          dateCheck = true;
+        } else if (day == Number(currentDate.getDate())) {
+          console.log("Day:", day);
+          if (hours > Number(currentDate.getHours())) {
+            dateCheck = true;
+          } else if (hours == Number(currentDate.getHours())) {
+            if (minutes >= Number(currentDate.getMinutes())) {
+              dateCheck = true;
+            }
+          }
+        }
+      }
+    }
+  }
+  if (dateCheck) {
+    if (appointments.value.length > 0) {
+      for (let i = 0; i < appointments.value.length; i++) {
+        if (
+          applications.value[props.editIndex][0].id ==
+            appointments.value[i][0].deadlineId &&
+          appointments.value[i][0].deadlineId != 0
+        ) {
+          appointments.value[i][0].appointmentFrom = start.value;
+          appointments.value[i][0].appointmentTo = deadline.value;
+        }
+      }
+      localStorage.setItem("appointments", JSON.stringify(appointments.value));
+      console.log("Updated Appointment");
+    } else {
+      localStorage.setItem("appointments", JSON.stringify([appointment]));
+      console.log("Added Appointment");
+    }
+
+    localStorage.setItem("applications", JSON.stringify(applications.value));
+  }
 };
 const closeModal = () => {
   buttonDisabled = true;

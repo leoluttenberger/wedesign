@@ -1,7 +1,7 @@
 <template>
   <section
     v-if="props.slideIndex != 4"
-    class="z-0 overflow-auto overflow-scroll w-screen h-screen py-20"
+    class="z-0 overflow-auto overflow-scroll w-screen h-screen py-20 pb-20"
   >
     <component :is="mapListComponents[slideIndex]" :key="renderComponent" />
     <div class="flex justify-center p-4">
@@ -17,7 +17,7 @@
   </section>
   <section
     v-if="props.slideIndex == 4"
-    class="z-0 overflow-auto overflow-scroll w-screen h-screen h-1/2"
+    class="z-0 overflow-auto overflow-scroll w-screen h-1/2 pb-20"
   >
     <component :is="mapListComponents[4]" :key="renderComponent" />
     <div class="flex justify-center p-4">

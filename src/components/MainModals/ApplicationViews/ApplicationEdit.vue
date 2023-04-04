@@ -404,8 +404,6 @@ const createMotivationNode = () => {
   sideBack.value = true;
 };
 const saveToLocalStorage = () => {
-  buttonDisabled = true;
-  slideDown.value = true;
   const applications = ref(JSON.parse(localStorage.getItem("applications")));
   const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
 
@@ -434,12 +432,12 @@ const saveToLocalStorage = () => {
       deadlineId: applications.value[props.editIndex][0].id,
     },
   ];
-  if (start.value.value != null) {
-    const year = Number(start.value.value.slice(0, 4));
-    const month = (Number(start.value.value.slice(5, 7)) / 10) * 10;
-    const day = (Number(start.value.value.slice(8, 10)) / 10) * 10;
-    const hours = (Number(start.value.value.slice(11, 13)) / 10) * 10;
-    const minutes = (Number(start.value.value.slice(14, 16)) / 10) * 10;
+  if (start.value != null) {
+    const year = Number(start.value.slice(0, 4));
+    const month = (Number(start.value.slice(5, 7)) / 10) * 10;
+    const day = (Number(start.value.slice(8, 10)) / 10) * 10;
+    const hours = (Number(start.value.slice(11, 13)) / 10) * 10;
+    const minutes = (Number(start.value.slice(14, 16)) / 10) * 10;
 
     if (year > Number(currentDate.getFullYear())) {
       dateCheck = true;
@@ -462,12 +460,12 @@ const saveToLocalStorage = () => {
       }
     }
   }
-  if (deadline.value.value != null) {
-    const year = Number(deadline.value.value.slice(0, 4));
-    const month = (Number(deadline.value.value.slice(5, 7)) / 10) * 10;
-    const day = (Number(deadline.value.value.slice(8, 10)) / 10) * 10;
-    const hours = (Number(deadline.value.value.slice(11, 13)) / 10) * 10;
-    const minutes = (Number(deadline.value.value.slice(14, 16)) / 10) * 10;
+  if (deadline.value != null) {
+    const year = Number(deadline.value.slice(0, 4));
+    const month = (Number(deadline.value.slice(5, 7)) / 10) * 10;
+    const day = (Number(deadline.value.slice(8, 10)) / 10) * 10;
+    const hours = (Number(deadline.value.slice(11, 13)) / 10) * 10;
+    const minutes = (Number(deadline.value.slice(14, 16)) / 10) * 10;
 
     if (year > Number(currentDate.getFullYear())) {
       dateCheck = true;
@@ -510,6 +508,8 @@ const saveToLocalStorage = () => {
     }
 
     localStorage.setItem("applications", JSON.stringify(applications.value));
+    buttonDisabled = true;
+    slideDown.value = true;
   }
 };
 const closeModal = () => {

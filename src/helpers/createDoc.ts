@@ -73,7 +73,7 @@ async function createDocx(
       titleBefore + " " + firstName + " " + secondName + " " + titleAfter;
   }
 
-  let lastIndex = tempMotivations.length() - 1;
+  let lastIndex = tempMotivations.length - 1;
   if (lastIndex <= 0) {
     lastIndex = 0;
   }

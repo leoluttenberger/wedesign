@@ -73,3 +73,6 @@ export const addedType = reactive({
 export const isMonthEvent = reactive({
   value: null,
 });
+export const dragOptionActive = reactive({
+  value: null,
+});

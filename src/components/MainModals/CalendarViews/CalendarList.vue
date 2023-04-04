@@ -6,12 +6,18 @@
           <div v-for="(item, index) in appointments" :key="index">
             <div
               v-if="
-                (item[0].appointmentFrom
+                ((item[0].appointmentFrom
                   ? item[0].appointmentFrom.slice(5, 7) == currentMonth
                   : false) ||
-                (item[0].appointmentTo
-                  ? item[0].appointmentTo.slice(5, 7) == currentMonth
-                  : false)
+                  (item[0].appointmentTo
+                    ? item[0].appointmentTo.slice(5, 7) == currentMonth
+                    : false)) &&
+                ((item[0].appointmentFrom
+                  ? item[0].appointmentFrom.slice(0, 4) == currentYear
+                  : false) ||
+                  (item[0].appointmentTo
+                    ? item[0].appointmentTo.slice(0, 4) == currentYear
+                    : false))
               "
             >
               <div class="flex">
@@ -213,6 +219,7 @@ import {
   isDarkMode,
   selectedDay,
   selectedMonth,
+  selectedYear,
   isMonthEvent,
 } from "@/store/store.js";
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
@@ -229,7 +236,8 @@ const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
 const bottomCardOpen2 = ref(false);
 let currentButtonIndex = ref(0);
 const currentDay = ref(0);
-const currentMonth = ref(selectedMonth.value);
+const currentMonth = ref(new Date().getMonth() + 1);
+const currentYear = ref(new Date().getFullYear());
 const isPicked = ref(false);
 const greenType = ref("Bewerbungsgespräch");
 const redType = ref("Deadline");
@@ -286,6 +294,7 @@ watch(selectedDay, () => {
 watch(isMonthEvent, () => {
   isPicked.value = false;
   currentMonth.value = selectedMonth.value + 1;
+  currentYear.value = selectedYear.value;
 });
 
 const openBottomCard = (id) => {

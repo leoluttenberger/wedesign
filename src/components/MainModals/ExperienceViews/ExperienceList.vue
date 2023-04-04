@@ -2,7 +2,7 @@
   <div>
     <section class="z-0">
       <div class="grid gap-2" v-if="renderComponent3">
-        <Container @drop="onDrop">
+        <Container @drop="onDrop" v-if="dragActive">
           <Draggable
             v-for="(item, index) in experiences"
             :key="index"
@@ -33,6 +33,37 @@
               <div class="flex-none p-4">
                 <SortIcon class="h-full"></SortIcon>
               </div>
+            </div>
+          </Draggable>
+        </Container>
+        <Container v-if="!dragActive">
+          <Draggable
+            v-for="(item, index) in experiences"
+            :key="index"
+            class="p-2"
+          >
+            <div class="flex">
+              <button @click="openBottomCard(index)" class="w-full px-2">
+                <div
+                  class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
+                >
+                  <div class="font-bold text-xl">{{ item[0].workshop }}</div>
+                  <div>{{ item[0].description }}</div>
+                  <div class="flex">
+                    <div class="flex-none">
+                      {{ item[0].workshopFrom }}
+                    </div>
+                    <div class="grow py-2 px-2">
+                      <ArrowIcon
+                        class="dark:stroke-wd-white stroke-1 w-full h-2"
+                      ></ArrowIcon>
+                    </div>
+                    <div class="flex-none">
+                      {{ item[0].workshopTo }}
+                    </div>
+                  </div>
+                </div>
+              </button>
             </div>
           </Draggable>
         </Container>
@@ -86,7 +117,7 @@
 </template>
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { slideDown, isDarkMode } from "@/store/store.js";
+import { slideDown, isDarkMode, dragOptionActive } from "@/store/store.js";
 
 import BottomCard from "@/components/MenuModals/BottomCard.vue";
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
@@ -102,6 +133,7 @@ const experiences = ref(JSON.parse(localStorage.getItem("experiences")));
 const bottomCardOpen3 = ref(false);
 const renderComponent3 = ref(true);
 let currentButtonIndex = ref(0);
+const dragActive = ref(false);
 
 interface SlideItem {
   id: string;
@@ -123,6 +155,10 @@ if (JSON.parse(localStorage.getItem("theme")) == "dark") {
 } else {
   darkLightMode.value = "light";
 }
+
+watch(dragOptionActive, () => {
+  dragActive.value = dragOptionActive.value;
+});
 
 watch(isDarkMode, () => {
   if (isDarkMode.value == true) {

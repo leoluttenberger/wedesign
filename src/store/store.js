@@ -61,6 +61,9 @@ export const selectedDay = reactive({
 export const selectedMonth = reactive({
   value: 0,
 });
+export const selectedYear = reactive({
+  value: 0,
+});
 export const addedDate = reactive({
   value: "",
 });
@@ -71,5 +74,8 @@ export const addedType = reactive({
   value: "",
 });
 export const isMonthEvent = reactive({
+  value: null,
+});
+export const dragOptionActive = reactive({
   value: null,
 });

@@ -1,10 +1,10 @@
 <template>
   <section
-    class="fixed inset-x-0 z-10 shadow dark:text-white text-xl font-Montserrat bg-white dark:bg-slate-800 shadow"
+    class="fixed inset-x-0 z-10 top-0 shadow dark:text-white text-xl font-Montserrat bg-white dark:bg-slate-800"
   >
     <div class="flex justify-center p-2 font-bold">Erinnerungen</div>
   </section>
-  <div class="flex pt-12 px-2" v-if="renderComponent">
+  <div class="fixed inset-x-0 z-10 top-0 pt-12" v-if="renderComponent">
     <VCalendar
       expanded
       ref="calendar"
@@ -25,27 +25,28 @@
         </div>
       </template></VCalendar
     >
-  </div>
-  <div class="flex px-2">
-    <BellIcon
-      class="h-10 w-8 dark:stroke-wd-white stroke-black stroke-1"
-    ></BellIcon>
-    <div
-      v-if="!pickedDate"
-      class="selected-day py-3 px-3 text-black dark:text-white font-Montserrat text-sm md:text-base font-bold"
-    >
-      Nächste Termine
+    <div class="px-2 flex bg-white dark:bg-slate-800">
+      <BellIcon
+        class="h-10 w-8 dark:stroke-wd-white stroke-black stroke-1"
+      ></BellIcon>
+      <div
+        v-if="!pickedDate"
+        class="selected-day py-3 px-3 text-black dark:text-white font-Montserrat text-sm md:text-base font-bold"
+      >
+        Nächste Termine
+      </div>
+      <div
+        v-if="pickedDate"
+        class="selected-day py-3 px-3 text-black dark:text-white font-Montserrat text-sm md:text-base font-bold"
+      >
+        <h3>{{ pickedDate.date.toDateString() }}</h3>
+      </div>
     </div>
-    <div
-      v-if="pickedDate"
-      class="selected-day py-3 px-3 text-black dark:text-white font-Montserrat text-sm md:text-base font-bold"
-    >
-      <h3>{{ pickedDate.date.toDateString() }}</h3>
-    </div>
   </div>
-  <swiper class="applicationSwiper">
+
+  <swiper class="applicationSwiper py-20">
     <swiper-slide>
-      <SwipeView :slideIndex="4"> </SwipeView>
+      <SwipeView :slideIndex="4" :useEditButton="false"> </SwipeView>
     </swiper-slide>
   </swiper>
 </template>
@@ -59,6 +60,7 @@ import {
   slideDown,
   selectedDay,
   selectedMonth,
+  selectedYear,
   addedDate,
   addedType,
   isMonthEvent,
@@ -257,6 +259,7 @@ const setMonth = () => {
 
 const onPageChanged = (page) => {
   selectedMonth.value = page[0].id.slice(5, 7) - 1;
+  selectedYear.value = page[0].id.slice(0, 4);
   isMonthEvent.value = false;
   isMonthEvent.value = true;
 };

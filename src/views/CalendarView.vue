@@ -66,6 +66,7 @@ import {
   isMonthEvent,
   changedDate,
 } from "@/store/store.js";
+import { month } from "@formkit/inputs";
 
 let theme = ref(false);
 const calendar = ref(null);
@@ -79,6 +80,7 @@ interface Highlight {
   base: { fillMode: string; color: string };
   end: { fillMode: string; color: string };
 }
+
 interface Dates {
   start: Date;
   end: Date;
@@ -94,9 +96,9 @@ interface Todo {
   highlight: Highlight;
   dates: Dates;
 }
+
 // Define the initial list of todos
 const todos: Todo[] = [];
-
 const addTodo = (color: string | undefined, dates: Dates, todos: Todo[]) => {
   // Otherwise, create a new todo item with the specified date and highlight
   todos.push({
@@ -122,6 +124,8 @@ const loadAppointments = () => {
   // Add a new todo with a new date and highlight
   if (localStorage.getItem("appointments")) {
     for (let i = 0; i < appointments.value.length; i++) {
+      let dates: Dates = { start: null, end: null };
+
       if (appointments.value[i][0].appointmentFrom) {
         const yearStart = appointments.value[i][0].appointmentFrom.slice(0, 4)
           ? appointments.value[i][0].appointmentFrom.slice(0, 4)
@@ -141,10 +145,23 @@ const loadAppointments = () => {
         const dayEnd = appointments.value[i][0].appointmentTo.slice(8, 10)
           ? appointments.value[i][0].appointmentTo.slice(8, 10)
           : 0;
-        const dates: Dates = {
-          start: new Date(yearStart, monthStart, dayStart),
-          end: new Date(yearEnd, monthEnd, dayEnd),
-        };
+        if (yearStart == 0 && monthStart == 0 && dayStart == 0) {
+          dates = {
+            start: null,
+            end: new Date(yearEnd, monthEnd, dayEnd),
+          };
+        } else if (yearEnd == 0 && monthEnd == 0 && dayEnd == 0) {
+          dates = {
+            start: new Date(yearStart, monthStart, dayStart),
+            end: null,
+          };
+        } else {
+          dates = {
+            start: new Date(yearStart, monthStart, dayStart),
+            end: new Date(yearEnd, monthEnd, dayEnd),
+          };
+        }
+
         if (appointments.value[i][0].type == "Bewerbungsgespräch") {
           addTodo("green", dates, todos);
         } else if (appointments.value[i][0].type == "Deadline") {

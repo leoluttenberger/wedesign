@@ -61,6 +61,9 @@ export const selectedDay = reactive({
 export const selectedMonth = reactive({
   value: 0,
 });
+export const selectedYear = reactive({
+  value: 0,
+});
 export const addedDate = reactive({
   value: "",
 });

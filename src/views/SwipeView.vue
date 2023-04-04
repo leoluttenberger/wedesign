@@ -17,18 +17,20 @@
   </section>
   <section
     v-if="props.slideIndex == 4"
-    class="z-0 overflow-auto overflow-scroll w-screen h-1/2 pb-20"
+    class="z-0 overflow-auto overflow-scroll w-screen h-auto py-96 pb-20 bg-wd-light-green dark:bg-slate-700"
   >
-    <component :is="mapListComponents[4]" :key="renderComponent" />
-    <div class="flex justify-center p-4">
-      <button
-        @click="openBottomCard()"
-        class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
-      >
-        <AddIcon
-          class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
-        ></AddIcon>
-      </button>
+    <div class="py-10">
+      <component :is="mapListComponents[4]" :key="renderComponent" />
+      <div class="flex justify-center p-4">
+        <button
+          @click="openBottomCard()"
+          class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
+        >
+          <AddIcon
+            class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
+          ></AddIcon>
+        </button>
+      </div>
     </div>
   </section>
   <teleport to="body">

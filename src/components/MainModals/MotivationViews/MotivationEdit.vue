@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-auto overflow-scroll w-screen h-screen">
+  <div class="w-screen h-screen">
     <div class="grid grid-cols-3 gap-20 p-2 place-items-center">
       <button type="button" @click="closeModal()" class="p-4">
         <CloseIcon

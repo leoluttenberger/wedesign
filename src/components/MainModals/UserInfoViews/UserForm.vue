@@ -265,6 +265,7 @@
           <FormKit
             v-model="email"
             type="email"
+            name="Email"
             validation="length:5|*email"
             validation-visibility="live"
             placeholder="Email"

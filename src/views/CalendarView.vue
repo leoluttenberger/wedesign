@@ -2,7 +2,7 @@
   <section
     class="fixed inset-x-0 z-10 top-0 shadow dark:text-white text-xl font-Montserrat bg-white dark:bg-slate-800"
   >
-    <div class="flex justify-center p-2 font-bold">Erinnerungen</div>
+    <div class="flex justify-center p-2 font-bold">Kalender</div>
   </section>
   <div class="fixed inset-x-0 z-10 top-0 pt-12" v-if="renderComponent">
     <VCalendar
@@ -67,6 +67,7 @@ import {
   changedDate,
 } from "@/store/store.js";
 import { month } from "@formkit/inputs";
+import { attr } from "dom7";
 
 let theme = ref(false);
 const calendar = ref(null);
@@ -74,6 +75,11 @@ const locale = "de-AT";
 const renderComponent = ref(true);
 const pickedDate = ref(null);
 const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
+
+interface HighlightDate {
+  color: string;
+  fillMode: string;
+}
 
 interface Highlight {
   start: { fillMode: string; color: string };
@@ -97,8 +103,16 @@ interface Todo {
   dates: Dates;
 }
 
+interface TodoDate {
+  dot: Dot;
+  highlight: HighlightDate;
+  dates: Date;
+}
+
 // Define the initial list of todos
 const todos: Todo[] = [];
+const todosDate: TodoDate[] = [];
+
 const addTodo = (color: string | undefined, dates: Dates, todos: Todo[]) => {
   // Otherwise, create a new todo item with the specified date and highlight
   todos.push({
@@ -115,18 +129,56 @@ const addTodo = (color: string | undefined, dates: Dates, todos: Todo[]) => {
     dates: dates,
   });
 };
+const addTodoDate = (
+  color: string | undefined,
+  date: Date,
+  todosDate: TodoDate[]
+) => {
+  // Otherwise, create a new todo item with the specified date and highlight
+  todosDate.push({
+    dot: {
+      style: {
+        backgroundColor: color,
+      },
+    },
+    highlight: {
+      color: color,
+      fillMode: "outline",
+    },
+    dates: date,
+  });
+};
 const clearTodo = () => {
   for (let i = 0; i < todos.length; i++) {
     todos.pop();
+  }
+};
+const clearTodoDate = () => {
+  for (let i = 0; i < todosDate.length; i++) {
+    todosDate.pop();
   }
 };
 const loadAppointments = () => {
   // Add a new todo with a new date and highlight
   if (localStorage.getItem("appointments")) {
     for (let i = 0; i < appointments.value.length; i++) {
-      let dates: Dates = { start: null, end: null };
-
-      if (appointments.value[i][0].appointmentFrom) {
+      let color = "";
+      if (appointments.value[i][0].type == "Bewerbungsgespräch") {
+        color = "green";
+      } else if (appointments.value[i][0].type == "Deadline") {
+        color = "red";
+      } else {
+        color = "blue";
+      }
+      if (
+        !appointments.value[i][0].appointmentFrom &&
+        !appointments.value[i][0].appointmentTo
+      ) {
+        console.log("Dates empty!");
+      } else if (
+        appointments.value[i][0].appointmentFrom &&
+        appointments.value[i][0].appointmentTo
+      ) {
         const yearStart = appointments.value[i][0].appointmentFrom.slice(0, 4)
           ? appointments.value[i][0].appointmentFrom.slice(0, 4)
           : 0;
@@ -145,30 +197,41 @@ const loadAppointments = () => {
         const dayEnd = appointments.value[i][0].appointmentTo.slice(8, 10)
           ? appointments.value[i][0].appointmentTo.slice(8, 10)
           : 0;
-        if (yearStart == 0 && monthStart == 0 && dayStart == 0) {
-          dates = {
-            start: null,
-            end: new Date(yearEnd, monthEnd, dayEnd),
-          };
-        } else if (yearEnd == 0 && monthEnd == 0 && dayEnd == 0) {
-          dates = {
-            start: new Date(yearStart, monthStart, dayStart),
-            end: null,
-          };
-        } else {
-          dates = {
-            start: new Date(yearStart, monthStart, dayStart),
-            end: new Date(yearEnd, monthEnd, dayEnd),
-          };
-        }
 
-        if (appointments.value[i][0].type == "Bewerbungsgespräch") {
-          addTodo("green", dates, todos);
-        } else if (appointments.value[i][0].type == "Deadline") {
-          addTodo("red", dates, todos);
-        } else {
-          addTodo("blau", dates, todos);
-        }
+        const dates: Dates = {
+          start: new Date(yearStart, monthStart, dayStart),
+          end: new Date(yearEnd, monthEnd, dayEnd),
+        };
+        addTodo(color, dates, todos);
+        console.log("Start and End");
+      } else if (!appointments.value[i][0].appointmentFrom) {
+        const yearEnd = appointments.value[i][0].appointmentTo.slice(0, 4)
+          ? appointments.value[i][0].appointmentTo.slice(0, 4)
+          : 0;
+        const monthEnd = appointments.value[i][0].appointmentTo.slice(5, 7)
+          ? appointments.value[i][0].appointmentTo.slice(5, 7) - 1
+          : 0;
+        const dayEnd = appointments.value[i][0].appointmentTo.slice(8, 10)
+          ? appointments.value[i][0].appointmentTo.slice(8, 10)
+          : 0;
+        addTodoDate(color, new Date(yearEnd, monthEnd, dayEnd), todosDate);
+        console.log("EndDate");
+      } else if (!appointments.value[i][0].appointmentEnd) {
+        const yearStart = appointments.value[i][0].appointmentFrom.slice(0, 4)
+          ? appointments.value[i][0].appointmentFrom.slice(0, 4)
+          : 0;
+        const monthStart = appointments.value[i][0].appointmentFrom.slice(5, 7)
+          ? appointments.value[i][0].appointmentFrom.slice(5, 7) - 1
+          : 0;
+        const dayStart = appointments.value[i][0].appointmentFrom.slice(8, 10)
+          ? appointments.value[i][0].appointmentFrom.slice(8, 10)
+          : 0;
+        addTodoDate(
+          color,
+          new Date(yearStart, monthStart, dayStart),
+          todosDate
+        );
+        console.log("EndDate");
       }
     }
   } else {
@@ -208,14 +271,20 @@ watch(slideDown, () => {
         start: new Date(yearStart, monthStart, dayStart),
         end: new Date(yearEnd, monthEnd, dayEnd),
       };
-
+      let color = "blue";
       if (addedType.value == "Bewerbungsgespräch") {
-        addTodo("green", dates, todos);
+        color = "green";
       } else if (addedType.value == "Deadline") {
-        addTodo("red", dates, todos);
+        color = "red";
+      } else if (addedType.value == "Aufnahmetest") {
+        color = "orange";
+      } else if (addedType.value == "Feedback") {
+        color = "purple";
       } else {
-        addTodo("blau", dates, todos);
+        color = "blue";
       }
+      addTodo(color, dates, todos);
+
       attributes.value = [
         {
           key: "today",
@@ -223,6 +292,7 @@ watch(slideDown, () => {
           dates: new Date(),
         },
         ...todos,
+        ...todosDate,
       ];
     }
     addedDate.value = "";
@@ -234,6 +304,7 @@ watch(changedDate, () => {
   if (changedDate.value == true) {
     appointments.value = JSON.parse(localStorage.getItem("appointments"));
     clearTodo();
+    clearTodoDate();
     loadAppointments();
     attributes.value = [];
     attributes.value = [
@@ -243,6 +314,7 @@ watch(changedDate, () => {
         dates: new Date(),
       },
       ...todos,
+      ...todosDate,
     ];
     renderComponent.value = false;
     renderComponent.value = true;
@@ -257,6 +329,7 @@ let attributes = ref([
     dates: new Date(),
   },
   ...todos,
+  ...todosDate,
 ]);
 
 const dayClicked = (date) => {

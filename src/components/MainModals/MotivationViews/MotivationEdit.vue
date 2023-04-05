@@ -1,15 +1,15 @@
 <template>
-  <div class="w-screen h-screen">
+  <div class="overflow-auto overflow-scroll w-screen h-screen">
     <div class="grid grid-cols-3 gap-20 p-2 place-items-center">
       <button type="button" @click="closeModal()" class="p-4">
-        <CloseIcon
+        <BackIcon
           class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-        ></CloseIcon>
+        ></BackIcon>
       </button>
       <p
         class="text-black px-2 dark:text-white font-Montserrat text-xl p-4 font-bold"
       >
-        Motivationsschreiben speichern!
+        Motivationsschreiben
       </p>
       <button type="button" @click="saveModal()" class="p-4">
         <CheckIcon
@@ -37,6 +37,7 @@
                 v-model="subject"
                 type="textarea"
                 placeholder="Bewerbung Beruf"
+                :disabled="true"
               />
             </div>
             <button type="button" @click="subjectEdit()" class="p-4">
@@ -59,6 +60,7 @@
                 v-model="salutationBeginning"
                 type="textarea"
                 placeholder="Sehr geehrte Frau/Herr"
+                :disabled="true"
               />
             </div>
             <button
@@ -93,6 +95,7 @@
                 v-model="textBegining"
                 type="textarea"
                 placeholder="Mit großem Interesse habe ich Ihre Anzeige gelesen."
+                :disabled="true"
               />
             </div>
 
@@ -116,6 +119,7 @@
                 v-model="textExperience"
                 type="textarea"
                 placeholder="Die Berufsausbildung zum KFZ-Mechaniker habe ich im Jahr 2020 erfolgreich bei der Musterfirma abgeschlossen..."
+                :disabled="true"
               />
             </div>
             <button type="button" @click="textExperienceEdit()" class="p-4">
@@ -137,6 +141,7 @@
                 v-model="textCompetence"
                 type="textarea"
                 placeholder="Ich kann mit stressigen Situationen sehr gut umgehen..."
+                :disabled="true"
               />
             </div>
             <button type="button" @click="textCompetenceEdit()" class="p-4">
@@ -158,6 +163,7 @@
                 v-model="textContribution"
                 type="textarea"
                 placeholder="In Ihrem Unternehmen möchte ich mein handwerkliches Geschick einbringen..."
+                :disabled="true"
               />
             </div>
             <button type="button" @click="textContributionEdit()" class="p-4">
@@ -186,6 +192,7 @@
                 v-model="ending"
                 type="textarea"
                 placeholder="Für offene Fragen zu meiner Bewerbung stehe ich Ihnen jederzeit zur Verfügung..."
+                :disabled="true"
               />
             </div>
             <button type="button" @click="endingEdit()" class="p-4">
@@ -207,6 +214,7 @@
                 v-model="salutationEnding"
                 type="textarea"
                 placeholder="Mit freundlichen Grüßen ..."
+                :disabled="true"
               />
             </div>
             <button type="button" @click="salutationEndingEdit()" class="p-4">
@@ -249,7 +257,7 @@ import {
   currentTextCompetence,
 } from "@/store/store.js";
 
-import CloseIcon from "@/assets/icons/CloseIcon.vue";
+import BackIcon from "@/assets/icons/BackIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 import EditIcon from "@/assets/icons/EditIcon.vue";
 

@@ -12,7 +12,12 @@
             v-model="type"
             type="select"
             placeholder="Auswahl"
-            :options="['Bewerbungsgespräch', 'Sonstige Termine']"
+            :options="[
+              'Bewerbungsgespräch',
+              'Aufnahmetest',
+              'Feedback',
+              'Sonstige Termine',
+            ]"
           />
         </div>
       </div>
@@ -41,15 +46,13 @@
         <p
           class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
         >
-          Beginn:
+          Start:
         </p>
         <div class="px-2">
           <FormKit
             type="datetime-local"
+            name="Start"
             v-model="appointmentFrom"
-            validation="required|date_after"
-            value=""
-            validation-visibility="live"
             placeholder="Auswählen"
           />
         </div>
@@ -65,11 +68,11 @@
         <div class="px-2">
           <FormKit
             type="datetime-local"
+            name="Ende"
             v-model="appointmentTo"
-            :value="appointmentFrom"
-            validation="required|date_after"
+            :validation="[['date_after', appointmentFrom]]"
             validation-visibility="live"
-            placeholder="Auswählen"
+            :value="appointmentTo"
           />
         </div>
       </div>
@@ -148,61 +151,29 @@ const saveToLocalStorage = () => {
       deadlineId: 0,
     },
   ];
+  let dateCheck = false;
 
-  if (appointmentFrom.value != null && appointmentTo.value != null) {
-    const year = Number(appointmentFrom.value.slice(0, 4));
-    const month = (Number(appointmentFrom.value.slice(5, 7)) / 10) * 10;
-    const day = (Number(appointmentFrom.value.slice(8, 10)) / 10) * 10;
-    const hours = (Number(appointmentFrom.value.slice(11, 13)) / 10) * 10;
-    const minutes = (Number(appointmentFrom.value.slice(14, 16)) / 10) * 10;
-    const currentDate = new Date();
-    let dateCheck = false;
+  if (appointmentFrom.value != null || appointmentTo.value != null) {
+    dateCheck = true;
+  }
 
-    if (year > Number(currentDate.getFullYear())) {
-      console.log("Year:", year);
-      dateCheck = true;
-    } else if (year == Number(currentDate.getFullYear())) {
-      if (month > Number(currentDate.getMonth() + 1)) {
-        console.log("Month:", month);
-        dateCheck = true;
-      } else if (month == Number(currentDate.getMonth() + 1)) {
-        if (day > Number(currentDate.getDate())) {
-          console.log("Day:", day);
-          dateCheck = true;
-        } else if (day == Number(currentDate.getDate())) {
-          console.log("Day:", day);
-          if (hours > Number(currentDate.getHours())) {
-            console.log("Hours:", hours);
-            dateCheck = true;
-          } else if (hours == Number(currentDate.getHours())) {
-            console.log("Hours:", hours);
-            if (minutes >= Number(currentDate.getMinutes())) {
-              console.log("Minutes:", minutes);
-              dateCheck = true;
-            }
-          }
+  if (buttonDisabled == false) {
+    if (appointmentFrom.value < appointmentTo.value) {
+      if (dateCheck) {
+        buttonDisabled = true;
+        if (localStorage.getItem("appointments")) {
+          const currentappointments = JSON.parse(
+            localStorage.getItem("appointments")
+          );
+          const newData = [...currentappointments, appointment];
+          localStorage.setItem("appointments", JSON.stringify(newData));
+        } else {
+          localStorage.setItem("appointments", JSON.stringify([appointment]));
         }
-      }
-    }
-
-    if (buttonDisabled == false) {
-      if (appointmentFrom.value < appointmentTo.value) {
-        if (dateCheck) {
-          buttonDisabled = true;
-          if (localStorage.getItem("appointments")) {
-            const currentappointments = JSON.parse(
-              localStorage.getItem("appointments")
-            );
-            const newData = [...currentappointments, appointment];
-            localStorage.setItem("appointments", JSON.stringify(newData));
-          } else {
-            localStorage.setItem("appointments", JSON.stringify([appointment]));
-          }
-          addedDate.value = appointmentFrom.value;
-          addedType.value = type.value;
-          slideDown.value = true;
-          console.log("Date saved!");
-        }
+        addedDate.value = appointmentFrom.value;
+        addedType.value = type.value;
+        slideDown.value = true;
+        console.log("Date saved!");
       }
     }
   } else {

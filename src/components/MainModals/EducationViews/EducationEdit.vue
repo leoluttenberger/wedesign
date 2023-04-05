@@ -1,10 +1,5 @@
 <template>
   <div class="p-4" v-bind="editIndex">
-    <h1
-      class="text-black dark:text-white font-Montserrat text-xl md:text-xxl font-bold"
-    >
-      Ausbildungen
-    </h1>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">
@@ -63,7 +58,7 @@
           <p
             class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
           >
-            Von:
+            Start:
           </p>
           <div class="px-2">
             <FormKit
@@ -79,12 +74,13 @@
           <p
             class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
           >
-            Bis:
+            Ende:
           </p>
           <div class="px-2">
             <FormKit
               type="date"
               v-model="educationTo"
+              name="Ende"
               placeholder="Auswählen"
               :validation="[['date_after', educationFrom]]"
               validation-visibility="live"

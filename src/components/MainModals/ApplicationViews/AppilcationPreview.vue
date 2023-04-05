@@ -2,9 +2,9 @@
   <div class="overflow-auto overflow-scroll w-screen h-screen">
     <div class="grid grid-cols-3 p-4 place-items-center">
       <button type="button" @click="closeModal()" class="">
-        <CloseIcon
+        <BackIcon
           class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-        ></CloseIcon>
+        ></BackIcon>
       </button>
       <p
         class="text-black px-1 dark:text-white font-Montserrat text-xl font-bold"
@@ -19,9 +19,9 @@
     </div>
     <div class="grid grid-cols-3 p-4 place-items-center">
       <button v-if="pdf" @click="zoomOut()" class="">
-        <CloseIcon
+        <BackIcon
           class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-        ></CloseIcon>
+        ></BackIcon>
       </button>
       <p
         class="text-black px-1 dark:text-white font-Montserrat text-xl font-bold"
@@ -50,7 +50,7 @@ import { ref, onMounted, defineProps, onBeforeUnmount } from "vue";
 import { useElementSize } from "@vueuse/core";
 import { sideBack } from "@/store/store.js";
 
-import CloseIcon from "@/assets/icons/CloseIcon.vue";
+import BackIcon from "@/assets/icons/BackIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 import AddIcon from "@/assets/icons/AddIcon.vue";
 
@@ -81,7 +81,7 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
-  currentApplMVid: {
+  currentMotvationMVIndex: {
     type: Number,
     default: 0,
   },
@@ -101,7 +101,11 @@ const closeModal = () => {
 };
 
 const createFile = async () => {
-  const file = await createDoc(props.currentApplIndex, props.currentApplMVid);
+  console.log(props.currentMotvationMVIndex);
+  const file = await createDoc(
+    props.currentApplIndex,
+    props.currentMotvationMVIndex
+  );
   const data = await new Promise((resolve) => {
     const reader = new FileReader();
     reader.onload = (e) => {

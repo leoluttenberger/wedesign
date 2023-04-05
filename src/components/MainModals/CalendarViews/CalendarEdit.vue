@@ -12,7 +12,12 @@
             v-model="type"
             type="select"
             placeholder="Auswahl"
-            :options="['Bewerbungsgespräch', 'Sonstig Termine']"
+            :options="[
+              'Bewerbungsgespräch',
+              'Aufnahmetest',
+              'Feedback',
+              'Sonstige Termine',
+            ]"
           />
         </div>
       </div>
@@ -41,7 +46,7 @@
         <p
           class="px-2 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
         >
-          Beginn:
+          Start:
         </p>
         <div class="px-2">
           <FormKit
@@ -62,6 +67,7 @@
         <div class="px-2">
           <FormKit
             type="datetime-local"
+            name="Ende"
             v-model="appointmentTo"
             :validation="[['date_after', appointmentFrom]]"
             validation-visibility="live"
@@ -156,63 +162,8 @@ onMounted(() => {
 
 const saveToLocalStorage = () => {
   let dateCheck = false;
-  const currentDate = new Date();
-
-  if (appointmentFrom.value != null) {
-    const year = Number(appointmentFrom.value.slice(0, 4));
-    const month = (Number(appointmentFrom.value.slice(5, 7)) / 10) * 10;
-    const day = (Number(appointmentFrom.value.slice(8, 10)) / 10) * 10;
-    const hours = (Number(appointmentFrom.value.slice(11, 13)) / 10) * 10;
-    const minutes = (Number(appointmentFrom.value.slice(14, 16)) / 10) * 10;
-
-    if (year > Number(currentDate.getFullYear())) {
-      dateCheck = true;
-    } else if (year == Number(currentDate.getFullYear())) {
-      if (month > Number(currentDate.getMonth() + 1)) {
-        dateCheck = true;
-      } else if (month == Number(currentDate.getMonth() + 1)) {
-        if (day > Number(currentDate.getDate())) {
-          dateCheck = true;
-        } else if (day == Number(currentDate.getDate())) {
-          if (hours > Number(currentDate.getHours())) {
-            dateCheck = true;
-          } else if (hours == Number(currentDate.getHours())) {
-            console.log("Hours:", hours);
-            if (minutes >= Number(currentDate.getMinutes())) {
-              dateCheck = true;
-            }
-          }
-        }
-      }
-    }
-  }
-  if (appointmentTo.value != null) {
-    const year = Number(appointmentTo.value.slice(0, 4));
-    const month = (Number(appointmentTo.value.slice(5, 7)) / 10) * 10;
-    const day = (Number(appointmentTo.value.slice(8, 10)) / 10) * 10;
-    const hours = (Number(appointmentTo.value.slice(11, 13)) / 10) * 10;
-    const minutes = (Number(appointmentTo.value.slice(14, 16)) / 10) * 10;
-
-    if (year > Number(currentDate.getFullYear())) {
-      dateCheck = true;
-    } else if (year == Number(currentDate.getFullYear())) {
-      if (month > Number(currentDate.getMonth() + 1)) {
-        dateCheck = true;
-      } else if (month == Number(currentDate.getMonth() + 1)) {
-        if (day > Number(currentDate.getDate())) {
-          dateCheck = true;
-        } else if (day == Number(currentDate.getDate())) {
-          console.log("Day:", day);
-          if (hours > Number(currentDate.getHours())) {
-            dateCheck = true;
-          } else if (hours == Number(currentDate.getHours())) {
-            if (minutes >= Number(currentDate.getMinutes())) {
-              dateCheck = true;
-            }
-          }
-        }
-      }
-    }
+  if (appointmentFrom.value != null || appointmentTo.value != null) {
+    dateCheck = true;
   }
   if (buttonDisabled == false) {
     if (dateCheck) {

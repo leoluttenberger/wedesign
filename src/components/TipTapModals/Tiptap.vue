@@ -13,7 +13,7 @@
     :should-show="({ editor }) => shouldShow({ editor })"
   >
     <section class="bubble-menu-section-container">
-      <section class="message-section">
+      <section class="message-section justify-end">
         {{ matchMessage }}
 
         <button class="ignore-suggestion-button" @click="ignoreSuggestion">

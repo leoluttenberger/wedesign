@@ -3,14 +3,14 @@
     <div v-if="!motivationModalOpen">
       <div class="grid grid-cols-3 gap-20 p-2 place-items-center">
         <button type="button" @click="closeModal()" class="p-4">
-          <CloseIcon
+          <BackIcon
             class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-          ></CloseIcon>
+          ></BackIcon>
         </button>
         <p
           class="text-black px-1 dark:text-white font-Montserrat text-xl p-4 font-bold"
         >
-          {{ company + " speichern!" }}
+          {{ company }}
         </p>
         <button type="button" @click="saveToLocalStorage()" class="p-4">
           <CheckIcon
@@ -128,9 +128,8 @@
               <div class="px-2">
                 <FormKit
                   type="datetime-local"
+                  name="Start"
                   v-model="start"
-                  validation="required"
-                  validation-visibility="live"
                   placeholder="Auswählen"
                 />
               </div>
@@ -146,8 +145,9 @@
               <div class="px-2">
                 <FormKit
                   type="datetime-local"
+                  name="Deadline"
                   v-model="deadline"
-                  :validation="[['date_after', start]]"
+                  :validation="[['required'], ['date_after', start]]"
                   validation-visibility="live"
                   :value="deadline"
                 />
@@ -215,10 +215,10 @@
           <div class="col-span-2 md:col-span-1">
             <div class="flex bg-white dark:bg-slate-800 h-24 py-1">
               <div class="py-2">
-                <CloseIcon
+                <BackIcon
                   v-if="__mv == 0"
                   class="h-6 w-24 stroke-1 stroke-wd-error"
-                ></CloseIcon>
+                ></BackIcon>
               </div>
               <div class="py-2">
                 <CheckIcon
@@ -285,7 +285,7 @@
             v-bind="editIndex"
             :is="ApplicationPreview"
             :currentApplIndex="editIndex"
-            :currentApplMVid="__mv"
+            :currentMotvationMVIndex="mvIndex"
           />
         </div>
       </div>
@@ -294,7 +294,7 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted, defineProps, watch } from "vue";
-import CloseIcon from "@/assets/icons/CloseIcon.vue";
+import BackIcon from "@/assets/icons/BackIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 
 import { slideDown, sideBack } from "@/store/store.js";
@@ -315,6 +315,7 @@ const streetNumber = ref(null);
 const districtNumber = ref(null);
 const city = ref(null);
 const start = ref(null);
+const mvIndex = ref(null);
 
 let __mv = null;
 let __mvText = null;
@@ -348,6 +349,8 @@ onMounted(() => {
   editIndex.value = props.editIndex;
   buttonDisabled = false;
   const applications = ref(JSON.parse(localStorage.getItem("applications")));
+  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+
   company.value = applications.value[props.editIndex][0].company;
   job.value = applications.value[props.editIndex][0].job;
   streetName.value = applications.value[props.editIndex][0].streetName;
@@ -360,6 +363,12 @@ onMounted(() => {
   note.value = applications.value[props.editIndex][0].note;
   start.value = applications.value[props.editIndex][0].start;
   __mv = applications.value[props.editIndex][0].mv;
+  for (let i = 0; i < motivations.value.length; i++) {
+    if (motivations.value[i][0].indexMV == __mv) {
+      mvIndex.value = i;
+    }
+  }
+
   if (__mv == null) {
     __mvText = "Motivationsschreiben fehlt";
   } else {
@@ -420,8 +429,6 @@ const saveToLocalStorage = () => {
   applications.value[props.editIndex][0].deadline = deadline.value;
 
   console.log(props.editIndex);
-  let dateCheck = false;
-  const currentDate = new Date();
   const appointment = [
     {
       type: "Deadline",
@@ -432,63 +439,8 @@ const saveToLocalStorage = () => {
       deadlineId: applications.value[props.editIndex][0].id,
     },
   ];
-  if (start.value != null) {
-    const year = Number(start.value.slice(0, 4));
-    const month = (Number(start.value.slice(5, 7)) / 10) * 10;
-    const day = (Number(start.value.slice(8, 10)) / 10) * 10;
-    const hours = (Number(start.value.slice(11, 13)) / 10) * 10;
-    const minutes = (Number(start.value.slice(14, 16)) / 10) * 10;
 
-    if (year > Number(currentDate.getFullYear())) {
-      dateCheck = true;
-    } else if (year == Number(currentDate.getFullYear())) {
-      if (month > Number(currentDate.getMonth() + 1)) {
-        dateCheck = true;
-      } else if (month == Number(currentDate.getMonth() + 1)) {
-        if (day > Number(currentDate.getDate())) {
-          dateCheck = true;
-        } else if (day == Number(currentDate.getDate())) {
-          if (hours > Number(currentDate.getHours())) {
-            dateCheck = true;
-          } else if (hours == Number(currentDate.getHours())) {
-            console.log("Hours:", hours);
-            if (minutes >= Number(currentDate.getMinutes())) {
-              dateCheck = true;
-            }
-          }
-        }
-      }
-    }
-  }
-  if (deadline.value != null) {
-    const year = Number(deadline.value.slice(0, 4));
-    const month = (Number(deadline.value.slice(5, 7)) / 10) * 10;
-    const day = (Number(deadline.value.slice(8, 10)) / 10) * 10;
-    const hours = (Number(deadline.value.slice(11, 13)) / 10) * 10;
-    const minutes = (Number(deadline.value.slice(14, 16)) / 10) * 10;
-
-    if (year > Number(currentDate.getFullYear())) {
-      dateCheck = true;
-    } else if (year == Number(currentDate.getFullYear())) {
-      if (month > Number(currentDate.getMonth() + 1)) {
-        dateCheck = true;
-      } else if (month == Number(currentDate.getMonth() + 1)) {
-        if (day > Number(currentDate.getDate())) {
-          dateCheck = true;
-        } else if (day == Number(currentDate.getDate())) {
-          console.log("Day:", day);
-          if (hours > Number(currentDate.getHours())) {
-            dateCheck = true;
-          } else if (hours == Number(currentDate.getHours())) {
-            if (minutes >= Number(currentDate.getMinutes())) {
-              dateCheck = true;
-            }
-          }
-        }
-      }
-    }
-  }
-  if (dateCheck) {
+  if (company.value && deadline.value) {
     if (appointments.value.length > 0) {
       for (let i = 0; i < appointments.value.length; i++) {
         if (

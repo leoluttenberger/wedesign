@@ -12,6 +12,7 @@
             <FormKit
               v-model="company"
               type="text"
+              name="Firma"
               placeholder="Unternehmensname"
               validation="required|alphanumeric|?length:2"
               validation-label="Firma"
@@ -44,10 +45,8 @@
           <div class="px-2">
             <FormKit
               type="datetime-local"
+              name="Start"
               v-model="start"
-              validation="required"
-              value=""
-              validation-visibility="live"
               placeholder="Auswählen"
             />
           </div>
@@ -63,11 +62,11 @@
           <div class="px-2">
             <FormKit
               type="datetime-local"
+              name="Deadline"
               v-model="deadline"
-              :value="start"
-              validation="required|date_after"
+              :validation="[['required'], ['date_after', start]]"
               validation-visibility="live"
-              placeholder="Auswählen"
+              :value="deadline"
             />
           </div>
         </div>
@@ -151,78 +150,11 @@ const saveToLocalStorage = () => {
     },
   ];
   let dateCheck = false;
-
-  if (deadline.value != null) {
-    const year = Number(deadline.value.slice(0, 4));
-    const month = (Number(deadline.value.slice(5, 7)) / 10) * 10;
-    const day = (Number(deadline.value.slice(8, 10)) / 10) * 10;
-    const hours = (Number(deadline.value.slice(11, 13)) / 10) * 10;
-    const minutes = (Number(deadline.value.slice(14, 16)) / 10) * 10;
-    const currentDate = new Date();
-    if (year > Number(currentDate.getFullYear())) {
-      console.log("Year:", year);
-      dateCheck = true;
-    } else if (year == Number(currentDate.getFullYear())) {
-      if (month > Number(currentDate.getMonth() + 1)) {
-        console.log("Month:", month);
-        dateCheck = true;
-      } else if (month == Number(currentDate.getMonth() + 1)) {
-        if (day > Number(currentDate.getDate())) {
-          console.log("Day:", day);
-          dateCheck = true;
-        } else if (day == Number(currentDate.getDate())) {
-          console.log("Day:", day);
-          if (hours > Number(currentDate.getHours())) {
-            console.log("Hours:", hours);
-            dateCheck = true;
-          } else if (hours == Number(currentDate.getHours())) {
-            console.log("Hours:", hours);
-            if (minutes >= Number(currentDate.getMinutes())) {
-              console.log("Minutes:", minutes);
-              dateCheck = true;
-            }
-          }
-        }
-      }
-    }
-  }
-  if (start.value != null) {
-    const year = Number(start.value.slice(0, 4));
-    const month = (Number(start.value.slice(5, 7)) / 10) * 10;
-    const day = (Number(start.value.slice(8, 10)) / 10) * 10;
-    const hours = (Number(start.value.slice(11, 13)) / 10) * 10;
-    const minutes = (Number(start.value.slice(14, 16)) / 10) * 10;
-    const currentDate = new Date();
-    dateCheck = false;
-    if (year > Number(currentDate.getFullYear())) {
-      console.log("Year:", year);
-      dateCheck = true;
-    } else if (year == Number(currentDate.getFullYear())) {
-      if (month > Number(currentDate.getMonth() + 1)) {
-        console.log("Month:", month);
-        dateCheck = true;
-      } else if (month == Number(currentDate.getMonth() + 1)) {
-        if (day > Number(currentDate.getDate())) {
-          console.log("Day:", day);
-          dateCheck = true;
-        } else if (day == Number(currentDate.getDate())) {
-          console.log("Day:", day);
-          if (hours > Number(currentDate.getHours())) {
-            console.log("Hours:", hours);
-            dateCheck = true;
-          } else if (hours == Number(currentDate.getHours())) {
-            console.log("Hours:", hours);
-            if (minutes >= Number(currentDate.getMinutes())) {
-              console.log("Minutes:", minutes);
-              dateCheck = true;
-            }
-          }
-        }
-      }
-    }
+  if (start.value != null || deadline.value != null) {
+    dateCheck = true;
   }
 
-  if (company.value) {
+  if (company.value && deadline.value) {
     if (buttonDisabled == false) {
       if (dateCheck) {
         buttonDisabled = true;

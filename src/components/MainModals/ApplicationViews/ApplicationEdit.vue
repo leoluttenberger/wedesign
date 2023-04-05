@@ -128,9 +128,8 @@
               <div class="px-2">
                 <FormKit
                   type="datetime-local"
+                  name="Start"
                   v-model="start"
-                  validation="required"
-                  validation-visibility="live"
                   placeholder="Auswählen"
                 />
               </div>
@@ -146,8 +145,9 @@
               <div class="px-2">
                 <FormKit
                   type="datetime-local"
+                  name="Deadline"
                   v-model="deadline"
-                  :validation="[['date_after', start]]"
+                  :validation="[['required'], ['date_after', start]]"
                   validation-visibility="live"
                   :value="deadline"
                 />
@@ -420,8 +420,6 @@ const saveToLocalStorage = () => {
   applications.value[props.editIndex][0].deadline = deadline.value;
 
   console.log(props.editIndex);
-  let dateCheck = false;
-  const currentDate = new Date();
   const appointment = [
     {
       type: "Deadline",
@@ -432,63 +430,8 @@ const saveToLocalStorage = () => {
       deadlineId: applications.value[props.editIndex][0].id,
     },
   ];
-  if (start.value != null) {
-    const year = Number(start.value.slice(0, 4));
-    const month = (Number(start.value.slice(5, 7)) / 10) * 10;
-    const day = (Number(start.value.slice(8, 10)) / 10) * 10;
-    const hours = (Number(start.value.slice(11, 13)) / 10) * 10;
-    const minutes = (Number(start.value.slice(14, 16)) / 10) * 10;
 
-    if (year > Number(currentDate.getFullYear())) {
-      dateCheck = true;
-    } else if (year == Number(currentDate.getFullYear())) {
-      if (month > Number(currentDate.getMonth() + 1)) {
-        dateCheck = true;
-      } else if (month == Number(currentDate.getMonth() + 1)) {
-        if (day > Number(currentDate.getDate())) {
-          dateCheck = true;
-        } else if (day == Number(currentDate.getDate())) {
-          if (hours > Number(currentDate.getHours())) {
-            dateCheck = true;
-          } else if (hours == Number(currentDate.getHours())) {
-            console.log("Hours:", hours);
-            if (minutes >= Number(currentDate.getMinutes())) {
-              dateCheck = true;
-            }
-          }
-        }
-      }
-    }
-  }
-  if (deadline.value != null) {
-    const year = Number(deadline.value.slice(0, 4));
-    const month = (Number(deadline.value.slice(5, 7)) / 10) * 10;
-    const day = (Number(deadline.value.slice(8, 10)) / 10) * 10;
-    const hours = (Number(deadline.value.slice(11, 13)) / 10) * 10;
-    const minutes = (Number(deadline.value.slice(14, 16)) / 10) * 10;
-
-    if (year > Number(currentDate.getFullYear())) {
-      dateCheck = true;
-    } else if (year == Number(currentDate.getFullYear())) {
-      if (month > Number(currentDate.getMonth() + 1)) {
-        dateCheck = true;
-      } else if (month == Number(currentDate.getMonth() + 1)) {
-        if (day > Number(currentDate.getDate())) {
-          dateCheck = true;
-        } else if (day == Number(currentDate.getDate())) {
-          console.log("Day:", day);
-          if (hours > Number(currentDate.getHours())) {
-            dateCheck = true;
-          } else if (hours == Number(currentDate.getHours())) {
-            if (minutes >= Number(currentDate.getMinutes())) {
-              dateCheck = true;
-            }
-          }
-        }
-      }
-    }
-  }
-  if (dateCheck) {
+  if (company.value && deadline.value) {
     if (appointments.value.length > 0) {
       for (let i = 0; i < appointments.value.length; i++) {
         if (

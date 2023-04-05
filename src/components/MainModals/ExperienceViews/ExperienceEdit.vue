@@ -37,7 +37,7 @@
           <p
             class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
           >
-            Von:
+            Start:
           </p>
           <div class="px-2">
             <FormKit
@@ -53,11 +53,12 @@
           <p
             class="py-2 px-0 w-14 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
           >
-            Bis:
+            Ende:
           </p>
           <div class="px-2">
             <FormKit
               type="date"
+              name="Ende"
               v-model="workshopTo"
               placeholder="Auswählen"
               :validation="[['date_after', workshopFrom]]"

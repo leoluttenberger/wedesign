@@ -29,6 +29,10 @@
                         ? 'border-green-500'
                         : item[0].type == redType
                         ? 'border-red-500'
+                        : item[0].type == orangeType
+                        ? 'border-orange-500'
+                        : item[0].type == purpleType
+                        ? 'border-purple-500'
                         : 'border-blue-500'
                     "
                   >
@@ -117,6 +121,10 @@
                         ? 'border-green-500'
                         : item[0].type == redType
                         ? 'border-red-500'
+                        : item[0].type == orangeType
+                        ? 'border-orange-500'
+                        : item[0].type == purpleType
+                        ? 'border-purple-500'
                         : 'border-blue-500'
                     "
                   >
@@ -241,6 +249,9 @@ const currentYear = ref(new Date().getFullYear());
 const isPicked = ref(false);
 const greenType = ref("Bewerbungsgespräch");
 const redType = ref("Deadline");
+const orangeType = ref("Aufnahmetest");
+const purpleType = ref("Feedback");
+const blueType = ref("Sonstige Termine");
 
 interface SlideItem {
   id: string;

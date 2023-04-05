@@ -28,7 +28,7 @@
       />
     </svg>
     <text x="2" y="30" font-size="6" stroke-width="0.3" class="font-Montserrat">
-      Erinnerungen
+      Kalender
     </text>
   </svg>
 </template>

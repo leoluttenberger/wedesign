@@ -34,6 +34,8 @@ async function createDocx(
   let districtNumber = "";
   let city = "";
   let hobbies = "";
+  console.log("Current MV:", mvIndex);
+  console.log("Current MV:", applicationIndex);
 
   if (localStorage.getItem("userInfos")) {
     titleBefore = userInfos[0][0].titleBefore
@@ -122,6 +124,7 @@ async function createDocx(
   let textCompetence = "";
   let ending = "";
   let salutationEnding = "";
+
   if (localStorage.getItem("motivations")) {
     subject = motivations[mvIndex][0].subject
       ? motivations[mvIndex][0].subject

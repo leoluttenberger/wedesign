@@ -3,14 +3,14 @@
     <div v-if="!motivationModalOpen">
       <div class="grid grid-cols-3 gap-20 p-2 place-items-center">
         <button type="button" @click="closeModal()" class="p-4">
-          <CloseIcon
+          <BackIcon
             class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-          ></CloseIcon>
+          ></BackIcon>
         </button>
         <p
           class="text-black px-1 dark:text-white font-Montserrat text-xl p-4 font-bold"
         >
-          {{ company + " speichern!" }}
+          {{ company }}
         </p>
         <button type="button" @click="saveToLocalStorage()" class="p-4">
           <CheckIcon
@@ -215,10 +215,10 @@
           <div class="col-span-2 md:col-span-1">
             <div class="flex bg-white dark:bg-slate-800 h-24 py-1">
               <div class="py-2">
-                <CloseIcon
+                <BackIcon
                   v-if="__mv == 0"
                   class="h-6 w-24 stroke-1 stroke-wd-error"
-                ></CloseIcon>
+                ></BackIcon>
               </div>
               <div class="py-2">
                 <CheckIcon
@@ -285,7 +285,7 @@
             v-bind="editIndex"
             :is="ApplicationPreview"
             :currentApplIndex="editIndex"
-            :currentApplMVid="__mv"
+            :currentMotvationMVIndex="mvIndex"
           />
         </div>
       </div>
@@ -294,7 +294,7 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted, defineProps, watch } from "vue";
-import CloseIcon from "@/assets/icons/CloseIcon.vue";
+import BackIcon from "@/assets/icons/BackIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 
 import { slideDown, sideBack } from "@/store/store.js";
@@ -315,6 +315,7 @@ const streetNumber = ref(null);
 const districtNumber = ref(null);
 const city = ref(null);
 const start = ref(null);
+const mvIndex = ref(null);
 
 let __mv = null;
 let __mvText = null;
@@ -348,6 +349,8 @@ onMounted(() => {
   editIndex.value = props.editIndex;
   buttonDisabled = false;
   const applications = ref(JSON.parse(localStorage.getItem("applications")));
+  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+
   company.value = applications.value[props.editIndex][0].company;
   job.value = applications.value[props.editIndex][0].job;
   streetName.value = applications.value[props.editIndex][0].streetName;
@@ -360,6 +363,12 @@ onMounted(() => {
   note.value = applications.value[props.editIndex][0].note;
   start.value = applications.value[props.editIndex][0].start;
   __mv = applications.value[props.editIndex][0].mv;
+  for (let i = 0; i < motivations.value.length; i++) {
+    if (motivations.value[i][0].indexMV == __mv) {
+      mvIndex.value = i;
+    }
+  }
+
   if (__mv == null) {
     __mvText = "Motivationsschreiben fehlt";
   } else {

@@ -1,19 +1,21 @@
 <template>
-  <div class="flex">
+  <div class="flex justify-end">
     <button type="button" @click="closeModal" class="p-4">
       <CloseIcon
         class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
       ></CloseIcon>
     </button>
+  </div>
+  <div class="flex justify-left pb-2">
     <p
       v-if="itemIndex > 0"
-      class="text-black px-1 dark:text-white font-Montserrat text-xl p-4"
+      class="text-black px-1 dark:text-white font-Montserrat text-xl"
     >
       {{ textLabel }} {{ " - Textvorlage " + itemIndex + ":" }}
     </p>
     <p
       v-if="itemIndex == 0"
-      class="text-black px-1 dark:text-white font-Montserrat text-xl p-4"
+      class="text-black px-1 dark:text-white font-Montserrat text-xl"
     >
       {{ textLabel }} {{ " - Aktueller Text:" }}
     </p>

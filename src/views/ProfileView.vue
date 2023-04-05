@@ -20,7 +20,7 @@
       </button>
 
       <CropModal :show="showModal">
-        <div class="grid grid-cols-3 gap-8 p-2 place-items-center">
+        <div class="grid grid-cols-3 gap-8 p-2 place-items-center justify-end">
           <div>
             <button
               type="button"

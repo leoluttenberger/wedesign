@@ -75,13 +75,13 @@
             class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
           >
             <router-link to="/calendar">
-              <CalendarIcon
+              <NotificationMenuIcon
                 :class="
                   activeButton4
                     ? 'stroke-wd-green dark:stroke-wd-green'
                     : 'stroke-black dark:stroke-white'
                 "
-              ></CalendarIcon
+              ></NotificationMenuIcon
             ></router-link>
           </button>
           <button
@@ -119,7 +119,7 @@ import { isDarkMode } from "@/store/store.js";
 import HomeIcon from "@/assets/icons/HomeIcon.vue";
 import UserIcon from "@/assets/icons/UserIcon.vue";
 import DocumentsMenuIcon from "@/assets/icons/DocumentsMenuIcon.vue";
-import CalendarIcon from "@/assets/icons/CalendarIcon.vue";
+import NotificationMenuIcon from "@/assets/icons/NotificationMenuIcon.vue";
 import ToolIcon from "@/assets/icons/ToolIcon.vue";
 
 const router = useRouter();

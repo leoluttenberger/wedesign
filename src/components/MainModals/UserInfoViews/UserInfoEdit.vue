@@ -1,10 +1,20 @@
 <template>
   <div class="overflow-auto overflow-scroll w-screen h-screen">
-    <div class="flex">
+    <div class="grid grid-cols-3 gap-20 p-2 place-items-center">
       <button type="button" @click="closeModal()" class="p-4">
-        <CloseIcon
-          class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
-        ></CloseIcon>
+        <BackIcon
+          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+        ></BackIcon>
+      </button>
+      <p
+        class="text-black px-2 dark:text-white font-Montserrat text-xl p-4 font-bold"
+      >
+        Lebenslauf
+      </p>
+      <button type="button" @click="saveToLocalStorage()" class="p-4">
+        <CheckIcon
+          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+        ></CheckIcon>
       </button>
     </div>
     <div class="space-y-1">
@@ -302,20 +312,13 @@
         </div>
       </div>
     </div>
-    <div class="grid flex py-2 bottom-0">
-      <button
-        class="bg-wd-green hover:bg-transparent-green shadow h-24 text-white font-bold"
-        @click="saveToLocalStorage()"
-      >
-        Speichern
-      </button>
-    </div>
   </div>
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { slideDownUserInfo } from "@/store/store.js";
-import CloseIcon from "@/assets/icons/CloseIcon.vue";
+import BackIcon from "@/assets/icons/BackIcon.vue";
+import CheckIcon from "@/assets/icons/CheckIcon.vue";
 
 const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")));
 const titleBefore = ref(null);

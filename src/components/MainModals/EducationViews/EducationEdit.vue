@@ -1,10 +1,5 @@
 <template>
   <div class="p-4" v-bind="editIndex">
-    <h1
-      class="text-black dark:text-white font-Montserrat text-xl md:text-xxl font-bold"
-    >
-      Ausbildungen
-    </h1>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
         <div class="flex bg-white dark:bg-slate-800 h-10">

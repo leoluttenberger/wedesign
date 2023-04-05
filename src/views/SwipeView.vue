@@ -17,7 +17,7 @@
   </section>
   <section
     v-if="props.slideIndex == 4"
-    class="z-0 overflow-auto overflow-scroll w-screen h-auto py-96 pb-20 bg-wd-light-green dark:bg-slate-700"
+    class="z-0 overflow-auto overflow-scroll w-screen h-auto py-96 pb-20 bg-wd-background dark:bg-slate-700"
   >
     <div class="py-10">
       <component :is="mapListComponents[4]" :key="renderComponent" />
@@ -50,17 +50,17 @@
           <BottomCard v-model:open="bottomCardOpen">
             <SwiperCard :items="items">
               <button @click="closeBottomCard()" class="p-2">
-                <div class="flex">
+                <div class="flex justify-end">
                   <CloseIcon
-                    class="py-8 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
+                    class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
                   ></CloseIcon>
-                  <div class="flex justify-center">
-                    <h1
-                      class="py-10 px-10 text-black dark:text-white font-Montserrat text-xl md:text-xxl font-bold"
-                    >
-                      {{ mapFormComponentsNames[props.slideIndex] }}
-                    </h1>
-                  </div>
+                </div>
+                <div class="flex justify-left">
+                  <h1
+                    class="px-2 text-black dark:text-white font-Montserrat text-xl md:text-xxl font-bold"
+                  >
+                    {{ mapFormComponentsNames[props.slideIndex] }}
+                  </h1>
                 </div>
               </button>
 

@@ -193,17 +193,17 @@
           <BottomCard v-model:open="bottomCardOpen2">
             <SwiperCard :items="items">
               <button @click="closeBottomCard()" class="p-2">
-                <div class="flex">
+                <div class="flex justify-end">
                   <CloseIcon
-                    class="py-8 h-24 w-24 dark:stroke-wd-white stroke-black stroke-1"
+                    class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
                   ></CloseIcon>
-                  <div class="flex justify-center">
-                    <h1
-                      class="py-10 px-10 text-black dark:text-white font-Montserrat text-xl md:text-xxl font-bold"
-                    >
-                      Termin
-                    </h1>
-                  </div>
+                </div>
+                <div class="flex justify-left">
+                  <h1
+                    class="px-2 text-black dark:text-white font-Montserrat text-xl md:text-xxl font-bold"
+                  >
+                    Termin
+                  </h1>
                 </div>
               </button>
               <div class="flex flex-col items-left shadow-lg-up">

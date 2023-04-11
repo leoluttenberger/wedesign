@@ -14,7 +14,7 @@
               type="text"
               name="Firma"
               placeholder="Unternehmensname"
-              validation="required|alphanumeric|?length:2"
+              validation="required|?length:2"
               validation-label="Firma"
               validation-visibility="live"
             />

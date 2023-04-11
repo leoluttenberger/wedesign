@@ -7,7 +7,7 @@
         >
           Label:
         </p>
-        <div class="px-2">
+        <div class="px-2" v-if="!isDeadline">
           <FormKit
             v-model="type"
             type="select"
@@ -18,6 +18,15 @@
               'Feedback',
               'Sonstige Termine',
             ]"
+          />
+        </div>
+        <div class="px-2" v-if="isDeadline">
+          <FormKit
+            v-model="type"
+            type="select"
+            value="Deadline"
+            placeholder="Deadline"
+            :options="['Deadline']"
           />
         </div>
       </div>
@@ -142,7 +151,7 @@ const address = ref("");
 const note = ref(null);
 const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
 let buttonDisabled = false;
-
+let isDeadline = false;
 const props = withDefaults(
   defineProps<{
     editIndex: number;
@@ -160,6 +169,11 @@ onMounted(() => {
   appointmentTo.value = appointments.value[props.editIndex][0].appointmentTo;
   address.value = appointments.value[props.editIndex][0].address;
   note.value = appointments.value[props.editIndex][0].note;
+  if (type.value == "Deadline") {
+    isDeadline = true;
+  } else {
+    isDeadline = false;
+  }
 });
 
 const saveToLocalStorage = () => {

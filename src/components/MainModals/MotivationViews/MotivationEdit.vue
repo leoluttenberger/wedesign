@@ -269,7 +269,7 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
-  currentApplMVid: {
+  currentMotvationMVIndex: {
     type: Number,
     default: 0,
   },
@@ -368,7 +368,7 @@ const lastIndex = ref(0);
 let textLabel = "";
 
 onMounted(() => {
-  setLastAndMVIndex();
+  indexOfMVid.value = props.currentMotvationMVIndex;
   updateForm();
   sideBackBack.value = false;
   sideBack.value = true;
@@ -390,28 +390,6 @@ watch(sideBackBack, () => {
   }
 });
 
-const setLastAndMVIndex = () => {
-  if (localStorage.getItem("motivations")) {
-    const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
-    lastIndex.value = motivations.value.length;
-    lastIndex.value--;
-    if (lastIndex.value < 0) {
-      console.log("Error last index negative!");
-    } else {
-      for (let i = 0; i <= lastIndex.value; i++) {
-        if (motivations.value[i][0].subject == props.currentApplMVid) {
-          indexOfMVid.value = i;
-          break;
-        }
-      }
-    }
-  } else {
-    lastIndex.value = 0;
-    indexOfMVid.value = 0;
-    console.log("Error default motivations are not set!");
-  }
-};
-
 const saveToMVForm = () => {
   const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
   motivations.value[indexOfMVid.value][0].subject = subject.value;
@@ -429,7 +407,15 @@ const saveToMVForm = () => {
 };
 
 const createNewMotivation = () => {
+  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
   const applications = ref(JSON.parse(localStorage.getItem("applications")));
+  if (motivations.value.length > 0) {
+    indexOfMVid.value =
+      motivations.value[motivations.value.length - 1][0].indexMV;
+  } else {
+    indexOfMVid.value = 0;
+  }
+
   const index = indexOfMVid.value + 1;
   const motivation = [
     {
@@ -452,7 +438,6 @@ const createNewMotivation = () => {
       if (lastIndex.value > MAX_MV_PREVIEW) {
         const deleteCount = lastIndex.value - MAX_MV_PREVIEW;
         newData.splice(0, deleteCount);
-        console.log("Splice newData");
       }
     }
 
@@ -538,7 +523,7 @@ const closeModal = () => {
 };
 
 const saveModal = () => {
-  if (props.currentApplMVid == 0) {
+  if (indexOfMVid.value == 0) {
     console.log("create mv");
     createNewMotivation();
   } else {

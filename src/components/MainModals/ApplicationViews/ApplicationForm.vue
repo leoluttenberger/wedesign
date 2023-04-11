@@ -137,7 +137,7 @@ const saveToLocalStorage = () => {
       note: "",
       start: start.value,
       deadline: deadline.value,
-      date: new Date().toLocaleDateString(),
+      date: new Date("4/11/2020").toLocaleDateString(),
     },
   ];
   const appointment = [

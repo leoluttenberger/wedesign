@@ -3,7 +3,7 @@
     <div class="col-span-2 md:col-span-1">
       <div class="flex bg-white dark:bg-slate-800 h-10">
         <p
-          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
+          class="px-2 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
         >
           Label:
         </p>
@@ -25,7 +25,7 @@
     <div class="col-span-2 md:col-span-1">
       <div class="flex bg-white dark:bg-slate-800 h-10">
         <p
-          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
+          class="px-2 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
         >
           Titel:
         </p>
@@ -44,7 +44,7 @@
     <div class="col-span-2 md:col-span-1">
       <div class="flex bg-white dark:bg-slate-800 h-10">
         <p
-          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
+          class="px-2 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
         >
           Start:
         </p>
@@ -61,7 +61,7 @@
     <div class="col-span-2 md:col-span-1">
       <div class="flex bg-white dark:bg-slate-800 h-10">
         <p
-          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
+          class="px-2 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
         >
           Ende:
         </p>
@@ -70,7 +70,9 @@
             type="datetime-local"
             name="Ende"
             v-model="appointmentTo"
-            :validation="[['date_after', appointmentFrom]]"
+            :validation="
+              appointmentFrom ? [['date_after', appointmentFrom]] : []
+            "
             validation-visibility="live"
             :value="appointmentTo"
           />
@@ -82,7 +84,7 @@
     <div class="col-span-2 md:col-span-1">
       <div class="flex bg-white dark:bg-slate-800 h-10">
         <p
-          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
+          class="px-2 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
         >
           Adresse:
         </p>
@@ -98,7 +100,7 @@
     <div class="col-span-2 md:col-span-1">
       <div class="flex bg-white dark:bg-slate-800 h-10">
         <p
-          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
+          class="px-2 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
         >
           Notizen:
         </p>

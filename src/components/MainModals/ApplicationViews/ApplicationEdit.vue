@@ -147,7 +147,9 @@
                   type="datetime-local"
                   name="Deadline"
                   v-model="deadline"
-                  :validation="[['required'], ['date_after', start]]"
+                  :validation="
+                    start ? [['required'], ['date_after', start]] : []
+                  "
                   validation-visibility="live"
                   :value="deadline"
                 />

@@ -32,18 +32,13 @@
             >
               Betreff:
             </p>
-            <div class="p-2">
+            <button type="button" @click="subjectEdit()" class="py-2">
               <FormKit
                 v-model="subject"
                 type="textarea"
                 placeholder="Bewerbung Beruf"
                 :disabled="true"
               />
-            </div>
-            <button type="button" @click="subjectEdit()" class="p-4">
-              <EditIcon
-                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-              ></EditIcon>
             </button>
           </div>
         </div>
@@ -55,22 +50,13 @@
             >
               Anrede:
             </p>
-            <div class="p-2">
+            <button type="button" @click="salutationBeginningEdit()" class="">
               <FormKit
                 v-model="salutationBeginning"
                 type="textarea"
                 placeholder="Sehr geehrte Frau/Herr"
                 :disabled="true"
               />
-            </div>
-            <button
-              type="button"
-              @click="salutationBeginningEdit()"
-              class="p-4"
-            >
-              <EditIcon
-                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-              ></EditIcon>
             </button>
           </div>
         </div>
@@ -90,19 +76,19 @@
             >
               Einleitung:
             </p>
-            <div class="p-2">
-              <FormKit
-                v-model="textBegining"
-                type="textarea"
-                placeholder="Mit großem Interesse habe ich Ihre Anzeige gelesen."
-                :disabled="true"
-              />
-            </div>
 
-            <button type="button" @click="textBeginingEdit()" class="p-4">
-              <EditIcon
-                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-              ></EditIcon>
+            <button type="button" @click="textBeginingEdit()">
+              <div class="flex gap-4">
+                <FormKit
+                  v-model="textBegining"
+                  type="textarea"
+                  placeholder="Mit großem Interesse habe ich Ihre Anzeige gelesen."
+                  :disabled="true"
+                />
+                <EditIcon
+                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                ></EditIcon>
+              </div>
             </button>
           </div>
         </div>
@@ -114,18 +100,19 @@
             >
               Werdegang:
             </p>
-            <div class="py-2">
-              <FormKit
-                v-model="textExperience"
-                type="textarea"
-                placeholder="Die Berufsausbildung zum KFZ-Mechaniker habe ich im Jahr 2020 erfolgreich bei der Musterfirma abgeschlossen..."
-                :disabled="true"
-              />
-            </div>
-            <button type="button" @click="textExperienceEdit()" class="p-4">
-              <EditIcon
-                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-              ></EditIcon>
+
+            <button type="button" @click="textExperienceEdit()" class="">
+              <div class="flex gap-4">
+                <FormKit
+                  v-model="textExperience"
+                  type="textarea"
+                  placeholder="Die Berufsausbildung zum KFZ-Mechaniker habe ich im Jahr 2020 erfolgreich bei der Musterfirma abgeschlossen..."
+                  :disabled="true"
+                />
+                <EditIcon
+                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                ></EditIcon>
+              </div>
             </button>
           </div>
         </div>
@@ -136,18 +123,19 @@
             >
               Kompetenzen:
             </p>
-            <div class="p-2">
-              <FormKit
-                v-model="textCompetence"
-                type="textarea"
-                placeholder="Ich kann mit stressigen Situationen sehr gut umgehen..."
-                :disabled="true"
-              />
-            </div>
-            <button type="button" @click="textCompetenceEdit()" class="p-4">
-              <EditIcon
-                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-              ></EditIcon>
+
+            <button type="button" @click="textCompetenceEdit()" class="">
+              <div class="flex gap-4">
+                <FormKit
+                  v-model="textCompetence"
+                  type="textarea"
+                  placeholder="Ich kann mit stressigen Situationen sehr gut umgehen..."
+                  :disabled="true"
+                />
+                <EditIcon
+                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                ></EditIcon>
+              </div>
             </button>
           </div>
         </div>
@@ -158,25 +146,28 @@
             >
               Beitrag:
             </p>
-            <div class="p-2">
-              <FormKit
-                v-model="textContribution"
-                type="textarea"
-                placeholder="In Ihrem Unternehmen möchte ich mein handwerkliches Geschick einbringen..."
-                :disabled="true"
-              />
-            </div>
-            <button type="button" @click="textContributionEdit()" class="p-4">
-              <EditIcon
-                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-              ></EditIcon>
+
+            <button type="button" @click="textContributionEdit()" class="">
+              <div class="flex gap-4">
+                <FormKit
+                  v-model="textContribution"
+                  type="textarea"
+                  placeholder="In Ihrem Unternehmen möchte ich mein handwerkliches Geschick einbringen..."
+                  :disabled="true"
+                />
+                <EditIcon
+                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                ></EditIcon>
+              </div>
             </button>
           </div>
         </div>
       </div>
     </div>
     <div class="space-y-1">
-      <p class="text-black px-2 dark:text-white font-Montserrat text-sm">
+      <p
+        class="text-black p-2 dark:text-white font-Montserrat text-sm font-bold"
+      >
         Schlussteil:
       </p>
       <div class="grid grid-cols-2 gap-1">
@@ -187,18 +178,19 @@
             >
               Abschluss:
             </p>
-            <div class="p-2">
-              <FormKit
-                v-model="ending"
-                type="textarea"
-                placeholder="Für offene Fragen zu meiner Bewerbung stehe ich Ihnen jederzeit zur Verfügung..."
-                :disabled="true"
-              />
-            </div>
-            <button type="button" @click="endingEdit()" class="p-4">
-              <EditIcon
-                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-              ></EditIcon>
+
+            <button type="button" @click="endingEdit()" class="">
+              <div class="flex gap-4">
+                <FormKit
+                  v-model="ending"
+                  type="textarea"
+                  placeholder="Für offene Fragen zu meiner Bewerbung stehe ich Ihnen jederzeit zur Verfügung..."
+                  :disabled="true"
+                />
+                <EditIcon
+                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                ></EditIcon>
+              </div>
             </button>
           </div>
         </div>
@@ -209,18 +201,19 @@
             >
               Abschied:
             </p>
-            <div class="p-2">
-              <FormKit
-                v-model="salutationEnding"
-                type="textarea"
-                placeholder="Mit freundlichen Grüßen ..."
-                :disabled="true"
-              />
-            </div>
-            <button type="button" @click="salutationEndingEdit()" class="p-4">
-              <EditIcon
-                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-              ></EditIcon>
+
+            <button type="button" @click="salutationEndingEdit()" class="">
+              <div class="flex gap-4">
+                <FormKit
+                  v-model="salutationEnding"
+                  type="textarea"
+                  placeholder="Mit freundlichen Grüßen ..."
+                  :disabled="true"
+                />
+                <EditIcon
+                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                ></EditIcon>
+              </div>
             </button>
           </div>
         </div>

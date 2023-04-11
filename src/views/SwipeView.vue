@@ -150,7 +150,7 @@ const mapFormComponentsNames = [
   "Erfahrung",
   "Kenntnisse",
   "Bewerbung",
-  "Kalender",
+  "Erinnerungen",
 ];
 
 onMounted(() => {

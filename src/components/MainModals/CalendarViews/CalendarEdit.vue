@@ -69,7 +69,9 @@
             type="datetime-local"
             name="Ende"
             v-model="appointmentTo"
-            :validation="[['date_after', appointmentFrom]]"
+            :validation="
+              appointmentFrom ? [['date_after', appointmentFrom]] : []
+            "
             validation-visibility="live"
             :value="appointmentTo"
           />

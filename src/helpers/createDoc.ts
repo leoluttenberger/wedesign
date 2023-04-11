@@ -1,5 +1,7 @@
 import { Document, Paragraph, HeadingLevel, AlignmentType, Packer } from "docx";
 import moment from "moment";
+import { ref } from "vue";
+
 export const createDoc = async (applicationIndex: number, mvIndex: number) => {
   const blob = createDocHandler(applicationIndex, mvIndex);
   return blob;
@@ -14,10 +16,10 @@ async function createDocx(
   applicationIndex: number,
   mvIndex: number
 ): Promise<Blob> {
-  const applications = JSON.parse(localStorage.getItem("applications"));
-  const motivations = JSON.parse(localStorage.getItem("motivations"));
-  const userInfos = JSON.parse(localStorage.getItem("userInfos"));
-  const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
+  const applications = ref(JSON.parse(localStorage.getItem("applications")));
+  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+  const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")));
+  const tempMotivations = ref(JSON.parse(localStorage.getItem("motivations")));
 
   let titleBefore = "";
   let titleAfter = "";
@@ -34,34 +36,48 @@ async function createDocx(
   let districtNumber = "";
   let city = "";
   let hobbies = "";
-  console.log("Current MV:", mvIndex);
-  console.log("Current MV:", applicationIndex);
+  console.log("Current MV index:", mvIndex);
+  console.log("Current MV appl index:", applicationIndex);
 
   if (localStorage.getItem("userInfos")) {
-    titleBefore = userInfos[0][0].titleBefore
-      ? userInfos[0][0].titleBefore
+    titleBefore = userInfos.value[0][0].titleBefore
+      ? userInfos.value[0][0].titleBefore
       : "";
-    titleAfter = userInfos[0][0].titleAfter ? userInfos[0][0].titleAfter : "";
-    firstName = userInfos[0][0].firstName ? userInfos[0][0].firstName : "";
-    secondName = userInfos[0][0].secondName ? userInfos[0][0].secondName : "";
-    birthDate = userInfos[0][0].birthDate ? userInfos[0][0].birthDate : "";
-    birthArea = userInfos[0][0].birthArea ? userInfos[0][0].birthArea : "";
-    civilStatus = userInfos[0][0].civilStatus
-      ? userInfos[0][0].civilStatus
+    titleAfter = userInfos.value[0][0].titleAfter
+      ? userInfos.value[0][0].titleAfter
       : "";
-    gender = userInfos[0][0].gender ? userInfos[0][0].gender : "";
-    email = userInfos[0][0].email ? userInfos[0][0].email : "";
-    phone = userInfos[0][0].phone ? userInfos[0][0].phone : "";
-    streetName = userInfos[0][0].streetName ? userInfos[0][0].streetName : "";
-    streetNumber = userInfos[0][0].streetNumber
-      ? userInfos[0][0].streetNumber
+    firstName = userInfos.value[0][0].firstName
+      ? userInfos.value[0][0].firstName
       : "";
-    districtNumber = userInfos[0][0].districtNumber
-      ? userInfos[0][0].districtNumber
+    secondName = userInfos.value[0][0].secondName
+      ? userInfos.value[0][0].secondName
+      : "";
+    birthDate = userInfos.value[0][0].birthDate
+      ? userInfos.value[0][0].birthDate
+      : "";
+    birthArea = userInfos.value[0][0].birthArea
+      ? userInfos.value[0][0].birthArea
+      : "";
+    civilStatus = userInfos.value[0][0].civilStatus
+      ? userInfos.value[0][0].civilStatus
+      : "";
+    gender = userInfos.value[0][0].gender ? userInfos.value[0][0].gender : "";
+    email = userInfos.value[0][0].email ? userInfos.value[0][0].email : "";
+    phone = userInfos.value[0][0].phone ? userInfos.value[0][0].phone : "";
+    streetName = userInfos.value[0][0].streetName
+      ? userInfos.value[0][0].streetName
+      : "";
+    streetNumber = userInfos.value[0][0].streetNumber
+      ? userInfos.value[0][0].streetNumber
+      : "";
+    districtNumber = userInfos.value[0][0].districtNumber
+      ? userInfos.value[0][0].districtNumber
       : "";
 
-    city = userInfos[0][0].city ? userInfos[0][0].city : "";
-    hobbies = userInfos[0][0].hobbies ? userInfos[0][0].hobbies : "";
+    city = userInfos.value[0][0].city ? userInfos.value[0][0].city : "";
+    hobbies = userInfos.value[0][0].hobbies
+      ? userInfos.value[0][0].hobbies
+      : "";
   }
 
   const date_city = moment().format("DD.MM.YYYY, ") + city;
@@ -75,7 +91,7 @@ async function createDocx(
       titleBefore + " " + firstName + " " + secondName + " " + titleAfter;
   }
 
-  let lastIndex = tempMotivations.length - 1;
+  let lastIndex = tempMotivations.value.length - 1;
   if (lastIndex <= 0) {
     lastIndex = 0;
   }
@@ -88,27 +104,27 @@ async function createDocx(
   let applCity = "";
   let job = "";
 
-  if (localStorage.getItem("applications")) {
-    company = applications[applicationIndex][0].company
-      ? applications[applicationIndex][0].company
+  if (applications.value.length > 0) {
+    company = applications.value[applicationIndex][0].company
+      ? applications.value[applicationIndex][0].company
       : "";
-    contactPerson = applications[applicationIndex][0].contactPerson
-      ? applications[applicationIndex][0].contactPerson
+    contactPerson = applications.value[applicationIndex][0].contactPerson
+      ? applications.value[applicationIndex][0].contactPerson
       : "";
-    applStreetName = applications[applicationIndex][0].streetName
-      ? applications[applicationIndex][0].streetName
+    applStreetName = applications.value[applicationIndex][0].streetName
+      ? applications.value[applicationIndex][0].streetName
       : "";
-    applStreetNumber = applications[applicationIndex][0].streetNumber
-      ? applications[applicationIndex][0].streetNumber
+    applStreetNumber = applications.value[applicationIndex][0].streetNumber
+      ? applications.value[applicationIndex][0].streetNumber
       : "";
-    applDistrict = applications[applicationIndex][0].districtNumber
-      ? applications[applicationIndex][0].districtNumber
+    applDistrict = applications.value[applicationIndex][0].districtNumber
+      ? applications.value[applicationIndex][0].districtNumber
       : "";
-    applCity = applications[applicationIndex][0].city
-      ? applications[applicationIndex][0].city
+    applCity = applications.value[applicationIndex][0].city
+      ? applications.value[applicationIndex][0].city
       : "";
-    job = applications[applicationIndex][0].job
-      ? applications[applicationIndex][0].job
+    job = applications.value[applicationIndex][0].job
+      ? applications.value[applicationIndex][0].job
       : "";
   }
 
@@ -124,31 +140,31 @@ async function createDocx(
   let textCompetence = "";
   let ending = "";
   let salutationEnding = "";
-
-  if (localStorage.getItem("motivations")) {
-    subject = motivations[mvIndex][0].subject
-      ? motivations[mvIndex][0].subject
+  console.log("Current MV:", mvIndex);
+  if (motivations.value.length > 0 && mvIndex > 0) {
+    subject = motivations.value[mvIndex][0].subject
+      ? motivations.value[mvIndex][0].subject
       : "";
-    salutationBeginning = motivations[mvIndex][0].salutationBeginning
-      ? motivations[mvIndex][0].salutationBeginning
+    salutationBeginning = motivations.value[mvIndex][0].salutationBeginning
+      ? motivations.value[mvIndex][0].salutationBeginning
       : "";
-    textBegining = motivations[mvIndex][0].textBegining
-      ? motivations[mvIndex][0].textBegining
+    textBegining = motivations.value[mvIndex][0].textBegining
+      ? motivations.value[mvIndex][0].textBegining
       : "";
-    textExperience = motivations[mvIndex][0].textExperience
-      ? motivations[mvIndex][0].textExperience
+    textExperience = motivations.value[mvIndex][0].textExperience
+      ? motivations.value[mvIndex][0].textExperience
       : "";
-    textContribution = motivations[mvIndex][0].textContribution
-      ? motivations[mvIndex][0].textContribution
+    textContribution = motivations.value[mvIndex][0].textContribution
+      ? motivations.value[mvIndex][0].textContribution
       : "";
-    textCompetence = motivations[mvIndex][0].textCompetence
-      ? motivations[mvIndex][0].textCompetence
+    textCompetence = motivations.value[mvIndex][0].textCompetence
+      ? motivations.value[mvIndex][0].textCompetence
       : "";
-    ending = motivations[mvIndex][0].ending
-      ? motivations[mvIndex][0].endin
+    ending = motivations.value[mvIndex][0].ending
+      ? motivations.value[mvIndex][0].ending
       : "";
-    salutationEnding = motivations[mvIndex][0].salutationEnding
-      ? motivations[mvIndex][0].salutationEnding
+    salutationEnding = motivations.value[mvIndex][0].salutationEnding
+      ? motivations.value[mvIndex][0].salutationEnding
       : "";
   }
   const doc = new Document({

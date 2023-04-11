@@ -12,7 +12,7 @@
         >
           {{ company }}
         </p>
-        <button type="button" @click="saveToLocalStorage()" class="p-4">
+        <button type="button" @click="closeAfterSave()" class="p-4">
           <CheckIcon
             class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
           ></CheckIcon>
@@ -215,10 +215,10 @@
           <div class="col-span-2 md:col-span-1">
             <div class="flex bg-white dark:bg-slate-800 h-24 py-1">
               <div class="py-2">
-                <BackIcon
+                <CloseIcon
                   v-if="__mv == 0"
                   class="h-6 w-24 stroke-1 stroke-wd-error"
-                ></BackIcon>
+                ></CloseIcon>
               </div>
               <div class="py-2">
                 <CheckIcon
@@ -239,21 +239,18 @@
           <button
             class="bg-wd-error shadow rounded-md h-10 w-full text-white font-bold"
             @click="removeFromLocalStorage()"
-            :disabled="buttonDisabled"
           >
             Bewerbung entfernen
           </button>
           <button
             class="bg-wd-green hover:bg-transparent-green shadow h-16 text-white font-bold"
             @click="createMotivationNode()"
-            :disabled="buttonDisabled"
           >
             Motivationsschreiben bearbeiten
           </button>
           <button
             class="bg-wd-green hover:bg-transparent-green shadow h-16 text-white font-bold"
-            @click="sendJobApplication()"
-            :disabled="buttonDisabled"
+            @click="previewApplication()"
           >
             Bewerbungs Ansicht
           </button>
@@ -270,7 +267,7 @@
             v-bind="editIndex"
             :is="MotivationEdit"
             :currentApplIndex="editIndex"
-            :currentApplMVid="__mv"
+            :currentMotvationMVIndex="mvIndex"
           />
         </div>
       </div>
@@ -296,6 +293,7 @@
 import { ref, onMounted, defineProps, watch } from "vue";
 import BackIcon from "@/assets/icons/BackIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
+import CloseIcon from "@/assets/icons/CloseIcon.vue";
 
 import { slideDown, sideBack } from "@/store/store.js";
 import MotivationEdit from "@/components/MainModals/MotivationViews/MotivationEdit.vue";
@@ -319,8 +317,6 @@ const mvIndex = ref(null);
 
 let __mv = null;
 let __mvText = null;
-
-let buttonDisabled = false;
 const editIndex = ref(0);
 
 const props = defineProps({
@@ -347,7 +343,6 @@ watch(sideBack, () => {
 
 onMounted(() => {
   editIndex.value = props.editIndex;
-  buttonDisabled = false;
   const applications = ref(JSON.parse(localStorage.getItem("applications")));
   const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
 
@@ -363,54 +358,71 @@ onMounted(() => {
   note.value = applications.value[props.editIndex][0].note;
   start.value = applications.value[props.editIndex][0].start;
   __mv = applications.value[props.editIndex][0].mv;
-  for (let i = 0; i < motivations.value.length; i++) {
-    if (motivations.value[i][0].indexMV == __mv) {
-      mvIndex.value = i;
+  if (__mv == 0) {
+    __mvText = "Motivationsschreiben fehlt";
+    mvIndex.value = 0;
+  } else {
+    __mvText = "Motivationsschreiben angehaengt";
+    mvIndex.value = 0;
+
+    for (let i = 0; i < motivations.value.length; i++) {
+      if (motivations.value[i][0].indexMV == __mv) {
+        mvIndex.value = i;
+        break;
+      }
     }
   }
 
-  if (__mv == null) {
-    __mvText = "Motivationsschreiben fehlt";
-  } else {
-    __mvText = "Motivationsschreiben angehaengt";
-  }
   sideBack.value = false;
   slideDown.value = false;
 });
 
-const sendJobApplication = () => {
+const previewApplication = () => {
+  saveToLocalStorage();
+  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+  if (__mv == null) {
+    __mvText = "Motivationsschreiben fehlt";
+  } else {
+    __mvText = "Motivationsschreiben angehaengt";
+    for (let i = 0; i < motivations.value.length; i++) {
+      if (motivations.value[i][0].indexMV == __mv) {
+        mvIndex.value = i;
+      }
+    }
+  }
   applicationPreviewOpen.value = true;
   sideBack.value = true;
 };
 const removeFromLocalStorage = () => {
-  if (buttonDisabled == false) {
-    buttonDisabled = true;
-    const applications = ref(JSON.parse(localStorage.getItem("applications")));
-    const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
-    let sliceIndex = 0;
-    let count = 0;
-    for (let i = 0; i < appointments.value.length; i++) {
-      if (
-        props.editIndex + 1 == appointments.value[i][0].deadlineId &&
-        appointments.value[i][0].deadlineId != 0
-      ) {
-        sliceIndex = i;
-        count++;
-      }
+  const applications = ref(JSON.parse(localStorage.getItem("applications")));
+  const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
+  let sliceIndex = 0;
+  let count = 0;
+  for (let i = 0; i < appointments.value.length; i++) {
+    if (
+      props.editIndex + 1 == appointments.value[i][0].deadlineId &&
+      appointments.value[i][0].deadlineId != 0
+    ) {
+      sliceIndex = i;
+      count++;
     }
-    if (count != 0) {
-      appointments.value.splice(sliceIndex, 1);
-      localStorage.setItem("appointments", JSON.stringify(appointments.value));
-      console.log("Removed Appointment: ", count);
-    }
-    applications.value.splice(props.editIndex, 1);
-    localStorage.setItem("applications", JSON.stringify(applications.value));
-    slideDown.value = true;
   }
+  if (count != 0) {
+    appointments.value.splice(sliceIndex, 1);
+    localStorage.setItem("appointments", JSON.stringify(appointments.value));
+    console.log("Removed Appointment: ", count);
+  }
+  applications.value.splice(props.editIndex, 1);
+  localStorage.setItem("applications", JSON.stringify(applications.value));
+  slideDown.value = true;
 };
 const createMotivationNode = () => {
   motivationModalOpen.value = true;
   sideBack.value = true;
+};
+const closeAfterSave = () => {
+  saveToLocalStorage();
+  slideDown.value = true;
 };
 const saveToLocalStorage = () => {
   const applications = ref(JSON.parse(localStorage.getItem("applications")));
@@ -460,12 +472,9 @@ const saveToLocalStorage = () => {
     }
 
     localStorage.setItem("applications", JSON.stringify(applications.value));
-    buttonDisabled = true;
-    slideDown.value = true;
   }
 };
 const closeModal = () => {
-  buttonDisabled = true;
   slideDown.value = true;
 };
 </script>

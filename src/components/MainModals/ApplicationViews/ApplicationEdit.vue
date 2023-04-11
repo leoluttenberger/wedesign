@@ -302,6 +302,8 @@ import MotivationEdit from "@/components/MainModals/MotivationViews/MotivationEd
 import MVEditModal from "@/components/MenuModals/MVEditModal.vue";
 import ApplicationPreview from "@/components/MainModals/ApplicationViews/AppilcationPreview.vue";
 
+const MAX_ARCHIVE_LENGHT = 20;
+
 const company = ref(null);
 const job = ref(null);
 const deadline = ref(null);
@@ -400,6 +402,27 @@ const removeFromLocalStorage = () => {
   const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
   let sliceIndex = 0;
   let count = 0;
+  const archive = [
+    {
+      company: applications.value[props.editIndex][0].company,
+      job: applications.value[props.editIndex][0].job,
+      state: applications.value[props.editIndex][0].state,
+      date: applications.value[props.editIndex][0].date,
+    },
+  ];
+  if (localStorage.getItem("archives")) {
+    const archives = JSON.parse(localStorage.getItem("archives"));
+    const newData = [...archives, archive];
+    console.log("Updated Archives");
+    if (archives.length > MAX_ARCHIVE_LENGHT) {
+      newData.splice(0, 1);
+    }
+    localStorage.setItem("archives", JSON.stringify(newData));
+  } else {
+    localStorage.setItem("archives", JSON.stringify([archive]));
+    console.log("Added Archives");
+  }
+
   for (let i = 0; i < appointments.value.length; i++) {
     if (
       props.editIndex + 1 == appointments.value[i][0].deadlineId &&

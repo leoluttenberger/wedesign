@@ -19,9 +19,9 @@
     </div>
     <div class="grid grid-cols-3 p-4 place-items-center">
       <button v-if="pdf" @click="zoomOut()" class="">
-        <BackIcon
+        <ZoomOutIcon
           class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-        ></BackIcon>
+        ></ZoomOutIcon>
       </button>
       <p
         class="text-black px-1 dark:text-white font-Montserrat text-xl font-bold"
@@ -29,9 +29,9 @@
         {{ "Zoom" }}
       </p>
       <button v-if="pdf" @click="zoomIn()" class="">
-        <AddIcon
+        <ZoomInIcon
           class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-        ></AddIcon>
+        ></ZoomInIcon>
       </button>
     </div>
     <div
@@ -53,6 +53,8 @@ import { sideBack } from "@/store/store.js";
 import BackIcon from "@/assets/icons/BackIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 import AddIcon from "@/assets/icons/AddIcon.vue";
+import ZoomOutIcon from "@/assets/icons/ZoomOutIcon.vue";
+import ZoomInIcon from "@/assets/icons/ZoomInIcon.vue";
 
 import VuePdfEmbed from "vue-pdf-embed";
 import { saveAs } from "file-saver";

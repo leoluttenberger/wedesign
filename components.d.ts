@@ -36,6 +36,8 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SwiperCard: typeof import('./src/components/MenuModals/SwiperCard.vue')['default']
+    TipsTricksCategory: typeof import('./src/components/MainModals/TipsTricksViews/tipsTricksCategory.vue')['default']
+    TipsTricksView: typeof import('./src/components/MainModals/TipsTricksViews/tipsTricksView.vue')['default']
     Tiptap: typeof import('./src/components/TipTapModals/Tiptap.vue')['default']
     UserForm: typeof import('./src/components/MainModals/UserInfoViews/UserForm.vue')['default']
     UserInfoDisplay: typeof import('./src/components/MainModals/UserInfoViews/UserInfoDisplay.vue')['default']

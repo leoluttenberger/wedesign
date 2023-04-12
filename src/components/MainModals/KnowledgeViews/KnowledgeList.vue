@@ -130,7 +130,7 @@ import KnowledgeEdit from "@/components/MainModals/KnowledgeViews/KnowledgeEdit.
 
 import { Container, Draggable } from "vue3-smooth-dnd";
 
-const knowledges = ref(JSON.parse(localStorage.getItem("knowledges")));
+const knowledges = ref(JSON.parse(localStorage.getItem("knowledges")) || []);
 const bottomCardOpen4 = ref(false);
 const renderComponent4 = ref(true);
 let currentButtonIndex = ref(0);
@@ -150,7 +150,7 @@ const items = ref<SlideItem[]>([
   { id: getID(), index: getPosIndex(), text: "First" },
 ]);
 
-const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")));
+const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   darkLightMode.value = "dark";
 } else {

@@ -43,7 +43,9 @@ import UserInfoEdit from "@/components/MainModals/UserInfoViews/UserInfoEdit.vue
 import UserForm from "@/components/MainModals/UserInfoViews/UserForm.vue";
 import ProfileView from "@/views/ProfileView.vue";
 
-const applications = ref(JSON.parse(localStorage.getItem("applications")));
+const applications = ref(
+  JSON.parse(localStorage.getItem("applications")) || []
+);
 const bottomCardOpen5 = ref(false);
 const renderComponent5 = ref(true);
 let currentButtonIndex = ref(0);

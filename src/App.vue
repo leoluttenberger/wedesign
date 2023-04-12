@@ -123,7 +123,7 @@ import NotificationMenuIcon from "@/assets/icons/NotificationMenuIcon.vue";
 import ToolIcon from "@/assets/icons/ToolIcon.vue";
 
 const router = useRouter();
-const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")));
+const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
 let activeButton1 = ref(true);
 let activeButton2 = ref(false);
 let activeButton3 = ref(false);

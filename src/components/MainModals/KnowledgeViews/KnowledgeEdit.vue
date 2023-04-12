@@ -99,7 +99,7 @@ const diversKnowledge = ref(null);
 const languageKnowledge = ref(null);
 const languageLevel = ref(null);
 let buttonDisabled = false;
-const knowledges = ref(JSON.parse(localStorage.getItem("knowledges")));
+const knowledges = ref(JSON.parse(localStorage.getItem("knowledges")) || []);
 
 const props = defineProps({
   editIndex: {

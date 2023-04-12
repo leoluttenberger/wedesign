@@ -310,7 +310,7 @@ const city = ref(null);
 const hobbies = ref(null);
 onMounted(() => {
   slideDown.value = false;
-  const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")));
+  const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")) || []);
   if (localStorage.getItem("userInfos")) {
     titleBefore.value = userInfos.value[0][0].titleBefore;
     titleAfter.value = userInfos.value[0][0].titleAfter;

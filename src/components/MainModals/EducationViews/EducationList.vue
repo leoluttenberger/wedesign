@@ -126,7 +126,7 @@ import EducationEdit from "@/components/MainModals/EducationViews/EducationEdit.
 
 import { Container, Draggable } from "vue3-smooth-dnd";
 
-const educations = ref(JSON.parse(localStorage.getItem("educations")));
+const educations = ref(JSON.parse(localStorage.getItem("educations")) || []);
 const bottomCardOpen2 = ref(false);
 const renderComponent2 = ref(true);
 let currentButtonIndex = ref(0);
@@ -147,7 +147,7 @@ const items = ref<SlideItem[]>([
   { id: getID(), index: getPosIndex(), text: "First" },
 ]);
 
-const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")));
+const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   darkLightMode.value = "dark";
 } else {

@@ -76,7 +76,9 @@ const calendar = ref(null);
 const locale = "de-AT";
 const renderComponent = ref(true);
 const pickedDate = ref(null);
-const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
+const appointments = ref(
+  JSON.parse(localStorage.getItem("appointments")) || []
+);
 
 interface HighlightDate {
   color: string;
@@ -263,7 +265,9 @@ onMounted(() => {
 
 watch(isQuickAccessCalendar, () => {
   if (isQuickAccessCalendar.value == true) {
-    const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
+    const appointments = ref(
+      JSON.parse(localStorage.getItem("appointments")) || []
+    );
     if (appointments.value[lastCalendarIndex.value][0].appointmentFrom) {
       selectedMonth.value = appointments.value[
         lastCalendarIndex.value

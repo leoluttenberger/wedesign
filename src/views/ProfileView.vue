@@ -84,7 +84,7 @@ valueAvatarShow.value = true;
 
 const bottomCardOpen = ref(false);
 
-const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")));
+const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   darkLightMode.value = "dark";
 } else {

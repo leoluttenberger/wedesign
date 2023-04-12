@@ -149,7 +149,9 @@ const appointmentFrom = ref(null);
 const appointmentTo = ref(null);
 const address = ref("");
 const note = ref(null);
-const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
+const appointments = ref(
+  JSON.parse(localStorage.getItem("appointments")) || []
+);
 let buttonDisabled = false;
 let isDeadline = false;
 const props = withDefaults(
@@ -230,7 +232,9 @@ const saveToLocalStorage = () => {
 };
 const removeFromLocalStorage = () => {
   if (buttonDisabled == false) {
-    const applications = ref(JSON.parse(localStorage.getItem("applications")));
+    const applications = ref(
+      JSON.parse(localStorage.getItem("applications")) || []
+    );
     for (let i = 0; i < applications.value.length; i++) {
       if (
         applications.value[i][0].id ==

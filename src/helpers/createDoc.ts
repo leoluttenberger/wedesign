@@ -16,10 +16,16 @@ async function createDocx(
   applicationIndex: number,
   mvIndex: number
 ): Promise<Blob> {
-  const applications = ref(JSON.parse(localStorage.getItem("applications")));
-  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
-  const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")));
-  const tempMotivations = ref(JSON.parse(localStorage.getItem("motivations")));
+  const applications = ref(
+    JSON.parse(localStorage.getItem("applications")) || []
+  );
+  const motivations = ref(
+    JSON.parse(localStorage.getItem("motivations")) || []
+  );
+  const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")) || []);
+  const tempMotivations = ref(
+    JSON.parse(localStorage.getItem("motivations")) || []
+  );
 
   let titleBefore = "";
   let titleAfter = "";

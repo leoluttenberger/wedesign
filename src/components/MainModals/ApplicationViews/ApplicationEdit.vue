@@ -340,15 +340,21 @@ watch(sideBack, () => {
   } else {
     motivationModalOpen.value = false;
     applicationPreviewOpen.value = false;
-    const applications = ref(JSON.parse(localStorage.getItem("applications")));
+    const applications = ref(
+      JSON.parse(localStorage.getItem("applications")) || []
+    );
     __mv = applications.value[props.editIndex][0].mv;
   }
 });
 
 onMounted(() => {
   editIndex.value = props.editIndex;
-  const applications = ref(JSON.parse(localStorage.getItem("applications")));
-  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+  const applications = ref(
+    JSON.parse(localStorage.getItem("applications")) || []
+  );
+  const motivations = ref(
+    JSON.parse(localStorage.getItem("motivations")) || []
+  );
 
   company.value = applications.value[props.editIndex][0].company;
   job.value = applications.value[props.editIndex][0].job;
@@ -383,7 +389,9 @@ onMounted(() => {
 
 const previewApplication = () => {
   saveToLocalStorage();
-  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+  const motivations = ref(
+    JSON.parse(localStorage.getItem("motivations")) || []
+  );
   if (__mv == null) {
     __mvText = "Motivationsschreiben fehlt";
   } else {
@@ -398,8 +406,12 @@ const previewApplication = () => {
   sideBack.value = true;
 };
 const removeFromLocalStorage = () => {
-  const applications = ref(JSON.parse(localStorage.getItem("applications")));
-  const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
+  const applications = ref(
+    JSON.parse(localStorage.getItem("applications")) || []
+  );
+  const appointments = ref(
+    JSON.parse(localStorage.getItem("appointments")) || []
+  );
   let sliceIndex = 0;
   let count = 0;
   const archive = [
@@ -450,8 +462,12 @@ const closeAfterSave = () => {
   slideDown.value = true;
 };
 const saveToLocalStorage = () => {
-  const applications = ref(JSON.parse(localStorage.getItem("applications")));
-  const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
+  const applications = ref(
+    JSON.parse(localStorage.getItem("applications")) || []
+  );
+  const appointments = ref(
+    JSON.parse(localStorage.getItem("appointments")) || []
+  );
 
   applications.value[props.editIndex][0].company = company.value;
   applications.value[props.editIndex][0].job = job.value;

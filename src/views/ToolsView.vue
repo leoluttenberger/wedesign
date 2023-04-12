@@ -50,7 +50,7 @@ watch(toggleOnDark, () => {
     localStorage.setItem("theme", JSON.stringify("light"));
   }
 });
-const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")));
+const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")) || []);
 const firstName = ref(null);
 onMounted(() => {
   if (localStorage.getItem("userInfos")) {

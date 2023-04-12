@@ -430,7 +430,9 @@ watch(sideBackBack, () => {
 });
 
 const saveToMVForm = () => {
-  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+  const motivations = ref(
+    JSON.parse(localStorage.getItem("motivations")) || []
+  );
   motivations.value[indexOfMVid.value][0].subject = subject.value;
   motivations.value[indexOfMVid.value][0].salutationBeginning =
     salutationBeginning.value;
@@ -446,8 +448,12 @@ const saveToMVForm = () => {
 };
 
 const createNewMotivation = () => {
-  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
-  const applications = ref(JSON.parse(localStorage.getItem("applications")));
+  const motivations = ref(
+    JSON.parse(localStorage.getItem("motivations")) || []
+  );
+  const applications = ref(
+    JSON.parse(localStorage.getItem("applications")) || []
+  );
   if (motivations.value.length > 0) {
     indexOfMVid.value =
       motivations.value[motivations.value.length - 1][0].indexMV;
@@ -491,7 +497,9 @@ const createNewMotivation = () => {
 };
 
 const updateForm = () => {
-  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+  const motivations = ref(
+    JSON.parse(localStorage.getItem("motivations")) || []
+  );
 
   if (isEdited) {
     subject.value = currentSubject.value;

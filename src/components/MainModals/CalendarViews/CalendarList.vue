@@ -243,7 +243,9 @@ import SwiperCard from "@/components/MenuModals/SwiperCard.vue";
 import { Container } from "vue3-smooth-dnd";
 import { select } from "@formkit/inputs";
 
-const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
+const appointments = ref(
+  JSON.parse(localStorage.getItem("appointments")) || []
+);
 const bottomCardOpen2 = ref(false);
 let currentButtonIndex = ref(0);
 const currentDay = ref(0);
@@ -271,7 +273,7 @@ const items = ref<SlideItem[]>([
   { id: getID(), index: getPosIndex(), text: "First" },
 ]);
 
-const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")));
+const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   darkLightMode.value = "dark";
 } else {

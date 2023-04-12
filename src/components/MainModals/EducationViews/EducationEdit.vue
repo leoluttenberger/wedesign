@@ -118,7 +118,7 @@ const address = ref(null);
 const educationFrom = ref(null);
 const educationTo = ref(null);
 let buttonDisabled = false;
-const educations = ref(JSON.parse(localStorage.getItem("educations")));
+const educations = ref(JSON.parse(localStorage.getItem("educations")) || []);
 
 const props = withDefaults(
   defineProps<{

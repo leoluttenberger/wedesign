@@ -102,7 +102,7 @@
       ></NotificationsIcon>
       <p class="flex-none pt-2">Wichtige Termine</p>
       <div class="grow ..."></div>
-      <p class="flex-none px-2 mx-2 pt-1 bg-wd-green rounded-full">
+      <p class="flex-none px-3 mx-2 pt-1 bg-wd-green rounded-full">
         {{ appointments.length }}
       </p>
     </div>
@@ -208,9 +208,13 @@ import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 import DocumentsIcon from "@/assets/icons/DocumentsIcon.vue";
 import NotificationsIcon from "@/assets/icons/NotificationsIcon.vue";
 import TripsTricks from "@/components/MainModals/TipsTricksViews/tipsTricksView.vue";
-const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")));
-const applications = ref(JSON.parse(localStorage.getItem("applications")));
-const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
+const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")) || []);
+const applications = ref(
+  JSON.parse(localStorage.getItem("applications")) || []
+);
+const appointments = ref(
+  JSON.parse(localStorage.getItem("appointments")) || []
+);
 
 const blueType = ref("Bewerbungsgespräch");
 const redType = ref("Deadline");

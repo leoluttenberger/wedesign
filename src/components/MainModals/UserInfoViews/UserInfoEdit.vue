@@ -320,7 +320,7 @@ import { slideDownUserInfo } from "@/store/store.js";
 import BackIcon from "@/assets/icons/BackIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 
-const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")));
+const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")) || []);
 const titleBefore = ref(null);
 const titleAfter = ref(null);
 const firstName = ref(null);

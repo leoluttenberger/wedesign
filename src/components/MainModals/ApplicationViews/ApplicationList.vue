@@ -195,7 +195,9 @@ import CheckIcon from "@/assets/icons/CheckIcon.vue";
 
 import { Container, Draggable } from "vue3-smooth-dnd";
 
-const applications = ref(JSON.parse(localStorage.getItem("applications")));
+const applications = ref(
+  JSON.parse(localStorage.getItem("applications")) || []
+);
 const bottomCardOpen4 = ref(false);
 const renderComponent4 = ref(true);
 let currentButtonIndex = ref(0);

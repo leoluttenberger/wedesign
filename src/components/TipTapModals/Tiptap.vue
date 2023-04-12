@@ -193,7 +193,9 @@ onMounted(() => {
   sideBackBack.value = true;
   let editText = "";
   let mvIndexToDisplay = 0;
-  const motivations = ref(JSON.parse(localStorage.getItem("motivations")));
+  const motivations = ref(
+    JSON.parse(localStorage.getItem("motivations")) || []
+  );
   const lastIndex = motivations.value.length;
   if (props.itemCurrentIndex >= 0) {
     if (props.itemCurrentIndex == 0) {

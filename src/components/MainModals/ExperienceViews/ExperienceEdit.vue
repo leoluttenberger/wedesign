@@ -96,7 +96,7 @@ const description = ref(null);
 const workshopFrom = ref(null);
 const workshopTo = ref(null);
 let buttonDisabled = false;
-const experiences = ref(JSON.parse(localStorage.getItem("experiences")));
+const experiences = ref(JSON.parse(localStorage.getItem("experiences")) || []);
 
 const props = defineProps({
   editIndex: {

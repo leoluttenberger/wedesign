@@ -120,7 +120,9 @@ onMounted(() => {
 });
 
 const saveToLocalStorage = () => {
-  const applications = ref(JSON.parse(localStorage.getItem("applications")));
+  const applications = ref(
+    JSON.parse(localStorage.getItem("applications")) || []
+  );
 
   const application = [
     {

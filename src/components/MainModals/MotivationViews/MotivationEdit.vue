@@ -273,62 +273,108 @@ interface SlideItem {
   index: number;
   text: string;
 }
-const defaultData = [
+const motivation1 = [
   {
     indexMV: "1",
     subject: "Bewerbung als ...",
     salutationBeginning: " Sehr geehrte/r Frau/Herr... Musterfrau, ",
     textBegining:
-      "mit großem Interesse habe ich in der Zeitung / auf der Website gelesen, dass Sie eine/n Mustermitarbeiter/in suchen. Ich möchte hiermit meine Chance nutzen, um mich Ihnen vorzustellen.",
+      "Ich habe in einer aktuellen Stellenausschreibung mit großem Interesse von Ihrem Unternehmen erfahren und möchte mich hiermit gerne für die Stelle als Mitarbeiter*in im Service-Verkauf bewerben.",
     textExperience:
-      "Wie Sie den beigefügten Unterlagen entnehmen können, bringe ich die erforderlichen fachlichen Qualifikationen für die ausgeschriebene Stelle mit. Nach dem erfolgreichen Abschluss meiner Musterausbildung an der Musterschule im Jahr JJJJ war ich mehrere Jahre als Mustermitarbeiter/in tätig. Zu meinen Aufgaben gehörten vor allem Aufzählen der wichtigsten Aufgaben.",
+      "Im Jahr xxx habe ich die xxx Schule erfolgreich abgeschlossen und konnte auch praktische Erfahrungen in einem Praktikum bei xxx sammeln. Während dieser Zeit habe ich wertvolle Erfahrungen im Umgang mit Kunden gesammelt und konnte eigene Aufgaben, wie z.B. die Beratung oder Betreuung von KundInnen, übernehmen.",
     textCompetence:
-      "Bei meiner bisherigen beruflichen Tätigkeit zählte ein hohes Maß an Lernbereitschaft ebenso zu meinen Stärken wie Teamfähigkeit und Problemlösungsfähigkeit . Diese Kompetenzen konnte ich vor allem bei der Umsetzung von Projekten unter Beweis stellen. Während meiner beruflichen Laufbahn / Ausbildung /... habe ich äußerst fundierte Kenntnisse bezüglich Daten- und Texterfassung , telefonische Beratung und Interviewführung erworben. Besonders möchte ich meine Kompetenzen und Erfahrungen auf dem Gebiet Verfassen von Texten hervorheben, die ich in meine zukünftige Arbeitsstelle mitbringe.",
+      "Zu meinen Fähigkeiten gehört selbständiges und verantwortungsbewusstes Arbeiten, das ich auch gewissenhaft mit Teamarbeit verbinde. Ich verfüge über ein hohes Maß an Lernbereitschaft und Problemlösungsfähigkeit. Diese Kompetenzen konnte ich vor allem während meines absolvierten Praktikums unter Beweis stellen. Der Kontakt mit Menschen macht mir Spaß, da ich auch sehr gerne kommuniziere und redegewandt bin. Ich habe Freude am Umgang mit Menschen, bin kommunikationsfreudig und redegewandt. Ich bin ausdauernd und erledige meine Aufgaben mit vollem Engagement und kann mich gut an Herausforderungen anpassen.",
     textContribution:
-      "Da Ihre Stellenbeschreibung meinen Fähigkeiten und Kenntnissen entspricht , bin ich davon überzeugt, für diesen Beruf bestens geeignet zu sein.",
+      "Da Ihre Stellenbeschreibung meinen Fähigkeiten und Kenntnissen entspricht, wie z.B. Kundenfreundlichkeit, selbständiges Arbeiten und eine kommunikative Einstellung, bin ich überzeugt, dass ich Ihr Unternehmen mit meinen bereits erworbenen Fähigkeiten unterstützen kann.",
     ending:
-      "Ich freue mich darauf, mich bald in einem persönlichen Gespräch vorzustellen und mehr über die Position zu erfahren.",
-    salutationEnding: " Mit freundlichen Grüßen",
+      "Ich freue mich darauf, mich bald in einem persönlichen Gespräch vorzustellen und mehr über die Stelle zu erfahren.",
+    salutationEnding: " Mit freundlichen Grüßen ...",
   },
 ];
 
-const motivation1 = [
+const motivation2 = [
   {
     indexMV: "2",
-    subject: "Bewerbung als Bäcker",
+    subject: "Bewerbung als ...",
     salutationBeginning: "Sehr geehrte Frau/Herr",
-    textBegining: "Mit großem Interesse habe ich Ihre Anzeige gelesen.",
+    textBegining:
+      "In der Stellenausschreibung auf Ihrer Homepage konnte ich sehen, dass Sie für Ihr Kreativstudio eine Medienfachkraft suchen. Da ich gerade eine Ausbildung in einer Medienagentur abgeschlossen habe, bewerbe ich mich bei Ihnen, vor allem weil Ihre Anzeige großes Interesse bei mir geweckt hat.",
     textExperience:
-      "Die Berufsausbildung zum Bäcker habe ich im Jahr 2020 erfolgreich bei der Musterfirma abgeschlossen...",
-    textCompetence: "Ich kann mit stressigen Situationen sehr gut umgehen...",
+      "Aufgrund meines erfolgreichen Abschlusses der Schule xxx und der anschließenden abgeschlossenen Lehre für „Medientechnik und -design“ und meiner damit bereits vorhandenen Praxiserfahrung, bin ich für diese Stelle sehr gut geeignet. Während meiner Ausbildung konnte ich mir hervorragende Kenntnisse in den einzelnen künstlerischen Darstellungsformen sowie der digitalen Bearbeitung aneignen. Zudem bin ich sehr engagiert und kreativ sowie künstlerisch begabt.",
+    textCompetence:
+      "Zu meinen Fähigkeiten gehört es, selbstständig und verantwortungsbewusst zu arbeiten und dies auch gewissenhaft mit Teamarbeit zu kombinieren. Ich verfüge über ein hohes Maß an Lernbereitschaft und Problemlösungsfähigkeit. Diese Kompetenzen konnte ich insbesondere während meiner abgeschlossenen Ausbildung unter Beweis stellen. Ich bin gut darin, Konzepte zu verstehen und in eine künstlerische Form zu übersetzen. Ich arbeite sehr gewissenhaft und erledige meine Aufgaben mit vollem Engagement und kann mich gut auf Herausforderungen einstellen.",
     textContribution:
-      "In Ihrem Unternehmen möchte ich meine Backkünste einbringen...",
+      "Da Ihre Stellenausschreibung meinen Fähigkeiten und Kenntnissen, wie Kreativität, selbständiges Arbeiten und die Umsetzung von Konzeptideen, entspricht, bin ich überzeugt, dass ich Ihr Kreativstudio mit meinen bereits erworbenen Fähigkeiten unterstützen kann.",
     ending:
-      "Für offene Fragen zu meiner Bewerbung stehe ich Ihnen jederzeit zur Verfügung...",
+      "Ich würde mich über eine Einladung zu einem persönlichen Vorstellungsgespräch freuen, zu dem ich gerne eine Mappe mit bisherigen Projekten mitbringe.",
     salutationEnding: "Mit freundlichen Grüßen ...",
   },
 ];
-const motivation2 = [
+const motivation3 = [
   {
     indexMV: "3",
-    subject: "Bewerbung als Verkäufer",
+    subject: "Bewerbung als ...",
     salutationBeginning: "Sehr geehrte Frau/Herr",
-    textBegining: "Mit großem Interesse habe ich Ihre Anzeige gelesen.",
+    textBegining:
+      "Mit großem Interesse habe ich Ihr Stellenangebot für eine Lehrstelle als KFZ-TechnikerIn gelesen und sende Ihnen deshalb meine schriftlichen Bewerbungsunterlagen. ",
     textExperience:
-      "Die Berufsausbildung zum Bäcker habe ich im Jahr 2020 erfolgreich bei der Musterfirma abgeschlossen...",
-    textCompetence: "Ich kann mit stressigen Situationen sehr gut umgehen...",
+      "Meine Ausbildung an der xxx Schule habe ich bereits erfolgreich abgeschlossen. In der Schule war ich ein/e sehr aufmerksame/r SchülerIn und konnte die geforderten Aufgaben gut bewältigen. Ich habe mich schon immer sehr für Autos und die Technik dahinter interessiert, z.B. habe ich meinem Vater immer gerne bei seinen eigenen Autoreparaturen zugeschaut. Ich würde sehr gerne die interessanten Aufgaben eines Kfz-Technikers erlernen, wie zum Beispiel die Reparatur von Sachschäden, Motoren oder Metallschäden.",
+    textCompetence:
+      "Ich bin handwerklich geschickt, arbeite auch sorgfältig und würde sehr gerne meine Ausbildung in Ihrem Betrieb absolvieren. Ich habe eine gute Auffassungsgabe und bin zudem sehr zuverlässig und pünktlich. Außerdem arbeite ich gerne selbständig und gewissenhaft, fühle mich aber auch im Team sehr wohl.",
     textContribution:
-      "In Ihrem Unternehmen möchte ich mein verkäuferisches Geschick einbringen...",
+      "Ich bin überzeugt, dass diese Lehrstelle sehr gut zu mir passt, da ich meine Interessen und Fähigkeiten hier gut einbringen kann und ich freue mich darauf, Ihr Unternehmen auch nach der Ausbildung mit meinem Einsatz zu unterstützen.",
     ending:
-      "Für offene Fragen zu meiner Bewerbung stehe ich Ihnen jederzeit zur Verfügung...",
+      "Über die Einladung zu einem persönlichen Vorstellungsgespräch, um Sie und Ihren Betrieb kennenzulernen, freue ich mich sehr.",
+    salutationEnding: "Mit freundlichen Grüßen ...",
+  },
+];
+const motivation4 = [
+  {
+    indexMV: "4",
+    subject: "Bewerbung als ...",
+    salutationBeginning: "Sehr geehrte Frau/Herr",
+    textBegining:
+      "Ich habe Ihre Anzeige gelesen und bewerbe mich mit großem Interesse um die ausgeschriebene Lehrstelle als ProgrammiererIn.",
+    textExperience:
+      "Durch den Einfluss meiner Familienmitglieder habe ich mich schon lange mit Technik beschäftigt und einiges von ihnen gelernt. Privat arbeite und spiele ich gerne am Computer und konnte mir bereits einige Programmierkenntnisse aneignen, die ich gerne ausbauen möchte. Eine Berufsausbildung, in der ich fundierte Programmierkenntnisse erlernen kann, würde mir viel bedeuten, da mein Interesse in diesem Bereich sehr groß ist.",
+    textCompetence:
+      "Ich bin technisch sehr geschickt, habe ein gutes Verständnis für digitale Prozesse, bin sehr genau und sehe das Programmieren auch als das Erlernen einer Sprache, worin ich auch sehr gut bin. Ich bin ein sehr pünktlicher Mensch, arbeite gerne selbständig und auch sehr gewissenhaft, bin gut in der Kommunikation, sowie stark problemlösungsorientiert.",
+    textContribution:
+      "Mit diesen aufgezählten Eigenschaften bin ich davon überzeugt, dass diese Lehrstelle sehr gut zu mir passt und ich mir meinen Traum als ProgrammiererIn arbeiten zu können erfüllen kann.",
+    ending:
+      "Gerne würde ich Sie in einem persönlichen Gespräch davon überzeugen, dass ich für diesen Ausbildungsplatz sehr gut geeignet bin und freue mich darauf, Sie persönlich kennenzulernen.",
+    salutationEnding: "Mit freundlichen Grüßen ...",
+  },
+];
+const motivation5 = [
+  {
+    indexMV: "5",
+    subject: "Bewerbung als ...",
+    salutationBeginning: "Sehr geehrte Frau/Herr",
+    textBegining:
+      "Bezugnehmend auf Ihre Stellenanzeige möchte ich mich gerne um die offene Lehrstelle als MechatronikerIn für Büro- und EDV-Systemtechnik bewerben.",
+    textExperience:
+      "Schon seit einigen Jahren interessiere ich mich sehr für technische Themen und beschäftige mich gerne mit Computern. Ich würde sehr gerne eine Berufsausbildung machen, in der ich mein großes Interesse an diesen Bereichen einsetzen kann.",
+    textCompetence:
+      "Wie Sie meinen beiliegenden Zeugnissen entnehmen können, waren meine Noten in entsprechenden Fächern immer sehr gut. Ich bin auch sehr geschickt und gewandt. Ich weiß, dass gerade im EDV-Bereich eine ständige Weiterbildung auch nach Beendigung der Lehre notwendig ist. Das ist für mich eine Selbstverständlichkeit.",
+    textContribution:
+      "Ich würde mich sehr freuen, Teil Ihres Teams werden zu dürfen und diesen spannenden Beruf bald selbst ausüben zu können und wertvolle Erfahrungen in der Lehre zu sammeln.",
+    ending:
+      "Ich würde mich sehr über eine Einladung zu einem persönlichen Vorstellungsgespräch freuen, um Sie und Ihr Team kennenzulernen.",
     salutationEnding: "Mit freundlichen Grüßen ...",
   },
 ];
 
 if (!localStorage.getItem("motivations")) {
-  localStorage.setItem("motivations", JSON.stringify([defaultData]));
+  localStorage.setItem("motivations", JSON.stringify([motivation1]));
   const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
-  const newData = [...tempMotivations, motivation1, motivation2];
+  const newData = [
+    ...tempMotivations,
+    motivation2,
+    motivation3,
+    motivation4,
+    motivation5,
+  ];
   localStorage.setItem("motivations", JSON.stringify(newData));
 }
 let idCounter = 0;

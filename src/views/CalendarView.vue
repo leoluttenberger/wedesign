@@ -279,7 +279,6 @@ watch(isQuickAccessCalendar, () => {
         appointments.value[lastCalendarIndex.value][0].appointmentTo
       );
     }
-    console.log("Month:", selectedMonth.value);
     isMonthEvent.value = false;
     isMonthEvent.value = true;
   } else {

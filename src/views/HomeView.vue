@@ -68,7 +68,7 @@
               </div>
 
               <div class="font-bold text-xl">{{ item[0].company }}</div>
-              <div class="flex">
+              <div class="flex text-sm">
                 <div class="flex-none">Deadline</div>
                 <div class="grow py-2 px-2">
                   <ArrowIcon
@@ -138,6 +138,31 @@
               <div class="font-bold text-base">
                 {{ item[0].title }}
               </div>
+              <div class="flex text-sm">
+                <div>
+                  {{
+                    item[0].appointmentFrom
+                      ? item[0].appointmentFrom.slice(8, 10) +
+                        "." +
+                        item[0].appointmentFrom.slice(5, 7) +
+                        "." +
+                        item[0].appointmentFrom.slice(0, 4)
+                      : item[0].appointmentTo.slice(8, 10) +
+                        "." +
+                        item[0].appointmentTo.slice(5, 7) +
+                        "." +
+                        item[0].appointmentTo.slice(0, 4)
+                  }}
+                </div>
+                <div class="grow ..."></div>
+                <div>
+                  {{
+                    item[0].appointmentFrom
+                      ? item[0].appointmentFrom.slice(11, 16) + " Uhr"
+                      : item[0].appointmentTo.slice(11, 16) + " Uhr"
+                  }}
+                </div>
+              </div>
 
               <div class="flex">
                 <div class="flex-none">ansehen</div>
@@ -156,26 +181,33 @@
     <div class="grid flex gap-6 px-6 pt-4 pb-20">
       <button
         class="rounded-md bg-wd-green hover:bg-transparent-green h-14 text-white font-bold"
+        @click="openBottomCard()"
       >
         Tips & Tricks
       </button>
     </div>
   </Container>
+  <div v-if="bottomCardOpen" class="fixed z-10 inset-0 bg-black bg-opacity-10">
+    <BottomCard v-model:open="bottomCardOpen"
+      ><TripsTricks></TripsTricks>
+    </BottomCard>
+  </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { useRouter } from "vue-router";
 import {
   lastApplicationIndex,
   isQuickAccessApplication,
   lastCalendarIndex,
   isQuickAccessCalendar,
+  slideDown,
 } from "@/store/store.js";
 
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 import DocumentsIcon from "@/assets/icons/DocumentsIcon.vue";
 import NotificationsIcon from "@/assets/icons/NotificationsIcon.vue";
-
+import TripsTricks from "@/components/MainModals/TipsTricksViews/tipsTricksView.vue";
 const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")));
 const applications = ref(JSON.parse(localStorage.getItem("applications")));
 const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
@@ -189,7 +221,18 @@ const greenType = ref("Sonstige Termine");
 const firstName = ref(null);
 const router = useRouter();
 
+const bottomCardOpen = ref(false);
+
+watch(slideDown, () => {
+  console.log("slideDown!");
+  if (slideDown.value == true) {
+    bottomCardOpen.value = false;
+    slideDown.value = true;
+  }
+});
+
 onMounted(() => {
+  bottomCardOpen.value = false;
   lastApplicationIndex.value = 0;
   isQuickAccessApplication.value = false;
   lastCalendarIndex.value = 0;
@@ -206,5 +249,9 @@ const saveApplicationIndex = (index) => {
 const saveCalendarIndex = (index) => {
   lastCalendarIndex.value = index;
   isQuickAccessCalendar.value = true;
+};
+
+const openBottomCard = () => {
+  bottomCardOpen.value = true;
 };
 </script>

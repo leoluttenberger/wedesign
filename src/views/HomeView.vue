@@ -13,11 +13,16 @@
     </div>
   </Container>
   <Container>
-    <div class="flex pt-56 dark:text-white text-black text-xl px-2">
+    <div class="flex pt-56 dark:text-white text-black text-l px-2">
       <DocumentsIcon
-        class="dark:stroke-wd-white stroke-black stroke-1 w-10 h-10"
+        class="dark:stroke-wd-white stroke-black stroke-1 w-8 h-8"
       ></DocumentsIcon>
       <p class="pt-2">Aktuelle Bewerbungen</p>
+      <div class="grow ..."></div>
+
+      <p class="px-3 mx-2 pt-1 bg-wd-green rounded-full">
+        {{ applications.length }}
+      </p>
     </div>
   </Container>
   <Container>
@@ -27,15 +32,56 @@
       <div
         v-for="(item, index) in applications"
         :key="index"
-        class="p-2 snap-start w-60 h-32 rounded-lg shrink-0"
+        class="p-2 snap-start w-52 h-30 rounded-lg shrink-0"
       >
         <button @click="saveApplicationIndex(index)">
           <router-link to="/documents"
             ><div
-              class="p-4 w-60 h-30 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
+              class="px-2 w-52 h-30 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
             >
+              <div class="flex top pt-2">
+                <div class="grow ..."></div>
+                <div
+                  v-if="item[0].state == 'Entwurf'"
+                  class="font-none px-2 text-xs text-white font-bold rounded-2xl bg-wd-edit"
+                >
+                  {{ item[0].state }}
+                </div>
+                <div
+                  v-if="item[0].state == 'Erledigt'"
+                  class="font-none px-2 text-xs text-white font-bold rounded-2xl bg-wd-green"
+                >
+                  {{ item[0].state }}
+                </div>
+                <div
+                  v-if="item[0].state == 'Keine Rückmeldung'"
+                  class="font-none px-2 text-xs text-white font-bold rounded-2xl bg-wd-error"
+                >
+                  {{ item[0].state }}
+                </div>
+                <div
+                  v-if="item[0].state == 'Leider nein'"
+                  class="font-none px-2 text-xs text-white font-bold rounded-2xl bg-wd-error"
+                >
+                  {{ item[0].state }}
+                </div>
+              </div>
+
               <div class="font-bold text-xl">{{ item[0].company }}</div>
-              <div class="font-bold text-xl">{{ item[0].job }}</div>
+              <div class="flex">
+                <div class="flex-none">Deadline</div>
+                <div class="grow py-2 px-2">
+                  <ArrowIcon
+                    class="dark:stroke-wd-white stroke-1 w-full h-2"
+                  ></ArrowIcon>
+                </div>
+                <div class="flex-none">
+                  {{ item[0].deadline.slice(8, 10) }}.{{
+                    item[0].deadline.slice(5, 7)
+                  }}.{{ item[0].deadline.slice(0, 4) }}
+                </div>
+              </div>
+
               <div class="flex">
                 <div class="flex-none">ansehen</div>
                 <div class="grow py-2 px-2">
@@ -50,26 +96,30 @@
     </div>
   </Container>
   <Container>
-    <div class="flex pt-4 dark:text-white text-xl px-2">
+    <div class="flex pt-4 dark:text-white text-l px-2">
       <NotificationsIcon
-        class="dark:stroke-wd-white stroke-black stroke-1 w-10 h-10"
+        class="dark:stroke-wd-white stroke-black stroke-1 w-8 h-8"
       ></NotificationsIcon>
-      <p class="pt-2">Wichtige Termine</p>
+      <p class="flex-none pt-2">Wichtige Termine</p>
+      <div class="grow ..."></div>
+      <p class="flex-none px-2 mx-2 pt-1 bg-wd-green rounded-full">
+        {{ appointments.length }}
+      </p>
     </div>
   </Container>
   <Container>
     <div
-      class="relative w-full flex gap-2 snap-x snap-mandatory overflow-x-auto"
+      class="relative w-full flex gap-4 snap-x snap-mandatory overflow-x-auto"
     >
       <div
         v-for="(item, index) in appointments"
         :key="index"
-        class="p-2 snap-start w-60 h-32 rounded-lg shrink-0"
+        class="p-2 snap-start w-52 h-30 rounded-lg shrink-0"
       >
         <button @click="saveCalendarIndex(index)">
           <router-link to="/calendar">
             <div
-              class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border-2"
+              class="p-2 w-52 h-30 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border-2"
               :class="
                 item[0].type == blueType
                   ? 'border-wd-blue'

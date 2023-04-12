@@ -83,18 +83,19 @@
         >
           <BottomCard v-model:open="bottomCardOpen2">
             <SwiperCard :items="items">
-              <button @click="closeBottomCard()" class="p-2">
-                <div class="flex justify-end">
-                  <CloseIcon
-                    class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
-                  ></CloseIcon>
-                </div>
-                <div class="flex justify-left">
+              <button @click="closeBottomCard()">
+                <div class="flex">
                   <h1
-                    class="px-2 text-black dark:text-white font-Montserrat text-xl md:text-xxl font-bold"
+                    class="pt-8 px-4 text-black dark:text-white font-Montserrat text-xl md:text-2xl font-bold"
                   >
                     Ausbildung
                   </h1>
+                  <div class="grow ..."></div>
+                  <div class="p-4">
+                    <CloseIcon
+                      class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
+                    ></CloseIcon>
+                  </div>
                 </div>
               </button>
               <div class="flex flex-col items-left shadow-lg-up">

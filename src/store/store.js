@@ -79,3 +79,17 @@ export const isMonthEvent = reactive({
 export const dragOptionActive = reactive({
   value: null,
 });
+
+export const lastApplicationIndex = reactive({
+  value: null,
+});
+export const isQuickAccessApplication = reactive({
+  value: null,
+});
+
+export const lastCalendarIndex = reactive({
+  value: null,
+});
+export const isQuickAccessCalendar = reactive({
+  value: null,
+});

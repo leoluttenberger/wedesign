@@ -173,8 +173,13 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import { slideDown, dragOptionActive } from "@/store/store.js";
+import { ref, watch, onMounted } from "vue";
+import {
+  slideDown,
+  dragOptionActive,
+  isQuickAccessApplication,
+  lastApplicationIndex,
+} from "@/store/store.js";
 
 import ApplicationEdit from "@/components/MainModals/ApplicationViews/ApplicationEdit.vue";
 import MVEditModal from "@/components/MenuModals/MVEditModal.vue";
@@ -212,11 +217,18 @@ watch(bottomCardOpen4, () => {
     renderComponent4.value = false;
   }
 });
+watch(isQuickAccessApplication, () => {
+  if (isQuickAccessApplication.value == true) {
+    openBottomCard(lastApplicationIndex.value);
+  }
+});
 
 const openBottomCard = (id) => {
   currentButtonIndex.value = id;
   slideDown.value = false;
   bottomCardOpen4.value = true;
+  isQuickAccessApplication.value = false;
+  lastApplicationIndex.value = 0;
 };
 
 const onDrop = (dropResult) => {

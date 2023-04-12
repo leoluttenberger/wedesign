@@ -29,21 +29,22 @@
         :key="index"
         class="p-2 snap-start w-60 h-32 rounded-lg shrink-0"
       >
-        <button>
-          <div
-            class="p-4 w-60 h-30 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
-          >
-            <div class="font-bold text-xl">{{ item[0].company }}</div>
-            <div class="font-bold text-xl">{{ item[0].job }}</div>
-            <div class="flex">
-              <div class="flex-none">ansehen</div>
-              <div class="grow py-2 px-2">
-                <ArrowIcon
-                  class="dark:stroke-wd-white stroke-black stroke-1 w-full h-2"
-                ></ArrowIcon>
-              </div>
-            </div>
-          </div>
+        <button @click="saveApplicationIndex(index)">
+          <router-link to="/documents"
+            ><div
+              class="p-4 w-60 h-30 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
+            >
+              <div class="font-bold text-xl">{{ item[0].company }}</div>
+              <div class="font-bold text-xl">{{ item[0].job }}</div>
+              <div class="flex">
+                <div class="flex-none">ansehen</div>
+                <div class="grow py-2 px-2">
+                  <ArrowIcon
+                    class="dark:stroke-wd-white stroke-black stroke-1 w-full h-2"
+                  ></ArrowIcon>
+                </div>
+              </div></div
+          ></router-link>
         </button>
       </div>
     </div>
@@ -65,37 +66,38 @@
         :key="index"
         class="p-2 snap-start w-60 h-32 rounded-lg shrink-0"
       >
-        <button>
-          <div
-            class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border-2"
-            :class="
-              item[0].type == blueType
-                ? 'border-wd-blue'
-                : item[0].type == redType
-                ? 'border-red-500'
-                : item[0].type == yellowType
-                ? 'border-wd-yellow'
-                : item[0].type == pinkType
-                ? 'border-wd-pink'
-                : 'border-wd-green'
-            "
-          >
-            <div class="font-bold text-base">
-              {{ item[0].type }}
-            </div>
-            <div class="font-bold text-base">
-              {{ item[0].title }}
-            </div>
-
-            <div class="flex">
-              <div class="flex-none">ansehen</div>
-              <div class="grow py-2 px-2">
-                <ArrowIcon
-                  class="dark:stroke-wd-white stroke-1 w-full h-2"
-                ></ArrowIcon>
+        <button @click="saveCalendarIndex(index)">
+          <router-link to="/calendar">
+            <div
+              class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border-2"
+              :class="
+                item[0].type == blueType
+                  ? 'border-wd-blue'
+                  : item[0].type == redType
+                  ? 'border-red-500'
+                  : item[0].type == yellowType
+                  ? 'border-wd-yellow'
+                  : item[0].type == pinkType
+                  ? 'border-wd-pink'
+                  : 'border-wd-green'
+              "
+            >
+              <div class="font-bold text-base">
+                {{ item[0].type }}
               </div>
-            </div>
-          </div>
+              <div class="font-bold text-base">
+                {{ item[0].title }}
+              </div>
+
+              <div class="flex">
+                <div class="flex-none">ansehen</div>
+                <div class="grow py-2 px-2">
+                  <ArrowIcon
+                    class="dark:stroke-wd-white stroke-1 w-full h-2"
+                  ></ArrowIcon>
+                </div>
+              </div></div
+          ></router-link>
         </button>
       </div>
     </div>
@@ -112,6 +114,14 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import {
+  lastApplicationIndex,
+  isQuickAccessApplication,
+  lastCalendarIndex,
+  isQuickAccessCalendar,
+} from "@/store/store.js";
+
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 import DocumentsIcon from "@/assets/icons/DocumentsIcon.vue";
 import NotificationsIcon from "@/assets/icons/NotificationsIcon.vue";
@@ -127,9 +137,24 @@ const pinkType = ref("Feedback");
 const greenType = ref("Sonstige Termine");
 
 const firstName = ref(null);
+const router = useRouter();
+
 onMounted(() => {
+  lastApplicationIndex.value = 0;
+  isQuickAccessApplication.value = false;
+  lastCalendarIndex.value = 0;
+  isQuickAccessCalendar.value = false;
   if (localStorage.getItem("userInfos")) {
     firstName.value = userInfos.value[0][0].firstName;
   }
 });
+const saveApplicationIndex = (index) => {
+  lastApplicationIndex.value = index;
+  isQuickAccessApplication.value = true;
+};
+
+const saveCalendarIndex = (index) => {
+  lastCalendarIndex.value = index;
+  isQuickAccessCalendar.value = true;
+};
 </script>

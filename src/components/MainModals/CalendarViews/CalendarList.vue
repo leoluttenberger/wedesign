@@ -229,6 +229,8 @@ import {
   selectedMonth,
   selectedYear,
   isMonthEvent,
+  isQuickAccessCalendar,
+  lastCalendarIndex,
 } from "@/store/store.js";
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
@@ -275,6 +277,12 @@ if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   darkLightMode.value = "light";
 }
 
+watch(isQuickAccessCalendar, () => {
+  if (isQuickAccessCalendar.value == true) {
+    openBottomCard(lastCalendarIndex.value);
+  }
+});
+
 watch(isDarkMode, () => {
   if (isDarkMode.value == true) {
     darkLightMode.value = "dark";
@@ -312,6 +320,8 @@ const openBottomCard = (id) => {
   currentButtonIndex.value = id;
   slideDown.value = false;
   bottomCardOpen2.value = true;
+  isQuickAccessCalendar.value = false;
+  lastCalendarIndex.value = 0;
 };
 
 const onDrop = (dropResult) => {

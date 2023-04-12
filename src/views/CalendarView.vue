@@ -65,6 +65,8 @@ import {
   addedType,
   isMonthEvent,
   changedDate,
+  isQuickAccessCalendar,
+  lastCalendarIndex,
 } from "@/store/store.js";
 import { month } from "@formkit/inputs";
 import { attr } from "dom7";
@@ -257,6 +259,32 @@ if (JSON.parse(localStorage.getItem("theme")) == "dark") {
 
 onMounted(() => {
   selectedMonth.value = new Date().getMonth();
+});
+
+watch(isQuickAccessCalendar, () => {
+  if (isQuickAccessCalendar.value == true) {
+    const appointments = ref(JSON.parse(localStorage.getItem("appointments")));
+    if (appointments.value[lastCalendarIndex.value][0].appointmentFrom) {
+      selectedMonth.value = appointments.value[
+        lastCalendarIndex.value
+      ][0].appointmentFrom.slice(5, 7);
+      calendar.value.move(
+        appointments.value[lastCalendarIndex.value][0].appointmentFrom
+      );
+    } else {
+      selectedMonth.value = appointments.value[
+        lastCalendarIndex.value
+      ][0].appointmentTo.slice(5, 7);
+      calendar.value.move(
+        appointments.value[lastCalendarIndex.value][0].appointmentTo
+      );
+    }
+    console.log("Month:", selectedMonth.value);
+    isMonthEvent.value = false;
+    isMonthEvent.value = true;
+  } else {
+    selectedMonth.value = new Date().getMonth();
+  }
 });
 
 watch(slideDown, () => {

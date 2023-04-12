@@ -164,11 +164,15 @@ const loadAppointments = () => {
     for (let i = 0; i < appointments.value.length; i++) {
       let color = "";
       if (appointments.value[i][0].type == "Bewerbungsgespräch") {
-        color = "green";
+        color = "#0094FF";
       } else if (appointments.value[i][0].type == "Deadline") {
         color = "red";
+      } else if (appointments.value[i][0].type == "Aufnahmetest") {
+        color = "#FAC643";
+      } else if (appointments.value[i][0].type == "Feedback") {
+        color = "#FF1787";
       } else {
-        color = "blue";
+        color = "#00e0ac";
       }
       if (
         !appointments.value[i][0].appointmentFrom &&
@@ -271,17 +275,17 @@ watch(slideDown, () => {
         start: new Date(yearStart, monthStart, dayStart),
         end: new Date(yearEnd, monthEnd, dayEnd),
       };
-      let color = "blue";
+      let color = "#00e0ac";
       if (addedType.value == "Bewerbungsgespräch") {
-        color = "green";
+        color = "#0094FF";
       } else if (addedType.value == "Deadline") {
         color = "red";
       } else if (addedType.value == "Aufnahmetest") {
-        color = "orange";
+        color = "#FAC643";
       } else if (addedType.value == "Feedback") {
-        color = "purple";
+        color = "#FF1787";
       } else {
-        color = "blue";
+        color = "#00e0ac";
       }
       addTodo(color, dates, todos);
 

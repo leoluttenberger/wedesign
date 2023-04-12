@@ -155,33 +155,36 @@ const saveToLocalStorage = () => {
   ];
   let dateCheck = false;
 
-  if (appointmentFrom.value != null || appointmentTo.value != null) {
-    dateCheck = true;
-  }
-
-  if (buttonDisabled == false) {
+  if (appointmentFrom.value != null && appointmentTo.value != null) {
     if (appointmentFrom.value < appointmentTo.value) {
-      if (dateCheck) {
-        buttonDisabled = true;
-        if (localStorage.getItem("appointments")) {
-          const currentappointments = JSON.parse(
-            localStorage.getItem("appointments")
-          );
-          const newData = [...currentappointments, appointment];
-          localStorage.setItem("appointments", JSON.stringify(newData));
-        } else {
-          localStorage.setItem("appointments", JSON.stringify([appointment]));
-        }
-        addedDate.value = appointmentFrom.value;
-        addedType.value = type.value;
-        slideDown.value = true;
-        console.log("Date saved!");
-      }
+      dateCheck = true;
     }
+  } else if (appointmentFrom.value != null || appointmentTo.value != null) {
+    dateCheck = true;
   } else {
     console.log("Date is not set!");
     console.log(appointmentFrom.value);
     console.log(appointmentTo.value);
+  }
+
+  if (dateCheck) {
+    if (localStorage.getItem("appointments")) {
+      const currentappointments = JSON.parse(
+        localStorage.getItem("appointments")
+      );
+      const newData = [...currentappointments, appointment];
+      localStorage.setItem("appointments", JSON.stringify(newData));
+    } else {
+      localStorage.setItem("appointments", JSON.stringify([appointment]));
+    }
+    if (appointmentFrom.value != null) {
+      addedDate.value = appointmentFrom.value;
+    } else {
+      addedDate.value = appointmentTo.value;
+    }
+    addedType.value = type.value;
+    slideDown.value = true;
+    console.log("Date saved!");
   }
 };
 </script>

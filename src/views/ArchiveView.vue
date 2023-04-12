@@ -53,9 +53,6 @@ const archives = ref(JSON.parse(localStorage.getItem("archives") || "[]"));
 
 const sortedItems = computed(() => {
   return archives.value.slice().sort((a, b) => {
-    console.log(a[0].date);
-    console.log(b[0].date);
-
     const dateA = new Date(a[0].date);
     const dateB = new Date(b[0].date);
 
@@ -68,5 +65,4 @@ const sortedItems = computed(() => {
     }
   });
 });
-console.log(sortedItems.value);
 </script>

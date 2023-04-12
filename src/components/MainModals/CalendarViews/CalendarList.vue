@@ -25,15 +25,15 @@
                   <div
                     class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border-2"
                     :class="
-                      item[0].type == greenType
-                        ? 'border-green-500'
+                      item[0].type == blueType
+                        ? 'border-wd-blue'
                         : item[0].type == redType
                         ? 'border-red-500'
-                        : item[0].type == orangeType
-                        ? 'border-orange-500'
-                        : item[0].type == purpleType
-                        ? 'border-purple-500'
-                        : 'border-blue-500'
+                        : item[0].type == yellowType
+                        ? 'border-wd-yellow'
+                        : item[0].type == pinkType
+                        ? 'border-wd-pink'
+                        : 'border-wd-green'
                     "
                   >
                     <div class="font-bold text-base">
@@ -117,15 +117,15 @@
                   <div
                     class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border-2"
                     :class="
-                      item[0].type == greenType
-                        ? 'border-green-500'
+                      item[0].type == blueType
+                        ? 'border-wd-blue'
                         : item[0].type == redType
                         ? 'border-red-500'
-                        : item[0].type == orangeType
-                        ? 'border-orange-500'
-                        : item[0].type == purpleType
-                        ? 'border-purple-500'
-                        : 'border-blue-500'
+                        : item[0].type == yellowType
+                        ? 'border-wd-yellow'
+                        : item[0].type == pinkType
+                        ? 'border-wd-pink'
+                        : 'border-wd-green'
                     "
                   >
                     <div class="font-bold text-base">
@@ -247,11 +247,11 @@ const currentDay = ref(0);
 const currentMonth = ref(new Date().getMonth() + 1);
 const currentYear = ref(new Date().getFullYear());
 const isPicked = ref(false);
-const greenType = ref("Bewerbungsgespräch");
+const blueType = ref("Bewerbungsgespräch");
 const redType = ref("Deadline");
-const orangeType = ref("Aufnahmetest");
-const purpleType = ref("Feedback");
-const blueType = ref("Sonstige Termine");
+const yellowType = ref("Aufnahmetest");
+const pinkType = ref("Feedback");
+const greenType = ref("Sonstige Termine");
 
 interface SlideItem {
   id: string;

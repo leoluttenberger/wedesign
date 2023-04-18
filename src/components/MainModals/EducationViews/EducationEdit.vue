@@ -90,16 +90,19 @@
       </div>
     </div>
   </div>
-  <div class="grid flex gap-6 py-10">
+
+  <div class="fixed bottom-40">
     <button
-      class="bg-wd-error shadow rounded-md h-14 w-full text-white font-bold"
+      class="bg-wd-error shadow rounded-md h-14 w-screen text-white font-bold"
       @click="removeFromLocalStorage()"
       :disabled="buttonDisabled"
     >
       Ausbildung entfernen
     </button>
+  </div>
+  <div class="fixed bottom-10 items-end justify-end">
     <button
-      class="bg-wd-green hover:bg-transparent-green shadow h-24 text-white font-bold"
+      class="bg-wd-green hover:bg-transparent-green shadow h-24 w-screen text-white font-bold"
       @click="saveToLocalStorage()"
       :disabled="buttonDisabled"
     >

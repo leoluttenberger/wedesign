@@ -9,29 +9,12 @@
       <p
         class="text-black px-1 dark:text-white font-Montserrat text-xl font-bold"
       >
-        {{ "Speichern & Senden" }}
+        {{ "Vorschau" }}
       </p>
       <button v-if="pdf" @click="saveAndDownLoadDocs()" class="">
         <CheckIcon
           class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
         ></CheckIcon>
-      </button>
-    </div>
-    <div class="grid grid-cols-3 p-4 place-items-center">
-      <button v-if="pdf" @click="zoomOut()" class="">
-        <ZoomOutIcon
-          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-        ></ZoomOutIcon>
-      </button>
-      <p
-        class="text-black px-1 dark:text-white font-Montserrat text-xl font-bold"
-      >
-        {{ "Zoom" }}
-      </p>
-      <button v-if="pdf" @click="zoomIn()" class="">
-        <ZoomInIcon
-          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-        ></ZoomInIcon>
       </button>
     </div>
     <div
@@ -42,6 +25,36 @@
     </div>
     <div class="border-[4px] border-wd-black dark:border-slate-800" ref="el">
       {{ height }} x {{ width }}
+    </div>
+  </div>
+  <div
+    class="group fixed bottom-0 left-0 p-4 flex items-end justify-end w-24 h-24"
+  >
+    <div class="">
+      <button
+        v-if="pdf"
+        @click="zoomOut()"
+        class="px-4 w-14 h-14 bg-wd-green rounded-full active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
+      >
+        <ZoomOutIcon
+          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+        ></ZoomOutIcon>
+      </button>
+    </div>
+  </div>
+  <div
+    class="group fixed bottom-0 right-0 p-4 flex items-end justify-end w-24 h-24"
+  >
+    <div class="">
+      <button
+        v-if="pdf"
+        @click="zoomIn()"
+        class="px-4 w-14 h-14 bg-wd-green rounded-full active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
+      >
+        <ZoomInIcon
+          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+        ></ZoomInIcon>
+      </button>
     </div>
   </div>
 </template>

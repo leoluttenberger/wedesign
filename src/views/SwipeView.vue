@@ -1,27 +1,35 @@
 <template>
   <section
     v-if="props.slideIndex != 4"
-    class="z-0 overflow-auto overflow-scroll w-screen h-screen py-20 pb-20"
+    class="z-0 overflow-auto overflow-scroll w-screen h-screen py-20 pb-32"
   >
     <component :is="mapListComponents[slideIndex]" :key="renderComponent" />
-    <div class="flex justify-center p-4">
-      <button
-        @click="openBottomCard()"
-        class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
-      >
-        <AddIcon
-          class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
-        ></AddIcon>
-      </button>
+    <div
+      class="group fixed bottom-24 right-0 p-6 flex items-end justify-end w-24 h-24"
+    >
+      <div class="">
+        <button
+          @click="openBottomCard()"
+          class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
+        >
+          <AddIcon
+            class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
+          ></AddIcon>
+        </button>
+      </div>
     </div>
   </section>
   <section
     v-if="props.slideIndex == 4"
-    class="z-0 overflow-auto overflow-scroll w-screen h-auto py-96 pb-20 bg-wd-background dark:bg-slate-700"
+    class="z-0 overflow-auto overflow-scroll w-screen h-screen py-96 pb-32 bg-wd-background dark:bg-slate-700"
   >
     <div class="py-10">
       <component :is="mapListComponents[4]" :key="renderComponent" />
-      <div class="flex justify-center p-4">
+    </div>
+    <div
+      class="group fixed bottom-24 right-0 p-6 flex items-end justify-end w-24 h-24"
+    >
+      <div class="">
         <button
           @click="openBottomCard()"
           class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"

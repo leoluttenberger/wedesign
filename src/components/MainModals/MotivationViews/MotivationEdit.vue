@@ -617,7 +617,7 @@ const textExperienceEdit = () => {
   textLabel = "Werdegang ";
 };
 
-const textContributionEdit = () => {
+const textCompetenceEdit = () => {
   storeFormData();
   sideBackBack.value = true;
   showBottomSlide.value = true;
@@ -625,7 +625,7 @@ const textContributionEdit = () => {
   isEdited = true;
   textLabel = "Kompetenz ";
 };
-const textCompetenceEdit = () => {
+const textContributionEdit = () => {
   storeFormData();
   sideBackBack.value = true;
   showBottomSlide.value = true;

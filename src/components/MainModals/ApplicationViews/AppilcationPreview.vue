@@ -62,6 +62,8 @@
 import { ref, onMounted, defineProps, onBeforeUnmount } from "vue";
 import { useElementSize } from "@vueuse/core";
 import { sideBack } from "@/store/store.js";
+import { Share } from "@capacitor/share";
+import { Capacitor } from "@capacitor/core";
 
 import BackIcon from "@/assets/icons/BackIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
@@ -155,7 +157,6 @@ const mailImage = () => {
   const mailtoLink = `mailto:recipient@example.com?subject=&body= Bitte hänge dein Motivationsschreiben und deinen Lebenslauf an. Die Datein findest im Ordner Dokumente!&attachment=`;
   window.location.href = mailtoLink;
 };
-
 const saveAndDownLoadDocs = async () => {
   const applications = JSON.parse(localStorage.getItem("applications"));
   const dateString = moment().format("DD_MM_YYYY");
@@ -173,16 +174,39 @@ const saveAndDownLoadDocs = async () => {
     dateString +
     ".pdf";
 
-  saveAs(pdf.value.output("blob"), fileNamePDF);
-  saveAs(downloadDocx.value, fileNameDoc);
   const base64StringPdf = await fileToBase64(pdf.value.output("blob"));
   const base64StringDoc = await fileToBase64(downloadDocx.value);
-
+  saveAs(pdf.value.output("blob"), fileNamePDF);
+  saveAs(downloadDocx.value, fileNameDoc);
+  let sharePath;
   await Filesystem.writeFile({
-    path: `${fileNameDoc}`,
+    path: fileNameDoc,
     data: base64StringDoc,
     directory: Directory.Documents,
   })
+    .then(
+      () => {
+        Filesystem.getUri({
+          directory: Directory.Documents,
+          path: fileNameDoc,
+        }).then(
+          (result) => {
+            Share.share({
+              title: fileNameDoc,
+              text: fileNameDoc,
+              files: [result.uri],
+            });
+            console.log("sharePath", result.uri);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+      },
+      (err) => {
+        console.log(err);
+      }
+    )
     .then(() => {
       console.log("File written to document docx directory!");
     })
@@ -201,7 +225,18 @@ const saveAndDownLoadDocs = async () => {
     .catch((error) => {
       console.error(error);
     });
-  mailImage();
+
+  if (Share.share && sharePath != "") {
+    await Share.share({
+      title: "Share File",
+      text: fileNameDoc,
+      url: sharePath,
+    });
+  } else {
+    // Fallback for browsers that do not support Web Share API
+    console.log("Web Share API is not supported in this browser");
+    mailImage();
+  }
   sideBack.value = false;
 };
 

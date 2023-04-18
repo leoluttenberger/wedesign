@@ -367,16 +367,24 @@ const motivation5 = [
 
 if (!localStorage.getItem("motivations")) {
   localStorage.setItem("motivations", JSON.stringify([motivation1]));
-  const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
-  const newData = [
-    ...tempMotivations,
-    motivation2,
-    motivation3,
-    motivation4,
-    motivation5,
-  ];
-  localStorage.setItem("motivations", JSON.stringify(newData));
 }
+let tempMotivations = JSON.parse(localStorage.getItem("motivations"));
+console.log(tempMotivations.length);
+if (tempMotivations.length < 5) {
+  let newData = [...tempMotivations, motivation2];
+  localStorage.setItem("motivations", JSON.stringify(newData));
+  tempMotivations = JSON.parse(localStorage.getItem("motivations"));
+  newData = [...tempMotivations, motivation3];
+  localStorage.setItem("motivations", JSON.stringify(newData));
+  tempMotivations = JSON.parse(localStorage.getItem("motivations"));
+  newData = [...tempMotivations, motivation4];
+  localStorage.setItem("motivations", JSON.stringify(newData));
+  tempMotivations = JSON.parse(localStorage.getItem("motivations"));
+  newData = [...tempMotivations, motivation5];
+  localStorage.setItem("motivations", JSON.stringify(newData));
+  tempMotivations = JSON.parse(localStorage.getItem("motivations"));
+}
+console.log(tempMotivations);
 let idCounter = 0;
 const getID = () => (idCounter++).toString();
 let posIndexCounter = 0;
@@ -478,10 +486,10 @@ const createNewMotivation = () => {
   if (localStorage.getItem("motivations")) {
     const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
     const newData = [...tempMotivations, motivation];
-    const cvlength = applications.value[0].length;
-    if (lastIndex.value > cvlength) {
-      if (lastIndex.value > MAX_MV_PREVIEW) {
-        const deleteCount = lastIndex.value - MAX_MV_PREVIEW;
+    const applicationLength = applications.value[0].length;
+    if (tempMotivations.length > applicationLength) {
+      if (tempMotivations.length > MAX_MV_PREVIEW) {
+        const deleteCount = tempMotivations.length - MAX_MV_PREVIEW;
         newData.splice(0, deleteCount);
       }
     }
@@ -559,7 +567,8 @@ const storeFormData = () => {
 };
 
 const initSlides = () => {
-  for (let i = 0; i <= lastIndex.value; i++) {
+  const tempMotivations = JSON.parse(localStorage.getItem("motivations"));
+  for (let i = 0; i < tempMotivations.length; i++) {
     addAfter();
   }
 };

@@ -159,7 +159,7 @@
         </div>
         <div class="grid grid-cols-2 gap-1">
           <div class="col-span-2 md:col-span-1">
-            <div class="flex bg-white dark:bg-slate-800 h-14">
+            <div class="flex bg-white dark:bg-slate-800 h-10">
               <p
                 class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
               >
@@ -180,9 +180,9 @@
             </div>
           </div>
           <div class="col-span-2 md:col-span-1">
-            <div class="flex bg-white dark:bg-slate-800 h-14">
+            <div class="flex bg-white dark:bg-slate-800 h-10">
               <div
-                class="px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+                class="px-1 py-1 w-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
               >
                 <p>Ansprechs</p>
                 <p>person:</p>
@@ -201,7 +201,7 @@
           <div class="col-span-2 md:col-span-1">
             <div class="flex bg-white dark:bg-slate-800 h-24">
               <p
-                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+                class="py-3 px-1 w-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
               >
                 Notiz:
               </p>
@@ -215,21 +215,21 @@
             </div>
           </div>
           <div class="col-span-2 md:col-span-1">
-            <div class="flex bg-white dark:bg-slate-800 h-24 py-1">
-              <div class="py-2">
+            <div class="flex bg-white dark:bg-slate-800 py-1">
+              <div class="py-1">
                 <CloseIcon
                   v-if="__mv == 0"
                   class="h-6 w-24 stroke-1 stroke-wd-error"
                 ></CloseIcon>
               </div>
-              <div class="py-2">
+              <div class="py-1">
                 <CheckIcon
                   v-if="__mv > 0"
                   class="h-6 w-24 stroke-1 stroke-wd-green"
                 ></CheckIcon>
               </div>
               <p
-                class="w-34 h-10 py-2 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
+                class="w-34 py-2 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
               >
                 {{ __mvText }}
               </p>

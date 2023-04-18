@@ -1,7 +1,7 @@
 <template>
   <div class="overflow-auto overflow-scroll w-screen h-screen">
-    <div class="grid grid-cols-3 p-4 place-items-center">
-      <button type="button" @click="closeModal()" class="">
+    <div class="grid grid-cols-3 gap-20 p-2 place-items-center">
+      <button type="button" @click="closeModal()" class="p-4">
         <BackIcon
           class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
         ></BackIcon>
@@ -11,7 +11,7 @@
       >
         {{ "Vorschau" }}
       </p>
-      <button v-if="pdf" @click="saveAndDownLoadDocs()" class="">
+      <button v-if="pdf" @click="saveAndDownLoadDocs()" class="p-4">
         <CheckIcon
           class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
         ></CheckIcon>

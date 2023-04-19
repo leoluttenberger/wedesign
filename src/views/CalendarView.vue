@@ -383,9 +383,11 @@ const setMonth = () => {
 };
 
 const onPageChanged = (page) => {
-  selectedMonth.value = page[0].id.slice(5, 7) - 1;
-  selectedYear.value = page[0].id.slice(0, 4);
-  isMonthEvent.value = false;
-  isMonthEvent.value = true;
+  if (page.id) {
+    selectedMonth.value = page[0].id.slice(5, 7) - 1;
+    selectedYear.value = page[0].id.slice(0, 4);
+    isMonthEvent.value = false;
+    isMonthEvent.value = true;
+  }
 };
 </script>

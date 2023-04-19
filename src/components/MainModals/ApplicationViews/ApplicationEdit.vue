@@ -254,7 +254,7 @@
             class="bg-wd-green hover:bg-transparent-green shadow h-16 text-white font-bold"
             @click="previewApplication()"
           >
-            Bewerbungs Ansicht
+            Vorschau ansehen
           </button>
         </div>
       </div>

@@ -127,9 +127,13 @@
                       ></ArrowIcon>
                     </div>
                     <div class="flex-none">
-                      {{ item[0].deadline.slice(8, 10) }}.{{
-                        item[0].deadline.slice(5, 7)
-                      }}.{{ item[0].deadline.slice(0, 4) }}
+                      {{
+                        item[0].deadline ? item[0].deadline.slice(8, 10) : ""
+                      }}.{{
+                        item[0].deadline ? item[0].deadline.slice(5, 7) : ""
+                      }}.{{
+                        item[0].deadline ? item[0].deadline.slice(0, 4) : ""
+                      }}
                     </div>
                   </div>
                   <div class="flex">

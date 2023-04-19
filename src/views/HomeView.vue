@@ -76,9 +76,9 @@
                   ></ArrowIcon>
                 </div>
                 <div class="flex-none">
-                  {{ item[0].deadline.slice(8, 10) }}.{{
-                    item[0].deadline.slice(5, 7)
-                  }}.{{ item[0].deadline.slice(0, 4) }}
+                  {{ item[0].deadline ? item[0].deadline.slice(8, 10) : "" }}.{{
+                    item[0].deadline ? item[0].deadline.slice(5, 7) : ""
+                  }}.{{ item[0].deadline ? item[0].deadline.slice(0, 4) : "" }}
                 </div>
               </div>
 
@@ -147,11 +147,7 @@
                         item[0].appointmentFrom.slice(5, 7) +
                         "." +
                         item[0].appointmentFrom.slice(0, 4)
-                      : item[0].appointmentTo.slice(8, 10) +
-                        "." +
-                        item[0].appointmentTo.slice(5, 7) +
-                        "." +
-                        item[0].appointmentTo.slice(0, 4)
+                      : ""
                   }}
                 </div>
                 <div class="grow ..."></div>
@@ -159,7 +155,7 @@
                   {{
                     item[0].appointmentFrom
                       ? item[0].appointmentFrom.slice(11, 16) + " Uhr"
-                      : item[0].appointmentTo.slice(11, 16) + " Uhr"
+                      : ""
                   }}
                 </div>
               </div>
@@ -221,7 +217,6 @@ const redType = ref("Deadline");
 const yellowType = ref("Aufnahmetest");
 const pinkType = ref("Feedback");
 const greenType = ref("Sonstige Termine");
-
 const firstName = ref(null);
 const router = useRouter();
 

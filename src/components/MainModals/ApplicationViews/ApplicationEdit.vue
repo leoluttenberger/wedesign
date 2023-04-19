@@ -492,27 +492,37 @@ const saveToLocalStorage = () => {
       deadlineId: applications.value[props.editIndex][0].id,
     },
   ];
-
+  let dateCheck = false;
   if (company.value && deadline.value) {
-    if (appointments.value.length > 0) {
-      for (let i = 0; i < appointments.value.length; i++) {
-        if (
-          applications.value[props.editIndex][0].id ==
-            appointments.value[i][0].deadlineId &&
-          appointments.value[i][0].deadlineId != 0
-        ) {
-          appointments.value[i][0].appointmentFrom = start.value;
-          appointments.value[i][0].appointmentTo = deadline.value;
-        }
-      }
-      localStorage.setItem("appointments", JSON.stringify(appointments.value));
-      console.log("Updated Appointment");
-    } else {
-      localStorage.setItem("appointments", JSON.stringify([appointment]));
-      console.log("Added Appointment");
+    if (start.value == null) {
+      dateCheck = true;
+    } else if (deadline.value >= start.value) {
+      dateCheck = true;
     }
+    if (dateCheck) {
+      if (appointments.value.length > 0) {
+        for (let i = 0; i < appointments.value.length; i++) {
+          if (
+            applications.value[props.editIndex][0].id ==
+              appointments.value[i][0].deadlineId &&
+            appointments.value[i][0].deadlineId != 0
+          ) {
+            appointments.value[i][0].appointmentFrom = start.value;
+            appointments.value[i][0].appointmentTo = deadline.value;
+          }
+        }
+        localStorage.setItem(
+          "appointments",
+          JSON.stringify(appointments.value)
+        );
+        console.log("Updated Appointment");
+      } else {
+        localStorage.setItem("appointments", JSON.stringify([appointment]));
+        console.log("Added Appointment");
+      }
 
-    localStorage.setItem("applications", JSON.stringify(applications.value));
+      localStorage.setItem("applications", JSON.stringify(applications.value));
+    }
   }
 };
 const closeModal = () => {

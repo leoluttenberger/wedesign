@@ -153,8 +153,12 @@ const saveToLocalStorage = () => {
     },
   ];
   let dateCheck = false;
-  if (start.value != null || deadline.value != null) {
-    dateCheck = true;
+  if (deadline.value != null && deadline.value) {
+    if (start.value == null) {
+      dateCheck = true;
+    } else if (deadline.value >= start.value) {
+      dateCheck = true;
+    }
   }
 
   if (company.value && deadline.value) {

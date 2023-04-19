@@ -122,7 +122,7 @@
       </div>
     </div>
   </div>
-  <div class="fixed bottom-40">
+  <div class="fixed bottom-40" v-if="!isDeadline">
     <button
       class="bg-wd-error shadow rounded-md h-14 w-screen text-white font-bold"
       @click="removeFromLocalStorage()"

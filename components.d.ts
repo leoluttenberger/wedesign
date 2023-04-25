@@ -42,5 +42,6 @@ declare module '@vue/runtime-core' {
     UserForm: typeof import('./src/components/MainModals/UserInfoViews/UserForm.vue')['default']
     UserInfoDisplay: typeof import('./src/components/MainModals/UserInfoViews/UserInfoDisplay.vue')['default']
     UserInfoEdit: typeof import('./src/components/MainModals/UserInfoViews/UserInfoEdit.vue')['default']
+    UserInfoPreview: typeof import('./src/components/MainModals/UserInfoViews/UserInfoPreview.vue')['default']
   }
 }

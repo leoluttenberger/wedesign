@@ -92,7 +92,7 @@
           <FormKit
             v-model="address"
             type="text"
-            placeholder="PLZ, Ort, Adresse"
+            placeholder="Straße Nr., PLZ"
           />
         </div>
       </div>

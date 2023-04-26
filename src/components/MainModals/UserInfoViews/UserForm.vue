@@ -274,6 +274,15 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="space-y-1">
+    <div class="mt-6">
+      <p
+        class="text-black px-1 dark:text-white font-Montserrat text-sm font-bold"
+      >
+        Sonstiges:
+      </p>
+    </div>
     <div class="flex bg-white dark:bg-slate-800 h-10">
       <p
         class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"

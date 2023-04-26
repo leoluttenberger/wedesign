@@ -15,7 +15,7 @@
 
       <UserForm v-if="renderComponent5"></UserForm>
       <div
-        class="group fixed bottom-20 p-6 flex flex-col items-center justify-center w-full h-24 mx-auto md:text-2xl text-base"
+        class="group bottom-20 p-6 flex flex-col items-center justify-center w-full h-24 mx-auto md:text-2xl text-base"
       >
         <button
           @click="openCVExport()"

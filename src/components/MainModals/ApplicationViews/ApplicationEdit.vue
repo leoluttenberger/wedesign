@@ -111,7 +111,7 @@
                 Ort:
               </p>
               <div class="px-2">
-                <FormKit v-model="city" type="text" placeholder="Muserstadt" />
+                <FormKit v-model="city" type="text" placeholder="Musterstadt" />
               </div>
             </div>
           </div>
@@ -170,8 +170,8 @@
                   type="select"
                   v-model="state"
                   :options="[
-                    'Entwurf',
-                    'Erledigt',
+                    'In Bearbeitung',
+                    'Abgeschickt',
                     'Keine Rückmeldung',
                     'Leider nein',
                   ]"

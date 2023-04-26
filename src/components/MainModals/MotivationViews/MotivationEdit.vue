@@ -33,12 +33,12 @@
               Betreff:
             </p>
             <button type="button" @click="subjectEdit()" class="py-2">
-              <FormKit
-                v-model="subject"
-                type="textarea"
-                placeholder="Bewerbung Beruf"
-                :disabled="true"
-              />
+              <div class="flex gap-4">
+                <FormKit v-model="subject" type="textarea" :disabled="true" />
+                <EditIcon
+                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                ></EditIcon>
+              </div>
             </button>
           </div>
         </div>
@@ -51,12 +51,16 @@
               Anrede:
             </p>
             <button type="button" @click="salutationBeginningEdit()" class="">
-              <FormKit
-                v-model="salutationBeginning"
-                type="textarea"
-                placeholder="Sehr geehrte Frau/Herr"
-                :disabled="true"
-              />
+              <div class="flex gap-4">
+                <FormKit
+                  v-model="salutationBeginning"
+                  type="textarea"
+                  :disabled="true"
+                />
+                <EditIcon
+                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                ></EditIcon>
+              </div>
             </button>
           </div>
         </div>
@@ -82,7 +86,6 @@
                 <FormKit
                   v-model="textBegining"
                   type="textarea"
-                  placeholder="Mit großem Interesse habe ich Ihre Anzeige gelesen."
                   :disabled="true"
                 />
                 <EditIcon
@@ -106,7 +109,6 @@
                 <FormKit
                   v-model="textExperience"
                   type="textarea"
-                  placeholder="Die Berufsausbildung zum KFZ-Mechaniker habe ich im Jahr 2020 erfolgreich bei der Musterfirma abgeschlossen..."
                   :disabled="true"
                 />
                 <EditIcon
@@ -129,7 +131,6 @@
                 <FormKit
                   v-model="textCompetence"
                   type="textarea"
-                  placeholder="Ich kann mit stressigen Situationen sehr gut umgehen..."
                   :disabled="true"
                 />
                 <EditIcon
@@ -152,7 +153,6 @@
                 <FormKit
                   v-model="textContribution"
                   type="textarea"
-                  placeholder="In Ihrem Unternehmen möchte ich mein handwerkliches Geschick einbringen..."
                   :disabled="true"
                 />
                 <EditIcon
@@ -181,12 +181,7 @@
 
             <button type="button" @click="endingEdit()" class="">
               <div class="flex gap-4">
-                <FormKit
-                  v-model="ending"
-                  type="textarea"
-                  placeholder="Für offene Fragen zu meiner Bewerbung stehe ich Ihnen jederzeit zur Verfügung..."
-                  :disabled="true"
-                />
+                <FormKit v-model="ending" type="textarea" :disabled="true" />
                 <EditIcon
                   class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
                 ></EditIcon>
@@ -207,7 +202,6 @@
                 <FormKit
                   v-model="salutationEnding"
                   type="textarea"
-                  placeholder="Mit freundlichen Grüßen ..."
                   :disabled="true"
                 />
                 <EditIcon
@@ -518,7 +512,7 @@ const updateForm = () => {
     textCompetence.value = currentTextCompetence.value;
     ending.value = currentEnding.value;
     salutationEnding.value = currentSalutationEnding.value;
-  } else if (indexOfMVid.value >= 0) {
+  } else if (indexOfMVid.value > 0) {
     subject.value = motivations.value[indexOfMVid.value][0].subject;
     salutationBeginning.value =
       motivations.value[indexOfMVid.value][0].salutationBeginning;

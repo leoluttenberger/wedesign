@@ -81,6 +81,17 @@ async function createDocx(): Promise<Blob> {
   const streetPlusNumber = streetName + " " + streetNumber;
   const districtPlusCity = districtNumber + " " + city;
   let fullName = "";
+  let sections;
+
+  sections.pus({
+    properties: {},
+    children: [
+      new Paragraph({
+        text: " ",
+        style: "normal",
+      }),
+    ],
+  });
   if (titleBefore == "") {
     fullName = firstName + " " + secondName + " " + titleAfter;
   } else {
@@ -163,81 +174,7 @@ async function createDocx(): Promise<Blob> {
         },
       ],
     },
-    sections: [
-      {
-        properties: {},
-        children: [
-          new Paragraph({
-            text: fullName,
-            heading: HeadingLevel.HEADING_2,
-            style: "h2",
-            alignment: AlignmentType.RIGHT,
-          }),
-          new Paragraph({
-            text: streetPlusNumber,
-            style: "normal",
-            alignment: AlignmentType.RIGHT,
-          }),
-          new Paragraph({
-            text: districtPlusCity,
-            style: "normal",
-            alignment: AlignmentType.RIGHT,
-          }),
-          new Paragraph({
-            text: phone,
-            style: "normal",
-            alignment: AlignmentType.RIGHT,
-          }),
-          new Paragraph({
-            text: email,
-            style: "normal",
-            alignment: AlignmentType.RIGHT,
-          }),
-          new Paragraph({
-            text: " ",
-            style: "normal",
-          }),
-          new Paragraph({
-            text: " ",
-            style: "normal",
-          }),
-          new Paragraph({
-            text: " ",
-            style: "normal",
-          }),
-          new Paragraph({
-            text: " ",
-            style: "normal",
-          }),
-          new Paragraph({
-            text: " ",
-            style: "normal",
-          }),
-          new Paragraph({
-            text: " ",
-            style: "normal",
-          }),
-          new Paragraph({
-            text: date_city,
-            style: "normal",
-            alignment: AlignmentType.RIGHT,
-          }),
-          new Paragraph({
-            text: " ",
-            style: "normal",
-          }),
-          new Paragraph({
-            text: " ",
-            style: "normal",
-          }),
-          new Paragraph({
-            text: fullName,
-            heading: HeadingLevel.HEADING_2,
-            style: "h2",
-          }),
-        ],
-      },
-    ],
+    sections,
   });
   const mimeType =
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document";

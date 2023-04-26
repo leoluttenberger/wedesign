@@ -28,7 +28,7 @@
     </div>
   </div>
   <div
-    class="group fixed bottom-0 left-0 p-4 flex items-end justify-end w-24 h-24"
+    class="group flix bottom-0 left-0 p-4 flex items-end justify-end w-24 h-24"
   >
     <div class="">
       <button
@@ -43,7 +43,7 @@
     </div>
   </div>
   <div
-    class="group fixed bottom-0 right-0 p-4 flex items-end justify-end w-24 h-24"
+    class="group flix bottom-0 right-0 p-4 flex items-end justify-end w-24 h-24"
   >
     <div class="">
       <button

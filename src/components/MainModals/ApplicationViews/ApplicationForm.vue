@@ -92,7 +92,7 @@
       </div>
     </div>
   </div>
-  <div class="group fixed bottom-10 items-end justify-end">
+  <div class="group flex bottom-10 pt-4 items-end justify-end">
     <button
       class="bg-wd-green hover:bg-transparent-green shadow h-24 w-screen text-white font-bold"
       @click="saveToLocalStorage()"
@@ -112,7 +112,7 @@ const contactPerson = ref(null);
 const note = ref("");
 const start = ref(null);
 let __mv = 0;
-let __state = "Entwurf";
+let __state = "In Bearbeitung";
 let buttonDisabled = false;
 
 onMounted(() => {

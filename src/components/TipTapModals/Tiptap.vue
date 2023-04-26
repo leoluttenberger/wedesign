@@ -32,13 +32,19 @@
       </section>
     </section>
   </bubble-menu>
-  <FormKit type="button" label="Speichern" @click="onClickedSave"></FormKit>
+  <div class="flex justify-center py-4">
+    <div class="column gap-10">
+      <FormKit type="button" label="Speichern" @click="onClickedSave"></FormKit>
+      <SwipeIcon class="stroke-white"></SwipeIcon>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, onMounted, defineProps } from "vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import MenuBar from "@/components/MenuModals/MenuBar.vue";
+import SwipeIcon from "@/assets/icons/SwipeIcon.vue";
 
 import { useEditor, EditorContent, Editor, Content } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
@@ -172,10 +178,10 @@ const onClickedSave = () => {
       currentTextExperience.value = comment_text;
       break;
     case 4:
-      currentTextContribution.value = comment_text;
+      currentTextCompetence.value = comment_text;
       break;
     case 5:
-      currentTextCompetence.value = comment_text;
+      currentTextContribution.value = comment_text;
       break;
     case 6:
       currentEnding.value = comment_text;
@@ -213,10 +219,10 @@ onMounted(() => {
           editText = currentTextExperience.value;
           break;
         case 4:
-          editText = currentTextContribution.value;
+          editText = currentTextCompetence.value;
           break;
         case 5:
-          editText = currentTextCompetence.value;
+          editText = currentTextContribution.value;
           break;
         case 6:
           editText = currentEnding.value;
@@ -246,10 +252,10 @@ onMounted(() => {
             editText = motivations.value[mvIndexToDisplay][0].textExperience;
             break;
           case 4:
-            editText = motivations.value[mvIndexToDisplay][0].textContribution;
+            editText = motivations.value[mvIndexToDisplay][0].textCompetence;
             break;
           case 5:
-            editText = motivations.value[mvIndexToDisplay][0].textCompetence;
+            editText = motivations.value[mvIndexToDisplay][0].textContribution;
             break;
           case 6:
             editText = motivations.value[mvIndexToDisplay][0].ending;

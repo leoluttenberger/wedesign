@@ -122,7 +122,7 @@
       </div>
     </div>
   </div>
-  <div class="fixed bottom-40" v-if="!isDeadline">
+  <div class="flex bottom-40 p-4" v-if="!isDeadline">
     <button
       class="bg-wd-error shadow rounded-md h-14 w-screen text-white font-bold"
       @click="removeFromLocalStorage()"
@@ -131,7 +131,7 @@
       Termin entfernen
     </button>
   </div>
-  <div class="fixed bottom-10 items-end justify-end">
+  <div class="flex bottom-10 pt-4 items-end justify-end">
     <button
       class="bg-wd-green hover:bg-transparent-green shadow h-24 w-screen text-white font-bold"
       @click="saveToLocalStorage()"

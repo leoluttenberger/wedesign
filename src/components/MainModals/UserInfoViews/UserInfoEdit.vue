@@ -241,7 +241,7 @@
               <FormKit
                 v-model="city"
                 type="text"
-                placeholder="Muserstadt"
+                placeholder="Musterstadt"
                 :disabled="false"
               />
             </div>

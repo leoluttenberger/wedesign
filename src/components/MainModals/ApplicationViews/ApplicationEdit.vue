@@ -140,7 +140,7 @@
               <p
                 class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
               >
-                Deadline:
+                Deadline: *
               </p>
               <div class="px-2">
                 <FormKit

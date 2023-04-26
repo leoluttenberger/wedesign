@@ -6,7 +6,7 @@
           <p
             class="px-0 py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
           >
-            Firma:
+            Firma: *
           </p>
           <div class="px-2">
             <FormKit
@@ -57,7 +57,7 @@
           <p
             class="py-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
           >
-            Deadline:
+            Deadline: *
           </p>
           <div class="px-2">
             <FormKit

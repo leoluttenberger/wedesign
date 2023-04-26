@@ -179,7 +179,7 @@
         class="rounded-md bg-wd-green hover:bg-transparent-green h-14 text-white font-bold"
         @click="openBottomCard()"
       >
-        Tips & Tricks
+        Tipps & Tricks
       </button>
     </div>
   </Container>

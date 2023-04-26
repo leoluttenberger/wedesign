@@ -28,7 +28,7 @@
     </div>
   </div>
   <div
-    class="group flix bottom-0 left-0 p-4 flex items-end justify-end w-24 h-24"
+    class="group fixed bottom-0 left-0 p-4 flex items-end justify-end w-24 h-24"
   >
     <div class="">
       <button
@@ -43,7 +43,7 @@
     </div>
   </div>
   <div
-    class="group flix bottom-0 right-0 p-4 flex items-end justify-end w-24 h-24"
+    class="group flex bottom-0 right-0 p-4 flex items-end justify-end w-24 h-24"
   >
     <div class="">
       <button
@@ -61,7 +61,7 @@
 <script setup lang="ts">
 import { ref, onMounted, defineProps, onBeforeUnmount } from "vue";
 import { useElementSize } from "@vueuse/core";
-import { sideBack } from "@/store/store.js";
+import { slideDownUserInfo } from "@/store/store.js";
 import { Share } from "@capacitor/share";
 import { Capacitor } from "@capacitor/core";
 
@@ -76,7 +76,7 @@ import { saveAs } from "file-saver";
 import jsPDF from "jspdf";
 
 import JSZip from "jszip";
-import { createDoc } from "@/helpers/createDoc";
+import { createCV } from "@/helpers/createCV";
 import { convertXmlToHtml } from "@/helpers/convertXmlToHtml";
 
 import { Filesystem, Directory } from "@capacitor/filesystem";
@@ -106,7 +106,7 @@ const props = defineProps({
 
 onMounted(async () => {
   downloadDocx.value = await createFile();
-  sideBack.value = true;
+  slideDownUserInfo.value = false;
   await convertToPdf();
   window.addEventListener("resize", resizePdfContainer);
 });
@@ -114,15 +114,11 @@ onBeforeUnmount(() => {
   window.removeEventListener("resize", resizePdfContainer);
 });
 const closeModal = () => {
-  sideBack.value = false;
+  slideDownUserInfo.value = true;
 };
 
 const createFile = async () => {
-  console.log(props.currentMotvationMVIndex);
-  const file = await createDoc(
-    props.currentApplIndex,
-    props.currentMotvationMVIndex
-  );
+  const file = await createCV();
   const data = await new Promise((resolve) => {
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -162,13 +158,13 @@ const saveAndDownLoadDocs = async () => {
   const dateString = moment().format("DD_MM_YYYY");
 
   const fileNameDoc =
-    "motivationsschreiben-" +
+    "lebenslauf-" +
     applications[props.currentApplIndex][0].company +
     "_" +
     dateString +
     ".docx";
   const fileNamePDF =
-    "motivationsschreiben-" +
+    "lebenslauf-" +
     applications[props.currentApplIndex][0].company +
     "_" +
     dateString +
@@ -237,7 +233,7 @@ const saveAndDownLoadDocs = async () => {
     console.log("Web Share API is not supported in this browser");
     mailImage();
   }
-  sideBack.value = false;
+  slideDownUserInfo.value = true;
 };
 
 const createPdfFromHtml = (html: string) => {

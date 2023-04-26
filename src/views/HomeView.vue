@@ -42,13 +42,13 @@
               <div class="flex top pt-2">
                 <div class="grow ..."></div>
                 <div
-                  v-if="item[0].state == 'Entwurf'"
+                  v-if="item[0].state == 'In Bearbeitung'"
                   class="font-none px-2 text-xs text-white font-bold rounded-2xl bg-wd-edit"
                 >
                   {{ item[0].state }}
                 </div>
                 <div
-                  v-if="item[0].state == 'Erledigt'"
+                  v-if="item[0].state == 'Abgeschickt'"
                   class="font-none px-2 text-xs text-white font-bold rounded-2xl bg-wd-green"
                 >
                   {{ item[0].state }}

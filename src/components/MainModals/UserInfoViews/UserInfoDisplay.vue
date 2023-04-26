@@ -14,6 +14,16 @@
       </div>
 
       <UserForm v-if="renderComponent5"></UserForm>
+      <div
+        class="group bottom-20 p-6 flex flex-col items-center justify-center w-full h-24 mx-auto md:text-2xl text-base"
+      >
+        <button
+          @click="openCVExport()"
+          class="bg-wd-green hover:bg-transparent-green shadow p-2 text-white font-Montserrat font-bold rounded-md"
+        >
+          Lebenslauf Ansicht
+        </button>
+      </div>
     </section>
   </div>
   <div>
@@ -31,15 +41,27 @@
       </div>
     </MVEditModal>
   </div>
+  <div>
+    <MVEditModal :show="bottomCardOpen6">
+      <div class="flex">
+        <div
+          class="rounded-lg w-screen h-screen overflow-hidden shadow-xl dark:bg-slate-700 bg-white"
+        >
+          <component :is="UserInfoPreview" />
+        </div>
+      </div>
+    </MVEditModal>
+  </div>
 </template>
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import { slideDownUserInfo } from "@/store/store.js";
+import { ref, watch, onMounted } from "vue";
+import { slideDownUserInfo, sideBack } from "@/store/store.js";
 
 import EditIcon from "@/assets/icons/EditIcon.vue";
 
 import MVEditModal from "@/components/MenuModals/MVEditModal.vue";
 import UserInfoEdit from "@/components/MainModals/UserInfoViews/UserInfoEdit.vue";
+import UserInfoPreview from "@/components/MainModals/UserInfoViews/UserInfoPreview.vue";
 import UserForm from "@/components/MainModals/UserInfoViews/UserForm.vue";
 import ProfileView from "@/views/ProfileView.vue";
 
@@ -47,14 +69,13 @@ const applications = ref(
   JSON.parse(localStorage.getItem("applications")) || []
 );
 const bottomCardOpen5 = ref(false);
+const bottomCardOpen6 = ref(false);
 const renderComponent5 = ref(true);
 let currentButtonIndex = ref(0);
-
 watch(slideDownUserInfo, () => {
   if (slideDownUserInfo.value) {
     bottomCardOpen5.value = false;
-  } else {
-    bottomCardOpen5.value = true;
+    bottomCardOpen6.value = false;
   }
 });
 
@@ -67,9 +88,16 @@ watch(bottomCardOpen5, () => {
   }
 });
 
+onMounted(() => {
+  slideDownUserInfo.vlaue = true;
+  bottomCardOpen5.value = false;
+  bottomCardOpen6.value = false;
+});
+
 const openBottomCard = (id) => {
   currentButtonIndex.value = id;
-  slideDownUserInfo.value = false;
+  bottomCardOpen5.value = true;
+  bottomCardOpen6.value = false;
 };
 
 const onDrop = (dropResult) => {
@@ -90,6 +118,10 @@ const applyDrag = (arr, dragResult) => {
   return arr;
 };
 const closeModal = () => {
+  bottomCardOpen5.value = false;
+};
+const openCVExport = () => {
+  bottomCardOpen6.value = true;
   bottomCardOpen5.value = false;
 };
 </script>

@@ -72,7 +72,7 @@
     </div>
   </div>
 
-  <div class="fixed bottom-40">
+  <div class="flex bottom-40 p-4">
     <button
       class="bg-wd-error shadow rounded-md h-14 w-screen text-white font-bold"
       @click="removeFromLocalStorage()"
@@ -81,7 +81,7 @@
       Kenntnisse entfernen
     </button>
   </div>
-  <div class="fixed bottom-10 items-end justify-end">
+  <div class="flex bottom-10 pt-4 items-end justify-end">
     <button
       class="bg-wd-green hover:bg-transparent-green shadow h-24 w-screen text-white font-bold"
       @click="saveToLocalStorage()"

@@ -71,7 +71,7 @@ import {
 import { month } from "@formkit/inputs";
 import { attr } from "dom7";
 
-let theme = ref(false);
+let theme = ref(true);
 const calendar = ref(null);
 const locale = "de-AT";
 const renderComponent = ref(true);
@@ -255,8 +255,10 @@ loadAppointments();
 
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   theme.value = true;
-} else {
+} else if (JSON.parse(localStorage.getItem("theme")) == "light") {
   theme.value = false;
+} else {
+  theme.value = true;
 }
 
 onMounted(() => {

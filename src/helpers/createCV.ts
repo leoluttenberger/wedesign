@@ -81,9 +81,9 @@ async function createDocx(): Promise<Blob> {
   const streetPlusNumber = streetName + " " + streetNumber;
   const districtPlusCity = districtNumber + " " + city;
   let fullName = "";
-  let sections;
+  const sections = [];
 
-  sections.pus({
+  sections.push({
     properties: {},
     children: [
       new Paragraph({

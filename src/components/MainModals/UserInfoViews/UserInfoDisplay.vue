@@ -73,7 +73,7 @@ const bottomCardOpen6 = ref(false);
 const renderComponent5 = ref(true);
 let currentButtonIndex = ref(0);
 watch(slideDownUserInfo, () => {
-  if (slideDownUserInfo.value) {
+  if (slideDownUserInfo.value == true) {
     bottomCardOpen5.value = false;
     bottomCardOpen6.value = false;
   }
@@ -89,7 +89,7 @@ watch(bottomCardOpen5, () => {
 });
 
 onMounted(() => {
-  slideDownUserInfo.vlaue = true;
+  slideDownUserInfo.value = true;
   bottomCardOpen5.value = false;
   bottomCardOpen6.value = false;
 });

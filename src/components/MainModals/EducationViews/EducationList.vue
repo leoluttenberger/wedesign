@@ -150,10 +150,12 @@ const items = ref<SlideItem[]>([
 const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   darkLightMode.value = "dark";
-} else {
+} else if (JSON.parse(localStorage.getItem("theme")) == "light") {
   darkLightMode.value = "light";
+} else {
+  darkLightMode.value = "dark";
+  isDarkMode.value = "dark";
 }
-
 watch(dragOptionActive, () => {
   dragActive.value = dragOptionActive.value;
 });

@@ -132,8 +132,11 @@ let activeButton5 = ref(false);
 
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   darkLightMode.value = "dark";
-} else {
+} else if (JSON.parse(localStorage.getItem("theme")) == "light") {
   darkLightMode.value = "light";
+} else {
+  darkLightMode.value = "dark";
+  isDarkMode.value = "dark";
 }
 watch(isDarkMode, () => {
   swichtDarkLightMode();

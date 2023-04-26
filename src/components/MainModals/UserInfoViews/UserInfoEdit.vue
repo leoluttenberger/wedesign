@@ -66,7 +66,7 @@
             <p
               class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
             >
-              Vorname:
+              Vorname: *
             </p>
             <div class="px-2">
               <FormKit
@@ -84,7 +84,7 @@
             <p
               class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
             >
-              Nachname:
+              Nachname: *
             </p>
             <div class="px-2">
               <FormKit

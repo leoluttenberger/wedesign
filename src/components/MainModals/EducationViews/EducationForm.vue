@@ -75,7 +75,7 @@
           <p
             class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
           >
-            Ende:
+            Ende: *
           </p>
           <div class="px-2">
             <FormKit
@@ -83,9 +83,45 @@
               name="Ende"
               v-model="educationTo"
               placeholder="Auswählen"
-              :validation="[['date_after', educationFrom]]"
+              :validation="[['required'], ['date_after', educationFrom]]"
               validation-visibility="live"
+              :disabled="checked"
             />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex items-center py-2 px-">
+          <input
+            id="ongoing"
+            v-model="checked"
+            type="checkbox"
+            value="ongoing"
+            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <label
+            for="ongoing"
+            class="px-2 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
+            >laufend</label
+          >
+        </div>
+        <div class="flex bg-white dark:bg-slate-800 h-10">
+          <p
+            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
+          >
+            Anmerkungen:
+          </p>
+
+          <div class="flex bg-white dark:bg-slate-800 h-10">
+            <div class="p-2">
+              <FormKit
+                type="textarea"
+                v-model="note"
+                placeholder="Wichtige Informationen"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -113,9 +149,12 @@ const address = ref(null);
 const educationFrom = ref(null);
 const educationTo = ref(null);
 let buttonDisabled = false;
+const checked = ref(false);
+const note = ref(null);
 
 onMounted(() => {
   buttonDisabled = false;
+  checked.value = false;
 });
 
 const saveToLocalStorage = () => {
@@ -126,6 +165,8 @@ const saveToLocalStorage = () => {
       address: address.value,
       educationFrom: educationFrom.value,
       educationTo: educationTo.value,
+      ongoing: checked.value,
+      note: note.value,
     },
   ];
   if (buttonDisabled == false) {

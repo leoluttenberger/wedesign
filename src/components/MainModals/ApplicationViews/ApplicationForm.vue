@@ -2,11 +2,11 @@
   <div class="px-5">
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
+        <div class="flex bg-white dark:bg-slate-800 h-10 pb-4">
           <p
             class="px-0 py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
           >
-            Firma:
+            Firma: *
           </p>
           <div class="px-2">
             <FormKit
@@ -52,12 +52,12 @@
           </div>
         </div>
       </div>
-      <div class="col-span-2 md:col-span-1">
+      <div class="col-span-2 md:col-span-1 pb-4">
         <div class="flex bg-white dark:bg-slate-800 h-10">
           <p
             class="py-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
           >
-            Deadline:
+            Deadline: *
           </p>
           <div class="px-2">
             <FormKit

@@ -1,7 +1,7 @@
 <template>
   <div class="overflow-auto overflow-scroll w-screen h-screen">
     <div class="grid grid-cols-3 gap-20 p-2 place-items-center">
-      <button type="button" @click="closeModal()" class="p-4">
+      <button type="button" @click="openQueryModal()" class="p-4">
         <BackIcon
           class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
         ></BackIcon>
@@ -227,6 +227,33 @@
       </SwiperCard>
     </BottomCard>
   </div>
+  <CropModal :show="showModal">
+    <div class="place-items-center">
+      <div class="text-white text-xl p-2">Schließen!</div>
+    </div>
+    <div class="flex text-white font-Montserrat text-base font-bold pb-2">
+      <p>
+        Bist du wirklich sicher dass du das Fenster schließen willst ohne zu
+        speichern!
+      </p>
+    </div>
+
+    <div
+      class="flex justify-evenly text-white font-Montserrat text-base font-bold h-10"
+    >
+      <button
+        type="button"
+        @click="returnToEdit()"
+        class="bg-wd-error w-screen"
+      >
+        Nein
+      </button>
+
+      <button type="button" @click="closeModal()" class="bg-wd-green w-screen">
+        Ja
+      </button>
+    </div>
+  </CropModal>
 </template>
 <script setup lang="ts">
 import { ref, onMounted, defineProps, watch } from "vue";
@@ -247,6 +274,7 @@ import {
 import BackIcon from "@/assets/icons/BackIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 import EditIcon from "@/assets/icons/EditIcon.vue";
+import CloseIcon from "@/assets/icons/CloseIcon.vue";
 
 import BottomCard from "@/components/MenuModals/BottomCard.vue";
 import EditTextModal from "@/components/MenuModals/EditTextModal.vue";
@@ -407,8 +435,10 @@ const MAX_MV_PREVIEW = 5;
 const lastIndex = ref(0);
 
 let textLabel = "";
+const showModal = ref(false);
 
 onMounted(() => {
+  showModal.value = false;
   indexOfMVid.value = props.currentMotvationMVIndex;
   updateForm();
   sideBackBack.value = false;
@@ -567,8 +597,12 @@ const initSlides = () => {
   }
 };
 
+const openQueryModal = () => {
+  showModal.value = true;
+};
 const closeModal = () => {
   sideBack.value = false;
+  showModal.value = false;
   isEdited = false;
 };
 
@@ -663,5 +697,8 @@ const addAfter = () => {
       text: "After",
     },
   ];
+};
+const returnToEdit = () => {
+  showModal.value = false;
 };
 </script>

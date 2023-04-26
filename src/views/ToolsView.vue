@@ -39,7 +39,12 @@ import Toggle from "@vueform/toggle";
 import { isDarkMode } from "@/store/store.js";
 
 const toggleOnDark = ref(false);
+
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
+  toggleOnDark.value = true;
+} else if (JSON.parse(localStorage.getItem("theme")) == "light") {
+  toggleOnDark.value = false;
+} else {
   toggleOnDark.value = true;
 }
 watch(toggleOnDark, () => {

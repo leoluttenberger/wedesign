@@ -2,7 +2,7 @@
   <div class="overflow-auto overflow-scroll w-screen h-screen">
     <div v-if="!motivationModalOpen">
       <div class="grid grid-cols-3 gap-20 p-2 place-items-center">
-        <button type="button" @click="closeModal()" class="p-4">
+        <button type="button" @click="openQueryModal()" class="p-4">
           <BackIcon
             class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
           ></BackIcon>
@@ -290,6 +290,33 @@
       </div>
     </MVEditModal>
   </div>
+  <CropModal :show="showModal">
+    <div class="place-items-center">
+      <div class="text-white text-xl p-2">Schließen!</div>
+    </div>
+    <div class="flex text-white font-Montserrat text-base font-bold pb-2">
+      <p>
+        Bist du wirklich sicher dass du das Fenster schließen willst ohne zu
+        speichern!
+      </p>
+    </div>
+
+    <div
+      class="flex justify-evenly text-white font-Montserrat text-base font-bold h-10"
+    >
+      <button
+        type="button"
+        @click="returnToEdit()"
+        class="bg-wd-error w-screen"
+      >
+        Nein
+      </button>
+
+      <button type="button" @click="closeModal()" class="bg-wd-green w-screen">
+        Ja
+      </button>
+    </div>
+  </CropModal>
 </template>
 <script setup lang="ts">
 import { ref, onMounted, defineProps, watch } from "vue";
@@ -318,6 +345,8 @@ const districtNumber = ref(null);
 const city = ref(null);
 const start = ref(null);
 const mvIndex = ref(null);
+
+const showModal = ref(false);
 
 let __mv = null;
 let __mvText = null;
@@ -348,6 +377,7 @@ watch(sideBack, () => {
 });
 
 onMounted(() => {
+  showModal.value = false;
   editIndex.value = props.editIndex;
   const applications = ref(
     JSON.parse(localStorage.getItem("applications")) || []
@@ -527,5 +557,13 @@ const saveToLocalStorage = () => {
 };
 const closeModal = () => {
   slideDown.value = true;
+  showModal.value = false;
+};
+const returnToEdit = () => {
+  showModal.value = false;
+};
+
+const openQueryModal = () => {
+  showModal.value = true;
 };
 </script>

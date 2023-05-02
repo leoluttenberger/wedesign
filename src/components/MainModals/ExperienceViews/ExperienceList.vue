@@ -171,7 +171,6 @@ if (localStorage.getItem("experiences") == null) {
     isEmpty.value = true;
   } else {
     isEmpty.value = false;
-    console.log("Not empty", experiences.value);
   }
 }
 let idCounter = 0;
@@ -191,7 +190,6 @@ onMounted(() => {
       isEmpty.value = true;
     } else {
       isEmpty.value = false;
-      console.log("Not empty", experiences.value);
     }
   }
 });

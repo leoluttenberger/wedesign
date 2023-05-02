@@ -166,7 +166,6 @@ if (localStorage.getItem("educations") == null) {
     isEmpty.value = true;
   } else {
     isEmpty.value = false;
-    console.log("Not empty", educations.value);
   }
 }
 let idCounter = 0;
@@ -196,7 +195,6 @@ onMounted(() => {
       isEmpty.value = true;
     } else {
       isEmpty.value = false;
-      console.log("Not empty", educations.value);
     }
   }
 });

@@ -2,7 +2,7 @@
   <div>
     <section class="z-0">
       <div class="grid gap-2" v-if="renderComponent2">
-        <Container @drop="onDrop" v-if="dragActive">
+        <Container @drop="onDrop" v-if="dragActive && !isEmpty">
           <Draggable
             v-for="(item, index) in educations"
             :key="index"
@@ -36,7 +36,7 @@
             </div>
           </Draggable>
         </Container>
-        <Container v-if="!dragActive">
+        <Container v-if="!dragActive && !isEmpty">
           <div v-for="(item, index) in educations" :key="index" class="p-2">
             <div class="flex">
               <button @click="openBottomCard(index)" class="grow px-2">
@@ -61,6 +61,27 @@
                 </div>
               </button>
             </div>
+          </div>
+        </Container>
+        <Container v-if="isEmpty">
+          <div class="flex">
+            <button :disabled="true" class="grow px-2">
+              <div
+                class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-gray-300"
+              >
+                <div class="font-bold text-xl text-gray-300">Mittelschule</div>
+                <div class="text-base text-gray-300">Straße Nr., PLZ</div>
+                <div class="flex">
+                  <div class="text-base text-gray-300 flex-none">Start</div>
+                  <div class="grow py-2 px-2">
+                    <ArrowIcon
+                      class="dark:stroke-wd-white stroke-1 w-full h-2"
+                    ></ArrowIcon>
+                  </div>
+                  <div class="text-base text-gray-300 flex-none">Ende</div>
+                </div>
+              </div>
+            </button>
           </div>
         </Container>
       </div>
@@ -113,7 +134,7 @@
   </teleport>
 </template>
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 import { slideDown, isDarkMode, dragOptionActive } from "@/store/store.js";
 
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
@@ -131,13 +152,23 @@ const bottomCardOpen2 = ref(false);
 const renderComponent2 = ref(true);
 let currentButtonIndex = ref(0);
 const dragActive = ref(false);
+const isEmpty = ref(true);
 
 interface SlideItem {
   id: string;
   index: number;
   text: string;
 }
-
+if (localStorage.getItem("educations") == null) {
+  isEmpty.value = true;
+} else {
+  if (educations.value.length == 0) {
+    isEmpty.value = true;
+  } else {
+    isEmpty.value = false;
+    console.log("Not empty", educations.value);
+  }
+}
 let idCounter = 0;
 const getID = () => (idCounter++).toString();
 let posIndexCounter = 0;
@@ -156,6 +187,20 @@ if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   darkLightMode.value = "dark";
   isDarkMode.value = "dark";
 }
+
+onMounted(() => {
+  if (localStorage.getItem("educations") == null) {
+    isEmpty.value = true;
+  } else {
+    if (educations.value.length == 0) {
+      isEmpty.value = true;
+    } else {
+      isEmpty.value = false;
+      console.log("Not empty", educations.value);
+    }
+  }
+});
+
 watch(dragOptionActive, () => {
   dragActive.value = dragOptionActive.value;
 });

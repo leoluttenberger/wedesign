@@ -2,7 +2,7 @@
   <div>
     <section class="z-0">
       <div class="grid gap-2" v-if="renderComponent4">
-        <Container @drop="onDrop" v-if="dragActive">
+        <Container @drop="onDrop" v-if="!dragActive && !isEmpty">
           <Draggable
             v-for="(item, index) in knowledges"
             :key="index"
@@ -36,7 +36,7 @@
             </div>
           </Draggable>
         </Container>
-        <Container v-if="!dragActive">
+        <Container v-if="!dragActive && !isEmpty">
           <Draggable
             v-for="(item, index) in knowledges"
             :key="index"
@@ -66,6 +66,21 @@
               </button>
             </div>
           </Draggable>
+        </Container>
+        <Container v-if="isEmpty">
+          <div class="flex">
+            <button :disabled="true" class="grow px-2">
+              <div
+                class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-gray-300"
+              >
+                <div class="font-bold text-xl text-gray-300">
+                  Sprachkenntnisse
+                </div>
+                <div class="text-base text-gray-300">Sprache</div>
+                <div class="text-base text-gray-300 flex-none">Level</div>
+              </div>
+            </button>
+          </div>
         </Container>
       </div>
     </section>
@@ -117,7 +132,7 @@
   </teleport>
 </template>
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 import { slideDown, isDarkMode, dragOptionActive } from "@/store/store.js";
 
 import SortIcon from "@/assets/icons/SortIcon.vue";
@@ -135,12 +150,38 @@ const bottomCardOpen4 = ref(false);
 const renderComponent4 = ref(true);
 let currentButtonIndex = ref(0);
 const dragActive = ref(false);
+const isEmpty = ref(true);
 
 interface SlideItem {
   id: string;
   index: number;
   text: string;
 }
+
+if (localStorage.getItem("knowledges") == null) {
+  isEmpty.value = true;
+} else {
+  if (knowledges.value.length == 0) {
+    isEmpty.value = true;
+  } else {
+    isEmpty.value = false;
+    console.log("Not empty", knowledges.value);
+  }
+}
+
+onMounted(() => {
+  if (localStorage.getItem("knowledges") == null) {
+    isEmpty.value = true;
+  } else {
+    if (knowledges.value.length == 0) {
+      isEmpty.value = true;
+    } else {
+      isEmpty.value = false;
+      console.log("Not empty", knowledges.value);
+    }
+  }
+});
+
 let idCounter = 0;
 const getID = () => (idCounter++).toString();
 let posIndexCounter = 0;

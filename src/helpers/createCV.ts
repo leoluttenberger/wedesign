@@ -81,7 +81,85 @@ async function createDocx(): Promise<Blob> {
   const streetPlusNumber = streetName + " " + streetNumber;
   const districtPlusCity = districtNumber + " " + city;
   let fullName = "";
+
+  if (titleBefore == "") {
+    fullName = firstName + " " + secondName + " " + titleAfter;
+  } else {
+    fullName =
+      titleBefore + " " + firstName + " " + secondName + " " + titleAfter;
+  }
+
   const sections = [];
+
+  sections.push({
+    properties: {},
+    children: [
+      new Paragraph({
+        text: fullName,
+        heading: HeadingLevel.HEADING_2,
+        style: "h2",
+      }),
+      new Paragraph({
+        text: streetPlusNumber,
+        style: "normal",
+      }),
+      new Paragraph({
+        text: districtPlusCity,
+        style: "normal",
+      }),
+      new Paragraph({
+        text: email,
+        style: "normal",
+      }),
+      new Paragraph({
+        text: " ",
+        style: "normal",
+      }),
+      new Paragraph({
+        text: " ",
+        style: "normal",
+      }),
+      new Paragraph({
+        text: " ",
+        style: "normal",
+      }),
+      new Paragraph({
+        text: "Lebenslauf",
+        heading: HeadingLevel.HEADING_1,
+        style: "h1",
+      }),
+      new Paragraph({
+        text: fullName,
+        heading: HeadingLevel.HEADING_2,
+        style: "h2",
+      }),
+      new Paragraph({
+        text: " ",
+        style: "normal",
+      }),
+      new Paragraph({
+        text: " ",
+        style: "normal",
+      }),
+      new Paragraph({
+        text: " ",
+        style: "normal",
+      }),
+      new Paragraph({
+        text: "Persönliche Daten:",
+        heading: HeadingLevel.HEADING_2,
+        style: "h2",
+      }),
+      new Paragraph({
+        text: birthDate + " in " + birthArea,
+        style: "normal",
+      }),
+      new Paragraph({
+        text: civilStatus,
+        style: "normal",
+      }),
+    ],
+  });
 
   sections.push({
     properties: {},
@@ -90,13 +168,129 @@ async function createDocx(): Promise<Blob> {
         text: " ",
         style: "normal",
       }),
+      new Paragraph({
+        text: "Ausbildung:",
+        heading: HeadingLevel.HEADING_2,
+        style: "h2",
+      }),
     ],
   });
-  if (titleBefore == "") {
-    fullName = firstName + " " + secondName + " " + titleAfter;
-  } else {
-    fullName =
-      titleBefore + " " + firstName + " " + secondName + " " + titleAfter;
+
+  if (educations.value != null) {
+    for (let i = 0; i < educations.value.length; i++) {
+      let educationString = educations.value[i][0].educationFrom
+        ? educations.value[i][0].educationFrom
+        : " ";
+
+      if (educations.value[i][0].educationTo != null) {
+        educationString += " - " + educations.value[i][0].educationTo;
+      } else {
+        educationString += " - laufend";
+      }
+      if (educations.value[i][0].type != null) {
+        educationString += "    " + educations.value[i][0].type;
+      }
+      if (educations.value[i][0].note != null) {
+        educationString += "  " + educations.value[i][0].note;
+      }
+      sections.push({
+        properties: {},
+        children: [
+          new Paragraph({
+            text: educationString,
+            style: "normal",
+          }),
+        ],
+      });
+    }
+  }
+
+  sections.push({
+    properties: {},
+    children: [
+      new Paragraph({
+        text: " ",
+        style: "normal",
+      }),
+      new Paragraph({
+        text: "Erfahrungen:",
+        heading: HeadingLevel.HEADING_2,
+        style: "h2",
+      }),
+    ],
+  });
+
+  if (experiences.value != null) {
+    for (let i = 0; i < experiences.value.length; i++) {
+      let experienceString = experiences.value[i][0].workshopFrom
+        ? experiences.value[i][0].workshopFrom
+        : " ";
+
+      if (experiences.value[i][0].workshopTo != null) {
+        experienceString += " - " + experiences.value[i][0].workshopTo;
+      } else {
+        experienceString += " - laufend";
+      }
+      if (experiences.value[i][0].workshop != null) {
+        experienceString += "    " + experiences.value[i][0].workshop;
+      }
+      if (experiences.value[i][0].description != null) {
+        experienceString += "  " + experiences.value[i][0].description;
+      }
+      sections.push({
+        properties: {},
+        children: [
+          new Paragraph({
+            text: experienceString,
+            style: "normal",
+          }),
+        ],
+      });
+    }
+  }
+
+  sections.push({
+    properties: {},
+    children: [
+      new Paragraph({
+        text: " ",
+        style: "normal",
+      }),
+      new Paragraph({
+        text: "Kenntnisse:",
+        heading: HeadingLevel.HEADING_2,
+        style: "h2",
+      }),
+    ],
+  });
+
+  if (knowledges.value != null) {
+    for (let i = 0; i < knowledges.value.length; i++) {
+      let knowledgestring = knowledges.value[i][0].type
+        ? knowledges.value[i][0].type
+        : " ";
+
+      if (knowledges.value[i][0].diversKnowledge != null) {
+        knowledgestring += " " + knowledges.value[i][0].diversKnowledge;
+      } else {
+        knowledgestring += " ";
+      }
+      if (knowledges.value[i][0].languageKnowledge != null) {
+        knowledgestring += " " + knowledges.value[i][0].languageKnowledge;
+      }
+      if (knowledges.value[i][0].languageLevel != null) {
+        knowledgestring += " " + knowledges.value[i][0].languageLevel;
+      }
+      sections.push({
+        properties: {},
+        children: [
+          new Paragraph({
+            text: knowledgestring,
+            style: "normal",
+          }),
+        ],
+      });
+    }
   }
 
   const doc = new Document({

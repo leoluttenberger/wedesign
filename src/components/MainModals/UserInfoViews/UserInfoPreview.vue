@@ -154,21 +154,9 @@ const mailImage = () => {
   window.location.href = mailtoLink;
 };
 const saveAndDownLoadDocs = async () => {
-  const applications = JSON.parse(localStorage.getItem("applications"));
   const dateString = moment().format("DD_MM_YYYY");
-
-  const fileNameDoc =
-    "lebenslauf-" +
-    applications[props.currentApplIndex][0].company +
-    "_" +
-    dateString +
-    ".docx";
-  const fileNamePDF =
-    "lebenslauf-" +
-    applications[props.currentApplIndex][0].company +
-    "_" +
-    dateString +
-    ".pdf";
+  const fileNameDoc = "lebenslauf-" + dateString + ".docx";
+  const fileNamePDF = "lebenslauf-" + "_" + dateString + ".pdf";
 
   const base64StringPdf = await fileToBase64(pdf.value.output("blob"));
   const base64StringDoc = await fileToBase64(downloadDocx.value);

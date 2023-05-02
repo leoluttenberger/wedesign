@@ -2,7 +2,7 @@ export function convertXmlToHtml(xmlString: string): string {
   const domParser = new DOMParser();
   const xmlDoc = domParser.parseFromString(xmlString, "application/xml");
   const paragraphs = xmlDoc.getElementsByTagName("w:p");
-
+  console.log(xmlString);
   let htmlString = "";
   for (let i = 0; i < paragraphs.length; i++) {
     const paragraph = paragraphs[i];

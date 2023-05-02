@@ -1,7 +1,14 @@
-import { Document, Paragraph, HeadingLevel, AlignmentType, Packer } from "docx";
+import {
+  Document,
+  Paragraph,
+  HeadingLevel,
+  AlignmentType,
+  Packer,
+  ImageRun,
+} from "docx";
 import moment from "moment";
 import { ref } from "vue";
-
+const profileImg = JSON.parse(localStorage.getItem("profileImg"));
 export const createCV = async () => {
   const blob = createDocHandler();
   return blob;
@@ -88,8 +95,17 @@ async function createDocx(): Promise<Blob> {
     fullName =
       titleBefore + " " + firstName + " " + secondName + " " + titleAfter;
   }
-
   const sections = [];
+
+  const image = new ImageRun({
+    data: profileImg,
+    transformation: {
+      width: 200,
+      height: 150,
+    },
+  });
+
+  console.log(image);
 
   sections.push({
     properties: {},
@@ -112,16 +128,8 @@ async function createDocx(): Promise<Blob> {
         style: "normal",
       }),
       new Paragraph({
-        text: " ",
-        style: "normal",
-      }),
-      new Paragraph({
-        text: " ",
-        style: "normal",
-      }),
-      new Paragraph({
-        text: " ",
-        style: "normal",
+        children: [image],
+        alignment: AlignmentType.RIGHT,
       }),
       new Paragraph({
         text: "Lebenslauf",
@@ -370,6 +378,7 @@ async function createDocx(): Promise<Blob> {
     },
     sections,
   });
+
   const mimeType =
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
   const fileName = "motivationLetter.docx";

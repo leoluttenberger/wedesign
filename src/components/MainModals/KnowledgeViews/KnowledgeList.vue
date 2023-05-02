@@ -165,7 +165,6 @@ if (localStorage.getItem("knowledges") == null) {
     isEmpty.value = true;
   } else {
     isEmpty.value = false;
-    console.log("Not empty", knowledges.value);
   }
 }
 
@@ -177,7 +176,6 @@ onMounted(() => {
       isEmpty.value = true;
     } else {
       isEmpty.value = false;
-      console.log("Not empty", knowledges.value);
     }
   }
 });

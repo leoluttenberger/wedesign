@@ -2,7 +2,7 @@
   <div>
     <section class="z-0">
       <div class="grid gap-2" v-if="renderComponent3">
-        <Container @drop="onDrop" v-if="dragActive">
+        <Container @drop="onDrop" v-if="!dragActive && !isEmpty">
           <Draggable
             v-for="(item, index) in experiences"
             :key="index"
@@ -36,7 +36,7 @@
             </div>
           </Draggable>
         </Container>
-        <Container v-if="!dragActive">
+        <Container v-if="!dragActive && !isEmpty">
           <Draggable
             v-for="(item, index) in experiences"
             :key="index"
@@ -66,6 +66,27 @@
               </button>
             </div>
           </Draggable>
+        </Container>
+        <Container v-if="isEmpty">
+          <div class="flex">
+            <button :disabled="true" class="grow px-2">
+              <div
+                class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-gray-300"
+              >
+                <div class="font-bold text-xl text-gray-300">Workshop</div>
+                <div class="text-base text-gray-300">Beschreibung</div>
+                <div class="flex">
+                  <div class="text-base text-gray-300 flex-none">Start</div>
+                  <div class="grow py-2 px-2">
+                    <ArrowIcon
+                      class="dark:stroke-wd-white stroke-1 w-full h-2"
+                    ></ArrowIcon>
+                  </div>
+                  <div class="text-base text-gray-300 flex-none">Ende</div>
+                </div>
+              </div>
+            </button>
+          </div>
         </Container>
       </div>
     </section>
@@ -117,7 +138,7 @@
   </teleport>
 </template>
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 import { slideDown, isDarkMode, dragOptionActive } from "@/store/store.js";
 
 import BottomCard from "@/components/MenuModals/BottomCard.vue";
@@ -135,11 +156,23 @@ const bottomCardOpen3 = ref(false);
 const renderComponent3 = ref(true);
 let currentButtonIndex = ref(0);
 const dragActive = ref(false);
+const isEmpty = ref(true);
 
 interface SlideItem {
   id: string;
   index: number;
   text: string;
+}
+
+if (localStorage.getItem("experiences") == null) {
+  isEmpty.value = true;
+} else {
+  if (experiences.value.length == 0) {
+    isEmpty.value = true;
+  } else {
+    isEmpty.value = false;
+    console.log("Not empty", experiences.value);
+  }
 }
 let idCounter = 0;
 const getID = () => (idCounter++).toString();
@@ -149,6 +182,19 @@ const getPosIndex = () => posIndexCounter++;
 const items = ref<SlideItem[]>([
   { id: getID(), index: getPosIndex(), text: "First" },
 ]);
+
+onMounted(() => {
+  if (localStorage.getItem("experiences") == null) {
+    isEmpty.value = true;
+  } else {
+    if (experiences.value.length == 0) {
+      isEmpty.value = true;
+    } else {
+      isEmpty.value = false;
+      console.log("Not empty", experiences.value);
+    }
+  }
+});
 
 const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {

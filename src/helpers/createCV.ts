@@ -5,10 +5,70 @@ import {
   AlignmentType,
   Packer,
   ImageRun,
+  TextRun,
 } from "docx";
 import moment from "moment";
 import { ref } from "vue";
 const profileImg = JSON.parse(localStorage.getItem("profileImg"));
+
+export interface Floating {
+  horizontalPosition: HorizontalPositionOptions;
+  verticalPosition: VerticalPositionOptions;
+  allowOverlap?: boolean;
+  lockAnchor?: boolean;
+  behindDocument?: boolean;
+  layoutInCell?: boolean;
+}
+
+export interface HorizontalPositionOptions {
+  relative: HorizontalPositionRelativeFrom;
+  align?: HorizontalPositionAlign;
+  offset?: number;
+}
+
+export interface VerticalPositionOptions {
+  relative: VerticalPositionRelativeFrom;
+  align?: VerticalPositionAlign;
+  offset?: number;
+}
+
+export enum HorizontalPositionRelativeFrom {
+  CHARACTER = "character",
+  COLUMN = "column",
+  INSIDE_MARGIN = "insideMargin",
+  LEFT_MARGIN = "leftMargin",
+  MARGIN = "margin",
+  OUTSIDE_MARGIN = "outsideMargin",
+  PAGE = "page",
+  RIGHT_MARGIN = "rightMargin",
+}
+
+export enum VerticalPositionRelativeFrom {
+  BOTTOM_MARGIN = "bottomMargin",
+  INSIDE_MARGIN = "insideMargin",
+  LINE = "line",
+  MARGIN = "margin",
+  OUTSIDE_MARGIN = "outsideMargin",
+  PAGE = "page",
+  PARAGRAPH = "paragraph",
+  TOP_MARGIN = "topMargin",
+}
+
+export enum HorizontalPositionAlign {
+  CENTER = "center",
+  INSIDE = "inside",
+  LEFT = "left",
+  OUTSIDE = "outside",
+  RIGHT = "right",
+}
+
+export enum VerticalPositionAlign {
+  BOTTOM = "bottom",
+  CENTER = "center",
+  INSIDE = "inside",
+  OUTSIDE = "outside",
+  TOP = "top",
+}
 export const createCV = async () => {
   const blob = createDocHandler();
   return blob;
@@ -100,89 +160,90 @@ async function createDocx(): Promise<Blob> {
   const image = new ImageRun({
     data: profileImg,
     transformation: {
-      width: 200,
-      height: 150,
+      width: 180,
+      height: 180,
+    },
+    floating: {
+      horizontalPosition: {
+        relative: HorizontalPositionRelativeFrom.MARGIN,
+        align: HorizontalPositionAlign.RIGHT,
+      },
+      verticalPosition: {
+        relative: VerticalPositionRelativeFrom.PARAGRAPH,
+        align: VerticalPositionAlign.CENTER,
+      },
     },
   });
 
-  console.log(image);
-
-  sections.push({
-    properties: {},
-    children: [
-      new Paragraph({
-        text: fullName,
-        heading: HeadingLevel.HEADING_2,
-        style: "h2",
-      }),
-      new Paragraph({
-        text: streetPlusNumber,
-        style: "normal",
-      }),
-      new Paragraph({
-        text: districtPlusCity,
-        style: "normal",
-      }),
-      new Paragraph({
-        text: email,
-        style: "normal",
-      }),
-      new Paragraph({
-        children: [image],
-        alignment: AlignmentType.RIGHT,
-      }),
-      new Paragraph({
-        text: "Lebenslauf",
-        heading: HeadingLevel.HEADING_1,
-        style: "h1",
-      }),
-      new Paragraph({
-        text: fullName,
-        heading: HeadingLevel.HEADING_2,
-        style: "h2",
-      }),
-      new Paragraph({
-        text: " ",
-        style: "normal",
-      }),
-      new Paragraph({
-        text: " ",
-        style: "normal",
-      }),
-      new Paragraph({
-        text: " ",
-        style: "normal",
-      }),
-      new Paragraph({
-        text: "Persönliche Daten:",
-        heading: HeadingLevel.HEADING_2,
-        style: "h2",
-      }),
-      new Paragraph({
-        text: birthDate + " in " + birthArea,
-        style: "normal",
-      }),
-      new Paragraph({
-        text: civilStatus,
-        style: "normal",
-      }),
-    ],
-  });
-
-  sections.push({
-    properties: {},
-    children: [
-      new Paragraph({
-        text: " ",
-        style: "normal",
-      }),
-      new Paragraph({
-        text: "Ausbildung:",
-        heading: HeadingLevel.HEADING_2,
-        style: "h2",
-      }),
-    ],
-  });
+  const children = [];
+  children.push(
+    new Paragraph({
+      text: fullName,
+      heading: HeadingLevel.HEADING_2,
+      style: "h2",
+    }),
+    new Paragraph({
+      text: streetPlusNumber,
+      style: "normal",
+    }),
+    new Paragraph({
+      text: districtPlusCity,
+      style: "normal",
+    }),
+    new Paragraph({
+      text: email,
+      style: "normal",
+    }),
+    new Paragraph({
+      text: " ",
+      style: "normal",
+    }),
+    new Paragraph({
+      text: " ",
+      style: "normal",
+    }),
+    new Paragraph({
+      text: " ",
+      style: "normal",
+    }),
+    new Paragraph({
+      style: "normal",
+      children: [image],
+    }),
+    new Paragraph({
+      text: " ",
+      style: "normal",
+    }),
+    new Paragraph({
+      text: " ",
+      style: "normal",
+    }),
+    new Paragraph({
+      text: " ",
+      style: "normal",
+    }),
+    new Paragraph({
+      text: "Lebenslauf",
+      heading: HeadingLevel.HEADING_1,
+      style: "h1",
+    }),
+    new Paragraph({
+      text: fullName,
+      heading: HeadingLevel.HEADING_2,
+      style: "h2",
+    })
+  );
+  children.push(
+    new Paragraph({
+      text: " ",
+      style: "normal",
+    }),
+    new Paragraph({
+      text: "Ausbildung:",
+      heading: HeadingLevel.HEADING_2,
+      style: "h2",
+    })
+  );
 
   if (educations.value != null) {
     for (let i = 0; i < educations.value.length; i++) {
@@ -201,32 +262,26 @@ async function createDocx(): Promise<Blob> {
       if (educations.value[i][0].note != null) {
         educationString += "  " + educations.value[i][0].note;
       }
-      sections.push({
-        properties: {},
-        children: [
-          new Paragraph({
-            text: educationString,
-            style: "normal",
-          }),
-        ],
-      });
+      children.push(
+        new Paragraph({
+          text: educationString,
+          style: "normal",
+        })
+      );
     }
   }
 
-  sections.push({
-    properties: {},
-    children: [
-      new Paragraph({
-        text: " ",
-        style: "normal",
-      }),
-      new Paragraph({
-        text: "Erfahrungen:",
-        heading: HeadingLevel.HEADING_2,
-        style: "h2",
-      }),
-    ],
-  });
+  children.push(
+    new Paragraph({
+      text: " ",
+      style: "normal",
+    }),
+    new Paragraph({
+      text: "Erfahrungen:",
+      heading: HeadingLevel.HEADING_2,
+      style: "h2",
+    })
+  );
 
   if (experiences.value != null) {
     for (let i = 0; i < experiences.value.length; i++) {
@@ -245,32 +300,26 @@ async function createDocx(): Promise<Blob> {
       if (experiences.value[i][0].description != null) {
         experienceString += "  " + experiences.value[i][0].description;
       }
-      sections.push({
-        properties: {},
-        children: [
-          new Paragraph({
-            text: experienceString,
-            style: "normal",
-          }),
-        ],
-      });
+      children.push(
+        new Paragraph({
+          text: experienceString,
+          style: "normal",
+        })
+      );
     }
   }
 
-  sections.push({
-    properties: {},
-    children: [
-      new Paragraph({
-        text: " ",
-        style: "normal",
-      }),
-      new Paragraph({
-        text: "Kenntnisse:",
-        heading: HeadingLevel.HEADING_2,
-        style: "h2",
-      }),
-    ],
-  });
+  children.push(
+    new Paragraph({
+      text: " ",
+      style: "normal",
+    }),
+    new Paragraph({
+      text: "Kenntnisse:",
+      heading: HeadingLevel.HEADING_2,
+      style: "h2",
+    })
+  );
 
   if (knowledges.value != null) {
     for (let i = 0; i < knowledges.value.length; i++) {
@@ -289,18 +338,19 @@ async function createDocx(): Promise<Blob> {
       if (knowledges.value[i][0].languageLevel != null) {
         knowledgestring += " " + knowledges.value[i][0].languageLevel;
       }
-      sections.push({
-        properties: {},
-        children: [
-          new Paragraph({
-            text: knowledgestring,
-            style: "normal",
-          }),
-        ],
-      });
+      children.push(
+        new Paragraph({
+          text: knowledgestring,
+          style: "normal",
+        })
+      );
     }
   }
-
+  console.log("children", children);
+  sections.push({
+    properties: {},
+    children: children,
+  });
   const doc = new Document({
     styles: {
       paragraphStyles: [

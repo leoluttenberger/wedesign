@@ -2,7 +2,6 @@ export function convertXmlToHtml(xmlString: string): string {
   const domParser = new DOMParser();
   const xmlDoc = domParser.parseFromString(xmlString, "application/xml");
   const paragraphs = xmlDoc.getElementsByTagName("w:p");
-  console.log(xmlString);
   let htmlString = "";
   for (let i = 0; i < paragraphs.length; i++) {
     const paragraph = paragraphs[i];
@@ -13,6 +12,7 @@ export function convertXmlToHtml(xmlString: string): string {
       .getElementsByTagName("w:jc")[0]
       ?.getAttribute("w:val");
     const textNodes = paragraph.getElementsByTagName("w:t");
+
     for (let j = 0; j < textNodes.length; j++) {
       const textNode = textNodes[j];
       const text = textNode.textContent.replace(/\n/g, "");

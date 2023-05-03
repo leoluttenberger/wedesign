@@ -82,6 +82,7 @@ import { convertXmlToHtml } from "@/helpers/convertXmlToHtml";
 import { Filesystem, Directory } from "@capacitor/filesystem";
 import { fileToBase64 } from "@/helpers/fileToBase64";
 import moment from "moment";
+const profileImg = JSON.parse(localStorage.getItem("profileImg"));
 
 const pdf = ref(null);
 const pdfDataURL = ref(null);
@@ -234,6 +235,8 @@ const createPdfFromHtml = (html: string) => {
         return true;
       },
     };
+
+  doc.addImage(profileImg, "PNG", 400, 95, 120, 120);
 
   const margins = {
     top: 60,

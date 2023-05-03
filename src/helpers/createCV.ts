@@ -6,6 +6,7 @@ import {
   Packer,
   ImageRun,
   TextRun,
+  Tab,
 } from "docx";
 import moment from "moment";
 import { ref } from "vue";
@@ -69,6 +70,16 @@ export enum VerticalPositionAlign {
   OUTSIDE = "outside",
   TOP = "top",
 }
+
+export enum TabStopType {
+  RIGHT = "right",
+  LEFT = "left",
+  CENTER = "center",
+}
+export enum TabStopPosition {
+  MAX = 1000,
+}
+
 export const createCV = async () => {
   const blob = createDocHandler();
   return blob;
@@ -247,25 +258,51 @@ async function createDocx(): Promise<Blob> {
 
   if (educations.value != null) {
     for (let i = 0; i < educations.value.length; i++) {
-      let educationString = educations.value[i][0].educationFrom
-        ? educations.value[i][0].educationFrom
-        : " ";
+      let educationString1 = "";
+      let educationString2 = "";
+      let educationString3 = "";
+      let educationString4 = "";
+      let educationString5 = "";
+
+      if (educations.value[i][0].educationFrom != null) {
+        educationString1 = educations.value[i][0].educationFrom;
+      }
 
       if (educations.value[i][0].educationTo != null) {
-        educationString += " - " + educations.value[i][0].educationTo;
+        educationString2 = " - " + educations.value[i][0].educationTo;
       } else {
-        educationString += " - laufend";
+        educationString2 = " - laufend";
       }
       if (educations.value[i][0].type != null) {
-        educationString += "    " + educations.value[i][0].type;
+        educationString3 += " " + educations.value[i][0].type;
+      }
+      if (educations.value[i][0].specialty != null) {
+        educationString4 += " " + educations.value[i][0].specialty;
       }
       if (educations.value[i][0].note != null) {
-        educationString += "  " + educations.value[i][0].note;
+        educationString5 += " " + educations.value[i][0].note;
       }
       children.push(
         new Paragraph({
-          text: educationString,
-          style: "normal",
+          style: "basic",
+          children: [
+            new TextRun({
+              children: [
+                educationString1,
+                educationString2,
+                new Tab(),
+                educationString3,
+                educationString4,
+                educationString5,
+              ],
+            }),
+          ],
+          tabStops: [
+            {
+              type: TabStopType.LEFT,
+              position: 500,
+            },
+          ],
         })
       );
     }
@@ -285,25 +322,45 @@ async function createDocx(): Promise<Blob> {
 
   if (experiences.value != null) {
     for (let i = 0; i < experiences.value.length; i++) {
-      let experienceString = experiences.value[i][0].workshopFrom
-        ? experiences.value[i][0].workshopFrom
-        : " ";
+      let experienceString1 = "";
+      let experienceString2 = "";
+      let experienceString3 = "";
+      let experienceString4 = "";
+      if (experiences.value[i][0].workshopFrom != null) {
+        experienceString1 = experiences.value[i][0].workshopFrom;
+      }
 
       if (experiences.value[i][0].workshopTo != null) {
-        experienceString += " - " + experiences.value[i][0].workshopTo;
+        experienceString2 = " - " + experiences.value[i][0].workshopTo;
       } else {
-        experienceString += " - laufend";
+        experienceString2 = " - laufend";
       }
       if (experiences.value[i][0].workshop != null) {
-        experienceString += "    " + experiences.value[i][0].workshop;
+        experienceString3 += " " + experiences.value[i][0].workshop;
       }
       if (experiences.value[i][0].description != null) {
-        experienceString += "  " + experiences.value[i][0].description;
+        experienceString4 += "  " + experiences.value[i][0].description;
       }
       children.push(
         new Paragraph({
-          text: experienceString,
-          style: "normal",
+          style: "basic",
+          children: [
+            new TextRun({
+              children: [
+                experienceString1,
+                experienceString2,
+                new Tab(),
+                experienceString3,
+                experienceString4,
+              ],
+            }),
+          ],
+          tabStops: [
+            {
+              type: TabStopType.LEFT,
+              position: 500,
+            },
+          ],
         })
       );
     }
@@ -422,6 +479,14 @@ async function createDocx(): Promise<Blob> {
               before: 0,
               after: 0,
             },
+          },
+        },
+        {
+          id: "basic",
+          name: "Basic",
+          run: {
+            font: "helvetica",
+            size: 24,
           },
         },
       ],

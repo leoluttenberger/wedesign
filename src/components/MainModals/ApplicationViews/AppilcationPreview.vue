@@ -28,34 +28,28 @@
     </div>
   </div>
   <div
-    class="group flix bottom-0 left-0 p-4 flex items-end justify-end w-24 h-24"
+    class="group fixed bottom-0 left-0 p-4 flex items-end justify-end w-24 h-24"
   >
-    <div class="">
-      <button
-        v-if="pdf"
-        @click="zoomOut()"
-        class="px-4 w-14 h-14 bg-wd-green rounded-full active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
-      >
-        <ZoomOutIcon
-          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-        ></ZoomOutIcon>
-      </button>
-    </div>
+    <button
+      @click="zoomOut()"
+      class="px-4 w-14 h-14 bg-wd-green rounded-full active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
+    >
+      <ZoomOutIcon
+        class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+      ></ZoomOutIcon>
+    </button>
   </div>
   <div
-    class="group flix bottom-0 right-0 p-4 flex items-end justify-end w-24 h-24"
+    class="group fixed bottom-0 right-0 p-4 flex items-end justify-end w-24 h-24"
   >
-    <div class="">
-      <button
-        v-if="pdf"
-        @click="zoomIn()"
-        class="px-4 w-14 h-14 bg-wd-green rounded-full active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
-      >
-        <ZoomInIcon
-          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-        ></ZoomInIcon>
-      </button>
-    </div>
+    <button
+      @click="zoomIn()"
+      class="px-4 w-14 h-14 bg-wd-green rounded-full active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
+    >
+      <ZoomInIcon
+        class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+      ></ZoomInIcon>
+    </button>
   </div>
 </template>
 <script setup lang="ts">
@@ -281,13 +275,13 @@ const resizePdfContainer = () => {
   container.style.height = `${height}px`;
 };
 const zoomIn = () => {
-  if (zoomFactor.value < 5) {
-    zoomFactor.value++;
+  if (zoomFactor.value < 2) {
+    zoomFactor.value += 0.1;
   }
 };
 const zoomOut = () => {
   if (zoomFactor.value > 1) {
-    zoomFactor.value--;
+    zoomFactor.value -= 0.1;
   }
 };
 </script>

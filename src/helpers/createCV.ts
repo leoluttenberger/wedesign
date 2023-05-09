@@ -193,6 +193,7 @@ async function createDocx(): Promise<Blob> {
       heading: HeadingLevel.HEADING_2,
       style: "h2",
     }),
+
     new Paragraph({
       text: streetPlusNumber,
       style: "normal",
@@ -201,20 +202,9 @@ async function createDocx(): Promise<Blob> {
       text: districtPlusCity,
       style: "normal",
     }),
+
     new Paragraph({
       text: email,
-      style: "normal",
-    }),
-    new Paragraph({
-      text: " ",
-      style: "normal",
-    }),
-    new Paragraph({
-      text: " ",
-      style: "normal",
-    }),
-    new Paragraph({
-      text: " ",
       style: "normal",
     }),
     new Paragraph({
@@ -234,14 +224,88 @@ async function createDocx(): Promise<Blob> {
       style: "normal",
     }),
     new Paragraph({
+      text: " ",
+      style: "normal",
+    }),
+    new Paragraph({
+      text: " ",
+      style: "normal",
+    }),
+    new Paragraph({
+      text: " ",
+      style: "normal",
+    }),
+    new Paragraph({
       text: "Lebenslauf",
       heading: HeadingLevel.HEADING_1,
       style: "h1",
-    }),
+    })
+  );
+  children.push(
     new Paragraph({
-      text: fullName,
+      text: "Persönliche Angaben:",
       heading: HeadingLevel.HEADING_2,
       style: "h2",
+    }),
+    new Paragraph({
+      style: "basic",
+      children: [
+        new TextRun({
+          children: [
+            "Geburtsdatum: ",
+            new Tab(),
+            new Tab(),
+            new Tab(),
+            birthDate,
+          ],
+        }),
+      ],
+      tabStops: [
+        {
+          type: TabStopType.LEFT,
+          position: 500,
+        },
+      ],
+    }),
+    new Paragraph({
+      style: "basic",
+      children: [
+        new TextRun({
+          children: [
+            "Geburtsort: ",
+            new Tab(),
+            new Tab(),
+            new Tab(),
+            birthArea,
+          ],
+        }),
+      ],
+      tabStops: [
+        {
+          type: TabStopType.LEFT,
+          position: 500,
+        },
+      ],
+    }),
+    new Paragraph({
+      style: "basic",
+      children: [
+        new TextRun({
+          children: [
+            "Familienstand: ",
+            new Tab(),
+            new Tab(),
+            new Tab(),
+            civilStatus,
+          ],
+        }),
+      ],
+      tabStops: [
+        {
+          type: TabStopType.LEFT,
+          position: 500,
+        },
+      ],
     })
   );
   children.push(
@@ -282,29 +346,56 @@ async function createDocx(): Promise<Blob> {
       if (educations.value[i][0].note != null) {
         educationString5 += " " + educations.value[i][0].note;
       }
-      children.push(
-        new Paragraph({
-          style: "basic",
-          children: [
-            new TextRun({
-              children: [
-                educationString1,
-                educationString2,
-                new Tab(),
-                educationString3,
-                educationString4,
-                educationString5,
-              ],
-            }),
-          ],
-          tabStops: [
-            {
-              type: TabStopType.LEFT,
-              position: 500,
-            },
-          ],
-        })
-      );
+      if (educationString2 == " - laufend") {
+        children.push(
+          new Paragraph({
+            style: "basic",
+            children: [
+              new TextRun({
+                children: [
+                  educationString1,
+                  educationString2,
+                  new Tab(),
+                  new Tab(),
+                  educationString3,
+                  educationString4,
+                  educationString5,
+                ],
+              }),
+            ],
+            tabStops: [
+              {
+                type: TabStopType.LEFT,
+                position: 500,
+              },
+            ],
+          })
+        );
+      } else {
+        children.push(
+          new Paragraph({
+            style: "basic",
+            children: [
+              new TextRun({
+                children: [
+                  educationString1,
+                  educationString2,
+                  new Tab(),
+                  educationString3,
+                  educationString4,
+                  educationString5,
+                ],
+              }),
+            ],
+            tabStops: [
+              {
+                type: TabStopType.LEFT,
+                position: 500,
+              },
+            ],
+          })
+        );
+      }
     }
   }
 
@@ -339,30 +430,56 @@ async function createDocx(): Promise<Blob> {
         experienceString3 += " " + experiences.value[i][0].workshop;
       }
       if (experiences.value[i][0].description != null) {
-        experienceString4 += "  " + experiences.value[i][0].description;
+        experienceString4 += " " + experiences.value[i][0].description;
       }
-      children.push(
-        new Paragraph({
-          style: "basic",
-          children: [
-            new TextRun({
-              children: [
-                experienceString1,
-                experienceString2,
-                new Tab(),
-                experienceString3,
-                experienceString4,
-              ],
-            }),
-          ],
-          tabStops: [
-            {
-              type: TabStopType.LEFT,
-              position: 500,
-            },
-          ],
-        })
-      );
+      if (experienceString2 == " - laufend") {
+        children.push(
+          new Paragraph({
+            style: "basic",
+            children: [
+              new TextRun({
+                children: [
+                  experienceString1,
+                  experienceString2,
+                  new Tab(),
+                  new Tab(),
+                  experienceString3,
+                  experienceString4,
+                ],
+              }),
+            ],
+            tabStops: [
+              {
+                type: TabStopType.LEFT,
+                position: 500,
+              },
+            ],
+          })
+        );
+      } else {
+        children.push(
+          new Paragraph({
+            style: "basic",
+            children: [
+              new TextRun({
+                children: [
+                  experienceString1,
+                  experienceString2,
+                  new Tab(),
+                  experienceString3,
+                  experienceString4,
+                ],
+              }),
+            ],
+            tabStops: [
+              {
+                type: TabStopType.LEFT,
+                position: 500,
+              },
+            ],
+          })
+        );
+      }
     }
   }
 
@@ -379,31 +496,62 @@ async function createDocx(): Promise<Blob> {
   );
 
   if (knowledges.value != null) {
-    for (let i = 0; i < knowledges.value.length; i++) {
-      let knowledgestring = knowledges.value[i][0].type
-        ? knowledges.value[i][0].type
-        : " ";
+    children.push(
+      new Paragraph({
+        text: "Sprachkenntnisse: ",
+        style: "normalBold",
+      })
+    );
 
-      if (knowledges.value[i][0].diversKnowledge != null) {
-        knowledgestring += " " + knowledges.value[i][0].diversKnowledge;
-      } else {
-        knowledgestring += " ";
+    for (let i = 0; i < knowledges.value.length; i++) {
+      let knowledgestring1 = "";
+      if (knowledges.value[i][0].type == "Sprachkenntnisse") {
+        knowledgestring1 += knowledges.value[i][0].languageKnowledge
+          ? knowledges.value[i][0].languageKnowledge
+          : "";
+        knowledgestring1 += knowledges.value[i][0].languageLevel
+          ? " - " + knowledges.value[i][0].languageLevel
+          : "";
+        children.push(
+          new Paragraph({
+            text: knowledgestring1,
+            style: "normal",
+          })
+        );
       }
-      if (knowledges.value[i][0].languageKnowledge != null) {
-        knowledgestring += " " + knowledges.value[i][0].languageKnowledge;
+    }
+
+    children.push(
+      new Paragraph({
+        text: " ",
+        style: "normal",
+      })
+    );
+    children.push(
+      new Paragraph({
+        text: "Sonstige Kenntnisse: ",
+        style: "normalBold",
+      })
+    );
+
+    for (let i = 0; i < knowledges.value.length; i++) {
+      let knowledgestring2 = "";
+
+      if (knowledges.value[i][0].type == "Sonstige Kenntnisse") {
+        if (knowledges.value[i][0].diversKnowledge != null) {
+          knowledgestring2 += knowledges.value[i][0].diversKnowledge;
+        } else {
+          knowledgestring2 += " ";
+        }
+        children.push(
+          new Paragraph({
+            text: knowledgestring2,
+            style: "normal",
+          })
+        );
       }
-      if (knowledges.value[i][0].languageLevel != null) {
-        knowledgestring += " " + knowledges.value[i][0].languageLevel;
-      }
-      children.push(
-        new Paragraph({
-          text: knowledgestring,
-          style: "normal",
-        })
-      );
     }
   }
-  console.log("children", children);
   sections.push({
     properties: {},
     children: children,
@@ -419,7 +567,7 @@ async function createDocx(): Promise<Blob> {
           quickFormat: true,
           run: {
             font: "helvetica",
-            size: 44,
+            size: 40,
             bold: true,
           },
           paragraph: {
@@ -437,7 +585,7 @@ async function createDocx(): Promise<Blob> {
           quickFormat: true,
           run: {
             font: "helvetica",
-            size: 28,
+            size: 24,
             bold: true,
           },
           paragraph: {
@@ -455,7 +603,7 @@ async function createDocx(): Promise<Blob> {
           quickFormat: true,
           run: {
             font: "helvetica",
-            size: 24,
+            size: 20,
           },
           paragraph: {
             spacing: {
@@ -472,7 +620,26 @@ async function createDocx(): Promise<Blob> {
           quickFormat: true,
           run: {
             font: "helvetica",
-            size: 24,
+            size: 20,
+          },
+          paragraph: {
+            spacing: {
+              before: 0,
+              after: 0,
+            },
+          },
+        },
+
+        {
+          id: "normalBold",
+          name: "NormalBold",
+          basedOn: "NormalBold",
+          next: "NormalBold",
+          quickFormat: true,
+          run: {
+            font: "helvetica",
+            size: 20,
+            bold: true,
           },
           paragraph: {
             spacing: {
@@ -486,7 +653,7 @@ async function createDocx(): Promise<Blob> {
           name: "Basic",
           run: {
             font: "helvetica",
-            size: 24,
+            size: 20,
           },
         },
       ],
@@ -496,7 +663,6 @@ async function createDocx(): Promise<Blob> {
 
   const mimeType =
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-  const fileName = "motivationLetter.docx";
   const docblob = Packer.toBlob(doc).then((blob) => {
     const docblob = blob.slice(0, blob.size, mimeType);
     return docblob;

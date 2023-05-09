@@ -151,7 +151,7 @@ const mailImage = () => {
 const saveAndDownLoadDocs = async () => {
   const dateString = moment().format("DD_MM_YYYY");
   const fileNameDoc = "lebenslauf-" + dateString + ".docx";
-  const fileNamePDF = "lebenslauf-" + "_" + dateString + ".pdf";
+  const fileNamePDF = "lebenslauf-" + dateString + ".pdf";
 
   const base64StringPdf = await fileToBase64(pdf.value.output("blob"));
   const base64StringDoc = await fileToBase64(downloadDocx.value);
@@ -193,7 +193,7 @@ const saveAndDownLoadDocs = async () => {
       console.error(error);
     });
 
-  await Filesystem.writeFile({
+  /*await Filesystem.writeFile({
     path: `${fileNamePDF}`,
     data: base64StringPdf,
     directory: Directory.Documents,
@@ -203,7 +203,7 @@ const saveAndDownLoadDocs = async () => {
     })
     .catch((error) => {
       console.error(error);
-    });
+    });*/
 
   if (Share.share && sharePath != "") {
     await Share.share({
@@ -230,8 +230,7 @@ const createPdfFromHtml = (html: string) => {
       },
     };
 
-  doc.addImage(profileImg, "PNG", 400, 95, 120, 120);
-
+  doc.addImage(profileImg, "PNG", 420, 60, 120, 120);
   const margins = {
     top: 60,
     bottom: 60,

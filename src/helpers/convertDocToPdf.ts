@@ -16,7 +16,7 @@ export async function convertXmlToPdf(xmlString: string): Promise<Blob> {
         if (textNodes) {
           text = textNodes["w:t"] ? textNodes["w:t"]._ : "";
         }
-        doc.setFontSize(14);
+        doc.setFontSize(12);
         doc.setFontType("normal");
         if (text == null) {
           text = " ";

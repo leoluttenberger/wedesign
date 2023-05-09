@@ -198,6 +198,7 @@ import {
   lastCalendarIndex,
   isQuickAccessCalendar,
   slideDown,
+  activeButtonIndex,
 } from "@/store/store.js";
 
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
@@ -243,11 +244,13 @@ onMounted(() => {
 const saveApplicationIndex = (index) => {
   lastApplicationIndex.value = index;
   isQuickAccessApplication.value = true;
+  activeButtonIndex.value = 3;
 };
 
 const saveCalendarIndex = (index) => {
   lastCalendarIndex.value = index;
   isQuickAccessCalendar.value = true;
+  activeButtonIndex.value = 4;
 };
 
 const openBottomCard = () => {

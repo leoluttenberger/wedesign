@@ -237,7 +237,7 @@
           </div>
         </div>
 
-        <div class="grid flex gap-2 py-2">
+        <div class="grid flex gap-2 p-2">
           <button
             class="bg-wd-error shadow rounded-md h-10 w-full text-white font-bold"
             @click="removeFromLocalStorage()"
@@ -245,13 +245,13 @@
             Bewerbung entfernen
           </button>
           <button
-            class="bg-wd-green hover:bg-transparent-green shadow h-16 text-white font-bold"
+            class="bg-wd-green shadow rounded-md h-16 w-full text-white font-bold"
             @click="createMotivationNode()"
           >
             Motivationsschreiben bearbeiten
           </button>
           <button
-            class="bg-wd-green hover:bg-transparent-green shadow h-16 text-white font-bold"
+            class="bg-wd-green shadow rounded-md h-16 w-full text-white font-bold"
             @click="previewApplication()"
           >
             Vorschau ansehen
@@ -293,12 +293,12 @@
   <CropModal :show="showModal">
     <div class="place-items-center">
       <div class="text-white text-xl p-2">Schließen?</div>
-    </div>
-    <div class="flex text-white font-Montserrat text-base font-bold pb-2">
-      <p>
-        Bist du wirklich sicher, dass du das Fenster schließen willst ohne zu
-        speichern?
-      </p>
+      <div class="text-white font-Montserrat text-base font-bold pb-2">
+        <p>
+          Bist du wirklich sicher, dass du das Fenster schließen willst ohne zu
+          speichern?
+        </p>
+      </div>
     </div>
 
     <div

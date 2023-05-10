@@ -32,6 +32,38 @@
       </p>
     </div>
   </div>
+  <div class="grid flex gap-2 p-2">
+    <button
+      class="bg-wd-error shadow rounded-md h-10 w-full text-white font-bold"
+      @click="openQueryModal()"
+    >
+      Daten zurücksetzen
+    </button>
+  </div>
+  <CropModal :show="showModal">
+    <div class="place-items-center">
+      <div class="text-white text-xl p-2">Daten zurücksetzen?</div>
+      <div class="text-white font-Montserrat text-base font-bold pb-2">
+        <p>Bist du sicher, dass du alle Daten löschen willst?</p>
+      </div>
+    </div>
+
+    <div
+      class="flex justify-evenly text-white font-Montserrat text-base font-bold h-10"
+    >
+      <button type="button" @click="closeModal()" class="bg-wd-error w-screen">
+        Nein
+      </button>
+
+      <button
+        type="button"
+        @click="removeAllData()"
+        class="bg-wd-green w-screen"
+      >
+        Ja
+      </button>
+    </div>
+  </CropModal>
 </template>
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
@@ -39,6 +71,7 @@ import Toggle from "@vueform/toggle";
 import { isDarkMode } from "@/store/store.js";
 
 const toggleOnDark = ref(false);
+const showModal = ref(false);
 
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   toggleOnDark.value = true;
@@ -62,4 +95,14 @@ onMounted(() => {
     firstName.value = userInfos.value[0][0].firstName;
   }
 });
+const removeAllData = () => {
+  localStorage.clear();
+  closeModal();
+};
+const closeModal = () => {
+  showModal.value = false;
+};
+const openQueryModal = () => {
+  showModal.value = true;
+};
 </script>

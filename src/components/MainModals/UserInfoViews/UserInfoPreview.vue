@@ -12,9 +12,9 @@
         {{ "Vorschau" }}
       </p>
       <button v-if="pdf" @click="saveAndDownLoadDocs()" class="p-4">
-        <CheckIcon
+        <ShareIcon
           class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-        ></CheckIcon>
+        ></ShareIcon>
       </button>
     </div>
     <div class="grid place-items-center">
@@ -82,7 +82,7 @@ import { slideDownUserInfo } from "@/store/store.js";
 import { Share } from "@capacitor/share";
 
 import BackIcon from "@/assets/icons/BackIcon.vue";
-import CheckIcon from "@/assets/icons/CheckIcon.vue";
+import ShareIcon from "@/assets/icons/ShareIcon.vue";
 import ZoomOutIcon from "@/assets/icons/ZoomOutIcon.vue";
 import ZoomInIcon from "@/assets/icons/ZoomInIcon.vue";
 

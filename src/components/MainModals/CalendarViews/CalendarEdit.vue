@@ -122,18 +122,18 @@
       </div>
     </div>
   </div>
-  <div class="flex bottom-40 p-4" v-if="!isEnd">
+  <div class="grid flex gap-2 p-2">
+    <div v-if="!isEnd">
+      <button
+        class="bg-wd-error shadow rounded-md h-10 w-full text-white font-bold"
+        @click="removeFromLocalStorage()"
+        :disabled="buttonDisabled"
+      >
+        Termin entfernen
+      </button>
+    </div>
     <button
-      class="bg-wd-error shadow rounded-md h-14 w-screen text-white font-bold"
-      @click="removeFromLocalStorage()"
-      :disabled="buttonDisabled"
-    >
-      Termin entfernen
-    </button>
-  </div>
-  <div class="flex bottom-10 pt-4 items-end justify-end">
-    <button
-      class="bg-wd-green hover:bg-transparent-green shadow h-24 w-screen text-white font-bold"
+      class="bg-wd-green shadow rounded-md h-16 w-full text-white font-bold"
       @click="saveToLocalStorage()"
       :disabled="buttonDisabled"
     >

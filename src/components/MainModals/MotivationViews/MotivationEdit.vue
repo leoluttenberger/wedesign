@@ -532,6 +532,9 @@ const updateForm = () => {
   const motivations = ref(
     JSON.parse(localStorage.getItem("motivations")) || []
   );
+  const applications = ref(
+    JSON.parse(localStorage.getItem("applications")) || []
+  );
 
   if (isEdited) {
     subject.value = currentSubject.value;
@@ -557,7 +560,8 @@ const updateForm = () => {
     salutationEnding.value =
       motivations.value[indexOfMVid.value][0].salutationEnding;
   } else {
-    subject.value = "";
+    subject.value =
+      "Bewerbung als " + applications.value[props.currentApplIndex][0].job;
     salutationBeginning.value = "";
     textBegining.value = "";
     textExperience.value = "";

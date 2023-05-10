@@ -84,10 +84,18 @@
           <div v-for="(item, index) in appointments" :key="index">
             <div
               v-if="
-                (item[0].appointmentFrom
-                  ? item[0].appointmentFrom.slice(8, 10) == currentDay &&
-                    currentMonth == item[0].appointmentFrom.slice(5, 7)
-                  : false) ||
+                ((item[0].appointmentFrom && item[0].appointmentTo
+                  ? item[0].appointmentFrom.slice(5, 7) == currentMonth ||
+                    item[0].appointmentFrom.slice(5, 7) == currentMonth
+                  : false) &&
+                  (item[0].appointmentFrom && item[0].appointmentTo
+                    ? item[0].appointmentFrom.slice(8, 10) >= currentDay &&
+                      item[0].appointmentTo.slice(8, 10) <= currentDay
+                    : false) &&
+                  (item[0].appointmentFrom
+                    ? item[0].appointmentFrom.slice(8, 10) == currentDay &&
+                      currentMonth == item[0].appointmentFrom.slice(5, 7)
+                    : false)) ||
                 (item[0].appointmentTo
                   ? item[0].appointmentTo.slice(8, 10) == currentDay &&
                     currentMonth == item[0].appointmentTo.slice(5, 7)
@@ -112,7 +120,17 @@
                   : false)
               "
             >
-              <div class="flex">
+              <div
+                class="flex"
+                v-if="
+                  (item[0].appointmentFrom
+                    ? item[0].appointmentFrom.slice(0, 4) == currentYear
+                    : false) ||
+                  (item[0].appointmentTo
+                    ? item[0].appointmentTo.slice(0, 4) == currentYear
+                    : false)
+                "
+              >
                 <button @click="openBottomCard(index)" class="grow p-2">
                   <div
                     class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border-2"

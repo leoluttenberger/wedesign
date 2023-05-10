@@ -211,7 +211,6 @@ const loadAppointments = () => {
           end: new Date(yearEnd, monthEnd, dayEnd),
         };
         addTodo(color, dates, todos);
-        console.log("Start and End");
       } else if (!appointments.value[i][0].appointmentFrom) {
         const yearEnd = appointments.value[i][0].appointmentTo.slice(0, 4)
           ? appointments.value[i][0].appointmentTo.slice(0, 4)
@@ -333,7 +332,6 @@ watch(slideDown, () => {
       ];
     }
     addedDate.value = "";
-    console.log("Date in Calendar added!");
   }
 });
 
@@ -372,7 +370,6 @@ let attributes = ref([
 const dayClicked = (date) => {
   pickedDate.value = date;
   selectedDay.value = date.day;
-  console.log("Calendar View current day:", selectedDay.value);
   isMonthEvent.value = false;
   renderComponent.value = false;
   renderComponent.value = true;

@@ -150,7 +150,7 @@ const saveToLocalStorage = () => {
       appointmentFrom: appointmentFrom.value,
       appointmentTo: appointmentTo.value,
       note: note.value,
-      deadlineId: 0,
+      endId: 0,
     },
   ];
   let dateCheck = false;

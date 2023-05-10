@@ -140,18 +140,18 @@
               <p
                 class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
               >
-                Deadline: *
+                Ende: *
               </p>
               <div class="px-2">
                 <FormKit
                   type="datetime-local"
-                  name="Deadline"
-                  v-model="deadline"
+                  name="Ende"
+                  v-model="end"
                   :validation="
                     start ? [['required'], ['date_after', start]] : []
                   "
                   validation-visibility="live"
-                  :value="deadline"
+                  :value="end"
                 />
               </div>
             </div>
@@ -333,7 +333,7 @@ const MAX_ARCHIVE_LENGHT = 20;
 
 const company = ref(null);
 const job = ref(null);
-const deadline = ref(null);
+const end = ref(null);
 const contactPerson = ref(null);
 const state = ref(null);
 const note = ref(null);
@@ -392,7 +392,7 @@ onMounted(() => {
   streetNumber.value = applications.value[props.editIndex][0].streetNumber;
   districtNumber.value = applications.value[props.editIndex][0].districtNumber;
   city.value = applications.value[props.editIndex][0].city;
-  deadline.value = applications.value[props.editIndex][0].deadline;
+  end.value = applications.value[props.editIndex][0].end;
   contactPerson.value = applications.value[props.editIndex][0].contactPerson;
   state.value = applications.value[props.editIndex][0].state;
   note.value = applications.value[props.editIndex][0].note;
@@ -467,8 +467,8 @@ const removeFromLocalStorage = () => {
 
   for (let i = 0; i < appointments.value.length; i++) {
     if (
-      props.editIndex + 1 == appointments.value[i][0].deadlineId &&
-      appointments.value[i][0].deadlineId != 0
+      props.editIndex + 1 == appointments.value[i][0].endId &&
+      appointments.value[i][0].endId != 0
     ) {
       sliceIndex = i;
       count++;
@@ -509,24 +509,24 @@ const saveToLocalStorage = () => {
   applications.value[props.editIndex][0].state = state.value;
   applications.value[props.editIndex][0].note = note.value;
   applications.value[props.editIndex][0].start = start.value;
-  applications.value[props.editIndex][0].deadline = deadline.value;
+  applications.value[props.editIndex][0].end = end.value;
 
   console.log(props.editIndex);
   const appointment = [
     {
-      type: "Deadline",
+      type: "Ende",
       title: company.value,
       appointmentFrom: start.value,
-      appointmentTo: deadline.value,
+      appointmentTo: end.value,
       note: note.value,
-      deadlineId: applications.value[props.editIndex][0].id,
+      endId: applications.value[props.editIndex][0].id,
     },
   ];
   let dateCheck = false;
-  if (company.value && deadline.value) {
+  if (company.value && end.value) {
     if (start.value == null) {
       dateCheck = true;
-    } else if (deadline.value >= start.value) {
+    } else if (end.value >= start.value) {
       dateCheck = true;
     }
     if (dateCheck) {
@@ -534,11 +534,11 @@ const saveToLocalStorage = () => {
         for (let i = 0; i < appointments.value.length; i++) {
           if (
             applications.value[props.editIndex][0].id ==
-              appointments.value[i][0].deadlineId &&
-            appointments.value[i][0].deadlineId != 0
+              appointments.value[i][0].endId &&
+            appointments.value[i][0].endId != 0
           ) {
             appointments.value[i][0].appointmentFrom = start.value;
-            appointments.value[i][0].appointmentTo = deadline.value;
+            appointments.value[i][0].appointmentTo = end.value;
           }
         }
         localStorage.setItem(

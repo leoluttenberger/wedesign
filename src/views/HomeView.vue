@@ -69,16 +69,16 @@
 
               <div class="font-bold text-xl">{{ item[0].company }}</div>
               <div class="flex text-sm">
-                <div class="flex-none">Deadline</div>
+                <div class="flex-none">Ende</div>
                 <div class="grow py-2 px-2">
                   <ArrowIcon
                     class="dark:stroke-wd-white stroke-1 w-full h-2"
                   ></ArrowIcon>
                 </div>
                 <div class="flex-none">
-                  {{ item[0].deadline ? item[0].deadline.slice(8, 10) : "" }}.{{
-                    item[0].deadline ? item[0].deadline.slice(5, 7) : ""
-                  }}.{{ item[0].deadline ? item[0].deadline.slice(0, 4) : "" }}
+                  {{ item[0].end ? item[0].end.slice(8, 10) : "" }}.{{
+                    item[0].end ? item[0].end.slice(5, 7) : ""
+                  }}.{{ item[0].end ? item[0].end.slice(0, 4) : "" }}
                 </div>
               </div>
 
@@ -214,7 +214,7 @@ const appointments = ref(
 );
 
 const blueType = ref("Bewerbungsgespräch");
-const redType = ref("Deadline");
+const redType = ref("Ende");
 const yellowType = ref("Aufnahmetest");
 const pinkType = ref("Feedback");
 const greenType = ref("Sonstige Termine");

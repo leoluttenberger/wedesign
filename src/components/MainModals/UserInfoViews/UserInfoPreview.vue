@@ -17,9 +17,32 @@
         ></CheckIcon>
       </button>
     </div>
+    <div class="grid place-items-center">
+      <div role="status" v-if="!pdf">
+        <svg
+          aria-hidden="true"
+          class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-green-500"
+          viewBox="0 0 100 101"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+            fill="currentColor"
+          />
+          <path
+            d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+            fill="currentFill"
+          />
+        </svg>
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+
     <div
       class="border-[4px] border-wd-black dark:border-slate-800"
       id="pdf-container"
+      v-if="pdf"
     >
       <vue-pdf-embed :source="pdfDataURL" :width="width * zoomFactor" />
     </div>
@@ -53,15 +76,13 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, defineProps, onBeforeUnmount } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 import { useElementSize } from "@vueuse/core";
 import { slideDownUserInfo } from "@/store/store.js";
 import { Share } from "@capacitor/share";
-import { Capacitor } from "@capacitor/core";
 
 import BackIcon from "@/assets/icons/BackIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
-import AddIcon from "@/assets/icons/AddIcon.vue";
 import ZoomOutIcon from "@/assets/icons/ZoomOutIcon.vue";
 import ZoomInIcon from "@/assets/icons/ZoomInIcon.vue";
 
@@ -77,7 +98,6 @@ import { Filesystem, Directory } from "@capacitor/filesystem";
 import { fileToBase64 } from "@/helpers/fileToBase64";
 import moment from "moment";
 const profileImg = JSON.parse(localStorage.getItem("profileImg"));
-
 const pdf = ref(null);
 const pdfDataURL = ref(null);
 const html = ref(null);
@@ -86,23 +106,13 @@ const docxContent = ref(null);
 const el = ref(null);
 const { width, height } = useElementSize(el);
 const zoomFactor = ref(1);
-const imgData = ref("");
-
-const props = defineProps({
-  currentApplIndex: {
-    type: Number,
-    default: 0,
-  },
-  currentMotvationMVIndex: {
-    type: Number,
-    default: 0,
-  },
-});
 
 onMounted(async () => {
   downloadDocx.value = await createFile();
   slideDownUserInfo.value = false;
-  await convertToPdf();
+  setTimeout(() => {
+    convertToPdf();
+  }, 1000);
   window.addEventListener("resize", resizePdfContainer);
 });
 onBeforeUnmount(() => {
@@ -113,6 +123,7 @@ const closeModal = () => {
 };
 
 const createFile = async () => {
+  console.log("onload Process");
   const file = await createCV();
   const data = await new Promise((resolve) => {
     const reader = new FileReader();
@@ -125,35 +136,23 @@ const createFile = async () => {
   const doc = await zip.loadAsync(data);
   const content = await doc.file("word/document.xml").async("string");
   docxContent.value = content;
-  console.log("onload Process");
+  console.log("onloaded data");
   return file;
 };
 const convertToPdf = async () => {
   const xmlString = docxContent.value;
   html.value = convertXmlToHtml(xmlString);
-  pdf.value = createPdfFromHtml(html.value);
-  pdfDataURL.value = URL.createObjectURL(pdf.value.output("blob"));
-};
-const creatImage = () => {
-  const canvas = document.querySelector("canvas") as HTMLCanvasElement;
-  const context = canvas.getContext("2d") as CanvasRenderingContext2D;
-  const img = new Image();
-  img.src = pdf.value.output("datauristring");
-  context.drawImage(img, 0, 0);
-  imgData.value = canvas.toDataURL("image/png");
-};
-
-const mailImage = () => {
-  creatImage();
-  const mailtoLink = `mailto:recipient@example.com?subject=&body= Bitte hänge dein Motivationsschreiben und deinen Lebenslauf an. Die Datein findest im Ordner Dokumente!&attachment=`;
-  window.location.href = mailtoLink;
+  console.log("Created hmtl");
+  pdf.value = await createPdfFromHtml(html.value);
+  pdf.value.addImage(profileImg, "PNG", 420, 60, 120, 120);
+  pdfDataURL.value = await URL.createObjectURL(pdf.value.output("blob"));
 };
 const saveAndDownLoadDocs = async () => {
   const dateString = moment().format("DD_MM_YYYY");
   const fileNameDoc = "lebenslauf-" + dateString + ".docx";
   const fileNamePDF = "lebenslauf-" + dateString + ".pdf";
 
-  const base64StringPdf = await fileToBase64(pdf.value.output("blob"));
+  //const base64StringPdf = await fileToBase64(pdf.value.output("blob"));
   const base64StringDoc = await fileToBase64(downloadDocx.value);
   saveAs(pdf.value.output("blob"), fileNamePDF);
   saveAs(downloadDocx.value, fileNameDoc);
@@ -214,12 +213,11 @@ const saveAndDownLoadDocs = async () => {
   } else {
     // Fallback for browsers that do not support Web Share API
     console.log("Web Share API is not supported in this browser");
-    mailImage();
   }
   slideDownUserInfo.value = true;
 };
 
-const createPdfFromHtml = (html: string) => {
+const createPdfFromHtml = async (html: string) => {
   const element = document.createElement("div");
   element.innerHTML = html;
 
@@ -230,7 +228,6 @@ const createPdfFromHtml = (html: string) => {
       },
     };
 
-  doc.addImage(profileImg, "PNG", 420, 60, 120, 120);
   const margins = {
     top: 60,
     bottom: 60,

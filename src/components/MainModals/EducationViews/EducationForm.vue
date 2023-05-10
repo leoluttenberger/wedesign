@@ -11,9 +11,8 @@
           <div class="px-2">
             <FormKit
               v-model="type"
-              type="select"
-              placeholder="Auswahl"
-              :options="['Mittelschule', 'Lehre', 'HTL', 'AHS', 'HAK', 'HBLA']"
+              type="text"
+              placeholder="Lehre, HTL, AHS, HAK, ..."
             />
           </div>
         </div>
@@ -77,7 +76,7 @@
           >
             Ende: *
           </p>
-          <div class="px-2">
+          <div class="px-2" v-if="!checked">
             <FormKit
               type="date"
               name="Ende"
@@ -128,9 +127,9 @@
     </div>
   </div>
 
-  <div class="group flex bottom-10 pt-4 items-end justify-end">
+  <div class="grid flex gap-2 p-2">
     <button
-      class="bg-wd-green hover:bg-transparent-green shadow h-24 w-screen text-white font-bold"
+      class="bg-wd-green shadow rounded-md h-16 w-full text-white font-bold"
       @click="saveToLocalStorage()"
       :disabled="buttonDisabled"
     >

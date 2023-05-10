@@ -86,10 +86,12 @@ export const lastApplicationIndex = reactive({
 export const isQuickAccessApplication = reactive({
   value: null,
 });
-
 export const lastCalendarIndex = reactive({
   value: null,
 });
 export const isQuickAccessCalendar = reactive({
   value: null,
+});
+export const activeButtonIndex = reactive({
+  value: 1,
 });

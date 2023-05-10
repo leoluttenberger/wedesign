@@ -169,7 +169,7 @@ const loadAppointments = () => {
       let color = "";
       if (appointments.value[i][0].type == "Bewerbungsgespräch") {
         color = "#0094FF";
-      } else if (appointments.value[i][0].type == "Deadline") {
+      } else if (appointments.value[i][0].type == "Ende") {
         color = "red";
       } else if (appointments.value[i][0].type == "Aufnahmetest") {
         color = "#FAC643";
@@ -311,7 +311,7 @@ watch(slideDown, () => {
       let color = "#00e0ac";
       if (addedType.value == "Bewerbungsgespräch") {
         color = "#0094FF";
-      } else if (addedType.value == "Deadline") {
+      } else if (addedType.value == "Ende") {
         color = "red";
       } else if (addedType.value == "Aufnahmetest") {
         color = "#FAC643";

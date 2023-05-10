@@ -2,7 +2,6 @@ export function convertXmlToHtml(xmlString: string): string {
   const domParser = new DOMParser();
   const xmlDoc = domParser.parseFromString(xmlString, "application/xml");
   const paragraphs = xmlDoc.getElementsByTagName("w:p");
-
   let htmlString = "";
   for (let i = 0; i < paragraphs.length; i++) {
     const paragraph = paragraphs[i];
@@ -13,6 +12,7 @@ export function convertXmlToHtml(xmlString: string): string {
       .getElementsByTagName("w:jc")[0]
       ?.getAttribute("w:val");
     const textNodes = paragraph.getElementsByTagName("w:t");
+    const tabs = paragraph.getElementsByTagName("w:tab");
     for (let j = 0; j < textNodes.length; j++) {
       const textNode = textNodes[j];
       const text = textNode.textContent.replace(/\n/g, "");
@@ -21,25 +21,39 @@ export function convertXmlToHtml(xmlString: string): string {
       if (text == " " || text == "" || text == null) {
         htmlString += `<ul class="whitespace-list"><li><br> </li></ul>`;
       } else {
-        if (paragraphStyle == "Heading1") {
-          htmlString += `<h1 style="text-align: ${paragraphAlign}; font-size: 30px; margin: 0 0 10px 0; padding: 0 0 10px 0;">`;
-        } else if (paragraphStyle == "Heading2") {
-          htmlString += `<h2 style="text-align: ${paragraphAlign}; font-size: 16px; margin: 0 0 0px 0; padding: 0 0 3px 0; ">`;
-        } else if (paragraphStyle == "paragraph") {
-          htmlString += `<p style="text-align: ${paragraphAlign}; font-size: 14px; margin: 0 0 0px 0; padding: 0 0 4px 0; ">`;
-        } else if (paragraphStyle == "normal") {
-          htmlString += `<div style="text-align: ${paragraphAlign}; font-size: 14px; ">`;
-        }
+        if (paragraphStyle == "basic") {
+          if (tabs && j == 2) {
+            htmlString += `<span style="margin: 10px;">&emsp; -- </span><span style="font-family: ${fontType}; font-size: 12px; "> &emsp;${text}</span>`;
+          } else if (j == 0) {
+            htmlString += `<p></p><span style="font-family: ${fontType}; font-size: 12px">${text}</span>`;
+          } else {
+            htmlString += `<span style="font-family: ${fontType}; font-size: 12px">${text}</span>`;
+          }
+        } else {
+          if (paragraphStyle == "Heading1") {
+            htmlString += `<h1 style="text-align: ${paragraphAlign}; font-size: 24px; margin: 0 0 10px 0; padding: 0 0 10px 0;">`;
+          } else if (paragraphStyle == "Heading2") {
+            htmlString += `<h2 style="text-align: ${paragraphAlign}; font-size: 14px; margin: 0 0 0px 0; padding: 0 0 3px 0; ">`;
+          } else if (paragraphStyle == "paragraph") {
+            htmlString += `<p style="text-align: ${paragraphAlign}; font-size: 12px; margin: 0 0 0px 0; padding: 0 0 4px 0; ">`;
+          } else if (paragraphStyle == "normal") {
+            htmlString += `<div style="text-align: ${paragraphAlign}; font-size: 12px; ">`;
+          } else if (paragraphStyle == "normalBold") {
+            htmlString += `<div style="text-align: ${paragraphAlign}; font-size: 12px; "><b>`;
+          }
 
-        htmlString += `<span style="font-family: ${fontType}">${text}</span>`;
-        if (paragraphStyle === "Heading1") {
-          htmlString += `</h1>`;
-        } else if (paragraphStyle === "Heading2") {
-          htmlString += `</h2>`;
-        } else if (paragraphStyle === "paragraph") {
-          htmlString += `</p>`;
-        } else if (paragraphStyle === "normal") {
-          htmlString += `</div>`;
+          htmlString += `<span style="font-family: ${fontType}">${text}</span>`;
+          if (paragraphStyle === "Heading1") {
+            htmlString += `</h1>`;
+          } else if (paragraphStyle === "Heading2") {
+            htmlString += `</h2>`;
+          } else if (paragraphStyle === "paragraph") {
+            htmlString += `</p>`;
+          } else if (paragraphStyle === "normal") {
+            htmlString += `</div>`;
+          } else if (paragraphStyle == "normalBold") {
+            htmlString += `</b></div>`;
+          }
         }
       }
     }

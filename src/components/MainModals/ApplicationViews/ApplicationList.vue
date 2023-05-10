@@ -43,16 +43,16 @@
                   </div>
                   <div>{{ item[0].job }}</div>
                   <div class="flex">
-                    <div class="flex-none">Deadline</div>
+                    <div class="flex-none">Ende</div>
                     <div class="grow py-2 px-2">
                       <ArrowIcon
                         class="dark:stroke-wd-white stroke-1 w-full h-2"
                       ></ArrowIcon>
                     </div>
                     <div class="flex-none">
-                      {{ item[0].deadline.slice(8, 10) }}.{{
-                        item[0].deadline.slice(5, 7)
-                      }}.{{ item[0].deadline.slice(0, 4) }}
+                      {{ item[0].end.slice(8, 10) }}.{{
+                        item[0].end.slice(5, 7)
+                      }}.{{ item[0].end.slice(0, 4) }}
                     </div>
                   </div>
                   <div class="flex">
@@ -120,20 +120,16 @@
                   </div>
                   <div>{{ item[0].job }}</div>
                   <div class="flex">
-                    <div class="flex-none">Deadline</div>
+                    <div class="flex-none">Ende</div>
                     <div class="grow py-2 px-2">
                       <ArrowIcon
                         class="dark:stroke-wd-white stroke-1 w-full h-2"
                       ></ArrowIcon>
                     </div>
                     <div class="flex-none">
-                      {{
-                        item[0].deadline ? item[0].deadline.slice(8, 10) : ""
-                      }}.{{
-                        item[0].deadline ? item[0].deadline.slice(5, 7) : ""
-                      }}.{{
-                        item[0].deadline ? item[0].deadline.slice(0, 4) : ""
-                      }}
+                      {{ item[0].end ? item[0].end.slice(8, 10) : "" }}.{{
+                        item[0].end ? item[0].end.slice(5, 7) : ""
+                      }}.{{ item[0].end ? item[0].end.slice(0, 4) : "" }}
                     </div>
                   </div>
                   <div class="flex">

@@ -7,7 +7,7 @@
         >
           Label:
         </p>
-        <div class="px-2" v-if="!isDeadline">
+        <div class="px-2" v-if="!isEnd">
           <FormKit
             v-model="type"
             type="select"
@@ -20,13 +20,13 @@
             ]"
           />
         </div>
-        <div class="px-2" v-if="isDeadline">
+        <div class="px-2" v-if="isEnd">
           <FormKit
             v-model="type"
             type="select"
-            value="Deadline"
-            placeholder="Deadline"
-            :options="['Deadline']"
+            value="Ende"
+            placeholder="Ende"
+            :options="['Ende']"
           />
         </div>
       </div>
@@ -122,18 +122,18 @@
       </div>
     </div>
   </div>
-  <div class="flex bottom-40 p-4" v-if="!isDeadline">
+  <div class="grid flex gap-2 p-2">
+    <div v-if="!isEnd">
+      <button
+        class="bg-wd-error shadow rounded-md h-10 w-full text-white font-bold"
+        @click="removeFromLocalStorage()"
+        :disabled="buttonDisabled"
+      >
+        Termin entfernen
+      </button>
+    </div>
     <button
-      class="bg-wd-error shadow rounded-md h-14 w-screen text-white font-bold"
-      @click="removeFromLocalStorage()"
-      :disabled="buttonDisabled"
-    >
-      Termin entfernen
-    </button>
-  </div>
-  <div class="flex bottom-10 pt-4 items-end justify-end">
-    <button
-      class="bg-wd-green hover:bg-transparent-green shadow h-24 w-screen text-white font-bold"
+      class="bg-wd-green shadow rounded-md h-16 w-full text-white font-bold"
       @click="saveToLocalStorage()"
       :disabled="buttonDisabled"
     >
@@ -155,7 +155,7 @@ const appointments = ref(
   JSON.parse(localStorage.getItem("appointments")) || []
 );
 let buttonDisabled = false;
-let isDeadline = false;
+let isEnd = false;
 const props = withDefaults(
   defineProps<{
     editIndex: number;
@@ -173,10 +173,10 @@ onMounted(() => {
   appointmentTo.value = appointments.value[props.editIndex][0].appointmentTo;
   address.value = appointments.value[props.editIndex][0].address;
   note.value = appointments.value[props.editIndex][0].note;
-  if (type.value == "Deadline") {
-    isDeadline = true;
+  if (type.value == "Ende") {
+    isEnd = true;
   } else {
-    isDeadline = false;
+    isEnd = false;
   }
 });
 
@@ -204,12 +204,12 @@ const saveToLocalStorage = () => {
         appointments.value[props.editIndex][0].address = address.value;
         appointments.value[props.editIndex][0].note = note.value;
 
-        if (type.value == "Deadline") {
+        if (type.value == "Ende") {
           if (appointments.value.length > 0) {
             for (let i = 0; i < applications.value.length; i++) {
               if (
                 applications.value[i][0].id ==
-                appointments.value[props.editIndex][0].deadlineId
+                appointments.value[props.editIndex][0].endId
               ) {
                 applications.value[i][0].start = appointmentFrom.value;
               }
@@ -240,10 +240,10 @@ const removeFromLocalStorage = () => {
     for (let i = 0; i < applications.value.length; i++) {
       if (
         applications.value[i][0].id ==
-          appointments.value[props.editIndex][0].deadlineId &&
-        appointments.value[props.editIndex][0].deadlineId != 0
+          appointments.value[props.editIndex][0].endId &&
+        appointments.value[props.editIndex][0].endId != 0
       ) {
-        applications.value[i][0].deadline = null;
+        applications.value[i][0].end = null;
         applications.value[i][0].start = null;
       }
     }

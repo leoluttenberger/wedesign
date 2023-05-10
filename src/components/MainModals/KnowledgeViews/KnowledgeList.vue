@@ -2,7 +2,7 @@
   <div>
     <section class="z-0">
       <div class="grid gap-2" v-if="renderComponent4">
-        <Container @drop="onDrop" v-if="!dragActive && !isEmpty">
+        <Container @drop="onDrop" v-if="dragActive && !isEmpty">
           <Draggable
             v-for="(item, index) in knowledges"
             :key="index"

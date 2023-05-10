@@ -404,7 +404,6 @@ async function createDocx(
   });
   const mimeType =
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-  const fileName = "motivationLetter.docx";
   const docblob = Packer.toBlob(doc).then((blob) => {
     const docblob = blob.slice(0, blob.size, mimeType);
     return docblob;

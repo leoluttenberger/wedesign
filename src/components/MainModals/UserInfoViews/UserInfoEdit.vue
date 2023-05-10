@@ -315,7 +315,7 @@
           v-model="hobbies"
           type="text"
           placeholder="laufen, schwimmen, tanzen"
-          :disabled="true"
+          :disabled="false"
         />
       </div>
     </div>

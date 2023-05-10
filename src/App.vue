@@ -114,7 +114,7 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
-import { isDarkMode } from "@/store/store.js";
+import { isDarkMode, activeButtonIndex } from "@/store/store.js";
 
 import HomeIcon from "@/assets/icons/HomeIcon.vue";
 import UserIcon from "@/assets/icons/UserIcon.vue";
@@ -141,6 +141,10 @@ if (JSON.parse(localStorage.getItem("theme")) == "dark") {
 watch(isDarkMode, () => {
   swichtDarkLightMode();
 });
+
+watch(activeButtonIndex, () => {
+  switchMenuIndex(activeButtonIndex.value);
+});
 const swichtDarkLightMode = () => {
   if (isDarkMode.value == true) {
     darkLightMode.value = "dark";
@@ -149,6 +153,9 @@ const swichtDarkLightMode = () => {
   }
 };
 const onMenuTo = (index) => {
+  activeButtonIndex.value = index;
+};
+const switchMenuIndex = (index) => {
   switch (index) {
     case 1:
       activeButton1.value = true;

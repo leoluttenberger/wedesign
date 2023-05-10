@@ -57,16 +57,16 @@
           <p
             class="py-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
           >
-            Deadline: *
+            Ende: *
           </p>
           <div class="px-2">
             <FormKit
               type="datetime-local"
-              name="Deadline"
-              v-model="deadline"
+              name="Ende"
+              v-model="end"
               :validation="[['required'], ['date_after', start]]"
               validation-visibility="live"
-              :value="deadline"
+              :value="end"
             />
           </div>
         </div>
@@ -92,9 +92,9 @@
       </div>
     </div>
   </div>
-  <div class="group flex bottom-10 pt-4 items-end justify-end">
+  <div class="grid flex gap-2 p-2">
     <button
-      class="bg-wd-green hover:bg-transparent-green shadow h-24 w-screen text-white font-bold"
+      class="bg-wd-green shadow rounded-md h-16 w-full text-white font-bold"
       @click="saveToLocalStorage()"
       :disabled="buttonDisabled"
     >
@@ -107,7 +107,7 @@ import { ref, onMounted } from "vue";
 import { slideDown } from "@/store/store.js";
 const company = ref(null);
 const job = ref(null);
-const deadline = ref(null);
+const end = ref(null);
 const contactPerson = ref(null);
 const note = ref("");
 const start = ref(null);
@@ -138,30 +138,30 @@ const saveToLocalStorage = () => {
       mv: __mv,
       note: "",
       start: start.value,
-      deadline: deadline.value,
+      end: end.value,
       date: new Date("4/11/2020").toLocaleDateString(),
     },
   ];
   const appointment = [
     {
-      type: "Deadline",
+      type: "Ende",
       title: company.value,
       appointmentFrom: start.value,
-      appointmentTo: deadline.value,
+      appointmentTo: end.value,
       note: note.value,
-      deadlineId: 1,
+      endId: 1,
     },
   ];
   let dateCheck = false;
-  if (deadline.value != null && deadline.value) {
+  if (end.value != null && end.value) {
     if (start.value == null) {
       dateCheck = true;
-    } else if (deadline.value >= start.value) {
+    } else if (end.value >= start.value) {
       dateCheck = true;
     }
   }
 
-  if (company.value && deadline.value) {
+  if (company.value && end.value) {
     if (buttonDisabled == false) {
       if (dateCheck) {
         buttonDisabled = true;
@@ -174,7 +174,7 @@ const saveToLocalStorage = () => {
 
             application[0].id =
               applications.value[applications.value.length - 1][0].id + 1;
-            appointment[0].deadlineId = application[0].id;
+            appointment[0].endId = application[0].id;
             const newData = [...currentApplications, application];
             localStorage.setItem("applications", JSON.stringify(newData));
           } else {

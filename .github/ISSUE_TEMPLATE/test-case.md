@@ -27,10 +27,11 @@ Tell the end user what is supposed to happen once they have completed the steps 
  <Hier bitte ausfüllen>
 
 **Device**
--[] Android app smarthphone
--[] Android app tabled
--[] Web
+- [ ] Android app Smarthphone
+- [ ] Android app Tablet
+- [ ] Web
 
 **Status**
--[] Pass
--[] Fail
+- [ ] Passt
+- [ ] Fail
+

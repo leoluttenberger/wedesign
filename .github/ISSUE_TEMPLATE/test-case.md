@@ -24,7 +24,12 @@ Keep it brief but make it clear what the end goal is.
 Tell the end user what is supposed to happen once they have completed the steps above. 
 
 **Actual result**
-This field is filled by testers and describes what actually happened. 
+ <Hier bitte ausfüllen>
+
+**Device**
+-[] Android app smarthphone
+-[] Android app tabled
+-[] Web
 
 **Status**
 -[] Pass

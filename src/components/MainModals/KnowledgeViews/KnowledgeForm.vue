@@ -1,21 +1,17 @@
 <template>
-  <div class="p-4">
+  <div class="px-2">
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-          >
-            Kenntnisse:
-          </p>
-          <div class="px-2">
-            <FormKit
-              v-model="type"
-              type="select"
-              placeholder="Auswahl"
-              :options="['Sprachkenntnisse', 'Sonstige Kenntnisse']"
-            />
-          </div>
+        <div class="px-2">
+          <FormKit
+            v-model="type"
+            label="Kenntnisse: "
+            type="select"
+            placeholder="Auswahl"
+            :options="['Sprachkenntnisse', 'Sonstige Kenntnisse']"
+            label-class="$reset text-base text-black dark:text-white"
+            input-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white"
+          />
         </div>
       </div>
 
@@ -23,6 +19,7 @@
         <div class="px-2">
           <FormKit
             v-model="diversKnowledge"
+            label="Sonstige Kenntnisse"
             type="text"
             placeholder="z.B. Führerschein, Office etc."
           />
@@ -30,47 +27,36 @@
       </div>
       <div v-if="type === 'Sprachkenntnisse'">
         <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
-            <p
-              class="py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-            >
-              Sprache:
-            </p>
-            <div class="px-2">
-              <FormKit
-                v-model="languageKnowledge"
-                type="text"
-                placeholder="z.B. Englisch, Deutsch etc."
-              />
-            </div>
+          <div class="px-2">
+            <FormKit
+              v-model="languageKnowledge"
+              label="Sprache: "
+              type="text"
+              placeholder="z.B. Englisch, Deutsch etc."
+            />
           </div>
         </div>
         <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-10">
-            <p
-              class="py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-            >
-              Level:
-            </p>
-            <div class="px-2">
-              <FormKit
-                v-model="languageLevel"
-                type="select"
-                :options="[
-                  'Basiskenntnisse',
-                  'Fortgeschritten',
-                  'Fließend',
-                  'Muttersprache',
-                ]"
-                placeholder="Auswahl"
-              />
-            </div>
+          <div class="px-2">
+            <FormKit
+              v-model="languageLevel"
+              label="Level: "
+              type="select"
+              :options="[
+                'Basiskenntnisse',
+                'Fortgeschritten',
+                'Fließend',
+                'Muttersprache',
+              ]"
+              placeholder="Auswahl"
+              input-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white"
+            />
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="grid flex gap-2 p-2">
+  <div class="grid flex gap-2 px-4">
     <button
       class="bg-wd-green shadow rounded-md h-16 w-full text-white font-bold"
       @click="saveToLocalStorage()"

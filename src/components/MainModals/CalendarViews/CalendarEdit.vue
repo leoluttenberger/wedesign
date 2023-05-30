@@ -1,15 +1,11 @@
 <template>
-  <div class="grid grid-cols-2 gap-1">
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="px-2 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-        >
-          Label:
-        </p>
+  <div class="px-2">
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
         <div class="px-2" v-if="!isEnd">
           <FormKit
             v-model="type"
+            label="Label:"
             type="select"
             placeholder="Auswahl"
             :options="[
@@ -18,65 +14,49 @@
               'Feedback',
               'Sonstige Termine',
             ]"
+            input-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white"
           />
         </div>
         <div class="px-2" v-if="isEnd">
           <FormKit
             v-model="type"
+            label="Ende"
             type="select"
             value="Ende"
             placeholder="Ende"
             :options="['Ende']"
+            input-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white"
           />
         </div>
       </div>
-    </div>
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="px-2 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-        >
-          Titel:
-        </p>
+      <div class="col-span-2 md:col-span-1">
         <div class="px-2">
           <FormKit
             v-model="title"
+            label="Titel:"
             type="text"
             placeholder="Titel des Termins"
           />
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="grid grid-cols-2 gap-1">
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="px-2 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-        >
-          Start:
-        </p>
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
         <div class="px-2">
           <FormKit
             type="datetime-local"
+            label="Start:"
             v-model="appointmentFrom"
             :value="appointmentFrom"
           />
         </div>
       </div>
-    </div>
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="px-2 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-        >
-          Ende:
-        </p>
+      <div class="col-span-2 md:col-span-1">
         <div class="px-2">
           <FormKit
             type="datetime-local"
-            name="Ende"
+            label="Ende:"
             v-model="appointmentTo"
             :validation="
               appointmentFrom ? [['date_after', appointmentFrom]] : []
@@ -87,34 +67,22 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="grid grid-cols-2 gap-1">
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="px-2 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-        >
-          Adresse:
-        </p>
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
         <div class="px-2">
           <FormKit
             v-model="address"
+            label="Adresse: "
             type="text"
             placeholder="Straße Nr., PLZ"
           />
         </div>
       </div>
-    </div>
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="px-2 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-        >
-          Notizen:
-        </p>
+      <div class="col-span-2 md:col-span-1">
         <div class="px-2">
           <FormKit
             type="textarea"
+            label="Notizen: "
             v-model="note"
             placeholder="Wichtige Informationen"
           />
@@ -122,7 +90,7 @@
       </div>
     </div>
   </div>
-  <div class="grid flex gap-2 p-2">
+  <div class="grid flex gap-2 px-4">
     <div v-if="!isEnd">
       <button
         class="bg-wd-error shadow rounded-md h-10 w-full text-white font-bold"

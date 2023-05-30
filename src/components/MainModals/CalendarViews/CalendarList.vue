@@ -212,13 +212,13 @@
             <SwiperCard :items="items">
               <button @click="closeBottomCard()">
                 <div class="flex">
-                  <h1
-                    class="pt-8 px-4 text-black dark:text-white font-Montserrat text-xl md:text-2xl font-bold"
+                  <p
+                    class="px-3 p-2 text-black dark:text-white font-Montserrat text-2xl md:text-xxl font-bold"
                   >
-                    Termin
-                  </h1>
+                    Erinnerungen
+                  </p>
                   <div class="grow ..."></div>
-                  <div class="p-4">
+                  <div class="px-2 py-2">
                     <CloseIcon
                       class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
                     ></CloseIcon>
@@ -274,7 +274,7 @@ const blueType = ref("Bewerbungsgespräch");
 const redType = ref("Ende");
 const yellowType = ref("Aufnahmetest");
 const pinkType = ref("Feedback");
-const greenType = ref("Sonstige Termine");
+const greenType = ref("Sonstige text-basee");
 
 interface SlideItem {
   id: string;

@@ -1,132 +1,102 @@
 <template>
-  <div class="p-4" v-bind="editIndex">
+  <div class="px-2" v-bind="editIndex">
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-          >
-            Typ:
-          </p>
-          <div class="px-2">
-            <FormKit
-              v-model="type"
-              type="text"
-              placeholder="Lehre, HTL, AHS, HAK, ..."
-            />
-          </div>
+        <div class="px-2">
+          <FormKit
+            v-model="type"
+            label="Typ:"
+            type="text"
+            placeholder="Lehre, HTL, AHS, HAK, ..."
+          />
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-          >
-            Schwerpunkt:
-          </p>
-          <div class="px-2">
-            <FormKit
-              v-model="specialty"
-              type="text"
-              placeholder="zB. Sprachen, BE, IT"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex bg-white dark:bg-slate-800 h-10">
-        <p
-          class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-        >
-          Adresse:
-        </p>
         <div class="px-2">
           <FormKit
-            v-model="address"
+            v-model="specialty"
+            label="Schwerpunkt:"
             type="text"
-            placeholder="Straße Nr., PLZ"
+            placeholder="zB. Sprachen, BE, IT"
           />
         </div>
       </div>
     </div>
+
     <div class="grid grid-cols-2 gap-1">
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-          >
-            Start:
-          </p>
-          <div class="px-2">
-            <FormKit
-              type="date"
-              v-model="educationFrom"
-              placeholder="Auswählen"
-            />
-          </div>
-        </div>
+      <div class="px-2">
+        <FormKit
+          v-model="address"
+          label="Adresse:"
+          type="text"
+          placeholder="Straße Nr., PLZ"
+        />
       </div>
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-          >
-            Ende: *
-          </p>
-          <div class="px-2" v-if="!checked">
-            <FormKit
-              type="date"
-              name="Ende"
-              v-model="educationTo"
-              placeholder="Auswählen"
-              :validation="[['required'], ['date_after', educationFrom]]"
-              validation-visibility="live"
-              :disabled="checked"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="grid grid-cols-2 gap-1">
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex items-center py-2 px-">
+      <div class="flex">
+        <div class="px-2 pt-6">
           <input
             id="ongoing"
             v-model="checked"
             type="checkbox"
             value="ongoing"
-            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            class="p-10 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
           />
           <label
             for="ongoing"
-            class="px-2 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-            >laufend</label
+            class="h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
           >
+          </label>
         </div>
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="px-0 py-2 w-32 h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-          >
-            Anmerkungen:
-          </p>
-
-          <div class="flex bg-white dark:bg-slate-800 h-10">
-            <div class="p-2">
-              <FormKit
-                type="textarea"
-                v-model="note"
-                placeholder="Wichtige Informationen"
-              />
-            </div>
-          </div>
+        <div
+          label
+          class="px-2 align-middle text-black dark:text-white font-Montserrat text-base font-bold md:text-lg pt-5"
+        >
+          Laufend
         </div>
       </div>
     </div>
+    <div class="grid grid-cols-2 gap-1">
+      <div class="col-span-2 md:col-span-1">
+        <div class="px-2 text-black dark:text-white">
+          <FormKit
+            type="datepicker"
+            label="Start:"
+            format="MM YYYY"
+            v-model="educationFrom"
+            :sequence="['year', 'month']"
+            picker-only
+            input-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white"
+          />
+        </div>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <div class="px-2 text-black dark:text-white" v-if="!checked">
+          <FormKit
+            type="datepicker"
+            label="Ende: *"
+            format="MM YYYY"
+            v-model="educationTo"
+            :validation="[['required'], ['date_after', educationFrom]]"
+            validation-visibility="live"
+            :sequence="['year', 'month']"
+            :disabled="checked"
+            picker-only
+            input-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="px-2">
+      <FormKit
+        type="textarea"
+        label="Anmerkungen: "
+        v-model="note"
+        placeholder="Wichtige Informationen"
+      />
+    </div>
   </div>
 
-  <div class="grid flex gap-2 p-2">
+  <div class="grid flex gap-2 px-4">
     <button
       class="bg-wd-error shadow rounded-md h-10 w-full text-white font-bold"
       @click="removeFromLocalStorage()"

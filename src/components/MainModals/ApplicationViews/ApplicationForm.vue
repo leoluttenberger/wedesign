@@ -1,98 +1,68 @@
 <template>
-  <div class="px-5">
+  <div class="px-2">
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10 pb-4">
-          <p
-            class="px-0 py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-          >
-            Firma: *
-          </p>
-          <div class="px-2">
-            <FormKit
-              v-model="company"
-              type="text"
-              name="Firma"
-              placeholder="Unternehmensname"
-              validation="required|?length:2"
-              validation-label="Firma"
-              validation-visibility="live"
-            />
-          </div>
+        <div class="px-2">
+          <FormKit
+            v-model="company"
+            type="text"
+            label="Firma: *"
+            placeholder="Unternehmensname"
+            validation="required|?length:2"
+            validation-label="Firma"
+            validation-visibility="live"
+          />
         </div>
       </div>
-      <div class="col-span-2 md:col-span-1 py-4">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="px-0 py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-          >
-            Beruf:
-          </p>
-          <div class="px-2">
-            <FormKit v-model="job" type="text" placeholder="Beruf oder Lehre" />
-          </div>
+      <div class="col-span-2 md:col-span-1">
+        <div class="px-2">
+          <FormKit
+            v-model="job"
+            label="Beruf:"
+            type="text"
+            placeholder="Beruf oder Lehre"
+          />
         </div>
       </div>
     </div>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <div
-            class="px-0 py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-          >
-            <p>Start</p>
-          </div>
-          <div class="px-2">
-            <FormKit
-              type="datetime-local"
-              name="Start"
-              v-model="start"
-              placeholder="Auswählen"
-            />
-          </div>
+        <div class="px-2">
+          <FormKit
+            type="datetime-local"
+            label="Start:"
+            v-model="start"
+            placeholder="Auswählen"
+          />
         </div>
       </div>
-      <div class="col-span-2 md:col-span-1 pb-4">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-3 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-          >
-            Ende: *
-          </p>
-          <div class="px-2">
-            <FormKit
-              type="datetime-local"
-              name="Ende"
-              v-model="end"
-              :validation="[['required'], ['date_after', start]]"
-              validation-visibility="live"
-              :value="end"
-            />
-          </div>
+      <div class="col-span-2 md:col-span-1">
+        <div class="px-2">
+          <FormKit
+            type="datetime-local"
+            label="Ende:"
+            v-model="end"
+            :validation="[['required'], ['date_after', start]]"
+            validation-visibility="live"
+            :value="end"
+          />
         </div>
       </div>
     </div>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-14">
-          <div
-            class="px-0 py-2 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-          >
-            <p>Ansprechs</p>
-            <p>person:</p>
-          </div>
-          <div class="px-2">
-            <FormKit
-              type="text"
-              v-model="contactPerson"
-              placeholder="Marlene Musterfrau"
-            />
-          </div>
+        <div class="px-2">
+          <FormKit
+            type="text"
+            label="Ansprechsperson:"
+            v-model="contactPerson"
+            placeholder="Marlene Musterfrau"
+          />
         </div>
       </div>
     </div>
   </div>
-  <div class="grid flex gap-2 p-2">
+  <div class="grid flex gap-2 px-4">
     <button
       class="bg-wd-green shadow rounded-md h-16 w-full text-white font-bold"
       @click="saveToLocalStorage()"

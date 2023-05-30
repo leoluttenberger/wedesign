@@ -1,232 +1,166 @@
 <template>
   <div class="space-y-1">
     <p
-      class="text-black px-1 py-2 dark:text-white font-Montserrat text-sm font-bold"
+      class="text-black px-10 py-2 dark:text-white font-Montserrat text-base font-bold"
     >
-      Deine Daten
+      Deine Daten:
     </p>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
-          >
-            Titel(vor N.):
-          </p>
-          <div class="px-2">
-            <FormKit
-              v-model="titleBefore"
-              type="text"
-              placeholder="Dr."
-              :disabled="true"
-            />
-          </div>
+        <div class="px-10">
+          <FormKit
+            v-model="titleBefore"
+            label="Titel(vor N.):"
+            type="text"
+            placeholder="Dr."
+            :disabled="true"
+          />
         </div>
       </div>
 
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
-          >
-            Titel(nach N.):
-          </p>
-          <div class="px-2">
-            <FormKit
-              v-model="titleAfter"
-              type="text"
-              placeholder="BA"
-              :disabled="true"
-            />
-          </div>
+        <div class="px-10">
+          <FormKit
+            v-model="titleAfter"
+            label="Titel(nach N.):"
+            type="text"
+            placeholder="BA"
+            :disabled="true"
+          />
         </div>
       </div>
     </div>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
-          >
-            Vorname: *
-          </p>
-          <div class="px-2">
-            <FormKit
-              v-model="firstName"
-              type="text"
-              placeholder="Max"
-              validation="required|length:3"
-              :disabled="true"
-            />
-          </div>
+        <div class="px-10">
+          <FormKit
+            v-model="firstName"
+            label="Vorname: *"
+            type="text"
+            placeholder="Max"
+            validation="required|length:3"
+            :disabled="true"
+          />
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
-          >
-            Nachname: *
-          </p>
-          <div class="px-2">
-            <FormKit
-              v-model="secondName"
-              type="text"
-              placeholder="Mustermann"
-              validation="required|length:3"
-              :disabled="true"
-            />
-          </div>
+        <div class="px-10">
+          <FormKit
+            v-model="secondName"
+            label="Nachname: *"
+            type="text"
+            placeholder="Mustermann"
+            validation="required|length:3"
+            :disabled="true"
+          />
         </div>
       </div>
     </div>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
-          >
-            Geburtsdatum:
-          </p>
-          <div class="px-2">
-            <FormKit v-model="birthDate" type="date" :disabled="true" />
-          </div>
+        <div class="px-10">
+          <FormKit
+            v-model="birthDate"
+            label="Geburtsdatum:"
+            type="date"
+            :disabled="true"
+          />
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
-          >
-            Geburtsort:
-          </p>
-          <div class="px-2">
-            <FormKit
-              v-model="birthArea"
-              type="text"
-              placeholder="Stadt"
-              validation="required|length:3"
-              :disabled="true"
-            />
-          </div>
+        <div class="px-10">
+          <FormKit
+            v-model="birthArea"
+            label="Geburtsort:"
+            type="text"
+            placeholder="Stadt"
+            validation="required|length:3"
+            :disabled="true"
+          />
         </div>
       </div>
     </div>
 
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
-          >
-            Familienstand:
-          </p>
-          <div class="px-2">
-            <FormKit
-              v-model="civilStatus"
-              type="select"
-              :options="[
-                'ledig',
-                'verheiratet',
-                'geschieden',
-                'verwitwet',
-                ' getrennt lebend',
-              ]"
-              placeholder="Auswahl"
-              :disabled="true"
-            />
-          </div>
+        <div class="px-10">
+          <FormKit
+            v-model="civilStatus"
+            label="Familienstand:"
+            type="select"
+            :options="[
+              'ledig',
+              'verheiratet',
+              'geschieden',
+              'verwitwet',
+              ' getrennt lebend',
+            ]"
+            placeholder="Auswahl"
+            :disabled="true"
+            input-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white"
+          />
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
-          >
-            Geschlecht:
-          </p>
-          <div class="px-2">
-            <FormKit
-              v-model="gender"
-              type="select"
-              :options="['weiblich', 'männlich', 'divers']"
-              placeholder="Auswahl"
-              :disabled="true"
-            />
-          </div>
+        <div class="px-10">
+          <FormKit
+            v-model="gender"
+            label="Geschlecht:"
+            type="select"
+            :options="['weiblich', 'männlich', 'divers']"
+            placeholder="Auswahl"
+            :disabled="true"
+            input-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white"
+          />
         </div>
       </div>
     </div>
 
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
-          >
-            Straße:
-          </p>
-          <div class="px-2">
-            <FormKit
-              v-model="streetName"
-              type="text"
-              placeholder="Musterstraße"
-              :disabled="true"
-            />
-          </div>
+        <div class="px-10">
+          <FormKit
+            v-model="streetName"
+            label="Straße:"
+            type="text"
+            placeholder="Musterstraße"
+            :disabled="true"
+          />
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
-          >
-            Nr:
-          </p>
-          <div class="px-2">
-            <FormKit
-              v-model="streetNumber"
-              type="text"
-              placeholder="1/1"
-              :disabled="true"
-            />
-          </div>
+        <div class="px-10">
+          <FormKit
+            v-model="streetNumber"
+            label="Nr:"
+            type="text"
+            placeholder="1/1"
+            :disabled="true"
+          />
         </div>
       </div>
     </div>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 dark:bg-slate-800 h-10">
-          <p
-            class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
-          >
-            PLZ:
-          </p>
-          <div class="px-2">
-            <FormKit
-              v-model="districtNumber"
-              type="text"
-              placeholder="1010"
-              :disabled="true"
-            />
-          </div>
+        <div class="px-10">
+          <FormKit
+            v-model="districtNumber"
+            label="PLZ:"
+            type="text"
+            placeholder="1010"
+            :disabled="true"
+          />
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
-          >
-            Ort:
-          </p>
-          <div class="px-2">
-            <FormKit
-              v-model="city"
-              type="text"
-              placeholder="Musterstadt"
-              :disabled="true"
-            />
-          </div>
+        <div class="px-10">
+          <FormKit
+            v-model="city"
+            label="Ort:"
+            type="text"
+            placeholder="Musterstadt"
+            :disabled="true"
+          />
         </div>
       </div>
     </div>
@@ -234,21 +168,17 @@
   <div class="space-y-1">
     <div class="mt-6">
       <p
-        class="text-black px-1 dark:text-white font-Montserrat text-sm font-bold"
+        class="px-10 text-black px-1 dark:text-white font-Montserrat text-base font-bold"
       >
         Deine Kontaktdaten
       </p>
     </div>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
-          >
-            Telefon:
-          </p>
+        <div class="px-10">
           <FormKit
             v-model="phone"
+            label="Telefon:"
             type="text"
             placeholder="xxxx-xxx-xxxx"
             :disabled="true"
@@ -256,14 +186,10 @@
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
-        <div class="flex bg-white dark:bg-slate-800 h-10">
-          <p
-            class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
-          >
-            EMail:
-          </p>
+        <div class="px-10">
           <FormKit
             v-model="email"
+            label="EMail:"
             type="email"
             name="Email"
             validation="length:5|*email"
@@ -278,19 +204,15 @@
   <div class="space-y-1">
     <div class="mt-6">
       <p
-        class="text-black px-1 dark:text-white font-Montserrat text-sm font-bold"
+        class="px-10 text-black px-1 dark:text-white font-Montserrat text-base font-bold"
       >
         Sonstiges:
       </p>
     </div>
-    <div class="flex bg-white dark:bg-slate-800 h-10">
-      <p
-        class="py-3 px-1 w-36 h-10 text-black dark:text-white font-Montserrat text-base md:text-sm font-bold"
-      >
-        Hobbies:
-      </p>
+    <div class="px-10">
       <FormKit
         v-model="hobbies"
+        label="Hobbies:"
         type="text"
         placeholder="laufen, schwimmen, tanzen"
         :disabled="true"

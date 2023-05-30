@@ -13,7 +13,7 @@
     </div>
   </Container>
   <Container>
-    <div class="flex pt-56 dark:text-white text-black text-l px-2">
+    <div class="flex pt-56 dark:text-white text-black text-l px-4">
       <DocumentsIcon
         class="dark:stroke-wd-white stroke-black stroke-1 w-8 h-8"
       ></DocumentsIcon>
@@ -32,7 +32,7 @@
       <div
         v-for="(item, index) in applications"
         :key="index"
-        class="p-2 snap-start w-52 h-30 rounded-lg shrink-0"
+        class="px-4 snap-start w-52 h-30 rounded-lg shrink-0"
       >
         <button @click="saveApplicationIndex(index)">
           <router-link to="/documents"
@@ -68,7 +68,7 @@
               </div>
 
               <div class="font-bold text-xl">{{ item[0].company }}</div>
-              <div class="flex text-sm">
+              <div class="flex text-base">
                 <div class="flex-none">Ende</div>
                 <div class="grow py-2 px-2">
                   <ArrowIcon
@@ -96,7 +96,7 @@
     </div>
   </Container>
   <Container>
-    <div class="flex pt-4 dark:text-white text-l px-2">
+    <div class="flex pt-4 dark:text-white text-l px-4">
       <NotificationsIcon
         class="dark:stroke-wd-white stroke-black stroke-1 w-8 h-8"
       ></NotificationsIcon>
@@ -109,12 +109,12 @@
   </Container>
   <Container>
     <div
-      class="relative w-full flex gap-4 snap-x snap-mandatory overflow-x-auto"
+      class="relative w-full flex gap-4 snap-x snap-mandatory overflow-x-auto px-4"
     >
       <div
         v-for="(item, index) in appointments"
         :key="index"
-        class="p-2 snap-start w-52 h-30 rounded-lg shrink-0"
+        class="snap-start w-52 h-30 rounded-lg shrink-0"
       >
         <button @click="saveCalendarIndex(index)">
           <router-link to="/calendar">
@@ -138,7 +138,7 @@
               <div class="font-bold text-base">
                 {{ item[0].title }}
               </div>
-              <div class="flex text-sm">
+              <div class="flex text-base">
                 <div>
                   {{
                     item[0].appointmentFrom
@@ -174,7 +174,7 @@
     </div>
   </Container>
   <Container>
-    <div class="grid flex gap-6 px-6 pt-4 pb-20">
+    <div class="grid flex gap-6 px-4 pt-4 pb-20">
       <button
         class="rounded-md bg-wd-green hover:bg-transparent-green h-14 text-white font-bold"
         @click="openBottomCard()"

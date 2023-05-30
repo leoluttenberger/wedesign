@@ -18,13 +18,13 @@
       </button>
     </div>
 
-    <div class="space-y-1">
-      <p
-        class="text-black p-2 dark:text-white font-Montserrat text-base font-bold px-4"
-      >
-        Einstieg
-      </p>
-      <div class="grid grid-cols-2 gap-1 px-4">
+    <p
+      class="text-black p-2 dark:text-white font-Montserrat text-base font-bold px-4"
+    >
+      Einstieg
+    </p>
+    <div class="justify-evenly flex">
+      <div class="grid grid-cols-2 gap-1">
         <div class="col-span-2 md:col-span-1">
           <button type="button" @click="subjectEdit()" class="py-2">
             <div class="flex gap-4">
@@ -52,12 +52,12 @@
         </div>
       </div>
     </div>
-    <div class="space-y-1">
-      <p
-        class="text-black p-2 dark:text-white font-Montserrat text-base font-bold px-4"
-      >
-        Hauptteil:
-      </p>
+    <p
+      class="text-black p-2 dark:text-white font-Montserrat text-base font-bold px-4"
+    >
+      Hauptteil:
+    </p>
+    <div class="justify-evenly flex">
       <div class="grid grid-cols-2 gap-1 px-4">
         <div class="col-span-2 md:col-span-1">
           <button type="button" @click="textBeginingEdit()">
@@ -118,12 +118,12 @@
         </div>
       </div>
     </div>
-    <div class="space-y-1">
-      <p
-        class="text-black p-2 dark:text-white font-Montserrat text-base font-bold px-4"
-      >
-        Schlussteil:
-      </p>
+    <p
+      class="text-black p-2 dark:text-white font-Montserrat text-base font-bold px-4"
+    >
+      Schlussteil:
+    </p>
+    <div class="justify-evenly flex">
       <div class="grid grid-cols-2 gap-1 px-4">
         <div class="col-span-2 md:col-span-1">
           <button type="button" @click="endingEdit()" class="">

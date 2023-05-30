@@ -93,7 +93,8 @@
               'verheiratet',
               'geschieden',
               'verwitwet',
-              ' getrennt lebend',
+              'getrennt lebend',
+              'verpartnert',
             ]"
             placeholder="Auswahl"
             :disabled="true"

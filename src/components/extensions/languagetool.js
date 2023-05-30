@@ -265,7 +265,7 @@ export const LanguageTool = Extension.create({
   addOptions() {
     return {
       language: "auto",
-      apiUrl: process.env.VUE_APP_LANGUAGE_TOOL_URL + "check",
+      apiUrl: process.env.VUE_APP_LANGUAGE_TOOL_URL,
       automaticMode: true,
       documentId: undefined,
     };

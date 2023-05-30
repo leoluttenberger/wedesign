@@ -16,8 +16,8 @@
     "@capacitor/ios": "^4.6.1",
     "@capacitor/share": "^4.1.1",
     "@capacitor/splash-screen": "^4.1.2",
-    "@formkit/themes": "^1.0.0-beta.10",
-    "@formkit/vue": "^1.0.0-beta.10",
+    "@formkit/pro": "^0.112.2",
+    "@formkit/vue": "^0.17.2",
     "@mdi/font": "5.9.55",
     "@tiptap/starter-kit": "^2.0.0-beta.209",
     "@tiptap/vue-3": "^2.0.0-beta.209",
@@ -128,5 +128,9 @@
         }
       }
     ]
+  },
+  "browser": {
+    "fs": false,
+    "os": false
   }
 }

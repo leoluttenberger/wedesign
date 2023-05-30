@@ -31,13 +31,13 @@
       ></BellIcon>
       <div
         v-if="!pickedDate"
-        class="selected-day py-3 px-3 text-black dark:text-white font-Montserrat text-sm md:text-base font-bold"
+        class="selected-day py-3 px-3 text-black dark:text-white font-Montserrat text-base md:text-base font-bold"
       >
         Nächste Termine
       </div>
       <div
         v-if="pickedDate"
-        class="selected-day py-3 px-3 text-black dark:text-white font-Montserrat text-sm md:text-base font-bold"
+        class="selected-day py-3 px-3 text-black dark:text-white font-Montserrat text-base md:text-base font-bold"
       >
         <h3>{{ pickedDate.date.toDateString() }}</h3>
       </div>

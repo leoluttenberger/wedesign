@@ -20,196 +20,134 @@
 
     <div class="space-y-1">
       <p
-        class="text-black p-2 dark:text-white font-Montserrat text-sm font-bold"
+        class="text-black p-2 dark:text-white font-Montserrat text-base font-bold px-4"
       >
         Einstieg
       </p>
-      <div class="grid grid-cols-2 gap-1">
+      <div class="grid grid-cols-2 gap-1 px-4">
         <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-24">
-            <p
-              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-            >
-              Betreff:
-            </p>
-            <button type="button" @click="subjectEdit()" class="py-2">
-              <div class="flex gap-4">
-                <FormKit v-model="subject" type="textarea" :disabled="true" />
-                <EditIcon
-                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-                ></EditIcon>
-              </div>
-            </button>
-          </div>
+          <button type="button" @click="subjectEdit()" class="py-2">
+            <div class="flex gap-4">
+              <FormKit v-model="subject" label="Betreff:" type="textarea" />
+              <EditIcon
+                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+              ></EditIcon>
+            </div>
+          </button>
         </div>
 
         <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-24">
-            <p
-              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-            >
-              Anrede:
-            </p>
-            <button type="button" @click="salutationBeginningEdit()" class="">
-              <div class="flex gap-4">
-                <FormKit
-                  v-model="salutationBeginning"
-                  type="textarea"
-                  :disabled="true"
-                />
-                <EditIcon
-                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-                ></EditIcon>
-              </div>
-            </button>
-          </div>
+          <button type="button" @click="salutationBeginningEdit()" class="">
+            <div class="flex gap-4">
+              <FormKit
+                v-model="salutationBeginning"
+                type="textarea"
+                label="Anrede:"
+              />
+              <EditIcon
+                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+              ></EditIcon>
+            </div>
+          </button>
         </div>
       </div>
     </div>
     <div class="space-y-1">
       <p
-        class="text-black p-2 dark:text-white font-Montserrat text-sm font-bold"
+        class="text-black p-2 dark:text-white font-Montserrat text-base font-bold px-4"
       >
         Hauptteil:
       </p>
-      <div class="grid grid-cols-2 gap-1">
+      <div class="grid grid-cols-2 gap-1 px-4">
         <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-24">
-            <p
-              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-            >
-              Einleitung:
-            </p>
-
-            <button type="button" @click="textBeginingEdit()">
-              <div class="flex gap-4">
-                <FormKit
-                  v-model="textBegining"
-                  type="textarea"
-                  :disabled="true"
-                />
-                <EditIcon
-                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-                ></EditIcon>
-              </div>
-            </button>
-          </div>
+          <button type="button" @click="textBeginingEdit()">
+            <div class="flex gap-4">
+              <FormKit
+                v-model="textBegining"
+                type="textarea"
+                label="Einleitung:"
+              />
+              <EditIcon
+                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+              ></EditIcon>
+            </div>
+          </button>
         </div>
 
         <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-24">
-            <p
-              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-            >
-              Werdegang:
-            </p>
-
-            <button type="button" @click="textExperienceEdit()" class="">
-              <div class="flex gap-4">
-                <FormKit
-                  v-model="textExperience"
-                  type="textarea"
-                  :disabled="true"
-                />
-                <EditIcon
-                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-                ></EditIcon>
-              </div>
-            </button>
-          </div>
+          <button type="button" @click="textExperienceEdit()" class="">
+            <div class="flex gap-4">
+              <FormKit
+                v-model="textExperience"
+                type="textarea"
+                label="Werdegang:"
+              />
+              <EditIcon
+                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+              ></EditIcon>
+            </div>
+          </button>
         </div>
         <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-24">
-            <p
-              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-            >
-              Kompetenzen:
-            </p>
-
-            <button type="button" @click="textCompetenceEdit()" class="">
-              <div class="flex gap-4">
-                <FormKit
-                  v-model="textCompetence"
-                  type="textarea"
-                  :disabled="true"
-                />
-                <EditIcon
-                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-                ></EditIcon>
-              </div>
-            </button>
-          </div>
+          <button type="button" @click="textCompetenceEdit()" class="">
+            <div class="flex gap-4">
+              <FormKit
+                v-model="textCompetence"
+                type="textarea"
+                label="Kompetenzen:"
+              />
+              <EditIcon
+                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+              ></EditIcon>
+            </div>
+          </button>
         </div>
         <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-24">
-            <p
-              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-            >
-              Beitrag:
-            </p>
-
-            <button type="button" @click="textContributionEdit()" class="">
-              <div class="flex gap-4">
-                <FormKit
-                  v-model="textContribution"
-                  type="textarea"
-                  :disabled="true"
-                />
-                <EditIcon
-                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-                ></EditIcon>
-              </div>
-            </button>
-          </div>
+          <button type="button" @click="textContributionEdit()" class="">
+            <div class="flex gap-4">
+              <FormKit
+                v-model="textContribution"
+                type="textarea"
+                label="Beitrag:"
+              />
+              <EditIcon
+                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+              ></EditIcon>
+            </div>
+          </button>
         </div>
       </div>
     </div>
     <div class="space-y-1">
       <p
-        class="text-black p-2 dark:text-white font-Montserrat text-sm font-bold"
+        class="text-black p-2 dark:text-white font-Montserrat text-base font-bold px-4"
       >
         Schlussteil:
       </p>
-      <div class="grid grid-cols-2 gap-1">
+      <div class="grid grid-cols-2 gap-1 px-4">
         <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-24">
-            <p
-              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-            >
-              Abschluss:
-            </p>
-
-            <button type="button" @click="endingEdit()" class="">
-              <div class="flex gap-4">
-                <FormKit v-model="ending" type="textarea" :disabled="true" />
-                <EditIcon
-                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-                ></EditIcon>
-              </div>
-            </button>
-          </div>
+          <button type="button" @click="endingEdit()" class="">
+            <div class="flex gap-4">
+              <FormKit v-model="ending" label="Abschluss:" type="textarea" />
+              <EditIcon
+                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+              ></EditIcon>
+            </div>
+          </button>
         </div>
         <div class="col-span-2 md:col-span-1">
-          <div class="flex bg-white dark:bg-slate-800 h-24">
-            <p
-              class="p-2 px-2 w-32 h-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-            >
-              Abschied:
-            </p>
-
-            <button type="button" @click="salutationEndingEdit()" class="">
-              <div class="flex gap-4">
-                <FormKit
-                  v-model="salutationEnding"
-                  type="textarea"
-                  :disabled="true"
-                />
-                <EditIcon
-                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-                ></EditIcon>
-              </div>
-            </button>
-          </div>
+          <button type="button" @click="salutationEndingEdit()" class="">
+            <div class="flex gap-4">
+              <FormKit
+                v-model="salutationEnding"
+                type="textarea"
+                label="Abschied:"
+              />
+              <EditIcon
+                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+              ></EditIcon>
+            </div>
+          </button>
         </div>
       </div>
     </div>
@@ -391,7 +329,6 @@ if (!localStorage.getItem("motivations")) {
   localStorage.setItem("motivations", JSON.stringify([motivation1]));
 }
 let tempMotivations = JSON.parse(localStorage.getItem("motivations"));
-console.log(tempMotivations.length);
 if (tempMotivations.length < 5) {
   let newData = [...tempMotivations, motivation2];
   localStorage.setItem("motivations", JSON.stringify(newData));
@@ -406,7 +343,6 @@ if (tempMotivations.length < 5) {
   localStorage.setItem("motivations", JSON.stringify(newData));
   tempMotivations = JSON.parse(localStorage.getItem("motivations"));
 }
-console.log(tempMotivations);
 let idCounter = 0;
 const getID = () => (idCounter++).toString();
 let posIndexCounter = 0;

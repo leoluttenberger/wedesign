@@ -26,7 +26,7 @@
             ? 'border-wd-green dark:border-wd-green'
             : 'border-white dark:border-slate-800'
         "
-        class="outline:none text-sm border-b-[3px] font-Montserrat dark:text-white font-bold"
+        class="outline:none text-base border-b-[3px] font-Montserrat dark:text-white font-bold"
       >
         Kategorie1
       </button>
@@ -38,7 +38,7 @@
             ? 'border-wd-green dark:border-wd-green'
             : 'border-white dark:border-slate-800'
         "
-        class="outline:none text-sm border-b-[3px] font-Montserrat dark:text-white font-bold"
+        class="outline:none text-base border-b-[3px] font-Montserrat dark:text-white font-bold"
       >
         Kategorie2
       </button>
@@ -50,7 +50,7 @@
             ? 'border-wd-green dark:border-wd-green'
             : 'border-white dark:border-slate-800'
         "
-        class="outline:none text-sm border-b-[3px] font-Montserrat dark:text-white font-bold"
+        class="outline:none text-base border-b-[3px] font-Montserrat dark:text-white font-bold"
       >
         Kategorie3
       </button>

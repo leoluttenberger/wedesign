@@ -18,221 +18,160 @@
           ></CheckIcon>
         </button>
       </div>
-      <div class="space-y-1">
+      <div class="space-y-1 px-2">
         <div class="grid grid-cols-2 gap-1">
           <div class="col-span-2 md:col-span-1">
-            <div class="flex bg-white dark:bg-slate-800 h-10">
-              <p
-                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-              >
-                Firma:
-              </p>
-              <div class="px-2">
-                <FormKit
-                  type="text"
-                  v-model="company"
-                  placeholder="Unternehmensname"
-                />
-              </div>
+            <div class="px-2">
+              <FormKit
+                type="text"
+                label="Firma:"
+                v-model="company"
+                placeholder="Unternehmensname"
+              />
             </div>
           </div>
 
           <div class="col-span-2 md:col-span-1">
-            <div class="flex bg-white dark:bg-slate-800 h-10">
-              <p
-                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-              >
-                Beruf:
-              </p>
-              <div class="px-2">
-                <FormKit
-                  type="text"
-                  v-model="job"
-                  placeholder="Beruf oder Lehre"
-                />
-              </div>
+            <div class="px-2">
+              <FormKit
+                type="text"
+                label="Beruf:"
+                v-model="job"
+                placeholder="Beruf oder Lehre"
+              />
             </div>
           </div>
         </div>
 
         <div class="grid grid-cols-2 gap-1">
           <div class="col-span-2 md:col-span-1">
-            <div class="flex bg-white dark:bg-slate-800 h-10">
-              <p
-                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-              >
-                Straße:
-              </p>
-              <div class="px-2">
-                <FormKit
-                  v-model="streetName"
-                  type="text"
-                  placeholder="Musterstraße"
-                />
-              </div>
+            <div class="px-2">
+              <FormKit
+                v-model="streetName"
+                label="Straße:"
+                type="text"
+                placeholder="Musterstraße"
+              />
             </div>
           </div>
           <div class="col-span-2 md:col-span-1">
-            <div class="flex bg-white dark:bg-slate-800 h-10">
-              <p
-                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-              >
-                Nr:
-              </p>
-              <div class="px-2">
-                <FormKit v-model="streetNumber" type="text" placeholder="1/1" />
-              </div>
+            <div class="px-2">
+              <FormKit
+                v-model="streetNumber"
+                label="Nr:"
+                type="text"
+                placeholder="1/1"
+              />
             </div>
           </div>
         </div>
 
         <div class="grid grid-cols-2 gap-1">
           <div class="col-span-2 md:col-span-1">
-            <div class="flex bg-white dark:bg-slate-800 dark:bg-slate-800 h-10">
-              <p
-                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-              >
-                PLZ:
-              </p>
-              <div class="px-2">
-                <FormKit
-                  v-model="districtNumber"
-                  type="text"
-                  placeholder="1010"
-                />
-              </div>
+            <div class="px-2">
+              <FormKit
+                v-model="districtNumber"
+                label="PLZ:"
+                type="text"
+                placeholder="1010"
+              />
             </div>
           </div>
           <div class="col-span-2 md:col-span-1">
-            <div class="flex bg-white dark:bg-slate-800 h-10">
-              <p
-                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-              >
-                Ort:
-              </p>
-              <div class="px-2">
-                <FormKit v-model="city" type="text" placeholder="Musterstadt" />
-              </div>
+            <div class="px-2">
+              <FormKit
+                v-model="city"
+                label="Ort:"
+                type="text"
+                placeholder="Musterstadt"
+              />
             </div>
           </div>
         </div>
 
         <div class="grid grid-cols-2 gap-1">
           <div class="col-span-2 md:col-span-1">
-            <div class="flex bg-white dark:bg-slate-800 h-10">
-              <p
-                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-              >
-                Start:
-              </p>
-              <div class="px-2">
-                <FormKit
-                  type="datetime-local"
-                  name="Start"
-                  v-model="start"
-                  placeholder="Auswählen"
-                />
-              </div>
+            <div class="px-2">
+              <FormKit
+                type="datetime-local"
+                label="Start:"
+                v-model="start"
+                placeholder="Auswählen"
+              />
             </div>
           </div>
           <div class="col-span-2 md:col-span-1">
-            <div class="flex bg-white dark:bg-slate-800 h-10">
-              <p
-                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-              >
-                Ende: *
-              </p>
-              <div class="px-2">
-                <FormKit
-                  type="datetime-local"
-                  name="Ende"
-                  v-model="end"
-                  :validation="
-                    start ? [['required'], ['date_after', start]] : []
-                  "
-                  validation-visibility="live"
-                  :value="end"
-                />
-              </div>
+            <div class="px-2">
+              <FormKit
+                type="datetime-local"
+                label="Ende: *"
+                v-model="end"
+                :validation="start ? [['required'], ['date_after', start]] : []"
+                validation-visibility="live"
+                :value="end"
+              />
             </div>
           </div>
         </div>
         <div class="grid grid-cols-2 gap-1">
           <div class="col-span-2 md:col-span-1">
-            <div class="flex bg-white dark:bg-slate-800 h-10">
-              <p
-                class="py-3 px-1 w-24 h-10 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-              >
-                Status:
-              </p>
-              <div class="px-2">
-                <FormKit
-                  type="select"
-                  v-model="state"
-                  :options="[
-                    'In Bearbeitung',
-                    'Abgeschickt',
-                    'Keine Rückmeldung',
-                    'Leider nein',
-                  ]"
-                />
-              </div>
+            <div class="px-2">
+              <FormKit
+                type="select"
+                v-model="state"
+                label=" Status:"
+                :options="[
+                  'In Bearbeitung',
+                  'Abgeschickt',
+                  'Keine Rückmeldung',
+                  'Leider nein',
+                ]"
+                input-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white"
+              />
             </div>
           </div>
           <div class="col-span-2 md:col-span-1">
-            <div class="flex bg-white dark:bg-slate-800 h-10">
-              <div
-                class="px-1 py-1 w-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-              >
-                <p>Ansprechs</p>
-                <p>person:</p>
-              </div>
-              <div class="px-2">
-                <FormKit
-                  type="text"
-                  v-model="contactPerson"
-                  placeholder="Marlene Musterfrau"
-                />
-              </div>
+            <div class="px-2">
+              <FormKit
+                type="text"
+                label="Ansprechsperson:"
+                v-model="contactPerson"
+                placeholder="Marlene Musterfrau"
+              />
             </div>
           </div>
         </div>
         <div class="grid grid-cols-2 gap-1">
           <div class="col-span-2 md:col-span-1">
-            <div class="flex bg-white dark:bg-slate-800 h-24">
-              <p
-                class="py-3 px-1 w-24 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-              >
-                Notiz:
-              </p>
-              <div class="py-2 px-2">
-                <FormKit
-                  type="textarea"
-                  v-model="note"
-                  placeholder="Wichtige Informationen"
-                />
-              </div>
+            <div class="py-2 px-2">
+              <FormKit
+                type="textarea"
+                label="Notiz:"
+                v-model="note"
+                placeholder="Wichtige Informationen"
+              />
             </div>
           </div>
           <div class="col-span-2 md:col-span-1">
-            <div class="flex bg-white dark:bg-slate-800 py-1">
-              <div class="py-1">
+            <div class="flex px-2">
+              <FormKit
+                type="text"
+                label="Motivationsschreiben:"
+                :value="__mvText"
+                disabled="true"
+              />
+              <div class="pt-7">
                 <CloseIcon
                   v-if="__mv == 0"
                   class="h-6 w-24 stroke-1 stroke-wd-error"
                 ></CloseIcon>
               </div>
-              <div class="py-1">
+              <div class="pt-7">
                 <CheckIcon
                   v-if="__mv > 0"
                   class="h-6 w-24 stroke-1 stroke-wd-green"
                 ></CheckIcon>
               </div>
-              <p
-                class="w-34 py-2 text-black dark:text-white font-Montserrat text-xs md:text-sm font-bold"
-              >
-                {{ __mvText }}
-              </p>
             </div>
           </div>
         </div>
@@ -399,10 +338,10 @@ onMounted(() => {
   start.value = applications.value[props.editIndex][0].start;
   __mv = applications.value[props.editIndex][0].mv;
   if (__mv == 0) {
-    __mvText = "Motivationsschreiben fehlt";
+    __mvText = "fehlt";
     mvIndex.value = 0;
   } else {
-    __mvText = "Motivationsschreiben angehaengt";
+    __mvText = "angehaengt";
     mvIndex.value = 0;
 
     for (let i = 0; i < motivations.value.length; i++) {
@@ -423,9 +362,9 @@ const previewApplication = () => {
     JSON.parse(localStorage.getItem("motivations")) || []
   );
   if (__mv == null) {
-    __mvText = "Motivationsschreiben fehlt";
+    __mvText = "fehlt";
   } else {
-    __mvText = "Motivationsschreiben angehaengt";
+    __mvText = "angehaengt";
     for (let i = 0; i < motivations.value.length; i++) {
       if (motivations.value[i][0].indexMV == __mv) {
         mvIndex.value = i;

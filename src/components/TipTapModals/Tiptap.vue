@@ -117,7 +117,7 @@ const editor = useEditor({
     LanguageTool.configure({
       automaticMode: true,
       documentId: "1",
-      apiUrl: process.env.VUE_APP_LANGUAGE_TOOL_URL + "check",
+      apiUrl: process.env.VUE_APP_LANGUAGE_TOOL_URL,
     }),
   ],
   onUpdate({ editor }) {

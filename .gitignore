@@ -22,6 +22,8 @@ capacitor.config.ts
 .env.local
 .env.*.local
 .env
+# Env for typescript workaround
+env.ts
 
 #Firebase config
 .firebaserc

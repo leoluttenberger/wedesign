@@ -51,7 +51,11 @@ const getCheckOptions = () => {
 };
 onMounted(() => {
   const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")) || []);
-  userName.value = userInfos.value[0][0].firstName;
+  if (localStorage.getItem("userInfos")) {
+    userName.value = userInfos.value[0][0].firstName;
+  } else {
+    userName.value = "";
+  }
   sideBackBack.value = true;
   sideBack.value = true;
   getCheckOptions();

@@ -7,15 +7,17 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    AppilcationPreview: typeof import('./src/components/MainModals/ApplicationViews/AppilcationPreview.vue')['default']
+    ApplicationCheck: typeof import('./src/components/MainModals/ApplicationViews/ApplicationCheck.vue')['default']
     ApplicationEdit: typeof import('./src/components/MainModals/ApplicationViews/ApplicationEdit.vue')['default']
     ApplicationForm: typeof import('./src/components/MainModals/ApplicationViews/ApplicationForm.vue')['default']
     ApplicationList: typeof import('./src/components/MainModals/ApplicationViews/ApplicationList.vue')['default']
+    ApplicationPreview: typeof import('./src/components/MainModals/ApplicationViews/ApplicationPreview.vue')['default']
     AvatarInput: typeof import('./src/components/MenuModals/AvatarInput.vue')['default']
     BottomCard: typeof import('./src/components/MenuModals/BottomCard.vue')['default']
     CalendarEdit: typeof import('./src/components/MainModals/CalendarViews/CalendarEdit.vue')['default']
     CalendarForm: typeof import('./src/components/MainModals/CalendarViews/CalendarForm.vue')['default']
     CalendarList: typeof import('./src/components/MainModals/CalendarViews/CalendarList.vue')['default']
+    CheckBox: typeof import('./src/components/MenuModals/CheckBox.vue')['default']
     CropModal: typeof import('./src/components/MenuModals/CropModal.vue')['default']
     CropperItem: typeof import('./src/components/MenuModals/CropperItem.vue')['default']
     EditTextModal: typeof import('./src/components/MenuModals/EditTextModal.vue')['default']
@@ -32,6 +34,7 @@ declare module '@vue/runtime-core' {
     MenuBar: typeof import('./src/components/MenuModals/MenuBar.vue')['default']
     MenuItem: typeof import('./src/components/MenuModals/MenuItem.vue')['default']
     MotivationEdit: typeof import('./src/components/MainModals/MotivationViews/MotivationEdit.vue')['default']
+    MultiCheckbox: typeof import('./src/components/MenuModals/MultiCheckbox.vue')['default']
     MVEditModal: typeof import('./src/components/MenuModals/MVEditModal.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

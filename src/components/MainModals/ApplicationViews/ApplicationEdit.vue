@@ -266,10 +266,9 @@ import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import { slideDown, sideBack } from "@/store/store.js";
 import MotivationEdit from "@/components/MainModals/MotivationViews/MotivationEdit.vue";
 import MVEditModal from "@/components/MenuModals/MVEditModal.vue";
-import ApplicationPreview from "@/components/MainModals/ApplicationViews/AppilcationPreview.vue";
+import ApplicationPreview from "@/components/MainModals/ApplicationViews/ApplicationPreview.vue";
 
 const MAX_ARCHIVE_LENGHT = 20;
-
 const company = ref(null);
 const job = ref(null);
 const end = ref(null);

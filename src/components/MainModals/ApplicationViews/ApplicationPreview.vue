@@ -72,11 +72,20 @@
       ></ZoomInIcon>
     </button>
   </div>
+  <MVEditModal :show="bottomCardOpen">
+    <div class="flex">
+      <div
+        class="rounded-lg w-screen h-screen overflow-hidden shadow-xl dark:bg-slate-700 bg-white"
+      >
+        <component :is="ApplicationCheck" />
+      </div>
+    </div>
+  </MVEditModal>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, defineProps, onBeforeUnmount } from "vue";
+import { ref, onMounted, defineProps, onBeforeUnmount, watch } from "vue";
 import { useElementSize } from "@vueuse/core";
-import { sideBack } from "@/store/store.js";
+import { sideBack, sideBackBack } from "@/store/store.js";
 import { Share } from "@capacitor/share";
 
 import BackIcon from "@/assets/icons/BackIcon.vue";
@@ -94,6 +103,8 @@ import { convertXmlToHtml } from "@/helpers/convertXmlToHtml";
 
 import { Filesystem, Directory } from "@capacitor/filesystem";
 import { fileToBase64 } from "@/helpers/fileToBase64";
+import ApplicationCheck from "@/components/MainModals/ApplicationViews/ApplicationCheck.vue";
+
 import moment from "moment";
 
 const pdf = ref(null);
@@ -105,7 +116,7 @@ const el = ref(null);
 const { width, height } = useElementSize(el);
 const zoomFactor = ref(1);
 const imgData = ref("");
-
+const bottomCardOpen = ref(false);
 const props = defineProps({
   currentApplIndex: {
     type: Number,
@@ -117,8 +128,16 @@ const props = defineProps({
   },
 });
 
+watch(sideBackBack, () => {
+  if (sideBackBack.value) {
+    bottomCardOpen.value = true;
+  } else {
+    bottomCardOpen.value = false;
+  }
+});
 onMounted(async () => {
   downloadDocx.value = await createFile();
+  bottomCardOpen.value = true;
   sideBack.value = true;
   setTimeout(() => {
     convertToPdf();
@@ -130,6 +149,7 @@ onBeforeUnmount(() => {
 });
 const closeModal = () => {
   sideBack.value = false;
+  console.log("close modal");
 };
 
 const createFile = async () => {

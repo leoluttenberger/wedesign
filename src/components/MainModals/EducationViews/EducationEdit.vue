@@ -57,7 +57,7 @@
     </div>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
-        <div class="px-2 text-black dark:text-white">
+        <div class="px-2">
           <FormKit
             type="datepicker"
             label="Start:"
@@ -65,12 +65,13 @@
             v-model="educationFrom"
             :sequence="['year', 'month']"
             picker-only
-            input-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white"
+            label-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white text-black"
+            input-class="$reset h-10 dark:bg-slate-800 text-base text-black dark:text-white"
           />
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
-        <div class="px-2 text-black dark:text-white" v-if="!checked">
+        <div class="px-2" v-if="!checked">
           <FormKit
             type="datepicker"
             label="Ende: *"
@@ -81,7 +82,8 @@
             :sequence="['year', 'month']"
             :disabled="checked"
             picker-only
-            input-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white"
+            label-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white text-black"
+            input-class="$reset h-10 dark:bg-slate-800 text-base text-black dark:text-white"
           />
         </div>
       </div>

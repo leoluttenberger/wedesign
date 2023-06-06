@@ -6,7 +6,7 @@
           <Draggable
             v-for="(item, index) in applications"
             :key="index"
-            class="p-2"
+            class="p-8"
           >
             <div class="flex">
               <button @click="openBottomCard(index)" class="grow px-2">
@@ -77,8 +77,13 @@
                   </div>
                 </div>
               </button>
-              <div class="flex-none p-4">
-                <SortIcon class="h-full"></SortIcon>
+              <div class="flex-none pt-6">
+                <div class="flex gap-2">
+                  <div class="text-black dark:text-white">
+                    {{ index + 1 }}
+                  </div>
+                  <SortIcon class="h-full"></SortIcon>
+                </div>
               </div>
             </div>
           </Draggable>
@@ -177,7 +182,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, watch, onMounted } from "vue";
+import { ref, watch } from "vue";
 import {
   slideDown,
   dragOptionActive,
@@ -238,8 +243,8 @@ const openBottomCard = (id) => {
 };
 
 const onDrop = (dropResult) => {
-  const newData = applyDrag(applications, dropResult); // educations call by reference
-  localStorage.setItem("applications", JSON.stringify(applications.value));
+  const newData = applyDrag(applications, dropResult);
+  localStorage.setItem("applications", JSON.stringify(newData.value));
 };
 const applyDrag = (arr, dragResult) => {
   const { removedIndex, addedIndex, payload } = dragResult;
@@ -253,9 +258,5 @@ const applyDrag = (arr, dragResult) => {
     arr.value.splice(addedIndex, 0, itemToAdd);
   }
   return arr;
-};
-const closeModal = () => {
-  slideDown.value = true;
-  slideDown.value = false;
 };
 </script>

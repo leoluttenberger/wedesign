@@ -350,7 +350,7 @@ const openBottomCard = (id) => {
 
 const onDrop = (dropResult) => {
   const newData = applyDrag(appointments, dropResult);
-  localStorage.setItem("appointments", JSON.stringify(appointments.value));
+  localStorage.setItem("appointments", JSON.stringify(newData.value));
 };
 const applyDrag = (arr, dragResult) => {
   const { removedIndex, addedIndex, payload } = dragResult;

@@ -2,14 +2,13 @@
   <div class="py-4">
     <div class="flex grid place-items-center">
       <AvatarInput
-        class="outline:none rounded-full min-w-24 w-1/2 md:w-60 shadow-lg border-[5px] border-white"
+        class="outline:none rounded-full min-w-24 w-1/2 md:w-60 shadow-lg border-white"
         v-model="form.avatar"
         :default-src="image"
-        v-show="valueAvatarCropShow"
+        v-if="valueAvatarCropShow"
       />
-      <button
-        class="outline:none rounded-full min-w-24 w-1/2 md:w-60 shadow-lg border-[5px] border-white"
-        @click="showEditImage()"
+      <div
+        class="outline:none rounded-full min-w-24 w-1/2 md:w-60 shadow-lg border-white"
       >
         <img
           class="rounded-full"
@@ -17,7 +16,15 @@
           :default-src="image"
           v-show="valueAvatarShow"
         />
-      </button>
+      </div>
+      <div class="pt-2">
+        <button
+          class="bg-wd-green hover:bg-transparent-green shadow p-2 text-white font-Montserrat font-bold rounded-md"
+          @click="showEditImage()"
+        >
+          {{ imageEditText }}
+        </button>
+      </div>
 
       <CropModal :show="showModal">
         <div class="grid grid-cols-3 gap-8 p-2 place-items-center justify-end">
@@ -83,6 +90,8 @@ valueAvatarCropShow.value = false;
 valueAvatarShow.value = true;
 
 const bottomCardOpen = ref(false);
+const imageEdit = ref(true);
+const imageEditText = ref("Profilbild ändern");
 
 const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
@@ -218,7 +227,16 @@ const openModal = () => {
   showModal.value = true;
 };
 const showEditImage = () => {
-  valueAvatarCropShow.value = true;
-  valueAvatarShow.value = false;
+  if (imageEdit.value == true) {
+    imageEditText.value = "Profilbild speichern";
+    imageEdit.value = false;
+    valueAvatarCropShow.value = true;
+    valueAvatarShow.value = false;
+  } else {
+    imageEditText.value = "Profilbild ändern";
+    imageEdit.value = true;
+    valueAvatarCropShow.value = false;
+    valueAvatarShow.value = true;
+  }
 };
 </script>

@@ -23,8 +23,8 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref, watch } from "vue";
-import { fileObject, imageObject, imagePreviewObject } from "@/store/store.js";
+import { defineProps, ref } from "vue";
+import { fileObject, imageObject } from "@/store/store.js";
 import IconProfile from "@/components/MenuModals/IconProfile.vue";
 
 const props = defineProps({
@@ -35,11 +35,6 @@ let imageAvatar = ref(props.defaultSrc);
 
 const file = ref(null);
 const isFileSelected = ref(false);
-
-watch(imagePreviewObject, () => {
-  imageAvatar.value = imagePreviewObject.value;
-  console.log("Updated preview avatar");
-});
 
 const browse = () => {
   console.log("browse");
@@ -58,6 +53,7 @@ const change = (e) => {
     isFileSelected.value = true;
     reader.onload = (e) => {
       console.log("file read");
+      imageObject.value = null;
       imageObject.value = e.target.result as string;
     };
   }

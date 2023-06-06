@@ -12,7 +12,6 @@
             v-model="titleBefore"
             label="Titel(vor N.):"
             type="text"
-            placeholder="Dr."
             :disabled="true"
           />
         </div>
@@ -24,7 +23,6 @@
             v-model="titleAfter"
             label="Titel(nach N.):"
             type="text"
-            placeholder="BA"
             :disabled="true"
           />
         </div>
@@ -37,7 +35,6 @@
             v-model="firstName"
             label="Vorname: *"
             type="text"
-            placeholder="Max"
             validation="required|length:3"
             :disabled="true"
           />
@@ -49,7 +46,6 @@
             v-model="secondName"
             label="Nachname: *"
             type="text"
-            placeholder="Mustermann"
             validation="required|length:3"
             :disabled="true"
           />
@@ -73,7 +69,6 @@
             v-model="birthArea"
             label="Geburtsort:"
             type="text"
-            placeholder="Stadt"
             validation="required|length:3"
             :disabled="true"
           />
@@ -124,7 +119,6 @@
             v-model="streetName"
             label="Straße:"
             type="text"
-            placeholder="Musterstraße"
             :disabled="true"
           />
         </div>
@@ -135,7 +129,6 @@
             v-model="streetNumber"
             label="Nr:"
             type="text"
-            placeholder="1/1"
             :disabled="true"
           />
         </div>
@@ -148,20 +141,13 @@
             v-model="districtNumber"
             label="PLZ:"
             type="text"
-            placeholder="1010"
             :disabled="true"
           />
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
         <div class="px-10">
-          <FormKit
-            v-model="city"
-            label="Ort:"
-            type="text"
-            placeholder="Musterstadt"
-            :disabled="true"
-          />
+          <FormKit v-model="city" label="Ort:" type="text" :disabled="true" />
         </div>
       </div>
     </div>
@@ -181,7 +167,6 @@
             v-model="phone"
             label="Telefon:"
             type="text"
-            placeholder="xxxx-xxx-xxxx"
             :disabled="true"
           />
         </div>
@@ -195,7 +180,6 @@
             name="Email"
             validation="length:5|*email"
             validation-visibility="live"
-            placeholder="Email"
             :disabled="true"
           />
         </div>
@@ -215,7 +199,6 @@
         v-model="hobbies"
         label="Hobbies:"
         type="text"
-        placeholder="laufen, schwimmen, tanzen"
         :disabled="true"
       />
     </div>

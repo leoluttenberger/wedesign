@@ -365,10 +365,10 @@ const salutationEnding = ref(null);
 const showBottomSlide = ref(false);
 let buttonIndex = 0;
 let isEdited = false;
-const indexOfMVid = ref(0);
+const indexOfMVid = ref(null);
 
 const MAX_MV_PREVIEW = 5;
-const lastIndex = ref(0);
+const lastIndex = ref(null);
 
 let textLabel = "";
 const showModal = ref(false);
@@ -376,6 +376,7 @@ const showModal = ref(false);
 onMounted(() => {
   showModal.value = false;
   indexOfMVid.value = props.currentMotvationMVIndex;
+  console.log("IndexMV:", indexOfMVid.value);
   updateForm();
   sideBackBack.value = false;
   sideBack.value = true;
@@ -401,18 +402,23 @@ const saveToMVForm = () => {
   const motivations = ref(
     JSON.parse(localStorage.getItem("motivations")) || []
   );
-  motivations.value[indexOfMVid.value][0].subject = subject.value;
-  motivations.value[indexOfMVid.value][0].salutationBeginning =
-    salutationBeginning.value;
-  motivations.value[indexOfMVid.value][0].textBegining = textBegining.value;
-  motivations.value[indexOfMVid.value][0].textExperience = textExperience.value;
-  motivations.value[indexOfMVid.value][0].textContribution =
-    textContribution.value;
-  motivations.value[indexOfMVid.value][0].textCompetence = textCompetence.value;
-  motivations.value[indexOfMVid.value][0].ending = ending.value;
-  motivations.value[indexOfMVid.value][0].salutationEnding =
-    salutationEnding.value;
-  localStorage.setItem("motivations", JSON.stringify(motivations.value));
+  if (motivations.value.length > 0) {
+    console.log("IndexMV:", indexOfMVid.value);
+    motivations.value[indexOfMVid.value][0].subject = subject.value;
+    motivations.value[indexOfMVid.value][0].salutationBeginning =
+      salutationBeginning.value;
+    motivations.value[indexOfMVid.value][0].textBegining = textBegining.value;
+    motivations.value[indexOfMVid.value][0].textExperience =
+      textExperience.value;
+    motivations.value[indexOfMVid.value][0].textContribution =
+      textContribution.value;
+    motivations.value[indexOfMVid.value][0].textCompetence =
+      textCompetence.value;
+    motivations.value[indexOfMVid.value][0].ending = ending.value;
+    motivations.value[indexOfMVid.value][0].salutationEnding =
+      salutationEnding.value;
+    localStorage.setItem("motivations", JSON.stringify(motivations.value));
+  }
 };
 
 const createNewMotivation = () => {
@@ -429,7 +435,8 @@ const createNewMotivation = () => {
     indexOfMVid.value = 0;
   }
 
-  const index = indexOfMVid.value + 1;
+  const index = Number(indexOfMVid.value) + 1;
+  console.log("index:", index);
   const motivation = [
     {
       indexMV: index,
@@ -547,7 +554,7 @@ const closeModal = () => {
 };
 
 const saveModal = () => {
-  if (indexOfMVid.value == 0) {
+  if (indexOfMVid.value == null) {
     console.log("create mv");
     createNewMotivation();
   } else {

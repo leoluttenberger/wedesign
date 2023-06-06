@@ -157,7 +157,15 @@
               <FormKit
                 type="text"
                 label="Motivationsschreiben:"
-                :value="__mvText"
+                v-if="__mv == 0"
+                value="fehlt"
+                disabled="true"
+              />
+              <FormKit
+                type="text"
+                label="Motivationsschreiben:"
+                v-if="__mv != 0"
+                value="angehängt"
                 disabled="true"
               />
               <div class="pt-7">
@@ -285,9 +293,7 @@ const start = ref(null);
 const mvIndex = ref(null);
 
 const showModal = ref(false);
-
-let __mv = null;
-let __mvText = null;
+const __mv = ref(null);
 const editIndex = ref(0);
 
 const props = defineProps({
@@ -310,7 +316,8 @@ watch(sideBack, () => {
     const applications = ref(
       JSON.parse(localStorage.getItem("applications")) || []
     );
-    __mv = applications.value[props.editIndex][0].mv;
+    __mv.value = applications.value[props.editIndex][0].mv;
+    checkMVTextAndMVIndex();
   }
 });
 
@@ -319,9 +326,6 @@ onMounted(() => {
   editIndex.value = props.editIndex;
   const applications = ref(
     JSON.parse(localStorage.getItem("applications")) || []
-  );
-  const motivations = ref(
-    JSON.parse(localStorage.getItem("motivations")) || []
   );
 
   company.value = applications.value[props.editIndex][0].company;
@@ -335,41 +339,28 @@ onMounted(() => {
   state.value = applications.value[props.editIndex][0].state;
   note.value = applications.value[props.editIndex][0].note;
   start.value = applications.value[props.editIndex][0].start;
-  __mv = applications.value[props.editIndex][0].mv;
-  if (__mv == 0) {
-    __mvText = "fehlt";
-    mvIndex.value = 0;
-  } else {
-    __mvText = "angehaengt";
-    mvIndex.value = 0;
-
-    for (let i = 0; i < motivations.value.length; i++) {
-      if (motivations.value[i][0].indexMV == __mv) {
-        mvIndex.value = i;
-        break;
-      }
-    }
-  }
-
+  __mv.value = applications.value[props.editIndex][0].mv;
+  checkMVTextAndMVIndex();
   sideBack.value = false;
   slideDown.value = false;
 });
 
-const previewApplication = () => {
-  saveToLocalStorage();
+const checkMVTextAndMVIndex = () => {
   const motivations = ref(
     JSON.parse(localStorage.getItem("motivations")) || []
   );
-  if (__mv == null) {
-    __mvText = "fehlt";
-  } else {
-    __mvText = "angehaengt";
+  if (__mv.value != null) {
+    console.log("mv", __mv.value);
     for (let i = 0; i < motivations.value.length; i++) {
-      if (motivations.value[i][0].indexMV == __mv) {
+      if (motivations.value[i][0].indexMV == __mv.value) {
         mvIndex.value = i;
       }
     }
   }
+};
+const previewApplication = () => {
+  saveToLocalStorage();
+  checkMVTextAndMVIndex();
   applicationPreviewOpen.value = true;
   sideBack.value = true;
 };

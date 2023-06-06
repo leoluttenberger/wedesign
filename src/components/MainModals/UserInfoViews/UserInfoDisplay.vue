@@ -2,13 +2,13 @@
   <div class="overflow-auto overflow-scroll w-screen h-screen">
     <section class="z-0 py-20">
       <ProfileView></ProfileView>
-      <div class="flex grid place-items-center">
+      <div class="flex grid place-items-end px-6">
         <button
           @click="openBottomCard"
           class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
         >
           <EditIcon
-            class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
+            class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
           ></EditIcon>
         </button>
       </div>

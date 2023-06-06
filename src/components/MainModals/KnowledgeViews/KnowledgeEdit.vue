@@ -69,7 +69,7 @@
       @click="saveToLocalStorage()"
       :disabled="buttonDisabled"
     >
-      Kenntnisse hinzufügen
+      Kenntnisse speichern
     </button>
   </div>
 </template>

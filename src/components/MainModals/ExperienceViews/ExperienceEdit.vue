@@ -61,7 +61,7 @@
       @click="saveToLocalStorage()"
       :disabled="buttonDisabled"
     >
-      Erfahrung hinzufügen
+      Erfahrung speichern
     </button>
   </div>
 </template>

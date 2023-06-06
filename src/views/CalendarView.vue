@@ -20,7 +20,8 @@
             class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold w-full px-3 py-1 rounded-md"
             @click="setMonth"
           >
-            Alle Termine im Monat
+            <div v-if="toggleMonth == true">Alle Termine im Monat</div>
+            <div v-if="toggleMonth == false">Zuletzt ausgewählter Tag</div>
           </button>
         </div>
       </template></VCalendar
@@ -76,6 +77,8 @@ const calendar = ref(null);
 const locale = "de-AT";
 const renderComponent = ref(true);
 const pickedDate = ref(null);
+let lastPickedDate = null;
+const toggleMonth = ref(true);
 const appointments = ref(
   JSON.parse(localStorage.getItem("appointments")) || []
 );
@@ -368,17 +371,33 @@ let attributes = ref([
 ]);
 
 const dayClicked = (date) => {
+  //console.log("date:", date);
+  renderComponent.value = false;
+  pickedDate.value = null;
+  selectedDay.value = null;
+  toggleMonth.value = true;
+  isMonthEvent.value = false;
+
   pickedDate.value = date;
   selectedDay.value = date.day;
-  isMonthEvent.value = false;
-  renderComponent.value = false;
+  lastPickedDate = pickedDate.value;
+
   renderComponent.value = true;
 };
 
 const setMonth = () => {
-  isMonthEvent.value = false;
-  pickedDate.value = null;
-  isMonthEvent.value = true;
+  if (toggleMonth.value == true) {
+    pickedDate.value = null;
+    if (lastPickedDate != null) {
+      toggleMonth.value = false;
+    }
+    isMonthEvent.value = false;
+    isMonthEvent.value = true;
+  } else {
+    if (lastPickedDate != null) {
+      dayClicked(lastPickedDate);
+    }
+  }
 };
 
 const onPageChanged = (page) => {

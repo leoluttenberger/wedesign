@@ -1,12 +1,12 @@
 <template>
   <div>
     <section class="z-0">
-      <div class="grid gap-2" v-if="renderComponent3">
+      <div class="grid" v-if="renderComponent3">
         <Container @drop="onDrop" v-if="dragActive && !isEmpty">
           <Draggable
             v-for="(item, index) in experiences"
             :key="index"
-            class="p-2"
+            class="p-8"
           >
             <div class="flex">
               <button @click="openBottomCard(index)" class="w-full px-2">
@@ -30,8 +30,13 @@
                   </div>
                 </div>
               </button>
-              <div class="flex-none p-4">
-                <SortIcon class="h-full"></SortIcon>
+              <div class="flex-none pt-6">
+                <div class="flex gap-2">
+                  <div class="text-black dark:text-white">
+                    {{ index + 1 }}
+                  </div>
+                  <SortIcon class="h-full"></SortIcon>
+                </div>
               </div>
             </div>
           </Draggable>
@@ -235,11 +240,15 @@ const openBottomCard = (id) => {
 };
 
 const onDrop = (dropResult) => {
-  const newData = applyDrag(experiences, dropResult); // experiences call by reference
-  localStorage.setItem("experiences", JSON.stringify(experiences.value));
+  console.log("dropresult: ", dropResult);
+  const newData = applyDrag(experiences, dropResult);
+  localStorage.setItem("experiences", JSON.stringify(newData.value));
 };
 const applyDrag = (arr, dragResult) => {
   const { removedIndex, addedIndex, payload } = dragResult;
+  console.log("removedIndex: ", removedIndex);
+  console.log("addedIndex: ", addedIndex);
+  console.log("payload: ", payload);
 
   if (removedIndex === null && addedIndex === null) return arr;
   let itemToAdd = payload;

@@ -6,7 +6,7 @@
           <Draggable
             v-for="(item, index) in educations"
             :key="index"
-            class="p-2"
+            class="p-8"
           >
             <div class="flex">
               <button @click="openBottomCard(index)" class="grow px-2">
@@ -30,8 +30,13 @@
                   </div>
                 </div>
               </button>
-              <div class="flex-none p-4">
-                <SortIcon class="h-full"></SortIcon>
+              <div class="flex-none pt-6">
+                <div class="flex gap-2">
+                  <div class="text-black dark:text-white">
+                    {{ index + 1 }}
+                  </div>
+                  <SortIcon class="h-full"></SortIcon>
+                </div>
               </div>
             </div>
           </Draggable>
@@ -231,8 +236,8 @@ const openBottomCard = (id) => {
 };
 
 const onDrop = (dropResult) => {
-  const newData = applyDrag(educations, dropResult); // educations call by reference
-  localStorage.setItem("educations", JSON.stringify(educations.value));
+  const newData = applyDrag(educations, dropResult);
+  localStorage.setItem("educations", JSON.stringify(newData.value));
 };
 const applyDrag = (arr, dragResult) => {
   const { removedIndex, addedIndex, payload } = dragResult;

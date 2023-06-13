@@ -16,6 +16,7 @@
     "@capacitor/ios": "^4.6.1",
     "@capacitor/share": "^4.1.1",
     "@capacitor/splash-screen": "^4.1.2",
+    "@dafcoe/vue-collapsible-panel": "^0.2.0",
     "@formkit/pro": "^0.112.5",
     "@formkit/vue": "^0.17.2",
     "@mdi/font": "5.9.55",

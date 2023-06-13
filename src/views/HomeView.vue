@@ -183,10 +183,17 @@
       </button>
     </div>
   </Container>
-  <div v-if="bottomCardOpen" class="fixed z-10 inset-0 bg-black bg-opacity-10">
-    <BottomCard v-model:open="bottomCardOpen"
-      ><TripsTricks></TripsTricks>
-    </BottomCard>
+
+  <div>
+    <MVEditModal :show="bottomCardOpen">
+      <div class="flex">
+        <div
+          class="rounded-lg w-screen h-screen overflow-hidden shadow-xl dark:bg-slate-700 bg-white"
+        >
+          <component :is="TripsTricks" />
+        </div>
+      </div>
+    </MVEditModal>
   </div>
 </template>
 <script setup lang="ts">
@@ -204,7 +211,8 @@ import {
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 import DocumentsIcon from "@/assets/icons/DocumentsIcon.vue";
 import NotificationsIcon from "@/assets/icons/NotificationsIcon.vue";
-import TripsTricks from "@/components/MainModals/TipsTricksViews/tipsTricksView.vue";
+import TripsTricks from "./TipsTricksView.vue";
+import MVEditModal from "@/components/MenuModals/MVEditModal.vue";
 const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")) || []);
 const applications = ref(
   JSON.parse(localStorage.getItem("applications")) || []

@@ -17,6 +17,8 @@
         ></ShareIcon>
       </button>
     </div>
+    <ConfettiExplosion v-if="visible" />
+
     <div class="grid place-items-center">
       <div role="status" v-if="!pdf">
         <svg
@@ -76,7 +78,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { nextTick, ref, onMounted, onBeforeUnmount } from "vue";
 import { useElementSize } from "@vueuse/core";
 import { slideDownUserInfo } from "@/store/store.js";
 import { Share } from "@capacitor/share";
@@ -96,6 +98,8 @@ import { convertXmlToHtml } from "@/helpers/convertXmlToHtml";
 
 import { Filesystem, Directory } from "@capacitor/filesystem";
 import { fileToBase64 } from "@/helpers/fileToBase64";
+import ConfettiExplosion from "vue-confetti-explosion";
+
 import moment from "moment";
 const profileImg = JSON.parse(localStorage.getItem("profileImg"));
 const pdf = ref(null);
@@ -106,6 +110,7 @@ const docxContent = ref(null);
 const el = ref(null);
 const { width, height } = useElementSize(el);
 const zoomFactor = ref(1);
+const visible = ref(false);
 
 onMounted(async () => {
   downloadDocx.value = await createFile();
@@ -152,6 +157,9 @@ const saveAndDownLoadDocs = async () => {
   const fileNameDoc = "lebenslauf-" + dateString + ".docx";
   const fileNamePDF = "lebenslauf-" + dateString + ".pdf";
 
+  visible.value = false;
+  await nextTick();
+  visible.value = true;
   //const base64StringPdf = await fileToBase64(pdf.value.output("blob"));
   const base64StringDoc = await fileToBase64(downloadDocx.value);
   saveAs(pdf.value.output("blob"), fileNamePDF);

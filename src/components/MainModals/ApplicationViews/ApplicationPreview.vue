@@ -17,6 +17,8 @@
         ></ShareIcon>
       </button>
     </div>
+    <ConfettiExplosion v-if="visible" />
+
     <div class="grid place-items-center">
       <div role="status" v-if="!pdf">
         <svg
@@ -83,7 +85,14 @@
   </MVEditModal>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, defineProps, onBeforeUnmount, watch } from "vue";
+import {
+  nextTick,
+  ref,
+  onMounted,
+  defineProps,
+  onBeforeUnmount,
+  watch,
+} from "vue";
 import { useElementSize } from "@vueuse/core";
 import { sideBack, sideBackBack } from "@/store/store.js";
 import { Share } from "@capacitor/share";
@@ -104,7 +113,7 @@ import { convertXmlToHtml } from "@/helpers/convertXmlToHtml";
 import { Filesystem, Directory } from "@capacitor/filesystem";
 import { fileToBase64 } from "@/helpers/fileToBase64";
 import ApplicationCheck from "@/components/MainModals/ApplicationViews/ApplicationCheck.vue";
-
+import ConfettiExplosion from "vue-confetti-explosion";
 import moment from "moment";
 
 const pdf = ref(null);
@@ -117,6 +126,7 @@ const { width, height } = useElementSize(el);
 const zoomFactor = ref(1);
 const imgData = ref("");
 const bottomCardOpen = ref(false);
+const visible = ref(false);
 const props = defineProps({
   currentApplIndex: {
     type: Number,
@@ -149,7 +159,6 @@ onBeforeUnmount(() => {
 });
 const closeModal = () => {
   sideBack.value = false;
-  console.log("close modal");
 };
 
 const createFile = async () => {
@@ -195,6 +204,9 @@ const mailImage = () => {
 const saveAndDownLoadDocs = async () => {
   const applications = JSON.parse(localStorage.getItem("applications"));
   const dateString = moment().format("DD_MM_YYYY");
+  visible.value = false;
+  await nextTick();
+  visible.value = true;
 
   const fileNameDoc =
     "motivationsschreiben-" +

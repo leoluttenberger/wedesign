@@ -82,7 +82,7 @@
         </filter>
       </defs>
     </svg>
-    <text x="7" y="30" font-size="6" stroke-width="0.3" class="font-Montserrat">
+    <text x="6" y="30" font-size="6" stroke-width="0.3" class="font-Montserrat">
       Lebenslauf
     </text>
   </svg>

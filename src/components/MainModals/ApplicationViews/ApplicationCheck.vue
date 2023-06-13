@@ -11,6 +11,7 @@
         ></CloseIcon>
       </button>
     </div>
+
     <div class="absolute flex flex-col items-center justify-center">
       <div
         class="flex flex-row items-center font-light dark:text-white text-black cursor-pointer select-none text-4xl p-4"
@@ -39,6 +40,7 @@ const allchecked = ref(false);
 const checklist = ref([]);
 const options = ref([]);
 const userName = ref("");
+
 const getCheckList = () => {
   checklist.value = [0, 0, 0];
 };
@@ -61,7 +63,7 @@ onMounted(() => {
   getCheckOptions();
   getCheckList();
 });
-const gotoPreview = () => {
+const gotoPreview = async () => {
   for (let i = 0; i < checklist.value.length; i++) {
     if (checklist.value[i] == 0) {
       allchecked.value = false;
@@ -76,6 +78,5 @@ const gotoPreview = () => {
 };
 const closeModal = () => {
   sideBack.value = false;
-  console.log("close modal");
 };
 </script>

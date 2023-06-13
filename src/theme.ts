@@ -1,12 +1,13 @@
 const textClassification = {
   label:
-    "inline-block align-middle text-black dark:text-white font-Montserrat md:text-lg text-xs placeholder-gray dark:placeholder-gray",
+    "inline-block align-middle text-black dark:text-white font-Montserrat md:text-lg text-xs placeholder-gray dark:placeholder-gray ",
   inner: `
     border-none
     border-transparent
     formkit-invalid:border-red-400
     overflow-hidden
     focus-within:border-wd-green
+    bg-white dark:bg-slate-800
   `,
   input:
     "h-10 outline-0 font-Montserrat md:text-lg text-xs font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-gray dark:placeholder-gray",
@@ -71,7 +72,7 @@ export default {
   textarea: {
     ...textClassification,
     input:
-      "h-20  outline-0 outline-none font-Montserrat md:text-lg text-base font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-gray dark:placeholder-gray",
+      "h-20 outline-0 outline-none font-Montserrat md:text-lg text-base font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-gray dark:placeholder-gray",
   },
   time: textClassification,
   url: textClassification,

@@ -2,13 +2,17 @@
   <section
     class="fixed inset-x-0 z-10 shadow dark:text-white text-xl font-Montserrat bg-white dark:bg-slate-800 shadow"
   >
-    <div class="flex justify-center p-2 font-bold">Home</div>
-    <div class="flex justify-center text-md">
+    <div class="flex justify-center p-2 font-bold">
       <span>Hi &#128075; {{ firstName }}</span>
     </div>
   </section>
   <Container>
-    <div class="flex pt-28 dark:text-white text-black text-l px-4">
+    <div class="flex justify-center">
+      <img class="absolute w-20 py-14" src="../assets/images/logo.png" />
+    </div>
+  </Container>
+  <Container>
+    <div class="flex pt-36 dark:text-white text-black text-l px-4">
       <DocumentsIcon
         class="dark:stroke-wd-white stroke-black stroke-1 w-8 h-8"
       ></DocumentsIcon>
@@ -23,7 +27,7 @@
 
   <Container>
     <div
-      class="relative w-full flex gap-4 snap-x snap-mandatory overflow-x-auto"
+      class="relative w-full flex gap-4 snap-x snap-mandatory overflow-x-auto py-1"
     >
       <div
         v-for="(item, index) in applications"
@@ -105,7 +109,7 @@
   </Container>
   <Container>
     <div
-      class="relative w-full flex gap-4 snap-x snap-mandatory overflow-x-auto px-4"
+      class="relative w-full flex gap-4 snap-x snap-mandatory overflow-x-auto py-1"
     >
       <div
         v-for="(item, index) in appointments"
@@ -195,7 +199,7 @@
               kannst?
             </div>
           </div>
-          <div class="flex justify-centerpx-4 py-8">
+          <div class="flex justify-center px-4 py-8">
             <div class="pt-2 px-2">
               <span class="relative flex h-2 w-2">
                 <span
@@ -212,7 +216,7 @@
               einzelne Jobbeschreibungen und Gehälter herausfinden kannst?
             </div>
           </div>
-          <div class="flex justify-centerpx-4 py-8">
+          <div class="flex justify-center px-4 py-8">
             <div class="pt-2 px-2">
               <span class="relative flex h-2 w-2">
                 <span
@@ -229,7 +233,7 @@
               kannst, auch, ohne dass eine Bewerbung ausgeschrieben ist?
             </div>
           </div>
-          <div class="flex px-4 py-8">
+          <div class="flex justify-center px-4 py-8">
             <div class="pt-2 px-2">
               <span class="relative flex h-2 w-2">
                 <span

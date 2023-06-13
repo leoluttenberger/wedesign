@@ -18,136 +18,138 @@
       </button>
     </div>
 
-    <p
-      class="text-black p-2 dark:text-white font-Montserrat text-base font-bold px-4"
-    >
-      Einstieg
-    </p>
-    <div class="justify-evenly flex">
-      <div class="grid grid-cols-2 gap-1">
-        <div class="col-span-2 md:col-span-1">
-          <button type="button" @click="subjectEdit()" class="py-2">
-            <div class="flex gap-4">
-              <FormKit v-model="subject" label="Betreff:" type="textarea" />
-              <EditIcon
-                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-              ></EditIcon>
-            </div>
-          </button>
-        </div>
+    <div class="space-y-1 px-2 py-4 bg-wd-background dark:bg-slate-700">
+      <p
+        class="text-black p-2 dark:text-white font-Montserrat text-base font-bold px-4"
+      >
+        Einstieg
+      </p>
+      <div class="justify-evenly flex">
+        <div class="grid grid-cols-2 gap-1">
+          <div class="col-span-2 md:col-span-1">
+            <button type="button" @click="subjectEdit()" class="py-2">
+              <div class="flex gap-4">
+                <FormKit v-model="subject" label="Betreff:" type="textarea" />
+                <EditIcon
+                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                ></EditIcon>
+              </div>
+            </button>
+          </div>
 
-        <div class="col-span-2 md:col-span-1">
-          <button type="button" @click="salutationBeginningEdit()" class="">
-            <div class="flex gap-4">
-              <FormKit
-                v-model="salutationBeginning"
-                type="textarea"
-                label="Anrede:"
-              />
-              <EditIcon
-                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-              ></EditIcon>
-            </div>
-          </button>
+          <div class="col-span-2 md:col-span-1">
+            <button type="button" @click="salutationBeginningEdit()" class="">
+              <div class="flex gap-4">
+                <FormKit
+                  v-model="salutationBeginning"
+                  type="textarea"
+                  label="Anrede:"
+                />
+                <EditIcon
+                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                ></EditIcon>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-    <p
-      class="text-black p-2 dark:text-white font-Montserrat text-base font-bold px-4"
-    >
-      Hauptteil:
-    </p>
-    <div class="justify-evenly flex">
-      <div class="grid grid-cols-2 gap-1 px-4">
-        <div class="col-span-2 md:col-span-1">
-          <button type="button" @click="textBeginingEdit()">
-            <div class="flex gap-4">
-              <FormKit
-                v-model="textBegining"
-                type="textarea"
-                label="Einleitung:"
-              />
-              <EditIcon
-                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-              ></EditIcon>
-            </div>
-          </button>
-        </div>
+      <p
+        class="text-black p-2 dark:text-white font-Montserrat text-base font-bold px-4"
+      >
+        Hauptteil:
+      </p>
+      <div class="justify-evenly flex">
+        <div class="grid grid-cols-2 gap-1 px-4">
+          <div class="col-span-2 md:col-span-1">
+            <button type="button" @click="textBeginingEdit()">
+              <div class="flex gap-4">
+                <FormKit
+                  v-model="textBegining"
+                  type="textarea"
+                  label="Einleitung:"
+                />
+                <EditIcon
+                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                ></EditIcon>
+              </div>
+            </button>
+          </div>
 
-        <div class="col-span-2 md:col-span-1">
-          <button type="button" @click="textExperienceEdit()" class="">
-            <div class="flex gap-4">
-              <FormKit
-                v-model="textExperience"
-                type="textarea"
-                label="Werdegang:"
-              />
-              <EditIcon
-                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-              ></EditIcon>
-            </div>
-          </button>
-        </div>
-        <div class="col-span-2 md:col-span-1">
-          <button type="button" @click="textCompetenceEdit()" class="">
-            <div class="flex gap-4">
-              <FormKit
-                v-model="textCompetence"
-                type="textarea"
-                label="Kompetenzen:"
-              />
-              <EditIcon
-                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-              ></EditIcon>
-            </div>
-          </button>
-        </div>
-        <div class="col-span-2 md:col-span-1">
-          <button type="button" @click="textContributionEdit()" class="">
-            <div class="flex gap-4">
-              <FormKit
-                v-model="textContribution"
-                type="textarea"
-                label="Beitrag:"
-              />
-              <EditIcon
-                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-              ></EditIcon>
-            </div>
-          </button>
+          <div class="col-span-2 md:col-span-1">
+            <button type="button" @click="textExperienceEdit()" class="">
+              <div class="flex gap-4">
+                <FormKit
+                  v-model="textExperience"
+                  type="textarea"
+                  label="Werdegang:"
+                />
+                <EditIcon
+                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                ></EditIcon>
+              </div>
+            </button>
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <button type="button" @click="textCompetenceEdit()" class="">
+              <div class="flex gap-4">
+                <FormKit
+                  v-model="textCompetence"
+                  type="textarea"
+                  label="Kompetenzen:"
+                />
+                <EditIcon
+                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                ></EditIcon>
+              </div>
+            </button>
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <button type="button" @click="textContributionEdit()" class="">
+              <div class="flex gap-4">
+                <FormKit
+                  v-model="textContribution"
+                  type="textarea"
+                  label="Beitrag:"
+                />
+                <EditIcon
+                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                ></EditIcon>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-    <p
-      class="text-black p-2 dark:text-white font-Montserrat text-base font-bold px-4"
-    >
-      Schlussteil:
-    </p>
-    <div class="justify-evenly flex">
-      <div class="grid grid-cols-2 gap-1 px-4">
-        <div class="col-span-2 md:col-span-1">
-          <button type="button" @click="endingEdit()" class="">
-            <div class="flex gap-4">
-              <FormKit v-model="ending" label="Abschluss:" type="textarea" />
-              <EditIcon
-                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-              ></EditIcon>
-            </div>
-          </button>
-        </div>
-        <div class="col-span-2 md:col-span-1">
-          <button type="button" @click="salutationEndingEdit()" class="">
-            <div class="flex gap-4">
-              <FormKit
-                v-model="salutationEnding"
-                type="textarea"
-                label="Abschied:"
-              />
-              <EditIcon
-                class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-              ></EditIcon>
-            </div>
-          </button>
+      <p
+        class="text-black p-2 dark:text-white font-Montserrat text-base font-bold px-4"
+      >
+        Schlussteil:
+      </p>
+      <div class="justify-evenly flex">
+        <div class="grid grid-cols-2 gap-1 px-4">
+          <div class="col-span-2 md:col-span-1">
+            <button type="button" @click="endingEdit()" class="">
+              <div class="flex gap-4">
+                <FormKit v-model="ending" label="Abschluss:" type="textarea" />
+                <EditIcon
+                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                ></EditIcon>
+              </div>
+            </button>
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <button type="button" @click="salutationEndingEdit()" class="">
+              <div class="flex gap-4">
+                <FormKit
+                  v-model="salutationEnding"
+                  type="textarea"
+                  label="Abschied:"
+                />
+                <EditIcon
+                  class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+                ></EditIcon>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
     </div>

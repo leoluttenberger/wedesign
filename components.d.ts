@@ -20,7 +20,6 @@ declare module '@vue/runtime-core' {
     CheckBox: typeof import('./src/components/MenuModals/CheckBox.vue')['default']
     CropModal: typeof import('./src/components/MenuModals/CropModal.vue')['default']
     CropperItem: typeof import('./src/components/MenuModals/CropperItem.vue')['default']
-    Defaul: typeof import('./src/components/MainModals/TipsTricksViews/defaul.vue')['default']
     EditTextModal: typeof import('./src/components/MenuModals/EditTextModal.vue')['default']
     EducationEdit: typeof import('./src/components/MainModals/EducationViews/EducationEdit.vue')['default']
     EducationForm: typeof import('./src/components/MainModals/EducationViews/EducationForm.vue')['default']

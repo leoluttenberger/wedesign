@@ -11,8 +11,6 @@ import { plugin, defaultConfig } from "@formkit/vue";
 import { generateClasses } from "@formkit/themes";
 import { de, en } from "@formkit/i18n";
 import { createProPlugin, inputs } from "@formkit/pro";
-import Vue3Tailwind from "vue3-tailwind";
-
 import { FORMKIT_PRO_ID } from "./env";
 //Create and configure App
 const app = createApp(App);
@@ -21,7 +19,6 @@ const pro = createProPlugin(FORMKIT_PRO_ID, inputs);
 // Formkit and tailwind css config
 app.use(
   plugin,
-  Vue3Tailwind,
   defaultConfig({
     config: {
       classes: generateClasses(theme),

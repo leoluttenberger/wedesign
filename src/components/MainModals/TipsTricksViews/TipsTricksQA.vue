@@ -1,6 +1,6 @@
 <template>
   <TwAccordion
-    class="bg-white rounded overflow-hidden"
+    class="bg-white dark:bg-slate-700 rounded overflow-hidden"
     :data="accordion"
     keep-alive
   >
@@ -10,7 +10,7 @@
       #[`header_${item.ref}`]="{ toggleAccordion, ref, isActive }"
     >
       <div
-        class="text-black bg-gray-300 dark:text-white dark:bg-slate-700 p-4 flex justify-between items-center cursor-pointer"
+        class="text-black bg-gray-300 dark:text-white dark:bg-slate-600 p-4 flex justify-between items-center cursor-pointer"
         @click="toggleAccordion(ref)"
       >
         <div>{{ item.header }}</div>
@@ -152,13 +152,15 @@ watch(isActiveCheck, (newValue, oldValue) => {
 </script>
 
 <style scoped>
-.nested-enter-active,
+.nested-enter-active {
+  transition: all 0.5s ease-in-out;
+}
 .nested-leave-active {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 /* delay leave of parent element */
 .nested-leave-active {
-  transition-delay: 0.25s;
+  transition-delay: 0.5s;
 }
 
 .nested-enter-from,

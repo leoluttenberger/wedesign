@@ -1,22 +1,17 @@
 <template>
-  <section
-    class="fixed inset-x-0 z-10 top-20 shadow dark:text-white text-xl font-Montserrat bg-white dark:bg-slate-800 rounded-3xl border-t-[5px] border-t-gray"
-  >
-    <button @click="closeBottomCard()">
-      <div class="flex">
-        <h1
-          class="non-flex pt-8 px-4 text-black dark:text-white font-Montserrat text-2xl md:text-2xl font-bold"
-        >
-          Tips & Tricks
-        </h1>
-        <div class="grow ..."></div>
-        <div class="p-4 non-flex">
-          <CloseIcon
-            class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
-          ></CloseIcon>
-        </div>
-      </div>
-    </button>
+  <div class="overflow-auto overflow-scroll w-screen h-screen">
+    <div class="grid grid-cols-3 gap-20 p-2 place-items-center">
+      <button type="button" @click="closeBottomCard" class="p-4">
+        <BackIcon
+          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
+        ></BackIcon>
+      </button>
+      <p
+        class="text-black px-2 dark:text-white font-Montserrat text-xl p-4 font-bold"
+      >
+        Tipps & Tricks
+      </p>
+    </div>
     <div class="flex justify-evenly">
       <button
         id="button1"
@@ -28,7 +23,7 @@
         "
         class="outline:none text-base border-b-[3px] font-Montserrat dark:text-white font-bold"
       >
-        Kategorie1
+        Q & A
       </button>
       <button
         id="button2"
@@ -40,7 +35,7 @@
         "
         class="outline:none text-base border-b-[3px] font-Montserrat dark:text-white font-bold"
       >
-        Kategorie2
+        Stellensuche
       </button>
       <button
         id="button3"
@@ -52,7 +47,7 @@
         "
         class="outline:none text-base border-b-[3px] font-Montserrat dark:text-white font-bold"
       >
-        Kategorie3
+        Fotos und Info
       </button>
     </div>
 
@@ -61,20 +56,22 @@
       @Swiper="setSwiperRef"
       @slideChange="onSlideChange"
     >
-      <SwiperSlide> <Category></Category> </SwiperSlide>
-      <SwiperSlide> <Category></Category></SwiperSlide>
+      <SwiperSlide> <QA></QA> </SwiperSlide>
+      <SwiperSlide> <Links></Links></SwiperSlide>
       <SwiperSlide> <Category></Category></SwiperSlide>
     </Swiper>
-  </section>
+  </div>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/virtual";
-import Category from "./tipsTricksCategory.vue";
-import CloseIcon from "@/assets/icons/CloseIcon.vue";
+import BackIcon from "@/assets/icons/BackIcon.vue";
 import { slideDown } from "@/store/store.js";
+import Category from "@/components/MainModals/TipsTricksViews/TipsTricksCategory.vue";
+import QA from "@/components/MainModals/TipsTricksViews/TipsTricksQA.vue";
+import Links from "@/components/MainModals/TipsTricksViews/TipsTricksLinks.vue";
 
 let activeButton1 = ref(true);
 let activeButton2 = ref(false);

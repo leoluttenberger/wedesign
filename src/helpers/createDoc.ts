@@ -42,8 +42,6 @@ async function createDocx(
   let districtNumber = "";
   let city = "";
   let hobbies = "";
-  console.log("Current MV index:", mvIndex);
-  console.log("Current MV appl index:", applicationIndex);
 
   if (localStorage.getItem("userInfos")) {
     titleBefore = userInfos.value[0][0].titleBefore
@@ -146,7 +144,6 @@ async function createDocx(
   let textCompetence = "";
   let ending = "";
   let salutationEnding = "";
-  console.log("Current MV:", mvIndex);
   if (motivations.value.length > 0 && mvIndex > 0) {
     subject = motivations.value[mvIndex][0].subject
       ? motivations.value[mvIndex][0].subject

@@ -97,6 +97,10 @@ onMounted(() => {
 });
 const removeAllData = () => {
   localStorage.clear();
+  localStorage.setItem("theme", JSON.stringify("dark"));
+  toggleOnDark.value = true;
+  isDarkMode.value = false;
+  isDarkMode.value = true;
   closeModal();
 };
 const closeModal = () => {

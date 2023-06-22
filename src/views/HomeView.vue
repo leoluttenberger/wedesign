@@ -2,18 +2,17 @@
   <section
     class="fixed inset-x-0 z-10 shadow dark:text-white text-xl font-Montserrat bg-white dark:bg-slate-800 shadow"
   >
-    <div class="flex justify-center p-2 font-bold">Home</div>
-    <div class="flex justify-center text-md">
+    <div class="flex justify-center p-2 font-bold">
       <span>Hi &#128075; {{ firstName }}</span>
     </div>
   </section>
   <Container>
     <div class="flex justify-center">
-      <img class="absolute w-32 py-24" src="../assets/images/logo.png" />
+      <img class="absolute w-20 py-14" src="../assets/images/logo.png" />
     </div>
   </Container>
   <Container>
-    <div class="flex pt-56 dark:text-white text-black text-l px-4">
+    <div class="flex pt-36 dark:text-white text-black text-l px-4">
       <DocumentsIcon
         class="dark:stroke-wd-white stroke-black stroke-1 w-8 h-8"
       ></DocumentsIcon>
@@ -25,9 +24,10 @@
       </p>
     </div>
   </Container>
+
   <Container>
     <div
-      class="relative w-full flex gap-4 snap-x snap-mandatory overflow-x-auto"
+      class="relative w-full flex gap-4 snap-x snap-mandatory overflow-x-auto py-1"
     >
       <div
         v-for="(item, index) in applications"
@@ -109,12 +109,12 @@
   </Container>
   <Container>
     <div
-      class="relative w-full flex gap-4 snap-x snap-mandatory overflow-x-auto px-4"
+      class="relative w-full flex gap-4 snap-x snap-mandatory overflow-x-auto py-1"
     >
       <div
         v-for="(item, index) in appointments"
         :key="index"
-        class="snap-start w-52 h-30 rounded-lg shrink-0"
+        class="px-4 snap-start w-52 h-30 rounded-lg shrink-0"
       >
         <button @click="saveCalendarIndex(index)">
           <router-link to="/calendar">
@@ -174,6 +174,85 @@
     </div>
   </Container>
   <Container>
+    <div class="pt-4">
+      <wrapper
+        class="flex w-screen h-28 justify-center text-black dark:text-white text-base"
+      >
+        <Flicking
+          :options="{ circular: true, horizontal: false }"
+          :plugins="plugins"
+        >
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
+              Wusstest du, dass du die Bewertungen der Arbeitgeber online finden
+              kannst?
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
+              Wusstest du, dass AMS einen Berufskompass hat, wo du mehr über
+              einzelne Jobbeschreibungen und Gehälter herausfinden kannst?
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
+              Wusstest du, dass du eine Bewerbung für eine Lehrstelle schicken
+              kannst, auch, ohne dass eine Bewerbung ausgeschrieben ist?
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>Du magst vor dem Aufnahmetest üben: hier entlang</div>
+          </div>
+        </Flicking>
+      </wrapper>
+    </div>
+  </Container>
+
+  <Container>
     <div class="grid flex gap-6 px-4 pt-4 pb-20">
       <button
         class="rounded-md bg-wd-green hover:bg-transparent-green h-14 text-white font-bold"
@@ -183,10 +262,17 @@
       </button>
     </div>
   </Container>
-  <div v-if="bottomCardOpen" class="fixed z-10 inset-0 bg-black bg-opacity-10">
-    <BottomCard v-model:open="bottomCardOpen"
-      ><TripsTricks></TripsTricks>
-    </BottomCard>
+
+  <div>
+    <MVEditModal :show="bottomCardOpen">
+      <div class="flex">
+        <div
+          class="rounded-lg w-screen h-screen overflow-hidden shadow-xl dark:bg-slate-700 bg-white"
+        >
+          <component :is="TripsTricks" />
+        </div>
+      </div>
+    </MVEditModal>
   </div>
 </template>
 <script setup lang="ts">
@@ -200,11 +286,16 @@ import {
   slideDown,
   activeButtonIndex,
 } from "@/store/store.js";
+import Flicking from "@egjs/vue3-flicking";
+import { AutoPlay } from "@egjs/flicking-plugins";
+import "@egjs/vue3-flicking/dist/flicking.css";
 
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 import DocumentsIcon from "@/assets/icons/DocumentsIcon.vue";
 import NotificationsIcon from "@/assets/icons/NotificationsIcon.vue";
-import TripsTricks from "@/components/MainModals/TipsTricksViews/tipsTricksView.vue";
+import TripsTricks from "./TipsTricksView.vue";
+import MVEditModal from "@/components/MenuModals/MVEditModal.vue";
+
 const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")) || []);
 const applications = ref(
   JSON.parse(localStorage.getItem("applications")) || []
@@ -220,11 +311,11 @@ const pinkType = ref("Feedback");
 const greenType = ref("Sonstige Termine");
 const firstName = ref(null);
 const router = useRouter();
-
 const bottomCardOpen = ref(false);
 
+const plugins = ref([new AutoPlay({ duration: 30000 })]);
+
 watch(slideDown, () => {
-  console.log("slideDown!");
   if (slideDown.value == true) {
     bottomCardOpen.value = false;
     slideDown.value = true;

@@ -1,5 +1,7 @@
 <template>
-  <div class="top-20 top-10 bg-white dark:bg-slate-800 w-screen h-screen p-4">
+  <div
+    class="top-20 top-10 bg-white dark:bg-slate-800 dark:text-white text-black w-screen h-screen p-4"
+  >
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

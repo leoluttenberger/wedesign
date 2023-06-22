@@ -37,7 +37,7 @@
         stroke-linejoin="round"
       />
     </svg>
-    <text x="5" y="30" font-size="6" stroke-width="0.3" class="font-Montserrat">
+    <text x="4" y="30" font-size="6" stroke-width="0.3" class="font-Montserrat">
       Bewerbung
     </text>
   </svg>

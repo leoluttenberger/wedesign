@@ -18,7 +18,7 @@
           ></CheckIcon>
         </button>
       </div>
-      <div class="space-y-1 px-2">
+      <div class="space-y-1 px-2 py-4 bg-wd-background dark:bg-slate-700">
         <div class="grid grid-cols-2 gap-1">
           <div class="col-span-2 md:col-span-1">
             <div class="px-2">

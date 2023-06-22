@@ -32,11 +32,7 @@
         <div
           class="rounded-lg w-screen h-screen overflow-hidden shadow-xl dark:bg-slate-700 bg-white"
         >
-          <component
-            v-bind="currentButtonIndex"
-            :is="UserInfoEdit"
-            :editIndex="currentButtonIndex"
-          />
+          <component :is="UserInfoEdit" />
         </div>
       </div>
     </MVEditModal>

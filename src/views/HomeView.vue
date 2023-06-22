@@ -195,6 +195,40 @@
             </div>
 
             <div>
+              Wusstest du, dass deine persönlichen Daten in der App nur lokal
+              gespeichert werden?
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
+              Falls du die App deinstallierst, gehen deine persönlichen Daten
+              verloren!
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
               Wusstest du, dass du die Bewertungen der Arbeitgeber online finden
               kannst?
             </div>

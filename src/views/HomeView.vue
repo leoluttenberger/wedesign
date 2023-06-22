@@ -380,6 +380,7 @@ const items = ref<SlideItem[]>([
   { id: getID(), index: getPosIndex(), text: "5" },
   { id: getID(), index: getPosIndex(), text: "6" },
   { id: getID(), index: getPosIndex(), text: "7" },
+  { id: getID(), index: getPosIndex(), text: "8" },
 ]);
 watch(slideDown, () => {
   if (slideDown.value == true) {

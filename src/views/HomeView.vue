@@ -308,6 +308,17 @@
       </div>
     </MVEditModal>
   </div>
+  <div>
+    <MVEditModal :show="openingInfo">
+      <SwiperCard :items="items" v-slot="slotProps">
+        <component
+          :is="TutorialModal"
+          :itemIndex="slotProps.itemIndex"
+          textLabel="Einführung"
+        />
+      </SwiperCard>
+    </MVEditModal>
+  </div>
 </template>
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
@@ -329,6 +340,13 @@ import DocumentsIcon from "@/assets/icons/DocumentsIcon.vue";
 import NotificationsIcon from "@/assets/icons/NotificationsIcon.vue";
 import TripsTricks from "./TipsTricksView.vue";
 import MVEditModal from "@/components/MenuModals/MVEditModal.vue";
+import TutorialModal from "@/components/MenuModals/TutorialModal.vue";
+
+interface SlideItem {
+  id: string;
+  index: number;
+  text: string;
+}
 
 const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")) || []);
 const applications = ref(
@@ -348,15 +366,36 @@ const router = useRouter();
 const bottomCardOpen = ref(false);
 
 const plugins = ref([new AutoPlay({ duration: 30000 })]);
+const openingInfo = ref(false);
 
+let idCounter = 0;
+const getID = () => (idCounter++).toString();
+let posIndexCounter = 0;
+const getPosIndex = () => posIndexCounter++;
+const items = ref<SlideItem[]>([
+  { id: getID(), index: getPosIndex(), text: "1" },
+  { id: getID(), index: getPosIndex(), text: "2" },
+  { id: getID(), index: getPosIndex(), text: "3" },
+  { id: getID(), index: getPosIndex(), text: "4" },
+  { id: getID(), index: getPosIndex(), text: "5" },
+  { id: getID(), index: getPosIndex(), text: "6" },
+  { id: getID(), index: getPosIndex(), text: "7" },
+]);
 watch(slideDown, () => {
   if (slideDown.value == true) {
     bottomCardOpen.value = false;
-    slideDown.value = true;
+    openingInfo.value = false;
   }
 });
 
 onMounted(() => {
+  if (localStorage.getItem("itemsSet") == "true") {
+    openingInfo.value = false;
+    console.log("Localstorage not empty:", localStorage.getItem("itemsSet"));
+  } else {
+    openingInfo.value = true;
+    localStorage.setItem("itemsSet", "true");
+  }
   bottomCardOpen.value = false;
   lastApplicationIndex.value = 0;
   isQuickAccessApplication.value = false;
@@ -380,5 +419,16 @@ const saveCalendarIndex = (index) => {
 
 const openBottomCard = () => {
   bottomCardOpen.value = true;
+};
+
+const addAfter = () => {
+  items.value = [
+    ...items.value,
+    {
+      id: getID(),
+      index: getPosIndex(),
+      text: "After",
+    },
+  ];
 };
 </script>

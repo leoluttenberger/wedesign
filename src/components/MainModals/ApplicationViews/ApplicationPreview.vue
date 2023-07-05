@@ -9,7 +9,7 @@
       <p
         class="text-black px-1 dark:text-white font-Montserrat text-xl font-bold"
       >
-        {{ "Vorschau" }}
+        {{ "Vorschau & Teilen" }}
       </p>
       <button v-if="pdf" @click="saveAndDownLoadDocs()" class="p-4">
         <ShareIcon

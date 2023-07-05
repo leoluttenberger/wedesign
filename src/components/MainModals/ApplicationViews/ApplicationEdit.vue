@@ -201,7 +201,7 @@
             class="bg-wd-green shadow rounded-md h-16 w-full text-white font-bold"
             @click="previewApplication()"
           >
-            Vorschau ansehen
+            Vorschau & Teilen
           </button>
         </div>
       </div>

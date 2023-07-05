@@ -35,7 +35,13 @@
   <div class="flex justify-center py-4">
     <div class="column gap-10">
       <FormKit type="button" label="Speichern" @click="onClickedSave"></FormKit>
-      <SwipeIcon class="stroke-white"></SwipeIcon>
+      <div class="flex justify-center">
+        <button type="button" class="p-4">
+          <SwipeRightIcon
+            class="animate-pulse h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
+          ></SwipeRightIcon>
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -44,7 +50,7 @@
 import { computed, ref, onMounted, defineProps } from "vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import MenuBar from "@/components/MenuModals/MenuBar.vue";
-import SwipeIcon from "@/assets/icons/SwipeIcon.vue";
+import SwipeRightIcon from "@/assets/icons/SwipeRight.vue";
 
 import { useEditor, EditorContent, Editor, Content } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";

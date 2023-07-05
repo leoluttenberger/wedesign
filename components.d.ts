@@ -43,6 +43,7 @@ declare module '@vue/runtime-core' {
     TipsTricksLinks: typeof import('./src/components/MainModals/TipsTricksViews/TipsTricksLinks.vue')['default']
     TipsTricksQA: typeof import('./src/components/MainModals/TipsTricksViews/TipsTricksQA.vue')['default']
     Tiptap: typeof import('./src/components/TipTapModals/Tiptap.vue')['default']
+    TutorialModal: typeof import('./src/components/MenuModals/TutorialModal.vue')['default']
     UserForm: typeof import('./src/components/MainModals/UserInfoViews/UserForm.vue')['default']
     UserInfoDisplay: typeof import('./src/components/MainModals/UserInfoViews/UserInfoDisplay.vue')['default']
     UserInfoEdit: typeof import('./src/components/MainModals/UserInfoViews/UserInfoEdit.vue')['default']

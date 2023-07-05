@@ -52,12 +52,11 @@ Install nodejs version 16.15.1 via nvm
 ```
 nvm use
 nvm install
+```
 
 After installing nvm run install script to auto install.
 ```
-
 sh install.sh
-
 ```
 to auto install and configure project. Script cointains all command below.
 
@@ -69,7 +68,6 @@ npx cap open android
 ```
 Android sdk updates gradle version and plugins.
 
-```
 
 ## Project setup
 

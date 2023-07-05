@@ -21,7 +21,7 @@
           @click="openCVExport()"
           class="bg-wd-green hover:bg-transparent-green shadow p-2 text-white font-Montserrat font-bold rounded-md"
         >
-          Lebenslauf Ansicht
+          Vorschau & Teilen
         </button>
       </div>
     </section>

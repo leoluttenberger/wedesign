@@ -85,39 +85,37 @@
             <div
               v-if="
                 ((item[0].appointmentFrom && item[0].appointmentTo
-                  ? item[0].appointmentFrom.slice(5, 7) == currentMonth ||
-                    item[0].appointmentFrom.slice(5, 7) == currentMonth
+                  ? true
                   : false) &&
-                  (item[0].appointmentFrom && item[0].appointmentTo
-                    ? item[0].appointmentFrom.slice(8, 10) >= currentDay &&
-                      item[0].appointmentTo.slice(8, 10) <= currentDay
+                  (item[0].appointmentFrom.slice(5, 7) == currentMonth ||
+                  item[0].appointmentTo.slice(5, 7) == currentMonth
+                    ? true
                     : false) &&
-                  (item[0].appointmentFrom
-                    ? item[0].appointmentFrom.slice(8, 10) == currentDay &&
-                      currentMonth == item[0].appointmentFrom.slice(5, 7)
+                  (item[0].appointmentFrom.slice(8, 10) == currentDay ||
+                  item[0].appointmentTo.slice(8, 10) == currentDay
+                    ? true
                     : false)) ||
-                (item[0].appointmentTo
-                  ? item[0].appointmentTo.slice(8, 10) == currentDay &&
-                    currentMonth == item[0].appointmentTo.slice(5, 7)
-                  : false) ||
-                (item[0].appointmentFrom && item[0].appointmentTo
-                  ? currentDay > item[0].appointmentFrom.slice(8, 10) &&
-                    currentDay < item[0].appointmentTo.slice(8, 10)
-                  : false) ||
-                (item[0].appointmentFrom && item[0].appointmentTo
-                  ? currentMonth < item[0].appointmentTo.slice(5, 7) &&
-                    currentMonth == item[0].appointmentFrom.slice(5, 7) &&
-                    currentDay > item[0].appointmentFrom.slice(8, 10)
-                  : false) ||
-                (item[0].appointmentFrom && item[0].appointmentTo
-                  ? currentMonth < item[0].appointmentTo.slice(5, 7) &&
-                    currentMonth > item[0].appointmentFrom.slice(5, 7) &&
-                    currentDay > item[0].appointmentTo.slice(8, 10)
-                  : false) ||
-                (item[0].appointmentFrom && item[0].appointmentTo
-                  ? currentMonth == item[0].appointmentTo.slice(5, 7) &&
-                    currentDay < item[0].appointmentTo.slice(8, 10)
-                  : false)
+                ((item[0].appointmentFrom && item[0].appointmentTo
+                  ? true
+                  : false) &&
+                  (item[0].appointmentFrom.slice(5, 7) == currentMonth ||
+                  item[0].appointmentTo.slice(5, 7) == currentMonth
+                    ? true
+                    : false) &&
+                  (item[0].appointmentFrom.slice(8, 10) <= currentDay &&
+                  item[0].appointmentTo.slice(8, 10) >= currentDay
+                    ? true
+                    : false)) ||
+                ((item[0].appointmentFrom && item[0].appointmentTo
+                  ? true
+                  : false) &&
+                  (item[0].appointmentFrom.slice(5, 7) < currentMonth &&
+                  item[0].appointmentTo.slice(5, 7) == currentMonth
+                    ? true
+                    : false) &&
+                  (item[0].appointmentTo.slice(8, 10) >= currentDay
+                    ? true
+                    : false))
               "
             >
               <div

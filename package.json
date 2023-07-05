@@ -60,7 +60,7 @@
     "swiper": "^8.4.4",
     "timers-browserify": "^2.0.12",
     "util": "^0.12.5",
-    "v-calendar": "^3.0.0-alpha.8",
+    "v-calendar": "^3.0.3",
     "vue": "^3.2.13",
     "vue-advanced-chat": "https://github.com/antoine92190/vue-advanced-chat/tarball/next",
     "vue-advanced-cropper": "^2.8.6",

@@ -23,7 +23,7 @@
         "
         class="outline:none text-base border-b-[3px] font-Montserrat dark:text-white font-bold"
       >
-        Q & A
+        FAQ
       </button>
       <button
         id="button2"
@@ -56,7 +56,7 @@
       @Swiper="setSwiperRef"
       @slideChange="onSlideChange"
     >
-      <SwiperSlide> <QA></QA> </SwiperSlide>
+      <SwiperSlide> <FAQ></FAQ> </SwiperSlide>
       <SwiperSlide> <Links></Links></SwiperSlide>
       <SwiperSlide> <Category></Category></SwiperSlide>
     </Swiper>
@@ -70,7 +70,7 @@ import "swiper/css/virtual";
 import BackIcon from "@/assets/icons/BackIcon.vue";
 import { slideDown } from "@/store/store.js";
 import Category from "@/components/MainModals/TipsTricksViews/TipsTricksCategory.vue";
-import QA from "@/components/MainModals/TipsTricksViews/TipsTricksQA.vue";
+import FAQ from "@/components/MainModals/TipsTricksViews/TipsTricksFAQ.vue";
 import Links from "@/components/MainModals/TipsTricksViews/TipsTricksLinks.vue";
 
 let activeButton1 = ref(true);

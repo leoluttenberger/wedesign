@@ -2,7 +2,6 @@
   <TwAccordion
     class="bg-white dark:bg-slate-700 rounded overflow-hidden"
     :data="accordion"
-    keep-alive
   >
     <template
       v-for="item in accordion"
@@ -63,35 +62,43 @@ const accordion = ref([
     ref: "Berufsorientierung allgemein",
     header: "Berufsorientierung allgemein",
     body: [
-      "https://www.berufslexikon.at/suche/",
-      "https://www.berufskompass.at/berufskompass/",
-      "https://www.jopsy.at/intro-video",
-      "https://www.whatchado.com/de/",
-      "https://www.kununu.com/at",
+      "https://www.berufslexikon.at/suche/ (AMS Informationen über einzelne Berufe)",
+      "https://www.berufskompass.at/berufskompass/ (AMS Fragebogen um einen passenden Beruf zu finden)",
+      "https://www.jopsy.at/intro-video (AK Fragebogen um einen passenden Beruf zu finden)",
+      "https://www.whatchado.com/de/  (Fragebogen um einen passenden Beruf zu finden, Videostories)",
+      "https://www.kununu.com/at (Bewertungen Arbeitsgeber*innen)",
+      "https://site.wko.at/biwi/lehrstellencheck/lehrstellencheck.html (WKO Test, der Auskunft über eigene Fähigkeiten und Eignung für bestimmte Lehrstellen gibt)",
     ],
   },
   {
     ref: "Stellensuche",
     header: "Stellensuche",
     body: [
-      "https://jobs.ams.at/public/emps/",
-      "https://www.ams.at/arbeitsuchende/arbeitslos-was-tun/lehrstellenboerse",
-      "https://lehrbetriebsuebersicht.wko.at/",
-      "https://www.karriere.at/",
-      "https://www.stepstone.at/",
-      "https://www.jobs.at/",
-      "https://www.metajob.at/",
-      "https://hokify.at/",
-      "https://bund.jobboerse.gv.at/sap/bc/jobs/",
+      "https://jobs.ams.at/public/emps/ (AMS Portal für Stellensuche)",
+      "https://www.ams.at/arbeitsuchende/arbeitslos-was-tun/lehrstellenboerse (AMS Lehrstellenbörse)",
+      "https://lehrbetriebsuebersicht.wko.at/ (WKO Übersicht Lehrbetriebe)",
+      "https://bund.jobboerse.gv.at/sap/bc/jobs/ (Öffentlicher Dienst - Stellenbörse)",
     ],
   },
   {
     ref: "Bewerbung",
     header: "Bewerbung",
     body: [
-      "https://www.ams.at/arbeitsuchende/topicliste/bewerbungsvorlage",
-      "https://www.akyoung.at/arbeit/bewerbung/",
-      "https://www.playmit.com/",
+      "https://www.ams.at/arbeitsuchende/topicliste/bewerbungsvorlage (AMS Online-Bewerbungscoach und Mustervorlagen)",
+      "https://www.akyoung.at/arbeit/bewerbung/ (Tipps für den Bewerbungsprozess)",
+      "https://www.playmit.com/ (Üben von Aufnahmetest)",
+    ],
+  },
+  {
+    ref: "Unterstützende Institutionen",
+    header: "Unterstützende Institutionen",
+    body: [
+      "Netzwerk Berufliche Assistenz: https://www.neba.at/jugendcoaching",
+      "AK Young, https://www.akyoung.at/",
+      "Verein Wiener Jugendzentren, http://www.jugendzentren.at/",
+      "Wien Extra, https://www.wienxtra.at/",
+      "18Plus Berufs- und Studienchecker, https://www.18plus.at/",
+      "BMBWF Beratungswegweiser: www.bib-atlas.at",
     ],
   },
 ]);

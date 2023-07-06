@@ -7,8 +7,14 @@
     </div>
   </section>
   <Container>
-    <div class="flex justify-center">
-      <img class="absolute w-20 py-14" src="../assets/images/logo.png" />
+    <div class="flex justify-center" v-if="darkLightMode == 'dark'">
+      <img
+        class="absolute w-52 py-14"
+        src="../assets/images/logo_apply_mint.png"
+      />
+    </div>
+    <div class="flex justify-center" v-if="darkLightMode == 'light'">
+      <img class="absolute w-52 py-14" src="../assets/images/logo_apply.png" />
     </div>
   </Container>
   <Container>
@@ -195,6 +201,58 @@
             </div>
 
             <div>
+              Wusstest du, dass du auf Webseiten wie “Kununu” Bewertungen von
+              Arbeitgeber*innen finden kannst?
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
+              Wusstest du, dass das AMS einen Berufskompass hat, wo du mehr über
+              einzelne Berufe und Gehälter herausfinden kannst?
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
+              Wusstest du, dass du eine “Initialbewerbung” für eine Lehrstelle
+              schicken kannst, d.h., ohne dass eine Bewerbung ausgeschrieben
+              ist?
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
               Wusstest du, dass deine persönlichen Daten in der App nur lokal
               gespeichert werden?
             </div>
@@ -212,8 +270,7 @@
             </div>
 
             <div>
-              Falls du die App deinstallierst, gehen deine persönlichen Daten
-              verloren!
+              Wusstest du, dass du dir in APPly auch Termine eintragen kannst?
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
@@ -229,8 +286,8 @@
             </div>
 
             <div>
-              Wusstest du, dass du die Bewertungen der Arbeitgeber online finden
-              kannst?
+              Wusstest du, dass du deinen Lebenslauf und Bewerbung auch als
+              .docx und PDF speichern und teilen kannst?
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
@@ -246,8 +303,8 @@
             </div>
 
             <div>
-              Wusstest du, dass AMS einen Berufskompass hat, wo du mehr über
-              einzelne Jobbeschreibungen und Gehälter herausfinden kannst?
+              In den Tipps & Tricks findest du viele weitere Informationen zu
+              Bewerbungen, die auch über die App selbst hinausgehen.
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
@@ -263,8 +320,9 @@
             </div>
 
             <div>
-              Wusstest du, dass du eine Bewerbung für eine Lehrstelle schicken
-              kannst, auch, ohne dass eine Bewerbung ausgeschrieben ist?
+              Unter “Erinnerungen” kannst du dir auch Termine für “Feedback”
+              anlegen, die dich daran erinnern bei Firmen nachzuhaken, wie der
+              aktuelle Stand ist.
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
@@ -279,7 +337,217 @@
               </span>
             </div>
 
-            <div>Du magst vor dem Aufnahmetest üben: hier entlang</div>
+            <div>
+              Du kannst unter “Erinnerungen” Termine für Bewerbungsgespräche,
+              Aufnahmetests, Feedback oder sonstige Termine eintragen.
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
+              In den Einstellungen kannst du den Dark Mode der App ein- und
+              ausschalten.
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
+              Wenn du dein Motivationsschreiben bearbeitest, kannst du für jeden
+              Teil zwischen mehreren Vorlagen wählen und diese anpassen.
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
+              Unter “Lebenslauf” kannst du Praktika, Workshops und Kurse im
+              Punkte “Erfahrungen” eintragen.
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
+              Deine Sprachkenntnisse kannst du unter “Lebenslauf” im Punkt
+              “Kenntnisse” eintragen.
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
+              Der “Home”-Screen bietet dir einen Überblick über aktuelle
+              Bewerbungen und die nächsten Termine - wische hier einfach durch
+              die Liste durch!
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
+              Manchmal geben Firmen keine Rückmeldung auf deine Bewerbung - das
+              passiert leider oft und liegt nicht an dir oder einem Problem mit
+              deiner Bewerbung!
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
+              Wir drücken dir die Daumen, dass du einen passenden Job findest!
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
+              APPly ist und bleibt kostenfrei und wurde von jungen Menschen und
+              Wissenschaftler*innen entwickelt.
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
+              Das Motivationsschreiben ist wichtig, um der Firma zu erklären,
+              warum gerade du die*der Beste für den Job bist.
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
+              Falls du noch eine Ausbildung hinzufügst und noch mittendrin
+              steckst, kannst du das eintragen, indem du ein Häkchen bei
+              “Laufend” setzt.
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
+              Das “Ende” einer Bewerbung ist eine Deadline der Firma oder ein
+              Deadline, die du selber setzt.
+            </div>
+          </div>
+          <div class="flex justify-center px-4 py-8">
+            <div class="pt-2 px-2">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"
+                ></span>
+              </span>
+            </div>
+
+            <div>
+              Das Feld “Start” bei Bewerbungen kannst du nutzen, falls es einen
+              festgelegten Bewerbungszeitraum gibt. Es ist aber optional und
+              muss nicht befüllt werden.
+            </div>
           </div>
         </Flicking>
       </wrapper>
@@ -342,6 +610,9 @@ import TipsTricks from "./TipsTricksView.vue";
 import MVEditModal from "@/components/MenuModals/MVEditModal.vue";
 import TutorialModal from "@/components/MenuModals/TutorialModal.vue";
 
+const logo_apply = ref(false);
+const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
+
 interface SlideItem {
   id: string;
   index: number;
@@ -390,6 +661,13 @@ watch(slideDown, () => {
 });
 
 onMounted(() => {
+  if (JSON.parse(localStorage.getItem("theme")) == "dark") {
+    darkLightMode.value = "dark";
+  } else if (JSON.parse(localStorage.getItem("theme")) == "light") {
+    darkLightMode.value = "light";
+  } else {
+    darkLightMode.value = "dark";
+  }
   if (localStorage.getItem("itemsSet") == "true") {
     openingInfo.value = false;
     console.log("Localstorage not empty:", localStorage.getItem("itemsSet"));

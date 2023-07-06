@@ -238,27 +238,27 @@ interface SlideItem {
 const motivation1 = [
   {
     indexMV: "1",
-    subject: "Bewerbung als ...",
-    salutationBeginning: " Sehr geehrte/r Frau/Herr... Musterfrau, ",
+    subject: "Bewerbung als [...]",
+    salutationBeginning: " Sehr geehrte/r [Frau/Herr] [Musterfrau], ",
     textBegining:
-      "Ich habe in einer aktuellen Stellenausschreibung mit großem Interesse von Ihrem Unternehmen erfahren und möchte mich hiermit gerne für die Stelle als Mitarbeiter*in im Service-Verkauf bewerben.",
+      "Ich habe in einer aktuellen Stellenausschreibung mit großem Interesse von Ihrem Unternehmen erfahren und möchte mich hiermit gerne für die Stelle als [Mitarbeiter*in] im Service-Verkauf bewerben.",
     textExperience:
-      "Im Jahr xxx habe ich die xxx Schule erfolgreich abgeschlossen und konnte auch praktische Erfahrungen in einem Praktikum bei xxx sammeln. Während dieser Zeit habe ich wertvolle Erfahrungen im Umgang mit Kunden gesammelt und konnte eigene Aufgaben, wie z.B. die Beratung oder Betreuung von KundInnen, übernehmen.",
+      "Im Jahr [xxx] habe ich die [xxx] Schule erfolgreich abgeschlossen und konnte auch praktische Erfahrungen in einem Praktikum bei [xxx] sammeln. Während dieser Zeit habe ich wertvolle Erfahrungen im Umgang mit Kunden gesammelt und konnte eigene Aufgaben, wie z.B. die Beratung oder Betreuung von KundInnen, übernehmen.",
     textCompetence:
       "Zu meinen Fähigkeiten gehört selbständiges und verantwortungsbewusstes Arbeiten, das ich auch gewissenhaft mit Teamarbeit verbinde. Ich verfüge über ein hohes Maß an Lernbereitschaft und Problemlösungsfähigkeit. Diese Kompetenzen konnte ich vor allem während meines absolvierten Praktikums unter Beweis stellen. Der Kontakt mit Menschen macht mir Spaß, da ich auch sehr gerne kommuniziere und redegewandt bin. Ich habe Freude am Umgang mit Menschen, bin kommunikationsfreudig und redegewandt. Ich bin ausdauernd und erledige meine Aufgaben mit vollem Engagement und kann mich gut an Herausforderungen anpassen.",
     textContribution:
       "Da Ihre Stellenbeschreibung meinen Fähigkeiten und Kenntnissen entspricht, wie z.B. Kundenfreundlichkeit, selbständiges Arbeiten und eine kommunikative Einstellung, bin ich überzeugt, dass ich Ihr Unternehmen mit meinen bereits erworbenen Fähigkeiten unterstützen kann.",
     ending:
       "Ich freue mich darauf, mich bald in einem persönlichen Gespräch vorzustellen und mehr über die Stelle zu erfahren.",
-    salutationEnding: " Mit freundlichen Grüßen ...",
+    salutationEnding: " Mit freundlichen Grüßen [...]",
   },
 ];
 
 const motivation2 = [
   {
     indexMV: "2",
-    subject: "Bewerbung als ...",
-    salutationBeginning: "Sehr geehrte Frau/Herr",
+    subject: "Bewerbung als [...]",
+    salutationBeginning: "Sehr geehrte [Frau/Herr]",
     textBegining:
       "In der Stellenausschreibung auf Ihrer Homepage konnte ich sehen, dass Sie für Ihr Kreativstudio eine Medienfachkraft suchen. Da ich gerade eine Ausbildung in einer Medienagentur abgeschlossen habe, bewerbe ich mich bei Ihnen, vor allem weil Ihre Anzeige großes Interesse bei mir geweckt hat.",
     textExperience:
@@ -269,32 +269,32 @@ const motivation2 = [
       "Da Ihre Stellenausschreibung meinen Fähigkeiten und Kenntnissen, wie Kreativität, selbständiges Arbeiten und die Umsetzung von Konzeptideen, entspricht, bin ich überzeugt, dass ich Ihr Kreativstudio mit meinen bereits erworbenen Fähigkeiten unterstützen kann.",
     ending:
       "Ich würde mich über eine Einladung zu einem persönlichen Vorstellungsgespräch freuen, zu dem ich gerne eine Mappe mit bisherigen Projekten mitbringe.",
-    salutationEnding: "Mit freundlichen Grüßen ...",
+    salutationEnding: "Mit freundlichen Grüßen [...]",
   },
 ];
 const motivation3 = [
   {
     indexMV: "3",
-    subject: "Bewerbung als ...",
-    salutationBeginning: "Sehr geehrte Frau/Herr",
+    subject: "Bewerbung als [...]",
+    salutationBeginning: "Sehr geehrte [Frau/Herr]",
     textBegining:
       "Mit großem Interesse habe ich Ihr Stellenangebot für eine Lehrstelle als KFZ-TechnikerIn gelesen und sende Ihnen deshalb meine schriftlichen Bewerbungsunterlagen. ",
     textExperience:
-      "Meine Ausbildung an der xxx Schule habe ich bereits erfolgreich abgeschlossen. In der Schule war ich ein/e sehr aufmerksame/r SchülerIn und konnte die geforderten Aufgaben gut bewältigen. Ich habe mich schon immer sehr für Autos und die Technik dahinter interessiert, z.B. habe ich meinem Vater immer gerne bei seinen eigenen Autoreparaturen zugeschaut. Ich würde sehr gerne die interessanten Aufgaben eines Kfz-Technikers erlernen, wie zum Beispiel die Reparatur von Sachschäden, Motoren oder Metallschäden.",
+      "Meine Ausbildung an der [xxx] Schule habe ich bereits erfolgreich abgeschlossen. In der Schule war ich [ein/e] sehr [aufmerksame/r] SchülerIn und konnte die geforderten Aufgaben gut bewältigen. Ich habe mich schon immer sehr für Autos und die Technik dahinter interessiert, z.B. habe ich meinem Vater immer gerne bei seinen eigenen Autoreparaturen zugeschaut. Ich würde sehr gerne die interessanten Aufgaben eines Kfz-Technikers erlernen, wie zum Beispiel die Reparatur von Sachschäden, Motoren oder Metallschäden.",
     textCompetence:
       "Ich bin handwerklich geschickt, arbeite auch sorgfältig und würde sehr gerne meine Ausbildung in Ihrem Betrieb absolvieren. Ich habe eine gute Auffassungsgabe und bin zudem sehr zuverlässig und pünktlich. Außerdem arbeite ich gerne selbständig und gewissenhaft, fühle mich aber auch im Team sehr wohl.",
     textContribution:
       "Ich bin überzeugt, dass diese Lehrstelle sehr gut zu mir passt, da ich meine Interessen und Fähigkeiten hier gut einbringen kann und ich freue mich darauf, Ihr Unternehmen auch nach der Ausbildung mit meinem Einsatz zu unterstützen.",
     ending:
       "Über die Einladung zu einem persönlichen Vorstellungsgespräch, um Sie und Ihren Betrieb kennenzulernen, freue ich mich sehr.",
-    salutationEnding: "Mit freundlichen Grüßen ...",
+    salutationEnding: "Mit freundlichen Grüßen [...]",
   },
 ];
 const motivation4 = [
   {
     indexMV: "4",
-    subject: "Bewerbung als ...",
-    salutationBeginning: "Sehr geehrte Frau/Herr",
+    subject: "Bewerbung als [...]",
+    salutationBeginning: "Sehr geehrte [Frau/Herr]",
     textBegining:
       "Ich habe Ihre Anzeige gelesen und bewerbe mich mit großem Interesse um die ausgeschriebene Lehrstelle als ProgrammiererIn.",
     textExperience:
@@ -305,14 +305,14 @@ const motivation4 = [
       "Mit diesen aufgezählten Eigenschaften bin ich davon überzeugt, dass diese Lehrstelle sehr gut zu mir passt und ich mir meinen Traum als ProgrammiererIn arbeiten zu können erfüllen kann.",
     ending:
       "Gerne würde ich Sie in einem persönlichen Gespräch davon überzeugen, dass ich für diesen Ausbildungsplatz sehr gut geeignet bin und freue mich darauf, Sie persönlich kennenzulernen.",
-    salutationEnding: "Mit freundlichen Grüßen ...",
+    salutationEnding: "Mit freundlichen Grüßen [...]",
   },
 ];
 const motivation5 = [
   {
     indexMV: "5",
-    subject: "Bewerbung als ...",
-    salutationBeginning: "Sehr geehrte Frau/Herr",
+    subject: "Bewerbung als [...]",
+    salutationBeginning: "Sehr geehrte [Frau/Herr]",
     textBegining:
       "Bezugnehmend auf Ihre Stellenanzeige möchte ich mich gerne um die offene Lehrstelle als MechatronikerIn für Büro- und EDV-Systemtechnik bewerben.",
     textExperience:
@@ -323,7 +323,7 @@ const motivation5 = [
       "Ich würde mich sehr freuen, Teil Ihres Teams werden zu dürfen und diesen spannenden Beruf bald selbst ausüben zu können und wertvolle Erfahrungen in der Lehre zu sammeln.",
     ending:
       "Ich würde mich sehr über eine Einladung zu einem persönlichen Vorstellungsgespräch freuen, um Sie und Ihr Team kennenzulernen.",
-    salutationEnding: "Mit freundlichen Grüßen ...",
+    salutationEnding: "Mit freundlichen Grüßen [...]",
   },
 ];
 

@@ -70,7 +70,10 @@
     <div class="place-items-center">
       <div class="text-white text-xl p-2">Daten zurücksetzen?</div>
       <div class="text-white font-Montserrat text-base font-bold pb-2">
-        <p>Bist du sicher, dass du alle Daten löschen willst?</p>
+        <p>
+          Bist du sicher, dass du alle Daten löschen willst? Die Daten können
+          nicht mehr wiederhergestellt werden!
+        </p>
       </div>
     </div>
 

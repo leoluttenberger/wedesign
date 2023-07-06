@@ -7,8 +7,14 @@
     </div>
   </section>
   <Container>
-    <div class="flex justify-center">
-      <img class="absolute w-20 py-14" src="../assets/images/logo.png" />
+    <div class="flex justify-center" v-if="darkLightMode == 'dark'">
+      <img
+        class="absolute w-52 py-14"
+        src="../assets/images/logo_apply_mint.png"
+      />
+    </div>
+    <div class="flex justify-center" v-if="darkLightMode == 'light'">
+      <img class="absolute w-52 py-14" src="../assets/images/logo_apply.png" />
     </div>
   </Container>
   <Container>
@@ -342,6 +348,9 @@ import TipsTricks from "./TipsTricksView.vue";
 import MVEditModal from "@/components/MenuModals/MVEditModal.vue";
 import TutorialModal from "@/components/MenuModals/TutorialModal.vue";
 
+const logo_apply = ref(false);
+const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
+
 interface SlideItem {
   id: string;
   index: number;
@@ -390,6 +399,13 @@ watch(slideDown, () => {
 });
 
 onMounted(() => {
+  if (JSON.parse(localStorage.getItem("theme")) == "dark") {
+    darkLightMode.value = "dark";
+  } else if (JSON.parse(localStorage.getItem("theme")) == "light") {
+    darkLightMode.value = "light";
+  } else {
+    darkLightMode.value = "dark";
+  }
   if (localStorage.getItem("itemsSet") == "true") {
     openingInfo.value = false;
     console.log("Localstorage not empty:", localStorage.getItem("itemsSet"));

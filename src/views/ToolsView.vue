@@ -32,6 +32,32 @@
       </p>
     </div>
   </div>
+  <div class="max-w-[100%] pb-20">
+    <div class="flex justify-evenly">
+      <p class="text-black dark:text-white font-Montserrat text-md font-bold">
+        Checkliste aus
+      </p>
+      <Toggle
+        v-model="checklistOnOff"
+        :classes="{
+          container: 'inline-block',
+          toggle:
+            'flex w-12 h-5 rounded-full relative cursor-pointer transition items-center box-content border-2 text-xs leading-none',
+          toggleOn:
+            'bg-wd-green border-wd-green justify-start text-black bg-slate-800',
+          toggleOff: 'bg-gray-200 border-gray-200 justify-end',
+          handle:
+            'inline-block bg-white w-5 h-5 top-0 rounded-full absolute transition-all',
+          handleOn: 'left-full transform -translate-x-full bg-shite',
+          handleOff: 'left-0 bg-slate-600',
+          label: 'text-center w-8 border-box whitespace-nowrap select-none',
+        }"
+      />
+      <p class="text-black dark:text-white font-Montserrat text-md font-bold">
+        Checkliste an
+      </p>
+    </div>
+  </div>
   <div class="grid flex gap-2 px-4">
     <button
       class="bg-wd-error shadow rounded-md h-10 w-full text-white font-bold"
@@ -71,6 +97,7 @@ import Toggle from "@vueform/toggle";
 import { isDarkMode } from "@/store/store.js";
 
 const toggleOnDark = ref(false);
+const checklistOnOff = ref(true);
 const showModal = ref(false);
 
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
@@ -88,11 +115,23 @@ watch(toggleOnDark, () => {
     localStorage.setItem("theme", JSON.stringify("light"));
   }
 });
+watch(checklistOnOff, () => {
+  if (checklistOnOff.value == false) {
+    localStorage.setItem("previewshow", "false");
+  } else {
+    localStorage.setItem("previewshow", "true");
+  }
+});
 const userInfos = ref(JSON.parse(localStorage.getItem("userInfos")) || []);
 const firstName = ref(null);
 onMounted(() => {
   if (localStorage.getItem("userInfos")) {
     firstName.value = userInfos.value[0][0].firstName;
+  }
+  if (localStorage.getItem("previewshow") == "true") {
+    checklistOnOff.value = true;
+  } else {
+    checklistOnOff.value = false;
   }
 });
 const removeAllData = () => {

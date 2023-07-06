@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-start justify-center pt-10">
+  <div class="p-2 flex flex-col items-start justify-center">
     <check-box
       v-for="option in options"
       :checked="value.includes(option.id)"

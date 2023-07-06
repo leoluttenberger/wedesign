@@ -17,33 +17,6 @@
         ></CheckIcon>
       </button>
     </div>
-
-    <div class="flex justify-evenly">
-      <button
-        id="button1"
-        @click="slideTo(1)"
-        :class="
-          activeButton1
-            ? 'border-wd-green dark:border-wd-green'
-            : 'border-white dark:border-slate-800'
-        "
-        class="outline:none text-base border-b-[3px] font-Montserrat dark:text-white"
-      >
-        Offen
-      </button>
-      <button
-        id="button2"
-        @click="slideTo(2)"
-        :class="
-          activeButton2
-            ? 'border-wd-green dark:border-wd-green'
-            : 'border-white dark:border-slate-800'
-        "
-        class="outline:none text-base border-b-[3px] font-Montserrat dark:text-white"
-      >
-        Archiv
-      </button>
-    </div>
   </section>
   <swiper
     class="applicationSwiper"
@@ -52,9 +25,6 @@
   >
     <swiper-slide>
       <SwipeView :slideIndex="3"> </SwipeView>
-    </swiper-slide>
-    <swiper-slide>
-      <ArchiveView></ArchiveView>
     </swiper-slide>
   </swiper>
 </template>

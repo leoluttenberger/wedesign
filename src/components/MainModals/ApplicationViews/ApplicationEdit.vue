@@ -381,7 +381,7 @@ const removeFromLocalStorage = () => {
       date: applications.value[props.editIndex][0].date,
     },
   ];
-  if (localStorage.getItem("archives")) {
+  /*if (localStorage.getItem("archives")) {
     const archives = JSON.parse(localStorage.getItem("archives"));
     const newData = [...archives, archive];
     console.log("Updated Archives");
@@ -392,7 +392,7 @@ const removeFromLocalStorage = () => {
   } else {
     localStorage.setItem("archives", JSON.stringify([archive]));
     console.log("Added Archives");
-  }
+  }*/
 
   for (let i = 0; i < appointments.value.length; i++) {
     if (

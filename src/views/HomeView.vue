@@ -303,7 +303,7 @@
         <div
           class="rounded-lg w-screen h-screen overflow-hidden shadow-xl dark:bg-slate-700 bg-white"
         >
-          <component :is="TripsTricks" />
+          <component :is="TipsTricks" />
         </div>
       </div>
     </MVEditModal>
@@ -338,7 +338,7 @@ import "@egjs/vue3-flicking/dist/flicking.css";
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 import DocumentsIcon from "@/assets/icons/DocumentsIcon.vue";
 import NotificationsIcon from "@/assets/icons/NotificationsIcon.vue";
-import TripsTricks from "./TipsTricksView.vue";
+import TipsTricks from "./TipsTricksView.vue";
 import MVEditModal from "@/components/MenuModals/MVEditModal.vue";
 import TutorialModal from "@/components/MenuModals/TutorialModal.vue";
 

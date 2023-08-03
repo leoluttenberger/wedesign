@@ -27,6 +27,7 @@
           Bewerbungsschreiben erstellen
         </button>
       </div>
+
       <MultiCheckbox
         v-model:value="checkListDisable"
         :options="enableDisable"
@@ -39,6 +40,8 @@ import { ref, onMounted } from "vue";
 import MultiCheckbox from "@/components/MenuModals/MultiCheckbox.vue";
 import { sideBack, sideBackBack } from "@/store/store.js";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
+import { createToast } from "mosha-vue-toastify";
+import "mosha-vue-toastify/dist/style.css";
 
 const allchecked = ref(false);
 const checklist = ref([]);
@@ -90,6 +93,8 @@ const gotoPreview = async () => {
   if (allchecked.value == true) {
     sideBackBack.value = false;
     console.log("Bewerbungsschreiben erstellen");
+  } else {
+    errorMessage();
   }
   if (enableDisable.value[0] == 0) {
     localStorage.setItem("previewshow", "false");
@@ -99,5 +104,11 @@ const gotoPreview = async () => {
 };
 const closeModal = () => {
   sideBack.value = false;
+};
+const errorMessage = () => {
+  createToast("Du hast nicht alle drei Kästchen angeklickt!", {
+    type: "danger",
+    position: "bottom-center",
+  });
 };
 </script>

@@ -91,7 +91,7 @@ const gotoPreview = async () => {
     sideBackBack.value = false;
     console.log("Bewerbungsschreiben erstellen");
   }
-  if (checkListDisable.value[0] == 0) {
+  if (enableDisable.value[0] == 0) {
     localStorage.setItem("previewshow", "false");
   } else {
     localStorage.setItem("previewshow", "true");

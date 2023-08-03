@@ -55,7 +55,7 @@ const getCheckOptions = () => {
   options.value = [
     { name: "Hast du die Ansprechperson angepasst?", id: 1 },
     { name: "Sind deine Kontaktdaten aktuell?", id: 2 },
-    { name: "Hast du ein Motivationschreiben erstellt?", id: 3 },
+    { name: "Hast du ein Motivationsschreiben erstellt?", id: 3 },
   ];
   enableDisable.value = [
     {

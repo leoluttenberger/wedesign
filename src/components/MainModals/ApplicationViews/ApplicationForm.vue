@@ -20,6 +20,8 @@
             v-model="job"
             label="Berufsbezeichnung:"
             type="text"
+            validation="required|?length:2"
+            validation-label="Berufsbezeichnung"
             placeholder="Bäcker, Verkäufer"
           />
         </div>

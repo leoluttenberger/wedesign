@@ -9,7 +9,7 @@
       <p
         class="text-black px-2 dark:text-white font-Montserrat text-xl p-4 font-bold"
       >
-        Tipps & Tricks
+        Tipps Tricks
       </p>
     </div>
     <div class="flex justify-evenly">

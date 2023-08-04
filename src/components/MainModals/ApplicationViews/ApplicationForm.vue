@@ -20,6 +20,8 @@
             v-model="job"
             label="Beruf:"
             type="text"
+            validation="required|?length:2"
+            validation-label="Beruf"
             placeholder="Beruf oder Lehre"
           />
         </div>

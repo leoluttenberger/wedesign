@@ -23,8 +23,6 @@
             validation="required|?length:2"
             validation-label="Berufsbezeichnung"
             placeholder="Bäcker, Verkäufer"
-            validation="required|?length:2"
-            validation-label="Berufsbezeichnung"
             validation-visibility="live"
           />
         </div>

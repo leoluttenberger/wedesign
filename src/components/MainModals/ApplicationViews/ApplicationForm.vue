@@ -18,11 +18,11 @@
         <div class="px-2">
           <FormKit
             v-model="job"
-            label="Beruf:"
+            label="Berufsbezeichnung:"
             type="text"
             validation="required|?length:2"
-            validation-label="Beruf"
-            placeholder="Beruf oder Lehre"
+            validation-label="Berufsbezeichnung"
+            placeholder="Bäcker, Verkäufer"
           />
         </div>
       </div>

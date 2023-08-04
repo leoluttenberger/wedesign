@@ -187,7 +187,7 @@
         <div class="grid flex gap-2 p-2">
           <button
             class="bg-wd-error shadow rounded-md h-10 w-full text-white font-bold"
-            @click="removeFromLocalStorage()"
+            @click="openDeteleModal()"
           >
             Bewerbung entfernen
           </button>
@@ -264,6 +264,34 @@
       </button>
     </div>
   </CropModal>
+  <CropModal :show="showDeleteModal">
+    <div class="place-items-center">
+      <div class="text-white text-xl p-2">Entfernen?</div>
+      <div class="text-white font-Montserrat text-base font-bold pb-2">
+        <p>Bist du wirklich sicher, dass du die Bewerbung entfernen willst?</p>
+      </div>
+    </div>
+
+    <div
+      class="flex justify-evenly text-white font-Montserrat text-base font-bold h-10"
+    >
+      <button
+        type="button"
+        @click="returnToEdit()"
+        class="bg-wd-error w-screen"
+      >
+        Nein
+      </button>
+
+      <button
+        type="button"
+        @click="deleteAndReturn()"
+        class="bg-wd-green w-screen"
+      >
+        Ja
+      </button>
+    </div>
+  </CropModal>
 </template>
 <script setup lang="ts">
 import { ref, onMounted, defineProps, watch } from "vue";
@@ -293,6 +321,7 @@ const start = ref(null);
 const mvIndex = ref(null);
 
 const showModal = ref(false);
+const showDeleteModal = ref(false);
 const __mv = ref(null);
 const editIndex = ref(0);
 
@@ -323,6 +352,7 @@ watch(sideBack, () => {
 
 onMounted(() => {
   showModal.value = false;
+  showDeleteModal.value = false;
   editIndex.value = props.editIndex;
   const applications = ref(
     JSON.parse(localStorage.getItem("applications")) || []
@@ -490,9 +520,18 @@ const closeModal = () => {
 };
 const returnToEdit = () => {
   showModal.value = false;
+  showDeleteModal.value = false;
+};
+
+const deleteAndReturn = () => {
+  showDeleteModal.value = false;
+  removeFromLocalStorage();
 };
 
 const openQueryModal = () => {
   showModal.value = true;
+};
+const openDeteleModal = () => {
+  showDeleteModal.value = true;
 };
 </script>

@@ -27,7 +27,7 @@
         <div v-if="isActive">
           <div>
             <div
-              class="p-4 bg-wd-background text-black dark:text-white dark:bg-slate-500 hover:text-blue-500 underline hover:underline-offset-2"
+              class="p-4 bg-wd-background text-black dark:text-white dark:bg-slate-500"
               :key="`${item.ref}`"
               :ref="item.ref"
             >
@@ -35,6 +35,7 @@
                 <li
                   v-for="(n, index) in item.body"
                   v-bind:key="item.body[index]"
+                  class="hover:text-blue-500 hover:underline"
                 >
                   <a
                     :href="item.body[index]"
@@ -62,31 +63,31 @@ const accordion = ref([
     ref: "Berufsorientierung allgemein",
     header: "Berufsorientierung allgemein",
     body: [
-      "https://www.berufslexikon.at/suche/ (AMS Informationen über einzelne Berufe)",
-      "https://www.berufskompass.at/berufskompass/ (AMS Fragebogen um einen passenden Beruf zu finden)",
-      "https://www.jopsy.at/intro-video (AK Fragebogen um einen passenden Beruf zu finden)",
-      "https://www.whatchado.com/de/  (Fragebogen um einen passenden Beruf zu finden, Videostories)",
-      "https://www.kununu.com/at (Bewertungen Arbeitsgeber*innen)",
-      "https://site.wko.at/biwi/lehrstellencheck/lehrstellencheck.html (WKO Test, der Auskunft über eigene Fähigkeiten und Eignung für bestimmte Lehrstellen gibt)",
+      "AMS Informationen über einzelne Berufe: https://www.berufslexikon.at/suche/",
+      "AMS Fragebogen um einen passenden Beruf zu finden: https://www.berufskompass.at/berufskompass/",
+      "AK Fragebogen um einen passenden Beruf zu finden: https://www.jopsy.at/intro-video",
+      "Fragebogen um einen passenden Beruf zu finden, Videostories: https://www.whatchado.com/de/",
+      "Bewertungen Arbeitsgeber*innen: https://www.kununu.com/at",
+      "WKO Test, der Auskunft über eigene Fähigkeiten und Eignung für bestimmte Lehrstellen gibt: https://site.wko.at/biwi/lehrstellencheck/lehrstellencheck.html",
     ],
   },
   {
     ref: "Stellensuche",
     header: "Stellensuche",
     body: [
-      "https://jobs.ams.at/public/emps/ (AMS Portal für Stellensuche)",
-      "https://www.ams.at/arbeitsuchende/arbeitslos-was-tun/lehrstellenboerse (AMS Lehrstellenbörse)",
-      "https://lehrbetriebsuebersicht.wko.at/ (WKO Übersicht Lehrbetriebe)",
-      "https://bund.jobboerse.gv.at/sap/bc/jobs/ (Öffentlicher Dienst - Stellenbörse)",
+      "AMS Online-Bewerbungscoach und Mustervorlagen: https://www.ams.at/arbeitsuchende/topicliste/bewerbungsvorlage",
+      "AMS Lehrstellenbörse: https://www.ams.at/arbeitsuchende/arbeitslos-was-tun/lehrstellenboerse",
+      "WKO Übersicht Lehrbetriebe: https://lehrbetriebsuebersicht.wko.at/",
+      "Öffentlicher Dienst - Stellenbörse: https://bund.jobboerse.gv.at/sap/bc/jobs/",
     ],
   },
   {
     ref: "Bewerbung",
     header: "Bewerbung",
     body: [
-      "https://www.ams.at/arbeitsuchende/topicliste/bewerbungsvorlage (AMS Online-Bewerbungscoach und Mustervorlagen)",
-      "https://www.akyoung.at/arbeit/bewerbung/ (Tipps für den Bewerbungsprozess)",
-      "https://www.playmit.com/ (Üben von Aufnahmetest)",
+      "AMS Online-Bewerbungscoach und Mustervorlagen: https://www.ams.at/arbeitsuchende/topicliste/bewerbungsvorlage ",
+      "Tipps für den Bewerbungsprozess: https://www.akyoung.at/arbeit/bewerbung/",
+      "Üben von Aufnahmetest: https://www.playmit.com/ ",
     ],
   },
   {
@@ -94,10 +95,10 @@ const accordion = ref([
     header: "Unterstützende Institutionen",
     body: [
       "Netzwerk Berufliche Assistenz: https://www.neba.at/jugendcoaching",
-      "AK Young, https://www.akyoung.at/",
-      "Verein Wiener Jugendzentren, http://www.jugendzentren.at/",
-      "Wien Extra, https://www.wienxtra.at/",
-      "18Plus Berufs- und Studienchecker, https://www.18plus.at/",
+      "AK Young: https://www.akyoung.at/",
+      "Verein Wiener Jugendzentren: http://www.jugendzentren.at/",
+      "Wien Extra: https://www.wienxtra.at/",
+      "18Plus Berufs- und Studienchecker: https://www.18plus.at/",
       "BMBWF Beratungswegweiser: www.bib-atlas.at",
     ],
   },

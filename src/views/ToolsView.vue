@@ -131,10 +131,10 @@ onMounted(() => {
   if (localStorage.getItem("userInfos")) {
     firstName.value = userInfos.value[0][0].firstName;
   }
-  if (localStorage.getItem("previewshow") == "true") {
-    checklistOnOff.value = true;
-  } else {
+  if (localStorage.getItem("previewshow") == "false") {
     checklistOnOff.value = false;
+  } else {
+    checklistOnOff.value = true;
   }
 });
 const removeAllData = () => {

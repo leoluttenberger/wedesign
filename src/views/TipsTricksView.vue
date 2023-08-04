@@ -47,7 +47,7 @@
         "
         class="outline:none text-base border-b-[3px] font-Montserrat dark:text-white font-bold"
       >
-        Fotos und Info
+        Tutorial
       </button>
     </div>
 

@@ -46,6 +46,7 @@ import "mosha-vue-toastify/dist/style.css";
 const allchecked = ref(false);
 const checklist = ref([]);
 const checkListDisable = ref([]);
+const checkListOffOn = ref(true);
 const enableDisable = ref([]);
 const options = ref([]);
 const userName = ref("");
@@ -96,10 +97,18 @@ const gotoPreview = async () => {
   } else {
     errorMessage();
   }
-  if (enableDisable.value[0] == 0) {
-    localStorage.setItem("previewshow", "false");
-  } else {
+  for (let i = 0; i < checkListDisable.value.length; i++) {
+    if (checkListDisable.value[i] == 0) {
+      checkListOffOn.value = false;
+    } else {
+      checkListOffOn.value = true;
+    }
+  }
+
+  if (checkListOffOn.value == false) {
     localStorage.setItem("previewshow", "true");
+  } else {
+    localStorage.setItem("previewshow", "false");
   }
 };
 const closeModal = () => {

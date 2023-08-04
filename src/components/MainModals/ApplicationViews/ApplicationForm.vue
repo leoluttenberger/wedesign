@@ -18,9 +18,9 @@
         <div class="px-2">
           <FormKit
             v-model="job"
-            label="Beruf:"
+            label="Berufsbezeichnung:"
             type="text"
-            placeholder="Beruf oder Lehre"
+            placeholder="Bäcker, Verkäufer"
           />
         </div>
       </div>

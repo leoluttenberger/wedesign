@@ -228,12 +228,12 @@ const openModal = () => {
 };
 const showEditImage = () => {
   if (imageEdit.value == true) {
-    imageEditText.value = "Profilbild speichern";
+    imageEditText.value = "Lebenslauf-Bild speichern";
     imageEdit.value = false;
     valueAvatarCropShow.value = true;
     valueAvatarShow.value = false;
   } else {
-    imageEditText.value = "Profilbild ändern";
+    imageEditText.value = "Lebenslauf-Bild ändern";
     imageEdit.value = true;
     valueAvatarCropShow.value = false;
     valueAvatarShow.value = true;

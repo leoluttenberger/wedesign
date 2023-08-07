@@ -72,7 +72,7 @@ export default {
   textarea: {
     ...textClassification,
     input:
-      "h-20 outline-0 outline-none font-Montserrat md:text-lg text-base font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-gray dark:placeholder-gray",
+      "h-20 outline-0 outline-none font-Montserrat md:text-lg text-base font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-gray dark:placeholder-gray resize-none",
   },
   time: textClassification,
   url: textClassification,

@@ -235,6 +235,8 @@ interface SlideItem {
   index: number;
   text: string;
 }
+const MAX_MV_PREVIEW = 6;
+
 const motivation1 = [
   {
     indexMV: "1",
@@ -326,12 +328,25 @@ const motivation5 = [
     salutationEnding: "Mit freundlichen Grüßen [...]",
   },
 ];
+const motivation6 = [
+  {
+    indexMV: "6",
+    subject: "leer",
+    salutationBeginning: "leer",
+    textBegining: "leer",
+    textExperience: "leer",
+    textCompetence: "leer",
+    textContribution: "leer",
+    ending: "leer",
+    salutationEnding: "leer",
+  },
+];
 
 if (!localStorage.getItem("motivations")) {
   localStorage.setItem("motivations", JSON.stringify([motivation1]));
 }
 let tempMotivations = JSON.parse(localStorage.getItem("motivations"));
-if (tempMotivations.length < 5) {
+if (tempMotivations.length < MAX_MV_PREVIEW) {
   let newData = [...tempMotivations, motivation2];
   localStorage.setItem("motivations", JSON.stringify(newData));
   tempMotivations = JSON.parse(localStorage.getItem("motivations"));
@@ -342,6 +357,8 @@ if (tempMotivations.length < 5) {
   localStorage.setItem("motivations", JSON.stringify(newData));
   tempMotivations = JSON.parse(localStorage.getItem("motivations"));
   newData = [...tempMotivations, motivation5];
+  localStorage.setItem("motivations", JSON.stringify(newData));
+  newData = [...tempMotivations, motivation6];
   localStorage.setItem("motivations", JSON.stringify(newData));
   tempMotivations = JSON.parse(localStorage.getItem("motivations"));
 }
@@ -369,7 +386,6 @@ let buttonIndex = 0;
 let isEdited = false;
 const indexOfMVid = ref(null);
 
-const MAX_MV_PREVIEW = 5;
 const lastIndex = ref(null);
 
 let textLabel = "";

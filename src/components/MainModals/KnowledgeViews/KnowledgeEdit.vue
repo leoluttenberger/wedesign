@@ -102,30 +102,27 @@ onMounted(() => {
 });
 
 const saveToLocalStorage = () => {
-  if (buttonDisabled == false) {
-    buttonDisabled = true;
-    if (localStorage.getItem("knowledges")) {
-      console.log("Update Education");
-      knowledges.value[props.editIndex][0].type = type.value;
-      knowledges.value[props.editIndex][0].diversKnowledge =
-        diversKnowledge.value;
-      knowledges.value[props.editIndex][0].languageKnowledge =
-        languageKnowledge.value;
-      knowledges.value[props.editIndex][0].languageLevel = languageLevel.value;
-      localStorage.setItem("knowledges", JSON.stringify(knowledges.value));
-    } else {
-      const knowledge = [
-        {
-          type: type.value,
-          diversKnowledge: diversKnowledge.value,
-          languageKnowledge: languageKnowledge.value,
-          languageLevel: languageLevel.value,
-        },
-      ];
-      localStorage.setItem("knowledges", JSON.stringify([knowledge]));
-    }
-    slideDown.value = true;
+  if (localStorage.getItem("knowledges")) {
+    console.log("Update Education");
+    knowledges.value[props.editIndex][0].type = type.value;
+    knowledges.value[props.editIndex][0].diversKnowledge =
+      diversKnowledge.value;
+    knowledges.value[props.editIndex][0].languageKnowledge =
+      languageKnowledge.value;
+    knowledges.value[props.editIndex][0].languageLevel = languageLevel.value;
+    localStorage.setItem("knowledges", JSON.stringify(knowledges.value));
+  } else {
+    const knowledge = [
+      {
+        type: type.value,
+        diversKnowledge: diversKnowledge.value,
+        languageKnowledge: languageKnowledge.value,
+        languageLevel: languageLevel.value,
+      },
+    ];
+    localStorage.setItem("knowledges", JSON.stringify([knowledge]));
   }
+  slideDown.value = true;
 };
 const removeFromLocalStorage = () => {
   if (buttonDisabled == false) {

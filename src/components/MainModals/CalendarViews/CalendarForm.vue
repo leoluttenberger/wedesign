@@ -93,6 +93,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { slideDown, addedDate, addedType } from "@/store/store.js";
+import { createToast } from "mosha-vue-toastify";
+import "mosha-vue-toastify/dist/style.css";
 
 const type = ref(null);
 const title = ref("");
@@ -121,15 +123,11 @@ const saveToLocalStorage = () => {
   let dateCheck = false;
 
   if (appointmentFrom.value != null && appointmentTo.value != null) {
-    if (appointmentFrom.value < appointmentTo.value) {
+    if (appointmentFrom.value <= appointmentTo.value) {
       dateCheck = true;
     }
   } else if (appointmentFrom.value != null || appointmentTo.value != null) {
     dateCheck = true;
-  } else {
-    console.log("Date is not set!");
-    console.log(appointmentFrom.value);
-    console.log(appointmentTo.value);
   }
 
   if (dateCheck) {
@@ -150,6 +148,14 @@ const saveToLocalStorage = () => {
     addedType.value = type.value;
     slideDown.value = true;
     console.log("Date saved!");
+  } else {
+    errorMessage();
   }
+};
+const errorMessage = () => {
+  createToast("Du hast nicht alle Felder richtig ausgefüllt.", {
+    type: "danger",
+    position: "bottom-center",
+  });
 };
 </script>

@@ -95,7 +95,6 @@
       <button
         class="bg-wd-error shadow rounded-md h-10 w-full text-white font-bold"
         @click="removeFromLocalStorage()"
-        :disabled="buttonDisabled"
       >
         Termin entfernen
       </button>
@@ -113,6 +112,9 @@
 <script setup lang="ts">
 import { ref, onMounted, defineProps, withDefaults } from "vue";
 import { slideDown, changedDate } from "@/store/store.js";
+import { createToast } from "mosha-vue-toastify";
+import "mosha-vue-toastify/dist/style.css";
+
 const type = ref(null);
 const title = ref("");
 const appointmentFrom = ref(null);
@@ -122,7 +124,6 @@ const note = ref(null);
 const appointments = ref(
   JSON.parse(localStorage.getItem("appointments")) || []
 );
-let buttonDisabled = false;
 let isEnd = false;
 const props = withDefaults(
   defineProps<{
@@ -132,7 +133,6 @@ const props = withDefaults(
 );
 
 onMounted(() => {
-  buttonDisabled = false;
   changedDate.value = false;
   type.value = appointments.value[props.editIndex][0].type;
   title.value = appointments.value[props.editIndex][0].title;
@@ -150,77 +150,82 @@ onMounted(() => {
 
 const saveToLocalStorage = () => {
   let dateCheck = false;
-  if (appointmentFrom.value != null || appointmentTo.value != null) {
+  if (appointmentFrom.value != null && appointmentTo.value != null) {
+    if (appointmentFrom.value <= appointmentTo.value) {
+      dateCheck = true;
+    }
+  } else if (appointmentFrom.value != null || appointmentTo.value != null) {
     dateCheck = true;
   }
-  if (buttonDisabled == false) {
-    if (dateCheck) {
-      buttonDisabled = true;
-      if (localStorage.getItem("appointments")) {
-        console.log("Update Appointments");
-        const applications = ref(
-          JSON.parse(localStorage.getItem("applications"))
-        );
 
-        appointments.value[props.editIndex][0].type = type.value;
-        appointments.value[props.editIndex][0].titel = title.value;
-        appointments.value[props.editIndex][0].appointmentFrom =
-          appointmentFrom.value;
-        appointments.value[props.editIndex][0].appointmentTo =
-          appointmentTo.value;
+  if (dateCheck) {
+    if (localStorage.getItem("appointments")) {
+      console.log("Update Appointments");
+      const applications = ref(
+        JSON.parse(localStorage.getItem("applications"))
+      );
 
-        appointments.value[props.editIndex][0].address = address.value;
-        appointments.value[props.editIndex][0].note = note.value;
+      appointments.value[props.editIndex][0].type = type.value;
+      appointments.value[props.editIndex][0].titel = title.value;
+      appointments.value[props.editIndex][0].appointmentFrom =
+        appointmentFrom.value;
+      appointments.value[props.editIndex][0].appointmentTo =
+        appointmentTo.value;
 
-        if (type.value == "Ende") {
-          if (appointments.value.length > 0) {
-            for (let i = 0; i < applications.value.length; i++) {
-              if (
-                applications.value[i][0].id ==
-                appointments.value[props.editIndex][0].endId
-              ) {
-                applications.value[i][0].start = appointmentFrom.value;
-              }
+      appointments.value[props.editIndex][0].address = address.value;
+      appointments.value[props.editIndex][0].note = note.value;
+
+      if (type.value == "Ende") {
+        if (appointments.value.length > 0) {
+          for (let i = 0; i < applications.value.length; i++) {
+            if (
+              applications.value[i][0].id ==
+              appointments.value[props.editIndex][0].endId
+            ) {
+              applications.value[i][0].start = appointmentFrom.value;
             }
-
-            localStorage.setItem(
-              "applications",
-              JSON.stringify(applications.value)
-            );
           }
-        }
 
-        localStorage.setItem(
-          "appointments",
-          JSON.stringify(appointments.value)
-        );
+          localStorage.setItem(
+            "applications",
+            JSON.stringify(applications.value)
+          );
+        }
       }
+
+      localStorage.setItem("appointments", JSON.stringify(appointments.value));
+      slideDown.value = true;
+      changedDate.value = true;
     }
-    slideDown.value = true;
-    changedDate.value = true;
+  } else {
+    errorMessage();
   }
 };
 const removeFromLocalStorage = () => {
-  if (buttonDisabled == false) {
-    const applications = ref(
-      JSON.parse(localStorage.getItem("applications")) || []
-    );
-    for (let i = 0; i < applications.value.length; i++) {
-      if (
-        applications.value[i][0].id ==
-          appointments.value[props.editIndex][0].endId &&
-        appointments.value[props.editIndex][0].endId != 0
-      ) {
-        applications.value[i][0].end = null;
-        applications.value[i][0].start = null;
-      }
+  const applications = ref(
+    JSON.parse(localStorage.getItem("applications")) || []
+  );
+  for (let i = 0; i < applications.value.length; i++) {
+    if (
+      applications.value[i][0].id ==
+        appointments.value[props.editIndex][0].endId &&
+      appointments.value[props.editIndex][0].endId != 0
+    ) {
+      applications.value[i][0].end = null;
+      applications.value[i][0].start = null;
     }
-    appointments.value.splice(props.editIndex, 1);
-    localStorage.setItem("appointments", JSON.stringify(appointments.value));
-    localStorage.setItem("applications", JSON.stringify(applications.value));
-
-    slideDown.value = true;
-    changedDate.value = true;
   }
+  appointments.value.splice(props.editIndex, 1);
+  localStorage.setItem("appointments", JSON.stringify(appointments.value));
+  localStorage.setItem("applications", JSON.stringify(applications.value));
+
+  slideDown.value = true;
+  changedDate.value = true;
+};
+const errorMessage = () => {
+  createToast("Du hast nicht alle Felder richtig ausgefüllt.", {
+    type: "danger",
+    position: "bottom-center",
+  });
 };
 </script>

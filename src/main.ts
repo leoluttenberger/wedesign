@@ -12,6 +12,7 @@ import { generateClasses } from "@formkit/themes";
 import { de, en } from "@formkit/i18n";
 import { createProPlugin, inputs } from "@formkit/pro";
 import { FORMKIT_PRO_ID } from "./env";
+
 //Create and configure App
 const app = createApp(App);
 //Create Formkit Pro

@@ -102,14 +102,12 @@
     <button
       class="bg-wd-error shadow rounded-md h-10 w-full text-white font-bold"
       @click="removeFromLocalStorage()"
-      :disabled="buttonDisabled"
     >
       Ausbildung entfernen
     </button>
     <button
       class="bg-wd-green shadow rounded-md h-16 w-full text-white font-bold"
       @click="saveToLocalStorage()"
-      :disabled="buttonDisabled"
     >
       Ausbildung speichern
     </button>
@@ -119,6 +117,8 @@
 <script setup lang="ts">
 import { ref, onMounted, defineProps, withDefaults } from "vue";
 import { slideDown } from "@/store/store.js";
+import { createToast } from "mosha-vue-toastify";
+import "mosha-vue-toastify/dist/style.css";
 
 const type = ref(null);
 const specialty = ref(null);
@@ -127,7 +127,6 @@ const educationFrom = ref(null);
 const educationTo = ref(null);
 const checked = ref(false);
 const note = ref(null);
-let buttonDisabled = false;
 const educations = ref(JSON.parse(localStorage.getItem("educations")) || []);
 
 const props = withDefaults(
@@ -138,7 +137,6 @@ const props = withDefaults(
 );
 
 onMounted(() => {
-  buttonDisabled = false;
   type.value = educations.value[props.editIndex][0].type;
   specialty.value = educations.value[props.editIndex][0].specialty;
   address.value = educations.value[props.editIndex][0].address;
@@ -149,8 +147,24 @@ onMounted(() => {
 });
 
 const saveToLocalStorage = () => {
-  if (buttonDisabled == false) {
-    buttonDisabled = true;
+  let dateCheck = false;
+  if (checked.value) {
+    if (educationFrom.value != null) {
+      dateCheck = true;
+    }
+  } else {
+    if (educationTo.value != null) {
+      dateCheck = true;
+    }
+    if (educationFrom.value != null && educationTo.value != null) {
+      if (educationFrom.value <= educationTo.value) {
+        dateCheck = true;
+      }
+    } else if (educationFrom.value != null || educationTo.value != null) {
+      dateCheck = true;
+    }
+  }
+  if (dateCheck) {
     if (localStorage.getItem("educations")) {
       console.log("Update Education");
       educations.value[props.editIndex][0].type = type.value;
@@ -177,13 +191,19 @@ const saveToLocalStorage = () => {
       localStorage.setItem("educations", JSON.stringify([education]));
     }
     slideDown.value = true;
+  } else {
+    errorMessage();
   }
 };
 const removeFromLocalStorage = () => {
-  if (buttonDisabled == false) {
-    educations.value.splice(props.editIndex, 1);
-    localStorage.setItem("educations", JSON.stringify(educations.value));
-    slideDown.value = true;
-  }
+  educations.value.splice(props.editIndex, 1);
+  localStorage.setItem("educations", JSON.stringify(educations.value));
+  slideDown.value = true;
+};
+const errorMessage = () => {
+  createToast("Du hast nicht alle Felder richtig ausgefüllt.", {
+    type: "danger",
+    position: "bottom-center",
+  });
 };
 </script>

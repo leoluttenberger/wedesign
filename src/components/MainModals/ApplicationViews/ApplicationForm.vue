@@ -69,7 +69,6 @@
     <button
       class="bg-wd-green shadow rounded-md h-16 w-full text-white font-bold"
       @click="saveToLocalStorage()"
-      :disabled="buttonDisabled"
     >
       Bewerbung hinzufügen
     </button>
@@ -78,6 +77,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { slideDown } from "@/store/store.js";
+import { createToast } from "mosha-vue-toastify";
+import "mosha-vue-toastify/dist/style.css";
+
 const company = ref(null);
 const job = ref(null);
 const end = ref(null);
@@ -86,11 +88,6 @@ const note = ref("");
 const start = ref(null);
 let __mv = 0;
 let __state = "In Bearbeitung";
-let buttonDisabled = false;
-
-onMounted(() => {
-  buttonDisabled = false;
-});
 
 const saveToLocalStorage = () => {
   const applications = ref(
@@ -135,39 +132,46 @@ const saveToLocalStorage = () => {
   }
 
   if (company.value && end.value) {
-    if (buttonDisabled == false) {
-      if (dateCheck) {
-        buttonDisabled = true;
-        if (localStorage.getItem("applications")) {
-          if (applications.value.length) {
-            const currentApplications = JSON.parse(
-              localStorage.getItem("applications")
-            );
-            console.log(applications.value.length);
+    if (dateCheck) {
+      if (localStorage.getItem("applications")) {
+        if (applications.value.length) {
+          const currentApplications = JSON.parse(
+            localStorage.getItem("applications")
+          );
+          console.log(applications.value.length);
 
-            application[0].id =
-              applications.value[applications.value.length - 1][0].id + 1;
-            appointment[0].endId = application[0].id;
-            const newData = [...currentApplications, application];
-            localStorage.setItem("applications", JSON.stringify(newData));
-          } else {
-            localStorage.setItem("applications", JSON.stringify([application]));
-          }
+          application[0].id =
+            applications.value[applications.value.length - 1][0].id + 1;
+          appointment[0].endId = application[0].id;
+          const newData = [...currentApplications, application];
+          localStorage.setItem("applications", JSON.stringify(newData));
         } else {
           localStorage.setItem("applications", JSON.stringify([application]));
         }
-        if (localStorage.getItem("appointments")) {
-          const currentappointments = JSON.parse(
-            localStorage.getItem("appointments")
-          );
-          const newData = [...currentappointments, appointment];
-          localStorage.setItem("appointments", JSON.stringify(newData));
-        } else {
-          localStorage.setItem("appointments", JSON.stringify([appointment]));
-        }
-        slideDown.value = true;
+      } else {
+        localStorage.setItem("applications", JSON.stringify([application]));
       }
+      if (localStorage.getItem("appointments")) {
+        const currentappointments = JSON.parse(
+          localStorage.getItem("appointments")
+        );
+        const newData = [...currentappointments, appointment];
+        localStorage.setItem("appointments", JSON.stringify(newData));
+      } else {
+        localStorage.setItem("appointments", JSON.stringify([appointment]));
+      }
+      slideDown.value = true;
+    } else {
+      errorMessage();
     }
+  } else {
+    errorMessage();
   }
+};
+const errorMessage = () => {
+  createToast("Du hast nicht alle Felder richtig ausgefüllt.", {
+    type: "danger",
+    position: "bottom-center",
+  });
 };
 </script>

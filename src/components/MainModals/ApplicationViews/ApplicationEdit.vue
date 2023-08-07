@@ -303,6 +303,8 @@ import { slideDown, sideBack } from "@/store/store.js";
 import MotivationEdit from "@/components/MainModals/MotivationViews/MotivationEdit.vue";
 import MVEditModal from "@/components/MenuModals/MVEditModal.vue";
 import ApplicationPreview from "@/components/MainModals/ApplicationViews/ApplicationPreview.vue";
+import { createToast } from "mosha-vue-toastify";
+import "mosha-vue-toastify/dist/style.css";
 
 const MAX_ARCHIVE_LENGHT = 20;
 const company = ref(null);
@@ -448,7 +450,6 @@ const createMotivationNode = () => {
 };
 const closeAfterSave = () => {
   saveToLocalStorage();
-  slideDown.value = true;
 };
 const saveToLocalStorage = () => {
   const applications = ref(
@@ -511,6 +512,9 @@ const saveToLocalStorage = () => {
       }
 
       localStorage.setItem("applications", JSON.stringify(applications.value));
+      slideDown.value = true;
+    } else {
+      errorMessage();
     }
   }
 };
@@ -533,5 +537,14 @@ const openQueryModal = () => {
 };
 const openDeteleModal = () => {
   showDeleteModal.value = true;
+};
+const errorMessage = () => {
+  createToast(
+    "Du hast nicht alle Felder richtig ausgefüllt. Die Veränderung wurde nicht übernommen!",
+    {
+      type: "danger",
+      position: "bottom-center",
+    }
+  );
 };
 </script>

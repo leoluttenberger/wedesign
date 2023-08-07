@@ -52,14 +52,12 @@
     <button
       class="bg-wd-error shadow rounded-md h-10 w-full text-white font-bold"
       @click="removeFromLocalStorage()"
-      :disabled="buttonDisabled"
     >
       Erfahrung entfernen
     </button>
     <button
       class="bg-wd-green shadow rounded-md h-16 w-full text-white font-bold"
       @click="saveToLocalStorage()"
-      :disabled="buttonDisabled"
     >
       Erfahrung speichern
     </button>
@@ -69,12 +67,13 @@
 <script setup lang="ts">
 import { ref, onMounted, defineProps } from "vue";
 import { slideDown } from "@/store/store.js";
+import { createToast } from "mosha-vue-toastify";
+import "mosha-vue-toastify/dist/style.css";
 
 const workshop = ref(null);
 const description = ref(null);
 const workshopFrom = ref(null);
 const workshopTo = ref(null);
-let buttonDisabled = false;
 const experiences = ref(JSON.parse(localStorage.getItem("experiences")) || []);
 
 const props = defineProps({
@@ -85,7 +84,6 @@ const props = defineProps({
 });
 
 onMounted(() => {
-  buttonDisabled = false;
   workshop.value = experiences.value[props.editIndex][0].workshop;
   description.value = experiences.value[props.editIndex][0].description;
   workshopFrom.value = experiences.value[props.editIndex][0].workshopFrom;
@@ -93,8 +91,16 @@ onMounted(() => {
 });
 
 const saveToLocalStorage = () => {
-  if (buttonDisabled == false) {
-    buttonDisabled = true;
+  let dateCheck = false;
+
+  if (workshopFrom.value != null && workshopTo.value != null) {
+    if (workshopFrom.value <= workshopTo.value) {
+      dateCheck = true;
+    }
+  } else if (workshopFrom.value != null || workshopTo.value != null) {
+    dateCheck = true;
+  }
+  if (dateCheck) {
     if (localStorage.getItem("experiences")) {
       console.log("Update Education");
       experiences.value[props.editIndex][0].workshop = workshop.value;
@@ -114,13 +120,19 @@ const saveToLocalStorage = () => {
       localStorage.setItem("experiences", JSON.stringify([experience]));
     }
     slideDown.value = true;
+  } else {
+    errorMessage();
   }
 };
 const removeFromLocalStorage = () => {
-  if (buttonDisabled == false) {
-    experiences.value.splice(props.editIndex, 1);
-    localStorage.setItem("experiences", JSON.stringify(experiences.value));
-    slideDown.value = true;
-  }
+  experiences.value.splice(props.editIndex, 1);
+  localStorage.setItem("experiences", JSON.stringify(experiences.value));
+  slideDown.value = true;
+};
+const errorMessage = () => {
+  createToast("Du hast nicht alle Felder richtig ausgefüllt.", {
+    type: "danger",
+    position: "bottom-center",
+  });
 };
 </script>

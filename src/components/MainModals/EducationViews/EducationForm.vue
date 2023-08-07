@@ -99,7 +99,6 @@
     <button
       class="bg-wd-green shadow rounded-md h-16 w-full text-white font-bold"
       @click="saveToLocalStorage()"
-      :disabled="buttonDisabled"
     >
       Ausbildung hinzufügen
     </button>
@@ -109,18 +108,18 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { slideDown } from "@/store/store.js";
+import { createToast } from "mosha-vue-toastify";
+import "mosha-vue-toastify/dist/style.css";
 
 const type = ref(null);
 const specialty = ref(null);
 const address = ref(null);
 const educationFrom = ref(null);
 const educationTo = ref(null);
-let buttonDisabled = false;
 const checked = ref(false);
 const note = ref(null);
 
 onMounted(() => {
-  buttonDisabled = false;
   checked.value = false;
 });
 
@@ -136,8 +135,17 @@ const saveToLocalStorage = () => {
       note: note.value,
     },
   ];
-  if (buttonDisabled == false) {
-    buttonDisabled = true;
+  let dateCheck = false;
+  if (checked.value) {
+    if (educationFrom.value != null) {
+      dateCheck = true;
+    }
+  } else {
+    if (educationTo.value != null) {
+      dateCheck = true;
+    }
+  }
+  if (dateCheck) {
     if (localStorage.getItem("educations")) {
       const currentEducations = JSON.parse(localStorage.getItem("educations"));
       const newData = [...currentEducations, education];
@@ -146,6 +154,8 @@ const saveToLocalStorage = () => {
       localStorage.setItem("educations", JSON.stringify([education]));
     }
     slideDown.value = true;
+  } else {
+    errorMessage();
   }
 };
 const toggleChecked = () => {
@@ -154,5 +164,11 @@ const toggleChecked = () => {
   } else {
     checked.value = true;
   }
+};
+const errorMessage = () => {
+  createToast("Du hast nicht alle Felder richtig ausgefüllt.", {
+    type: "danger",
+    position: "bottom-center",
+  });
 };
 </script>

@@ -52,7 +52,6 @@
     <button
       class="bg-wd-green shadow rounded-md h-16 w-full text-white font-bold"
       @click="saveToLocalStorage()"
-      :disabled="buttonDisabled"
     >
       Erfahrung hinzufügen
     </button>
@@ -62,16 +61,13 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { slideDown } from "@/store/store.js";
+import { createToast } from "mosha-vue-toastify";
+import "mosha-vue-toastify/dist/style.css";
 
 const workshop = ref(null);
 const description = ref(null);
 const workshopFrom = ref(null);
 const workshopTo = ref(null);
-let buttonDisabled = false;
-
-onMounted(() => {
-  buttonDisabled = false;
-});
 
 const saveToLocalStorage = () => {
   const experience = [
@@ -82,8 +78,17 @@ const saveToLocalStorage = () => {
       workshopTo: workshopTo.value,
     },
   ];
-  if (buttonDisabled == false) {
-    buttonDisabled = true;
+
+  let dateCheck = false;
+
+  if (workshopFrom.value != null && workshopTo.value != null) {
+    if (workshopFrom.value <= workshopTo.value) {
+      dateCheck = true;
+    }
+  } else if (workshopFrom.value != null || workshopTo.value != null) {
+    dateCheck = true;
+  }
+  if (dateCheck) {
     if (localStorage.getItem("experiences")) {
       const currentExperiences = JSON.parse(
         localStorage.getItem("experiences")
@@ -94,6 +99,14 @@ const saveToLocalStorage = () => {
       localStorage.setItem("experiences", JSON.stringify([experience]));
     }
     slideDown.value = true;
+  } else {
+    errorMessage();
   }
+};
+const errorMessage = () => {
+  createToast("Du hast nicht alle Felder richtig ausgefüllt.", {
+    type: "danger",
+    position: "bottom-center",
+  });
 };
 </script>

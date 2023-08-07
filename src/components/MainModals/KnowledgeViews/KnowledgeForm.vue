@@ -60,7 +60,6 @@
     <button
       class="bg-wd-green shadow rounded-md h-16 w-full text-white font-bold"
       @click="saveToLocalStorage()"
-      :disabled="buttonDisabled"
     >
       Kenntniss hinzufügen
     </button>
@@ -75,11 +74,6 @@ const type = ref(null);
 const diversKnowledge = ref(null);
 const languageKnowledge = ref(null);
 const languageLevel = ref(null);
-let buttonDisabled = false;
-
-onMounted(() => {
-  buttonDisabled = false;
-});
 
 const saveToLocalStorage = () => {
   const knowledge = [
@@ -90,16 +84,13 @@ const saveToLocalStorage = () => {
       languageLevel: languageLevel.value,
     },
   ];
-  if (buttonDisabled == false) {
-    buttonDisabled = true;
-    if (localStorage.getItem("knowledges")) {
-      const currentknowledges = JSON.parse(localStorage.getItem("knowledges"));
-      const newData = [...currentknowledges, knowledge];
-      localStorage.setItem("knowledges", JSON.stringify(newData));
-    } else {
-      localStorage.setItem("knowledges", JSON.stringify([knowledge]));
-    }
-    slideDown.value = true;
+  if (localStorage.getItem("knowledges")) {
+    const currentknowledges = JSON.parse(localStorage.getItem("knowledges"));
+    const newData = [...currentknowledges, knowledge];
+    localStorage.setItem("knowledges", JSON.stringify(newData));
+  } else {
+    localStorage.setItem("knowledges", JSON.stringify([knowledge]));
   }
+  slideDown.value = true;
 };
 </script>

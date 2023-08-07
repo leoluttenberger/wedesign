@@ -394,7 +394,6 @@ const previewApplication = () => {
   saveToLocalStorage();
   checkMVTextAndMVIndex();
   applicationPreviewOpen.value = true;
-  sideBack.value = true;
 };
 const removeFromLocalStorage = () => {
   const applications = ref(
@@ -450,6 +449,7 @@ const createMotivationNode = () => {
 };
 const closeAfterSave = () => {
   saveToLocalStorage();
+  slideDown.value = true;
 };
 const saveToLocalStorage = () => {
   const applications = ref(
@@ -512,7 +512,7 @@ const saveToLocalStorage = () => {
       }
 
       localStorage.setItem("applications", JSON.stringify(applications.value));
-      slideDown.value = true;
+      infoMessage();
     } else {
       errorMessage();
     }
@@ -540,11 +540,17 @@ const openDeteleModal = () => {
 };
 const errorMessage = () => {
   createToast(
-    "Du hast nicht alle Felder richtig ausgefüllt. Die Veränderung wurde nicht übernommen!",
+    "Du hast nicht alle Felder richtig ausgefüllt. Die Änderungen wurden nicht übernommen!",
     {
       type: "danger",
       position: "bottom-center",
     }
   );
+};
+const infoMessage = () => {
+  createToast("Änderungen gespeichert!", {
+    type: "info",
+    position: "bottom-center",
+  });
 };
 </script>

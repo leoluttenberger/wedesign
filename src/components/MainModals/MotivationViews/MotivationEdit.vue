@@ -264,7 +264,7 @@ const motivation2 = [
     textBegining:
       "In der Stellenausschreibung auf Ihrer Homepage konnte ich sehen, dass Sie für Ihr Kreativstudio eine Medienfachkraft suchen. Da ich gerade eine Ausbildung in einer Medienagentur abgeschlossen habe, bewerbe ich mich bei Ihnen, vor allem weil Ihre Anzeige großes Interesse bei mir geweckt hat.",
     textExperience:
-      "Aufgrund meines erfolgreichen Abschlusses der Schule xxx und der anschließenden abgeschlossenen Lehre für „Medientechnik und -design“ und meiner damit bereits vorhandenen Praxiserfahrung, bin ich für diese Stelle sehr gut geeignet. Während meiner Ausbildung konnte ich mir hervorragende Kenntnisse in den einzelnen künstlerischen Darstellungsformen sowie der digitalen Bearbeitung aneignen. Zudem bin ich sehr engagiert und kreativ sowie künstlerisch begabt.",
+      "Aufgrund meines erfolgreichen Abschlusses der Schule [xxx] und der anschließenden abgeschlossenen Lehre für „Medientechnik und -design“ und meiner damit bereits vorhandenen Praxiserfahrung, bin ich für diese Stelle sehr gut geeignet. Während meiner Ausbildung konnte ich mir hervorragende Kenntnisse in den einzelnen künstlerischen Darstellungsformen sowie der digitalen Bearbeitung aneignen. Zudem bin ich sehr engagiert und kreativ sowie künstlerisch begabt.",
     textCompetence:
       "Zu meinen Fähigkeiten gehört es, selbstständig und verantwortungsbewusst zu arbeiten und dies auch gewissenhaft mit Teamarbeit zu kombinieren. Ich verfüge über ein hohes Maß an Lernbereitschaft und Problemlösungsfähigkeit. Diese Kompetenzen konnte ich insbesondere während meiner abgeschlossenen Ausbildung unter Beweis stellen. Ich bin gut darin, Konzepte zu verstehen und in eine künstlerische Form zu übersetzen. Ich arbeite sehr gewissenhaft und erledige meine Aufgaben mit vollem Engagement und kann mich gut auf Herausforderungen einstellen.",
     textContribution:
@@ -280,9 +280,9 @@ const motivation3 = [
     subject: "Bewerbung als [...]",
     salutationBeginning: "Sehr geehrte [Frau/Herr]",
     textBegining:
-      "Mit großem Interesse habe ich Ihr Stellenangebot für eine Lehrstelle als KFZ-TechnikerIn gelesen und sende Ihnen deshalb meine schriftlichen Bewerbungsunterlagen. ",
+      "Mit großem Interesse habe ich Ihr Stellenangebot für eine Lehrstelle als [KFZ-TechnikerIn] gelesen und sende Ihnen deshalb meine schriftlichen Bewerbungsunterlagen. ",
     textExperience:
-      "Meine Ausbildung an der [xxx] Schule habe ich bereits erfolgreich abgeschlossen. In der Schule war ich [ein/e] sehr [aufmerksame/r] SchülerIn und konnte die geforderten Aufgaben gut bewältigen. Ich habe mich schon immer sehr für Autos und die Technik dahinter interessiert, z.B. habe ich meinem Vater immer gerne bei seinen eigenen Autoreparaturen zugeschaut. Ich würde sehr gerne die interessanten Aufgaben eines Kfz-Technikers erlernen, wie zum Beispiel die Reparatur von Sachschäden, Motoren oder Metallschäden.",
+      "Meine Ausbildung an der [xxx] Schule habe ich bereits erfolgreich abgeschlossen. In der Schule war ich [ein/e] sehr [aufmerksame/r] [SchülerIn] und konnte die geforderten Aufgaben gut bewältigen. Ich habe mich schon immer sehr für Autos und die Technik dahinter interessiert, z.B. habe ich meinem Vater immer gerne bei seinen eigenen Autoreparaturen zugeschaut. Ich würde sehr gerne die interessanten Aufgaben eines [Kfz-Technikers] erlernen, wie zum Beispiel die Reparatur von Sachschäden, Motoren oder Metallschäden.",
     textCompetence:
       "Ich bin handwerklich geschickt, arbeite auch sorgfältig und würde sehr gerne meine Ausbildung in Ihrem Betrieb absolvieren. Ich habe eine gute Auffassungsgabe und bin zudem sehr zuverlässig und pünktlich. Außerdem arbeite ich gerne selbständig und gewissenhaft, fühle mich aber auch im Team sehr wohl.",
     textContribution:
@@ -298,13 +298,13 @@ const motivation4 = [
     subject: "Bewerbung als [...]",
     salutationBeginning: "Sehr geehrte [Frau/Herr]",
     textBegining:
-      "Ich habe Ihre Anzeige gelesen und bewerbe mich mit großem Interesse um die ausgeschriebene Lehrstelle als ProgrammiererIn.",
+      "Ich habe Ihre Anzeige gelesen und bewerbe mich mit großem Interesse um die ausgeschriebene Lehrstelle als [ProgrammiererIn.]",
     textExperience:
       "Durch den Einfluss meiner Familienmitglieder habe ich mich schon lange mit Technik beschäftigt und einiges von ihnen gelernt. Privat arbeite und spiele ich gerne am Computer und konnte mir bereits einige Programmierkenntnisse aneignen, die ich gerne ausbauen möchte. Eine Berufsausbildung, in der ich fundierte Programmierkenntnisse erlernen kann, würde mir viel bedeuten, da mein Interesse in diesem Bereich sehr groß ist.",
     textCompetence:
       "Ich bin technisch sehr geschickt, habe ein gutes Verständnis für digitale Prozesse, bin sehr genau und sehe das Programmieren auch als das Erlernen einer Sprache, worin ich auch sehr gut bin. Ich bin ein sehr pünktlicher Mensch, arbeite gerne selbständig und auch sehr gewissenhaft, bin gut in der Kommunikation, sowie stark problemlösungsorientiert.",
     textContribution:
-      "Mit diesen aufgezählten Eigenschaften bin ich davon überzeugt, dass diese Lehrstelle sehr gut zu mir passt und ich mir meinen Traum als ProgrammiererIn arbeiten zu können erfüllen kann.",
+      "Mit diesen aufgezählten Eigenschaften bin ich davon überzeugt, dass diese Lehrstelle sehr gut zu mir passt und ich mir meinen Traum als [ProgrammiererIn] arbeiten zu können erfüllen kann.",
     ending:
       "Gerne würde ich Sie in einem persönlichen Gespräch davon überzeugen, dass ich für diesen Ausbildungsplatz sehr gut geeignet bin und freue mich darauf, Sie persönlich kennenzulernen.",
     salutationEnding: "Mit freundlichen Grüßen [...]",
@@ -316,7 +316,7 @@ const motivation5 = [
     subject: "Bewerbung als [...]",
     salutationBeginning: "Sehr geehrte [Frau/Herr]",
     textBegining:
-      "Bezugnehmend auf Ihre Stellenanzeige möchte ich mich gerne um die offene Lehrstelle als MechatronikerIn für Büro- und EDV-Systemtechnik bewerben.",
+      "Bezugnehmend auf Ihre Stellenanzeige möchte ich mich gerne um die offene Lehrstelle als [MechatronikerIn] für Büro- und EDV-Systemtechnik bewerben.",
     textExperience:
       "Schon seit einigen Jahren interessiere ich mich sehr für technische Themen und beschäftige mich gerne mit Computern. Ich würde sehr gerne eine Berufsausbildung machen, in der ich mein großes Interesse an diesen Bereichen einsetzen kann.",
     textCompetence:

@@ -5,7 +5,7 @@
         <div class="px-2">
           <FormKit
             v-model="type"
-            label="Typ:"
+            label="Typ & Name:"
             type="text"
             placeholder="Lehre, HTL, AHS, HAK, ..."
           />

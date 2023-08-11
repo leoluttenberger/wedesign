@@ -91,7 +91,7 @@ valueAvatarShow.value = true;
 
 const bottomCardOpen = ref(false);
 const imageEdit = ref(true);
-const imageEditText = ref("Profilbild ändern");
+const imageEditText = ref("Lebenslauf-Bild ändern");
 
 const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {

@@ -23,37 +23,13 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-1">
-      <div class="px-2">
-        <FormKit
-          v-model="address"
-          label="Adresse:"
-          type="text"
-          placeholder="Straße Nr., PLZ"
-        />
-      </div>
-      <div class="flex">
-        <div class="px-2 pt-6">
-          <input
-            id="ongoing"
-            v-model="checked"
-            type="checkbox"
-            value="ongoing"
-            class="p-10 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          />
-          <label
-            for="ongoing"
-            class="h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-          >
-          </label>
-        </div>
-        <div
-          label
-          class="px-2 align-middle text-black dark:text-white font-Montserrat text-base font-bold md:text-lg pt-5"
-        >
-          Laufend
-        </div>
-      </div>
+    <div class="grow px-2">
+      <FormKit
+        v-model="address"
+        label="Adresse:"
+        type="text"
+        placeholder="Straße Nr., PLZ"
+      />
     </div>
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
@@ -90,13 +66,39 @@
         </div>
       </div>
     </div>
-    <div class="px-2">
-      <FormKit
-        type="textarea"
-        label="Anmerkungen: "
-        v-model="note"
-        placeholder="Wichtige Informationen"
-      />
+    <div class="grid grid-cols-2 gap-1">
+      <div class="px-2">
+        <FormKit
+          type="textarea"
+          label="Anmerkungen: "
+          v-model="note"
+          placeholder="Wichtige Informationen"
+        />
+      </div>
+      <div class="flex">
+        <div class="px-2 pt-6">
+          <input
+            id="ongoing"
+            v-model="checked"
+            type="checkbox"
+            value="ongoing"
+            class="p-10 w-3 h-3 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <label
+            for="ongoing"
+            class="h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
+          >
+          </label>
+        </div>
+        <div class="pt-1">
+          <div
+            label
+            class="px-2 align-middle text-black dark:text-white font-Montserrat text-base font-bold md:text-lg pt-5"
+          >
+            Laufend
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

@@ -1,4 +1,9 @@
 <template>
+  <p
+    class="text-black px-2 dark:text-white font-Montserrat text-xl p-4 font-bold"
+  >
+    Bewerbungsprozess
+  </p>
   <TwAccordion
     class="bg-white dark:bg-slate-700 rounded overflow-hidden"
     :data="accordion"
@@ -23,7 +28,371 @@
           ></TwFeather>
         </button>
       </div>
-      <Transition duration="550" name="nested">
+      <Transition name="nested">
+        <div v-if="isActive">
+          <div>
+            <div
+              class="p-4 bg-wd-background text-black dark:text-white dark:bg-slate-500"
+              :key="`${item.ref}`"
+              :ref="item.ref"
+            >
+              <ul>
+                <li
+                  v-for="(n, index) in item.body"
+                  v-bind:key="item.body[index]"
+                >
+                  {{ item.body[index] }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </template>
+  </TwAccordion>
+  <p
+    class="text-black px-2 dark:text-white font-Montserrat text-xl p-4 font-bold"
+  >
+    Lebenslauf erstellen
+  </p>
+
+  <TwAccordion
+    class="bg-white dark:bg-slate-700 rounded overflow-hidden"
+    :data="accordion2"
+  >
+    <template
+      v-for="item in accordion2"
+      :key="item.ref"
+      #[`header_${item.ref}`]="{ toggleAccordion, ref, isActive }"
+    >
+      <div
+        class="text-black bg-gray-300 dark:text-white dark:bg-slate-600 p-4 flex justify-between items-center cursor-pointer"
+        @click="toggleAccordion(ref)"
+      >
+        <div>{{ item.header }}</div>
+        <button class="flex items-center">
+          <TwFeather
+            class="transition-all duration-400"
+            type="chevron-down"
+            :class="{
+              'rotate-180': isActive,
+            }"
+          ></TwFeather>
+        </button>
+      </div>
+      <Transition name="nested">
+        <div v-if="isActive">
+          <div>
+            <div
+              class="p-4 bg-wd-background text-black dark:text-white dark:bg-slate-500"
+              :key="`${item.ref}`"
+              :ref="item.ref"
+            >
+              <ul>
+                <li
+                  v-for="(n, index) in item.body"
+                  v-bind:key="item.body[index]"
+                >
+                  {{ item.body[index] }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </template>
+  </TwAccordion>
+  <p
+    class="text-black px-2 dark:text-white font-Montserrat text-xl p-4 font-bold"
+  >
+    Bewerbung erstellen
+  </p>
+
+  <TwAccordion
+    class="bg-white dark:bg-slate-700 rounded overflow-hidden"
+    :data="accordion3"
+  >
+    <template
+      v-for="item in accordion3"
+      :key="item.ref"
+      #[`header_${item.ref}`]="{ toggleAccordion, ref, isActive }"
+    >
+      <div
+        class="text-black bg-gray-300 dark:text-white dark:bg-slate-600 p-4 flex justify-between items-center cursor-pointer"
+        @click="toggleAccordion(ref)"
+      >
+        <div>{{ item.header }}</div>
+        <button class="flex items-center">
+          <TwFeather
+            class="transition-all duration-400"
+            type="chevron-down"
+            :class="{
+              'rotate-180': isActive,
+            }"
+          ></TwFeather>
+        </button>
+      </div>
+      <Transition name="nested">
+        <div v-if="isActive">
+          <div>
+            <div
+              class="p-4 bg-wd-background text-black dark:text-white dark:bg-slate-500"
+              :key="`${item.ref}`"
+              :ref="item.ref"
+            >
+              <ul>
+                <li
+                  v-for="(n, index) in item.body"
+                  v-bind:key="item.body[index]"
+                >
+                  {{ item.body[index] }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </template>
+  </TwAccordion>
+  <p
+    class="text-black px-2 dark:text-white font-Montserrat text-xl p-4 font-bold"
+  >
+    Bewerbung speichern und bearbeiten
+  </p>
+
+  <TwAccordion
+    class="bg-white dark:bg-slate-700 rounded overflow-hidden"
+    :data="accordion4"
+  >
+    <template
+      v-for="item in accordion4"
+      :key="item.ref"
+      #[`header_${item.ref}`]="{ toggleAccordion, ref, isActive }"
+    >
+      <div
+        class="text-black bg-gray-300 dark:text-white dark:bg-slate-600 p-4 flex justify-between items-center cursor-pointer"
+        @click="toggleAccordion(ref)"
+      >
+        <div>{{ item.header }}</div>
+        <button class="flex items-center">
+          <TwFeather
+            class="transition-all duration-400"
+            type="chevron-down"
+            :class="{
+              'rotate-180': isActive,
+            }"
+          ></TwFeather>
+        </button>
+      </div>
+      <Transition name="nested">
+        <div v-if="isActive">
+          <div>
+            <div
+              class="p-4 bg-wd-background text-black dark:text-white dark:bg-slate-500"
+              :key="`${item.ref}`"
+              :ref="item.ref"
+            >
+              <ul>
+                <li
+                  v-for="(n, index) in item.body"
+                  v-bind:key="item.body[index]"
+                >
+                  {{ item.body[index] }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </template>
+  </TwAccordion>
+  <p
+    class="text-black px-2 dark:text-white font-Montserrat text-xl p-4 font-bold"
+  >
+    Erinnerungen und Kalender
+  </p>
+
+  <TwAccordion
+    class="bg-white dark:bg-slate-700 rounded overflow-hidden"
+    :data="accordion5"
+  >
+    <template
+      v-for="item in accordion5"
+      :key="item.ref"
+      #[`header_${item.ref}`]="{ toggleAccordion, ref, isActive }"
+    >
+      <div
+        class="text-black bg-gray-300 dark:text-white dark:bg-slate-600 p-4 flex justify-between items-center cursor-pointer"
+        @click="toggleAccordion(ref)"
+      >
+        <div>{{ item.header }}</div>
+        <button class="flex items-center">
+          <TwFeather
+            class="transition-all duration-400"
+            type="chevron-down"
+            :class="{
+              'rotate-180': isActive,
+            }"
+          ></TwFeather>
+        </button>
+      </div>
+      <Transition name="nested">
+        <div v-if="isActive">
+          <div>
+            <div
+              class="p-4 bg-wd-background text-black dark:text-white dark:bg-slate-500"
+              :key="`${item.ref}`"
+              :ref="item.ref"
+            >
+              <ul>
+                <li
+                  v-for="(n, index) in item.body"
+                  v-bind:key="item.body[index]"
+                >
+                  {{ item.body[index] }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </template>
+  </TwAccordion>
+  <p
+    class="text-black px-2 dark:text-white font-Montserrat text-xl p-4 font-bold"
+  >
+    Einstellungen
+  </p>
+
+  <TwAccordion
+    class="bg-white dark:bg-slate-700 rounded overflow-hidden"
+    :data="accordion6"
+  >
+    <template
+      v-for="item in accordion6"
+      :key="item.ref"
+      #[`header_${item.ref}`]="{ toggleAccordion, ref, isActive }"
+    >
+      <div
+        class="text-black bg-gray-300 dark:text-white dark:bg-slate-600 p-4 flex justify-between items-center cursor-pointer"
+        @click="toggleAccordion(ref)"
+      >
+        <div>{{ item.header }}</div>
+        <button class="flex items-center">
+          <TwFeather
+            class="transition-all duration-400"
+            type="chevron-down"
+            :class="{
+              'rotate-180': isActive,
+            }"
+          ></TwFeather>
+        </button>
+      </div>
+      <Transition name="nested">
+        <div v-if="isActive">
+          <div>
+            <div
+              class="p-4 bg-wd-background text-black dark:text-white dark:bg-slate-500"
+              :key="`${item.ref}`"
+              :ref="item.ref"
+            >
+              <ul>
+                <li
+                  v-for="(n, index) in item.body"
+                  v-bind:key="item.body[index]"
+                >
+                  {{ item.body[index] }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </template>
+  </TwAccordion>
+  <p
+    class="text-black px-2 dark:text-white font-Montserrat text-xl p-4 font-bold"
+  >
+    Datenschutz und Datennutzung
+  </p>
+
+  <TwAccordion
+    class="bg-white dark:bg-slate-700 rounded overflow-hidden"
+    :data="accordion7"
+  >
+    <template
+      v-for="item in accordion7"
+      :key="item.ref"
+      #[`header_${item.ref}`]="{ toggleAccordion, ref, isActive }"
+    >
+      <div
+        class="text-black bg-gray-300 dark:text-white dark:bg-slate-600 p-4 flex justify-between items-center cursor-pointer"
+        @click="toggleAccordion(ref)"
+      >
+        <div>{{ item.header }}</div>
+        <button class="flex items-center">
+          <TwFeather
+            class="transition-all duration-400"
+            type="chevron-down"
+            :class="{
+              'rotate-180': isActive,
+            }"
+          ></TwFeather>
+        </button>
+      </div>
+      <Transition name="nested">
+        <div v-if="isActive">
+          <div>
+            <div
+              class="p-4 bg-wd-background text-black dark:text-white dark:bg-slate-500"
+              :key="`${item.ref}`"
+              :ref="item.ref"
+            >
+              <ul>
+                <li
+                  v-for="(n, index) in item.body"
+                  v-bind:key="item.body[index]"
+                >
+                  {{ item.body[index] }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </template>
+  </TwAccordion>
+  <p
+    class="text-black px-2 dark:text-white font-Montserrat text-xl p-4 font-bold"
+  >
+    Wer sind wir
+  </p>
+
+  <TwAccordion
+    class="bg-white dark:bg-slate-700 rounded overflow-hidden"
+    :data="accordion8"
+  >
+    <template
+      v-for="item in accordion8"
+      :key="item.ref"
+      #[`header_${item.ref}`]="{ toggleAccordion, ref, isActive }"
+    >
+      <div
+        class="text-black bg-gray-300 dark:text-white dark:bg-slate-600 p-4 flex justify-between items-center cursor-pointer"
+        @click="toggleAccordion(ref)"
+      >
+        <div>{{ item.header }}</div>
+        <button class="flex items-center">
+          <TwFeather
+            class="transition-all duration-400"
+            type="chevron-down"
+            :class="{
+              'rotate-180': isActive,
+            }"
+          ></TwFeather>
+        </button>
+      </div>
+      <Transition name="nested">
         <div v-if="isActive">
           <div>
             <div
@@ -96,6 +465,8 @@ const accordion = ref([
       "Falls du den Lebenslauf und das Motivationsschreiben direkt vom Smartphone schicken magst, klicke bitte auf 'Vorschau & Teilen' und dann auf den 'Teilen'-Button rechts oben. Das Dokument wird dabei automatisch auf deinem Smartphone (z.B. unter Dokumenten oder Downloads - das ist bei jedem Smartphone anders) gespeichert. Öffne dein E-Mail-Programm, falls du mit deiner E-Mail-Adresse angemeldet bist (falls nicht, kannst du im Internet suchen, wie man ein E-Mail-Konto erstellt und dieses auch am Smartphone nutzen kann). Schreibe dann die E-Mail an die E-Mail Adresse der Arbeitgeber*innen. Diese steht in der Regel in der Stellenausschreibung. Hänge dann die Dateien (Lebenslauf und Motivationsschreiben) an - normalerweise gibt es dafür einen 'Anhängen'-Button, oder ein Büroklammer-Symbol in deinem E-Mail-Programm. Jetzt kannst du die E-Mail senden.",
     ],
   },
+]);
+const accordion2 = ref([
   {
     ref: "Was ist ein Lebenslauf?",
     header: "Was ist ein Lebenslauf?",
@@ -163,6 +534,8 @@ const accordion = ref([
       "Ja, indem du auf 'Vorschau & Teilen' und dann auf das Teilen-Symbol (rechts oben) klickst. Der Lebenslauf wird damit automatisch im PDF und .docx Format auf deinem Smartphone gespeichert (je nach Smartphone in deinem Dokumenten- oder Download-Ordner). Du kannst es zum Beispiel an dich selbst schicken oder auf eine Cloud (z.B. Google Drive) hochladen. Dann kannst du es weiter bearbeiten. Zum Bearbeiten empfehlen wir das .docx Format.",
     ],
   },
+]);
+const accordion3 = ref([
   {
     ref: "Wie erstelle ich eine Bewerbung in der App?",
     header: "Wie erstelle ich eine Bewerbung in der App?",
@@ -262,6 +635,8 @@ const accordion = ref([
       "Nein. Ein Motivationsschreiben muss nicht immer genauso wie hier aufgebaut sein. Die APPly Version ist nur ein Beispiel, du kannst es aber auch anders gestalten. Diese Unterscheidung soll dir nur helfen, das Motivationsschreiben zu strukturieren, du kannst aber auch etwas anderes in die Felder schreiben oder sie auch leer lassen. Hier findest du einige weitere Beispiele für Bewerbungsschreiben: Bewerbungsportal - Musterbewerbungen (ams.or.at).",
     ],
   },
+]);
+const accordion4 = ref([
   {
     ref: "Wie speichere ich meine Bewerbungen als Dokument ab?",
     header: "Wie speichere ich meine Bewerbungen als Dokument ab?",
@@ -305,6 +680,8 @@ const accordion = ref([
       "Das fertige Motivationsschreiben kannst du hochladen oder verschicken. Dafür kannst du unter dem Menüpunkt 'Bewerbungen' die passende Bewerbung auswählen. Anschließend kannst du auf 'Vorschau & Teilen' gehen. Hier werden dir einige Fragen gestellt, um sicherzugehen, dass du nichts vergessen hast. Wenn du alles mit einem 'Häkchen' abgehakt hast, kannst du das Motivationsschreiben erstellen. Über den Teilen-Button rechts oben kannst du das Schreiben senden. Das Motivationsschreiben wird automatisch im PDF und im .docx Format auf deinem Smartphone gespeichert. Zum Verschicken empfehlen wir das PDF Format. Falls du das Schreiben aber noch in einer anderen Software ändern magst, empfiehlt sich das .docx Format.",
     ],
   },
+]);
+const accordion5 = ref([
   {
     ref: "Wozu ist der Menüpunkt 'Erinnerungen'?",
     header: "Wozu ist der Menüpunkt 'Erinnerungen'?",
@@ -333,6 +710,8 @@ const accordion = ref([
       "Um eine Erinnerung zu erstellen, klicke auf das grüne Plus, wähle den passenden Typ ('Bewerbungsgespräch', 'Aufnahmetest', 'Feedback', 'sonstige Termine') aus und setze 'Start und Ende'. Mit 'Start und Ende' gibst du einen Zeitraum an, in dem die Erinnerung gilt und verschaffst dir damit einen Überblick, wann eine Aufgabe abgeschlossen ist. Klicke nun auf 'Termin hinzufügen'. Mit dem 'x' rechts oben schließt sich das Fenster, ohne etwas abzuspeichern.",
     ],
   },
+]);
+const accordion6 = ref([
   {
     ref: "Kann ich die Hintergrundfarbe der App ändern?",
     header: "Kann ich die Hintergrundfarbe der App ändern?",
@@ -359,6 +738,8 @@ const accordion = ref([
     header: "Gibt es die App auch in anderen Sprachen?",
     body: ["Das wäre sehr schön - leider konnten wir das noch nicht machen."],
   },
+]);
+const accordion7 = ref([
   {
     ref: "Muss ich mich anmelden?",
     header: "Muss ich mich anmelden?",
@@ -396,6 +777,8 @@ const accordion = ref([
       "Ja, du kannst deine Daten im Menüpunkt “Einstellungen” zurücksetzen und damit endgültig löschen. Diese können auch nicht mehr wiederhergestellt werden. Außerdem kannst du alle Daten und Cookies der App in den Einstellungen deines Smartphones löschen. In diesem Fall wird die App nicht gelöscht, die Daten aber schon. Und natürlich kannst du auch jederzeit einfach die App löschen.",
     ],
   },
+]);
+const accordion8 = ref([
   {
     ref: "Wer hat die App gemacht?",
     header: "Wer hat die App gemacht?",

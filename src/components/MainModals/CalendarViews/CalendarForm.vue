@@ -153,8 +153,9 @@ const saveToLocalStorage = () => {
 };
 const errorMessage = () => {
   createToast("Du hast nicht alle Felder richtig ausgefüllt.", {
+    position: "top-center",
+    transition: "zoom",
     type: "danger",
-    position: "bottom-center",
   });
 };
 </script>

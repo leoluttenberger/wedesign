@@ -1,7 +1,7 @@
 <template>
   <div class="overflow-auto overflow-scroll w-screen h-screen">
     <div class="grid grid-cols-3 gap-20 p-2 place-items-center">
-      <button type="button" @click="closeModal()" class="p-4">
+      <button type="button" @click="openQueryModal()" class="p-4">
         <BackIcon
           class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
         ></BackIcon>
@@ -11,7 +11,7 @@
       >
         Lebenslauf
       </p>
-      <button type="button" @click="saveToLocalStorage()" class="p-4">
+      <button type="button" @click="closeAfterSave()" class="p-4">
         <CheckIcon
           class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
         ></CheckIcon>
@@ -237,6 +237,33 @@
       </div>
     </div>
   </div>
+  <CropModal :show="showModal">
+    <div class="place-items-center">
+      <div class="text-white text-xl p-2">Schließen?</div>
+      <div class="text-white font-Montserrat text-base font-bold pb-2">
+        <p>
+          Bist du wirklich sicher, dass du das Fenster schließen willst ohne zu
+          speichern?
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="flex justify-evenly text-white font-Montserrat text-base font-bold h-10"
+    >
+      <button
+        type="button"
+        @click="returnToEdit()"
+        class="bg-wd-error w-screen"
+      >
+        Nein
+      </button>
+
+      <button type="button" @click="closeModal()" class="bg-wd-green w-screen">
+        Ja
+      </button>
+    </div>
+  </CropModal>
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
@@ -262,8 +289,11 @@ const streetNumber = ref(null);
 const districtNumber = ref(null);
 const city = ref(null);
 const hobbies = ref(null);
+const showModal = ref(false);
+
 onMounted(() => {
   slideDownUserInfo.value = false;
+  showModal.value = false;
   if (localStorage.getItem("userInfos")) {
     titleBefore.value = userInfos.value[0][0].titleBefore;
     titleAfter.value = userInfos.value[0][0].titleAfter;
@@ -329,8 +359,6 @@ const saveToLocalStorage = () => {
       ];
       localStorage.setItem("userInfos", JSON.stringify([defaultUserInfos]));
     }
-
-    slideDownUserInfo.value = true;
   } else {
     errorMessage();
   }
@@ -343,5 +371,16 @@ const errorMessage = () => {
     type: "danger",
     position: "bottom-center",
   });
+};
+const returnToEdit = () => {
+  showModal.value = false;
+};
+
+const openQueryModal = () => {
+  showModal.value = true;
+};
+const closeAfterSave = () => {
+  saveToLocalStorage();
+  slideDownUserInfo.value = true;
 };
 </script>

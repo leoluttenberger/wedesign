@@ -160,7 +160,7 @@ const saveAndDownLoadDocs = async () => {
   visible.value = false;
   await nextTick();
   visible.value = true;
-  //const base64StringPdf = await fileToBase64(pdf.value.output("blob"));
+  const base64StringPdf = await fileToBase64(pdf.value.output("blob"));
   const base64StringDoc = await fileToBase64(downloadDocx.value);
   saveAs(pdf.value.output("blob"), fileNamePDF);
   saveAs(downloadDocx.value, fileNameDoc);
@@ -200,7 +200,7 @@ const saveAndDownLoadDocs = async () => {
       console.error(error);
     });
 
-  /*await Filesystem.writeFile({
+  await Filesystem.writeFile({
     path: `${fileNamePDF}`,
     data: base64StringPdf,
     directory: Directory.Documents,
@@ -210,7 +210,7 @@ const saveAndDownLoadDocs = async () => {
     })
     .catch((error) => {
       console.error(error);
-    });*/
+    });
 
   if (Share.share && sharePath != "") {
     await Share.share({

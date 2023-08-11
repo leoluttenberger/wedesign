@@ -541,15 +541,17 @@ const errorMessage = () => {
   createToast(
     "Du hast nicht alle Felder richtig ausgefüllt. Die Änderungen wurden nicht übernommen!",
     {
+      position: "top-center",
+      transition: "zoom",
       type: "danger",
-      position: "bottom-center",
     }
   );
 };
 const infoMessage = () => {
   createToast("Änderungen gespeichert!", {
+    position: "top-center",
+    transition: "zoom",
     type: "info",
-    position: "bottom-center",
   });
 };
 </script>

@@ -116,8 +116,9 @@ const closeModal = () => {
 };
 const errorMessage = () => {
   createToast("Du hast nicht alle drei Kästchen angeklickt!", {
+    position: "top-center",
+    transition: "zoom",
     type: "danger",
-    position: "bottom-center",
   });
 };
 </script>

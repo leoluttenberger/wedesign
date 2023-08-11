@@ -14,18 +14,16 @@
               'Feedback',
               'Sonstige Termine',
             ]"
-            input-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white"
           />
         </div>
         <div class="px-2" v-if="isEnd">
           <FormKit
             v-model="type"
-            label="Ende"
+            label="Label:"
             type="select"
             value="Ende"
             placeholder="Ende"
             :options="['Ende']"
-            input-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white"
           />
         </div>
       </div>

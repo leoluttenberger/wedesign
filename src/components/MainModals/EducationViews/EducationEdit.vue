@@ -60,10 +60,12 @@
         <div class="px-2">
           <FormKit
             type="datepicker"
-            label="Start:"
+            label="Start: *"
             format="MM YYYY"
             v-model="educationFrom"
             :sequence="['year', 'month']"
+            :validation="[['required']]"
+            validation-visibility="live"
             picker-only
             label-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white text-black"
             input-class="$reset h-10 dark:bg-slate-800 text-base text-black dark:text-white"

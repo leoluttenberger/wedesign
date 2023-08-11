@@ -116,7 +116,6 @@
               ]"
               placeholder="Auswahl"
               :disabled="false"
-              input-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white"
             />
           </div>
         </div>
@@ -129,7 +128,6 @@
               :options="['weiblich', 'männlich', 'divers']"
               placeholder="Auswahl"
               :disabled="false"
-              input-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white"
             />
           </div>
         </div>

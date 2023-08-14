@@ -63,7 +63,7 @@ const getCheckOptions = () => {
   ];
   enableDisable.value = [
     {
-      name: "Diese Checkliste nicht mehr Anzeigen!",
+      name: "Diese Checkliste nicht mehr anzeigen!",
     },
   ];
 };

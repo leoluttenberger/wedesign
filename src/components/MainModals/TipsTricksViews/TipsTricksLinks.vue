@@ -43,6 +43,7 @@
                     rel="noopener noreferrer"
                     >{{ item.body[index] }}
                   </a>
+                  
                 </li>
               </ul>
             </div>
@@ -75,19 +76,19 @@ const accordion = ref([
     ref: "Stellensuche",
     header: "Stellensuche",
     body: [
-      "AMS Online-Bewerbungscoach und Mustervorlagen: https://www.ams.at/arbeitsuchende/topicliste/bewerbungsvorlage",
-      "AMS Lehrstellenbörse: https://www.ams.at/arbeitsuchende/arbeitslos-was-tun/lehrstellenboerse",
+      "AMS Portal für Stellensuche: https://jobs.ams.at/public/emps/",
+      "AMS Lehrstellenbörse https://www.ams.at/arbeitsuchende/arbeitslos-was-tun/lehrstellenboerse",
       "WKO Übersicht Lehrbetriebe: https://lehrbetriebsuebersicht.wko.at/",
-      "Öffentlicher Dienst - Stellenbörse: https://bund.jobboerse.gv.at/sap/bc/jobs/",
+      "Öffentlicher Dienst - Stellenbörse: https://bund.jobboerse.gv.at/sap/bc/jobs/ ",
     ],
   },
   {
     ref: "Bewerbung",
     header: "Bewerbung",
     body: [
-      "AMS Online-Bewerbungscoach und Mustervorlagen: https://www.ams.at/arbeitsuchende/topicliste/bewerbungsvorlage ",
+      "AMS Online-Bewerbungscoach und Mustervorlagen: https://www.ams.at/arbeitsuchende/topicliste/bewerbungsvorlage",
       "Tipps für den Bewerbungsprozess: https://www.akyoung.at/arbeit/bewerbung/",
-      "Üben von Aufnahmetest: https://www.playmit.com/ ",
+      "Üben von Aufnahmetest: https://www.playmit.com/",
     ],
   },
   {

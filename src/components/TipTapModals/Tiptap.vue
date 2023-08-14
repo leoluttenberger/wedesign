@@ -288,7 +288,7 @@ onMounted(() => {
   } else {
     editor.value.commands.setContent({
       type: "text",
-      text: "Neuer Text",
+      text: "aktueller Text",
     });
     console.log("Empty text is not allowed!");
   }

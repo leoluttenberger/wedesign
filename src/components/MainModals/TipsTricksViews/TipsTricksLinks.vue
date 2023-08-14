@@ -43,7 +43,6 @@
                     rel="noopener noreferrer"
                     >{{ item.body[index] }}
                   </a>
-                  
                 </li>
               </ul>
             </div>

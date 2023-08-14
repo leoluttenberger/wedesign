@@ -331,14 +331,22 @@ const motivation5 = [
 const motivation6 = [
   {
     indexMV: "6",
-    subject: "leer",
-    salutationBeginning: "leer",
-    textBegining: "leer",
-    textExperience: "leer",
-    textCompetence: "leer",
-    textContribution: "leer",
-    ending: "leer",
-    salutationEnding: "leer",
+    subject:
+      "Schreibe hier deinen Text. Weitere Vorlagen findest du, wenn du nach rechts wischt.",
+    salutationBeginning:
+      "Schreibe hier deinen Text. Weitere Vorlagen findest du, wenn du nach rechts wischt.",
+    textBegining:
+      "Schreibe hier deinen Text. Weitere Vorlagen findest du, wenn du nach rechts wischt.",
+    textExperience:
+      "Schreibe hier deinen Text. Weitere Vorlagen findest du, wenn du nach rechts wischt.",
+    textCompetence:
+      "Schreibe hier deinen Text. Weitere Vorlagen findest du, wenn du nach rechts wischt.",
+    textContribution:
+      "Schreibe hier deinen Text. Weitere Vorlagen findest du, wenn du nach rechts wischt.",
+    ending:
+      "Schreibe hier deinen Text. Weitere Vorlagen findest du, wenn du nach rechts wischt.",
+    salutationEnding:
+      "Schreibe hier deinen Text. Weitere Vorlagen findest du, wenn du nach rechts wischt.",
   },
 ];
 

@@ -34,6 +34,7 @@
     "@vue/compiler-sfc": "^3.2.39",
     "@vueform/toggle": "^2.1.2",
     "@vueuse/core": "^9.13.0",
+    "cordova-plugin-inappbrowser": "^5.0.0",
     "core-js": "^3.8.3",
     "dexie": "^3.2.2",
     "docx": "^7.8.2",

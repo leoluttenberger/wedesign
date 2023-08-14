@@ -4,15 +4,15 @@
     :data="accordion"
   >
     <template
-      v-for="item in accordion"
-      :key="item.ref"
-      #[`header_${item.ref}`]="{ toggleAccordion, ref, isActive }"
+      v-for="section in accordion"
+      :key="section.ref"
+      #[`header_${section.ref}`]="{ toggleAccordion, ref, isActive }"
     >
       <div
         class="text-black bg-gray-300 dark:text-white dark:bg-slate-600 p-4 flex justify-between items-center cursor-pointer"
         @click="toggleAccordion(ref)"
       >
-        <div>{{ item.header }}</div>
+        <div>{{ section.header }}</div>
         <button class="flex items-center">
           <TwFeather
             class="transition-all duration-400"
@@ -28,21 +28,18 @@
           <div>
             <div
               class="p-4 bg-wd-background text-black dark:text-white dark:bg-slate-500"
-              :key="`${item.ref}`"
-              :ref="item.ref"
+              :key="`${section.ref}`"
+              :ref="section.ref"
             >
               <ul>
-                <li
-                  v-for="(n, index) in item.body"
-                  v-bind:key="item.body[index]"
-                  class="hover:text-blue-500 hover:underline"
-                >
-                  <a
-                    :href="item.body[index]"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >{{ item.body[index] }}
-                  </a>
+                <li v-for="(item, itemIndex) in section.body" :key="itemIndex">
+                  {{ item.text }}
+                  <button
+                    @click="openLinkInBrowser(item.url)"
+                    class="hover:text-blue-500 underline"
+                  >
+                    {{ item.url }}
+                  </button>
                 </li>
               </ul>
             </div>
@@ -58,48 +55,112 @@ import { ref, watch } from "vue";
 import { TwAccordion, TwFeather } from "vue3-tailwind";
 const show = ref(true);
 
+const openLinkInBrowser = async (url: string) => {
+  window.open(url);
+};
 const accordion = ref([
   {
     ref: "Berufsorientierung allgemein",
     header: "Berufsorientierung allgemein",
     body: [
-      "AMS Informationen über einzelne Berufe: https://www.berufslexikon.at/suche/",
-      "AMS Fragebogen um einen passenden Beruf zu finden: https://www.berufskompass.at/berufskompass/",
-      "AK Fragebogen um einen passenden Beruf zu finden: https://www.jopsy.at/intro-video",
-      "Fragebogen um einen passenden Beruf zu finden, Videostories: https://www.whatchado.com/de/",
-      "Bewertungen Arbeitsgeber*innen: https://www.kununu.com/at",
-      "WKO Test, der Auskunft über eigene Fähigkeiten und Eignung für bestimmte Lehrstellen gibt: https://site.wko.at/biwi/lehrstellencheck/lehrstellencheck.html",
+      {
+        text: "AMS Informationen über einzelne Berufe: ",
+        url: "https://www.berufslexikon.at/suche/",
+      },
+      {
+        text: "AMS Fragebogen um einen passenden Beruf zu finden: ",
+        url: "https://www.berufskompass.at/berufskompass/",
+      },
+      {
+        text: "AK Fragebogen um einen passenden Beruf zu finden: ",
+        url: "https://www.jopsy.at/intro-video",
+      },
+      {
+        text: "Fragebogen um einen passenden Beruf zu finden, Videostories: ",
+        url: "https://www.whatchado.com/de/",
+      },
+      {
+        text: "Bewertungen Arbeitsgeber*innen: ",
+        url: "https://www.kununu.com/at",
+      },
+      {
+        text: "WKO Test, der Auskunft über eigene Fähigkeiten und Eignung für bestimmte Lehrstellen gibt: ",
+        url: "https://site.wko.at/biwi/lehrstellencheck/lehrstellencheck.html",
+      },
     ],
   },
   {
     ref: "Stellensuche",
     header: "Stellensuche",
     body: [
-      "AMS Portal für Stellensuche: https://jobs.ams.at/public/emps/",
-      "AMS Lehrstellenbörse https://www.ams.at/arbeitsuchende/arbeitslos-was-tun/lehrstellenboerse",
-      "WKO Übersicht Lehrbetriebe: https://lehrbetriebsuebersicht.wko.at/",
-      "Öffentlicher Dienst - Stellenbörse: https://bund.jobboerse.gv.at/sap/bc/jobs/ ",
+      {
+        text: "AMS Portal für Stellensuche: ",
+        url: "https://jobs.ams.at/public/emps/",
+      },
+      {
+        text: "AMS Lehrstellenbörse: ",
+        url: "https://www.ams.at/arbeitsuchende/arbeitslos-was-tun/lehrstellenboerse",
+      },
+      {
+        text: "WKO Übersicht Lehrbetriebe: ",
+        url: "https://lehrbetriebsuebersicht.wko.at/",
+      },
+      {
+        text: "Öffentlicher Dienst - Stellenbörse:  ",
+        url: "https://bund.jobboerse.gv.at/sap/bc/jobs/ ",
+      },
     ],
   },
   {
     ref: "Bewerbung",
     header: "Bewerbung",
     body: [
-      "AMS Online-Bewerbungscoach und Mustervorlagen: https://www.ams.at/arbeitsuchende/topicliste/bewerbungsvorlage",
-      "Tipps für den Bewerbungsprozess: https://www.akyoung.at/arbeit/bewerbung/",
-      "Üben von Aufnahmetest: https://www.playmit.com/",
+      {
+        text: "AMS Online-Bewerbungscoach und Mustervorlagen: ",
+
+        url: "https://www.ams.at/arbeitsuchende/topicliste/bewerbungsvorlage",
+      },
+      {
+        text: "Tipps für den Bewerbungsprozess: ",
+
+        url: "https://www.akyoung.at/arbeit/bewerbung/",
+      },
+      {
+        text: "Üben von Aufnahmetest: ",
+
+        url: "https://www.playmit.com/",
+      },
     ],
   },
   {
     ref: "Unterstützende Institutionen",
     header: "Unterstützende Institutionen",
     body: [
-      "Netzwerk Berufliche Assistenz: https://www.neba.at/jugendcoaching",
-      "AK Young: https://www.akyoung.at/",
-      "Verein Wiener Jugendzentren: http://www.jugendzentren.at/",
-      "Wien Extra: https://www.wienxtra.at/",
-      "18Plus Berufs- und Studienchecker: https://www.18plus.at/",
-      "BMBWF Beratungswegweiser: www.bib-atlas.at",
+      {
+        text: "Netzwerk Berufliche Assistenz: ",
+        url: "https://www.neba.at/jugendcoaching",
+      },
+      {
+        text: "AK Young: ",
+        url: "https://www.akyoung.at/",
+      },
+      {
+        text: "Verein Wiener Jugendzentren: ",
+        url: "http://www.jugendzentren.at/",
+      },
+      {
+        text: "Wien Extra: ",
+        url: "https://www.wienxtra.at/",
+      },
+      {
+        text: "18Plus Berufs- und Studienchecker: ",
+        url: "https://www.18plus.at/",
+      },
+      {
+        text: "BMBWF Beratungswegweiser: ",
+
+        url: "http://www.bib-atlas.at",
+      },
     ],
   },
 ]);

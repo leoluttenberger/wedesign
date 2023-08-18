@@ -101,7 +101,7 @@ import { fileToBase64 } from "@/helpers/fileToBase64";
 import ConfettiExplosion from "vue-confetti-explosion";
 
 import moment from "moment";
-const profileImg = JSON.parse(localStorage.getItem("profileImg"));
+let profileImg = JSON.parse(localStorage.getItem("profileImg"));
 const pdf = ref(null);
 const pdfDataURL = ref(null);
 const html = ref(null);
@@ -111,9 +111,14 @@ const el = ref(null);
 const { width, height } = useElementSize(el);
 const zoomFactor = ref(1);
 const visible = ref(false);
+const MIME_TYPE = "image/png";
+const QUALITY = 0.9;
+const MAX_WIDTH = 600;
+const MAX_HEIGHT = 600;
 
 onMounted(async () => {
   downloadDocx.value = await createFile();
+  profileImg = JSON.parse(localStorage.getItem("profileImg"));
   slideDownUserInfo.value = false;
   setTimeout(() => {
     convertToPdf();
@@ -149,7 +154,6 @@ const convertToPdf = async () => {
   html.value = convertXmlToHtml(xmlString);
   console.log("Created hmtl");
   pdf.value = await createPdfFromHtml(html.value);
-  pdf.value.addImage(profileImg, "PNG", 420, 60, 120, 120);
   pdfDataURL.value = await URL.createObjectURL(pdf.value.output("blob"));
 };
 const saveAndDownLoadDocs = async () => {
@@ -160,7 +164,9 @@ const saveAndDownLoadDocs = async () => {
   visible.value = false;
   await nextTick();
   visible.value = true;
-  const base64StringPdf = await fileToBase64(pdf.value.output("blob"));
+  await nextTick();
+  console.log("Pdf-size", pdf.value.output("blob").size / 1024 + " KB");
+  await nextTick();
   const base64StringDoc = await fileToBase64(downloadDocx.value);
   saveAs(pdf.value.output("blob"), fileNamePDF);
   saveAs(downloadDocx.value, fileNameDoc);
@@ -202,7 +208,7 @@ const saveAndDownLoadDocs = async () => {
 
   await Filesystem.writeFile({
     path: `${fileNamePDF}`,
-    data: base64StringPdf,
+    data: pdf.value.output("blob"),
     directory: Directory.Documents,
   })
     .then(() => {
@@ -253,6 +259,7 @@ const createPdfFromHtml = async (html: string) => {
     },
     margins
   );
+  doc.addImage(profileImg, 420, 60, 120, 120);
   return doc;
 };
 const resizePdfContainer = () => {

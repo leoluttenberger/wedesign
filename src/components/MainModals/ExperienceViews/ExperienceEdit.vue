@@ -51,7 +51,7 @@
   <div class="grid flex gap-2 px-4">
     <button
       class="bg-wd-error shadow rounded-md h-10 w-full text-white font-bold"
-      @click="removeFromLocalStorage()"
+      @click="openDeteleModal()"
     >
       Erfahrung entfernen
     </button>
@@ -62,6 +62,37 @@
       Erfahrung speichern
     </button>
   </div>
+
+  <CropModal :show="showDeleteModal">
+    <div class="place-items-center">
+      <div class="text-white text-xl p-2">Entfernen?</div>
+      <div class="text-white font-Montserrat text-base font-bold pb-2">
+        <p>
+          Bist du wirklich sicher, dass du diese Erfahrung entfernen willst?
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="flex justify-evenly text-white font-Montserrat text-base font-bold h-10"
+    >
+      <button
+        type="button"
+        @click="returnToEdit()"
+        class="bg-wd-error w-screen"
+      >
+        Nein
+      </button>
+
+      <button
+        type="button"
+        @click="deleteAndReturn()"
+        class="bg-wd-green w-screen"
+      >
+        Ja
+      </button>
+    </div>
+  </CropModal>
 </template>
 
 <script setup lang="ts">
@@ -75,6 +106,7 @@ const description = ref(null);
 const workshopFrom = ref(null);
 const workshopTo = ref(null);
 const experiences = ref(JSON.parse(localStorage.getItem("experiences")) || []);
+const showDeleteModal = ref(false);
 
 const props = defineProps({
   editIndex: {
@@ -127,7 +159,6 @@ const saveToLocalStorage = () => {
 const removeFromLocalStorage = () => {
   experiences.value.splice(props.editIndex, 1);
   localStorage.setItem("experiences", JSON.stringify(experiences.value));
-  slideDown.value = true;
 };
 const errorMessage = () => {
   createToast("Du hast nicht alle Felder richtig ausgefüllt.", {
@@ -135,5 +166,17 @@ const errorMessage = () => {
     transition: "zoom",
     type: "danger",
   });
+};
+const returnToEdit = () => {
+  showDeleteModal.value = false;
+};
+
+const deleteAndReturn = () => {
+  showDeleteModal.value = false;
+  removeFromLocalStorage();
+  slideDown.value = true;
+};
+const openDeteleModal = () => {
+  showDeleteModal.value = true;
 };
 </script>

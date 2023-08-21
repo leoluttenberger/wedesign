@@ -92,7 +92,7 @@
     <div v-if="!isEnd">
       <button
         class="bg-wd-error shadow rounded-md h-10 w-full text-white font-bold"
-        @click="removeFromLocalStorage()"
+        @click="openDeteleModal()"
       >
         Termin entfernen
       </button>
@@ -105,6 +105,34 @@
       Termin speichern
     </button>
   </div>
+  <CropModal :show="showDeleteModal">
+    <div class="place-items-center">
+      <div class="text-white text-xl p-2">Entfernen?</div>
+      <div class="text-white font-Montserrat text-base font-bold pb-2">
+        <p>Bist du wirklich sicher, dass du den Termin entfernen willst?</p>
+      </div>
+    </div>
+
+    <div
+      class="flex justify-evenly text-white font-Montserrat text-base font-bold h-10"
+    >
+      <button
+        type="button"
+        @click="returnToEdit()"
+        class="bg-wd-error w-screen"
+      >
+        Nein
+      </button>
+
+      <button
+        type="button"
+        @click="deleteAndReturn()"
+        class="bg-wd-green w-screen"
+      >
+        Ja
+      </button>
+    </div>
+  </CropModal>
 </template>
 
 <script setup lang="ts">
@@ -119,6 +147,8 @@ const appointmentFrom = ref(null);
 const appointmentTo = ref(null);
 const address = ref("");
 const note = ref(null);
+const showDeleteModal = ref(false);
+const buttonDisabled = ref(false);
 const appointments = ref(
   JSON.parse(localStorage.getItem("appointments")) || []
 );
@@ -132,6 +162,7 @@ const props = withDefaults(
 
 onMounted(() => {
   changedDate.value = false;
+  showDeleteModal.value = false;
   type.value = appointments.value[props.editIndex][0].type;
   title.value = appointments.value[props.editIndex][0].title;
   appointmentFrom.value =
@@ -141,8 +172,10 @@ onMounted(() => {
   note.value = appointments.value[props.editIndex][0].note;
   if (type.value == "Ende") {
     isEnd = true;
+    buttonDisabled.value = true;
   } else {
     isEnd = false;
+    buttonDisabled.value = false;
   }
 });
 
@@ -217,7 +250,6 @@ const removeFromLocalStorage = () => {
   localStorage.setItem("appointments", JSON.stringify(appointments.value));
   localStorage.setItem("applications", JSON.stringify(applications.value));
 
-  slideDown.value = true;
   changedDate.value = true;
 };
 const errorMessage = () => {
@@ -226,5 +258,17 @@ const errorMessage = () => {
     transition: "zoom",
     type: "danger",
   });
+};
+const returnToEdit = () => {
+  showDeleteModal.value = false;
+};
+
+const deleteAndReturn = () => {
+  showDeleteModal.value = false;
+  removeFromLocalStorage();
+  slideDown.value = true;
+};
+const openDeteleModal = () => {
+  showDeleteModal.value = true;
 };
 </script>

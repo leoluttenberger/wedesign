@@ -1,25 +1,29 @@
 <template>
   <div class="px-2">
-    <div class="grid grid-cols-2 gap-1">
-      <div class="px-2">
-        <FormKit
-          v-model="type"
-          label="Typ & Name:"
-          type="text"
-          placeholder="Lehre, HTL, AHS, HAK, ..."
-        />
+    <div class="flex gap-1">
+      <div class="grow">
+        <div class="px-2">
+          <FormKit
+            v-model="type"
+            label="Typ & Name:"
+            type="text"
+            placeholder="Lehre, HTL, AHS, HAK, ..."
+          />
+        </div>
       </div>
-      <div class="">
-        <FormKit
-          v-model="specialty"
-          label="Schwerpunkt:"
-          type="text"
-          placeholder="zB. Sprachen, BE, IT"
-        />
+      <div class="grow">
+        <div class="px-2">
+          <FormKit
+            v-model="specialty"
+            label="Schwerpunkt:"
+            type="text"
+            placeholder="zB. Sprachen, BE, IT"
+          />
+        </div>
       </div>
     </div>
-    <div class="grid grid-cols-2 gap-1">
-      <div class="px-2">
+    <div class="flex">
+      <div class="grow px-2">
         <FormKit
           v-model="address"
           label="Adresse:"
@@ -27,29 +31,8 @@
           placeholder="Straße Nr., PLZ"
         />
       </div>
-      <div class="flex">
-        <div class="px-2 pt-6">
-          <input
-            id="ongoing"
-            v-model="checked"
-            type="checkbox"
-            value="ongoing"
-            class="p-10 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          />
-          <label
-            for="ongoing"
-            class="h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-          >
-          </label>
-        </div>
-        <div
-          label
-          class="px-2 align-middle text-black dark:text-white font-Montserrat text-base font-bold md:text-lg pt-8"
-        >
-          Laufend
-        </div>
-      </div>
     </div>
+
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
         <div class="px-2">
@@ -64,7 +47,6 @@
             picker-only
             label-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white text-black"
             input-class="$reset h-10 dark:bg-slate-800 text-base text-black dark:text-white"
-            overlay
           />
         </div>
       </div>
@@ -82,18 +64,43 @@
             picker-only
             label-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white text-black"
             input-class="$reset h-10 dark:bg-slate-800 text-base text-black dark:text-white"
-            overlay
           />
         </div>
       </div>
     </div>
-    <div class="px-2">
-      <FormKit
-        type="textarea"
-        label="Anmerkungen: "
-        v-model="note"
-        placeholder="Wichtige Informationen"
-      />
+    <div class="grid grid-cols-2 gap-1">
+      <div class="px-2">
+        <FormKit
+          type="textarea"
+          label="Anmerkungen: "
+          v-model="note"
+          placeholder="Wichtige Informationen"
+        />
+      </div>
+      <div class="flex">
+        <div class="px-2 pt-6">
+          <input
+            id="ongoing"
+            v-model="checked"
+            type="checkbox"
+            value="ongoing"
+            class="p-10 w-3 h-3 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <label
+            for="ongoing"
+            class="h-10 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
+          >
+          </label>
+        </div>
+        <div class="pt-1">
+          <div
+            label
+            class="px-2 align-middle text-black dark:text-white font-Montserrat text-base font-bold md:text-lg pt-5"
+          >
+            Laufend
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -126,6 +133,12 @@ onMounted(() => {
 });
 
 const saveToLocalStorage = () => {
+  if (educationFrom.value != null) {
+    educationFrom.value = educationFrom.value.slice(0, 7);
+  }
+  if (educationTo.value != null) {
+    educationTo.value = educationTo.value.slice(0, 7);
+  }
   const education = [
     {
       type: type.value,

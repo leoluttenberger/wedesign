@@ -1,7 +1,7 @@
 <template>
   <div class="px-2" v-bind="editIndex">
-    <div class="grid grid-cols-2 gap-1">
-      <div class="col-span-2 md:col-span-1">
+    <div class="flex gap-1">
+      <div class="grow">
         <div class="px-2">
           <FormKit
             v-model="type"
@@ -11,7 +11,7 @@
           />
         </div>
       </div>
-      <div class="col-span-2 md:col-span-1">
+      <div class="grow">
         <div class="px-2">
           <FormKit
             v-model="specialty"
@@ -22,15 +22,17 @@
         </div>
       </div>
     </div>
-
-    <div class="grow px-2">
-      <FormKit
-        v-model="address"
-        label="Adresse:"
-        type="text"
-        placeholder="Straße Nr., PLZ"
-      />
+    <div class="flex">
+      <div class="grow px-2">
+        <FormKit
+          v-model="address"
+          label="Adresse:"
+          type="text"
+          placeholder="Straße Nr., PLZ"
+        />
+      </div>
     </div>
+
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
         <div class="px-2">
@@ -182,6 +184,12 @@ onMounted(() => {
 
 const saveToLocalStorage = () => {
   let dateCheck = false;
+  if (educationFrom.value != null) {
+    educationFrom.value = educationFrom.value.slice(0, 7);
+  }
+  if (educationTo.value != null) {
+    educationTo.value = educationTo.value.slice(0, 7);
+  }
   if (checked.value) {
     if (educationFrom.value != null) {
       dateCheck = true;

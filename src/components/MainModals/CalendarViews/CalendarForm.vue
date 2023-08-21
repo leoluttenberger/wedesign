@@ -1,7 +1,7 @@
 <template>
   <div class="px-2">
-    <div class="grid grid-cols-2 gap-1">
-      <div class="col-span-2 md:col-span-1">
+    <div class="flex gap-1">
+      <div class="grow">
         <div class="px-2">
           <FormKit
             v-model="type"
@@ -17,7 +17,7 @@
           />
         </div>
       </div>
-      <div class="col-span-2 md:col-span-1">
+      <div class="grow">
         <div class="px-2">
           <FormKit
             v-model="title"
@@ -28,7 +28,6 @@
         </div>
       </div>
     </div>
-
     <div class="grid grid-cols-2 gap-1">
       <div class="col-span-2 md:col-span-1">
         <div class="px-2">

@@ -5,9 +5,12 @@
         <div class="px-2">
           <FormKit
             v-model="workshop"
-            label="Titel: "
+            label="Titel: *"
             type="text"
             placeholder="Workshop"
+            validation="required"
+            validation-label="Titel"
+            validation-visibility="live"
           />
         </div>
       </div>
@@ -87,18 +90,24 @@ const saveToLocalStorage = () => {
     }
   } else if (workshopFrom.value != null || workshopTo.value != null) {
     dateCheck = true;
+  } else {
+    dateCheck = true;
   }
   if (dateCheck) {
-    if (localStorage.getItem("experiences")) {
-      const currentExperiences = JSON.parse(
-        localStorage.getItem("experiences")
-      );
-      const newData = [...currentExperiences, experience];
-      localStorage.setItem("experiences", JSON.stringify(newData));
+    if (workshop.value != null) {
+      if (localStorage.getItem("experiences")) {
+        const currentExperiences = JSON.parse(
+          localStorage.getItem("experiences")
+        );
+        const newData = [...currentExperiences, experience];
+        localStorage.setItem("experiences", JSON.stringify(newData));
+      } else {
+        localStorage.setItem("experiences", JSON.stringify([experience]));
+      }
+      slideDown.value = true;
     } else {
-      localStorage.setItem("experiences", JSON.stringify([experience]));
+      errorMessage();
     }
-    slideDown.value = true;
   } else {
     errorMessage();
   }

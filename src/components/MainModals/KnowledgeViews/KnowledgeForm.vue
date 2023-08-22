@@ -5,11 +5,14 @@
         <div class="px-2">
           <FormKit
             v-model="type"
-            label="Kenntnisse: "
+            label="Kenntnisse: *"
             type="select"
             placeholder="Auswahl"
             :options="['Sprachkenntnisse', 'Sonstige Kenntnisse']"
             label-class="$reset text-base text-black dark:text-white"
+            validation="required"
+            validation-label="Kenntnisse"
+            validation-visibility="live"
           />
         </div>
       </div>
@@ -68,6 +71,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { slideDown } from "@/store/store.js";
+import { createToast } from "mosha-vue-toastify";
+import "mosha-vue-toastify/dist/style.css";
 
 const type = ref(null);
 const diversKnowledge = ref(null);
@@ -83,13 +88,24 @@ const saveToLocalStorage = () => {
       languageLevel: languageLevel.value,
     },
   ];
-  if (localStorage.getItem("knowledges")) {
-    const currentknowledges = JSON.parse(localStorage.getItem("knowledges"));
-    const newData = [...currentknowledges, knowledge];
-    localStorage.setItem("knowledges", JSON.stringify(newData));
+  if (type.value != null) {
+    if (localStorage.getItem("knowledges")) {
+      const currentknowledges = JSON.parse(localStorage.getItem("knowledges"));
+      const newData = [...currentknowledges, knowledge];
+      localStorage.setItem("knowledges", JSON.stringify(newData));
+    } else {
+      localStorage.setItem("knowledges", JSON.stringify([knowledge]));
+    }
+    slideDown.value = true;
   } else {
-    localStorage.setItem("knowledges", JSON.stringify([knowledge]));
+    errorMessage();
   }
-  slideDown.value = true;
+};
+const errorMessage = () => {
+  createToast("Du hast nicht alle Felder richtig ausgefüllt.", {
+    position: "top-center",
+    transition: "zoom",
+    type: "danger",
+  });
 };
 </script>

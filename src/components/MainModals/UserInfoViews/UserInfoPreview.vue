@@ -168,6 +168,8 @@ const saveAndDownLoadDocs = async () => {
   console.log("Pdf-size", pdf.value.output("blob").size / 1024 + " KB");
   await nextTick();
   const base64StringDoc = await fileToBase64(downloadDocx.value);
+  const base64StringPdf = await fileToBase64(pdf.value.output("blob"));
+
   saveAs(pdf.value.output("blob"), fileNamePDF);
   saveAs(downloadDocx.value, fileNameDoc);
   let sharePath;
@@ -208,7 +210,7 @@ const saveAndDownLoadDocs = async () => {
 
   await Filesystem.writeFile({
     path: `${fileNamePDF}`,
-    data: pdf.value.output("blob"),
+    data: base64StringPdf,
     directory: Directory.Documents,
   })
     .then(() => {

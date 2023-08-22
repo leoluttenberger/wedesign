@@ -292,7 +292,7 @@ const getMatchAndSetDecorations = async (
   ).json();
   // Post response output in console
   const { matches } = ltRes;
-
+  console.log("lTRes", ltRes);
   const decorations: Decoration[] = [];
 
   for (const match of matches) {

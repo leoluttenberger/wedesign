@@ -164,9 +164,7 @@ const saveAndDownLoadDocs = async () => {
   visible.value = false;
   await nextTick();
   visible.value = true;
-  await nextTick();
-  console.log("Pdf-size", pdf.value.output("blob").size / 1024 + " KB");
-  await nextTick();
+
   const base64StringDoc = await fileToBase64(downloadDocx.value);
   const base64StringPdf = await fileToBase64(pdf.value.output("blob"));
 
@@ -207,18 +205,26 @@ const saveAndDownLoadDocs = async () => {
     .catch((error) => {
       console.error(error);
     });
+  await nextTick();
+  const fileSize = pdf.value.output("blob").size / 1024;
+  console.log("Pdf-size", fileSize + " KB");
 
-  await Filesystem.writeFile({
-    path: `${fileNamePDF}`,
-    data: base64StringPdf,
-    directory: Directory.Documents,
-  })
-    .then(() => {
-      console.log("File written to document pdf directory!");
+  if (fileSize <= 2000) {
+    await nextTick();
+    await Filesystem.writeFile({
+      path: `${fileNamePDF}`,
+      data: base64StringPdf,
+      directory: Directory.Documents,
     })
-    .catch((error) => {
-      console.error(error);
-    });
+      .then(() => {
+        console.log("File written to document pdf directory!");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } else {
+    console.log("Error PDF filesize to big!");
+  }
 
   if (Share.share && sharePath != "") {
     await Share.share({

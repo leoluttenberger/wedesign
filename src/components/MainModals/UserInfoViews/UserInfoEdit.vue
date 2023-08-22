@@ -315,49 +315,55 @@ onMounted(() => {
 
 const saveToLocalStorage = () => {
   let formCheck = false;
-  if (firstName.value.length >= 3 && secondName.value.length >= 3) {
-    formCheck = true;
-  }
-  if (formCheck) {
-    if (localStorage.getItem("userInfos")) {
-      userInfos.value[0][0].titleBefore = titleBefore.value;
-      userInfos.value[0][0].titleAfter = titleAfter.value;
-      userInfos.value[0][0].firstName = firstName.value;
-      userInfos.value[0][0].secondName = secondName.value;
-      userInfos.value[0][0].birthDate = birthDate.value;
-      userInfos.value[0][0].birthArea = birthArea.value;
-      userInfos.value[0][0].civilStatus = civilStatus.value;
-      userInfos.value[0][0].gender = gender.value;
-      userInfos.value[0][0].email = email.value;
-      userInfos.value[0][0].phone = phone.value;
-      userInfos.value[0][0].streetName = streetName.value;
-      userInfos.value[0][0].streetNumber = streetNumber.value;
-      userInfos.value[0][0].districtNumber = districtNumber.value;
-      userInfos.value[0][0].city = city.value;
-      userInfos.value[0][0].hobbies = hobbies.value;
-      localStorage.setItem("userInfos", JSON.stringify(userInfos.value));
+  if (firstName.value != null) {
+    if (firstName.value.length >= 3 && secondName.value.length >= 3) {
+      formCheck = true;
+    }
+
+    if (formCheck) {
+      if (localStorage.getItem("userInfos")) {
+        userInfos.value[0][0].titleBefore = titleBefore.value;
+        userInfos.value[0][0].titleAfter = titleAfter.value;
+        userInfos.value[0][0].firstName = firstName.value;
+        userInfos.value[0][0].secondName = secondName.value;
+        userInfos.value[0][0].birthDate = birthDate.value;
+        userInfos.value[0][0].birthArea = birthArea.value;
+        userInfos.value[0][0].civilStatus = civilStatus.value;
+        userInfos.value[0][0].gender = gender.value;
+        userInfos.value[0][0].email = email.value;
+        userInfos.value[0][0].phone = phone.value;
+        userInfos.value[0][0].streetName = streetName.value;
+        userInfos.value[0][0].streetNumber = streetNumber.value;
+        userInfos.value[0][0].districtNumber = districtNumber.value;
+        userInfos.value[0][0].city = city.value;
+        userInfos.value[0][0].hobbies = hobbies.value;
+        localStorage.setItem("userInfos", JSON.stringify(userInfos.value));
+      } else {
+        console.log("userinfo new save");
+        const defaultUserInfos = [
+          {
+            titleBefore: titleBefore.value,
+            firstName: firstName.value,
+            secondName: secondName.value,
+            titleAfter: titleAfter.value,
+            birthDate: birthDate.value,
+            birthArea: birthArea.value,
+            civilStatus: civilStatus.value,
+            gender: gender.value,
+            email: email.value,
+            phone: phone.value,
+            streetName: streetName.value,
+            streetNumber: streetNumber.value,
+            districtNumber: districtNumber.value,
+            city: city.value,
+            hobbies: hobbies.value,
+          },
+        ];
+        localStorage.setItem("userInfos", JSON.stringify([defaultUserInfos]));
+      }
+      slideDownUserInfo.value = true;
     } else {
-      console.log("userinfo new save");
-      const defaultUserInfos = [
-        {
-          titleBefore: titleBefore.value,
-          firstName: firstName.value,
-          secondName: secondName.value,
-          titleAfter: titleAfter.value,
-          birthDate: birthDate.value,
-          birthArea: birthArea.value,
-          civilStatus: civilStatus.value,
-          gender: gender.value,
-          email: email.value,
-          phone: phone.value,
-          streetName: streetName.value,
-          streetNumber: streetNumber.value,
-          districtNumber: districtNumber.value,
-          city: city.value,
-          hobbies: hobbies.value,
-        },
-      ];
-      localStorage.setItem("userInfos", JSON.stringify([defaultUserInfos]));
+      errorMessage();
     }
   } else {
     errorMessage();
@@ -382,6 +388,5 @@ const openQueryModal = () => {
 };
 const closeAfterSave = () => {
   saveToLocalStorage();
-  slideDownUserInfo.value = true;
 };
 </script>

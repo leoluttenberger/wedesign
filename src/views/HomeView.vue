@@ -656,7 +656,13 @@ const items = ref<SlideItem[]>([
 watch(slideDown, () => {
   if (slideDown.value == true) {
     bottomCardOpen.value = false;
-    openingInfo.value = false;
+    if (localStorage.getItem("itemsSet") == "true") {
+      openingInfo.value = false;
+      console.log("Localstorage not empty:", localStorage.getItem("itemsSet"));
+    } else {
+      openingInfo.value = true;
+      localStorage.setItem("itemsSet", "true");
+    }
   }
 });
 

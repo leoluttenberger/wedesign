@@ -13,6 +13,7 @@
                 <div
                   class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
                 >
+                  <div class="font-bold text-xl">{{ item[0].type }}</div>
                   <div
                     v-if="item[0].type === 'Sprachkenntnisse'"
                     class="font-bold text-xl"
@@ -52,6 +53,8 @@
                 <div
                   class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border border-wd-green"
                 >
+                  <div class="font-bold text-xl">{{ item[0].type }}</div>
+
                   <div
                     v-if="item[0].type === 'Sprachkenntnisse'"
                     class="font-bold text-xl"

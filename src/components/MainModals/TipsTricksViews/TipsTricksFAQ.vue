@@ -547,14 +547,7 @@ const accordion3 = ref([
     ref: "Wie viele Bewerbungen kann ich gleichzeitig speichern?",
     header: "Wie viele Bewerbungen kann ich gleichzeitig speichern?",
     body: [
-      "Du kannst so viele Bewerbungen speichern, wie du magst. Es empfiehlt sich aber, die nicht mehr gebrauchten Bewerbungen zu löschen. Diese werden im 'Archiv' angezeigt.",
-    ],
-  },
-  {
-    ref: "Was ist der Unterschied zwischen 'Offen' und 'Archiv'?",
-    header: "Was ist der Unterschied zwischen 'Offen' und 'Archiv'?",
-    body: [
-      "Die Bewerbungen unter 'Offen' sind deine aktuellen Bewerbungen. Das 'Archiv' ist für die alten Bewerbungen, die du nicht mehr brauchst. Hier werden also deine gelöschten Bewerbungen angezeigt, falls du die Bewerbung unabsichtlich gelöscht hast oder die Bewerbung später doch wieder brauchst.",
+      "Du kannst so viele Bewerbungen speichern, wie du magst. Es empfiehlt sich aber, die nicht mehr gebrauchten Bewerbungen zu löschen.",
     ],
   },
   {
@@ -648,7 +641,7 @@ const accordion4 = ref([
     ref: "Wo finde ich eine Übersicht aller gespeicherten Bewerbungen?",
     header: "Wo finde ich eine Übersicht aller gespeicherten Bewerbungen?",
     body: [
-      "Im Menüpunkt 'Bewerbungen' findest du unter 'Offen' eine Übersicht aller von dir angelegten Bewerbungen. Wenn du Bewerbungen löscht, erscheinen diese im Archiv. Zum Archiv kommst du, wenn du nach rechts wischst oder in der Bewerbungsübersicht oben auf den Punkt 'Archiv' klickst.",
+      "Im Menüpunkt 'Bewerbungen' findest du unter 'Offen' eine Übersicht aller von dir angelegten Bewerbungen.",
     ],
   },
   {

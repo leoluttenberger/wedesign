@@ -12,7 +12,14 @@
         {{ textLabel }} - {{ itemIndex + 1 }}
       </p>
     </div>
-    <img :src="imageArray[itemIndex]" :default-src="imageArray[itemIndex]" />
+    <div class="flex justify-center">
+      <img
+        class="object-contain h-screen w-screen"
+        :src="imageArray[itemIndex]"
+        :default-src="imageArray[itemIndex]"
+      />
+    </div>
+
     <div class="flex justify-center">
       <button type="button" class="p-4">
         <SwipeRightIcon

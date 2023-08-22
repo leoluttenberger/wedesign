@@ -58,7 +58,7 @@
     >
       <SwiperSlide> <FAQ></FAQ> </SwiperSlide>
       <SwiperSlide> <Links></Links></SwiperSlide>
-      <SwiperSlide> <Category></Category></SwiperSlide>
+      <SwiperSlide> <TutorialView></TutorialView></SwiperSlide>
     </Swiper>
   </div>
 </template>
@@ -72,7 +72,7 @@ import { slideDown } from "@/store/store.js";
 import Category from "@/components/MainModals/TipsTricksViews/TipsTricksCategory.vue";
 import FAQ from "@/components/MainModals/TipsTricksViews/TipsTricksFAQ.vue";
 import Links from "@/components/MainModals/TipsTricksViews/TipsTricksLinks.vue";
-
+import TutorialView from "@/views/TutorialView.vue";
 let activeButton1 = ref(true);
 let activeButton2 = ref(false);
 let activeButton3 = ref(false);

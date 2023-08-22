@@ -5,10 +5,13 @@
         <div class="px-2 text-black dark:text-white">
           <FormKit
             v-model="type"
-            label="Kenntnisse: "
+            label="Kenntnisse: *"
             type="select"
             placeholder="Auswahl"
             :options="['Sprachkenntnisse', 'Sonstige Kenntnisse']"
+            validation="required"
+            validation-label="Kenntnisse"
+            validation-visibility="live"
           />
         </div>
       </div>
@@ -106,6 +109,8 @@
 <script setup lang="ts">
 import { ref, onMounted, defineProps } from "vue";
 import { slideDown } from "@/store/store.js";
+import { createToast } from "mosha-vue-toastify";
+import "mosha-vue-toastify/dist/style.css";
 
 const type = ref(null);
 const diversKnowledge = ref(null);
@@ -132,27 +137,31 @@ onMounted(() => {
 });
 
 const saveToLocalStorage = () => {
-  if (localStorage.getItem("knowledges")) {
-    console.log("Update Education");
-    knowledges.value[props.editIndex][0].type = type.value;
-    knowledges.value[props.editIndex][0].diversKnowledge =
-      diversKnowledge.value;
-    knowledges.value[props.editIndex][0].languageKnowledge =
-      languageKnowledge.value;
-    knowledges.value[props.editIndex][0].languageLevel = languageLevel.value;
-    localStorage.setItem("knowledges", JSON.stringify(knowledges.value));
+  if (type.value != null) {
+    if (localStorage.getItem("knowledges")) {
+      console.log("Update Education");
+      knowledges.value[props.editIndex][0].type = type.value;
+      knowledges.value[props.editIndex][0].diversKnowledge =
+        diversKnowledge.value;
+      knowledges.value[props.editIndex][0].languageKnowledge =
+        languageKnowledge.value;
+      knowledges.value[props.editIndex][0].languageLevel = languageLevel.value;
+      localStorage.setItem("knowledges", JSON.stringify(knowledges.value));
+    } else {
+      const knowledge = [
+        {
+          type: type.value,
+          diversKnowledge: diversKnowledge.value,
+          languageKnowledge: languageKnowledge.value,
+          languageLevel: languageLevel.value,
+        },
+      ];
+      localStorage.setItem("knowledges", JSON.stringify([knowledge]));
+    }
+    slideDown.value = true;
   } else {
-    const knowledge = [
-      {
-        type: type.value,
-        diversKnowledge: diversKnowledge.value,
-        languageKnowledge: languageKnowledge.value,
-        languageLevel: languageLevel.value,
-      },
-    ];
-    localStorage.setItem("knowledges", JSON.stringify([knowledge]));
+    errorMessage();
   }
-  slideDown.value = true;
 };
 const removeFromLocalStorage = () => {
   if (buttonDisabled == false) {
@@ -172,5 +181,12 @@ const deleteAndReturn = () => {
 };
 const openDeteleModal = () => {
   showDeleteModal.value = true;
+};
+const errorMessage = () => {
+  createToast("Du hast nicht alle Felder richtig ausgefüllt.", {
+    position: "top-center",
+    transition: "zoom",
+    type: "danger",
+  });
 };
 </script>

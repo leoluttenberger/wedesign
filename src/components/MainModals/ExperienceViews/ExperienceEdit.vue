@@ -5,9 +5,12 @@
         <div class="px-2">
           <FormKit
             v-model="workshop"
-            label="Titel: "
+            label="Titel: *"
             type="text"
             placeholder="Workshop"
+            validation="required"
+            validation-label="Titel"
+            validation-visibility="live"
           />
         </div>
       </div>
@@ -131,27 +134,33 @@ const saveToLocalStorage = () => {
     }
   } else if (workshopFrom.value != null || workshopTo.value != null) {
     dateCheck = true;
+  } else {
+    dateCheck = true;
   }
   if (dateCheck) {
-    if (localStorage.getItem("experiences")) {
-      console.log("Update Education");
-      experiences.value[props.editIndex][0].workshop = workshop.value;
-      experiences.value[props.editIndex][0].description = description.value;
-      experiences.value[props.editIndex][0].workshopFrom = workshopFrom.value;
-      experiences.value[props.editIndex][0].workshopTo = workshopTo.value;
-      localStorage.setItem("experiences", JSON.stringify(experiences.value));
+    if (workshop.value != null) {
+      if (localStorage.getItem("experiences")) {
+        console.log("Update Education");
+        experiences.value[props.editIndex][0].workshop = workshop.value;
+        experiences.value[props.editIndex][0].description = description.value;
+        experiences.value[props.editIndex][0].workshopFrom = workshopFrom.value;
+        experiences.value[props.editIndex][0].workshopTo = workshopTo.value;
+        localStorage.setItem("experiences", JSON.stringify(experiences.value));
+      } else {
+        const experience = [
+          {
+            workshop: workshop.value,
+            description: description.value,
+            workshopFrom: workshopFrom.value,
+            workshopTo: workshopTo.value,
+          },
+        ];
+        localStorage.setItem("experiences", JSON.stringify([experience]));
+      }
+      slideDown.value = true;
     } else {
-      const experience = [
-        {
-          workshop: workshop.value,
-          description: description.value,
-          workshopFrom: workshopFrom.value,
-          workshopTo: workshopTo.value,
-        },
-      ];
-      localStorage.setItem("experiences", JSON.stringify([experience]));
+      errorMessage();
     }
-    slideDown.value = true;
   } else {
     errorMessage();
   }

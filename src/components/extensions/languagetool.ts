@@ -280,20 +280,17 @@ const getMatchAndSetDecorations = async (
   }
   const languageSettings = process.env.VUE_APP_LANGUAGE_SETTING;
   const textBody = languageSettings + "&text=" + encodeURIComponent(text);
-  //console.log("text:", textBody);
-  const postOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      Accept: "application/json",
-    },
-    body: textBody,
-  };
-  //console.log("apiUrl", apiUrl);
-  //console.log("Post:", postOptions);
   // Post option ouput in console
   const ltRes: LanguageToolResponse = await (
-    await fetch(apiUrl, postOptions)
+    await fetch(apiUrl, {
+      method: "POST",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: textBody,
+    })
   ).json();
   // Post response output in console
   const { matches } = ltRes;
@@ -338,7 +335,7 @@ const getMatchAndSetDecorations = async (
 
 const debouncedGetMatchAndSetDecorations = debounce(
   getMatchAndSetDecorations,
-  300
+  1000
 );
 
 let lastOriginalFrom = 0;

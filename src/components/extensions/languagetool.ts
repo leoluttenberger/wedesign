@@ -275,24 +275,25 @@ const getMatchAndSetDecorations = async (
   text: string,
   originalFrom: number
 ) => {
+  if (text == "") {
+    return;
+  }
   const languageSettings = process.env.VUE_APP_LANGUAGE_SETTING;
-  const postOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      Accept: "application/json",
-    },
-    body: `text=${encodeURIComponent(
-      text
-    )}&${languageSettings}&enabledOnly=false`,
-  };
+  const textBody = languageSettings + "&text=" + encodeURIComponent(text);
   // Post option ouput in console
   const ltRes: LanguageToolResponse = await (
-    await fetch(apiUrl, postOptions)
+    await fetch(apiUrl, {
+      method: "POST",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: textBody,
+    })
   ).json();
   // Post response output in console
   const { matches } = ltRes;
-  console.log("lTRes", ltRes);
   const decorations: Decoration[] = [];
 
   for (const match of matches) {
@@ -334,7 +335,7 @@ const getMatchAndSetDecorations = async (
 
 const debouncedGetMatchAndSetDecorations = debounce(
   getMatchAndSetDecorations,
-  300
+  1000
 );
 
 let lastOriginalFrom = 0;

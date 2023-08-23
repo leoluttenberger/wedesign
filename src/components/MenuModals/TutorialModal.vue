@@ -1,22 +1,34 @@
 <template>
-  <div class="flex justify-end">
-    <button type="button" @click="closeModal" class="p-4">
-      <CloseIcon
-        class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-      ></CloseIcon>
-    </button>
-  </div>
-  <div v-if="itemIndex >= 0 && itemIndex < 7">
-    <div class="flex justify-left p-2">
-      <p class="text-black px-1 dark:text-white font-Montserrat text-xl">
+  <div class="flex gap-1 p-2">
+    <div class="grow" v-if="itemIndex <= 7">
+      <p
+        class="p-2 text-black px-1 dark:text-white font-Montserrat text-xl font-bold"
+      >
         {{ textLabel }} - {{ itemIndex + 1 }}
       </p>
     </div>
+    <div class="grow" v-if="itemIndex == 8">
+      <p
+        class="p-2 text-black px-1 dark:text-white font-Montserrat text-xl font-bold"
+      >
+        {{ textLabel }} Ende
+      </p>
+    </div>
+    <div class="justify-center">
+      <div class="grow">
+        <button type="button" @click="closeModal()">
+          <CloseIcon
+            class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
+          ></CloseIcon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div v-if="itemIndex >= 0 && itemIndex <= 7">
     <div class="flex justify-center">
       <img
-        class="object-contain h-screen w-screen"
+        class="object-contain h-screen w-screen pb-32"
         :src="imageArray[itemIndex]"
-        :default-src="imageArray[itemIndex]"
       />
     </div>
 
@@ -28,13 +40,7 @@
       </button>
     </div>
   </div>
-  <div v-if="itemIndex == 7">
-    <div class="flex justify-left p-2">
-      <p class="text-black px-1 dark:text-white font-Montserrat text-xl">
-        {{ textLabel }} Ende
-      </p>
-    </div>
-
+  <div v-if="itemIndex == 8">
     <div class="grid flex gap-6 px-4 pt-4 pb-20">
       <button
         class="rounded-md bg-wd-green hover:bg-transparent-green h-14 text-white font-bold"

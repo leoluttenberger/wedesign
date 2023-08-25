@@ -497,16 +497,20 @@ async function createDocx(): Promise<Blob> {
         style: "h2",
       })
     );
-    children.push(
-      new Paragraph({
-        text: "Sprachkenntnisse: ",
-        style: "normalBold",
-      })
-    );
 
     for (let i = 0; i < knowledges.value.length; i++) {
       let knowledgestring1 = "";
+      let knowledgeLanguage = false;
       if (knowledges.value[i][0].type == "Sprachkenntnisse") {
+        if (knowledgeLanguage == false) {
+          knowledgeLanguage = true;
+          children.push(
+            new Paragraph({
+              text: "Sprachkenntnisse: ",
+              style: "normalBold",
+            })
+          );
+        }
         knowledgestring1 += knowledges.value[i][0].languageKnowledge
           ? knowledges.value[i][0].languageKnowledge
           : "";
@@ -528,17 +532,21 @@ async function createDocx(): Promise<Blob> {
         style: "normal",
       })
     );
-    children.push(
-      new Paragraph({
-        text: "Sonstige Kenntnisse: ",
-        style: "normalBold",
-      })
-    );
 
     for (let i = 0; i < knowledges.value.length; i++) {
       let knowledgestring2 = "";
-
+      let knowledgeOther = false;
       if (knowledges.value[i][0].type == "Sonstige Kenntnisse") {
+        if (knowledgeOther == false) {
+          knowledgeOther = true;
+          children.push(
+            new Paragraph({
+              text: "Sonstige Kenntnisse: ",
+              style: "normalBold",
+            })
+          );
+        }
+
         if (knowledges.value[i][0].diversKnowledge != null) {
           knowledgestring2 += knowledges.value[i][0].diversKnowledge;
         } else {

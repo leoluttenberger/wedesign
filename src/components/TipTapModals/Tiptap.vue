@@ -146,7 +146,11 @@ const replacements = computed(() => {
   return rps;
 });
 
-const matchMessage = computed(() => match.value?.message || "No Message");
+const matchMessage = computed(
+  () =>
+    match.value?.message ||
+    "Bitte drücke nochmals neben dem Wort um die Rechschreibprüfung zu starten."
+);
 
 const updateHtml = () => navigator.clipboard.writeText(editor.value.getHTML());
 

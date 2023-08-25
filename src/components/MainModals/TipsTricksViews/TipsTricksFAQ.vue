@@ -638,13 +638,6 @@ const accordion4 = ref([
     ],
   },
   {
-    ref: "Wo finde ich eine Übersicht aller gespeicherten Bewerbungen?",
-    header: "Wo finde ich eine Übersicht aller gespeicherten Bewerbungen?",
-    body: [
-      "Im Menüpunkt 'Bewerbungen' findest du unter 'Offen' eine Übersicht aller von dir angelegten Bewerbungen.",
-    ],
-  },
-  {
     ref: "Kann ich ein Motivationsschreiben nachträglich bearbeiten?",
     header: "Kann ich ein Motivationsschreiben nachträglich bearbeiten?",
     body: [

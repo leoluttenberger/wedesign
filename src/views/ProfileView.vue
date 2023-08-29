@@ -5,10 +5,11 @@
         class="outline:none rounded-full min-w-24 w-1/2 md:w-60 shadow-lg border-white"
         v-model="form.avatar"
         :default-src="image"
-        v-if="valueAvatarCropShow"
+        v-if="valueAvatarCropShow == true"
       />
       <div
         class="outline:none rounded-full min-w-24 w-1/2 md:w-60 shadow-lg border-white"
+        v-if="valueAvatarShow == true"
       >
         <img
           class="rounded-full"

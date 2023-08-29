@@ -28,10 +28,13 @@
   </svg>
 </template>
 
-<script>
-export default {
-  props: {
-    name: String,
+<script setup lang="ts">
+import { ref, defineProps } from "vue";
+
+const props = defineProps({
+  name: {
+    type: String,
   },
-};
+});
+const name = ref(props.name);
 </script>

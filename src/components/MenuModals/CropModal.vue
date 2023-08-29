@@ -20,6 +20,10 @@
             aria-modal="true"
             aria-labelledby="modal-headline"
           >
+            <div
+              class="bg-wd-white dark:bg-slate-800"
+              :style="safeAreaStyle"
+            ></div>
             <slot>I'm empty inside</slot>
           </div>
         </div>
@@ -28,7 +32,7 @@
   </teleport>
 </template>
 <script setup lang="ts">
-import { ref, watch, defineProps } from "vue";
+import { ref, watch, defineProps, computed } from "vue";
 
 const props = defineProps({
   show: {
@@ -36,6 +40,35 @@ const props = defineProps({
     default: false,
   },
 });
+const safeAreaTop = ref(0);
+const safeAreaStyle = computed(() => ({
+  paddingTop: `${safeAreaTop.value}px`,
+}));
+// Check if the app is running on a mobile device
+if (
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  )
+) {
+  // Check for iOS platform and set safe area for status bar
+  if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
+    console.log("ios");
+    safeAreaTop.value = window.innerWidth > 375 ? 44 : 20;
+  }
+  // Check for Android platform and set safe area for status bar
+  else if (/Android/i.test(navigator.userAgent)) {
+    console.log("android");
+    const androidStatusBarHeight = 0; // Adjust as needed
+    safeAreaTop.value = androidStatusBarHeight;
+  } else {
+    console.log("web");
+    safeAreaTop.value = 0;
+  }
+} else {
+  console.log("web");
+
+  safeAreaTop.value = 0;
+}
 const showModal = ref(false);
 watch(
   () => props.show,

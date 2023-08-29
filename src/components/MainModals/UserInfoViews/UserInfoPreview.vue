@@ -174,7 +174,13 @@ const saveAndDownLoadDocs = async () => {
     )
   ) {
     try {
-      console.log("Save to File");
+      if (Share.share) {
+        console.log("Sharing is supported!");
+      } else {
+        // Fallback for browsers that do not support Web Share API
+        console.log("Web Share API is not supported in this browser");
+      }
+      console.log("Save and Share Files");
       await Filesystem.writeFile({
         path: fileNameDoc,
         data: base64StringDoc,
@@ -231,23 +237,6 @@ const saveAndDownLoadDocs = async () => {
       }
     } catch (e) {
       console.log("File Save not supported on this platform");
-    }
-    console.log("Share to File");
-    if (Share.share) {
-      try {
-        await Share.share({
-          title: "Share File",
-          text: fileNameDoc,
-          url: "",
-        });
-      } catch (e) {
-        console.log("Web Share API is not supported in this browser");
-        saveAs(pdf.value.output("blob"), fileNamePDF);
-        saveAs(downloadDocx.value, fileNameDoc);
-      }
-    } else {
-      // Fallback for browsers that do not support Web Share API
-      console.log("Web Share API is not supported in this browser");
     }
   } else {
     try {

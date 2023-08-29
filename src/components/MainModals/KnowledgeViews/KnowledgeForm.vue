@@ -62,7 +62,7 @@
       class="bg-wd-green shadow rounded-md h-16 w-full text-white font-bold"
       @click="saveToLocalStorage()"
     >
-      Kenntniss hinzufügen
+      Kenntnis hinzufügen
     </button>
   </div>
 </template>

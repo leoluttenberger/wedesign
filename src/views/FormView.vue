@@ -74,9 +74,6 @@
     @slideChange="onSlideChange"
   >
     <SwiperSlide>
-      <UserInfoDisplay></UserInfoDisplay>
-    </SwiperSlide>
-    <SwiperSlide>
       <SwipeView :slideIndex="0" :useEditButton="false"></SwipeView>
     </SwiperSlide>
     <SwiperSlide>
@@ -84,6 +81,9 @@
     </SwiperSlide>
     <SwiperSlide>
       <SwipeView :slideIndex="2" :useEditButton="false"></SwipeView>
+    </SwiperSlide>
+    <SwiperSlide>
+      <SwipeView :slideIndex="3" :useEditButton="false"></SwipeView>
     </SwiperSlide>
   </Swiper>
 </template>
@@ -93,7 +93,6 @@ import { ref, onMounted } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { dragOptionActive } from "@/store/store.js";
 import SwipeView from "./SwipeView.vue";
-import UserInfoDisplay from "@/components/MainModals/UserInfoViews/UserInfoDisplay.vue";
 import DragIcon from "@/assets/icons/DragIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 import "swiper/css";

@@ -1,6 +1,6 @@
 <template>
   <section
-    v-if="props.slideIndex != 4"
+    v-if="props.slideIndex > 0 && props.slideIndex < 5"
     class="z-0 overflow-auto overflow-scroll w-screen h-screen py-20 pb-32"
   >
     <component :is="mapListComponents[slideIndex]" :key="renderComponent" />
@@ -20,7 +20,13 @@
     </div>
   </section>
   <section
-    v-if="props.slideIndex == 4"
+    v-if="props.slideIndex == 0"
+    class="z-0 overflow-auto overflow-scroll w-screen h-screen py-20 pb-32"
+  >
+    <component :is="mapListComponents[slideIndex]" :key="renderComponent" />
+  </section>
+  <section
+    v-if="props.slideIndex == 5"
     class="z-0 overflow-auto overflow-scroll w-screen h-screen py-96 pb-32 bg-wd-background dark:bg-slate-700"
   >
     <div class="py-10">
@@ -88,6 +94,7 @@
 import { ref, defineProps, watch, onMounted } from "vue";
 import AddIcon from "@/assets/icons/AddIcon.vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
+import UserInfoDisplay from "@/components/MainModals/UserInfoViews/UserInfoDisplay.vue";
 
 import SwiperCard from "@/components/MenuModals/SwiperCard.vue";
 import BottomCard from "@/components/MenuModals/BottomCard.vue";
@@ -141,6 +148,7 @@ const props = defineProps({
 });
 
 const mapFormComponents = [
+  UserInfoDisplay,
   EducationForm,
   ExperienceForm,
   KnowledgeForm,
@@ -148,6 +156,7 @@ const mapFormComponents = [
   CalendarForm,
 ];
 const mapListComponents = [
+  UserInfoDisplay,
   EducationList,
   ExperienceList,
   KnowledgeList,
@@ -155,6 +164,7 @@ const mapListComponents = [
   CalendarList,
 ];
 const mapFormComponentsNames = [
+  "Lebenslauf",
   "Ausbildungen",
   "Erfahrung",
   "Kenntnisse",

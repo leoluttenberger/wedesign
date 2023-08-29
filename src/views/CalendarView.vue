@@ -47,7 +47,7 @@
 
   <swiper class="applicationSwiper py-20">
     <swiper-slide>
-      <SwipeView :slideIndex="4" :useEditButton="false"> </SwipeView>
+      <SwipeView :slideIndex="5" :useEditButton="false"> </SwipeView>
     </swiper-slide>
   </swiper>
 </template>

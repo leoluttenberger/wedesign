@@ -168,8 +168,14 @@ const saveAndDownLoadDocs = async () => {
   const base64StringDoc = await fileToBase64(downloadDocx.value);
   const base64StringPdf = await fileToBase64(pdf.value.output("blob"));
 
-  saveAs(pdf.value.output("blob"), fileNamePDF);
-  saveAs(downloadDocx.value, fileNameDoc);
+  try {
+    var isFileSaverSupported = !!new Blob();
+    saveAs(pdf.value.output("blob"), fileNamePDF);
+    saveAs(downloadDocx.value, fileNameDoc);
+  } catch (e) {
+    console.log("File Save not supported on this platform");
+  }
+
   let sharePath;
   await Filesystem.writeFile({
     path: fileNameDoc,

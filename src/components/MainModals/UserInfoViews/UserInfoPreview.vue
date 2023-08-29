@@ -174,79 +174,76 @@ const saveAndDownLoadDocs = async () => {
     )
   ) {
     console.log("ios or android");
-    try {
-      if (Share.share) {
-        await Share.share({
-          text: "Really awesome thing you need to see right meow",
-        });
-        console.log("Sharing is supported!");
-      } else {
-        // Fallback for browsers that do not support Web Share API
-        console.log("Web Share API is not supported in this browser");
-        try {
-          saveAs(pdf.value.output("blob"), fileNamePDF);
-          saveAs(downloadDocx.value, fileNameDoc);
-        } catch (e) {
-          console.log("File Share not supported on this platform");
-        }
+
+    if (Share.share) {
+      await Share.share({
+        text: "Really awesome thing you need to see right meow",
+      });
+      console.log("Sharing is supported!");
+    } else {
+      // Fallback for browsers that do not support Web Share API
+      console.log("Web Share API is not supported in this browser");
+      try {
+        saveAs(pdf.value.output("blob"), fileNamePDF);
+        saveAs(downloadDocx.value, fileNameDoc);
+      } catch (e) {
+        console.log("File Share not supported on this platform");
       }
-      console.log("Save and Share Files");
+    }
+    console.log("Save and Share Files");
+    await Filesystem.writeFile({
+      path: fileNameDoc,
+      data: base64StringDoc,
+      directory: Directory.Documents,
+    })
+      .then(
+        () => {
+          Filesystem.getUri({
+            directory: Directory.Documents,
+            path: fileNameDoc,
+          }).then(
+            (result) => {
+              Share.share({
+                title: fileNameDoc,
+                text: fileNameDoc,
+                files: [result.uri],
+              });
+              console.log("sharePath", result.uri);
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
+      .then(() => {
+        console.log("File written to document docx directory!");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    await nextTick();
+    const fileSize = pdf.value.output("blob").size / 1024;
+    console.log("Pdf-size", fileSize + " KB");
+
+    if (fileSize <= 3000) {
+      await nextTick();
       await Filesystem.writeFile({
-        path: fileNameDoc,
-        data: base64StringDoc,
+        path: `${fileNamePDF}`,
+        data: base64StringPdf,
         directory: Directory.Documents,
       })
-        .then(
-          () => {
-            Filesystem.getUri({
-              directory: Directory.Documents,
-              path: fileNameDoc,
-            }).then(
-              (result) => {
-                Share.share({
-                  title: fileNameDoc,
-                  text: fileNameDoc,
-                  files: [result.uri],
-                });
-                console.log("sharePath", result.uri);
-              },
-              (err) => {
-                console.log(err);
-              }
-            );
-          },
-          (err) => {
-            console.log(err);
-          }
-        )
         .then(() => {
-          console.log("File written to document docx directory!");
+          console.log("File written to document pdf directory!");
         })
         .catch((error) => {
           console.error(error);
         });
-      await nextTick();
-      const fileSize = pdf.value.output("blob").size / 1024;
-      console.log("Pdf-size", fileSize + " KB");
-
-      if (fileSize <= 3000) {
-        await nextTick();
-        await Filesystem.writeFile({
-          path: `${fileNamePDF}`,
-          data: base64StringPdf,
-          directory: Directory.Documents,
-        })
-          .then(() => {
-            console.log("File written to document pdf directory!");
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      } else {
-        console.log("Error PDF filesize to big!");
-      }
-    } catch (e) {
-      console.log("File Save not supported on this platform");
+    } else {
+      console.log("Error PDF filesize to big!");
     }
   } else {
     try {

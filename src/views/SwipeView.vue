@@ -1,13 +1,13 @@
 <template>
   <section
-    v-if="props.slideIndex != 4"
+    v-if="props.slideIndex > 0 && props.slideIndex < 5"
     class="z-0 overflow-auto overflow-scroll w-screen h-screen py-20 pb-32"
+    :key="renderComponent"
   >
-    <component :is="mapListComponents[slideIndex]" :key="renderComponent" />
-    <div
-      class="group fixed bottom-24 right-0 p-6 flex items-end justify-end w-24 h-24"
-    >
-      <div class="">
+    <component :is="mapListComponents[slideIndex]" />
+    <div class="flex justify-end items-end place-items-end">
+      <div class="grow ..."></div>
+      <div class="fixed bottom-28 px-4">
         <button
           @click="openBottomCard()"
           class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
@@ -20,16 +20,23 @@
     </div>
   </section>
   <section
-    v-if="props.slideIndex == 4"
+    v-if="props.slideIndex == 0"
+    class="z-0 overflow-auto overflow-scroll w-screen h-screen py-20 pb-32"
+    :key="renderComponent"
+  >
+    <component :is="mapListComponents[slideIndex]" />
+  </section>
+  <section
+    v-if="props.slideIndex == 5"
     class="z-0 overflow-auto overflow-scroll w-screen h-screen py-96 pb-32 bg-wd-background dark:bg-slate-700"
+    :key="renderComponent"
   >
     <div class="py-10">
-      <component :is="mapListComponents[4]" :key="renderComponent" />
+      <component :is="mapListComponents[4]" />
     </div>
-    <div
-      class="group fixed bottom-24 right-0 p-6 flex items-end justify-end w-24 h-24"
-    >
-      <div class="">
+    <div class="flex justify-end items-end place-items-end">
+      <div class="grow ..."></div>
+      <div class="fixed bottom-28 px-4">
         <button
           @click="openBottomCard()"
           class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
@@ -88,6 +95,7 @@
 import { ref, defineProps, watch, onMounted } from "vue";
 import AddIcon from "@/assets/icons/AddIcon.vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
+import UserInfoDisplay from "@/components/MainModals/UserInfoViews/UserInfoDisplay.vue";
 
 import SwiperCard from "@/components/MenuModals/SwiperCard.vue";
 import BottomCard from "@/components/MenuModals/BottomCard.vue";
@@ -134,13 +142,10 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
-  useEditButton: {
-    type: Boolean,
-    default: false,
-  },
 });
 
 const mapFormComponents = [
+  UserInfoDisplay,
   EducationForm,
   ExperienceForm,
   KnowledgeForm,
@@ -148,6 +153,7 @@ const mapFormComponents = [
   CalendarForm,
 ];
 const mapListComponents = [
+  UserInfoDisplay,
   EducationList,
   ExperienceList,
   KnowledgeList,
@@ -155,6 +161,7 @@ const mapListComponents = [
   CalendarList,
 ];
 const mapFormComponentsNames = [
+  "Lebenslauf",
   "Ausbildungen",
   "Erfahrung",
   "Kenntnisse",
@@ -163,7 +170,6 @@ const mapFormComponentsNames = [
 ];
 
 onMounted(() => {
-  isEdit.value = props.useEditButton;
   sideBackBack.value = false;
   sideBack.value = false;
   slideDown.value = true;
@@ -172,7 +178,6 @@ onMounted(() => {
 
 const bottomCardOpen = ref(false);
 const renderComponent = ref(true);
-const isEdit = ref(false);
 
 const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {

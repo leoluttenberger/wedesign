@@ -73,17 +73,17 @@
     @Swiper="setSwiperRef"
     @slideChange="onSlideChange"
   >
-    <SwiperSlide>
-      <UserInfoDisplay></UserInfoDisplay>
+    <SwiperSlide :show="renderComponent">
+      <SwipeView :slideIndex="0"></SwipeView>
     </SwiperSlide>
     <SwiperSlide>
-      <SwipeView :slideIndex="0" :useEditButton="false"></SwipeView>
+      <SwipeView :slideIndex="1"></SwipeView>
     </SwiperSlide>
     <SwiperSlide>
-      <SwipeView :slideIndex="1" :useEditButton="false"></SwipeView>
+      <SwipeView :slideIndex="2"></SwipeView>
     </SwiperSlide>
     <SwiperSlide>
-      <SwipeView :slideIndex="2" :useEditButton="false"></SwipeView>
+      <SwipeView :slideIndex="3"></SwipeView>
     </SwiperSlide>
   </Swiper>
 </template>
@@ -93,12 +93,11 @@ import { ref, onMounted } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { dragOptionActive } from "@/store/store.js";
 import SwipeView from "./SwipeView.vue";
-import UserInfoDisplay from "@/components/MainModals/UserInfoViews/UserInfoDisplay.vue";
 import DragIcon from "@/assets/icons/DragIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 import "swiper/css";
 import "swiper/css/virtual";
-
+const renderComponent = ref(true);
 let activeButton1 = ref(true);
 let activeButton2 = ref(false);
 let activeButton3 = ref(false);
@@ -109,6 +108,8 @@ let swiperIndex = 0;
 
 let dragButtonVisible = ref(true);
 onMounted(() => {
+  renderComponent.value = false;
+  renderComponent.value = true;
   dragOptionActive.value = false;
 });
 
@@ -116,6 +117,8 @@ const setSwiperRef = (swiper) => {
   swiperRef = swiper;
 };
 const slideTo = (index) => {
+  renderComponent.value = false;
+  renderComponent.value = true;
   swiperRef.slideTo(index - 1, 0);
   onSlideChange();
 };

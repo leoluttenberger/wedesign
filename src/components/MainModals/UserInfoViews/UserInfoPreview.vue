@@ -174,8 +174,6 @@ const saveAndDownLoadDocs = async () => {
       navigator.userAgent
     )
   ) {
-    console.log("ios or android");
-
     if (Share.share) {
       console.log("Sharing is supported!");
       try {

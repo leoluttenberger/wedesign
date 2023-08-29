@@ -7,17 +7,17 @@
       ref="file"
       @change="change"
     />
-    <img :src="imageAvatar" class="h-full w-full object-cover" />
-    <div
-      class="absolute h-full w-full bg-black bg-opacity-25 flex items-center justify-center"
-    >
-      <button
-        type="button"
-        @click="browse()"
-        class="rounded-full hover:bg-white hover:bg-opacity-25 p-2 focus:outline-none text-white transition duration-200"
-      >
-        <icon-profile name="camera" class="h-6 w-6"></icon-profile>
-      </button>
+    <div class="z-10 h-full w-full object-cover relative">
+      <div class="absolute inset-0 flex items-center justify-center">
+        <button
+          type="button"
+          @click="browse()"
+          class="z-20 absolute rounded-full hover:bg-black hover:bg-opacity-25 p-2 focus:outline-none text-white transition duration-200 shadow-md bg-gray-400"
+        >
+          <icon-profile name="camera" class="h-6 w-6"></icon-profile>
+        </button>
+      </div>
+      <img :src="imageAvatar" />
     </div>
   </div>
 </template>

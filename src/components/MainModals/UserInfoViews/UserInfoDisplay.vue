@@ -51,7 +51,7 @@
 </template>
 <script setup lang="ts">
 import { ref, watch, onMounted } from "vue";
-import { slideDownUserInfo, sideBack } from "@/store/store.js";
+import { slideDownUserInfo } from "@/store/store.js";
 
 import EditIcon from "@/assets/icons/EditIcon.vue";
 

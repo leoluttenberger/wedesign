@@ -124,7 +124,7 @@
       >
         Schlussteil:
       </p>
-      <div class="justify-evenly flex">
+      <div class="justify-evenly flex pb-20">
         <div class="grid grid-cols-2 gap-1 px-4">
           <div class="col-span-2 md:col-span-1">
             <button type="button" @click="endingEdit()" class="">

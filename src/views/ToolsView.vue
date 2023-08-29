@@ -21,7 +21,7 @@
             'bg-wd-green border-wd-green justify-start text-black bg-slate-800',
           toggleOff: 'bg-gray-200 border-gray-200 justify-end',
           handle:
-            'inline-block bg-white w-5 h-5 top-0 rounded-full absolute transition-all',
+            'inline-block bg-white w-5 h-5 rounded-full absolute transition-all',
           handleOn: 'left-full transform -translate-x-full bg-shite',
           handleOff: 'left-0 bg-slate-600',
           label: 'text-center w-8 border-box whitespace-nowrap select-none',
@@ -47,7 +47,7 @@
             'bg-wd-green border-wd-green justify-start text-black bg-slate-800',
           toggleOff: 'bg-gray-200 border-gray-200 justify-end',
           handle:
-            'inline-block bg-white w-5 h-5 top-0 rounded-full absolute transition-all',
+            'inline-block bg-white w-5 h-5 rounded-full absolute transition-all',
           handleOn: 'left-full transform -translate-x-full bg-shite',
           handleOff: 'left-0 bg-slate-600',
           label: 'text-center w-8 border-box whitespace-nowrap select-none',

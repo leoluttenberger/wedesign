@@ -226,7 +226,7 @@
           Sonstiges:
         </p>
       </div>
-      <div class="px-2">
+      <div class="px-2 pb-20">
         <FormKit
           v-model="hobbies"
           label="Hobbies:"

@@ -9,7 +9,7 @@
     />
     <img :src="imageAvatar" class="h-full w-full object-cover" />
     <div
-      class="absolute top-0 h-full w-full bg-black bg-opacity-25 flex items-center justify-center"
+      class="absolute h-full w-full bg-black bg-opacity-25 flex items-center justify-center"
     >
       <button
         type="button"

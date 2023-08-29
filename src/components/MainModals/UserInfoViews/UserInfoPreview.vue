@@ -175,10 +175,8 @@ const saveAndDownLoadDocs = async () => {
   ) {
     try {
       if (Share.share) {
-        Share.share({
-          title: fileNameDoc,
-          text: fileNameDoc,
-          files: pdf.value.output("blob"),
+        await Share.share({
+          text: "Really awesome thing you need to see right meow",
         });
         console.log("Sharing is supported!");
       } else {

@@ -176,19 +176,16 @@ const saveAndDownLoadDocs = async () => {
     console.log("ios or android");
 
     if (Share.share) {
-      await Share.share({
-        text: "Really awesome thing you need to see right meow",
-      });
       console.log("Sharing is supported!");
-    } else {
-      // Fallback for browsers that do not support Web Share API
-      console.log("Web Share API is not supported in this browser");
       try {
         saveAs(pdf.value.output("blob"), fileNamePDF);
         saveAs(downloadDocx.value, fileNameDoc);
       } catch (e) {
         console.log("File Share not supported on this platform");
       }
+    } else {
+      // Fallback for browsers that do not support Web Share API
+      console.log("Web Share API is not supported in this browser");
     }
     console.log("Save and Share Files");
     await Filesystem.writeFile({
@@ -208,7 +205,7 @@ const saveAndDownLoadDocs = async () => {
                 text: fileNameDoc,
                 files: [result.uri],
               });
-              console.log("sharePath", result.uri);
+              console.log("sharePathDoc", result.uri);
             },
             (err) => {
               console.log(err);
@@ -225,6 +222,7 @@ const saveAndDownLoadDocs = async () => {
       .catch((error) => {
         console.error(error);
       });
+
     await nextTick();
     const fileSize = pdf.value.output("blob").size / 1024;
     console.log("Pdf-size", fileSize + " KB");
@@ -232,10 +230,33 @@ const saveAndDownLoadDocs = async () => {
     if (fileSize <= 3000) {
       await nextTick();
       await Filesystem.writeFile({
-        path: `${fileNamePDF}`,
+        path: fileNamePDF,
         data: base64StringPdf,
         directory: Directory.Documents,
       })
+        .then(
+          () => {
+            Filesystem.getUri({
+              directory: Directory.Documents,
+              path: fileNamePDF,
+            }).then(
+              (result) => {
+                Share.share({
+                  title: fileNamePDF,
+                  text: fileNamePDF,
+                  files: [result.uri],
+                });
+                console.log("sharePathPDF", result.uri);
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+          },
+          (err) => {
+            console.log(err);
+          }
+        )
         .then(() => {
           console.log("File written to document pdf directory!");
         })

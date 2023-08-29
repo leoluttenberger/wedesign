@@ -154,19 +154,36 @@
       </div>
     </div>
   </div>
-  <div>
-    <BottomCard v-model:open="showBottomSlide">
-      <SwiperCard :items="items" v-slot="slotProps">
-        <component
-          :is="EditTextModal"
-          :itemIndex="slotProps.itemIndex"
-          :buttonIndex="buttonIndex"
-          :indexOfMVid="indexOfMVid"
-          :textLabel="textLabel"
-        />
-      </SwiperCard>
-    </BottomCard>
-  </div>
+  <teleport to="body">
+    <transition
+      enter-active-class="transition ease-out duration-200 transform"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition ease-in duration-200 transform"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <section :class="darkLightMode">
+        <div
+          v-if="showBottomSlide"
+          class="fixed z-10 inset-0 dark:bg-transparent-black bg-wd-white bg-opacity-50"
+        >
+          <BottomCard v-model:open="showBottomSlide">
+            <SwiperCard :items="items" v-slot="slotProps">
+              <component
+                :is="EditTextModal"
+                :itemIndex="slotProps.itemIndex"
+                :buttonIndex="buttonIndex"
+                :indexOfMVid="indexOfMVid"
+                :textLabel="textLabel"
+              />
+            </SwiperCard>
+          </BottomCard>
+        </div>
+      </section>
+    </transition>
+  </teleport>
+
   <CropModal :show="showModal">
     <div class="place-items-center">
       <div class="text-white text-xl p-2">Schließen?</div>
@@ -209,16 +226,32 @@ import {
   currentTextExperience,
   currentTextContribution,
   currentTextCompetence,
+  isDarkMode,
 } from "@/store/store.js";
 
 import BackIcon from "@/assets/icons/BackIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 import EditIcon from "@/assets/icons/EditIcon.vue";
-import CloseIcon from "@/assets/icons/CloseIcon.vue";
-
 import BottomCard from "@/components/MenuModals/BottomCard.vue";
 import EditTextModal from "@/components/MenuModals/EditTextModal.vue";
+import SwiperCard from "@/components/MenuModals/SwiperCard.vue";
 
+const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
+if (JSON.parse(localStorage.getItem("theme")) == "dark") {
+  darkLightMode.value = "dark";
+} else if (JSON.parse(localStorage.getItem("theme")) == "light") {
+  darkLightMode.value = "light";
+} else {
+  darkLightMode.value = "dark";
+  isDarkMode.value = "dark";
+}
+watch(isDarkMode, () => {
+  if (isDarkMode.value == true) {
+    darkLightMode.value = "dark";
+  } else {
+    darkLightMode.value = "light";
+  }
+});
 const props = defineProps({
   currentApplIndex: {
     type: Number,
@@ -429,7 +462,6 @@ const saveToMVForm = () => {
     JSON.parse(localStorage.getItem("motivations")) || []
   );
   if (motivations.value.length > 0) {
-    console.log("IndexMV:", indexOfMVid.value);
     motivations.value[indexOfMVid.value][0].subject = subject.value;
     motivations.value[indexOfMVid.value][0].salutationBeginning =
       salutationBeginning.value;
@@ -594,71 +626,72 @@ const saveModal = () => {
 const subjectEdit = () => {
   storeFormData();
   sideBackBack.value = true;
-  showBottomSlide.value = true;
   buttonIndex = 0;
   isEdited = true;
   textLabel = "Betreff ";
+  console.log("open tip tap");
+  showBottomSlide.value = true;
 };
 
 const salutationBeginningEdit = () => {
   storeFormData();
   sideBackBack.value = true;
-  showBottomSlide.value = true;
   buttonIndex = 1;
   isEdited = true;
   textLabel = "Anrede ";
+  showBottomSlide.value = true;
 };
 
 const textBeginingEdit = () => {
   storeFormData();
   sideBackBack.value = true;
-  showBottomSlide.value = true;
   buttonIndex = 2;
   isEdited = true;
   textLabel = "Einleitung ";
+  showBottomSlide.value = true;
 };
 
 const textExperienceEdit = () => {
   storeFormData();
   sideBackBack.value = true;
-  showBottomSlide.value = true;
   buttonIndex = 3;
   isEdited = true;
   textLabel = "Werdegang ";
+  showBottomSlide.value = true;
 };
 
 const textCompetenceEdit = () => {
   storeFormData();
   sideBackBack.value = true;
-  showBottomSlide.value = true;
   buttonIndex = 4;
   isEdited = true;
   textLabel = "Kompetenz ";
+  showBottomSlide.value = true;
 };
 const textContributionEdit = () => {
   storeFormData();
   sideBackBack.value = true;
-  showBottomSlide.value = true;
   buttonIndex = 5;
   isEdited = true;
   textLabel = "Beitrag ";
+  showBottomSlide.value = true;
 };
 
 const endingEdit = () => {
   storeFormData();
   sideBackBack.value = true;
-  showBottomSlide.value = true;
   buttonIndex = 6;
   isEdited = true;
   textLabel = "Abschluss ";
+  showBottomSlide.value = true;
 };
 const salutationEndingEdit = () => {
   storeFormData();
   sideBackBack.value = true;
-  showBottomSlide.value = true;
   buttonIndex = 7;
   isEdited = true;
   textLabel = "Abschied ";
+  showBottomSlide.value = true;
 };
 
 const addAfter = () => {

@@ -1,7 +1,7 @@
 <template>
   <div class="overflow-auto overflow-scroll w-screen h-screen">
-    <div class="grid grid-cols-3 gap-20 p-2 place-items-center">
-      <button type="button" @click="closeModal()" class="p-4">
+    <div class="grid grid-cols-3 p-2 place-items-center">
+      <button type="button" @click="closeModal()">
         <BackIcon
           class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
         ></BackIcon>
@@ -11,11 +11,19 @@
       >
         {{ "Vorschau & Teilen" }}
       </p>
-      <button v-if="pdf" @click="saveAndDownLoadDocs()" class="p-4">
-        <ShareIcon
-          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-        ></ShareIcon>
-      </button>
+      <div class="flex gap-4">
+        <button v-if="pdf" @click="saveAndDownLoadDocs()">
+          <DocIcon
+            class="h-8 w-8 dark:stroke-wd-white stroke-black stroke-1 fill-black dark:fill-white"
+          ></DocIcon>
+        </button>
+
+        <button v-if="pdf" @click="saveAndDownLoadPDF()">
+          <PdfIcon
+            class="h-8 w-8 dark:stroke-wd-white stroke-black stroke-1 fill-black dark:fill-white"
+          ></PdfIcon>
+        </button>
+      </div>
     </div>
     <ConfettiExplosion v-if="visible" />
 
@@ -98,7 +106,8 @@ import { sideBack, sideBackBack } from "@/store/store.js";
 import { Share } from "@capacitor/share";
 
 import BackIcon from "@/assets/icons/BackIcon.vue";
-import ShareIcon from "@/assets/icons/ShareIcon.vue";
+import DocIcon from "@/assets/icons/DocIcon.vue";
+import PdfIcon from "@/assets/icons/PdfIcon.vue";
 import ZoomOutIcon from "@/assets/icons/ZoomOutIcon.vue";
 import ZoomInIcon from "@/assets/icons/ZoomInIcon.vue";
 
@@ -187,20 +196,7 @@ const convertToPdf = async () => {
   pdf.value = createPdfFromHtml(html.value);
   pdfDataURL.value = URL.createObjectURL(pdf.value.output("blob"));
 };
-const creatImage = () => {
-  const canvas = document.querySelector("canvas") as HTMLCanvasElement;
-  const context = canvas.getContext("2d") as CanvasRenderingContext2D;
-  const img = new Image();
-  img.src = pdf.value.output("datauristring");
-  context.drawImage(img, 0, 0);
-  imgData.value = canvas.toDataURL("image/png");
-};
 
-const mailImage = () => {
-  creatImage();
-  const mailtoLink = `mailto:recipient@example.com?subject=&body= Bitte hänge dein Motivationsschreiben und deinen Lebenslauf an. Die Datein findest im Ordner Dokumente!&attachment=`;
-  window.location.href = mailtoLink;
-};
 const saveAndDownLoadDocs = async () => {
   const applications = JSON.parse(localStorage.getItem("applications"));
   const dateString = moment().format("DD_MM_YYYY");
@@ -214,77 +210,147 @@ const saveAndDownLoadDocs = async () => {
     "_" +
     dateString +
     ".docx";
+
+  const base64StringDoc = await fileToBase64(downloadDocx.value);
+  if (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    )
+  ) {
+    console.log("ios or android");
+
+    if (Share.share) {
+      console.log("Sharing is supported!");
+      try {
+        saveAs(downloadDocx.value, fileNameDoc);
+      } catch (e) {
+        console.log("File Share not supported on this platform");
+      }
+    } else {
+      // Fallback for browsers that do not support Web Share API
+      console.log("Web Share API is not supported in this browser");
+    }
+    console.log("Save and Share Files");
+    await Filesystem.writeFile({
+      path: fileNameDoc,
+      data: base64StringDoc,
+      directory: Directory.Documents,
+    })
+      .then(
+        () => {
+          Filesystem.getUri({
+            directory: Directory.Documents,
+            path: fileNameDoc,
+          }).then(
+            (result) => {
+              Share.share({
+                title: fileNameDoc,
+                text: fileNameDoc,
+                files: [result.uri],
+              });
+              console.log("sharePathDoc", result.uri);
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
+      .then(() => {
+        console.log("File written to document docx directory!");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } else {
+    try {
+      saveAs(downloadDocx.value, fileNameDoc);
+    } catch (e) {
+      console.log("File Save not supported on this platform");
+    }
+  }
+};
+const saveAndDownLoadPDF = async () => {
+  const applications = JSON.parse(localStorage.getItem("applications"));
+  const dateString = moment().format("DD_MM_YYYY");
+  visible.value = false;
+  await nextTick();
+  visible.value = true;
   const fileNamePDF =
     "motivationsschreiben-" +
     applications[props.currentApplIndex][0].company +
     "_" +
     dateString +
     ".pdf";
-
+  const fileSize = pdf.value.output("blob").size / 1024;
+  console.log("Pdf-size", fileSize + " KB");
   const base64StringPdf = await fileToBase64(pdf.value.output("blob"));
-  const base64StringDoc = await fileToBase64(downloadDocx.value);
-  saveAs(pdf.value.output("blob"), fileNamePDF);
-  saveAs(downloadDocx.value, fileNameDoc);
-  let sharePath;
-  await Filesystem.writeFile({
-    path: fileNameDoc,
-    data: base64StringDoc,
-    directory: Directory.Documents,
-  })
-    .then(
-      () => {
-        Filesystem.getUri({
-          directory: Directory.Documents,
-          path: fileNameDoc,
-        }).then(
-          (result) => {
-            Share.share({
-              title: fileNameDoc,
-              text: fileNameDoc,
-              files: [result.uri],
-            });
-            console.log("sharePath", result.uri);
+
+  if (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    )
+  ) {
+    if (fileSize <= 4000) {
+      if (Share.share) {
+        console.log("Sharing is supported!");
+        try {
+          saveAs(downloadDocx.value, fileNamePDF);
+        } catch (e) {
+          console.log("File Share not supported on this platform");
+        }
+      } else {
+        // Fallback for browsers that do not support Web Share API
+        console.log("Web Share API is not supported in this browser");
+      }
+      await nextTick();
+      await Filesystem.writeFile({
+        path: fileNamePDF,
+        data: base64StringPdf,
+        directory: Directory.Documents,
+      })
+        .then(
+          () => {
+            Filesystem.getUri({
+              directory: Directory.Documents,
+              path: fileNamePDF,
+            }).then(
+              (result) => {
+                Share.share({
+                  title: fileNamePDF,
+                  text: fileNamePDF,
+                  files: [result.uri],
+                });
+                console.log("sharePathPDF", result.uri);
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
           },
           (err) => {
             console.log(err);
           }
-        );
-      },
-      (err) => {
-        console.log(err);
-      }
-    )
-    .then(() => {
-      console.log("File written to document docx directory!");
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-
-  await Filesystem.writeFile({
-    path: `${fileNamePDF}`,
-    data: base64StringPdf,
-    directory: Directory.Documents,
-  })
-    .then(() => {
-      console.log("File written to document pdf directory!");
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-
-  if (Share.share && sharePath != "") {
-    await Share.share({
-      title: "Share File",
-      text: fileNameDoc,
-      url: sharePath,
-    });
+        )
+        .then(() => {
+          console.log("File written to document pdf directory!");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      console.log("Error PDF filesize to big!");
+    }
   } else {
-    // Fallback for browsers that do not support Web Share API
-    console.log("Web Share API is not supported in this browser");
-    mailImage();
+    try {
+      saveAs(pdf.value.output("blob"), fileNamePDF);
+    } catch (e) {
+      console.log("File Save not supported on this platform");
+    }
   }
-  sideBack.value = false;
 };
 
 const createPdfFromHtml = (html: string) => {

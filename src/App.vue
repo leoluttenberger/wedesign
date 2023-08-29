@@ -1,132 +1,158 @@
 <template>
-  <UseScreenSafeArea top right bottom left>
-    <section :class="darkLightMode">
-      <div class="bg-wd-background dark:bg-slate-700">
-        <div class="h-screen">
-          <router-view></router-view>
+  <section :class="darkLightMode">
+    <div class="bg-wd-background dark:bg-slate-700">
+      <div class="h-screen">
+        <div class="bg-wd-white dark:bg-slate-800" :style="safeAreaStyle"></div>
+        <router-view></router-view>
+      </div>
+      <section
+        class="fixed z-10 inset-x-0 bottom-0 shadow bg-wd-white dark:bg-slate-800"
+      >
+        <div class="flex justify-evenly">
+          <button
+            @click="onMenuTo(1)"
+            :class="
+              activeButton1
+                ? 'border-wd-green dark:border-wd-green'
+                : 'border-white dark:border-slate-800'
+            "
+            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
+          >
+            <router-link to="/"
+              ><HomeIcon
+                :class="
+                  activeButton1
+                    ? 'stroke-wd-green dark:stroke-wd-green'
+                    : 'stroke-black dark:stroke-white'
+                "
+              ></HomeIcon>
+            </router-link>
+          </button>
+          <button
+            @click="onMenuTo(2)"
+            :class="
+              activeButton2
+                ? 'border-wd-green dark:border-wd-green'
+                : 'border-white dark:border-slate-800'
+            "
+            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
+          >
+            <router-link to="/form">
+              <UserIcon
+                :class="
+                  activeButton2
+                    ? 'stroke-wd-green dark:stroke-wd-green'
+                    : 'stroke-black dark:stroke-white'
+                "
+              ></UserIcon>
+            </router-link>
+          </button>
+          <button
+            @click="onMenuTo(3)"
+            :class="
+              activeButton3
+                ? 'border-wd-green dark:border-wd-green'
+                : 'border-white dark:border-slate-800'
+            "
+            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
+          >
+            <router-link to="/documents"
+              ><DocumentsMenuIcon
+                :class="
+                  activeButton3
+                    ? 'stroke-wd-green dark:stroke-wd-green'
+                    : 'stroke-black dark:stroke-white'
+                "
+              ></DocumentsMenuIcon>
+            </router-link>
+          </button>
+          <button
+            @click="onMenuTo(4)"
+            :class="
+              activeButton4
+                ? 'border-wd-green dark:border-wd-green'
+                : 'border-white dark:border-slate-800'
+            "
+            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
+          >
+            <router-link to="/calendar">
+              <NotificationMenuIcon
+                :class="
+                  activeButton4
+                    ? 'stroke-wd-green dark:stroke-wd-green'
+                    : 'stroke-black dark:stroke-white'
+                "
+              ></NotificationMenuIcon
+            ></router-link>
+          </button>
+          <button
+            @click="onMenuTo(5)"
+            :class="
+              activeButton5
+                ? 'border-wd-green dark:border-wd-green'
+                : 'border-white dark:border-slate-800'
+            "
+            class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
+          >
+            <router-link to="/tools">
+              <ToolIcon
+                :class="
+                  activeButton5
+                    ? 'stroke-wd-green dark:stroke-wd-green'
+                    : 'stroke-black dark:stroke-white'
+                "
+              ></ToolIcon
+            ></router-link>
+          </button>
+          <div
+            class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+          ></div>
         </div>
-        <section
-          class="fixed z-10 inset-x-0 bottom-0 shadow bg-white dark:bg-slate-800"
-        >
-          <div class="flex justify-evenly">
-            <button
-              @click="onMenuTo(1)"
-              :class="
-                activeButton1
-                  ? 'border-wd-green dark:border-wd-green'
-                  : 'border-white dark:border-slate-800'
-              "
-              class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
-            >
-              <router-link to="/"
-                ><HomeIcon
-                  :class="
-                    activeButton1
-                      ? 'stroke-wd-green dark:stroke-wd-green'
-                      : 'stroke-black dark:stroke-white'
-                  "
-                ></HomeIcon>
-              </router-link>
-            </button>
-            <button
-              @click="onMenuTo(2)"
-              :class="
-                activeButton2
-                  ? 'border-wd-green dark:border-wd-green'
-                  : 'border-white dark:border-slate-800'
-              "
-              class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
-            >
-              <router-link to="/form">
-                <UserIcon
-                  :class="
-                    activeButton2
-                      ? 'stroke-wd-green dark:stroke-wd-green'
-                      : 'stroke-black dark:stroke-white'
-                  "
-                ></UserIcon>
-              </router-link>
-            </button>
-            <button
-              @click="onMenuTo(3)"
-              :class="
-                activeButton3
-                  ? 'border-wd-green dark:border-wd-green'
-                  : 'border-white dark:border-slate-800'
-              "
-              class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
-            >
-              <router-link to="/documents"
-                ><DocumentsMenuIcon
-                  :class="
-                    activeButton3
-                      ? 'stroke-wd-green dark:stroke-wd-green'
-                      : 'stroke-black dark:stroke-white'
-                  "
-                ></DocumentsMenuIcon>
-              </router-link>
-            </button>
-            <button
-              @click="onMenuTo(4)"
-              :class="
-                activeButton4
-                  ? 'border-wd-green dark:border-wd-green'
-                  : 'border-white dark:border-slate-800'
-              "
-              class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
-            >
-              <router-link to="/calendar">
-                <NotificationMenuIcon
-                  :class="
-                    activeButton4
-                      ? 'stroke-wd-green dark:stroke-wd-green'
-                      : 'stroke-black dark:stroke-white'
-                  "
-                ></NotificationMenuIcon
-              ></router-link>
-            </button>
-            <button
-              @click="onMenuTo(5)"
-              :class="
-                activeButton5
-                  ? 'border-wd-green dark:border-wd-green'
-                  : 'border-white dark:border-slate-800'
-              "
-              class="dark:hover:border-wd-green hover:border-wd-green border-t-[3px]"
-            >
-              <router-link to="/tools">
-                <ToolIcon
-                  :class="
-                    activeButton5
-                      ? 'stroke-wd-green dark:stroke-wd-green'
-                      : 'stroke-black dark:stroke-white'
-                  "
-                ></ToolIcon
-              ></router-link>
-            </button>
-            <div
-              class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-            ></div>
-          </div>
-        </section>
-      </div></section
-  ></UseScreenSafeArea>
+      </section>
+    </div>
+  </section>
 </template>
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import { isDarkMode, activeButtonIndex } from "@/store/store.js";
-import { useScreenSafeArea } from "@vueuse/core";
-
 import HomeIcon from "@/assets/icons/HomeIcon.vue";
 import UserIcon from "@/assets/icons/UserIcon.vue";
 import DocumentsMenuIcon from "@/assets/icons/DocumentsMenuIcon.vue";
 import NotificationMenuIcon from "@/assets/icons/NotificationMenuIcon.vue";
 import ToolIcon from "@/assets/icons/ToolIcon.vue";
 
-const { top, right, bottom, left } = useScreenSafeArea();
-
 const router = useRouter();
+const safeAreaTop = ref(0);
+const safeAreaStyle = computed(() => ({
+  paddingTop: `${safeAreaTop.value}px`,
+}));
+
+// Check if the app is running on a mobile device
+if (
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  )
+) {
+  // Check for iOS platform and set safe area for status bar
+  if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
+    console.log("ios");
+    safeAreaTop.value = window.innerWidth > 375 ? 44 : 20;
+  }
+  // Check for Android platform and set safe area for status bar
+  else if (/Android/i.test(navigator.userAgent)) {
+    console.log("android");
+    const androidStatusBarHeight = 0; // Adjust as needed
+    safeAreaTop.value = androidStatusBarHeight;
+  } else {
+    console.log("web");
+    safeAreaTop.value = 0;
+  }
+} else {
+  console.log("web");
+
+  safeAreaTop.value = 0;
+}
 const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
 let activeButton1 = ref(true);
 let activeButton2 = ref(false);
@@ -142,6 +168,7 @@ if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   darkLightMode.value = "dark";
   isDarkMode.value = "dark";
 }
+
 watch(isDarkMode, () => {
   swichtDarkLightMode();
 });
@@ -199,10 +226,9 @@ const switchMenuIndex = (index) => {
   }
 };
 </script>
-<style>
-.icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+<style scoped>
+.safe-area {
+  padding-top: var(--safe-area-top, 0px);
+  /* Other styles for your safe area container */
 }
 </style>

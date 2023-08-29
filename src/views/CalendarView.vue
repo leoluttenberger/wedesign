@@ -1,10 +1,10 @@
 <template>
   <section
-    class="fixed inset-x-0 z-10 top-0 shadow dark:text-white text-xl font-Montserrat bg-white dark:bg-slate-800"
+    class="fixed inset-x-0 z-10 shadow dark:text-white text-xl font-Montserrat bg-white dark:bg-slate-800"
   >
     <div class="flex justify-center p-2 font-bold">Erinnerungen</div>
   </section>
-  <div class="fixed inset-x-0 z-10 top-0 pt-12" v-if="renderComponent">
+  <div class="fixed inset-x-0 z-10 pt-12" v-if="renderComponent">
     <VCalendar
       expanded
       ref="calendar"

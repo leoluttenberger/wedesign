@@ -51,7 +51,6 @@
                 'Fließend',
                 'Muttersprache',
               ]"
-              input-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white"
             />
           </div>
         </div>

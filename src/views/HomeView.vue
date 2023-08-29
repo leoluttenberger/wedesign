@@ -18,11 +18,11 @@
     </div>
   </Container>
   <Container>
-    <div class="flex pt-36 dark:text-white text-black text-l px-4">
+    <div class="flex pt-32 dark:text-white text-black text-l px-4">
       <DocumentsIcon
         class="dark:stroke-wd-white stroke-black stroke-1 w-8 h-8"
       ></DocumentsIcon>
-      <p class="pt-2">Aktuelle Bewerbungen</p>
+      <p class="">Aktuelle Bewerbungen</p>
       <div class="grow ..."></div>
 
       <p class="px-3 mx-2 pt-1 bg-wd-green rounded-full">
@@ -102,11 +102,11 @@
     </div>
   </Container>
   <Container>
-    <div class="flex pt-4 dark:text-white text-l px-4">
+    <div class="flex pt-2 dark:text-white text-l px-4">
       <NotificationsIcon
         class="dark:stroke-wd-white stroke-black stroke-1 w-8 h-8"
       ></NotificationsIcon>
-      <p class="flex-none pt-2">Wichtige Termine</p>
+      <p class="flex-none">Wichtige Termine</p>
       <div class="grow ..."></div>
       <p class="flex-none px-3 mx-2 pt-1 bg-wd-green rounded-full">
         {{ appointments.length }}
@@ -180,7 +180,7 @@
     </div>
   </Container>
   <Container>
-    <div class="pt-4">
+    <div class="pt-2">
       <wrapper
         class="flex w-screen h-28 justify-center text-black dark:text-white text-base"
       >
@@ -189,7 +189,7 @@
           :plugins="plugins"
         >
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -206,7 +206,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -223,7 +223,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -241,7 +241,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -258,7 +258,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -274,7 +274,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -291,7 +291,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -308,7 +308,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -326,7 +326,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -343,7 +343,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -360,7 +360,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -377,7 +377,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -394,7 +394,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -411,7 +411,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -429,7 +429,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -447,7 +447,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -463,7 +463,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -480,7 +480,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -497,7 +497,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -515,7 +515,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -532,7 +532,7 @@
             </div>
           </div>
           <div class="flex justify-center px-4 py-8">
-            <div class="pt-2 px-2">
+            <div class="px-2">
               <span class="relative flex h-2 w-2">
                 <span
                   class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"
@@ -555,7 +555,7 @@
   </Container>
 
   <Container>
-    <div class="grid flex gap-6 px-4 pt-4 pb-20">
+    <div class="grid flex gap-6 px-4 pb-20">
       <button
         class="rounded-md bg-wd-green hover:bg-transparent-green h-14 text-white font-bold"
         @click="openBottomCard()"

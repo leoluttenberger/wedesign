@@ -183,7 +183,7 @@
           </div>
         </div>
 
-        <div class="grid flex gap-2 p-2">
+        <div class="grid flex gap-2 p-2 pb-20">
           <button
             class="bg-wd-error shadow rounded-md h-10 w-full text-white font-bold"
             @click="openDeteleModal()"

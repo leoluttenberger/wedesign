@@ -175,10 +175,21 @@ const saveAndDownLoadDocs = async () => {
   ) {
     try {
       if (Share.share) {
+        Share.share({
+          title: fileNameDoc,
+          text: fileNameDoc,
+          files: pdf.value.output("blob"),
+        });
         console.log("Sharing is supported!");
       } else {
         // Fallback for browsers that do not support Web Share API
         console.log("Web Share API is not supported in this browser");
+        try {
+          saveAs(pdf.value.output("blob"), fileNamePDF);
+          saveAs(downloadDocx.value, fileNameDoc);
+        } catch (e) {
+          console.log("File Save not supported on this platform");
+        }
       }
       console.log("Save and Share Files");
       await Filesystem.writeFile({

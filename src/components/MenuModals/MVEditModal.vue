@@ -54,16 +54,12 @@ if (
   }
   // Check for Android platform and set safe area for status bar
   else if (/Android/i.test(navigator.userAgent)) {
-    console.log("android");
     const androidStatusBarHeight = 0; // Adjust as needed
     safeAreaTop.value = androidStatusBarHeight;
   } else {
-    console.log("web");
     safeAreaTop.value = 0;
   }
 } else {
-  console.log("web");
-
   safeAreaTop.value = 0;
 }
 const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);

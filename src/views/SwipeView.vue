@@ -141,10 +141,6 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
-  useEditButton: {
-    type: Boolean,
-    default: false,
-  },
 });
 
 const mapFormComponents = [
@@ -173,7 +169,6 @@ const mapFormComponentsNames = [
 ];
 
 onMounted(() => {
-  isEdit.value = props.useEditButton;
   sideBackBack.value = false;
   sideBack.value = false;
   slideDown.value = true;
@@ -182,7 +177,6 @@ onMounted(() => {
 
 const bottomCardOpen = ref(false);
 const renderComponent = ref(true);
-const isEdit = ref(false);
 
 const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {

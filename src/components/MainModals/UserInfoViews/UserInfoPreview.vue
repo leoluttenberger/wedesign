@@ -1,7 +1,7 @@
 <template>
   <div class="overflow-auto overflow-scroll w-screen h-screen">
-    <div class="grid grid-cols-3 gap-20 p-2 place-items-center">
-      <button type="button" @click="closeModal()" class="p-4">
+    <div class="grid grid-cols-3 p-2 place-items-center">
+      <button type="button" @click="closeModal()">
         <BackIcon
           class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
         ></BackIcon>
@@ -11,11 +11,19 @@
       >
         {{ "Vorschau & Teilen" }}
       </p>
-      <button v-if="pdf" @click="saveAndDownLoadDocs()" class="p-4">
-        <ShareIcon
-          class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-        ></ShareIcon>
-      </button>
+      <div class="flex gap-4">
+        <button v-if="pdf" @click="saveAndDownLoadDocs()">
+          <DocIcon
+            class="h-8 w-8 dark:stroke-wd-white stroke-black stroke-1 fill-black dark:fill-white"
+          ></DocIcon>
+        </button>
+
+        <button v-if="pdf" @click="saveAndDownLoadPDF()">
+          <PdfIcon
+            class="h-8 w-8 dark:stroke-wd-white stroke-black stroke-1 fill-black dark:fill-white"
+          ></PdfIcon>
+        </button>
+      </div>
     </div>
     <ConfettiExplosion v-if="visible" />
 
@@ -84,7 +92,8 @@ import { slideDownUserInfo } from "@/store/store.js";
 import { Share } from "@capacitor/share";
 
 import BackIcon from "@/assets/icons/BackIcon.vue";
-import ShareIcon from "@/assets/icons/ShareIcon.vue";
+import DocIcon from "@/assets/icons/DocIcon.vue";
+import PdfIcon from "@/assets/icons/PdfIcon.vue";
 import ZoomOutIcon from "@/assets/icons/ZoomOutIcon.vue";
 import ZoomInIcon from "@/assets/icons/ZoomInIcon.vue";
 
@@ -111,10 +120,6 @@ const el = ref(null);
 const { width, height } = useElementSize(el);
 const zoomFactor = ref(1);
 const visible = ref(false);
-const MIME_TYPE = "image/png";
-const QUALITY = 0.9;
-const MAX_WIDTH = 600;
-const MAX_HEIGHT = 600;
 
 onMounted(async () => {
   downloadDocx.value = await createFile();
@@ -159,15 +164,11 @@ const convertToPdf = async () => {
 const saveAndDownLoadDocs = async () => {
   const dateString = moment().format("DD_MM_YYYY");
   const fileNameDoc = "lebenslauf-" + dateString + ".docx";
-  const fileNamePDF = "lebenslauf-" + dateString + ".pdf";
 
   visible.value = false;
   await nextTick();
   visible.value = true;
-
-  console.log("File to base64");
   const base64StringDoc = await fileToBase64(downloadDocx.value);
-  const base64StringPdf = await fileToBase64(pdf.value.output("blob"));
   if (
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
@@ -178,7 +179,6 @@ const saveAndDownLoadDocs = async () => {
     if (Share.share) {
       console.log("Sharing is supported!");
       try {
-        saveAs(pdf.value.output("blob"), fileNamePDF);
         saveAs(downloadDocx.value, fileNameDoc);
       } catch (e) {
         console.log("File Share not supported on this platform");
@@ -222,12 +222,41 @@ const saveAndDownLoadDocs = async () => {
       .catch((error) => {
         console.error(error);
       });
+  } else {
+    try {
+      saveAs(downloadDocx.value, fileNameDoc);
+    } catch (e) {
+      console.log("File Save not supported on this platform");
+    }
+  }
+};
+const saveAndDownLoadPDF = async () => {
+  const dateString = moment().format("DD_MM_YYYY");
+  const fileNamePDF = "lebenslauf-" + dateString + ".pdf";
+  visible.value = false;
+  await nextTick();
+  visible.value = true;
+  const fileSize = pdf.value.output("blob").size / 1024;
+  console.log("Pdf-size", fileSize + " KB");
+  const base64StringPdf = await fileToBase64(pdf.value.output("blob"));
 
-    await nextTick();
-    const fileSize = pdf.value.output("blob").size / 1024;
-    console.log("Pdf-size", fileSize + " KB");
-
-    if (fileSize <= 3000) {
+  if (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    )
+  ) {
+    if (fileSize <= 4000) {
+      if (Share.share) {
+        console.log("Sharing is supported!");
+        try {
+          saveAs(downloadDocx.value, fileNamePDF);
+        } catch (e) {
+          console.log("File Share not supported on this platform");
+        }
+      } else {
+        // Fallback for browsers that do not support Web Share API
+        console.log("Web Share API is not supported in this browser");
+      }
       await nextTick();
       await Filesystem.writeFile({
         path: fileNamePDF,
@@ -269,7 +298,6 @@ const saveAndDownLoadDocs = async () => {
   } else {
     try {
       saveAs(pdf.value.output("blob"), fileNamePDF);
-      saveAs(downloadDocx.value, fileNameDoc);
     } catch (e) {
       console.log("File Save not supported on this platform");
     }

@@ -5,7 +5,7 @@
     :key="renderComponent"
   >
     <component :is="mapListComponents[slideIndex]" />
-    <div class="fixed bottom-32 p-6 w-24 h-24">
+    <div class="fixed bottom-32 p-6 w-24 h-24 right-0">
       <button
         @click="openBottomCard()"
         class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
@@ -31,7 +31,7 @@
     <div class="py-10">
       <component :is="mapListComponents[4]" />
     </div>
-    <div class="fixed bottom-32 p-6 w-24 h-24">
+    <div class="fixed bottom-32 p-6 w-24 h-24 right-0">
       <button
         @click="openBottomCard()"
         class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"

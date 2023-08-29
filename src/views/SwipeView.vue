@@ -2,49 +2,44 @@
   <section
     v-if="props.slideIndex > 0 && props.slideIndex < 5"
     class="z-0 overflow-auto overflow-scroll w-screen h-screen py-20 pb-32"
+    :key="renderComponent"
   >
-    <component :is="mapListComponents[slideIndex]" :key="renderComponent" />
-    <div
-      class="group fixed bottom-24 right-0 p-6 flex items-end justify-end w-24 h-24"
-    >
-      <div class="">
-        <button
-          @click="openBottomCard()"
-          class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
-        >
-          <AddIcon
-            class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
-          ></AddIcon>
-        </button>
-      </div>
+    <component :is="mapListComponents[slideIndex]" />
+    <div class="fixed bottom-32 p-6 w-24 h-24">
+      <button
+        @click="openBottomCard()"
+        class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
+      >
+        <AddIcon
+          class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
+        ></AddIcon>
+      </button>
     </div>
   </section>
   <section
     v-if="props.slideIndex == 0"
     class="z-0 overflow-auto overflow-scroll w-screen h-screen py-20 pb-32"
+    :key="renderComponent"
   >
-    <component :is="mapListComponents[slideIndex]" :key="renderComponent" />
+    <component :is="mapListComponents[slideIndex]" />
   </section>
   <section
     v-if="props.slideIndex == 5"
     class="z-0 overflow-auto overflow-scroll w-screen h-screen py-96 pb-32 bg-wd-background dark:bg-slate-700"
+    :key="renderComponent"
   >
     <div class="py-10">
-      <component :is="mapListComponents[4]" :key="renderComponent" />
+      <component :is="mapListComponents[4]" />
     </div>
-    <div
-      class="group fixed bottom-24 right-0 p-6 flex items-end justify-end w-24 h-24"
-    >
-      <div class="">
-        <button
-          @click="openBottomCard()"
-          class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
-        >
-          <AddIcon
-            class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
-          ></AddIcon>
-        </button>
-      </div>
+    <div class="fixed bottom-32 p-6 w-24 h-24">
+      <button
+        @click="openBottomCard()"
+        class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
+      >
+        <AddIcon
+          class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
+        ></AddIcon>
+      </button>
     </div>
   </section>
   <teleport to="body">

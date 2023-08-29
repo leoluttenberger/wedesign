@@ -5,15 +5,18 @@
     :key="renderComponent"
   >
     <component :is="mapListComponents[slideIndex]" />
-    <div class="fixed bottom-32 p-6 w-24 h-24 right-0">
-      <button
-        @click="openBottomCard()"
-        class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
-      >
-        <AddIcon
-          class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
-        ></AddIcon>
-      </button>
+    <div class="flex justify-end items-end place-items-end">
+      <div class="grow ..."></div>
+      <div class="fixed bottom-28 px-4">
+        <button
+          @click="openBottomCard()"
+          class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
+        >
+          <AddIcon
+            class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
+          ></AddIcon>
+        </button>
+      </div>
     </div>
   </section>
   <section
@@ -31,15 +34,18 @@
     <div class="py-10">
       <component :is="mapListComponents[4]" />
     </div>
-    <div class="fixed bottom-32 p-6 w-24 h-24 right-0">
-      <button
-        @click="openBottomCard()"
-        class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
-      >
-        <AddIcon
-          class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
-        ></AddIcon>
-      </button>
+    <div class="flex justify-end items-end place-items-end">
+      <div class="grow ..."></div>
+      <div class="fixed bottom-28 px-4">
+        <button
+          @click="openBottomCard()"
+          class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
+        >
+          <AddIcon
+            class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
+          ></AddIcon>
+        </button>
+      </div>
     </div>
   </section>
   <teleport to="body">

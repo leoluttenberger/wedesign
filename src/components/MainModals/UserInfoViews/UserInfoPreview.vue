@@ -173,6 +173,7 @@ const saveAndDownLoadDocs = async () => {
       navigator.userAgent
     )
   ) {
+    console.log("ios or android");
     try {
       if (Share.share) {
         await Share.share({
@@ -186,7 +187,7 @@ const saveAndDownLoadDocs = async () => {
           saveAs(pdf.value.output("blob"), fileNamePDF);
           saveAs(downloadDocx.value, fileNameDoc);
         } catch (e) {
-          console.log("File Save not supported on this platform");
+          console.log("File Share not supported on this platform");
         }
       }
       console.log("Save and Share Files");

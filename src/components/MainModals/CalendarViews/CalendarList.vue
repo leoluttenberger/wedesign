@@ -83,61 +83,63 @@
         <Container @drop="onDrop" v-if="isPicked">
           <div v-for="(item, index) in appointments" :key="index">
             <div v-if="checkFilter(item)">
-              <button @click="openBottomCard(index)" class="grow p-2">
-                <div
-                  class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border-2"
-                  :class="
-                    item[0].type == blueType
-                      ? 'border-wd-blue'
-                      : item[0].type == redType
-                      ? 'border-red-500'
-                      : item[0].type == yellowType
-                      ? 'border-wd-yellow'
-                      : item[0].type == pinkType
-                      ? 'border-wd-pink'
-                      : 'border-wd-green'
-                  "
-                >
-                  <div class="font-bold text-base">
-                    {{ item[0].type + ": " + item[0].title }}
+              <div class="flex">
+                <button @click="openBottomCard(index)" class="grow p-2">
+                  <div
+                    class="p-2 bg-white dark:bg-slate-800 text-black text-left dark:text-white font-Montserrat rounded-md border-2"
+                    :class="
+                      item[0].type == blueType
+                        ? 'border-wd-blue'
+                        : item[0].type == redType
+                        ? 'border-red-500'
+                        : item[0].type == yellowType
+                        ? 'border-wd-yellow'
+                        : item[0].type == pinkType
+                        ? 'border-wd-pink'
+                        : 'border-wd-green'
+                    "
+                  >
+                    <div class="font-bold text-base">
+                      {{ item[0].type + ": " + item[0].title }}
+                    </div>
+                    <div class="flex">
+                      <div class="flex-none text-sm">
+                        {{
+                          item[0].appointmentFrom
+                            ? item[0].appointmentFrom.slice(8, 10) +
+                              "." +
+                              item[0].appointmentFrom.slice(5, 7) +
+                              "." +
+                              item[0].appointmentFrom.slice(0, 4) +
+                              " " +
+                              item[0].appointmentFrom.slice(11, 16) +
+                              " Uhr"
+                            : ""
+                        }}
+                      </div>
+                      <div class="grow py-2 px-2">
+                        <ArrowIcon
+                          class="dark:stroke-wd-white stroke-1 w-full h-2"
+                        ></ArrowIcon>
+                      </div>
+                      <div class="flex-none text-sm">
+                        {{
+                          item[0].appointmentTo
+                            ? item[0].appointmentTo.slice(8, 10) +
+                              "." +
+                              item[0].appointmentTo.slice(5, 7) +
+                              "." +
+                              item[0].appointmentTo.slice(0, 4) +
+                              " " +
+                              item[0].appointmentTo.slice(11, 16) +
+                              " Uhr"
+                            : ""
+                        }}
+                      </div>
+                    </div>
                   </div>
-                  <div class="flex">
-                    <div class="flex-none text-sm">
-                      {{
-                        item[0].appointmentFrom
-                          ? item[0].appointmentFrom.slice(8, 10) +
-                            "." +
-                            item[0].appointmentFrom.slice(5, 7) +
-                            "." +
-                            item[0].appointmentFrom.slice(0, 4) +
-                            " " +
-                            item[0].appointmentFrom.slice(11, 16) +
-                            " Uhr"
-                          : ""
-                      }}
-                    </div>
-                    <div class="grow py-2 px-2">
-                      <ArrowIcon
-                        class="dark:stroke-wd-white stroke-1 w-full h-2"
-                      ></ArrowIcon>
-                    </div>
-                    <div class="flex-none text-sm">
-                      {{
-                        item[0].appointmentTo
-                          ? item[0].appointmentTo.slice(8, 10) +
-                            "." +
-                            item[0].appointmentTo.slice(5, 7) +
-                            "." +
-                            item[0].appointmentTo.slice(0, 4) +
-                            " " +
-                            item[0].appointmentTo.slice(11, 16) +
-                            " Uhr"
-                          : ""
-                      }}
-                    </div>
-                  </div>
-                </div>
-              </button>
+                </button>
+              </div>
             </div>
           </div>
         </Container>
@@ -320,45 +322,61 @@ const closeBottomCard = () => {
   slideDown.value = true;
 };
 const checkFilter = (item: any) => {
+  let currentDateInSec = getSecOfDate(
+    currentDay.value,
+    currentMonth.value,
+    currentYear.value
+  );
   if (item[0].appointmentFrom != null && item[0].appointmentTo != null) {
-    if (
-      item[0].appointmentFrom.slice(5, 7) <= currentMonth.value &&
-      item[0].appointmentFrom.slice(0, 4) <= currentYear.value
-    ) {
-      if (
-        item[0].appointmentTo.slice(5, 7) >= currentMonth.value &&
-        item[0].appointmentTo.slice(0, 4) >= currentYear.value
-      ) {
-        if (
-          item[0].appointmentFrom.slice(8, 10) <= selectedDay.value &&
-          item[0].appointmentTo.slice(8, 10) >= selectedDay.value
-        ) {
-          return true;
-        }
-      }
+    const dateInSecFrom = getSecOfDate(
+      parseInt(item[0].appointmentFrom.slice(8, 10)),
+      parseInt(item[0].appointmentFrom.slice(5, 7)),
+      parseInt(item[0].appointmentFrom.slice(0, 4))
+    );
+    const dateInSecTo = getSecOfDate(
+      parseInt(item[0].appointmentTo.slice(8, 10)),
+      parseInt(item[0].appointmentTo.slice(5, 7)),
+      parseInt(item[0].appointmentTo.slice(0, 4))
+    );
+    if (currentDateInSec >= dateInSecFrom && currentDateInSec <= dateInSecTo) {
+      return true;
     }
   } else {
     if (item[0].appointmentFrom != null) {
       if (
-        item[0].appointmentFrom.slice(0, 4) == currentYear.value &&
-        item[0].appointmentFrom.slice(5, 7) == currentMonth.value
+        currentDateInSec ==
+        getSecOfDate(
+          parseInt(item[0].appointmentFrom.slice(8, 10)),
+          parseInt(item[0].appointmentFrom.slice(5, 7)),
+          parseInt(item[0].appointmentFrom.slice(0, 4))
+        )
       ) {
-        if (item[0].appointmentFrom.slice(8, 10) == selectedDay.value) {
-          return true;
-        }
+        return true;
       }
-    }
-    if (item[0].appointmentTo != null) {
+    } else if (item[0].appointmentTo != null) {
       if (
-        item[0].appointmentTo.slice(0, 4) == currentYear.value &&
-        item[0].appointmentTo.slice(5, 7) == currentMonth.value
+        currentDateInSec ==
+        getSecOfDate(
+          parseInt(item[0].appointmentTo.slice(8, 10)),
+          parseInt(item[0].appointmentTo.slice(5, 7)),
+          parseInt(item[0].appointmentTo.slice(0, 4))
+        )
       ) {
-        if (item[0].appointmentTo.slice(8, 10) == selectedDay.value) {
-          return true;
-        }
+        return true;
       }
     }
   }
   return false;
+};
+const getSecOfDate = (day, month, year) => {
+  let calculatedTimeInSeconds: number | null = null;
+  if (day != null && month != null && year != null) {
+    const selectedDate = new Date(year, month, day);
+    calculatedTimeInSeconds = selectedDate.getTime();
+  } else {
+    calculatedTimeInSeconds = null;
+  }
+
+  return calculatedTimeInSeconds;
 };
 </script>

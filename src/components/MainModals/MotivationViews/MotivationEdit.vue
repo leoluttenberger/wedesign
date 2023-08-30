@@ -285,7 +285,7 @@ const motivation1 = [
       "Da Ihre Stellenbeschreibung meinen Fähigkeiten und Kenntnissen entspricht, wie z.B. Kundenfreundlichkeit, selbständiges Arbeiten und eine kommunikative Einstellung, bin ich überzeugt, dass ich Ihr Unternehmen mit meinen bereits erworbenen Fähigkeiten unterstützen kann.",
     ending:
       "Ich freue mich darauf, mich bald in einem persönlichen Gespräch vorzustellen und mehr über die Stelle zu erfahren.",
-    salutationEnding: " Mit freundlichen Grüßen [...]",
+    salutationEnding: "Mit freundlichen Grüßen,",
   },
 ];
 
@@ -304,7 +304,7 @@ const motivation2 = [
       "Da Ihre Stellenausschreibung meinen Fähigkeiten und Kenntnissen, wie Kreativität, selbständiges Arbeiten und die Umsetzung von Konzeptideen, entspricht, bin ich überzeugt, dass ich Ihr Kreativstudio mit meinen bereits erworbenen Fähigkeiten unterstützen kann.",
     ending:
       "Ich würde mich über eine Einladung zu einem persönlichen Vorstellungsgespräch freuen, zu dem ich gerne eine Mappe mit bisherigen Projekten mitbringe.",
-    salutationEnding: "Mit freundlichen Grüßen [...]",
+    salutationEnding: "Mit freundlichen Grüßen,",
   },
 ];
 const motivation3 = [
@@ -322,7 +322,7 @@ const motivation3 = [
       "Ich bin überzeugt, dass diese Lehrstelle sehr gut zu mir passt, da ich meine Interessen und Fähigkeiten hier gut einbringen kann und ich freue mich darauf, Ihr Unternehmen auch nach der Ausbildung mit meinem Einsatz zu unterstützen.",
     ending:
       "Über die Einladung zu einem persönlichen Vorstellungsgespräch, um Sie und Ihren Betrieb kennenzulernen, freue ich mich sehr.",
-    salutationEnding: "Mit freundlichen Grüßen [...]",
+    salutationEnding: "Mit freundlichen Grüßen,",
   },
 ];
 const motivation4 = [
@@ -340,7 +340,7 @@ const motivation4 = [
       "Mit diesen aufgezählten Eigenschaften bin ich davon überzeugt, dass diese Lehrstelle sehr gut zu mir passt und ich mir meinen Traum als [ProgrammiererIn] arbeiten zu können erfüllen kann.",
     ending:
       "Gerne würde ich Sie in einem persönlichen Gespräch davon überzeugen, dass ich für diesen Ausbildungsplatz sehr gut geeignet bin und freue mich darauf, Sie persönlich kennenzulernen.",
-    salutationEnding: "Mit freundlichen Grüßen [...]",
+    salutationEnding: "Mit freundlichen Grüßen,",
   },
 ];
 const motivation5 = [
@@ -358,7 +358,7 @@ const motivation5 = [
       "Ich würde mich sehr freuen, Teil Ihres Teams werden zu dürfen und diesen spannenden Beruf bald selbst ausüben zu können und wertvolle Erfahrungen in der Lehre zu sammeln.",
     ending:
       "Ich würde mich sehr über eine Einladung zu einem persönlichen Vorstellungsgespräch freuen, um Sie und Ihr Team kennenzulernen.",
-    salutationEnding: "Mit freundlichen Grüßen [...]",
+    salutationEnding: "Mit freundlichen Grüßen,",
   },
 ];
 const motivation6 = [

@@ -769,7 +769,7 @@ const accordion8 = ref([
     ref: "Wer hat die App gemacht?",
     header: "Wer hat die App gemacht?",
     body: [
-      "Die App war Teil eines Projekts der Universität Wien, das zwischen 2021 und 2023 lief. Die App wurde gemeinsam mit Schüler*innen der HAK Friesgasse und den media.lab Teilnehmenden des WUK work.space entwickelt. Hier haben alle gemeinsam gedacht, designed, entwickelt, getestet und viel Herz in die App gesteckt.",
+      "Die App war Teil eines Projekts der Universität Wien, das zwischen 2021 und 2023 lief. Die App wurde gemeinsam mit Schüler*innen der HAK AUL Flora Fries und den media.lab Teilnehmenden des WUK work.space entwickelt. Hier haben alle gemeinsam gedacht, designed, entwickelt, getestet und viel Herz in die App gesteckt.",
     ],
   },
   {

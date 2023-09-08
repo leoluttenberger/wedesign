@@ -4,7 +4,7 @@
     class="z-0 overflow-auto overflow-scroll w-screen h-screen py-20 pb-32"
     :key="renderComponent"
   >
-    <component :is="mapListComponents[slideIndex]" />
+    <component :is="mapListComponents[props.slideIndex]" />
     <div class="flex justify-end items-end place-items-end">
       <div class="grow ..."></div>
       <div class="fixed bottom-28 px-4">
@@ -24,7 +24,7 @@
     class="z-0 overflow-auto overflow-scroll w-screen h-screen py-20 pb-32"
     :key="renderComponent"
   >
-    <component :is="mapListComponents[slideIndex]" />
+    <component :is="mapListComponents[props.slideIndex]" />
   </section>
   <section
     v-if="props.slideIndex == 5"
@@ -32,7 +32,7 @@
     :key="renderComponent"
   >
     <div class="py-10">
-      <component :is="mapListComponents[4]" />
+      <component :is="mapListComponents[props.slideIndex]" />
     </div>
     <div class="flex justify-end items-end place-items-end">
       <div class="grow ..."></div>

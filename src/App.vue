@@ -105,7 +105,7 @@
             ></router-link>
           </button>
           <div
-            class="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+            class="flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75"
           ></div>
         </div>
       </section>
@@ -127,29 +127,21 @@ const safeAreaTop = ref(0);
 const safeAreaStyle = computed(() => ({
   paddingTop: `${safeAreaTop.value}px`,
 }));
-
-// Check if the app is running on a mobile device
-if (
-  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    navigator.userAgent
-  )
-) {
-  // Check for iOS platform and set safe area for status bar
-  if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
-    safeAreaTop.value = window.innerWidth > 375 ? 44 : 20;
-  }
-  // Check for Android platform and set safe area for status bar
-  else if (/Android/i.test(navigator.userAgent)) {
-    const androidStatusBarHeight = 0; // Adjust as needed
-    safeAreaTop.value = androidStatusBarHeight;
-  } else {
-    safeAreaTop.value = 0;
-  }
-} else {
-  console.log("web");
-
-  safeAreaTop.value = 0;
+if (/(iPhone|iPod|iPad|iPad)/i.test(navigator.userAgent)) {
+  safeAreaTop.value = window.innerWidth > 375 ? 44 : 20;
+  console.log("iOS: iPhone iPad");
 }
+// Check for Android platform and set safe area for status bar
+else if (/Android/i.test(navigator.userAgent)) {
+  const androidStatusBarHeight = 20; // Adjust as needed
+  console.log("Android");
+  safeAreaTop.value = androidStatusBarHeight;
+} else {
+  console.log("!web!");
+
+  safeAreaTop.value = 20;
+}
+
 const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
 let activeButton1 = ref(true);
 let activeButton2 = ref(false);

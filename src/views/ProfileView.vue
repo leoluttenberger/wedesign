@@ -149,7 +149,7 @@ const createBlobImage = () => {
     const blobURL = URL.createObjectURL(fileObject.file);
     const reader = new Image();
     reader.src = blobURL;
-    reader.onload = () => {
+    reader.onload = async () => {
       URL.revokeObjectURL(reader.src);
       const canvas = document.createElement("canvas");
       canvas.width = canvasCoordinates.width;
@@ -158,7 +158,7 @@ const createBlobImage = () => {
       ctx.drawImage(reader, -canvasCoordinates.left, -canvasCoordinates.top);
       canvas.toBlob(
         (blob) => {
-          console.log(blob.size / 1024 + " KB");
+          console.log("Original size: " + blob.size / 1024 + " KB");
         },
         MIME_TYPE,
         QUALITY
@@ -166,7 +166,7 @@ const createBlobImage = () => {
       image.value = canvas.toDataURL();
       let blob = JSON.stringify(image.value);
       if (blob.length / 1028 >= 2048) {
-        downSampleImage(image.value);
+        await downSampleImage(image.value);
       } else {
         localStorage.setItem("profileImg", JSON.stringify(image.value));
       }
@@ -189,7 +189,7 @@ const downSampleImage = (blobURL) => {
     ctx.drawImage(reader, 0, 0, newWidth, newHeight);
     canvas.toBlob(
       (blob) => {
-        console.log(blob.size / 1024 + " KB");
+        console.log("Downsampled size: " + blob.size / 1024 + " KB");
       },
       MIME_TYPE,
       QUALITY

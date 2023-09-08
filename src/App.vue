@@ -137,16 +137,18 @@ if (
   // Check for iOS platform and set safe area for status bar
   if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
     safeAreaTop.value = window.innerWidth > 375 ? 44 : 20;
+    console.log("iOS: iPhone iPad");
   }
   // Check for Android platform and set safe area for status bar
   else if (/Android/i.test(navigator.userAgent)) {
     const androidStatusBarHeight = 0; // Adjust as needed
+    console.log("Android");
     safeAreaTop.value = androidStatusBarHeight;
   } else {
     safeAreaTop.value = 0;
   }
 } else {
-  console.log("web");
+  console.log("!web!");
 
   safeAreaTop.value = 0;
 }

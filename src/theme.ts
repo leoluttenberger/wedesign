@@ -1,6 +1,6 @@
 const textClassification = {
   label:
-    "inline-block align-middle text-black dark:text-white font-Montserrat md:text-lg text-xs placeholder-gray dark:placeholder-gray",
+    "inline-block align-middle text-black dark:text-white font-Montserrat md:text-lg text-base placeholder-gray dark:placeholder-gray",
   inner: `
     border-none
     border-transparent
@@ -10,7 +10,7 @@ const textClassification = {
     bg-white dark:bg-slate-800
   `,
   input:
-    "h-10 outline-0 font-Montserrat md:text-lg text-xs font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-gray dark:placeholder-gray",
+    "h-10 outline-0 font-Montserrat md:text-lg text-base font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-gray dark:placeholder-gray",
 };
 const boxClassification = {
   fieldset: "max-w-md border border-gray-400 rounded-md",
@@ -28,14 +28,14 @@ const buttonClassification = {
 };
 const navigationClassification = {
   input:
-    "flex items-center text-xs uppercase font-Montserrat leading-snug text-black hover:bg-trasparent-black",
+    "flex items-center text-base uppercase font-Montserrat leading-snug text-black hover:bg-trasparent-black",
 };
 export default {
   global: {
     outer: "mb-5 formkit-disabled:opacity-50",
-    help: "text-xs text-gray-500",
+    help: "text-base text-gray-500",
     messages: "list-none p-0 mt-1 mb-0",
-    message: "text-red-500 mb-1 text-xs",
+    message: "text-red-500 mb-1 text-base",
   },
   navigation: navigationClassification,
   button: buttonClassification,

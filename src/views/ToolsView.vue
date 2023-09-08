@@ -16,7 +16,7 @@
         :classes="{
           container: 'inline-block',
           toggle:
-            'flex w-12 h-5 rounded-full relative cursor-pointer transition items-center box-content border-2 text-xs leading-none',
+            'flex w-12 h-5 rounded-full relative cursor-pointer transition items-center box-content border-2 text-base leading-none',
           toggleOn:
             'bg-wd-green border-wd-green justify-start text-black bg-slate-800',
           toggleOff: 'bg-gray-200 border-gray-200 justify-end',
@@ -42,7 +42,7 @@
         :classes="{
           container: 'inline-block',
           toggle:
-            'flex w-12 h-5 rounded-full relative cursor-pointer transition items-center box-content border-2 text-xs leading-none',
+            'flex w-12 h-5 rounded-full relative cursor-pointer transition items-center box-content border-2 text-base leading-none',
           toggleOn:
             'bg-wd-green border-wd-green justify-start text-black bg-slate-800',
           toggleOff: 'bg-gray-200 border-gray-200 justify-end',

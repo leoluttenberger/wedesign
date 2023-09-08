@@ -49,25 +49,25 @@
                 <div class="grow ..."></div>
                 <div
                   v-if="item[0].state == 'In Bearbeitung'"
-                  class="font-none px-2 text-xs text-white font-bold rounded-2xl bg-wd-edit"
+                  class="font-none px-2 text-base text-white font-bold rounded-2xl bg-wd-edit"
                 >
                   {{ item[0].state }}
                 </div>
                 <div
                   v-if="item[0].state == 'Abgeschickt'"
-                  class="font-none px-2 text-xs text-white font-bold rounded-2xl bg-wd-green"
+                  class="font-none px-2 text-base text-white font-bold rounded-2xl bg-wd-green"
                 >
                   {{ item[0].state }}
                 </div>
                 <div
                   v-if="item[0].state == 'Keine Rückmeldung'"
-                  class="font-none px-2 text-xs text-white font-bold rounded-2xl bg-wd-error"
+                  class="font-none px-2 text-base text-white font-bold rounded-2xl bg-wd-error"
                 >
                   {{ item[0].state }}
                 </div>
                 <div
                   v-if="item[0].state == 'Leider nein'"
-                  class="font-none px-2 text-xs text-white font-bold rounded-2xl bg-wd-error"
+                  class="font-none px-2 text-base text-white font-bold rounded-2xl bg-wd-error"
                 >
                   {{ item[0].state }}
                 </div>

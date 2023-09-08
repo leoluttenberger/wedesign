@@ -7,7 +7,7 @@
     <component :is="mapListComponents[props.slideIndex]" />
     <div class="flex justify-end items-end place-items-end">
       <div class="grow ..."></div>
-      <div class="fixed bottom-28 px-4">
+      <div class="fixed bottom-32 px-4">
         <button
           @click="openBottomCard()"
           class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"
@@ -36,7 +36,7 @@
     </div>
     <div class="flex justify-end items-end place-items-end">
       <div class="grow ..."></div>
-      <div class="fixed bottom-28 px-4">
+      <div class="fixed bottom-32 px-4">
         <button
           @click="openBottomCard()"
           class="bg-wd-green hover:bg-transparent-green shadow p-2 md:p-4 rounded-full"

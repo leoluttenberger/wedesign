@@ -52,10 +52,10 @@ if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
 }
 // Check for Android platform and set safe area for status bar
 else if (/Android/i.test(navigator.userAgent)) {
-  const androidStatusBarHeight = 0; // Adjust as needed
+  const androidStatusBarHeight = 20; // Adjust as needed
   safeAreaTop.value = androidStatusBarHeight;
 } else {
-  safeAreaTop.value = 0;
+  safeAreaTop.value = 20;
 }
 
 const showModal = ref(false);

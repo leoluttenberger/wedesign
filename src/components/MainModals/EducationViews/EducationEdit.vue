@@ -1,6 +1,6 @@
 <template>
   <div class="px-2" v-bind="editIndex">
-    <div class="flex gap-1">
+    <div class="flex">
       <div class="grow">
         <div class="px-2">
           <FormKit
@@ -22,45 +22,75 @@
         </div>
       </div>
     </div>
-    <div class="flex">
-      <div class="grow px-2">
-        <FormKit
-          v-model="address"
-          label="Adresse:"
-          type="text"
-          placeholder="Straße Nr., PLZ"
-        />
-      </div>
-    </div>
 
-    <div class="flex gap-1">
-      <div class="grow px-2">
-        <FormKit
-          type="datepicker"
-          label="Start: *"
-          format="MM YYYY"
-          v-model="educationFrom"
-          :sequence="['year', 'month']"
-          :validation="[['required']]"
-          validation-visibility="live"
-          picker-only
-        />
+    <div class="grid grid-cols-3">
+      <div class="col-span-3">
+        <div class="px-2">
+          <FormKit
+            type="datepicker"
+            label="Start: *"
+            format="MM YYYY"
+            v-model="educationFrom"
+            :sequence="['year', 'month']"
+            :validation="[['required']]"
+            validation-visibility="live"
+            picker-only
+          />
+        </div>
       </div>
-      <div class="grow px-2" v-if="!checked">
-        <FormKit
-          type="datepicker"
-          label="Ende: *"
-          format="MM YYYY"
-          v-model="educationTo"
-          :validation="[['required'], ['date_after', educationFrom]]"
-          validation-visibility="live"
-          :sequence="['year', 'month']"
-          :disabled="checked"
-          picker-only
-        />
+      <div class="col-span-3">
+        <div class="flex grow px-2">
+          <div class="grow">
+            <FormKit
+              type="datepicker"
+              label="Ende: *"
+              format="MM YYYY"
+              v-model="educationTo"
+              :validation="[['required'], ['date_after', educationFrom]]"
+              validation-visibility="live"
+              :sequence="['year', 'month']"
+              :disabled="checked"
+              picker-only
+            />
+          </div>
+
+          <div class="flex">
+            <div class="pt-10 px-2">
+              <input
+                id="ongoing"
+                v-model="checked"
+                type="checkbox"
+                value="ongoing"
+                class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              />
+              <label
+                for="ongoing"
+                class="w-5 h-5 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
+              >
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="flex">
+          <div class="grow ..."></div>
+          <div
+            label
+            class="text-black dark:text-white font-Montserrat text-xs font-bold md:text-base"
+          >
+            Laufend
+          </div>
+        </div>
       </div>
     </div>
     <div class="grid grid-cols-2 gap-1">
+      <div class="px-2">
+        <FormKit
+          type="textarea"
+          label="Adresse:"
+          v-model="address"
+          placeholder="Straße Nr., PLZ"
+        />
+      </div>
       <div class="px-2">
         <FormKit
           type="textarea"
@@ -68,30 +98,6 @@
           v-model="note"
           placeholder="Wichtige Informationen"
         />
-      </div>
-      <div class="flex">
-        <div class="px-2 pt-6">
-          <input
-            id="ongoing"
-            v-model="checked"
-            type="checkbox"
-            value="ongoing"
-            class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          />
-          <label
-            for="ongoing"
-            class="w-5 h-5 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
-          >
-          </label>
-        </div>
-        <div class="pt-1 px-2">
-          <div
-            label
-            class="px-2 align-middle text-black dark:text-white font-Montserrat text-base font-bold md:text-lg pt-5"
-          >
-            Laufend
-          </div>
-        </div>
       </div>
     </div>
   </div>

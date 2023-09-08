@@ -77,4 +77,8 @@ export default {
   time: textClassification,
   url: textClassification,
   week: textClassification,
+  datepicker: {
+    label:
+      "inline-block align-middle text-black dark:text-white font-Montserrat md:text-lg text-base placeholder-gray dark:placeholder-gray",
+  },
 };

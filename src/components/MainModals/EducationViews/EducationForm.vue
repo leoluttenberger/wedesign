@@ -34,38 +34,30 @@
     </div>
 
     <div class="flex gap-1">
-      <div class="grow">
-        <div class="px-2">
-          <FormKit
-            type="datepicker"
-            label="Start: *"
-            format="MM YYYY"
-            v-model="educationFrom"
-            :sequence="['year', 'month']"
-            :validation="[['required']]"
-            validation-visibility="live"
-            picker-only
-            label-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white text-black"
-            input-class="$reset h-10 dark:bg-slate-800 text-base text-black dark:text-white"
-          />
-        </div>
+      <div class="grow px-2">
+        <FormKit
+          type="datepicker"
+          label="Start: *"
+          format="MM YYYY"
+          v-model="educationFrom"
+          :sequence="['year', 'month']"
+          :validation="[['required']]"
+          validation-visibility="live"
+          picker-only
+        />
       </div>
-      <div class="grow">
-        <div class="px-2" v-if="!checked">
-          <FormKit
-            type="datepicker"
-            label="Ende: *"
-            format="MM YYYY"
-            v-model="educationTo"
-            :validation="[['required'], ['date_after', educationFrom]]"
-            validation-visibility="live"
-            :sequence="['year', 'month']"
-            :disabled="checked"
-            picker-only
-            label-class="$reset h-10 bg-white dark:bg-slate-800 text-base dark:text-white text-black"
-            input-class="$reset h-10 dark:bg-slate-800 text-base text-black dark:text-white"
-          />
-        </div>
+      <div class="grow px-2" v-if="!checked">
+        <FormKit
+          type="datepicker"
+          label="Ende: *"
+          format="MM YYYY"
+          v-model="educationTo"
+          :validation="[['required'], ['date_after', educationFrom]]"
+          validation-visibility="live"
+          :sequence="['year', 'month']"
+          :disabled="checked"
+          picker-only
+        />
       </div>
     </div>
     <div class="grid grid-cols-2 gap-1">

@@ -169,21 +169,13 @@ const saveAndDownLoadDocs = async () => {
   await nextTick();
   visible.value = true;
   const base64StringDoc = await fileToBase64(downloadDocx.value);
-  if (
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    )
-  ) {
-    if (Share.share) {
-      console.log("Sharing is supported!");
-      try {
-        saveAs(downloadDocx.value, fileNameDoc);
-      } catch (e) {
-        console.log("File Share not supported on this platform");
-      }
-    } else {
-      // Fallback for browsers that do not support Web Share API
-      console.log("Web Share API is not supported in this browser");
+
+  if (Share.share) {
+    console.log("Sharing is supported!");
+    try {
+      saveAs(downloadDocx.value, fileNameDoc);
+    } catch (e) {
+      console.log("File Share not supported on this platform");
     }
     console.log("Save and Share Files");
     await Filesystem.writeFile({
@@ -221,6 +213,8 @@ const saveAndDownLoadDocs = async () => {
         console.error(error);
       });
   } else {
+    // Fallback for browsers that do not support Web Share API
+    console.log("Web Share API is not supported in this browser");
     try {
       saveAs(downloadDocx.value, fileNameDoc);
     } catch (e) {
@@ -238,22 +232,13 @@ const saveAndDownLoadPDF = async () => {
   console.log("Pdf-size", fileSize + " KB");
   const base64StringPdf = await fileToBase64(pdf.value.output("blob"));
 
-  if (
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    )
-  ) {
-    if (fileSize <= 4000) {
-      if (Share.share) {
-        console.log("Sharing is supported!");
-        try {
-          saveAs(downloadDocx.value, fileNamePDF);
-        } catch (e) {
-          console.log("File Share not supported on this platform");
-        }
-      } else {
-        // Fallback for browsers that do not support Web Share API
-        console.log("Web Share API is not supported in this browser");
+  if (fileSize <= 4000) {
+    if (Share.share) {
+      console.log("Sharing is supported!");
+      try {
+        saveAs(downloadDocx.value, fileNamePDF);
+      } catch (e) {
+        console.log("File Share not supported on this platform");
       }
       await nextTick();
       await Filesystem.writeFile({
@@ -291,14 +276,16 @@ const saveAndDownLoadPDF = async () => {
           console.error(error);
         });
     } else {
-      console.log("Error PDF filesize to big!");
+      // Fallback for browsers that do not support Web Share API
+      console.log("Web Share API is not supported in this browser");
+      try {
+        saveAs(pdf.value.output("blob"), fileNamePDF);
+      } catch (e) {
+        console.log("File Save not supported on this platform");
+      }
     }
   } else {
-    try {
-      saveAs(pdf.value.output("blob"), fileNamePDF);
-    } catch (e) {
-      console.log("File Save not supported on this platform");
-    }
+    console.log("Error PDF filesize to big!");
   }
 };
 

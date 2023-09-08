@@ -33,8 +33,8 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-1">
-      <div class="col-span-2 md:col-span-1">
+    <div class="flex gap-1">
+      <div class="grow">
         <div class="px-2">
           <FormKit
             type="datepicker"
@@ -50,7 +50,7 @@
           />
         </div>
       </div>
-      <div class="col-span-2 md:col-span-1">
+      <div class="grow">
         <div class="px-2" v-if="!checked">
           <FormKit
             type="datepicker"
@@ -84,11 +84,11 @@
             v-model="checked"
             type="checkbox"
             value="ongoing"
-            class="w-3.5 h-3.5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
           />
           <label
             for="ongoing"
-            class="w-3.5 h-3.5 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
+            class="w-5 h-5 text-black dark:text-white font-Montserrat text-base md:text-md font-bold"
           >
           </label>
         </div>

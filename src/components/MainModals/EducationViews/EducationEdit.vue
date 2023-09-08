@@ -33,8 +33,8 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-1">
-      <div class="col-span-2 md:col-span-1">
+    <div class="flex gap-1">
+      <div class="grow">
         <div class="px-2">
           <FormKit
             type="datepicker"
@@ -50,7 +50,7 @@
           />
         </div>
       </div>
-      <div class="col-span-2 md:col-span-1">
+      <div class="grow">
         <div class="px-2" v-if="!checked">
           <FormKit
             type="datepicker"

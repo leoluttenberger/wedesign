@@ -213,48 +213,45 @@ const saveAndDownLoadDocs = async () => {
 
   const base64StringDoc = await fileToBase64(downloadDocx.value);
 
-  if (Share.share) {
+  if ((await Share.canShare()).value == true) {
     console.log("Sharing is supported!");
     try {
-      saveAs(downloadDocx.value, fileNameDoc);
+      await Filesystem.writeFile({
+        path: fileNameDoc,
+        data: base64StringDoc,
+        directory: Directory.External,
+      })
+        .then(
+          () => {
+            Filesystem.getUri({
+              directory: Directory.External,
+              path: fileNameDoc,
+            }).then(
+              (result) => {
+                Share.share({
+                  title: fileNameDoc,
+                  files: [result.uri],
+                });
+                console.log("sharePathDoc", result.uri);
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+          },
+          (err) => {
+            console.log(err);
+          }
+        )
+        .then(() => {
+          console.log("File written to document docx directory!");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     } catch (e) {
       console.log("File Share not supported on this platform");
     }
-    console.log("Save and Share Files");
-    await Filesystem.writeFile({
-      path: fileNameDoc,
-      data: base64StringDoc,
-      directory: Directory.Library,
-    })
-      .then(
-        () => {
-          Filesystem.getUri({
-            directory: Directory.Library,
-            path: fileNameDoc,
-          }).then(
-            (result) => {
-              Share.share({
-                title: fileNameDoc,
-                text: fileNameDoc,
-                files: [result.uri],
-              });
-              console.log("sharePathDoc", result.uri);
-            },
-            (err) => {
-              console.log(err);
-            }
-          );
-        },
-        (err) => {
-          console.log(err);
-        }
-      )
-      .then(() => {
-        console.log("File written to document docx directory!");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
   } else {
     // Fallback for browsers that do not support Web Share API
     console.log("Web Share API is not supported in this browser");
@@ -282,48 +279,46 @@ const saveAndDownLoadPDF = async () => {
   const base64StringPdf = await fileToBase64(pdf.value.output("blob"));
 
   if (fileSize <= 4000) {
-    if (Share.share) {
+    if ((await Share.canShare()).value == true) {
       console.log("Sharing is supported!");
+      await nextTick();
       try {
-        saveAs(downloadDocx.value, fileNamePDF);
+        await Filesystem.writeFile({
+          path: fileNamePDF,
+          data: base64StringPdf,
+          directory: Directory.External,
+        })
+          .then(
+            () => {
+              Filesystem.getUri({
+                directory: Directory.External,
+                path: fileNamePDF,
+              }).then(
+                (result) => {
+                  Share.share({
+                    title: fileNamePDF,
+                    files: [result.uri],
+                  });
+                  console.log("sharePathPDF", result.uri);
+                },
+                (err) => {
+                  console.log(err);
+                }
+              );
+            },
+            (err) => {
+              console.log(err);
+            }
+          )
+          .then(() => {
+            console.log("File written to document pdf directory!");
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       } catch (e) {
         console.log("File Share not supported on this platform");
       }
-      await nextTick();
-      await Filesystem.writeFile({
-        path: fileNamePDF,
-        data: base64StringPdf,
-        directory: Directory.Library,
-      })
-        .then(
-          () => {
-            Filesystem.getUri({
-              directory: Directory.Library,
-              path: fileNamePDF,
-            }).then(
-              (result) => {
-                Share.share({
-                  title: fileNamePDF,
-                  text: fileNamePDF,
-                  files: [result.uri],
-                });
-                console.log("sharePathPDF", result.uri);
-              },
-              (err) => {
-                console.log(err);
-              }
-            );
-          },
-          (err) => {
-            console.log(err);
-          }
-        )
-        .then(() => {
-          console.log("File written to document pdf directory!");
-        })
-        .catch((error) => {
-          console.error(error);
-        });
     } else {
       // Fallback for browsers that do not support Web Share API
       console.log("Web Share API is not supported in this browser");

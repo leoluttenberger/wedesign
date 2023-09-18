@@ -29,7 +29,12 @@
           <div class="col-span-2 md:col-span-1">
             <button type="button" @click="subjectEdit()" class="py-2">
               <div class="flex gap-4">
-                <FormKit v-model="subject" label="Betreff:" type="textarea" />
+                <FormKit
+                  v-model="subject"
+                  label="Betreff:"
+                  type="textarea"
+                  :disabled="true"
+                />
                 <EditIcon
                   class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
                 ></EditIcon>
@@ -44,6 +49,7 @@
                   v-model="salutationBeginning"
                   type="textarea"
                   label="Anrede:"
+                  :disabled="true"
                 />
                 <EditIcon
                   class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
@@ -67,6 +73,7 @@
                   v-model="textBegining"
                   type="textarea"
                   label="Einleitung:"
+                  :disabled="true"
                 />
                 <EditIcon
                   class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
@@ -82,6 +89,7 @@
                   v-model="textExperience"
                   type="textarea"
                   label="Werdegang:"
+                  :disabled="true"
                 />
                 <EditIcon
                   class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
@@ -96,6 +104,7 @@
                   v-model="textCompetence"
                   type="textarea"
                   label="Kompetenzen:"
+                  :disabled="true"
                 />
                 <EditIcon
                   class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
@@ -110,6 +119,7 @@
                   v-model="textContribution"
                   type="textarea"
                   label="Beitrag:"
+                  :disabled="true"
                 />
                 <EditIcon
                   class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
@@ -129,7 +139,12 @@
           <div class="col-span-2 md:col-span-1">
             <button type="button" @click="endingEdit()" class="">
               <div class="flex gap-4">
-                <FormKit v-model="ending" label="Abschluss:" type="textarea" />
+                <FormKit
+                  v-model="ending"
+                  label="Abschluss:"
+                  type="textarea"
+                  :disabled="true"
+                />
                 <EditIcon
                   class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
                 ></EditIcon>
@@ -143,6 +158,7 @@
                   v-model="salutationEnding"
                   type="textarea"
                   label="Abschied:"
+                  :disabled="true"
                 />
                 <EditIcon
                   class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"

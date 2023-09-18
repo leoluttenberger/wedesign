@@ -255,11 +255,8 @@ import SwiperCard from "@/components/MenuModals/SwiperCard.vue";
 const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   darkLightMode.value = "dark";
-} else if (JSON.parse(localStorage.getItem("theme")) == "light") {
-  darkLightMode.value = "light";
 } else {
-  darkLightMode.value = "dark";
-  isDarkMode.value = "dark";
+  darkLightMode.value = "light";
 }
 watch(isDarkMode, () => {
   if (isDarkMode.value == true) {

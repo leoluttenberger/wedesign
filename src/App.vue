@@ -142,20 +142,21 @@ else if (/Android/i.test(navigator.userAgent)) {
   safeAreaTop.value = 20;
 }
 
-const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
+const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || "light");
 let activeButton1 = ref(true);
 let activeButton2 = ref(false);
 let activeButton3 = ref(false);
 let activeButton4 = ref(false);
 let activeButton5 = ref(false);
 
-if (JSON.parse(localStorage.getItem("theme")) == "dark") {
-  darkLightMode.value = "dark";
+if (darkLightMode.value == "dark") {
+  isDarkMode.value = true;
 } else if (JSON.parse(localStorage.getItem("theme")) == "light") {
-  darkLightMode.value = "light";
+  isDarkMode.value = false;
 } else {
-  darkLightMode.value = "dark";
-  isDarkMode.value = "dark";
+  darkLightMode.value = "light";
+  isDarkMode.value = false;
+  localStorage.setItem("theme", JSON.stringify("light"));
 }
 
 watch(isDarkMode, () => {

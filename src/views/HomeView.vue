@@ -670,10 +670,8 @@ watch(slideDown, () => {
 onMounted(() => {
   if (JSON.parse(localStorage.getItem("theme")) == "dark") {
     darkLightMode.value = "dark";
-  } else if (JSON.parse(localStorage.getItem("theme")) == "light") {
-    darkLightMode.value = "light";
   } else {
-    darkLightMode.value = "dark";
+    darkLightMode.value = "light";
   }
   if (localStorage.getItem("itemsSet") == "true") {
     openingInfo.value = false;

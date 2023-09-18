@@ -197,15 +197,8 @@ const items = ref<SlideItem[]>([
   { id: getID(), index: getPosIndex(), text: "First" },
 ]);
 
-const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
-if (JSON.parse(localStorage.getItem("theme")) == "dark") {
-  darkLightMode.value = "dark";
-} else if (JSON.parse(localStorage.getItem("theme")) == "light") {
-  darkLightMode.value = "light";
-} else {
-  darkLightMode.value = "dark";
-  isDarkMode.value = "dark";
-}
+const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || "light");
+
 watch(dragOptionActive, () => {
   dragActive.value = dragOptionActive.value;
 });

@@ -105,10 +105,8 @@ const showModal = ref(false);
 
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   toggleOnDark.value = true;
-} else if (JSON.parse(localStorage.getItem("theme")) == "light") {
-  toggleOnDark.value = false;
 } else {
-  toggleOnDark.value = true;
+  toggleOnDark.value = false;
 }
 watch(toggleOnDark, () => {
   isDarkMode.value = toggleOnDark.value;
@@ -139,7 +137,7 @@ onMounted(() => {
 });
 const removeAllData = () => {
   localStorage.clear();
-  localStorage.setItem("theme", JSON.stringify("dark"));
+  localStorage.setItem("theme", JSON.stringify("light"));
   toggleOnDark.value = true;
   isDarkMode.value = false;
   isDarkMode.value = true;

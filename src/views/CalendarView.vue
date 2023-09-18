@@ -257,10 +257,8 @@ loadAppointments();
 
 if (JSON.parse(localStorage.getItem("theme")) == "dark") {
   theme.value = true;
-} else if (JSON.parse(localStorage.getItem("theme")) == "light") {
-  theme.value = false;
 } else {
-  theme.value = true;
+  theme.value = false;
 }
 
 onMounted(() => {

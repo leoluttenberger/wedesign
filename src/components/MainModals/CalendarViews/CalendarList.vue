@@ -227,7 +227,6 @@ const blueType = ref("Bewerbungsgespräch");
 const redType = ref("Ende");
 const yellowType = ref("Aufnahmetest");
 const pinkType = ref("Feedback");
-const greenType = ref("Sonstige text-basee");
 
 interface SlideItem {
   id: string;
@@ -245,13 +244,10 @@ const items = ref<SlideItem[]>([
 ]);
 
 const darkLightMode = ref(JSON.parse(localStorage.getItem("theme")) || []);
-if (JSON.parse(localStorage.getItem("theme")) == "dark") {
+if (isDarkMode == true) {
   darkLightMode.value = "dark";
-} else if (JSON.parse(localStorage.getItem("theme")) == "light") {
-  darkLightMode.value = "light";
 } else {
-  darkLightMode.value = "dark";
-  isDarkMode.value = "dark";
+  darkLightMode.value = "light";
 }
 
 watch(isQuickAccessCalendar, () => {

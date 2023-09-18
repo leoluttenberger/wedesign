@@ -121,7 +121,9 @@
     <div class="place-items-center">
       <div class="text-white text-xl p-2">Entfernen?</div>
       <div class="text-white font-Montserrat text-base font-bold pb-2">
-        <p>Bist du wirklich sicher, dass diese Ausbildung entfernen willst?</p>
+        <p>
+          Bist du wirklich sicher, dass du diese Ausbildung entfernen willst?
+        </p>
       </div>
     </div>
 

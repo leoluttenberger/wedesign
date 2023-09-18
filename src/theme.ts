@@ -65,7 +65,12 @@ export default {
       "form-range appearance-none w-full h-2 p-0 bg-gray-200 rounded-full focus:outline-none focus:ring-0 focus:shadow-none",
   },
   search: textClassification,
-  select: textClassification,
+  select: {
+    label:
+      "inline-block align-middle text-black dark:text-white font-Montserrat text-base placeholder-gray dark:placeholder-gray",
+    input:
+      "h-10 outline-0 font-Montserrat text-xs font-bold text-black bg-wd-white dark:text-white dark:bg-slate-800 placeholder-gray dark:placeholder-gray",
+  },
   submit: buttonClassification,
   tel: textClassification,
   text: textClassification,
@@ -79,6 +84,6 @@ export default {
   week: textClassification,
   datepicker: {
     label:
-      "inline-block align-middle text-black dark:text-white font-Montserrat md:text-lg text-base placeholder-gray dark:placeholder-gray",
+      "inline-block align-middle text-black dark:text-white font-Montserrat text-base placeholder-gray dark:placeholder-gray",
   },
 };

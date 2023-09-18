@@ -1,8 +1,8 @@
 <template>
   <div class="px-2">
     <div class="flex gap-1">
-      <div class="grow">
-        <div class="px-2" v-if="!isEnd">
+      <div class="grow" v-if="!isEnd">
+        <div class="px-2">
           <FormKit
             v-model="type"
             label="Label:"
@@ -17,8 +17,8 @@
           />
         </div>
       </div>
-      <div class="grow">
-        <div class="px-2" v-if="isEnd">
+      <div class="grow" v-if="isEnd">
+        <div class="px-2">
           <FormKit
             v-model="type"
             label="Label:"

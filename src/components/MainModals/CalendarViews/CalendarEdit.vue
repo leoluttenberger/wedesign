@@ -32,10 +32,11 @@
       <div class="grow">
         <div class="px-2">
           <FormKit
-            v-model="title"
             label="Titel:"
             type="text"
             placeholder="Titel des Termins"
+            v-model="titleText"
+            :value="titleText"
           />
         </div>
       </div>
@@ -144,7 +145,7 @@ import { createToast } from "mosha-vue-toastify";
 import "mosha-vue-toastify/dist/style.css";
 
 const type = ref(null);
-const title = ref("");
+const titleText = ref("");
 const appointmentFrom = ref(null);
 const appointmentTo = ref(null);
 const address = ref("");
@@ -166,7 +167,7 @@ onMounted(() => {
   changedDate.value = false;
   showDeleteModal.value = false;
   type.value = appointments.value[props.editIndex][0].type;
-  title.value = appointments.value[props.editIndex][0].title;
+  titleText.value = appointments.value[props.editIndex][0].title;
   appointmentFrom.value =
     appointments.value[props.editIndex][0].appointmentFrom;
   appointmentTo.value = appointments.value[props.editIndex][0].appointmentTo;
@@ -199,7 +200,7 @@ const saveToLocalStorage = () => {
       );
 
       appointments.value[props.editIndex][0].type = type.value;
-      appointments.value[props.editIndex][0].titel = title.value;
+      appointments.value[props.editIndex][0].title = titleText.value;
       appointments.value[props.editIndex][0].appointmentFrom =
         appointmentFrom.value;
       appointments.value[props.editIndex][0].appointmentTo =

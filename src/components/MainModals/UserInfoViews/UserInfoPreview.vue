@@ -181,12 +181,12 @@ const saveAndDownLoadDocs = async () => {
     await Filesystem.writeFile({
       path: fileNameDoc,
       data: base64StringDoc,
-      directory: Directory.Documents,
+      directory: Directory.Library,
     })
       .then(
         () => {
           Filesystem.getUri({
-            directory: Directory.Documents,
+            directory: Directory.Library,
             path: fileNameDoc,
           }).then(
             (result) => {
@@ -244,12 +244,12 @@ const saveAndDownLoadPDF = async () => {
       await Filesystem.writeFile({
         path: fileNamePDF,
         data: base64StringPdf,
-        directory: Directory.Documents,
+        directory: Directory.Library,
       })
         .then(
           () => {
             Filesystem.getUri({
-              directory: Directory.Documents,
+              directory: Directory.Library,
               path: fileNamePDF,
             }).then(
               (result) => {

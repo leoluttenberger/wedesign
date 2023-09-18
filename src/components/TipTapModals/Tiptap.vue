@@ -32,11 +32,11 @@
       </section>
     </section>
   </bubble-menu>
-  <div class="flex justify-center py-4">
+  <div class="flex justify-center pt-2">
     <div class="column gap-10">
       <FormKit type="button" label="Speichern" @click="onClickedSave"></FormKit>
       <div class="flex justify-center">
-        <button type="button" class="p-4">
+        <button type="button">
           <SwipeRightIcon
             class="animate-pulse h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
           ></SwipeRightIcon>

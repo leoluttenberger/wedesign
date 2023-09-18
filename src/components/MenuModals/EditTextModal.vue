@@ -1,24 +1,27 @@
 <template>
-  <div class="flex justify-end">
-    <button type="button" @click="closeModal" class="p-4">
-      <CloseIcon
-        class="h-6 w-6 dark:stroke-wd-white stroke-black stroke-1"
-      ></CloseIcon>
-    </button>
-  </div>
-  <div class="flex justify-left pb-2">
-    <p
-      v-if="itemIndex > 0"
-      class="text-black px-1 dark:text-white font-Montserrat text-xl"
-    >
-      {{ textLabel }} {{ " - Textvorlage " + itemIndex + ":" }}
-    </p>
-    <p
-      v-if="itemIndex == 0"
-      class="text-black px-1 dark:text-white font-Montserrat text-xl"
-    >
-      {{ textLabel }} {{ " - Aktueller Text:" }}
-    </p>
+  <div class="flex">
+    <div class="flex justify-left p-2">
+      <p
+        v-if="itemIndex > 0"
+        class="text-black px-1 dark:text-white font-Montserrat text-xl"
+      >
+        {{ textLabel }} {{ " - Textvorlage " + itemIndex + ":" }}
+      </p>
+      <p
+        v-if="itemIndex == 0"
+        class="text-black px-1 dark:text-white font-Montserrat text-xl"
+      >
+        {{ textLabel }} {{ " - Aktueller Text:" }}
+      </p>
+    </div>
+    <div class="grow ..."></div>
+    <div class="flex justify-end">
+      <button type="button" @click="closeModal" class="p-4">
+        <CloseIcon
+          class="h-10 w-10 dark:stroke-wd-white stroke-black stroke-1"
+        ></CloseIcon>
+      </button>
+    </div>
   </div>
   <Tiptap
     :itemCurrentIndex="props.itemIndex"
